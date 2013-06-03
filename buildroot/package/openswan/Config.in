@@ -1,0 +1,9 @@
+config BR2_PACKAGE_OPENSWAN
+	bool "openswan"
+	depends on BR2_USE_MMU # iproute2
+	select BR2_PACKAGE_GMP
+	select BR2_PACKAGE_IPROUTE2
+	help
+	  Openswan is an implementation of IPsec for Linux
+
+	  http://www.openswan.org

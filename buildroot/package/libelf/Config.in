@@ -1,0 +1,7 @@
+config BR2_PACKAGE_LIBELF
+	bool "libelf"
+	help
+	  The elf library provides routines to access, and manipulate,
+	  Elf object files.
+
+	  http://www.mr511.de/software/

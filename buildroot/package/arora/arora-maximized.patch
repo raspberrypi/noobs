@@ -1,0 +1,11 @@
+--- a/src/browserapplication.cpp	2013-05-15 17:17:30.437710592 +0200
++++ b/src/browserapplication.cpp	2013-05-15 17:18:02.561711409 +0200
+@@ -554,7 +554,7 @@
+     m_mainWindows.prepend(browser);
+     connect(this, SIGNAL(privacyChanged(bool)),
+             browser, SLOT(privacyChanged(bool)));
+-    browser->show();
++    browser->showMaximized();
+     return browser;
+ }
+ 

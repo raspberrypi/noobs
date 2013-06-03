@@ -1,0 +1,19 @@
+config BR2_PACKAGE_CVS
+	bool "cvs"
+	depends on BR2_USE_WCHAR
+	# needs fork()
+	depends on BR2_USE_MMU
+	select BR2_PACKAGE_NCURSES
+	help
+	  Concurrent Versions System - source code revision control tools.
+
+	  http://www.nongnu.org/cvs/
+
+config BR2_PACKAGE_CVS_SERVER
+	bool "server support"
+	depends on BR2_PACKAGE_CVS
+	help
+	  Enable cvs server code
+
+comment "cvs requires a toolchain with WCHAR support"
+	depends on !BR2_USE_WCHAR

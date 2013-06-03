@@ -1,0 +1,78 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[full-rebuild]]
+Understanding when a full rebuild is necessary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A full rebuild is achieved by running:
+
+---------------
+$ make clean all
+---------------
+
+In some cases, a full rebuild is mandatory:
+
+* each time the toolchain properties are changed, this includes:
+
+** after changing any toolchain option under the _Toolchain_ menu (if
+   the internal Buildroot backend is used);
+** after running +make ctng-menuconfig+ (if the crosstool-NG backend
+   is used);
+** after running +make uclibc-menuconfig+.
+
+* after removing some libraries from the package selection.
+
+In some cases, a full rebuild is recommended:
+
+* after adding some libraries to the package selection (otherwise,
+  packages that can be optionally linked against those libraries
+  won't be rebuilt, so they won't support those new available
+  features).
+
+In other cases, it is up to you to decide if you should run a
+full rebuild, but you should know what is impacted and understand what
+you are doing anyway.
+
+[[rebuild-pkg]]
+Understanding how to rebuild packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One of the most common questions asked by Buildroot users is how to
+rebuild a given package or how to remove a package without rebuilding
+everything from scratch.
+
+Removing a package is unsupported by Buildroot without
+rebuilding from scratch. This is because Buildroot doesn't keep track
+of which package installs what files in the +output/staging+ and
++output/target+ directories, or which package would be compiled differently
+depending on the availability of another package.
+
+The easiest way to rebuild a single package from scratch is to remove
+its build directory in +output/build+. Buildroot will then re-extract,
+re-configure, re-compile and re-install this package from scratch. You
+can ask buildroot to do this with the +make <package>-dirclean+ command.
+
+For convenience, the special make targets
+<package>-reconfigure and <package>-rebuild repeat the configure
+resp. build steps.
+
+However, if you don't want to rebuild the package completely from
+scratch, a better understanding of the Buildroot internals is
+needed. Internally, to keep track of which steps have been done and
+which steps remain to be done, Buildroot maintains stamp files (empty
+files that just tell whether this or that action has been done):
+
+* +output/build/<package>-<version>/.stamp_configured+. If removed,
+  Buildroot will trigger the recompilation of the package from the
+  configuration step (execution of +./configure+).
+
+* +output/build/<package>-<version>/.stamp_built+. If removed,
+  Buildroot will trigger the recompilation of the package from the
+  compilation step (execution of +make+).
+
+Note: toolchain packages use custom makefiles. Their stamp files are named
+differently.
+
+Further details about package special make targets are explained in
+xref:pkg-build-steps[].

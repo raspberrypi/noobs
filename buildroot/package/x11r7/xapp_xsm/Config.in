@@ -1,0 +1,5 @@
+config BR2_PACKAGE_XAPP_XSM
+	bool "xsm"
+	select BR2_PACKAGE_XLIB_LIBXAW
+	help
+	  X Session Manager

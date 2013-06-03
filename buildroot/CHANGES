@@ -1,0 +1,1925 @@
+2013.02, Released February 28th, 2013:
+
+	Misc manual updates.
+
+	Updated/fixed packages: busybox, collectd, flashbench,
+	libgtk2, libupnp, mii-diag, quota
+
+2013.02-rc3, Released February 26th, 2013
+
+	Minor fixes.
+
+	Updated/fixed packages: conntrack-tools, dialog,
+	enlightenment, haserl, keyutils, libfif, libmad,
+	linux-firmware, linux-fusion, matchbox-desktop, matchbox-wm,
+	ruby, spawn-fcgi, vtun
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#5960: fusion.ko driver does not install to target rootfs
+
+2013.02-rc2, Released February 19th, 2013
+
+	Fixes all over the tree.
+
+	Various manual updates and fixes.
+
+	Updated/fixed packages: busybox, collectd, gesftpserver,
+	glib-networking, gnutls, inotify-tools, libcurl, libffi,
+	libglib2, libtorrent, libvorbis, neard, network-manager,
+	ntfs-3g, openssl, qt, rpi-userland, rtorrent, thttpd, vim.
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#5906: collectd client headers not exported
+
+2013.02-rc1, Released February 10th, 2013
+
+	Toolchain: Crosstool-ng 1.17.0, default to GCC 4.6.3, target
+	libraries install fixed. Add Linaro ARM
+	2012.11/2012.12/2013.01, AArch64 12.11/12.12/13.01. Sourcery
+	CodeBench MIPS 2012.03/09. Infrastructure to warn about
+	missing 32bit support for binary toolchains. Toolchain wrapper
+	is now relocatable. Add GDB 7.5.1 / Remove 6.8 / 7.0 /
+	7.1. Deprecate uClibc 0.9.31.
+
+	Architecture: Xtensa fixes, add missing powerpc variants, arm
+	1136jf-s rev1, add A5/A15, neon support toggle, OABI
+	deprecated. Sparc: drop old unused variants
+
+	Bootloaders: At91bootstap: fix upstream URL, Barebox: add
+	2012.12/2013.01/2013.02, remove 2012.08/09/10, lzop fixes,
+	environment image support, U-Boot: add 2013.01.01
+
+	Linux: fix appended dtb handling for v3.8+ kernels, support
+	multiple device trees
+
+	Defconfigs: calao USB-A9260, snowball, QEMU PPC440 on ML507
+	board, QEMU ARM Exynos4210, Kernel version in QEMU defconfigs
+	updated, at91rm9200df: misc fixes. Lock kernel headers to
+	match kernel.
+
+	Infrastructure: Git download fixes. Toolchain make target
+	renamed from 'cross' to 'toolchain'. Eclipse integration
+	support. Option to set root password, post image scripts,
+	config scripts handling.
+
+	Updated/fixed packages: alsa-lib, argp-standalone, argus,
+	arptables, atk, audiofile, axel, beecrypt, bind, bison,
+	bluez_utils, boost, cairo, can-utils, bmon, boa, busybox,
+	cairo, ccache, cdrkit, cifs-utils, cjson, cmake, collectd,
+	connman, coreutils, cpanminus, cups, dbus, dhcp, dialog,
+	diffutils, directfb, distcc, divine, dnsmasq, docker,
+	dosfstools, dstat, e2fsprogs, ebtables, ed, empty, ethtool,
+	expedite, fbset, fbv, ffmpeg, flex, fltk, fluxbox, freetype,
+	gadget-test, gawk, gdb, genext2fs, gettext, giblib,
+	glib-networking, gmp, gmpc, gnupg, gnutls, gpsd,
+	gst-plugins-{bad,base,good}, gstreamer, gzip, haserl, hdparm,
+	heirloom-mailx, hiawanta, hostapd, icu, imagemagick, imlib2,
+	inadyn, infozip, iproute2, ipset, iptables, iw, jpeg, jquery,
+	jquery-sparklines, jqeury-validation, kismet, kmod, lame,
+	libao, libcap, libcurl, libdvdnav, libdvdread, libecore,
+	libedbus, libedje, libeet, libefreet, libeina, libeio,
+	liberation, libelementary, libembryo, libethumb, libev,
+	libevas, libffi, libfribidi, libfuse, libgcrypt, libglib2,
+	libgpg-error, libgtk2, libhid, libidn, libmicrohttpd, libmpd,
+	libnl, libnspr, libnss, libogg, libpcap, libplayer, libpng,
+	libroxml, librsvg, libseccomp, libsigc, libsndfile, libungif,
+	libupnp, liburcu, libusb-compat, libvncserver, libvorbis,
+	libxml2, libxslt, lighttpd, links, linux-firmware,
+	linux-fusion, ltp-testsuite, ltrace,
+	lttng-{babel,libust,modules,tools}, lvm2, lua, luajit, lzop,
+	matchbox-{desktop,lib}, mdadm, metacity, midori, minicom, mpd,
+	mpfr, mplayer, mtd, mysql_client, ncurses, neon, netatalk,
+	networkmanager, nspr, ntfs-3g, nuttcp, ofone, olsr, openssl,
+	openvpn, opkg, oprofile, opus, opus-tools, orc, ortp, pango,
+	pciutils, pcmanfm, pcre, pcsc-lite, perl, php, pixman,
+	pkgconf, polarssl, pptp-linux, proxychains, pulseaudio,
+	python, python3, qemu, qextserialport, qt, quagga, radvd,
+	readline, rng-tools, rt-tests, rubix, ruby, sam-ba, samba,
+	sane-backends, sconeserver, scons, screen, sdl, sdl_gfx,
+	sdl_mixer, sdl_ttf, sdparm, sed, ser2net, smartmontools,
+	speex, sqlite, squid, sshfs, strace, sudo, sylpheed, tn5250,
+	taglib, tar, torsmo, transmission, tslib, uboot-tools, ulogd,
+	usb_modeswitch, util-linux, valgrind, vim, vsftpd, wavpack,
+	webkit, wipe, wireless_tools, wpa_supplicant, xapp_xinit,
+	xapp_xinput-calibrator, xapp_xman, xapp_xmh, xlib_libX11,
+	xlib_libXdmcp, xlib_libXft, xlib_libpthread-stubs,
+	xlib_xtrans, xproto_xcmiscproto, xproto_xextproto,
+	xserver_xorg-server, xstroke, xvkbd, xz
+
+	New packages: b43-firmware, b43-fwcutter, bustle,
+	cache-calibrator, cegui06, celt051, classpath, curlftpfs,
+	dvb-apps, dvbsnoop, elfutils, enlightenment, firmware-imx,
+	flashbench, gd, gesftpserver, gst-fsl-plugins, httping, iftop,
+	imx-lib, jamvm, jpeg-turbo, keyutils, libatasmart, libcofi,
+	libebml, libevas-generic-loaders, libfslcodec, libfslparser,
+	libfslvpuwrap, libgsasl, libiscsi, libmatroska, libmcrypt,
+	libmhash, libqwt, libseccomp, libsha1, linenoise, mcrypt,
+	media-ctl, ncdu, neard, neardal, nettle, perf, polkit,
+	proxychains, python-bottle, python-pyparsing, rpi-firmware,
+	rpi-userland, sg3_utils, slirp, snowball-hdmiservice, spice,
+	spice-protocol, tcllib, tvheadend, udisks, usbredir
+	ux500-firmware, vde2, xcb-utils-keysyms, yavta,
+	zd1211-firmware
+
+	Removed packages: customize, xdriver_xf86-input-{acecad,aiptek},
+	xdriver_xf86-video-{apm,chips,i740,rendition,s3,s3virge,sisusb},
+	xdriver_xf86-video-sun{cg14,cg3,cg6,ffb,leo,tcx},
+	xdriver_xf86-video-{tsend,xgi,xgixp}
+
+	Deprecated packages: xstroke
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#4237: building shared openssl w/-Os fails due to gcc bug
+	#5690: python3 does not obey to BR2_PACKAGE_PYTHON3_PYC_ONLY=y
+	#5602: python3 should install a "python" symbolic link
+	#5846: Extra slash added to last slash in URL
+
+2012.11.1, Released January 3rd, 2013:
+
+	Toolchain: Fixed non-largefile builds on recent Ubuntu
+	versions.
+
+	Arch: fix missing x86/generic handling, Build for Xtensa with
+	longcalls option.
+
+	Updated/fixed packages: dosfstools, qt
+
+2012.11, Released December 2nd, 2012:
+
+	Git shallow clone fix for older git version.
+
+	Updated/fixed packages: ctuio, libtool
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#5726: List all the available hook points
+
+2012.11-rc2, Released November 30th, 2012:
+
+	Minor fixes around the tree.
+
+	Various manual updates and fixes.
+
+	Add checks for legacy features.
+
+	Updated/fixed packages: acpid, alsa-lib, arptables, binutils,
+	busybox, ccache, cjson, cramfs, directfb, flex, fluxbox, gdb,
+	hiawatha, igh-ethercat, imagemagick, imlib2, lcdproc,
+	libdaemon, libecore, libhid, libmad, libpcap, libsigc, libusb,
+	linux-fusion, matchbox, ocf-linux, owl-linux, python, rrdtool,
+	scons, strace, sylpheed
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#5732: Error : package/alsa-lib/alsa-lib.mk
+
+2012.11-rc1, Released November 17th, 2012
+
+	Fixes all over the tree and new features.
+
+	Defconfigs: use u-boot 2012.10 on at91 and beaglebone,
+	sheevaplug + qemu: bump kernel version, add qemu-mips64-malta
+	+ nitrogen6x defconfigs.
+
+	Bootloaders: add u-boot 2012.07/10, ais target format, add
+	barebox 2012.08/09/10/11, linker overlap issue fix for
+	at91bootstrap, mxs-bootlets updated for new Barebox versions.
+
+	Toolchains: binutils 2.23.1, gcc 4.7.2, default to gcc 4.6.x,
+	Codebench arm/sh/x86 2012.03/09, Linaro 2012.08/09/10.
+	Libtirpc support for modern glibc variants. Toolchain on
+	target has been deprecated.
+
+	Initial Aarch64 support, Xtensa support re-added.
+
+	Infrastructure: Use shallow git clone when possible, use
+	tarballs rather than git URLs for github. Moved to pkgconf
+	rather than pkg-config. System directory added, default
+	skeleton/device tables moved. More than 1 post-build script
+	can now be used. output/target now contains a
+	THIS_IS_NOT_YOUR_ROOT_FILESYSTEM warning, to help people
+	understand how to (not) use it.
+
+	Manual has been reworked and extended.
+
+	Legal-info: Lots of package annotations, CSV file fixes,
+	_LICENSE / _REDISTRIBUTE splitup, per-package hooks.
+
+	Updated/fixed packages: acpid, alsa-lib, alsa-utils,
+	alsamixergui, attr, autoconf, automake, bash, bind, binutils,
+	bison, blackbox, bluez-utils, busybox, cairo, can-utils,
+	cifs-utils, cjson, cmake, collectd, connman, conntrack-tools,
+	coreutils, cups, cvs, dbus, dhcp, directfb, dmalloc, dnsmasq,
+	dropbear, e2fsprogs, ethtool, fbdump, feh, fftw, file,
+	flashrom, fluxbox, gdb, gdisk, gdk-pixbuf, genext2fs, gettext,
+	gnutls, gpsd, gqview, grep, gsl, gst-plugins-{bad,good},
+	hdparm, hiawatha, hostapd, input-tools, iproute2, ipset,
+	iptables, iw, json-c, kexec, kmod, lcdproc, leafpad, less,
+	libcurl, libdrm, libdvdnav, libdvdread, libffi, libfuse,
+	libglib2, libhid, liblockfile, libmad, libmbus, libmnl,
+	libnetfilter_{acct,conntrack,cthelper,cttimeout,queue},
+	libnfc, libnfc-llcp, libnfnetlink, libnl, libnspr, libnss,
+	libpcap, libplayer, libtool, libtorrent, liburcu, libv4l,
+	libxcb, libxml2, libxslt, links, linux-firmware, lm-sensors,
+	lmbench, lockfile-progs, logrotate, lshw, lsof,
+	lttng-babeltrace, lttng-tools, lua, luajit, mesa3d, microperl,
+	mii-diag, module-init-tools, mpc, mpd, mpg123, mplayer,
+	mtd-utils, mysql_client, nbd, ncurses, netatalk, netkitbase,
+	netkittelnet, netsnmp, newt, nfs-utils, openntpd, openssh,
+	openssl, opkg, patch, pciutils, pcre, php, poco, polarssl,
+	popt, portmap, pppd, procps, pulseaudio, python, python-nfc,
+	python-protobuf, qt, quota, rp-pppoe, rtorrent, sam-ba, samba,
+	scons, sdl_gfx, smartmontools, sqlite, squid, strace, sudo,
+	sylpheed, tcpdump, tremor, ttcp, tiff, unionfs,
+	usb_modeswitch, usbutils, util-linux, vala, valgrind, vpnc,
+	vsftpd, webkit, wget, which, wpa_supplicant, x11vnc, xapp_*,
+	xdriver_*, xenomai, xfont_*, xinetd, xl2tp, xlib_*, xlsclient,
+	xproto_*, xserver_xorg-server, xutil_util-macros, xz, zeromq
+
+	New packages: arptables, at91bootstrap3, boot-wrapper-aarch64,
+	ccid, cpanminus, cpuload, erlang, evtest, fb-test-apps,
+	fxload, gdbm, gnupg, googlefontdirectory, grantlee, gsl,
+	lcdapi, liblo, liblog4c-localtime, libtirpc, linux-pam,
+	lua-msgpack-native, macchanger, mtdev, mtdev2tuio, nfacct,
+	opus, opus-tools, pcsc-lite, perl, pkgconf, python-meld3,
+	python3, qemu, qextserialport, qtuio, rpcbind, schifra,
+	sconeserver, supervisor, time, ulogd, usb_modeswitch_data,
+	yasm
+
+	Deprecated packages: netkitbase, netkittelnet
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#807:  [PATCH] samba - make iconv and smbd optional
+	#3049: binutils have a sysroot bug in ld
+	#5330: update vsftpd to 3.0.0
+	#5486: libglib2 build fails on: libs/libglib-2.0.so: undefined...
+	#5666: Fails to build python 2.7.2 for 2440 arm
+
+2012.08, Release August 31th, 2012
+
+	Updated/fixed packages: microperl, cups, luajit, rrdtool,
+	prboom, oprofile.
+
+	Added license information for: sqlite.
+
+	Changed the source URLs of all packages located on Sourceforge
+	in order to use the automatic mirror selection URL
+	downloads.sourceforge.net, and get rid of the
+	BR2_SOURCEFORGE_MIRROR option.
+
+2012.08-rc3, Released August 25th, 2012
+
+	Updated/fixed packages: libglib2, netsnmp, freetype, libfuse,
+	libpng, x11vnc, zlib, gpsd, ifplugd, bash, distcc.
+
+	Added license informations for: barebox, grub, syslinux,
+	uboot, xloader, yajl, zlib, zxing, alsa-lib, alsa-utils,
+	faad2, nano, fbdump, rsync, librsync, fontconfig,
+	inotify-tools,
+
+2012.08-rc2, Released August 15th, 2012
+
+	Updated/fixed packages: imagemagick, sudo, crosstool-ng.
+
+	Added license informations for: mxml, nanocom, empty, expat,
+	lua, lucjson, xinetd, cjson, luaexpat, lmbench, bwm-ng,
+	input-event-daemon, luajit, cgilua, copas, coxpcall,
+	luafilesystem, luasocket, rings, wsapi, xavante, libtpl,
+	avahi, busybox, libfcgi, ifplugd, libcgicc, libcurl,
+	libdaemon, libdnet, libgpg-error, libpcap, libpng, lighttpd,
+	mtd, openssl, psmisc, socat, spawn-fcgi.
+
+	Fixes to Microblaze external toolchains
+	configuration. Improvements of the pkg-stats
+	script. Out-of-tree fix for the graph-depends script.
+
+	Kernel headers version bump.
+
+2012.08-rc1, Released August 1st, 2012
+
+	Fixes all over the tree and new features.
+
+	Integration of a legal information reporting infrastructure,
+	which allows to generate detailed informations about the
+	licenses and source code of all components of a system
+	generated by Buildroot. License information will progressively
+	be added on packages.
+
+	Default configuration files added for Calao-systems USB-A9263
+	and Calao-systems USB-A9G20-LPW.
+
+	External toolchains update: allow download of a custom
+	toolchain, add Linaro 2012.05 and 2012.06 for ARM, add
+	Blackfin toolchain 2012R1-BETA1, add Sourcery CodeBench MIPS
+	2011.09.
+
+	Allow the restriction of downloads to the primary site only.
+        This is useful for project developers who want to ensure that
+        the project can be built even if the upstream tarball
+        locations disappear.
+
+	Add a 'System configuration' choice to select between 3
+	different init systems: Busybox init, SysV init and Systemd
+	init.
+
+	Cleanups to the package infrastructure. The visible change to
+	developers is that $(eval $(call AUTOTARGETS)) is now $(eval
+	$(autotools-package)), and similarly for other package
+	infrastructures and host packages. Refer to the documentation
+	for details.
+
+	By default, automatic detection of the number of compilation
+	jobs to use, depending on the number of CPUs available.
+
+	Improvements to generate systems with static libraries only
+	(infrastructure and package fixes).
+
+	Add proper support in the Linux kernel package to generate
+	Device Tree Blobs or combined Device Tree / Kernel
+	images. This will be useful on Microblaze, PowerPC and ARM,
+	which are architectures making extensive use of the Device
+	Tree.
+
+	Updated/fixed packages: audiofile, autoconf, automake, axel,
+	barebox, bash, beecrypt, berkeleydb, bind, bison, bluez_utils,
+	bonnie, boost, busybox, bsdiff, bwm-ng, bzip2, cifs-utils,
+	cgilua, cmake, connman, conntrack-tools, crosstool-ng, cups,
+	dbus, dhcp, dnsmasq, e2fsprogs, eeprog, ethtool, faad2, fbv,
+	ffmpeg, freetype, gmp, gnutls, gob2, gpsd, grep,
+	gst-plugins-base, gst-plugins-good, gzip, hiawatha, hostapd,
+	htop, icu, igh-ethercat, imagemagick, input-tools, iostat,
+	iproute2, ipset, iptables, iw, kmod, less, libcap, libgci,
+	libconfig, libcurl, libelf, libevas, libeXosip2, libexif,
+	libfuse, libidn, libmad, libmbus, libmnl,
+	libnetfilter-conntrack, libnl, libnspr, libnss, libogg,
+	libosip2, libpcap, libpng, libroxml, liburcu, libusb, libxml2,
+	libxslt, lighttpd, linux, ltrace, lttng-libust, lttng-modules,
+	lttng-tools, lua, m4, memtester, midori, mii-diag,
+	module-init-tools, mpfr, mpg123, mrouted, msmtp, mtd, mxml,
+	mysql_client, nasm, nbd, ncurses, nfs-utils, opencv, openocd,
+	openssl, pciutils, php, polarssl, portaudio, pppd,
+	pthread-stubs, pulseaudio, qt, quagga, quota, radvd, rpm,
+	rrdtool, samba, sam-ba, scons, sdl_gfx, sdl_sound, speex,
+	sqlite, squashfs, squid, sudo, synergy, syslinux, systemd,
+	tar, tcpdump, tcpreplay, udev, usbutils, valgrind, wget,
+	wpa_supplicant, wsapi, xavante, xserver_xorg-server, zlib
+
+	New packages: cjson, collectd, dfu-util, dmidecode, elftosb,
+	fbterm, flashrom, freerdp, inadyn, libfreefare,
+	libnetfilter_cttimeout, libnfc, libnfc-llcp, liboping,
+	libtorrent, linphone, logsurfer, lshw, luacjson, luaexpat,
+	luajit, mediastreamer, mobile-broadband-provider-info, monit,
+	mxs-bootlets, nanocom, nss-mdns, ofone, omap-u-boot-utils,
+	opkg, ortp, owl-linux, python-id3, python-nfc, quota,
+	ramspeed, rtorrent, sound-theme-borealis,
+	sound-theme-freedesktop, sysprof, webrtc-audio-processing,
+	xinetd, zxing
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#1315: Allow use of older external toolchains without sysroot
+               support [won't fix]
+	#5276: Hiawatha needs to manage IPV6 if so [fixed]
+	#5360: buildroot fails when building "host-libglib2 2.30.2
+               Building" [won't fix, upstream problem]
+	#5384: Can't build packages relying on gets on newer glibc
+               [fixed]
+
+2012.05, Released May 30th, 2012:
+
+	Updated/fixed packages: busybox, netsnmp, pptp-linux
+
+2012.05-rc3, Released May 25th, 2012:
+
+	Minor fixes around the tree.
+
+	Infra: Fix for DOWNLOAD macro when using primary mirrors with
+	scp targets.
+
+	Toolchain: Kernel headers 3.2.18 / 3.3.7.
+
+	Updated/fixed packages: binutils, bison, busybox, cifs-utils,
+	gnuchess, gpsd, iperf, libmpeg2, mtd, ntfs-3g, oprofile,
+	xserver-xorg
+
+2012.05-rc2, Released May 18th, 2012:
+
+	Fixes all over the tree.
+
+	Toolchain: uClibc: Use 0.9.33.2, Crosstool-ng: fix gperf
+	dependency, disable decimal floats support, Linux 3.2.17 /
+	3.3.6 kernel headers. Fix sysroot copy handling for toolchains
+	without C++ support.
+
+	Updated/fixed packages: apr, apr-util, ccache, dnsmasq,
+	heirloom-mailx, gdb, ndisc6, opencv, openssl, socat, vala
+
+2012.05-rc1, Released May 10th, 2012:
+
+	Fixes all over the tree and new features.
+
+	Use /etc/os-release for version info rather than
+	/etc/br-version.
+
+	CMake toolchain file moved to $HOST_DIR/usr/share/buildroot.
+
+	Apply-patches.sh: cleanups, archived patches handling fixes,
+	support series files.
+
+	Defconfigs: beaglebone, mx53qsb, pandaboard, qemu configs for
+	arm-vexpress/microblaze/ppc-mpc88544ds, use 3.2.x for
+	atngw100, use 3.3.x for qemu configs.
+
+	Menu structure: Libraries moved out of multimedia section
+
+	Atom processor support. Prescott fix, blackfin ABI fix,
+	Microblaze architecture support (using ext toolchain). Cleanup
+	architecture names, deprecate Xtensa support.
+
+	Toolchain: Add GCC 4.4.7, 4.6.3, 4.7.0. uClibc 0.9.33.1,
+	default to uClibc 0.9.33.x, enable
+	UCLIBC_SUPPORT_AI_ADDRCONFIG by default, static and 64bit
+	fixes for external toolchains, linaro ext toolchains, new
+	sourcery codebench ext toolchains, GDB 7.4.1, crosstool-ng
+	1.15.2.
+
+	Bootloaders: U-Boot: add 2012.04.01, SPL and u-boot.img
+	support. Barebox: add 2012.04, remove 2011.12.
+
+	Updated/fixed packages: alsa-lib, alsa-utils, at, atk, avahi,
+	barebox, berkeleydb, bind, bluez_utils, boost, busybox,
+	can-utils, ccache, cifs-utils, coreutils, cups, dbus, dhcp,
+	directfb, dnsmasq, doom-wad, dosfstools, e2fsprogs, expat,
+	fakeroot, feh, ffmpeg, file, fis, freetype, gamin, gawk,
+	gdk-pixbuf, gettext, giblib, glib-networking, gmp, gnutls,
+	gpsd, grep, gstreamer, gst-plugins-{bad,base,good,ugly},
+	haserl, hdparm, imagemagick, iproute2, iptable, iw, kexec,
+	kmod, lame, libaio, libarchive, libatomic_ops, libconfig,
+	libcurl, libdvdnav, libdvdread, libedbus, libethumb, libffi,
+	libfuse, libglib2, libgtk2, libhid, libmad, libmbus, libmpeg2,
+	libnl, libplayer, libpng, libsigc, libsoup, libupnp, liburcu,
+	libusb, libusb-compat, libxml2, libxml-parser-perl, libxslt,
+	lighttpd, linux-firmware, linux-fusion, lite, lsof, ltrace,
+	lttng-libust, lua, m4, makedevs, microperl, mpd, mpfr, mpg123,
+	mrouted, mtd, mysql_client, nbd, ncftp, ncurses, neon,
+	netsnmp, network-manager, nfs-utils, ngrep, ntfs-3g, openntpd,
+	openssh, openssl, parted, pango, pcre, php, pixman, poco,
+	psmisc, pulseaudio, python, qt, quagga, radvd, rpm, rsync,
+	ruby, samba, sam-ba, sane-backends, sawman, screen, sdl_net,
+	smartmontools, speex, sqlite, squashfs3, squid, sshfs, sudo,
+	syslinux, sysstat, taglib, tcpdump, tftp-hpa, transmission,
+	tiff, tinyhttpd, uboot-tools, udev, uemacs, unionfs, usbutils,
+	util-linux, vala, valgrind, vim, vsftpd, wget, wipe,
+	wpa_supplicant, xdriver_xf86-{input-vmmouse,video-fbdev},
+	xfsprogs, zlib
+
+	New packages: apr, apr-util, audiofile, bellagio,
+	conntrack-tools, empty, fmtools, glib-networking,
+	heirloom-mailx, hiawatha, latencytop, lcdproc, libcap-ng,
+	libdmtx, libfcgi, libnetfilter_conntrack, libnfnetlink,
+	libtpl, localedef, minicom, msmtp, ndisc6, netatalk,
+	ocf-linux, openswan, parted, polarssl, protobuf, read-edid,
+	socketcand, stress, systemd, ushare, zeromq
+
+	Deprecated packages: ttcp
+
+	Removed packages: ntfsprogs
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#2353: [lua] fix build with 2010.08-rc1
+	#2503: Microperl fails build on MIPSel or with Fedora13.x86_64
+	#2557: [PATCH] mkfs.xfs complains about missing libxfs.so.0
+	#2881: Can't build project statically with external toolchain
+	#3751: MIPS: fix BR2_GCC_TARGET_ABI for MIPS n64
+	#4808: ccache may build against wrong zlib
+	#4880: New package lcdproc
+	#4886: New package protobuf
+	#4892: build fails on ltp-testsuite-20101031/testcases/kernel/fs/...
+	#4898: * make: [target-finalize] Error 1 (ignored)*
+	#4985: Qt 4.7.4 build crashes with Linux 2.6.29
+	#4970: udev 181 fails to build if kernel version 3.3 is selected
+	#5018: dialog broken: exits with assert in uClibc
+	#5102: qt package moc, uic, rcc read from wrong place
+	#5144: Patch to fix ixon bug in uemacs
+	#5198: Line graphics output is broken in GNU Screen
+	#5204: Missing terminfo file(s) for GNU screen terminal type
+
+2012.02, Released February 29th, 2012:
+
+	Updated/fixed packages: libecore
+
+2012.02-rc3, Released February 27th, 2012:
+
+	Fixes all over the tree.
+
+	Automatic host dependencies handling for cmake packages
+	fixed. Customize package deprecated as using a post-build
+	script is nowadays the preferred way of adding extra stuff to
+	the rootfs.
+
+	Linux-headers 3.0.x / 3.2.x stable version bumped.
+
+	QEMU defconfigs updated to 3.2.x kernels and readme fixed.
+
+	Updated/fixed packages: dropbear, ffmpeg, libpng
+
+2012.02-rc2, Released February 19th, 2012:
+
+	Fixes all over the tree.
+
+	Toolchain: uClibc: Added upstream post-0.9.33 fixes, Bump
+	linux-headers 3.0.x / 3.2.x stable versions.
+
+	Documentation: Added makedev / <pkg>_DEVICES /
+	<pkg>_PERMISSIONS documentation.
+
+	Updated/fixed packages: busybox, ffmpeg, gst-dsp, libecore,
+	libvncserver, mxml, python.
+
+2012.02-rc1, Released February 12th, 2012:
+
+	Fixes all over the tree and new features.
+
+	Toolchain: Default to GCC 4.5.x, add binutils 2.22. Java
+	support removed, Powerpc SPE ABI support. GDB ELF support fix,
+	GDB 7.4, crosstool-NG 1.13.4.
+
+	Gentargets: scp and mercurial support.
+	Autotools: derive host dependencies from target by default.
+	Packages can now declare device table snippets.
+
+	Host utilities menu with commonly used host tools.
+
+	defconfigs: qemu configs for x86-64, mips and sparc, at91
+	defconfigs now use modern U-Boot / mainline Linux, added
+	lpc3250 defconfigs.
+
+	uClibc: remove 0.9.30, backport unshare() support, add
+	0.9.32.1 / 0.9.33, use same config for ctng.
+
+	Bootloaders: U-Boot: add 2011.12, remove 2010.xx versions,
+	Barebox: add 2012.01/02, remove 2011.10/11, LPC32xx
+	bootloaders added.
+
+	Various manual updates. Release tarballs now contain generated
+	manual in text/html/pdf formats.
+
+	Buildroot now calls the stop function of scripts in
+	/etc/init.d at shutdown.
+
+	Updated/fixed packages: atk, avahi, barebox, bash, beecrypt,
+	bind, binutils, bison, bluez_utils, bzip2, busybox, cairo,
+	ccache, cdrkit, coreutils, cramfs, dbus, dbus-glib, dialog,
+	diffutils, dmalloc, dropbear, e2fsprogs, ebtables, ed,
+	ethtool, expat, ffmpeg, file, fis, flex, fluxbox, fontconfig,
+	freetype, gawk, grep, gst-dsp, gst-ffmpeg, gst-plugins-base,
+	hdparm, hostapd, htop, i2c-tools, icu, iproute2, ipsec-tools,
+	ipset, iptables, iw, jpeg, kismet, lame, libcap, libcgi,
+	libev, libeXosip2, libffi, libftdi, libgpg-error, libgtk2,
+	libidn, libmms, libmnl, libmodbus, libnl, libogg, libosip,
+	libpcap, libpng, libraw1394, libroxml, libusb, libusb-compat,
+	libv4l, libvorbis, libxcb, libxml-parser-perl, libxslt,
+	lighttpd, links, lm-sensors, lua, m4, module-init-tools, mpc,
+	mesa3d, mpd, mpfr, mplayer, mtd-utils, nano, nbd, ncurses,
+	netperf, netsnmp, ntp, opencv, openocd, openssl, openvpn, orc,
+	pciutils, pcre, pixman, pkg-config, poco, popt, proftpd,
+	python, python-serial, qt, ruby, samba, sdl, sdparm,
+	squashfs3, sshfs, sqlite, squid, sudo, syslinux, tcl, tcpdump,
+	ti-utils, tiff, tremor, uboot, uboot-tools, udev, usbmount,
+	util-linux, vala, valgrind, vsftpd, wpa_supplicant,
+	xapp_{bdftopcf,mkfontdir,mkfontscale,xkbcomp,xcursorgen,xinit},
+	xapp_xinput, xapp_xman, xcb-util, xdm, xenomai,
+	xf86-video-sis, xfont_{encodings,font-util},
+	xlib_lib{fontenc,X11,Xau,Xcursor,Xdmcp,Xfixes,Xfont,Xrender},
+	xlib_libxkbfile, xterm, xutil_makedepend, yajl
+
+	New packages: boost, connman, dstat, expedite, explorercanvas,
+	feh, flot, giblib, igh-ethercat, imlib2, jquery,
+	jquery-sparklines, jquery-validation, jsmin, kmod, libecore,
+	libedbus, libedje, libeet, libeina, libelementary, libesmtp,
+	libethumb, libevas, libical, libmbus, liboauth, liburcu,
+	libvncserver, linux-firmware,
+	lttng-{babeltrace,libust,modules,tools}, NetworkManager,
+	open2300, python-distutilscross, python-dpkt,
+	python-netifaces, python-pygame, python-setuptools, rt-tests,
+	sam-ba, sane-backends, sqlcipher, transmission, unionfs,
+	xf86-input-tslib, xinput-calibrator
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#743:  Add Transmission bit torrent option to buildroot
+	#755:  Add Boost libraries as a package
+	#2299: Add crypto support to libsoup
+	#2617: Pixman 0.19.2 & Cairo 1.10.0
+	#3403: libgpg-error: bump to version 1.10
+	#3409: libgpg-error: download from gnupg.org
+	#3421: nano: make tiny flag optional
+	#3691: New EFL packages
+	#4664: Cannot patch AT91Bootstrap
+	#4700: setlocalversion not working for combination svn/ubuntu 11.10...
+	#4760: Qt: add host-pkg-config to dependency-list
+
+2011.11, Released November 30th, 2011:
+
+	Fixes all over the tree.
+
+	Bump kernel headers / default Linux version to 3.1.4.
+
+	Updated/fixed packages: ruby
+
+2011.11-rc3, Released November 26th, 2011:
+
+	Fixes all over the tree.
+
+	Toolchain: Fix gdb dependencies for external toolchains,
+	adjust uClibc patches so they don't confuse modern versions of
+	patch, bump crosstool-ng, kernel headers and linux versions.
+
+	Updated/fixed packages: busybox, freetype, mplayer, opencv,
+	php, rsyslog, ruby, thttpd, xapp_xf86dga
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#4357: Prevent patch commands from accessing source control
+	#4369: Fix permissions on untared lsof archive
+
+2011.11-rc2, Released November 18th, 2011:
+
+	Fixes all over the tree and new features.
+
+	Updated asciidoc documentation
+
+	Toolchain: Bumped 3.x stable kernel headers, use wget in
+	crosstool-ng as well, bump crosstool-ng version, gdb fixes,
+	uClibc sparc fix.
+
+	Updated/fixed packages: distcc, file, gst-plugins-bad, libxcb,
+	mplayer, newt, qt, rpm, rrdtool, tar, tftpd
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#3355: mplayer fails to build
+	#4021: uClibc: undefined reference to `__GI___errno_location'
+	#4297: Qt's qmake uses wrong pkg-config
+
+2011.11-rc1, Released November 11th, 2011:
+
+	Fixes all over the tree and new features.
+
+	Moved misc scripts and support stuff to support/. Renamed
+	patch-kernel.sh to support/scripts/apply-patches.sh.
+
+	Documentation: Moved to asciidoc format, make targets to
+	generate text/html/pdf/epub output added.
+
+	Defconfigs: Qemu configs updated to 3.1 kernel and readmes
+	added.
+
+	Bootloaders: Add support for custom git tree / tarballs for
+	barebox, similar to how it's handled for u-boot. Clean up
+	menuconfig options.
+
+	Toolchain: Update external codesourcery toolchain download
+	URLs after Codesourcery got bought by Mentor, add x86
+	toolchain, update toolchain versions and optimize toolchain
+	sysroot copying. Fix uClibc 0.9.32 builds for e500 PPC,
+	updated GDB versions / download URLs. Binutils
+	libbfd/libopcodes static/dynamic linking fix. GCC 4.6.2 added,
+	use ctng-1.13.0.
+
+	Package infrastructure: Support for local packages /
+	overrides, package dir / name arguments dropped from
+	{GEN,AUTO,CMAKE}TARGETS.
+
+	Linux: Kernel extensions infrastructure support, Xenomai +
+	RTAI support.
+
+	Updated/fixed packages: acpid, bind, busybox, dash, dbus,
+	dbus-glib, directfb, dnsmasq, drystone, e2fsprogs, ethtool,
+	fakeroot, fbdump, file, freetype, fuse, gamin, gmp, gmpc,
+	gnutls, gob2, gst-plugins-{base,bad,good,ugly}, gstreamer,
+	hostapd, ifplugd, imagemagick, intltool, ipsec-tools, ipset,
+	iptables, iw, jpeg, kexec, leafpad, less, libargtable2, libao,
+	libconfuse, libcuefile, libcurl, libdaemon, libevent,
+	libglib2, libiconv, libmpd, libreplaygain, libroxml,
+	libsamplerate, libsndfile, libsoup, libsvgtiny, libtool,
+	libxcb, lighttpd, links, linux-fusion, lite, lrzsz, lsof, lzo,
+	lzop, makedevs, mcookie, mpg123, mpd, mpfr, mtd, musepack,
+	mutt, mysql_client, ncftp, ncurses, neon, netcat, netsnmp,
+	ntfs-3g, ntfsprogs, ntp, openntpd, openssh, openssl, oprofile,
+	orc, pciutils, psmisc, python, qt, quagga, radvd, rpm, rsync,
+	samba, sawman, sdl_sound, smartmontools, sqlite, squid,
+	stunnel, sudo, sylpheed, sysstat, taglib, tar, tcpreplay,
+	tslib, usbutils, util-linux, valgrind, wget, whetstone, which,
+	wpa-supplicant, xdata_xcursor-themes, xmlstarlet, xterm
+
+	New packages: bluez-utils, cifs-utils, fftw, fluxbox, json-c,
+	libev, libftdi, libgeotiff, libmodbus, libplayer, live555,
+	ngrep, noip, opencv, openocd, picocom, poco, portaudio,
+	pulseaudio, pv, rtai, vala, xenomai.
+
+	Removed packages: liboil, sfdisk, swfdec, webif
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#505:  live555: new package
+	#507:  Enable live and tv options in MPlayer-1.0rc2
+	#531:  let e2fsprogs package to export headers to staging dir if needed
+	#1171: Linuxthreads new cannot find sysdep.h
+	#1357: Add bluez to buildroot system
+	#2107: New package: input-event-daemon
+	#2599: New package: orc (Oil Runtime Compiler)
+	#2605: gstreamer: Update to 0.10.30
+	#2677: introducing util-linux-ng as replacement for util-linux
+	#2917: Qt: Add declarative module
+	#3145: jffs2 image generation fails
+	#3271: netperf-2.4.5 fails to compile
+	#3331: xdata_xcursor-themes depends on xcursorgen
+	#3343: Add file:// download SITE_METHOD
+	#3391: Add support for specifying an external kernel tree
+	#3631: Error while compiling with Xorg
+	#3709: oprofile doesn't build for mipsel
+	#3925: midori not getting compile
+	#4045: Add support for downloading i386 toolchains from codesourcery
+	#4165: lrzsz-fix-symlink-at-rebuild.patch
+	#4171: makedevs-unused-but-set-variable.patch
+	#4183: Codesourcery toolchain download site has changed
+	#4231: libneon.so: undefined reference to `SSL_SESSION_cmp'
+	#4381: Add option to lighttpd to enable Lua support
+	#4387: Make sure that dest dir exists before installing mtd files
+
+2011.08, Released August 31th, 2011:
+
+	Fixes all over the tree.
+
+	Toolchain: Fix codesourcery 2009q3 ARM download, Linux 3.0.4
+	kernel headers.
+
+	Updated/fixed packages: ipset, python
+
+2011.08-rc2, Released August 29th, 2011:
+
+	Fixes all over the tree.
+
+	Toolchain: crosstool-NG 1.12.1, use binutils 2.21 on
+	mips/sh/older uClibc, disallow uClibc 0.9.32 on avr32/sh
+	(broken).
+
+	Defconfigs: kernel updates, fix mini2440 serial port config,
+	remove old arm toolchain configs.
+
+	Bootloaders: Fix grub patching, add barebox-{n,x,menuconfig}
+	targets similar to linux/busybox.
+
+	Updated/fixed packages: barebox, directfb, libsoup,
+	libxml-parser-perl, mtd, ncurses, python, ti-utils, udev,
+	usbmount, util-linux, xfont_font-misc-misc
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#3685: ncurses installation hangs due to old version of tic
+	#4093: Grub fails to install bz2 patch after conversion to...
+
+2011.08-rc1, Released August 4th, 2011:
+
+	Fixes all over the tree and new features.
+
+	Toolchain: uClibc 0.9.32 / NPTL support, 0.9.29 removed,
+	ext-toolchain-wrapper improvements, improved non-MMU
+	support. GCC 4.3.6 / 4.6.1.
+
+	GENTARGETS infrastructure extended to cover bootloaders and
+	Linux kernel as well. Options to retrive Linux/U-Boot from a
+	custom git repo instead of upstream tarballs.
+	Support for Linux 3.x and release candidate tarballs.
+	X-Loader bootloader for omap added.
+
+	Make source/external-deps now also works for external
+	toolchains / crosstool-ng backend.
+
+	Updated/fixed packages: autoconf, berkeleydb, bind, binutils,
+	bmon, bridge-utils, busybox, cmake, dbus, dbus-glib,
+	e2fsprogs, ethtool, ffmpeg, gst-plugins-{bad,base,good,ugly},
+	gvfs, hostapd, iproute2, iptables, iw, jpeg, lame, libarchive,
+	libdnet, libdrm, libgcrypt, libgtk2, libmpeg2, libpng,
+	libsoup, lighttpd, linux-fusion, lzo, midori, mtd-utils,
+	nfs-utils, openvpn, oprofile, orc, pkg-config, proftpd, qt,
+	ruby, samba, sdl, shared-mime-info, sudo, sqlite, squid,
+	synergy, udev, usbmount, usbutils, util-linux, valgrind,
+	webkit, xorg-xserver, xz, zlib
+
+	New packages: acl, attr, ebtables, gnutls, inotify-tools,
+	ipset, libargtable2, libiqrf, libmnl, libnspr, libnss,
+	libroxml, libyaml, live555, mxml, orc, rsyslog, sredird,
+	statserial, stunnel, ti-utils, uboot-tools, yajl
+
+	Deprecated packages: liboil, swfdec
+
+	Removed packages: hal
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#3559: libnspr: Add new package
+	#3595: patch to add libroxml
+	#3565: libnss: Add new package
+	#3583: xfonts_font-adobe-100dpi fails due to missing map file
+	#3649: [PATCH] Add mapdir to existing pkg-config patch
+	#3907: 2011.05 - Qt 4.7.3 not building on ARM
+	#3961: Nfs-utils: Remove SUSv3-function index
+	#3985: "help" target's defconfig list needs sort
+	#3997: bump libroxml to v2.1.0
+
+2011.05, Released May 27th, 2011:
+
+	Updated/fixed packages: makedevs
+
+2011.05-rc2, Released May 24th, 2011:
+
+	Fixes all over the tree.
+
+	Toolchain: Code sourcery ARM 2009q1 download URL fixed /
+	2009q3 external toolchains added. Crosstool-NG bumped to
+	1.11.3, eglic/glibc configuration fixes. Linux kernel 2.6.38.x
+	bumped to 2.6.38.7.
+
+	Updated/fixed packages: bind, fakeroot, kbd, psmisc, qt
+
+2011.05-rc1, Released May 18th, 2011:
+
+	Fixes all over the tree and new features.
+
+	External toolchain improvements: We now build a binary
+	toolchain wrapper and install it into HOST_DIR/usr/bin, which
+	enforces the correct compiler arguments, making an external
+	toolchain as easy to use outside of Buildroot as the internal
+	ones are. This also brought a cleanup of CFLAGS, making the
+	Buildroot build output easier to read.
+
+	Rootfs device handling improvements: Choice between static
+	/dev, devtmpfs and devtmpfs with either mdev or udev.
+
+	Toolchain: More preconfigured codesourcery external
+	toolchains, improved Crosstool-NG support, fix for GCC
+	snapshot versions, GCC 4.4.6 / 4.5.3, experimental GCC 4.6.0
+	support, target-GCC fixes, uClibc fixes, 0.9.32-rc3 support.
+
+	Bootloaders: U-boot 2011.03, Barebox 2011.05.0
+
+	Linux: support for custom kernel image targets, E.G. for
+	powerpc builds with embedded device trees.
+
+	Misc fixes for qemu defconfigs, ensuring correct serial
+	terminal setup out of the box.
+
+	Misc gentarget / autotools handling fixes.
+
+	Updated/fixed packages: alsa-lib, alsa-utils, alsamixergui,
+	atk, avahi, bind, bison, busybox, copas, dbus-glib, dhcp,
+	dhcpdump, dnsmasq, dropbear, ethtool, fakeroot, ffmpeg, file,
+	gamin, gnuconfig, gst-ffmpeg, gst-plugins-good, gtk2-engines,
+	haserl, hostapd, icu, imagemagick, iproute2, iw, kismet, less,
+	libcap, libdnet, libglade, libglib2, libgtk2, libnl, libpng,
+	libxml2, libxml2, libxslt, lighttpd, lockfile-progs, makedevs,
+	midori, mpg123, mpc, mpd, mpfr, mplayer, mtd-utils, ncurses,
+	netsnmp, openssh, openssl, openvpn, pango, pkg-config, popt,
+	procps, proftpd, qt, quagga, readline, rsync, samba, sdl,
+	socat, squashfs, squid, sudo, tslib, udev, usbutils, webkit,
+	wpa_supplicant, xerces, xfont_font-misc-misc, xlib_libX11,
+	xlib_libXfont, xlib_xtrans, xorg-server, xterm, xz
+
+	New packages: bonnie++, can-utils, gdisk, htop,
+	input-event-daemon, libexif, libraw, libv4l, ngircd
+
+	Removed packages: festival
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#2131: Add OpenMP support to the toolchain
+	#3379: New Package: bonnie++
+	#3445: Not working openssl-10.0.0d on 386sx
+	#3451: fakeroot package: wrong FAKEROOT_SITE variable
+	#3457: alsamixergui: broken URL
+	#3475: Calling sync on large filesystems when not always necessary
+	#3511: make busybox-menuconfig does not download busybox package
+	#3541: Quotes in the top Makefile:217 break buildroot/kernel config...
+	#3571: u-boot: fw_printenv does not build
+	#3643: popt source url is not responding
+	#3733: dropbear: make zlib optional
+	#3757: Buildroot can't build mplayer with libmad
+
+2011.02, Released February 28th, 2011:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: alsamixergui, avahi, ffmpeg, icu, mpd,
+	nuttcp, qt, slang, squashfs, sylpheed, synergy, xerces
+
+	Deprecated packages: devmem2, webif
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#2911: Qt: Disable qt3support-option, if gui-module isn't selected
+	#3259: Unable to build webkit (on arm)
+	#3295: slang fails to build on mipsel
+	#3325: ffmpeg fails to build
+
+2011.02-rc2, Released February 24th, 2011:
+
+	Fixes all over the tree.
+
+	Festival packages marked as broken. Unless someone steps up
+	to support them, they will be removed during the 2011.05
+	development cycle.
+
+	Updated/fixed packages: atk, avahi, bind, cairo, dbus,
+	enchant, fakeroot, gmpc, gpsd, gvfs, iperf, jpeg, libarchive,
+	libcgicc, libdaemon, libdrm, libevent, libgail, libglib2,
+	libgpg-error, libmicrohttpd, librsvg, libsoup, libxcp,
+	makedevs, matchbox-fakekey, matchbox-startup-monitor, mdadm,
+	metacity, mpd, nasm, nfs-utils, olsr, openssl, popt,
+	pthread-stubs, quagga, rpm, samba, sdl, sdl_gfx, sdl_image,
+	sdl_mixer, sdl_sound, sdl_ttf, squashfs, synergy, taglib,
+	tcpreplay, tiff, wpa_supplicant, xcb-util,
+	xdriver_xf86-input-{acepad,aiptek,evdev,joystick,keyboard},
+	xdriver_xf86-input-{mouse,synaptics,void},
+	xdriver_xf86-video-{chips,dummy,geode,glide,intel,nv,wsfb},
+	xlib_lib{ICE,SM,XScrnSaver,Xau,Xcursor,Xdmcp,Xi,Xinerama},
+	xlib_lib{Xrandr,Xt,Xtst,Xxf86dga,Xxf86vm,dmx,fontenc,pciaccess},
+	xserver_xorg-server, xz
+
+	Removed packages: ace_of_penguins, vlc
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#3205: Failing chmod when running "make" in buildroot (openssl)...
+	#3277: quagga fails to build with SNMP support
+	#3283: See why nfs-utils needs fakeroot, and convert to autotools
+	#3307: synergy fails to build due to missing XTest library
+
+2011.02-rc1, Released February 14th, 2011:
+
+	Fixes all over the tree and new features.
+
+	External toolchain improvements: clarification of the options,
+	and introduction of the toolchain profile concept, for
+	well-known toolchains. Buildroot is now capable of
+	automatically downloading and extracting well-known toolchains
+	(for the moment, CodeSourcery ARM, PowerPC, MIPS and SuperH
+	toolchains are supported). Crosstool-NG backend updated and
+	improved.
+
+	Complete rework of how hardware boards are supported.
+	Each board now only has a single defconfig file, and all
+	board-specific options have been removed. See
+	docs/buildroot.html#board_support for details.
+
+	Added support for the following boards: Mini2440, Qemu ARM
+	Versatile, Qemu MIPSel Malta, Qemu PowerPC G3beige, Qemu SH4
+	r2d and Qemu x86. The Qemu boards support allows to easily
+	build systems that are known to work under Qemu.
+
+	Initial support for Blackfin processors.
+
+	Staging directory moved into $(O)/host/usr/<tuple>/sysroot, in
+	preparation for support of SDK. For the same reason, the
+	toolchain binaries (cross-compiler and other related tools)
+	are now installed in $(O)/host/usr/bin/. The cross pkg-config
+	now also automatically returns correct values for cross
+	compilation, without needing any environment variables to be
+	set.
+
+	Ccache support reworked. Now used for both host and target
+	compilation, and cache is stored in ~/.buildroot-ccache.
+
+	Toolchain: uClibc 0.9.32-rc2, several components moved to
+	normal AUTOTARGET packages.
+
+	Generic cmake infrastructure, similar to the existing
+	GENTARGETS/AUTOTARGETS.
+
+	Support for bzr downloads, next to the existing git/svn support.
+
+	Kconfig infrastructure rebased against 2.6.38-rc3, bringing
+	misc fixes. 'xconfig' now uses Qt4 rather than Qt3.
+
+	EXT2 file system size handling improved, UBI image support, fs
+	configuration options cleanup, U-Boot/Barebox version bumps.
+
+	Updated/fixed packages: alsa-utils, at, autoconf, automake,
+	bash, binutils, bison, busybox, bzip2, cdrkit, cloop, cmake,
+	coreutils, cups, dbus, dbus-python, dhcp, directfb,
+	direcfb-examples, dmalloc, dnsmasq, dosfstools, e2fsprogs, ed,
+	fbset, ffmpeg, findutils, flac, freetype, gdk-pixbuf, gmp,
+	grep, gperf, gst-ffmpeg, gst-plugins-bad, gst-plugins-base,
+	gst-plugins-good, gst-plugins-ugly, gstreamer, gvfs, hdparm,
+	hostapd, i2c-tools, icu, imagemagick, input-tools, iproute2,
+	iptables, iw, jpeg, kexec, libaio, libart, libcap, libconfig,
+	libfuse, libglib2, libidn, libmad, libogg, libpcap, libpng,
+	libsndfile, libtheora, libtool, libusb-compat, libvorbis,
+	libxcb, libxml2, libxslt, links, linux-fusion, lm-sensors,
+	lsof, ltp-testsuite, ltrace, lvm2, lzo, m4, makedevs,
+	memtester, mesa3d, mii-diag, mpc, mpfr, mpg123, mplayer,
+	mrouted, mtd-utils, nano, netperf, netplug, ntfs-3g, ntp,
+	openssh, openssl, openvpn, oprofile, pango, patch, pciutils,
+	php, pkgconfig, portmap, psmisc, python, qt, rsync, ruby,
+	sawman, screen, sdl_gfx, sdl_sound, smartmontools, socat,
+	sqlite, squid, sshfs, sstrip, sysklogd, sysstat, sysvinit,
+	tar, tcpdump, tslib, udev, usbutils, vim, vtun, webkit, wipe,
+	x11vnc, xapp_xlogo, xcb-proto, xfont_font-util,
+	xkeyboard-config, xlib_libX11, xz, zlib
+
+	New packages: dhrystone, dsp-tools, faad2, fbgrab, gst-dsp,
+	gst-omapfb, irda-utils, lame, libao, libcue, libcuefile,
+	libffi, libhid, libreplaygain, libsamplerate, libsigc++,
+	lsuio, mpd, musepack, python-mad, python-serial, rsh-redone,
+	sdparm, tidsp-binaries, vorbis-tools, wavpack, whetstone,
+	xl2tp, xmlstarlet
+
+	Removed packages: hotplug, l2tp, libfloat, microcom,
+	ng-spice-rework
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#267:  The make target: cross fails because toolchain_build_...
+	#415:  Berkeley DB: mut_pthread.o: relocation R_X86_64_32 against...
+	#561:  ltp-testsuite failed to install
+	#1447: Installing gfortran on PowerPC
+	#1651: Build fail caused by ccache in module-init-tools
+	#1681: Cross-compiled binaries shouldn't be installed into staging
+	#1723: [PATCH] axel: convert to generic package infrastructure and...
+	#1735: [PATCH] mplayer: convert to autotools infrastructure
+	#2551: [PATCH] native toolchain in the target filesystem fails
+	#2623: buildroot-snapshot-20100922 fails when compiling development...
+	#2647: makedevs package lacks support for 16-bit major/minor numbers
+	#2371: QT MYSQL Module does not build when MySQL installed on the host
+	#2839: compile fails in various packages with a odd message "error:...
+	#2887: tar "buffer overflow detected" error
+	#2893: Broken "make source" with external toolchain
+	#2905: Qt: Speed up compilation, if gui-module isn't selected
+	#2929: genext2fs: couldn't allocate a block (no free space)
+	#2935: Ntpdate isn't installed
+	#2965: Broken linkage to xkbcomp (blocking X server startup)
+	#2983: xlib_libX11 build failed
+	#3007: kexec doesn't build: Missing regdef.h file
+	#3085: Init scripts are not compatible with sysVinit (when busybox...
+	#3103: make external-deps wants to download gcc-.tar.bz2 when...
+	#3109: abnormal `make busybox-menuconfig`
+	#3115: How about board specific makefiles?
+	#3169: python patch has typo, aborts build in scenario
+	#3181: dhcp.mk copies S80dhcp-server to etc/init.d, not etc/init.d/
+
+2010.11, Released November 30th, 2010:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: libgcrypt, qt, squid, sysstat, tcpdump,
+	xserver-xorg
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#2773: squid with openssl support needs openssl on the host
+	#2857: OBJDUMP definition is missing from TARGET_CONFIGURE_OPTS
+
+2010.11-rc2, Released November 25th, 2010:
+
+	Fixes all over the tree.
+
+	Add support for LEON Sparc architecture variants. Fix make
+	source/external-deps for host packages.
+
+	Updated/fixed packages: bash, bind, busybox, dialog, gpsd,
+	libglib2, libcurl, libmad, lrzsz, midori, module-init-tools,
+	mtd-utils, openssh, openssl, pciutils, php, qt, sqlite,
+	sysstat, webkit, zlib
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#759:  Sysstat build broken without libintl
+	#2479: host-module-init-tools 3.11 fails to build
+	#2725: Buildroot overrides kernel config
+	#2785: mtd-utils build fails due to missing libmtd
+	#2791: Added PHP-Process Control to the PHP-Package
+	#2797: pciutils dependencies on zlib not taken into account
+	#2809: failed to compile libglib2
+	#2821: [PATCH] Patch for JavaScriptCore in QtWebKit module
+	#2827: qt-4.7.0-pthread_getattr_np.patch invalid for qt 4.6...
+	#2833: Failed to compile webkit without X11
+
+2010.11-rc1, Released November 8th, 2010:
+
+	Fixes all over the tree and new features.
+
+	Kconfig infrastructure rebased against 2.6.36-rc1, bringing
+	misc fixes + nconfig and savedefconfig targets.
+
+	Toolchain: ARM cortex A9 support, experimental crosstool-ng
+	backend, GCC 4.5.x.
+
+	Fs: Squashfs 4.1 with lzo support
+
+	Old-style package hooks (*_HOOK_POST_*) removed. Use the more
+	generic new-style ones instead.
+
+	Download handling reworked and support for git/svn downloads
+	added.
+
+	Removed experimental shared config.cache support, as it is
+	too unreliable.
+
+	A convenience Makefile wrapper is created when using
+	out-of-tree building, similar to how it is done for the kernel.
+
+	Alpha, Cris, IA64 and Sparc64 architecture support removed.
+
+	New packages: argp-standalone, gdk-pixbuf, gpsd, gst-ffmpeg,
+	libmpeg2, kbd, librsvg, nuttcp, rng-tools, rrdtool, xz
+
+	Updated/fixed packages: acpid, alsa-lib, argus, at, autoconf,
+	automake, avahi, axel, beecrypt, berkeleydb, bind, bmon, boa,
+	bootutils, bridge-utils, bsdiff, busybox, cvs, dbus, directfb,
+	dmraid, docker, dosfstools, dropbear, e2fsprogs, ethtool,
+	expat, ezxml, fbset, fconfig, ffmpeg, freetype, gadgetfs-test,
+	gamin, gawk, genext2fs, gperf, gst-plugins-base,
+	gst-plugins-ugly, gtk2-themes, gtkperf, gvfs, haserl, hdparm,
+	hostapd, hwdata, ifplugd, imagemagick, iperf, ipsec-tools,
+	iproute2, iptables, iw, jpeg, kexec, kismet, less, libcgi,
+	libcurl, libdaemon, libdnet, liberation, libevent, libeXosip2,
+	libglade, libgtk2, libiconv, libidn, libintl, libmms, libmpd,
+	libnl, liboil, libosip2, libpcap, libpng, libtool, libungif,
+	libxml2, libxslt, lighttpd, lite, lm-sensors, lockfile-progs,
+	logrotate, m4, matchbox, mdadm, mesa3d, metacity, mplayer,
+	mtd-utils, mysql_client, nano, nbd, ncftp, neon, netperf,
+	netsnmp, ng-spice-rework, ntfsprogs, ntp, openntpd, openssh,
+	openssl, openvpn, oprofile, pango, patch, pcre, php,
+	pkg-config, portmap, pppd, pptp-linux, prboom, proftpd, radvd,
+	rdesktop, readline, rp-pppoe, ruby, qt, quagga, samba, sawman,
+	sdl_mixer, sdl_sound, sed, setserial, shared-mime-info, slang,
+	speex, sqlite, squashfs, startup-notification, strace,
+	sylpheed, sysstat, taglib, tcpdump, thttpd, tiff, tn5250,
+	torsmo, tslib, udev, udpcast, usbmount, usbutils, vsftpd,
+	vtun, which, wireless-tools, wpa_supplicant, xapp_twm,
+	xapp_xbacklight, xapp_xcursorgen, xapp_xinit, xapp_xinput,
+	xapp_xmore,
+	xdriver_xf86-input-{acecad,aiptek,evdev,joystick,keyboard},
+	xdriver-xf86-input-{mouse,synaptics,vmmouse,void},
+	xdriver-xf86-video-{apm,ark,ast,ati,chips,cirrus,dummy,fbdev},
+	xdriver-xf86-video-{geode,glide,glint,i128,i740,intel,mach64},
+	xdriver-xf86-video-{mga,neomagic,newport,nv,openchrome,r128},
+	xdriver-xf86-video-{rendition,s3,s3virge,savage,siliconmotion},
+	xdriver-xf86-video-{sis,sisusb,suncg3,suncg6,suncg14,sunffb},
+	xdriver-xf86-video-{sunleo,suntcx,tdfx,tga,trident,v4l,vesa},
+	xdriver-xf86-video-{vmware,voodeo,wsfb,xgi,xgixp},
+	xkeyboard-config, xlib_libX11, xserver_xorg-server, xstroke,
+	xterm, xvkbd, zlib
+
+	Deprecated packages: hotplug, lzma, ng-spice-rework, sfdisk
+
+	Removed packages: dillo, libglib12, libgtk12, microwin,
+	pcmcia
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#901:  new package: gpsd
+	#2389: Generate a Makefile wrapper in $(O)
+	#2461: wireless_tools: install shared library if needed
+	#2521: Can't compile sdl_mixer, mikmod.h can't be found
+	#2533: xserver_xorg-server: Enable glx, if mesa3d is built
+	#2563: [PATCH] cairo: Expose the configure option to disable some...
+	#2581: libmms: Update to 0.6, and patch to work on architectures...
+	#2707: Can't compile linux kernel using buildroot + crosstool-ng
+	#2731: Build order
+	#2737: buildroot configuration tool crashing when the path exceeds...
+	#2767: Build for lsof broken in buildroot-2010.08
+
+2010.08: Released August 31th, 2010:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: atk, xstroke
+
+	Removed packages: lxdoom
+
+2010.08-rc2, Released August 30th, 2010:
+
+	Fixes all over the tree.
+
+	Mark the combination of uClibc 0.9.31, gcc 4.2.x, C++ and
+	locale support as broken. Remove deprecated GCC 4.2.[1-3]
+	versions.
+
+	Mark CRIS architecture as deprecated, as it is discontinued
+	upstream.
+
+	Marked shared config.cache as experimental and disabled by
+	default as it is known to break with certain package
+	combinations.
+
+	Toolchain: fixed gcc 4.2.x build after uClibc NPTL support got
+	added.
+
+	fs: old-style squashfs for big endian archs fixed.
+
+	Updated/fixed packages: busybox, gst-plugins-base,
+	imagemagick, kismet, libgail, libglib2, libgtk2, lua,
+	luafilesystem, lzo, ncurses, netcat, pango, php, pppd,
+	proftpd, qt, samba, startup-notification, swfdec, sysvinit,
+	util-linux
+
+	Removed packages: stunnel
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#635:  util-linux fails to build in 2009.08
+	#2239: netcat package installs its binary to target as avr32-linux...
+	#2395: libglib2-2.24.1 and libxml2-2.7.7 fails build on MIPS because...
+	#2443: Initramfs: Don't overwrite $(TARGET_DIR)/init if it exists
+	#2449: Minor fixes for squashfs makefile and correct PowerPC e500 ...
+
+2010.08-rc1, Released July 30th, 2010:
+
+	Fixes all over the tree and new features.
+
+	Toolchain: GCC 4.3.5, older 4.3.x versions removed. GCC 4.1.2
+	and non-sysroot support removed. Added support for (snapshot)
+	NPTL in uClibc, 0.9.28.3 removed,
+
+	Bootloaders: Various cleanups, moved to boot/, added Barebox,
+	removed yaboot. Support building u-boot from custom tarball,
+	u-boot 2010.06.
+
+	New GTK-based configurator, usable using 'make gconfig'.
+
+	Java packages marked as broken. Unless someone steps up to
+	support this, they will be removed during the 2010.11
+	development cycle.
+
+	Alpha, IA64 and Sparc64 architectures marked as deprecated.
+	GTK+ on DirectFB has also been marked as deprecated, as it is
+	not supported in recent GTK+ versions, and more and more
+	packages depends on the new versions.
+	Unless someone steps up to support them, they will be removed
+	during the 2010.11 development cycle.
+
+	New packages: cgilua, copas, coxpcall, ffmpeg, libsvgtiny,
+	libgail, luafilesystem, luasocket, rings, wsapi, xavante, xterm
+
+	Updated/fixed packages: alsa-lib, alsamixergui, at, atk,
+	avahi, berkeleydb, bash, blackbox, busybox, bzip2, cairo,
+	cdrkit, cmake, dash, dhcp, dialog, diffutils, distcc, dmalloc,
+	dnsmasq, dropbear, e2fsprogs, fbv, file, flex, fontconfig,
+	gawk, gmpc, gnuchess, gst-plugins-base, gst-plugins-good,
+	gstreamer, gzip, icu, intltool, iostat, ipsec-tools, iptables,
+	iw, libart, libcgi, libcurl, libdrm, libeXosip, libfuse,
+	libglib2, libgpg-error, libiconv, libidn, liblockfile, libpng,
+	libsoup, lighttpd, links, linux-fusion, lmbench, lrzsz,
+	ltrace, make, midori, module-init-tools, mplayer,
+	mysql_client, nbd, ncurses, neon, netcat, netperf, netsnmp,
+	ntfsprogs, openssl, oprofile, pango, php, qt, quagga, samba,
+	setserial, sdl, sdl_mixer, sdl_sound, sdl_ttf, speech-tools,
+	sqlite, squashfs, swfdec, tftpd, thttpd, tn5250, tremor,
+	usbutils, webif, webkit, wireless_tools, xerces,
+	xkeyboard-config, xserver_xorg-server, xvkbd, zlib
+
+	Removed packages: modutils, portage, rxvt
+
+	Deprecated packages: dillo, libglib12, libgtk12, microwin, pcmcia
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#321:  alsa-lib uses host include files for python which breaks ...
+	#361:  linux kernel configuration choice works incorrectly
+	#387:  Tremor not installed to toolchain
+	#401:  new package: ffmpeg
+	#475:  uImage target for U-boot failed generating
+	#543:  ATK requires X11 on DirectFB target
+	#575:  webkit: Buildroot Libtool Patch Fails
+	#583:  build fails with external x86_64 toolchain
+	#729:  sstrip creates corrupted headers
+	#829:  Webkit r44552 needs libXt
+	#835:  Package Dataflashboot-1.05 does not compile with buildroot...
+	#847:  Compiling target-gcc v4.4 fails with "libc.so.0: cannot open...
+	#859:  Add (head of) nptl branch to list of uClibc versions
+	#949:  compile with debug info
+	#955:  Grub fails to build with External Toolchain
+	#1051: Webkit doesn't compile (Linuxthreads new, x86)
+	#1213: Move .config into output directory
+	#1225: Buildroot fails to account for "nof" subdirectory (no float...
+	#1231: (sparc) Linux kernel fails to build
+	#1261: The getline() in output/build/linux-2.6.28/scripts/unifdef.c...
+	#1339: Busybox needs -fno-strict-aliasing to compile cleanly
+	#1393: neon config fails libxml/parser.h: libxml2 requires, but not ...
+	#1405: WebKit fails to build because pthread_getattr_np is not impl...
+	#1675: GMP Error during buildroot make process
+	#1741: external toolchain linking error
+	#1753: lmbench: convert to generic package infrastructure
+	#1771: Fakeroot and the target/generic/device_table.txt create bad...
+	#1807: LZMA 4.32.7, Required header file(s) are missing
+	#1813: xkeyboard-config fails to build because of intltool problem
+	#1879: Bump iptables to 1.4.8
+	#1885: Add a bunch of lua modules
+	#1897: Bump libusb to 1.0.7
+	#1903: Bump tn5250 to 0.17.4 and migrate to autotargets
+	#1909: netperf-2.4.5 fails to build because of undeclared SOCK_DCCP
+	#1927: Bump file to 5.03 and migrate to autotargets
+	#1933: Bump gawk to 3.1.8 and migrate to autotargets
+	#1945: PHP: add sqlite3 dependency when using external lib
+	#1951: Bump openssl to 0.9.8o
+	#1957: Bump sqlite to 3.6.23.1
+	#1975: Package removal/deprecation
+	#1981: zlib: bump to 1.2.5
+	#1987: intltool: Fix spelling mistake
+	#1993: Bump bash to 4.1.7(1) and migrate to autotargets
+	#1999: Typo in path checking
+	#2005: Bump dnsmasq to 2.55 and migrate to gentargets
+	#2035: ipsec-tools-0.7.2 fails to build with gcc-4.4.x
+	#2038: Bump ncurses to 5.7
+	#2095: make gconfig: undefined reference to symbol 'dlsym@@GLIBC_2.2.5'
+	#2101: blackbox depends on locale support
+	#2119: Tries to build kernel, although disabled in config
+	#2125: libXfont build fail
+	#2143: buildroot compiler generates segfaulting statically linked exe..
+	#2149: xterm build failure
+	#2155: Compression lzo don't set for ubifs
+	#2161: [SECURITY] Update libpng to 1.2.44
+	#2167: Bump busybox to 1.17.0, convert to gentargets, drop 1.12, ...
+	#2181: pixman can't apply pixman-0.10.0-no-tests.patch
+	#2191: linux-fusion build fail
+	#2221: Qt does not compile (dependencies not taken into account?)
+	#2233: Atmel atstk target skeletons have /etc/mtab as a file, not ...
+	#2245: Netcat does not work due to incorrect assumptions about signed..
+	#2251: directory output/build after make *_defconfig not found
+	#2257: Convert netsnmp package to autotargets
+	#2263: Bump samba to 3.3.13
+	#2269: setserial causes make error
+
+2010.05, Released May 30th, 2010:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: coreutils, hal, libcap,
+	lockfile-progs, ncftp, xserver_xorg-server
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#1789: binutils fails to build for i386
+	#1843: Fix libcap build failure
+	#1855: XORG Keyboard driver fails to compile
+
+2010.05-rc3, Released May 27th, 2010:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: aumix, atk, avahi, bmon, busybox, cairo,
+	cdrkit, dbus-glib, dbus-python, docker, enchant, fltk, gamin,
+	gettext, gmpc, gob2, grep, gstreamer, gst-plugins-bad,
+	gst-plugins-base, gvfs, hal, iconv, icu, iperf, libcgicc,
+	libdvdnav, libdvdread, libglade, libglib2, libgtk2, libidn,
+	libmms, libmpd, libpcap, libsoup, lmbench, lsof, ltrace, lvm2,
+	make, metacity, microperl, mtd-utils, mutt, nbd, netsnmp,
+	ntfsprogs, ntp, olsr, pango, pciutils, pcmanfm, php,
+	pkg-config, psmisc, qt, samba, shared-mime-info, squashfs,
+	squashfs3, sshfs, startup-notification, swfdec, sylpheed,
+	uemacs, util-linux, valgrind, vpnc, vsftpd, webkit, xstroke
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#75: arm buildroot "unrecognized option" error
+	#699: Buildroot fails to copy libstdc++ to target when using external...
+	#1693: NTP trys IPV6 even if not configured error: 'IPV6_MULTICAST...
+	#1729: alsamixergui fails to build
+	#1801: Avahi-autoipd doesn't create TARGET_DIR/var/lib
+	#1819: pciutils small bugs
+	#2065: Internal toolchain: bump gcc 4.3.x series to 4.3.5
+
+2010.05-rc2, Released May 11th, 2010:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: busybox, customize, gawk, gnuchess,
+	hal, hostapd, less, libgcrypt, libnl, libxcb, linux-fusion,
+	ltp-testsuite, mplayer, netplug, pciutils, php, sed,
+	shared-mime-info usb_modeswitch, usbutils, vlc wpa_supplicant,
+	xapp_bdftopcf, xapp_mkfontdir, xdriver_xf86-video-openchrome,
+	xfont_encodings, xlib_libX11, xlib_libXfont, xlib_xtrans,
+	xproto_fontcacheproto, xproto_fontsproto, xvkbd
+
+	Removed packages: vice
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#849: "customize" package copies files to wrong place in target tree
+	#985: Bump usb_modeswitch package to 1.1.0
+	#1135: Package customize. Wrong copying
+	#1525: Package hal deletes a whole <target>/etc/rc.d directory
+	#1531: libxcb 1.5 build fails, due to missing xcbgen Python module
+	#1669: Busybox failed to compile when using an external toolchain
+	#1699: Fix usbutils dependencies and bump
+	#1705: Fix pciutils broken cross compiling
+	#1717: External toolchain fixes for hostapd & wpa_supplicant
+
+2010.05-rc1, Released May 3rd, 2010:
+
+	Cleaned up / restructured package menu.
+
+	Toolchain: uClibc 0.9.30.3 / 0.9.31, older 0.9.30.x removed.
+	2.6.33 kernel headers, binutils 2.20.1, GCC 4.4.4,
+	removed broken nios2 support, ppc e300cX/e500mc support,
+	improved external toolchain support, GDB 7.x support.
+
+	X.org updated to 7.5.
+
+	New packages: cdrkit, cramfs, genext2fs, genromfs,
+	libatomic_ops, librsync, libusb-compat, lmbench, netperf,
+	squashfs, squashfs3, squid
+
+	Updated/fixed packages: alsa-utils, argus, autoconf, bison,
+	busybox, bzip2, directfb, dnsmasq, dosfstools, e2fsprogs,
+	eeprog, fakeroot, fbv, findutils, freetype, haserl, hostapd,
+	iperf, iptables, iw, less, libaio, libcgi, libcgicc, libdrm,
+	libgcrypt, libglib2, libid3tag, libmad, liboil, libosip2,
+	libpng, libraw1394, libsysfs, libxml2, libxslt, linux-fusion,
+	ltrace, lua, lzma, madplay, makedevs, matchbox, mdadm,
+	memstat, mesa3d, mtd-utils, nano, ncurses, openssl, patch,
+	pciutils, php, pixman, portage, pppd, pthread-stubs, python,
+	qt, radvd, samba, setserial, smartmontools, tar, tslib,
+	udpcast, usb_modeswith, vtun, wget, xdata_xcursor-themes,
+	xdriver_xf86-video-intel, xkeyboard-config, xlib_libX11,
+	xlib_libXaw, xlib_libXfont, xlib_libXfontcache,
+	xlib_libXxf86misc, xlib_libXtst, xlib_libpciaccess,
+	xproto_dri2proto, xproto_eviext, xproto_fontcacheproto,
+	xproto_xf86miscproto, xserver_xorg-server
+
+	Removed packages: xapp_xtrap, xlib_libXTrap, xlib_libXevie,
+	xlib_libXxf86misc, xxproto_evieext, proto_trapproto,
+	xproto_xf86miscproto
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#513: Add new squid package
+	#661: lmbench: new package
+	#719: Add lua option to haserl
+	#800: [PATCH] iperf update to 2.0.4
+	#803: [PATCH] lua - add shared library patch and config option for...
+	#805: [PATCH] mdadm - version update
+	#817: integrator926_defconfig uses unsupported uboot board name
+	#851: Add option to specify --sysroot value for external toolchain
+	#1093: Upgrade libusb to v1.0.3 and add new libusb-compat
+               package for compatibility with old packages that expect
+               the pre-1.0 API.
+	#1105: Add new netperf package
+	#1111: Bump wget to 1.12 and migrate to Makefile.autotools.in
+	#1117: Bump nano to 2.2.3 and migrate to Makefile.autotools.in
+	#1123: Bump less to 436 and migrate to Makefile.autotools.in
+	#1129: Bump memstat to 0.8 and migrate to Makefile.package.in
+	#1189: Wrong u-boot configuration name for integrator926 target
+	#1219: kernel headers not correctly installed into toolchain/staging
+	#1267: Wrong BR2_EXTRA_VERSION
+	#1273: BR2_INET_IPV6 does not enable IPv6 in pppd
+	#1303: Add librsync package
+	#1321: Busybox link fails due to lack of --sysroot option
+	#1327: mtd-utils compile failure due to lack of --sysroot in CFLAGS
+	#1345: Bump pppd to 2.4.5 and convert to Makefile.autotools.in
+	#1369: cannot build radvd (flex problem)
+	#1387: xlib_libX11-1.3.2 can't find libjpeg
+	#1411: [SECURITY] Update openssl package to 0.9.8n
+	#1417: Bump iptables to 1.4.7
+	#1423: Bump e2fsprogs to 1.41.11
+	#1429: [SECURITY] Update php to 5.2.13
+	#1441: Add binutils 2.20.1
+	#1447: Package installation on target with debug symbols is broken
+	#1459: Misc QA fixes
+	#1489: radvd update to 1.6
+	#1513: Enable powerpc e300c2, e300c3 and e500mc optimization
+	#1537: dev entries not created anymore
+	#1555: Fix default uclibc-0.9.31 configuration
+	#1561: [SECURITY] Update samba to 3.3.12
+	#1567: openssl0.9.8n fails to compile
+	#1573: Alsa-utils alsactl/init/* not installed to target
+	#1591: portmap fails to compile
+	#1615: Convert eeprog package to gentargets
+	#1645: Bump hostapd package to 0.7.2
+
+2010.02, Release February 26th, 2010:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: avahi, busybox, cramfs, ipsec-tools, libcgicc,
+	libgtk2, libraw1394, madplay, netsnmp, pango, squashfs, sylpheed, qt,
+	xfont_font-util
+
+	Removed packages: hostap, openmotif, xpdf
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#165: openmotif does not build
+	#1147: Remove obsolete hostap package
+	#1183: make source fails to download gmp, mpfr and patches
+
+2010.02-rc2, Released February 23th, 2010:
+
+	Fixes all over the tree and new features.
+
+	New packages: intltool
+
+	Updated/fixed packages: ace_of_penguins, alsa-lib, alsa-utils, argus,
+	at, automake, ccache, dosfstools, e2fsprogs, flex, gob2, gmpc,
+	gst-plugins-good, imagemagick, iw, kexec, libeXosip, libgtk2,
+	libpcap, libpng, libsoup, libxcb, libxml-parser-perl, libxml2,
+	libxslt, lvm2, matchbox, mplayer, rsync, rubix, shared-mime-info,
+	tcl, webkit, xapp_mkfontscale, xfont_encodings, xfont_font-util,
+	xlib_libfontenc, xproto_trapproto, zlib
+
+	Removed package: xboard
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#335: atk looks for the path to the gnome library on the host
+	#355: Please update WebKit - it doesn't compile!
+	#453: libglib2 autoreconf
+	#457: e2fsprogs link problem
+	#459: libgtk2 autoreconf
+	#469: build of libgtk2 for host incorrectly assumes that X.org ...
+	#671: Bash fails to build when building buildront on Ubuntu 9.04
+	#711: WebKit host dependencies problems
+	#821: cp: illegal operation
+	#1039: Not compiled on ubuntu karmic
+	#1069: [PATCH] The AT91BOOTSTRAP makefile contains a typo
+
+2010.02-rc1, Released February 9th, 2010:
+
+	Fixes all over the tree and new features.
+
+	Generalized autotools infrastructure to be usable for
+	non-autotools packages, see package/Makefile.package.in for
+	details.
+
+	Cleaned up avr32 toolchain config, external source-based
+	toolchain support is gone.
+
+	Dependency checks: Also check for makeinfo, only print output
+	on errors.
+
+	Toolchain: uClibc 0.9.30.2, gcc 4.4.3
+
+	New packages: libcdaudio, libdvdnav, libdvdread, hostapd, ser2net,
+	tcpreplay
+
+	Updated/fixed packages: alsa-lib, alsa-utils, at, autoconf, bash,
+	bind, binutils, bootutils, busybox, dbus, directfb, dnsmasq,
+	e2fsprogs, gstreamer, gperf, gst-plugins-bad, gvfs, fbdump, flex,
+	hal, iptables, iw, jpeg, kismet, libfuse, libglib2, liboil, libpcap,
+	libungif, libxml2, libxslt, lighttpd, mesa, mpg123, mtd-utils, nbd,
+	neon, netstat-nat, newt, openvpn, pcre, php, qt, rdesktop, readline,
+	rpm, sawman, sdl, sdl_ttf, sqlite, sshfs, tremor, u-boot,
+	usb_modeswitch, usbutils, webkit, wpa_supplicant, xfsprogs, zlib
+
+	Removed package: asterisk, openswan
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#515: tcpreplay: new package
+	#553: Wrong DirectFB ps2mouse limitation
+	#559: mesa3d build fails
+	#679: Autoconf cannot find M4
+	#739: New/updated hostapd package
+	#749: Bump usbutils package to version 0.86
+	#751: Kernel 2.6 snapshot fetch fail
+	#753: Bump lighttpd package to 1.4.25
+	#757: U-Boot: mkimage cannot be installed using external toolchain
+	#761: Add binutils 2.20 to toolchain options
+	#763: [SECURITY] Update pcre to 7.9
+	#765: Add buildroot branding to gcc
+	#767: Bump iw package to 0.9.18
+	#773: [SECURITY] Update bind to 9.5.2-P1
+	#795: Minor edits to fix typos, grammar, spelling, usage in documen...
+	#813: Drop not very useful generic package selection options ...
+	#823: Editor backup files (~) is copied from the target_skeleton
+	#827: Bump mtd-utils package to version 1.2.0
+	#841: Build error
+	#913: Bump iptables to 1.4.6
+	#919: Bump usb_modeswitch package to 1.0.7
+	#925: Bump wpa_supplicant package to 0.6.10
+	#931: Bump kismet package to 2010-01-R1
+	#937: Bump openvpn package to 2.1.1
+	#943: Bump sqlite package to 3.6.22
+	#961: Bump dnsmasq to 2.52
+	#967: Bump netstat-nat to 1.4.10
+	#973: Bump iw to 0.9.19
+	#1003: DHCP options disabled with busybox-1.16.0
+	#1009: [SECURITY] Bump php to 5.2.12
+	#1015: [SECURITY] Bump bind to 9.5.1-P2
+	#1027: Busybox flash commands conflict with those from mtd-utils
+	#1063: [SECURITY] Update lighttpd to 1.4.26
+
+2009.11, Released December 1st, 2009:
+
+	Additional fixes and cleanups.
+
+	Updated/fixed packages: alsamixergui, autoconf, coreutils, fltk,
+	microperl, ncurses, vim
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#707: Cant configure fltk-1.1.7. configure: error: Configure could ...
+
+2009.11-rc2, Released November 29th, 2009:
+
+	Additional fixes and cleanups.
+
+	Updated/fixed packages: busybox, dbus, fltk, gvfs, ltrace
+
+2009.11-rc1, Released November 23rd, 2009:
+
+	Fixes all over the tree and new features.
+
+	Cleaned up / Simplified build directory layout. Refer to
+	docs/buildroot.html#using for details.
+
+	Target defconfig files moved to configs/ and listed in 'make help'
+	output.
+
+	Fixed *clean targets. Now clean removes everything generated,
+	so you can do a fresh rebuild. Distclean furthermore removes
+	kbuild tools and .config, bringing the source tree back in a
+	pristine state.
+
+	Toolchain: ARM cortex A8 support, GCC 4.4.2, sensible default
+	soft / hardfloat setting for architecture, ensure target-ldd
+	gets installed.
+
+	New packages: divine, gvfs, libarchive, libmicrohttpd,
+	sdl_sound, swfdec, sysstat
+
+	Updated/fixed packages: alsa-lib, alsamixergui, autoconf, bootutils,
+	busybox, gcc, directfb, dnsmasq, e2fsprogs, festival, gamin, gperf,
+	gqview, gstreamer, gst-plugins-bad, gst-plugins-base, gst-plugins-good,
+	imagemagick, ipkg, iptables, iw, kernel-headers, kismet, leafpad,
+	libelf, libevent, libglib2, libidn, liblockfile, libmad, libpcap,
+	libupnp, libuuid, libxml2, lighttpd, ltrace, lua, lzma, magiccube4d,
+	matchbox, mdadm, nbd, ncftp, ncurses, netkittelnet, netsnmp,
+	ng-spice-rework, ntfs-3g, openntp, openssl, pcmanfm, php, psmisc,
+	python, quagga, radvd, rpm, rsync, rubix, samba, sawman, sdl, sdl_image,
+	shared-mime-info, sfdisk, spawn-fcgi, speech-tools, sqlite, squashfs,
+	synergy, syslinux, sysklogd, target-binutils, tcpdump, torsmo, u-boot,
+	udpcast, util-linux, valgrind, vsftpd, wipe, wpa-supplicant, x11vnc,
+	xdata_xcursor-themes, xboard, xfsprogs, xstroke, zlib[5~
+
+	Removed package: mdnsresponder, mpatrol, gcc 3.4.6 + 4.0.4, vice
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#301: allow to install libsmbclient
+	#303: add gvfs package
+	#477: Add sdl_sound package
+	#487: Make kismet package sexier
+	#511: New package usb_modeswitch
+	#527: misc fixes for dnsmasq package
+	#565: libevent: Bump version and clean up makefile
+	#587: Use iptables multipurpose binaries and bump to 1.4.4
+	#593: Missing early check for patch(1)
+	#597: (REOP)  Selecting busybox in buildroot's config clobbers ar ...
+	#609: libmicrohttpd: New package
+	#615: python: Don't delete .py files unless asked
+	#617: netkit/inetd requires RPC and fails to build if RPC is disabled
+	#619: netkittelnet requires netkitbase to install, but there's no ...
+	#645: allow to build nbd-server with NBD package
+	#653: [SECURITY] Update php package to version 5.2.11
+	#655: Update sqlite package to version 3.6.18
+	#657: Bug in imagemagick-clean target
+	#663: Add option for NAND flash with 512B Page and 16 kB erasesize ...
+	#665: [PATCH] Samba package
+	#667: [PATCH] e2fsprogs
+	#683: SDL-dfb does not select directfb
+	#701: make install problem with unstripped binaries
+	#703: [SECURITY] Update openssl package to 0.9.8l
+	#705: Bump spawn-fcgi package to 1.6.3
+	#709: Bump lighttpd package to 1.4.24
+	#713: Migrate openntpd package to Makefile.autotools.in
+	#715: Bump libidn package to 1.15 and other fixes
+	#717: Bump dnsmasq to 2.51 and introduce new IDN option
+	#731: Bump iw package to 0.9.17
+
+2009.08, Released August 31th, 2009:
+
+	Additional fixes and cleanups.
+
+	Updated/fixed packages: ctorrent, saveconfig/getconfig,
+	sdl_net, util-linux.
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#529: util-linux doesn't find headers and include libs correctly
+	#557: Build ctorrent with SSL support if available
+
+2009.08-rc3, Released August 26th, 2009:
+
+	Additional fixes and cleanups.
+
+	Updated/fixed packages: alsa-utils, berkeleydb, busybox, dbus,
+	directfb, enchant, kernel headers.
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#471: Allow directfb compilation with debug
+	#541: Removal of CVS directories in target filesystem broken
+	#547: berkeleydb: Update config.{sub, guess}
+	#549: enchant: Fix dependencies.
+	#569: Fix alsa-utils build for x86 on x86-64
+
+2009.08-rc2, Released August 6th, 2009:
+
+	Additional fixes and new features.
+
+	New packages: libuuid, gcc 4.3.4.
+
+	Updated/fixed packages: busybox, classpath, gzip, ipsec-tools,
+	jamvm, libusb, microperl, neon, popt, sed, webkit.
+
+	Fixed issue with 'make oldconfig'
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#525: sed broken with external toolchain
+	#537: Fix gzip build with recent glibc
+
+2009.08-rc1, Released August 2nd, 2009:
+
+	Fixes all over the tree and new features.
+
+	Improvement of external toolchain support:
+	  - Support for glibc toolchains.
+	  - The toolchain configuration announced to Buildroot is
+	    verified against the real toolchain configuration.
+	  - Fixes, documentation.
+
+	Cleanup X.org support: clarified configuration options, and
+	removed mandatory dependency on useless libraries such as
+	libXt or libXaw.
+
+	New QT-based configurator, usable using 'make xconfig'.
+
+	Support for the Xtensa architecture.
+
+	Toolchain: GCC 4.4.1, 2.6.30 kernel headers, removed < 2.6.26
+	headers.
+
+	New packages: bmon, ctorrent, dosfstools, enchant,
+	gst-plugins-bad, iw, libmms, libnl, netstat-nat, ntfsprogs,
+	sdl_gfx, spawn-fcgi.
+
+	Updated packages: bind, busybox, coreutils, sqlite, directfb,
+	expat, gamin, gnuconfig, haserl, ipsec-tools, classpath,
+	libcurl, libglib2, liblockfile, libpng, libsoup, libxml2,
+	lighttpd, ltp-testsuite, lvm2, matchbox, memstat,
+	gst-plugins-good, gstreamer, libogg, libvorbis, mplayer,
+	neon, openssl, pciutils, php, qt, ruby, sawman, webkit,
+	wpa-supplicant, xdriver_xf86-input-synaptics,
+	xdriver_xf86-video-intel, xlib_libXfont, xlib_libXft,
+	xlib_libXt, xproto_xproto, xserver-xorg, xutil_makedepend,
+	xutil_util-macros.
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#83: liblockfile fails to compile due to eaccess redefinition
+	#163: Xtensa architecture port
+	#171: xorg-server / kernel headers 2.6.26 - vm86.c compilation issue
+	#241: device mapper + lvm2: build together
+	#243: ctorrent: new package
+	#247: ntfsprogs: new package
+	#271: Library 'libgcc_s.so.1' not installed in search path
+	#287: New package libnl
+	#289: New package iw
+	#331: Update MPlayer to version 1.0rc2
+	#333: Bump sqlite package to 3.6.15
+	#349: update libsoup to version 2.26.2
+	#357: New package netstat-nat
+	#359,#413: Upgrade openvpn to Makefile.autotools.in
+	#367: linux kernel compile error for arm926t
+	#369: Add SDL_gfx package
+	#373: Support for building gstreamer without libxml
+	#379: update DirectFB to version 1.4.0
+	#383: gst-plugins-good: Allow soup plugin to be configured
+	#385: neon: Fix pkgconfig dependency
+	#387: Tremor not installed to toolchain
+	#389: New package bmon
+	#391: gstreamer: Bump version to 0.10.23
+	#393: gst-plugins-base: Bump version to 0.10.23
+	#395: gst-plugins-bad: New package
+	#403: Error while building iso9660 image
+	#409: Bump php package to 5.2.10
+	#411: ipsec-tools: Bump version to 0.7.2
+	#417: New package spawn-fcgi
+	#419: Bump lighttpd package to 1.4.23
+	#421: toolchain: Clean up toolchain locale support menu
+	#427: webkit: Update to WebKit svn r44552
+	#437: ltp-testsuite: Bump version to 20090630
+	#451: Upgrade from unmaintained dosfstools-2.11 to dosfstools-3.0.3
+	#467: DirectFB 1.4.1
+	#473: memstat_0.5.tar.gz has install with -D and that fails "make"
+	#491: libxml2: Bump version to 0.7.3
+	#495: Bump bind package to 9.5.1-P3 (security)
+	#497: OpenSSL RSA key generation hangs on x86_64
+	#509: Bump sqlite package to 3.6.16
+	#523: pciutils broken with external toolchain
+	#533: Update gamin to 0.1.10 to fix compilation
+
+2009.05, Released June 1st, 2009:
+
+	Fixes for dropbear & diffutils, bump linux-advanced 2.6.29.x
+	version and marked ubifsroot as broken.
+
+2009.05-rc3, Released May 27th, 2009:
+
+	Fixes for toolchain (gcc arm pr37436), stable kernel versions,
+	busybox, curl, libusb, readline, python and strace.
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#345: libcurl package needs a urandom fix
+
+2009.05-rc2, Released May 19th, 2009:
+
+	Fixes for toolchain (gcc w/softfloat on ppc, 3.4.6 buildfix
+	for newer hosts), stable kernel versions, busybox, cups,
+	dmraid, docker, mesa3d, rsync and updated defconfigs.
+
+	xserver marked as broken on AVR32 and atngw100-expanded
+	config removed.
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#167: metacity does not build
+	#295: gamin installs python support even if python is disabled
+	#323: gen_matypes fails to execute during build of Mesa when us...
+
+2009.05-rc1, Released May 5th, 2009:
+
+	Fixes all over the tree, further conversion of packages to
+	Makefile.autotools.in and we now build host versions of
+	packages where needed for build time dependencies instead of
+	relying on the correct versions being available on the build
+	host. Ancient toolchain / busybox versions have furthermore
+	been removed as announced in the 2009.02 release notes.
+
+	New packages: flac, gob2, lzop, taglib, wpa_supplicant
+
+	Updated packages: avahi, bind, binutils, busybox, dbus, dbus-glib,
+	directfb, dnsmasq, freetype, gcc, gmp, gstreamer, iptables, kernel
+	headers, kexec, libglib2, libpng, libsndfile, lua, mpfr, ntfs-3g,
+	openssl, php, qtopia4, rsync, samba, sqlite, tar, uboot, uclibc,
+	util-linux, xorg7, xerces
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#5,#77,#141,#143: Convert php package to Makefile.autotools.in
+         and a ton of other improvements
+	#19: page.h missing by util-linux
+	#37: update libglib2 to version 2.18.4
+	#61: tslib puts staging_dir into pkgconfig file
+	#69: tar refuses to build
+	#71,#175: ./wchar.h:41:12: error: empty filename in #include
+	#73: Bump openssl package to the latest version
+	#81: New package wpa_supplicant
+	#99: new package: flac
+	#101: update gstreamer packages
+	#105,#313: menuconfig segfaults on tinyx if wchar is not
+         selected
+	#107: convert libvorbis to Makefile.autotools.in
+	#109: Make pppd package avoid bsd err
+	#111: binutils 2.17 fails to build when texinfo >= 4.10
+	#133: Modify ncurses5-config to get correct include path
+	#137: Bump php to version 5.2.9
+	#139: Bump sqlite to 3.6.11 and convert to
+         Makefile.autotools.in
+	#145: Bump bind package to 9.5.1-P1 (security)
+	#147: buildroot toolchain fails to build w/binutils-2.19.1
+	#151: openssl package trivial fixes
+	#161: vim fails on patching with errors in configure.patch
+	#169: blackbox-0.70.1 does not build
+	#177: xdriver_xf86-input-keyboard does not build
+	#179: Upgrade dropbear to Makefile.autotools.in
+	#181: Update to Xorg 7.4
+	#187: ntfs-3g: could not build cross
+	#191: alsa-lib ARM binaries always built with EABI
+	#213: Bump wpa_supplicant package to version 0.6.9
+	#217: Bump openssl package to 0.9.8k (security)
+	#219: Toolchain build fails on m4
+	#225: m4 macros are out of place
+	#233: make ipv6 optional in iptables
+	#237: ncftp: convert to Makefile.autotools.in
+	#239: ntfs-3g: convert to Makefile.autotools.in
+	#245: lzop: new package
+	#271: Bump bind package to 9.5.1-P2 (security)
+	#277: Bump sqlite package to 3.6.16
+	#279: update libglib2 to version 2.20.1
+	#281: update DirectFB to version 1.2.8
+	#283: add taglib
+	#285: compilation of samba fails if IPV6 support is missing
+	#293: update samba to version 3.3.3
+	#299: add shared-mime-info package
+	#307: make openssl package respect build flags

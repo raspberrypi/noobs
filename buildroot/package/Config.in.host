@@ -1,0 +1,15 @@
+menu "Host utilities"
+
+source "package/dfu-util/Config.in.host"
+source "package/dosfstools/Config.in.host"
+source "package/e2fsprogs/Config.in.host"
+source "package/genimage/Config.in.host"
+source "package/genpart/Config.in.host"
+source "package/lpc3250loader/Config.in.host"
+source "package/mtools/Config.in.host"
+source "package/omap-u-boot-utils/Config.in.host"
+source "package/openocd/Config.in.host"
+source "package/sam-ba/Config.in.host"
+source "package/uboot-tools/Config.in.host"
+
+endmenu

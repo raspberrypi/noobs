@@ -1,0 +1,148 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[patch-policy]]
+
+Patching a package
+------------------
+
+While integrating a new package or updating an existing one, it may be
+necessary to patch the source of the software to get it cross-built within
+Buildroot.
+
+Buildroot offers an infrastructure to automatically handle this during
+the builds. It supports three ways of applying patch sets: downloaded patches,
+patches supplied within buildroot and patches located in a user-defined
+global patch directory.
+
+Providing patches
+~~~~~~~~~~~~~~~~~
+
+Downloaded
+^^^^^^^^^^
+
+If it is necessary to apply a patch that is available for download, then it
+to the +<packagename>_PATCH+ variable. It is downloaded from the same site
+as the package itself. It can be a single patch, or a tarball containing a
+patch series.
+
+This method is typically used for packages from Debian.
+
+Within Buildroot
+^^^^^^^^^^^^^^^^
+
+Most patches are provided within Buildroot, in the package
+directory; these typically aim to fix cross-compilation, libc support,
+or other such issues.
+
+These patch files should be named +<packagename>-<number>-<description>.patch+.
+
+A +series+ file, as used by +quilt+, may also be added in the
+package directory. In that case, the +series+ file defines the patch
+application order.
+
+.Notes
+- The patch files coming with Buildroot should not contain any package version
+reference in their filename.
+- The field +<number>+ in the patch file name refers to the 'apply order'.
+
+Global patch directory
+^^^^^^^^^^^^^^^^^^^^^^
+
+The +BR2_GLOBAL_PATCH_DIR+ configuration file option can be
+used to specify a directory containing global package patches. See
+xref:packages-custom[] for details.
+
+
+How patches are applied
+~~~~~~~~~~~~~~~~~~~~~~~
+
+. Run the +<packagename>_PRE_PATCH_HOOKS+ commands if defined;
+
+. Cleanup the build directory, removing any existing +*.rej+ files;
+
+. If +<packagename>_PATCH+ is defined, then patches from these
+  tarballs are applied;
+
+. If there are some +*.patch+ files in the package directory or in the
+  a package subdirectory named +<packageversion>+, then:
++
+* If a +series+ file exists in the package directory, then patches are
+  applied according to the +series+ file;
++
+* Otherwise, patch files matching +<packagename>-*.patch+
+  are applied in alphabetical order.
+  So, to ensure they are applied in the right order, it is hightly
+  recommended to named the patch files like this:
+  +<packagename>-<number>-<description>.patch+, where +<number>+
+  refers to the 'apply order'.
+
+. Run the +<packagename>_POST_PATCH_HOOKS+ commands if defined.
+
+If something goes wrong in the steps _3_ or _4_, then the build fails.
+
+Format and licensing of the package patches
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Patches are released under the same license as the software that is
+modified.
+
+A message explaining what the patch does, and why it is needed, should
+be added in the header commentary of the patch.
+
+You should add a +Signed-off-by+ statement in the header of the each
+patch to help with keeping track of the changes and to certify that the
+patch is released under the same license as the software that is modified.
+
+If the software is under version control, it is recommended to use the
+upstream SCM software to generate the patch set.
+
+Otherwise, concatenate the header with the output of the
++diff -purN package-version.orig/ package-version/+ command.
+
+At the end, the patch should look like:
+
+---------------
+configure.ac: add C++ support test
+
+signed-off-by John Doe <john.doe@noname.org>
+
+--- configure.ac.orig
++++ configure.ac
+@@ -40,2 +40,12 @@
+
+AC_PROG_MAKE_SET
++
++AC_CACHE_CHECK([whether the C++ compiler works],
++               [rw_cv_prog_cxx_works],
++               [AC_LANG_PUSH([C++])
++                AC_LINK_IFELSE([AC_LANG_PROGRAM([], [])],
++                               [rw_cv_prog_cxx_works=yes],
++                               [rw_cv_prog_cxx_works=no])
++                AC_LANG_POP([C++])])
++
++AM_CONDITIONAL([CXX_WORKS], [test "x$rw_cv_prog_cxx_works" = "xyes"])
+---------------
+
+Integrating patches found on the Web
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When integrating a patch of which you are not the author, you have to
+add a few things in the header of the patch itself.
+
+Depending on whether the patch has been obtained from the project
+repository itself, or from somewhere on the web, add one of the
+following tags:
+
+---------------
+Backported from: <some commit id>
+---------------
+
+or
+
+---------------
+Fetch from: <some url>
+---------------
+
+It is also sensible to add a few words about any changes to the patch
+that may have been necessary.

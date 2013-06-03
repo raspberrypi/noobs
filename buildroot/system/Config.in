@@ -1,0 +1,297 @@
+menu "System configuration"
+
+config BR2_TARGET_GENERIC_HOSTNAME
+       string "System hostname"
+       default "buildroot"
+       help
+         Select system hostname to be stored in /etc/hostname.
+
+config BR2_TARGET_GENERIC_ISSUE
+       string "System banner"
+       default "Welcome to Buildroot"
+       help
+         Select system banner (/etc/issue) to be displayed at login.
+
+choice
+	bool "Passwords encoding"
+	default BR2_TARGET_GENERIC_PASSWD_MD5
+	help
+	  Choose the password encoding scheme to use when Buildroot
+	  needs to encode a password (eg. the root password, below).
+
+	  Note: this is used at build-time, and *not* at runtime.
+
+config BR2_TARGET_GENERIC_PASSWD_DES
+	bool "des"
+	help
+	  Use standard 56-bit DES-based crypt(3) to encode passwords.
+
+	  Old, wildly available, but also the weakest, very susceptible to
+	  brute-force attacks.
+
+config BR2_TARGET_GENERIC_PASSWD_MD5
+	bool "md5"
+	help
+	  Use MD5 to encode passwords.
+
+	  The default. Wildly available, and pretty good.
+	  Although pretty strong, MD5 is now an old hash function, and
+	  suffers from some weaknesses, which makes it susceptible to
+	  brute-force attacks.
+
+config BR2_TARGET_GENERIC_PASSWD_SHA256
+	bool "sha-256"
+	help
+	  Use SHA256 to encode passwords.
+
+	  Very strong, but not ubiquitous, although available in glibc
+	  for some time now. Choose only if you are sure your C library
+	  understands SHA256 passwords.
+
+config BR2_TARGET_GENERIC_PASSWD_SHA512
+	bool "sha-512"
+	help
+	  Use SHA512 to encode passwords.
+
+	  Extremely strong, but not ubiquitous, although available in glibc
+	  for some time now. Choose only if you are sure your C library
+	  understands SHA512 passwords.
+
+endchoice # Passwd encoding
+
+config BR2_TARGET_GENERIC_PASSWD_METHOD
+	string
+	default "des"       if BR2_TARGET_GENERIC_PASSWD_DES
+	default "md5"       if BR2_TARGET_GENERIC_PASSWD_MD5
+	default "sha-256"   if BR2_TARGET_GENERIC_PASSWD_SHA256
+	default "sha-512"   if BR2_TARGET_GENERIC_PASSWD_SHA512
+
+choice
+	prompt "/dev management"
+	default BR2_ROOTFS_DEVICE_CREATION_STATIC
+
+config BR2_ROOTFS_DEVICE_CREATION_STATIC
+	bool "Static using device table"
+
+config BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_DEVTMPFS
+	bool "Dynamic using devtmpfs only"
+
+config BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_MDEV
+	bool "Dynamic using mdev"
+	select BR2_PACKAGE_BUSYBOX
+
+config BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_UDEV
+	bool "Dynamic using udev"
+	depends on BR2_LARGEFILE # udev
+	depends on BR2_USE_WCHAR # udev
+	select BR2_PACKAGE_UDEV
+
+comment "udev requires a toolchain with LARGEFILE + WCHAR support"
+	depends on !(BR2_LARGEFILE && BR2_USE_WCHAR)
+
+endchoice
+
+choice
+	prompt "Init system"
+	default BR2_INIT_BUSYBOX
+
+config BR2_INIT_BUSYBOX
+	bool "Busybox"
+	select BR2_PACKAGE_BUSYBOX
+
+config BR2_INIT_SYSV
+	bool "systemV"
+	select BR2_PACKAGE_SYSVINIT
+
+config BR2_INIT_SYSTEMD
+	bool "systemd"
+	depends on BR2_LARGEFILE
+	depends on BR2_USE_WCHAR
+	depends on BR2_INET_IPV6
+	depends on BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_UDEV
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	depends on BR2_USE_MMU
+	select BR2_PACKAGE_DBUS
+	select BR2_PACKAGE_SYSTEMD
+
+comment 'systemd requires largefile, wchar, IPv6, threads and udev support'
+	depends on !(BR2_LARGEFILE && BR2_USE_WCHAR && \
+		     BR2_INET_IPV6 && BR2_TOOLCHAIN_HAS_THREADS && \
+		     BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_UDEV)
+
+config BR2_INIT_NONE
+	bool "None"
+
+endchoice
+
+config BR2_ROOTFS_DEVICE_TABLE
+	string "Path to the permission tables"
+	default "system/device_table.txt"
+	help
+	  Specify a space-separated list of permission table locations,
+	  that will be passed to the makedevs utility to assign
+	  correct owners and permissions on various files in the
+	  target filesystem.
+
+	  See package/makedevs/README for details on the usage and
+	  syntax of these files.
+
+config BR2_ROOTFS_STATIC_DEVICE_TABLE
+	string "Path to the device tables"
+	default "system/device_table_dev.txt"
+	depends on BR2_ROOTFS_DEVICE_CREATION_STATIC
+	help
+	  Specify a space-separated list of device table locations,
+	  that will be passed to the makedevs utility to create all
+	  the special device files under /dev.
+
+	  See package/makedevs/README for details on the usage and
+	  syntax of these files.
+
+choice
+	prompt "Root FS skeleton"
+
+config BR2_ROOTFS_SKELETON_DEFAULT
+	bool "default target skeleton"
+	help
+	  Use default target skeleton
+
+config BR2_ROOTFS_SKELETON_CUSTOM
+	bool "custom target skeleton"
+	help
+	  Use custom target skeleton.
+
+endchoice
+
+if BR2_ROOTFS_SKELETON_CUSTOM
+config BR2_ROOTFS_SKELETON_CUSTOM_PATH
+	string "custom target skeleton path"
+	default "system/skeleton"
+	help
+	  Path custom target skeleton.
+endif
+
+if BR2_ROOTFS_SKELETON_DEFAULT
+
+config BR2_TARGET_GENERIC_ROOT_PASSWD
+	string "Root password"
+	default ""
+	help
+	  Set the initial root password (in clear). It will be md5-encrypted.
+
+	  If set to empty (the default), then no root password will be set,
+	  and root will need no password to log in.
+
+	  WARNING! WARNING!
+	  Although pretty strong, MD5 is now an old hash function, and
+	  suffers from some weaknesses, which makes it susceptible to attacks.
+	  It is showing its age, so this root password should not be trusted
+	  to properly secure any product that can be shipped to the wide,
+	  hostile world.
+
+	  WARNING! WARNING!
+	  The password appears in clear in the .config file, and may appear
+	  in the build log! Avoid using a valuable password if either the
+	  .config file or the build log may be distributed!
+
+config BR2_TARGET_GENERIC_GETTY_PORT
+	string "Port to run a getty (login prompt) on"
+	default "ttyS0"
+	help
+	  Specify a port to run a getty (login prompt) on.
+	  Set to the empty string to not run a getty.
+
+choice
+	prompt "Baudrate to use"
+	default BR2_TARGET_GENERIC_GETTY_BAUDRATE_115200
+	help
+	  Select a baudrate to use.
+
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE_KEEP
+       bool "keep kernel default"
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE_9600
+	bool "9600"
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE_19200
+	bool "19200"
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE_38400
+	bool "38400"
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE_57600
+	bool "57600"
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE_115200
+	bool "115200"
+endchoice
+
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE
+	string
+	default "0"		if BR2_TARGET_GENERIC_GETTY_BAUDRATE_KEEP
+	default "9600"		if BR2_TARGET_GENERIC_GETTY_BAUDRATE_9600
+	default "19200"		if BR2_TARGET_GENERIC_GETTY_BAUDRATE_19200
+	default "38400"		if BR2_TARGET_GENERIC_GETTY_BAUDRATE_38400
+	default "57600"		if BR2_TARGET_GENERIC_GETTY_BAUDRATE_57600
+	default "115200"	if BR2_TARGET_GENERIC_GETTY_BAUDRATE_115200
+
+config BR2_TARGET_GENERIC_GETTY_TERM
+	string "Value to assign the TERM environment variable"
+	default "vt100"
+	help
+	  Specify a TERM type.
+
+config BR2_TARGET_GENERIC_REMOUNT_ROOTFS_RW
+	bool "remount root filesystem read-write during boot"
+	default y
+	help
+	  The root filesystem is typically mounted read-only at boot.
+	  By default, buildroot remounts it in read-write mode early during the
+	  boot process.
+	  Say no here if you would rather like your root filesystem to remain
+	  read-only.
+	  If unsure, say Y.
+
+endif # BR2_ROOTFS_SKELETON_DEFAULT
+
+config BR2_ROOTFS_OVERLAY
+	string "Root filesystem overlay directories"
+	default ""
+	help
+	  Specify a list of directories that are copied over the target
+	  root filesystem after the build has finished and before it is
+	  packed into the selected filesystem images.
+
+	  They are copied as-is into the rootfs, excluding files ending with
+	  ~ and .git, .svn and .hg directories.
+
+config BR2_ROOTFS_POST_BUILD_SCRIPT
+	string "Custom scripts to run before creating filesystem images"
+	default ""
+	help
+	  Specify a space-separated list of scripts to be run after the build
+	  has finished and before Buildroot starts packing the files into
+	  selected filesystem images.
+
+	  This gives users the oportunity to do board-specific cleanups,
+	  add-ons and the like, so the generated files can be used directly
+	  without further processing.
+
+	  These scripts are called with the target directory name as first and
+	  only argument. Make sure the exit code of those scripts are 0,
+	  otherwise make will stop after calling them.
+
+config BR2_ROOTFS_POST_IMAGE_SCRIPT
+	string "Custom scripts to run after creating filesystem images"
+	default ""
+	help
+	  Specify a space-separated list of scripts to be run after
+	  the build has finished and after Buildroot has packed the
+	  files into selected filesystem images.
+
+	  This can for example be used to call a tool building a
+	  firmware image from different images generated by Buildroot,
+	  or automatically extract the tarball root filesystem image
+	  into some location exported by NFS, or any other custom
+	  action.
+
+	  These scripts are called with the images directory name as
+	  first and only argument. The script is executed from the
+	  main Buildroot source directory as the current directory.
+
+endmenu

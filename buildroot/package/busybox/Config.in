@@ -1,0 +1,85 @@
+config BR2_PACKAGE_BUSYBOX
+	bool "BusyBox"
+	default y
+	help
+	  The Swiss Army Knife of embedded Linux.  It slices, it dices, it
+	  makes Julian Fries.
+
+	  http://busybox.net/
+
+	  Most people will answer Y.
+
+if BR2_PACKAGE_BUSYBOX
+
+choice
+	prompt "BusyBox Version"
+	default BR2_BUSYBOX_VERSION_1_21_X
+	help
+	  Select the version of BusyBox you wish to use.
+
+	config BR2_BUSYBOX_VERSION_1_19_X
+		bool "BusyBox 1.19.x"
+
+	config BR2_BUSYBOX_VERSION_1_20_X
+		bool "BusyBox 1.20.x"
+
+	config BR2_BUSYBOX_VERSION_1_21_X
+		bool "BusyBox 1.21.x"
+
+	config BR2_PACKAGE_BUSYBOX_SNAPSHOT
+		bool "daily snapshot"
+
+endchoice
+
+config BR2_BUSYBOX_VERSION
+	string
+	default "1.19.4"	if BR2_BUSYBOX_VERSION_1_19_X
+	default "1.20.2"	if BR2_BUSYBOX_VERSION_1_20_X
+	default "1.21.0"	if BR2_BUSYBOX_VERSION_1_21_X
+
+config BR2_PACKAGE_BUSYBOX_CONFIG
+	string "BusyBox configuration file to use?"
+	default "package/busybox/busybox-1.21.x.config" if BR2_PACKAGE_BUSYBOX_SNAPSHOT
+	default "package/busybox/busybox-1.19.x.config" if BR2_BUSYBOX_VERSION_1_19_X
+	default "package/busybox/busybox-1.20.x.config" if BR2_BUSYBOX_VERSION_1_20_X
+	default "package/busybox/busybox-1.21.x.config" if BR2_BUSYBOX_VERSION_1_21_X
+	help
+	  Some people may wish to use their own modified BusyBox configuration
+	  file, and will specify their config file location with this option.
+
+	  Most people will just use the default BusyBox configuration file.
+
+config BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	bool "Show packages that are also provided by busybox"
+	help
+	  Show packages in menuconfig that are potentially also provided
+	  by busybox.
+
+config BR2_PACKAGE_BUSYBOX_WATCHDOG
+	bool "Install the watchdog daemon startup script"
+	help
+	  Install the watchdog daemon startup script,
+	  that just start at the boot the busybox watchdog daemon.
+
+if BR2_PACKAGE_BUSYBOX_WATCHDOG
+
+config BR2_PACKAGE_BUSYBOX_WATCHDOG_PERIOD
+	string "Delay between reset"
+	default "5"
+	help
+	  Select the number of seconds between each
+	  reset of the watchdog (default 5)
+
+	  Use ms suffix to specify milliseconds (e.g. 500ms)
+
+endif
+
+endif
+
+if !BR2_PACKAGE_BUSYBOX # kconfig doesn't support else
+
+# add dummy config so the stuff with busybox alternatives are shown
+# when busybox is disabled
+config BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+       default y
+endif

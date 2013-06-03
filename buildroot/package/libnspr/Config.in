@@ -1,0 +1,14 @@
+config BR2_PACKAGE_LIBNSPR
+	bool "libnspr"
+	depends on BR2_LARGEFILE
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	help
+	  NSPR is the Netscape Portable Runtime library which provides
+	  a platform-neutral API for system level and libc like
+	  functions. The library is used by the Mozilla project as well
+	  as others.
+
+	  http://www.mozilla.org/projects/nspr/
+
+comment "libnspr requires a toolchain with LARGEFILE and threads support"
+	depends on !BR2_LARGEFILE && !BR2_TOOLCHAIN_HAS_THREADS

@@ -1,0 +1,7 @@
+config BR2_PACKAGE_XAPP_XFS
+	bool "xfs"
+	select BR2_PACKAGE_XLIB_LIBFS
+	select BR2_PACKAGE_XLIB_LIBXFONT
+	select BR2_PACKAGE_XPROTO_FONTSPROTO
+	help
+	  X font server

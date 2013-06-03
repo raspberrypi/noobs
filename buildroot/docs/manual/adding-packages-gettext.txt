@@ -1,0 +1,47 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Gettext integration and interaction with packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Many packages that support internationalization use the gettext
+library. Dependencies for this library are fairly complicated and
+therefore, deserve some explanation.
+
+The 'uClibc' C library doesn't implement gettext functionality;
+therefore with this C library, a separate gettext must be compiled. On
+the other hand, the 'glibc' C library does integrate its own gettext,
+and in this case the separate gettext library should not be compiled,
+because it creates various kinds of build failures.
+
+Additionally, some packages (such as +libglib2+) do require gettext
+unconditionally, while other packages (those who support
++--disable-nls+ in general) only require gettext when locale support
+is enabled.
+
+Therefore, Buildroot defines two configuration options:
+
+* +BR2_NEEDS_GETTEXT+, which is true as soon as the toolchain doesn't
+  provide its own gettext implementation
+
+* +BR2_NEEDS_GETTEXT_IF_LOCALE+, which is true if the toolchain
+  doesn't provide its own gettext implementation and if locale support
+  is enabled
+
+Packages that need gettext only when locale support is enabled should:
+
+* use +select BR2_PACKAGE_GETTEXT if BR2_NEEDS_GETTEXT_IF_LOCALE+ in the
+  +Config.in+ file;
+
+* use +$(if $(BR2_NEEDS_GETTEXT_IF_LOCALE),gettext)+ in the package
+  +DEPENDENCIES+ variable in the +.mk+ file.
+
+Packages that unconditionally need gettext (which should be very rare)
+should:
+
+* use +select BR2_PACKAGE_GETTEXT if BR2_NEEDS_GETTEXT+ in the +Config.in+
+  file;
+
+* use +$(if $(BR2_NEEDS_GETTEXT),gettext)+ in the package
+  +DEPENDENCIES+ variable in the +.mk+ file.
+

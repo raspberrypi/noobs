@@ -1,0 +1,148 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[legal-info]]
+
+Legal notice and licensing
+==========================
+
+Complying with open source licenses
+-----------------------------------
+
+All of the end products of Buildroot (toolchain, root filesystem, kernel,
+bootloaders) contain open source software, released under various licenses.
+
+Using open source software gives you the freedom to build rich embedded
+systems, choosing from a wide range of packages, but also imposes some
+obligations that you must know and honour.
+Some licenses require you to publish the license text in the documentation of
+your product. Others require you to redistribute the source code of the
+software to those that receive your product.
+
+The exact requirements of each license are documented in each package, and
+it is your responsibility (or that of your legal office) to comply with those
+requirements.
+To make this easier for you, Buildroot can collect for you some material you
+will probably need. To produce this material, after you have configured
+Buildroot with +make menuconfig+, +make xconfig+ or +make gconfig+, run:
+
+--------------------
+make legal-info
+--------------------
+
+Buildroot will collect legally-relevant material in your output directory,
+under the +legal-info/+ subdirectory.
+There you will find:
+
+* A +README+ file, that summarizes the produced material and contains warnings
+  about material that Buildroot could not produce.
+* +buildroot.config+: this is the Buildroot configuration file that is usually
+  produced with +make menuconfig+, and which is necessary to reproduce the
+  build.
+* The source code for all packages; this is saved in the +sources/+
+  subdirectory (except for proprietary packages, whose source code is not
+  saved);
+  patches applied to some packages by Buildroot are distributed with the
+  Buildroot sources and are not duplicated in the +sources/+ subdirectory.
+* A manifest file listing the configured packages, their version, license and
+  related information.
+  Some of this information might not be defined in Buildroot; such items are
+  marked as "unknown".
+* A +licenses/+ subdirectory, which contains the license text of packages.
+  If the license file(s) are not defined in Buildroot, the file is not produced
+  and a warning in the +README+ indicates this.
+
+Please note that the aim of the +legal-info+ feature of Buildroot is to
+produce all the material that is somehow relevant for legal compliance with the
+package licenses. Buildroot does not try to produce the exact material that
+you must somehow make public. Certainly, more material is produced than is
+needed for a strict legal compliance. For example, it produces the source code
+for packages released under BSD-like licenses, that you are not required to
+redistribute in source form.
+
+Moreover, due to technical limitations, Buildroot does not produce some
+material that you will or may need, such as the toolchain source code and the
+Buildroot source code itself (including patches to packages for which source
+distribution is required).
+When you run +make legal-info+, Buildroot produces warnings in the +README+
+file to inform you of relevant material that could not be saved.
+
+[[legal-info-list-licenses]]
+License abbreviations
+---------------------
+
+Here is a list of the licenses that are most widely used by packages in
+Buildroot, with the name used in the manifest file:
+
+* `GPLv2`:
+  http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[
+  GNU General Public License, version 2];
+* `GPLv2+`:
+  http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[
+  GNU General Public License, version 2]
+  or (at your option) any later version;
+* `GPLv3`:
+  http://www.gnu.org/licenses/gpl.html[
+  GNU General Public License, version 3];
+* `GPLv3+`:
+  http://www.gnu.org/licenses/gpl.html[
+  GNU General Public License, version 3]
+  or (at your option) any later version;
+* `GPL`:
+  http://www.gnu.org/licenses/gpl.html[
+  GNU General Public License] (any version);
+* `LGPLv2`:
+  http://www.gnu.org/licenses/old-licenses/lgpl-2.0.html[
+  GNU Library General Public License, version 2];
+* `LGPLv2+`:
+  http://www.gnu.org/licenses/old-licenses/lgpl-2.0.html[
+  GNU Library General Public License, version 2.1]
+  or (at your option) any later version;
+* `LGPLv2.1`:
+  http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html[
+  GNU Lesser General Public License, version 2.1];
+* `LGPLv2.1+`:
+  http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html[
+  GNU Lesser General Public License, version 2.1]
+  or (at your option) any later version;
+* `LGPLv3`:
+  http://www.gnu.org/licenses/lgpl.html[
+  GNU Lesser General Public License, version 3];
+* `LGPLv3+`:
+  http://www.gnu.org/licenses/lgpl.html[
+  GNU Lesser General Public License, version 3]
+  or (at your option) any later version;
+* `LGPL`:
+  http://www.gnu.org/licenses/lgpl.html[
+  GNU Lesser General Public License] (any version);
+* `BSD-4c`: Original BSD 4-clause license;
+* `BSD-3c`: BSD 3-clause license;
+* `BSD-2c`: BSD 2-clause license;
+* `MIT`: MIT-style license.
+
+Complying with the Buildroot license
+------------------------------------
+
+Buildroot itself is an open source software, released under the
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[GNU General Public
+License, version 2] or (at your option) any later version.
+However, being a build system, it is not normally part of the end product:
+if you develop the root filesystem, kernel, bootloader or toolchain for a
+device, the code of Buildroot is only present on the development machine, not
+in the device storage.
+
+Nevertheless, the general view of the Buildroot developers is that you should
+release the Buildroot source code along with the source code of other packages
+when releasing a product that contains GPL-licensed software.
+This is because the
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[GNU GPL]
+defines the "'complete source code'" for an executable work as "'all the
+source code for all modules it contains, plus any associated interface
+definition files, plus the scripts used to control compilation and installation
+of the executable'".
+Buildroot is part of the 'scripts used to control compilation and
+installation of the executable', and as such it is considered part of the
+material that must be redistributed.
+
+Keep in mind that this is only the Buildroot developers' opinion, and you
+should consult your legal department or lawyer in case of any doubt.

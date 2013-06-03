@@ -1,0 +1,15 @@
+config BR2_PACKAGE_LIBNETFILTER_QUEUE
+	bool "libnetfilter_queue"
+	depends on BR2_LARGEFILE
+	depends on BR2_INET_IPV6
+	select BR2_PACKAGE_LIBNFNETLINK
+	select BR2_PACKAGE_LIBMNL
+	help
+	  libnetfilter_queue is the userspace library that provides
+	  the programming interface to the fine-grain
+	  connection tracking timeout infrastructure.
+
+	  http://www.netfilter.org/projects/libnetfilter_queue/
+
+comment "libnetfilter_queue requires a toolchain with LARGEFILE and IPv6 support"
+	depends on !BR2_LARGEFILE && !BR2_INET_IPV6

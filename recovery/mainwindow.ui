@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>301</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
+   <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QListWidget" name="list">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="spacing">
+       <number>1</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionWrite_image_to_disk"/>
+   <addaction name="actionEdit_config"/>
+   <addaction name="actionBrowser"/>
+   <addaction name="actionCancel"/>
+  </widget>
+  <widget class="QToolBar" name="advToolBar">
+   <property name="windowTitle">
+    <string/>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="actionAdd_image"/>
+   <addaction name="actionRemove_image"/>
+  </widget>
+  <action name="actionWrite_image_to_disk">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/backups.png</normaloff>:/icons/backups.png</iconset>
+   </property>
+   <property name="text">
+    <string>Install OS</string>
+   </property>
+   <property name="toolTip">
+    <string>Install OS</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
+   </property>
+  </action>
+  <action name="actionCancel">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/door_in.png</normaloff>:/icons/door_in.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </action>
+  <action name="actionAdvanced">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/setting_tools.png</normaloff>:/icons/setting_tools.png</iconset>
+   </property>
+   <property name="text">
+    <string>Advanced</string>
+   </property>
+  </action>
+  <action name="actionAdd_image">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add image</string>
+   </property>
+  </action>
+  <action name="actionRemove_image">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove image</string>
+   </property>
+  </action>
+  <action name="actionEdit_config">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/page_white_edit.png</normaloff>:/icons/page_white_edit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit config</string>
+   </property>
+  </action>
+  <action name="actionBrowser">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/world.png</normaloff>:/icons/world.png</iconset>
+   </property>
+   <property name="text">
+    <string>Online help</string>
+   </property>
+   <property name="toolTip">
+    <string>Online help</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

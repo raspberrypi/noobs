@@ -1,0 +1,39 @@
+comment "Kismet requires a toolchain with thread and C++ support enabled"
+	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_TOOLCHAIN_HAS_THREADS
+
+config BR2_PACKAGE_KISMET
+	bool "kismet"
+	depends on BR2_INSTALL_LIBSTDCPP
+	depends on BR2_TOOLCHAIN_HAS_THREADS # libnl
+	select BR2_PACKAGE_NCURSES
+	select BR2_PACKAGE_NCURSES_TARGET_PANEL
+	select BR2_PACKAGE_LIBPCAP
+	select BR2_PACKAGE_LIBNL
+	help
+	  Kismet - 802.11 layer2 wireless network detector, sniffer,
+	  and intrusion detection system.
+
+	  Kismet will work with any wireless card which supports raw
+	  monitoring (rfmon) mode, and can sniff 802.11b, 802.11a, and
+	  802.11g traffic.
+
+	  Kismet identifies networks by passively collecting packets
+	  and detecting standard named networks, detecting (and given
+	  time, decloaking) hidden networks, and infering the presence
+	  of nonbeaconing networks via data traffic.
+
+	  http://www.kismetwireless.net
+
+config BR2_PACKAGE_KISMET_CLIENT
+	bool "Install client"
+	depends on BR2_PACKAGE_KISMET
+
+config BR2_PACKAGE_KISMET_DRONE
+	bool "Install drone"
+	depends on BR2_PACKAGE_KISMET
+
+config BR2_PACKAGE_KISMET_SERVER
+	bool "Install server"
+	default y
+	depends on BR2_PACKAGE_KISMET
+

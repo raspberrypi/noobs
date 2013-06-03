@@ -1,0 +1,41 @@
+comment "rpm requires a toolchain with thread support"
+	depends on !BR2_TOOLCHAIN_HAS_THREADS
+
+comment "rpm requires libneon with SSL, XML and ZLIB support"
+	depends on !BR2_PACKAGE_NEON || BR2_PACKAGE_NEON_NOXML && BR2_TOOLCHAIN_HAS_THREADS
+
+config BR2_PACKAGE_RPM
+	bool "rpm"
+	depends on BR2_TOOLCHAIN_HAS_THREADS # beecrypt
+	select BR2_PACKAGE_BEECRYPT
+	select BR2_PACKAGE_POPT
+	select BR2_PACKAGE_OPENSSL
+	depends on BR2_PACKAGE_NEON
+	depends on !BR2_PACKAGE_NEON_NOXML
+	select BR2_PACKAGE_NEON_ZLIB
+	select BR2_PACKAGE_NEON_SSL
+	help
+	  The RPM package management system.
+
+	  http://rpm5.org
+
+if BR2_PACKAGE_RPM
+
+config BR2_PACKAGE_RPM_BZIP2_PAYLOADS
+	bool "support for bzip2 payloads"
+	select BR2_PACKAGE_BZIP2
+	help
+	  Support for bzip2 payloads in RPM.
+
+config BR2_PACKAGE_RPM_XZ_PAYLOADS
+	bool "support for xz payloads"
+	depends on BR2_INSTALL_LIBSTDCPP
+	help
+	  Support for xz payloads in RPM.
+
+comment "xz payload support requires a toolchain with c++ support"
+	depends on !BR2_INSTALL_LIBSTDCPP
+
+endif
+
+

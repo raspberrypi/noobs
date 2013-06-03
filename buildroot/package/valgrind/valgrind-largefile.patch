@@ -1,0 +1,56 @@
+[PATCH] valgrind: don't enable largefile support unconditionally on uClibc
+
+uClibc can be compiled without largefile support (and errors out if
+_FILE_OFFSET_BITS is set to 64), so don't define it if that combination
+is detected.
+
+Signed-off-by: Peter Korsgaard <jacmet@sunsite.dk>
+
+Index: b/coregrind/m_initimg/initimg-linux.c
+===================================================================
+--- a/coregrind/m_initimg/initimg-linux.c
++++ b/coregrind/m_initimg/initimg-linux.c
+@@ -55,7 +55,11 @@
+ 
+ /* --- !!! --- EXTERNAL HEADERS start --- !!! --- */
+ #define _GNU_SOURCE
++#include <features.h>
++/* uclibc without largefile support #errors on _FILE_OFFSET_BITS=64 */
++#if !(defined(__UCLIBC__) && !defined(__UCLIBC_HAS_LFS__))
+ #define _FILE_OFFSET_BITS 64
++#endif
+ /* This is for ELF types etc, and also the AT_ constants. */
+ #include <elf.h>
+ /* --- !!! --- EXTERNAL HEADERS end --- !!! --- */
+Index: b/coregrind/m_main.c
+===================================================================
+--- a/coregrind/m_main.c
++++ b/coregrind/m_main.c
+@@ -2948,7 +2948,11 @@
+ 
+ /* --- !!! --- EXTERNAL HEADERS start --- !!! --- */
+ #define _GNU_SOURCE
++#include <features.h>
++/* uclibc without largefile support #errors on _FILE_OFFSET_BITS=64 */
++#if !(defined(__UCLIBC__) && !defined(__UCLIBC_HAS_LFS__))
+ #define _FILE_OFFSET_BITS 64
++#endif
+ /* This is in order to get AT_NULL and AT_PAGESIZE. */
+ #include <elf.h>
+ /* --- !!! --- EXTERNAL HEADERS end --- !!! --- */
+Index: b/coregrind/m_ume/elf.c
+===================================================================
+--- a/coregrind/m_ume/elf.c
++++ b/coregrind/m_ume/elf.c
+@@ -48,7 +48,11 @@
+ 
+ /* --- !!! --- EXTERNAL HEADERS start --- !!! --- */
+ #define _GNU_SOURCE
++#include <features.h>
++/* uclibc without largefile support #errors on _FILE_OFFSET_BITS=64 */
++#if !(defined(__UCLIBC__) && !defined(__UCLIBC_HAS_LFS__))
+ #define _FILE_OFFSET_BITS 64
++#endif
+ /* This is for ELF types etc, and also the AT_ constants. */
+ #include <elf.h>
+ /* --- !!! --- EXTERNAL HEADERS end --- !!! --- */

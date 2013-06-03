@@ -1,0 +1,21 @@
+config BR2_PACKAGE_PPPD
+	bool "pppd"
+	help
+	  An implementation of the Point-to-point protocol.
+
+	  http://www.samba.org/ppp/
+
+config BR2_PACKAGE_PPPD_FILTER
+	depends on BR2_PACKAGE_PPPD
+	select BR2_PACKAGE_LIBPCAP
+	bool "filtering"
+	help
+	  Packet filtering abilities for pppd. If enabled,
+	  the pppd active-filter and pass-filter options
+	  are available.
+
+config BR2_PACKAGE_PPPD_RADIUS
+	depends on BR2_PACKAGE_PPPD
+	bool "radius"
+	help
+	  Install RADIUS support for pppd

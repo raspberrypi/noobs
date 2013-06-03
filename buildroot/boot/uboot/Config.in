@@ -1,0 +1,234 @@
+config BR2_TARGET_UBOOT
+	bool "U-Boot"
+	help
+	  Build "Das U-Boot" Boot Monitor
+
+if BR2_TARGET_UBOOT
+config BR2_TARGET_UBOOT_BOARDNAME
+	string "U-Boot board name"
+	help
+	  One of U-Boot supported boards to be built.
+	  This will be suffixed with _config to meet U-Boot standard naming.
+	  See boards.cfg in U-Boot source code for the list of available
+	  configurations.
+
+choice
+	prompt "U-Boot Version"
+	default BR2_TARGET_UBOOT_2013_04
+	help
+	  Select the specific U-Boot version you want to use
+
+config BR2_TARGET_UBOOT_2013_04
+	bool "2013.04"
+
+config BR2_TARGET_UBOOT_2013_01
+	bool "2013.01.01"
+
+config BR2_TARGET_UBOOT_2012_10
+	bool "2012.10"
+
+config BR2_TARGET_UBOOT_2012_07
+	bool "2012.07"
+
+config BR2_TARGET_UBOOT_2012_04
+	bool "2012.04.01"
+	depends on BR2_DEPRECATED
+
+config BR2_TARGET_UBOOT_2011_12
+	bool "2011.12"
+	depends on BR2_DEPRECATED
+
+config BR2_TARGET_UBOOT_CUSTOM_TARBALL
+	bool "Custom tarball"
+
+config BR2_TARGET_UBOOT_CUSTOM_GIT
+	bool "Custom Git repository"
+
+endchoice
+
+if BR2_TARGET_UBOOT_CUSTOM_TARBALL
+
+config BR2_TARGET_UBOOT_CUSTOM_TARBALL_LOCATION
+	string "URL of custom U-Boot tarball"
+
+endif
+
+config BR2_TARGET_UBOOT_VERSION
+	string
+	default "2013.04"	if BR2_TARGET_UBOOT_2013_04
+	default "2013.01.01"	if BR2_TARGET_UBOOT_2013_01
+	default "2012.10"	if BR2_TARGET_UBOOT_2012_10
+	default "2012.07"	if BR2_TARGET_UBOOT_2012_07
+	default "2012.04.01"	if BR2_TARGET_UBOOT_2012_04
+	default "2011.12"	if BR2_TARGET_UBOOT_2011_12
+	default "custom"	if BR2_TARGET_UBOOT_CUSTOM_TARBALL
+	default $BR2_TARGET_UBOOT_CUSTOM_GIT_VERSION if BR2_TARGET_UBOOT_CUSTOM_GIT
+
+config BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR
+	string "custom patch dir"
+	help
+	  If your board requires custom patches, add the path to the
+	  directory containing the patches here. The patches must be
+	  named uboot-<something>.patch.
+
+	  Most users may leave this empty
+
+if BR2_TARGET_UBOOT_CUSTOM_GIT
+
+config BR2_TARGET_UBOOT_CUSTOM_GIT_REPO_URL
+	string "URL of custom Git repository"
+
+config BR2_TARGET_UBOOT_CUSTOM_GIT_VERSION
+	string "Custom Git version"
+
+endif
+
+choice
+	prompt "U-Boot binary format"
+	default BR2_TARGET_UBOOT_FORMAT_BIN
+
+config BR2_TARGET_UBOOT_FORMAT_AIS
+	bool "u-boot.ais"
+	help
+	  AIS (Application Image Script) is a format defined by TI.
+	  It is required to load code/data on OMAP-L1 processors.
+	  u-boot.ais contains U-Boot with the SPL support.
+
+config BR2_TARGET_UBOOT_FORMAT_BIN
+	bool "u-boot.bin"
+
+config BR2_TARGET_UBOOT_FORMAT_IMG
+	bool "u-boot.img"
+
+config BR2_TARGET_UBOOT_FORMAT_NAND_BIN
+	bool "u-boot-nand.bin"
+
+config BR2_TARGET_UBOOT_FORMAT_KWB
+	depends on BR2_arm
+	bool "u-boot.kwb (Marvell)"
+
+config BR2_TARGET_UBOOT_FORMAT_LDR
+	depends on BR2_bfin
+	bool "u-boot.ldr"
+
+endchoice
+
+config BR2_TARGET_UBOOT_OMAP_IFT
+	depends on BR2_TARGET_UBOOT_FORMAT_BIN
+	depends on BR2_arm || BR2_armeb
+	select BR2_PACKAGE_HOST_OMAP_U_BOOT_UTILS
+	bool "produce a .ift signed image (OMAP)"
+	help
+	  Use gpsign to produce an image of u-boot.bin signed with
+	  a Configuration Header for booting on OMAP processors.
+	  This allows U-Boot to boot without the need for an
+	  intermediate bootloader (e.g. x-loader) if it is written
+	  on the first sector of the boot medium.
+	  This only works for some media, such as NAND. Check your
+	  chip documentation for details. You might also want to
+	  read the documentation of gpsign, the tool that generates
+	  the .ift image, at:
+	  https://github.com/nmenon/omap-u-boot-utils/blob/master/README
+
+if BR2_TARGET_UBOOT_OMAP_IFT
+
+config BR2_TARGET_UBOOT_OMAP_IFT_CONFIG
+	string "gpsign Configuration Header config file"
+	help
+	  The Configuration Header (CH) config file defines the
+	  desired content of the CH for the signed image.
+	  It usually contains external RAM settings and
+	  possibly other external devices initialization.
+	  The omap-u-boot-utils software contains example
+	  configuration files for some boards:
+	  https://github.com/nmenon/omap-u-boot-utils/tree/master/configs
+
+endif
+
+menuconfig BR2_TARGET_UBOOT_NETWORK
+	bool "Custom Network Settings"
+	help
+	  Custom network settings for U-boot
+
+if BR2_TARGET_UBOOT_NETWORK
+
+config BR2_TARGET_UBOOT_SERVERIP
+	string "server ip"
+	default "10.175.196.221"
+	help
+	  TFTP server ip address
+
+config BR2_TARGET_UBOOT_IPADDR
+	string "ip address"
+	default "10.175.196.18"
+	help
+	  Target ip address
+
+config BR2_TARGET_UBOOT_GATEWAY
+	string "gateway ip"
+	default "10.175.196.1"
+	help
+	  Gateway ip address
+
+config BR2_TARGET_UBOOT_NETMASK
+	string "netmask"
+	default "255.255.255.0"
+	help
+	  Network Mask
+
+config BR2_TARGET_UBOOT_ETHADDR
+	string "ethernet address"
+	default "04:25:fe:ed:00:18"
+	help
+	  Target MAC address for the ethernet interface.
+	  This should be changed for production units
+
+config BR2_TARGET_UBOOT_ETH1ADDR
+	string "ethernet 2 address"
+	help
+	  Target MAC address for the second ethernet interface.
+
+endif # BR2_TARGET_UBOOT_NETWORK
+
+config BR2_TARGET_UBOOT_SPL
+	bool "U-Boot SPL support"
+	depends on !BR2_TARGET_XLOADER
+	help
+	  Enable the U-Boot SPL support. SPL is a first stage
+	  bootloader loaded into internal memory in charge of
+	  enabling and configuring the external memory (DDR),
+	  and load the u-boot program into DDR.
+
+config BR2_TARGET_UBOOT_SPL_NAME
+	string "U-Boot SPL target name"
+	default "u-boot-spl.bin"
+	depends on BR2_TARGET_UBOOT_SPL
+	help
+	  This is the name of the SPL binary, generated during
+	  u-boot build. For most platform it is u-boot-spl.bin
+	  but not always. It is MLO on OMAP for example.
+
+menuconfig BR2_TARGET_UBOOT_ENVIMAGE
+	bool "Environment image"
+	help
+	  Generate a valid binary environment image from a text file
+	  describing the key=value pairs of the environment.
+
+	  The environment image will be called uboot-env.bin.
+
+if BR2_TARGET_UBOOT_ENVIMAGE
+
+config BR2_TARGET_UBOOT_ENVIMAGE_SOURCE
+	string "Source file for environment"
+	help
+	  Text file describing the environment.
+
+config BR2_TARGET_UBOOT_ENVIMAGE_SIZE
+	string "Size of environment"
+	help
+	  Size of envronment, can be prefixed with 0x for hexadecimal
+	  values.
+
+endif # BR2_TARGET_UBOOT_ENVIMAGE
+
+endif # BR2_TARGET_UBOOT

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PPTP_LINUX
+	bool "pptp-linux"
+	help
+	  An implementation of the Point-to-point protocol client.
+
+	  http://pptpclient.sourceforge.net/

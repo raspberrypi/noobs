@@ -1,0 +1,30 @@
+#
+# Makefile.legacy - support for backward compatibility
+#
+# This file contains placeholders to detect backward-compatibility problems.
+# When a buildroot "API" feature is being deprecated, a rule should be added
+# here that issues an error when the old feature is used.
+#
+# This file is not included if BR2_DEPRECATED is selected, so it is possible
+# to bypass the errors (although that's usually a bad idea).
+
+ifeq ($(BR2_LEGACY),y)
+$(error "You have legacy configuration in your .config! Please check your configuration.")
+endif
+
+#
+# Legacy options from 2012.08
+#
+
+host-pkg-config:
+	@$(call MESSAGE,host-pkg-config is replaced by host-pkgconf)
+	@$(call MESSAGE,please update your .mk files)
+	@false
+.PHONY: host-pkg-config
+
+#
+# Legacy options from 2012.05
+#
+GENTARGETS = $$(error The GENTARGETS macro no longer exists; use $$$$(eval $$$$(generic-package)) or $$$$(eval $$$$(host-generic-package)))
+AUTOTARGETS = $$(error The AUTOTARGETS macro no longer exists; use $$$$(eval $$$$(autotools-package)) or $$$$(eval $$$$(host-autotools-package)))
+CMAKETARGETS = $$(error The CMAKETARGETS macro no longer exists; use $$$$(eval $$$$(cmake-package)) or $$$$(eval $$$$(host-cmake-package)))

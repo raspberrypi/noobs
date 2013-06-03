@@ -1,0 +1,135 @@
+# Generic toolchain options
+
+# we want gdb config in the middle of both source and external
+# toolchains, but mconf won't let us source the same file twice,
+# so put it here instead
+source "package/gdb/Config.in.host"
+
+config BR2_LARGEFILE
+	bool
+
+config BR2_INET_IPV6
+	bool
+
+config BR2_TOOLCHAIN_HAS_NATIVE_RPC
+	bool
+
+config BR2_USE_WCHAR
+	bool
+
+config BR2_ENABLE_LOCALE
+	bool
+
+config BR2_INSTALL_LIBSTDCPP
+	bool
+
+config BR2_TOOLCHAIN_HAS_THREADS
+	bool
+
+config BR2_TOOLCHAIN_HAS_THREADS_DEBUG
+	bool
+
+config BR2_TOOLCHAIN_HAS_SHADOW_PASSWORDS
+	bool
+
+config BR2_ENABLE_LOCALE_PURGE
+	bool "Purge unwanted locales"
+	help
+	  Explicitly specify what locales to install on target. If N
+	  then all locales supported by packages are installed.
+
+config BR2_ENABLE_LOCALE_WHITELIST
+	string "Locales to keep"
+	default "C en_US de fr"
+	depends on BR2_ENABLE_LOCALE_PURGE
+	help
+	  Whitespace seperated list of locales to allow on target.
+	  Locales not listed here will be removed from the target.
+	  See 'locale -a' on your host for a list of locales available
+	  on your build host, or have a look in /usr/share/locale in
+	  the target file system for available locales.
+
+	  Notice that listing a locale here doesn't guarantee that it
+	  will be available on the target - That purely depends on the
+	  support for that locale in the selected packages.
+
+config BR2_GENERATE_LOCALE
+	string "Generate locale data"
+	default ""
+	# Pre-built uClibc external toolchains and uClibc toolchains
+	# built by the Crosstool-NG backend cannot be supported,
+	# because the list of locales to support must be defined at
+	# build time.
+	depends on \
+		BR2_TOOLCHAIN_BUILDROOT      || \
+		BR2_TOOLCHAIN_EXTERNAL_GLIBC || \
+		BR2_TOOLCHAIN_CTNG_eglibc    || \
+		BR2_TOOLCHAIN_CTNG_glibc
+	help
+	  Generate support for a list of locales. Locales can be
+	  specified with or without encoding, when no encoding is
+	  specified, UTF-8 is assumed. Examples of locales: en_US,
+	  fr_FR.UTF-8.
+
+# glibc and eglibc directly include gettext, so a separatly compiled
+# gettext isn't needed and shouldn't be built to avoid conflicts. Some
+# packages always need gettext, other packages only need gettext when
+# locale support is enabled. See the documentation for how packages
+# should rely on the following two options.
+
+config BR2_NEEDS_GETTEXT
+	bool
+	default y if BR2_TOOLCHAIN_BUILDROOT
+	default y if BR2_TOOLCHAIN_EXTERNAL_UCLIBC
+	default y if BR2_TOOLCHAIN_CTNG_uClibc
+
+config BR2_NEEDS_GETTEXT_IF_LOCALE
+	bool
+	default y if (BR2_NEEDS_GETTEXT && BR2_ENABLE_LOCALE)
+
+config BR2_USE_MMU
+	bool "Enable MMU support" if BR2_arm || BR2_armeb || BR2_mips || BR2_mipsel || BR2_sh || BR2_xtensa
+	default y if !BR2_bfin
+	help
+	  If your target has a MMU, you should say Y here.  If you
+	  are unsure, just say Y.
+
+config BR2_PREFER_SOFT_FLOAT
+	bool
+	default y if BR2_arm
+	default y if BR2_armeb
+	default y if BR2_avr32
+	default y if BR2_mips
+	default y if BR2_mipsel
+
+config BR2_SOFT_FLOAT
+	bool "Use software floating point by default"
+	depends on BR2_arm || BR2_armeb || BR2_avr32 || BR2_mips || BR2_mipsel || BR2_powerpc
+	# External toolchains will automatically do soft float or hard
+	# float depending on their configuration
+	depends on BR2_TOOLCHAIN_BUILDROOT || BR2_TOOLCHAIN_CTNG
+	default $(BR2_PREFER_SOFT_FLOAT)
+	help
+	  If your target CPU does not have a Floating Point Unit (FPU) or a
+	  kernel FPU emulator, but you still wish to support floating point
+	  functions, then everything will need to be compiled with soft
+	  floating point support (-msoft-float).
+
+config BR2_TARGET_OPTIMIZATION
+	string "Target Optimizations"
+	default "-pipe"
+	help
+	  Optimizations to use when building for the target host.
+	  NOTE: gcc optimization level is defined in build options.
+
+config BR2_TARGET_LDFLAGS
+	string "Target linker options"
+	help
+	  Extra options to pass to the linker when building for the target.
+
+config BR2_ECLIPSE_REGISTER
+	bool "Register toolchain within Eclipse Buildroot plug-in"
+	help
+	  This options tells Buildroot to generate the necessary
+	  configuration files to make your toolchain appear within
+	  Eclipse, through the Eclipse Buildroot plugin.

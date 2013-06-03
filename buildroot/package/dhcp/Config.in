@@ -1,0 +1,29 @@
+config BR2_PACKAGE_DHCP
+	bool "isc dhcp"
+	# fork()
+	depends on BR2_USE_MMU
+	help
+	  DHCP relay agent from the ISC DHCP distribution.
+
+	  http://www.isc.org/products/DHCP
+
+config BR2_PACKAGE_DHCP_SERVER
+	bool "dhcp server"
+	depends on BR2_PACKAGE_DHCP
+	help
+	  DHCP server from the ISC DHCP distribution.
+
+
+config BR2_PACKAGE_DHCP_RELAY
+	bool "dhcp relay"
+	depends on BR2_PACKAGE_DHCP
+	help
+	  DHCP relay agent from the ISC DHCP distribution.
+
+
+config BR2_PACKAGE_DHCP_CLIENT
+	bool "dhcp client"
+	depends on BR2_PACKAGE_DHCP
+	help
+	  DHCP client from the ISC DHCP distribution.
+

@@ -1,0 +1,150 @@
+config BR2_PACKAGE_QT5BASE
+	bool "qt5base"
+	select BR2_PACKAGE_ZLIB
+	select BR2_PACKAGE_PCRE
+	select BR2_PACKAGE_PCRE_16
+	help
+	  Qt is a cross-platform application and UI framework for
+	  developers using C++.
+
+	  This package corresponds to the qt5base module, which
+	  contains the base Qt libraries: QtCore, QtNetwork, QtGui,
+	  QtWidgets, etc.
+
+	  http://qt-project.org
+
+if BR2_PACKAGE_QT5BASE
+
+config BR2_PACKAGE_QT5BASE_LICENSE_APPROVED
+	bool "Approve free license"
+	help
+	  Select this if you approve one of the available free licenses for the
+	  Qt5 library.
+	  By doing this you will not be asked while the library is compiled.
+	  Please read and understand the license terms before approving this.
+
+	  LGPL v2.1: http://qt-project.org/doc/qt-5.0/qtdoc/lgpl.html
+	  GPL  v3.0: http://qt-project.org/doc/qt-5.0/qtdoc/gpl.html
+
+	  See also http://qt-project.org/doc/qt-5.0/qtdoc/licensing.html
+
+config BR2_PACKAGE_QT5BASE_NETWORK
+	bool "network module"
+	help
+	  This options enables the Qt5Network library.
+
+config BR2_PACKAGE_QT5BASE_CONCURRENT
+	bool "concurrent module"
+	help
+	  This options enables the Qt5Concurrent library.
+
+config BR2_PACKAGE_QT5BASE_SQL
+	bool "sql module"
+	help
+	  This options enables the Qt5Sql library.
+
+config BR2_PACKAGE_QT5BASE_TEST
+	bool "test module"
+	help
+	  This options enables the Qt5Test library.
+
+config BR2_PACKAGE_QT5BASE_XML
+	bool "XML module"
+	help
+	  This options enables the Qt5Xml library.
+
+config BR2_PACKAGE_QT5BASE_GUI
+	bool "gui module"
+	# At least one graphic backend must be enabled, so enable
+	# linuxfb if nothing is enabled.
+	select BR2_PACKAGE_QT5BASE_LINUXFB if \
+	       !BR2_PACKAGE_QT5BASE_DIRECTFB && \
+	       !BR2_PACKAGE_QT5BASE_XCB && \
+	       !BR2_PACKAGE_QT5BASE_EGLFS
+	help
+	  This option enables the Qt5Gui library.
+
+if BR2_PACKAGE_QT5BASE_GUI
+
+config BR2_PACKAGE_QT5BASE_WIDGETS
+	bool "widgets module"
+	help
+	  This option enables the Qt5Widgets library.
+
+config BR2_PACKAGE_QT5BASE_LINUXFB
+	bool "linuxfb support"
+
+config BR2_PACKAGE_QT5BASE_DIRECTFB
+	bool "directfb support"
+	select BR2_PACKAGE_DIRECTFB
+
+config BR2_PACKAGE_QT5BASE_XCB
+	bool "X.org XCB support"
+	depends on BR2_PACKAGE_XORG7
+	select BR2_PACKAGE_LIBX11
+	select BR2_PACKAGE_LIBXCB
+	select BR2_PACKAGE_XCB_UTIL_IMAGE
+	select BR2_PACKAGE_XCB_UTIL_KEYSYMS
+	select BR2_PACKAGE_XCB_UTIL_WM
+
+comment "X.org XCB backend available if X.org is enabled"
+	depends on !BR2_PACKAGE_XORG7
+
+config BR2_PACKAGE_QT5BASE_EGLFS
+	bool "eglfs support"
+	depends on BR2_PACKAGE_HAS_OPENGL_EGL
+	depends on BR2_PACKAGE_HAS_OPENGL_ES
+
+comment "eglfs backend available if OpenGLES and EGL are enabled"
+	depends on !BR2_PACKAGE_HAS_OPENGL_EGL || !BR2_PACKAGE_HAS_OPENGL_ES
+
+config BR2_PACKAGE_QT5BASE_PRINTSUPPORT
+	bool "print support module"
+	select BR2_PACKAGE_QT5BASE_WIDGETS
+	help
+	  This option enables the Qt5PrintSupport
+
+config BR2_PACKAGE_QT5BASE_FONTCONFIG
+	bool "fontconfig support"
+	select BR2_PACKAGE_FONTCONFIG
+	help
+	  This option enables Fontconfig and Freetype support using
+	  the system fontconfig and freetype2 libraries.
+
+config BR2_PACKAGE_QT5BASE_GIF
+	bool "GIF support"
+	help
+	  This compiles and installs the plugin for GIF reading support.
+
+config BR2_PACKAGE_QT5BASE_JPEG
+	bool "JPEG support"
+	select BR2_PACKAGE_JPEG
+	help
+	  This option enables JPEG support using the system libjpeg
+	  library.
+
+config BR2_PACKAGE_QT5BASE_PNG
+	bool "PNG support"
+	select BR2_PACKAGE_LIBPNG
+	help
+	  This option enables PNG support using the system libpng
+	  library.
+
+endif
+
+config BR2_PACKAGE_QT5BASE_DBUS
+	bool "DBus module"
+	select BR2_PACKAGE_DBUS
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	depends on BR2_USE_MMU
+	help
+	  This option enables the D-Bus module.
+
+config BR2_PACKAGE_QT5BASE_ICU
+	bool "Enable ICU support"
+	select BR2_PACKAGE_ICU
+	help
+	  This option enables ICU support in Qt5. This is for example
+	  needed for Qt5Webkit.
+
+endif

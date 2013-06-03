@@ -1,0 +1,23 @@
+config BR2_PACKAGE_LCDPROC
+	bool "lcdproc"
+	depends on BR2_USE_MMU # fork()
+	select BR2_PACKAGE_FREETYPE
+	select BR2_PACKAGE_NCURSES
+	select BR2_PACKAGE_ZLIB
+	help
+	  LCD display driver daemon and clients
+
+	  http://lcdproc.org/
+
+config BR2_PACKAGE_LCDPROC_DRIVERS
+	string "List of drivers to build"
+	default "all"
+	depends on BR2_PACKAGE_LCDPROC
+	help
+	  Specify a comma-separated list of lcdproc drivers to be built
+
+config BR2_PACKAGE_LCDPROC_MENUS
+	bool "Menu support"
+	depends on BR2_PACKAGE_LCDPROC
+	help
+	  Enable support for lcdproc menus

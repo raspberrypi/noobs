@@ -1,0 +1,80 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[pkg-build-steps]]
+
+Package-specific _make_ targets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Running +make <package>+ builds and installs that particular package
+and its dependencies.
+
+For packages relying on the Buildroot infrastructure, there are
+numerous special make targets that can be called independently like
+this:
+
+------------
+make <package>-<target>
+------------
+
+The package build targets are (in the order they are executed):
+
+[width="90%",cols="^1,4",options="header"]
+|===================================================
+| command/target    | Description
+
+| +source+          | Fetch the source (download the tarball, clone
+the source repository, etc)
+
+| +depends+         | Build and install all dependencies required to
+build the package
+
+| +extract+         | Put the source in the package build directory
+(extract the tarball, copy the source, etc)
+
+| +patch+           | Apply the patches, if any
+
+| +configure+       | Run the configure commands, if any
+
+| +build+           | Run the compilation commands
+
+| +install-staging+ |
+*target package:* Run the installation of the package in the
+staging directory, if necessary
+
+| +install-target+  |
+*target package:* Run the installation of the package in the
+target directory, if necessary
+
+| +install+         |
+*target package:* Run the 2 previous installation commands
+
+*host package:* Run the installation of the package in the host
+directory
+
+|===================================================
+
+Additionally, there are some other useful make targets:
+
+[width="90%",cols="^1,4",options="header"]
+|===================================================
+| command/target    | Description
+
+| +show-depends+    | Displays the dependencies required to build the
+package
+
+| +clean+           | Run the clean command of the package, also
+uninstall the package from both the target and the staging directory; _note
+that this is not implemented for all packages_
+
+| +dirclean+        | Remove the whole package build directory
+
+| +rebuild+         | Re-run the compilation commands - this only makes
+sense when using the +OVERRIDE_SRCDIR+ feature or when you modified a file
+directly in the build directory
+
+| +reconfigure+     | Re-run the configure commands, then rebuild - this only
+makes sense when using the +OVERRIDE_SRCDIR+ feature or when you modified a
+file directly in the build directory
+
+|===================================================

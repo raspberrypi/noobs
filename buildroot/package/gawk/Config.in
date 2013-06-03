@@ -1,0 +1,12 @@
+config BR2_PACKAGE_GAWK
+	bool "gawk"
+	depends on BR2_USE_WCHAR
+	help
+	  A special-purpose programming language which is data driven
+	  rather than procedural.  Allows for simple data-reformatting jobs
+	  with just a few lines of code.
+
+	  http://www.gnu.org/software/gawk/
+
+comment "gawk requires a toolchain with WCHAR support"
+	depends on !BR2_USE_WCHAR

@@ -1,0 +1,121 @@
+config BR2_TARGET_BAREBOX
+	bool "Barebox"
+	help
+	  The Barebox bootloader, formerly known as U-Boot v2.
+
+	  http://www.barebox.org
+
+if BR2_TARGET_BAREBOX
+choice
+	prompt "version"
+	default BR2_TARGET_BAREBOX_2013_04
+	help
+	  Select the specific Barebox version you want to use
+
+config BR2_TARGET_BAREBOX_2013_01
+	bool "2013.01.0"
+
+config BR2_TARGET_BAREBOX_2013_02
+	bool "2013.02.0"
+
+config BR2_TARGET_BAREBOX_2013_03
+	bool "2013.03.0"
+
+config BR2_TARGET_BAREBOX_2013_04
+	bool "2013.04.0"
+
+config BR2_TARGET_BAREBOX_CUSTOM_TARBALL
+	bool "Custom tarball"
+
+config BR2_TARGET_BAREBOX_CUSTOM_GIT
+	bool "Custom Git repository"
+
+endchoice
+
+if BR2_TARGET_BAREBOX_CUSTOM_TARBALL
+
+config BR2_TARGET_BAREBOX_CUSTOM_TARBALL_LOCATION
+	string "URL of custom Barebox tarball"
+
+endif
+
+config BR2_TARGET_BAREBOX_VERSION
+	string
+	default "2013.01.0"	if BR2_TARGET_BAREBOX_2013_01
+	default "2013.02.0"	if BR2_TARGET_BAREBOX_2013_02
+	default "2013.03.0"	if BR2_TARGET_BAREBOX_2013_03
+	default "2013.04.0"	if BR2_TARGET_BAREBOX_2013_04
+	default "custom"	if BR2_TARGET_BAREBOX_CUSTOM_TARBALL
+	default $BR2_TARGET_BAREBOX_CUSTOM_GIT_VERSION if BR2_TARGET_BAREBOX_CUSTOM_GIT
+
+config BR2_TARGET_BAREBOX_CUSTOM_PATCH_DIR
+	string "custom patch dir"
+	help
+	  If your board requires custom patches, add the path to the
+	  directory containing the patches here. The patches must be
+	  named barebox-<version>-<something>.patch.
+
+	  Most users may leave this empty
+
+if BR2_TARGET_BAREBOX_CUSTOM_GIT
+
+config BR2_TARGET_BAREBOX_CUSTOM_GIT_REPO_URL
+	string "URL of custom Git repository"
+
+config BR2_TARGET_BAREBOX_CUSTOM_GIT_VERSION
+	string "Custom Git version"
+
+endif
+
+
+choice
+	prompt "Barebox configuration"
+	default BR2_TARGET_BAREBOX_USE_DEFCONFIG
+
+config BR2_TARGET_BAREBOX_USE_DEFCONFIG
+	bool "Using a defconfig"
+
+config BR2_TARGET_BAREBOX_USE_CUSTOM_CONFIG
+	bool "Using a custom config file"
+
+endchoice
+
+config BR2_TARGET_BAREBOX_BOARD_DEFCONFIG
+	string "board defconfig"
+	depends on BR2_TARGET_BAREBOX_USE_DEFCONFIG
+	help
+	  Name of the board for which Barebox should be built, without
+	  the _defconfig suffix.
+
+
+config BR2_TARGET_BAREBOX_CUSTOM_CONFIG_FILE
+	string "Configuration file path"
+	depends on BR2_TARGET_BAREBOX_USE_CUSTOM_CONFIG
+	help
+	  Path to the barebox configuration file
+
+config BR2_TARGET_BAREBOX_BAREBOXENV
+	bool "bareboxenv tool in target"
+	help
+	  Install bareboxenv tool in target.
+
+config BR2_TARGET_BAREBOX_CUSTOM_ENV
+	bool "Generate an environment image"
+	help
+	  Generate a custom environment image. This environment will
+	  contain the variables and scripts to be used at boot by
+	  barebox.
+
+config BR2_TARGET_BAREBOX_CUSTOM_ENV_PATH
+	string "Environment path"
+	depends on BR2_TARGET_BAREBOX_CUSTOM_ENV
+	help
+	  Path to the directory containing the custom barebox
+	  environment. Depending on your setup, it will probably be
+	  based on either the content of the defaultenv or
+	  defaultenv-2 directories in the barebox source code, plus
+	  the additions needed. The output will be an image in the
+	  barebox devfs format, stored in the images directory, with
+	  the same name as the directory name given here.
+
+endif

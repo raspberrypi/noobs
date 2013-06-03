@@ -1,0 +1,39 @@
+choice
+	prompt "Target Architecture Variant"
+	depends on BR2_sparc
+	default BR2_sparc_v8
+	help
+	  Specific CPU variant to use
+
+config BR2_sparc_v8
+	bool "v8"
+config BR2_sparc_sparchfleon
+	bool "hfleon"
+config BR2_sparc_sparchfleonv8
+	bool "hfleonv8"
+config BR2_sparc_sparcsfleon
+	bool "sfleon"
+config BR2_sparc_sparcsfleonv8
+	bool "sfleonv8"
+endchoice
+
+config BR2_ARCH
+	default "sparc"	if BR2_sparc
+
+config BR2_ENDIAN
+	default "BIG"
+
+config BR2_GCC_TARGET_TUNE
+	default "v8"		if BR2_sparc_v8
+	default "v9"		if BR2_sparc_v9
+	default "v9"		if BR2_sparc_v9a
+	default "v9"		if BR2_sparc_v9b
+	default "ultrasparc"	if BR2_sparc_ultrasparc
+	default "ultrasparc3"	if BR2_sparc_ultrasparc3
+	default "niagara"	if BR2_sparc_niagara
+
+config BR2_GCC_TARGET_CPU
+	default "sparchfleon"	if BR2_sparc_sparchfleon
+	default "sparchfleonv8"	if BR2_sparc_sparchfleonv8
+	default "sparcsfleon"	if BR2_sparc_sparcsfleon
+	default "sparcsfleonv8"	if BR2_sparc_sparcsfleonv8

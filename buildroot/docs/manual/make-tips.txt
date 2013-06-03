@@ -1,0 +1,65 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[make-tips]]
+'make' tips
+-----------
+
+This is a collection of tips that help you make the most of Buildroot.
+
+.Configuration searches:
+
+The +make *config+ commands offer a search tool. Read the help message in
+the different frontend menus to know how to use it:
+
+* in _menuconfig_, the search tool is called by pressing +/+;
+* in _xconfig_, the search tool is called by pressing +Ctrl+ + +f+.
+
+The result of the search shows the help message of the matching items.
+
+.Display all commands executed by make:
+
+--------------------
+ $ make V=1 <target>
+--------------------
+
+.Display all available targets:
+
+--------------------
+ $ make help
+--------------------
+
+.Not all targets are always available,
+
+some settings in the +.config+ file may hide some targets:
+
+* +linux-menuconfig+ and +linux-savedefconfig+ only work when
+  +linux+ is enabled;
+* +uclibc-menuconfig+ is only available when the
+  Buildroot internal toolchain backend is used;
+* +ctng-menuconfig+ is only available when the
+  crosstool-NG backend is used;
+* +barebox-menuconfig+ and +barebox-savedefconfig+ only work when the
+  +barebox+ bootloader is enabled.
+
+.Cleaning:
+
+Explicit cleaning is required when any of the architecture or toolchain
+configuration options are changed.
+
+To delete all build products (including build directories, host, staging
+and target trees, the images and the toolchain):
+
+--------------------
+ $ make clean
+--------------------
+
+To delete all build products as well as the configuration:
+
+--------------------
+ $ make distclean
+--------------------
+
+Note that if +ccache+ is enabled, running +make clean+ or +distclean+ does
+not empty the compiler cache used by Buildroot. To delete it, refer
+to xref:ccache[].

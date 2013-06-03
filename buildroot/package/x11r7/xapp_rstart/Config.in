@@ -1,0 +1,5 @@
+config BR2_PACKAGE_XAPP_RSTART
+	bool "rstart"
+	select BR2_PACKAGE_XLIB_LIBX11
+	help
+	  X.Org rstart application

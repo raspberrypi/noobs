@@ -1,0 +1,13 @@
+config BR2_PACKAGE_DBUS_PYTHON
+	bool "dbus-python"
+	depends on BR2_USE_WCHAR # glib2
+	depends on BR2_PACKAGE_DBUS
+	depends on BR2_PACKAGE_PYTHON
+	select BR2_PACKAGE_DBUS_GLIB
+	help
+	  Python bindings for D-Bus
+
+	  http://dbus.freedesktop.org/doc/dbus-python/
+
+comment "dbus-python requires a toolchain with WCHAR support"
+	depends on BR2_PACKAGE_DBUS && BR2_PACKAGE_PYTHON && !BR2_USE_WCHAR

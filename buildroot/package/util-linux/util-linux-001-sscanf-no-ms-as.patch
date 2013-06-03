@@ -1,0 +1,114 @@
+Fix libmount build under uClibc
+
+See https://bugs.gentoo.org/show_bug.cgi?id=406303
+Patch from http://repository.timesys.com/buildsources/u/util-linux/util-linux-2.21.2/util-linux-2.21.2-sscanf-no-ms-as.patch ported to util-linux-2.22.2
+
+Signed-off-by: Gustavo Zacarias <gustavo@zacarias.com.ar>
+
+diff -Nura util-linux-2.22.2/configure.ac util-linux-2.22.2-sscanf-no-ms-as/configure.ac
+--- util-linux-2.22.2/configure.ac	2012-12-13 08:16:02.973822890 -0300
++++ util-linux-2.22.2-sscanf-no-ms-as/configure.ac	2013-03-07 14:50:39.975512873 -0300
+@@ -733,7 +733,6 @@
+ UL_BUILD_INIT([libmount])
+ UL_REQUIRES_LINUX([libmount])
+ UL_REQUIRES_BUILD([libmount], [libblkid])
+-UL_REQUIRES_HAVE([libmount], [scanf_alloc_modifier], [scanf string alloc modifier])
+ AM_CONDITIONAL(BUILD_LIBMOUNT, test "x$build_libmount" = xyes)
+ AM_CONDITIONAL(BUILD_LIBMOUNT_TESTS, test "x$build_libmount" = xyes -a "x$enable_static" = xyes)
+
+diff -Nura util-linux-2.22.2/libmount/src/tab_parse.c util-linux-2.22.2-sscanf-no-ms-as/libmount/src/tab_parse.c
+--- util-linux-2.22.2/libmount/src/tab_parse.c	2012-12-12 17:04:47.906355128 -0300
++++ util-linux-2.22.2-sscanf-no-ms-as/libmount/src/tab_parse.c	2013-03-07 15:08:29.589503961 -0300
+@@ -58,19 +58,21 @@
+  */
+ static int mnt_parse_table_line(struct libmnt_fs *fs, char *s)
+ {
+-	int rc, n = 0, xrc;
+-	char *src = NULL, *fstype = NULL, *optstr = NULL;
+-
+-	rc = sscanf(s,	UL_SCNsA" "	/* (1) source */
+-			UL_SCNsA" "	/* (2) target */
+-			UL_SCNsA" "	/* (3) FS type */
+-			UL_SCNsA" "	/* (4) options */
++	int rc, n = 0, len = strlen (s) + 1, xrc;
++	char *src     = malloc (sizeof *src * len);
++	char *fstype  = malloc (sizeof *fstype * len);
++	char *optstr  = malloc (sizeof *optstr * len);
++
++	rc = sscanf(s,	"%s"" "	/* (1) source */
++			"%s"" "	/* (2) target */
++			"%s"" "	/* (3) FS type */
++			"%s"" "	/* (4) options */
+ 			"%n",		/* byte count */
+ 
+-			&src,
+-			&fs->target,
+-			&fstype,
+-			&optstr,
++			src,
++			fs->target,
++			fstype,
++			optstr,
+ 			&n);
+	xrc = rc;
+ 
+@@ -132,16 +134,20 @@
+  */
+ static int mnt_parse_mountinfo_line(struct libmnt_fs *fs, char *s)
+ {
+-	int rc, end = 0;
++	int rc, end = 0, len = strlen (s) + 1;
+ 	unsigned int maj, min;
+	char *fstype = NULL, *src = NULL, *p;
+ 
++	fs->root        = malloc (sizeof *fs->root * len);
++	fs->target      = malloc (sizeof *fs->target * len);
++	fs->vfs_optstr  = malloc (sizeof *fs->vfs_optstr * len);
++
+ 	rc = sscanf(s,	"%u "		/* (1) id */
+ 			"%u "		/* (2) parent */
+ 			"%u:%u "	/* (3) maj:min */
+-			UL_SCNsA" "	/* (4) mountroot */
+-			UL_SCNsA" "	/* (5) target */
+-			UL_SCNsA	/* (6) vfs options (fs-independent) */
++			"%s"" "	/* (4) mountroot */
++			"%s"" "	/* (5) target */
++			"%s"	/* (6) vfs options (fs-independent) */
+ 			"%n",		/* number of read bytes */
+ 
+ 			&fs->id,
+@@ -163,9 +169,14 @@
+ 	}
+ 	s = p + 3;
+ 
+-	rc += sscanf(s,	UL_SCNsA" "	/* (8) FS type */
+-			UL_SCNsA" "	/* (9) source */
+-			UL_SCNsA,	/* (10) fs options (fs specific) */
++	len           = strlen (s) + 1;
++	fstype        = malloc (sizeof *fstype * len);
++	src           = malloc (sizeof *src * len);
++	fs->fs_optstr = malloc (sizeof *fs->fs_optstr * len);
++
++	rc += sscanf(s,	"%s"" "	/* (8) FS type */
++			"%s"" "	/* (9) source */
++			"%s",	/* (10) fs options (fs specific) */
+ 
+ 			&fstype,
+ 			&src,
+@@ -274,11 +285,12 @@
+ static int mnt_parse_swaps_line(struct libmnt_fs *fs, char *s)
+ {
+	uintmax_t fsz, usz;
+-	int rc;
+-	char *src = NULL;
++	int rc, len = strlen (s) + 1;
++	char *src = malloc (sizeof *src * len);
++	fs->swaptype = malloc (sizeof *fs->swaptype * len);
+
+-	rc = sscanf(s,	UL_SCNsA" "	/* (1) source */
+-			UL_SCNsA" "	/* (2) type */
++	rc = sscanf(s,	"%s"		/* (1) source */
++			"%s"		/* (2) type */
+			"%jd"		/* (3) size */
+			"%jd"		/* (4) used */
+			"%d",		/* priority */

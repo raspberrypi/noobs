@@ -1,0 +1,332 @@
+ifndef MAKE
+MAKE:=make
+endif
+ifndef HOSTMAKE
+HOSTMAKE=$(MAKE)
+endif
+HOSTMAKE :=$(shell which $(HOSTMAKE) || type -p $(HOSTMAKE) || echo make)
+
+# If BR2_LEVEL is 0, scale the maximum concurrency with the number of
+# CPUs.  A coefficient of 2 is used in order to keep processors busy
+# while waiting on I/O.
+ifeq ($(BR2_JLEVEL),0)
+PARALLEL_JOBS:=$(shell echo \
+	$$((2 * `getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`)))
+else
+PARALLEL_JOBS:=$(BR2_JLEVEL)
+endif
+
+MAKE1:=$(HOSTMAKE) -j1
+MAKE:=$(HOSTMAKE) -j$(PARALLEL_JOBS)
+
+# Compute GNU_TARGET_NAME
+GNU_TARGET_NAME=$(ARCH)-buildroot-linux-$(LIBC)$(ABI)
+
+ifeq ($(BR2_TOOLCHAIN_BUILDROOT)$(BR2_TOOLCHAIN_CTNG_uClibc)$(BR2_TOOLCHAIN_EXTERNAL_UCLIBC),y)
+LIBC=uclibc
+else
+LIBC=gnu
+endif
+
+# The ABI suffix is a bit special on ARM, as it needs to be
+# -uclibcgnueabi for uClibc EABI, -uclibc for uClibc OABI, -gnueabi
+# for glibc EABI and -gnu for glibc OABI. This means that the LIBC and
+# ABI aren't strictly orthogonal, which explains why we need the test
+# on LIBC below.
+ifeq ($(BR2_ARM_EABI),y)
+ifeq ($(LIBC),uclibc)
+ABI=gnueabi
+else
+ABI=eabi
+endif
+endif
+
+# For FSL PowerPC there's SPE
+ifeq ($(BR2_powerpc_SPE),y)
+ABI=spe
+# MPC8540s are e500v1 with single precision FP
+ifeq ($(BR2_powerpc_8540),y)
+TARGET_ABI+=-mabi=spe -mfloat-gprs=single -Wa,-me500
+endif
+ifeq ($(BR2_powerpc_8548),y)
+TARGET_ABI+=-mabi=spe -mfloat-gprs=double -Wa,-me500x2
+endif
+ifeq ($(BR2_powerpc_e500mc),y)
+TARGET_ABI+=-mabi=spe -mfloat-gprs=double -Wa,-me500mc
+endif
+endif
+
+# Use longcalls option for Xtensa globally.
+# The 'longcalls' option allows calls across a greater range of addresses,
+# and is required for some packages. While this option can degrade both
+# code size and performance, the linker can usually optimize away the
+# overhead when a call ends up within a certain range.
+ifeq ($(BR2_xtensa),y)
+TARGET_ABI += -mlongcalls
+endif
+
+STAGING_SUBDIR = usr/$(GNU_TARGET_NAME)/sysroot
+STAGING_DIR    = $(HOST_DIR)/$(STAGING_SUBDIR)
+
+TARGET_OPTIMIZATION:=$(call qstrip,$(BR2_TARGET_OPTIMIZATION))
+
+ifeq ($(BR2_OPTIMIZE_0),y)
+TARGET_OPTIMIZATION+=-O0
+endif
+ifeq ($(BR2_OPTIMIZE_1),y)
+TARGET_OPTIMIZATION+=-O1
+endif
+ifeq ($(BR2_OPTIMIZE_2),y)
+TARGET_OPTIMIZATION+=-O2
+endif
+ifeq ($(BR2_OPTIMIZE_3),y)
+TARGET_OPTIMIZATION+=-O3
+endif
+ifeq ($(BR2_OPTIMIZE_S),y)
+TARGET_OPTIMIZATION+=-Os
+endif
+ifeq ($(BR2_DEBUG_1),y)
+TARGET_DEBUGGING=-g1
+endif
+ifeq ($(BR2_DEBUG_2),y)
+TARGET_DEBUGGING=-g2
+endif
+ifeq ($(BR2_DEBUG_3),y)
+TARGET_DEBUGGING=-g3
+endif
+
+ifeq ($(BR2_LARGEFILE),y)
+TARGET_CPPFLAGS += -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+endif
+
+TARGET_CFLAGS = $(TARGET_CPPFLAGS) $(TARGET_ABI) $(TARGET_OPTIMIZATION) $(TARGET_DEBUGGING)
+TARGET_CXXFLAGS = $(TARGET_CFLAGS)
+TARGET_LDFLAGS = $(call qstrip,$(BR2_TARGET_LDFLAGS))
+
+ifeq ($(BR2_TOOLCHAIN_BUILDROOT)$(BR2_TOOLCHAIN_CTNG),y)
+TARGET_CROSS=$(HOST_DIR)/usr/bin/$(GNU_TARGET_NAME)-
+else
+TARGET_CROSS=$(HOST_DIR)/usr/bin/$(call qstrip,$(BR2_TOOLCHAIN_EXTERNAL_PREFIX))-
+endif
+
+# Quotes are needed for spaces et al in path components.
+TARGET_PATH="$(HOST_DIR)/bin:$(HOST_DIR)/usr/bin:$(HOST_DIR)/usr/sbin/:$(PATH)"
+
+# Define TARGET_xx variables for all common binutils/gcc tools by
+# including the --sysroot option where necessary.
+TARGET_AR       = $(TARGET_CROSS)ar
+TARGET_AS       = $(TARGET_CROSS)as
+TARGET_CC       = $(TARGET_CROSS)gcc
+TARGET_CPP      = $(TARGET_CROSS)cpp
+TARGET_CXX      = $(TARGET_CROSS)g++
+TARGET_FC       = $(TARGET_CROSS)gfortran
+TARGET_LD       = $(TARGET_CROSS)ld
+TARGET_NM       = $(TARGET_CROSS)nm
+TARGET_RANLIB   = $(TARGET_CROSS)ranlib
+TARGET_READELF  = $(TARGET_CROSS)readelf
+TARGET_OBJCOPY  = $(TARGET_CROSS)objcopy
+TARGET_OBJDUMP  = $(TARGET_CROSS)objdump
+
+TARGET_CC_NOCCACHE  := $(TARGET_CC)
+TARGET_CXX_NOCCACHE := $(TARGET_CXX)
+
+ifeq ($(BR2_CCACHE),y)
+TARGET_CC  := $(CCACHE) $(TARGET_CC)
+TARGET_CXX := $(CCACHE) $(TARGET_CXX)
+endif
+
+ifeq ($(BR2_STRIP_strip),y)
+STRIP_STRIP_DEBUG:=--strip-debug
+STRIP_STRIP_UNNEEDED:=--strip-unneeded
+STRIP_STRIP_ALL:=--strip-all
+TARGET_STRIP=$(TARGET_CROSS)strip
+STRIPCMD=$(TARGET_CROSS)strip --remove-section=.comment --remove-section=.note
+KSTRIPCMD=$(STRIPCMD) $(STRIP_STRIP_UNNEEDED)
+endif
+ifeq ($(BR2_STRIP_sstrip),y)
+STRIP_STRIP_DEBUG:=
+STRIP_STRIP_UNNEEDED:=
+STRIP_STRIP_ALL:=
+TARGET_STRIP=$(HOST_DIR)/usr/bin/$(GNU_TARGET_NAME)-sstrip
+STRIPCMD=$(TARGET_STRIP)
+KSTRIPCMD=$(TARGET_CROSS)strip --remove-section=.comment --remove-section=.note --strip-unneeded
+endif
+ifeq ($(BR2_STRIP_none),y)
+TARGET_STRIP=true
+STRIPCMD=$(TARGET_STRIP)
+KSTRIPCMD=$(TARGET_STRIP)
+endif
+INSTALL:=$(shell which install || type -p install)
+FLEX:=$(shell which flex || type -p flex)
+BISON:=$(shell which bison || type -p bison)
+SED:=$(shell which sed || type -p sed) -i -e
+
+HOST_CPPFLAGS  = -I$(HOST_DIR)/usr/include
+HOST_CFLAGS   ?= -O2
+HOST_CFLAGS   += $(HOST_CPPFLAGS)
+HOST_CXXFLAGS += $(HOST_CFLAGS)
+HOST_LDFLAGS  += -L$(HOST_DIR)/lib -L$(HOST_DIR)/usr/lib -Wl,-rpath,$(HOST_DIR)/usr/lib
+HOST_PATH=$(HOST_DIR)/bin:$(HOST_DIR)/usr/bin:$(PATH)
+
+# hostcc version as an integer - E.G. 4.3.2 => 432
+HOSTCC_VERSION:=$(shell $(HOSTCC_NOCCACHE) --version | \
+	sed -n 's/^.* \([0-9]*\)\.\([0-9]*\)\.\([0-9]*\)[ ]*.*$$/\1\2\3/p')
+
+TARGET_CONFIGURE_OPTS=PATH=$(TARGET_PATH) \
+		AR="$(TARGET_AR)" \
+		AS="$(TARGET_AS)" \
+		LD="$(TARGET_LD)" \
+		NM="$(TARGET_NM)" \
+		CC="$(TARGET_CC)" \
+		GCC="$(TARGET_CC)" \
+		CPP="$(TARGET_CPP)" \
+		CXX="$(TARGET_CXX)" \
+		FC="$(TARGET_FC)" \
+		RANLIB="$(TARGET_RANLIB)" \
+		READELF="$(TARGET_READELF)" \
+		STRIP="$(TARGET_STRIP)" \
+		OBJCOPY="$(TARGET_OBJCOPY)" \
+		OBJDUMP="$(TARGET_OBJDUMP)" \
+		AR_FOR_BUILD="$(HOSTAR)" \
+		AS_FOR_BUILD="$(HOSTAS)" \
+		CC_FOR_BUILD="$(HOSTCC)" \
+		GCC_FOR_BUILD="$(HOSTCC)" \
+		CXX_FOR_BUILD="$(HOSTCXX)" \
+		FC_FOR_BUILD="$(HOSTFC)" \
+		LD_FOR_BUILD="$(HOSTLD)" \
+		CPPFLAGS_FOR_BUILD="$(HOST_CPPFLAGS)" \
+		CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
+		CXXFLAGS_FOR_BUILD="$(HOST_CXXFLAGS)" \
+		LDFLAGS_FOR_BUILD="$(HOST_LDFLAGS)" \
+		FCFLAGS_FOR_BUILD="$(HOST_FCFLAGS)" \
+		DEFAULT_ASSEMBLER="$(TARGET_AS)" \
+		DEFAULT_LINKER="$(TARGET_LD)" \
+		CPPFLAGS="$(TARGET_CPPFLAGS)" \
+		CFLAGS="$(TARGET_CFLAGS)" \
+		CXXFLAGS="$(TARGET_CXXFLAGS)" \
+		LDFLAGS="$(TARGET_LDFLAGS)" \
+		FCFLAGS="$(TARGET_FCFLAGS)" \
+		PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
+		PERLLIB="$(HOST_DIR)/usr/lib/perl" \
+		STAGING_DIR="$(STAGING_DIR)"
+
+TARGET_MAKE_ENV=PATH=$(TARGET_PATH) \
+		PERLLIB="$(HOST_DIR)/usr/lib/perl"
+
+HOST_CONFIGURE_OPTS=PATH=$(HOST_PATH) \
+		AR="$(HOSTAR)" \
+		AS="$(HOSTAS)" \
+		LD="$(HOSTLD)" \
+		NM="$(HOSTNM)" \
+		CC="$(HOSTCC)" \
+		GCC="$(HOSTCC)" \
+		CXX="$(HOSTCXX)" \
+		CPP="$(HOSTCPP)" \
+		CPPFLAGS="$(HOST_CPPFLAGS)" \
+		CFLAGS="$(HOST_CFLAGS)" \
+		CXXFLAGS="$(HOST_CXXFLAGS)" \
+		LDFLAGS="$(HOST_LDFLAGS)" \
+		PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
+		PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 \
+		PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
+		PKG_CONFIG_SYSROOT_DIR="/" \
+		PKG_CONFIG_LIBDIR="$(HOST_DIR)/usr/lib/pkgconfig:$(HOST_DIR)/usr/share/pkgconfig" \
+		PERLLIB="$(HOST_DIR)/usr/lib/perl" \
+		LD_LIBRARY_PATH="$(HOST_DIR)/usr/lib:$(LD_LIBRARY_PATH)"
+
+HOST_MAKE_ENV=PATH=$(HOST_PATH) \
+		LD_LIBRARY_PATH="$(HOST_DIR)/usr/lib:$(LD_LIBRARY_PATH)" \
+		PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
+		PKG_CONFIG_SYSROOT_DIR="/" \
+		PKG_CONFIG_LIBDIR="$(HOST_DIR)/usr/lib/pkgconfig" \
+		PERLLIB="$(HOST_DIR)/usr/lib/perl"
+
+
+#######################################################################
+# settings we need to pass to configure
+
+# does unaligned access trap?
+BR2_AC_CV_TRAP_CHECK=ac_cv_lbl_unaligned_fail=yes
+ifeq ($(BR2_i386),y)
+BR2_AC_CV_TRAP_CHECK=ac_cv_lbl_unaligned_fail=no
+endif
+ifeq ($(BR2_x86_64),y)
+BR2_AC_CV_TRAP_CHECK=ac_cv_lbl_unaligned_fail=no
+endif
+ifeq ($(BR2_m68k),y)
+BR2_AC_CV_TRAP_CHECK=ac_cv_lbl_unaligned_fail=no
+endif
+ifeq ($(BR2_powerpc)$(BR2_ENDIAN),yBIG)
+BR2_AC_CV_TRAP_CHECK=ac_cv_lbl_unaligned_fail=no
+endif
+
+ifeq ($(BR2_ENDIAN),"BIG")
+BR2_AC_CV_C_BIGENDIAN=ac_cv_c_bigendian=yes
+else
+BR2_AC_CV_C_BIGENDIAN=ac_cv_c_bigendian=no
+endif
+
+TARGET_CONFIGURE_ARGS= \
+	$(BR2_AC_CV_TRAP_CHECK) \
+	ac_cv_func_mmap_fixed_mapped=yes \
+	ac_cv_func_memcmp_working=yes \
+	ac_cv_have_decl_malloc=yes \
+	gl_cv_func_malloc_0_nonnull=yes \
+	ac_cv_func_malloc_0_nonnull=yes \
+	ac_cv_func_calloc_0_nonnull=yes \
+	ac_cv_func_realloc_0_nonnull=yes \
+	lt_cv_sys_lib_search_path_spec="" \
+	$(BR2_AC_CV_C_BIGENDIAN)
+
+#######################################################################
+
+ifeq ($(BR2_ENABLE_LOCALE),y)
+DISABLE_NLS:=
+else
+DISABLE_NLS:=--disable-nls
+endif
+
+ifneq ($(BR2_LARGEFILE),y)
+DISABLE_LARGEFILE= --disable-largefile
+endif
+
+ifneq ($(BR2_HAVE_DOCUMENTATION),y)
+# The configure option varies, but since unknown options are ignored
+# we can pass all of them.
+DISABLE_DOCUMENTATION = \
+	--disable-gtk-doc \
+	--disable-doc \
+	--disable-docs \
+	--disable-documentation \
+	--with-xmlto=no \
+	--with-fop=no
+endif
+
+ifeq ($(BR2_INET_IPV6),y)
+DISABLE_IPV6= --enable-ipv6
+else
+DISABLE_IPV6= --disable-ipv6
+endif
+
+ifneq ($(BR2_INSTALL_LIBSTDCPP),y)
+TARGET_CONFIGURE_OPTS+=CXX=false
+endif
+
+ifeq ($(BR2_ENABLE_DEBUG),y)
+ENABLE_DEBUG:=--enable-debug
+else
+ENABLE_DEBUG:=
+endif
+
+ifeq ($(BR2_PREFER_STATIC_LIB),y)
+SHARED_STATIC_LIBS_OPTS=--enable-static --disable-shared
+TARGET_LDFLAGS += --static
+else
+SHARED_STATIC_LIBS_OPTS=--enable-static --enable-shared
+endif
+
+include package/pkg-utils.mk
+include package/pkg-download.mk
+include package/pkg-autotools.mk
+include package/pkg-cmake.mk
+include package/pkg-generic.mk

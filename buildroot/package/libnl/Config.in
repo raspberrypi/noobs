@@ -1,0 +1,16 @@
+config BR2_PACKAGE_LIBNL
+	bool "libnl"
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	help
+	  A library for applications dealing with netlink socket.
+
+	  http://people.suug.ch/~tgr/libnl/
+
+config BR2_PACKAGE_LIBNL_TOOLS
+	bool "install tools"
+	depends on BR2_PACKAGE_LIBNL
+	help
+	  Install binary tools.
+
+comment "libnl requires a toolchain with thread support"
+	depends on !BR2_TOOLCHAIN_HAS_THREADS

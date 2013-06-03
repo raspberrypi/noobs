@@ -1,0 +1,7 @@
+config BR2_PACKAGE_XLIB_LIBPTHREAD_STUBS
+	bool "libpthread-stubs"
+	help
+	  This library provides weak aliases for pthread functions not
+	  provided in libc or otherwise available by default.
+
+	  http://xcb.freedesktop.org/

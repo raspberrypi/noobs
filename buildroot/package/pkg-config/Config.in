@@ -1,0 +1,15 @@
+config BR2_PACKAGE_PKG_CONFIG
+	bool "pkg-config"
+	depends on BR2_USE_WCHAR # glib2
+	depends on BR2_DEPRECATED
+	select BR2_PACKAGE_LIBGLIB2
+	help
+	  pkg-config is a system for managing library compile/link
+	  flags that works with automake and autoconf. It replaces
+	  the ubiquitous *-config scripts you may have seen with a
+	  single tool.
+
+	  http://www.freedesktop.org/software/pkgconfig/
+
+comment "pkg-config requires a toolchain with WCHAR support"
+	depends on BR2_DEPRECATED && !BR2_USE_WCHAR

@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LMBENCH
+	bool "lmbench"
+	select BR2_PACKAGE_LIBTIRPC if !BR2_TOOLCHAIN_HAS_NATIVE_RPC
+	help
+	  LMbench is a suite of simple, portable,
+	  ANSI/C microbenchmarks for UNIX/POSIX.
+
+	  http://sourceforge.net/projects/lmbench/

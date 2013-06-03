@@ -1,0 +1,5 @@
+config BR2_PACKAGE_ARORA
+        bool "arora"
+    select BR2_PACKAGE_QT
+        help
+          Arora web browser 

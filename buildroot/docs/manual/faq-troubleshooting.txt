@@ -1,0 +1,128 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Frequently Asked Questions & Troubleshooting
+============================================
+
+[[faq-boot-hang-after-starting]]
+The boot hangs after 'Starting network...'
+------------------------------------------
+
+If the boot process seems to hang after the following messages
+(messages not necessarily exactly similar, depending on the list of
+packages selected):
+
+------------------------
+Freeing init memory: 3972K
+Initializing random number generator... done.
+Starting network...
+Starting dropbear sshd: generating rsa key... generating dsa key... OK
+------------------------
+
+then it means that your system is running, but didn't start a shell on
+the serial console. In order to have the system start a shell on your
+serial console, you have to go into the Buildroot configuration, +System
+configuration+, and modify +Port to run a getty (login prompt) on+ and
++Baudrate to use+ as appropriate. This will automatically tune the
++/etc/inittab+ file of the generated system so that a shell starts on
+the correct serial port.
+
+[[faq-module-init-tool-build-failure]]
+module-init-tools fails to build with 'cannot find -lc'
+-------------------------------------------------------
+
+If the build of +module-init-tools+ for the host fails with:
+
+------------------------
+/usr/bin/ld: cannot find -lc
+------------------------
+
+then probably you are running a Fedora (or similar) distribution, and
+you should install the +glibc-static+ package. This is because the
++module-init-tools+ build process wants to link statically against the
+C library.
+
+[[faq-no-compiler-on-target]]
+Why is there no compiler on the target?
+---------------------------------------
+
+It has been decided that support for the _native compiler on the
+target_ would be stopped from the Buildroot-2012.11 release because:
+
+* this feature was neither maintained nor tested, and often broken;
+* this feature was only available for Buildroot toolchains;
+* Buildroot mostly targets _small_ or _very small_ target hardware
+  with limited resource onboard (CPU, ram, mass-storage), for which
+  compiling does not make much sense.
+
+If you need a compiler on your target anyway, then Buildroot is not
+suitable for your purpose. In such case, you need a _real
+distribution_ and you should opt for something like:
+
+* http://www.openembedded.org[openembedded]
+* https://www.yoctoproject.org[yocto]
+* http://www.emdebian.org[emdebian]
+* https://fedoraproject.org/wiki/Architectures[Fedora]
+* http://en.opensuse.org/Portal:ARM[openSUSE ARM]
+* http://archlinuxarm.org[Arch Linux ARM]
+* ...
+
+[[faq-no-dev-files-on-target]]
+Why are there no development files on the target?
+-------------------------------------------------
+
+Since there is no compiler available on the target (see
+xref:faq-no-compiler-on-target[]), it does not make sense to waste
+space with headers or static libraries.
+
+Therefore, those files are always removed from the target since the
+Buildroot-2012.11 release.
+
+[[faq-no-doc-on-target]]
+Why is there no documentation on the target?
+--------------------------------------------
+
+Because Buildroot mostly targets _small_ or _very small_ target
+hardware with limited resource onboard (CPU, ram, mass-storage), it
+does not make sense to waste space with the documentation data.
+
+If you need documentation data on your target anyway, then Buildroot
+is not suitable for your purpose, and you should look for a _real
+distribution_ (see: xref:faq-no-compiler-on-target[]).
+
+[[faq-why-not-visible-package]]
+Why are some packages not visible in the Buildroot config menu?
+---------------------------------------------------------------
+
+If a package exists in the Buildroot tree and does not appear in the
+config menu, this most likely means that some of the package's
+dependencies are not met.
+
+To know more about the dependencies of a package, search for the
+package symbol in the config menu (see xref:make-tips[]).
+
+Then, you may have to recursively enable several options (which
+correspond to the unmet dependencies) to finally be able to select
+the package.
+
+If the package is not visible due to some unmet toolchain options,
+then you should certainly run a full rebuild (see xref:make-tips[] for
+more explanations).
+
+[[faq-why-not-use-target-as-chroot]]
+Why not use the target directory as a chroot directory?
+-------------------------------------------------------
+
+There are plenty of reasons to *not* use the target directory a chroot
+one, among these:
+
+* file ownerships, modes and permissions are not correctly set in the
+  target directory;
+* device nodes are not created in the target directory.
+
+For these reasons, commands run through chroot, using the target
+directory as the new root, will most likely fail.
+
+If you want to run the target filesystem inside a chroot, or as an NFS
+root, then use the tarball image generated in +images/+ and extract it
+as root.

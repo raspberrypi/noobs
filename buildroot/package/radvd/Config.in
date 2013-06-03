@@ -1,0 +1,14 @@
+config BR2_PACKAGE_RADVD
+	bool "radvd"
+	# libdaemon uses fork()
+	depends on BR2_USE_MMU
+	select BR2_PACKAGE_FLEX
+	select BR2_PACKAGE_LIBDAEMON
+	depends on BR2_INET_IPV6
+	help
+	  IPv6 Router Advertisement Daemon.
+
+	  http://www.litech.org/radvd/
+
+comment "radvd requires a toolchain with IPV6 support"
+	depends on !BR2_INET_IPV6

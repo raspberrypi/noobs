@@ -1,0 +1,11 @@
+config BR2_PACKAGE_FINDUTILS
+	bool "findutils"
+	depends on BR2_USE_WCHAR
+	help
+	  Basic directory searching utilities.  Provides the
+	  common 'find', 'xargs', 'locate', and 'updatedb' binaries.
+
+	  http://www.gnu.org/software/findutils/findutils.html
+
+comment "findutils requires a toolchain with WCHAR support"
+	depends on !BR2_USE_WCHAR

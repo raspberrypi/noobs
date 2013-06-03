@@ -1,0 +1,68 @@
+#!/bin/sh
+#
+# Recovery init script
+#
+
+# Standard busybox init
+/bin/mount -t proc proc /proc
+/bin/mount -o remount,rw,noatime / 
+/bin/mount -t sysfs sysfs /sys
+/bin/mount -t devtmpfs dev /dev
+/bin/hostname -F /etc/hostname
+
+# Load kbd driver
+/sbin/modprobe usbkbd
+
+# Rescue shell available on tty2 and tty3
+echo 2 >/sys/module/vt/parameters/cur_default
+/sbin/getty -L tty2 0 vt100 &
+/sbin/getty -L tty3 0 vt100 &
+/sbin/getty -L ttyAMA0 115200 vt100 &
+
+if grep -q vncinstall /proc/cmdline; then
+	# VNC server mode. Mainly useful for making screenshots
+	export QWS_DISPLAY="VNC:size=800x600:depth=32:0"
+	ifup eth0
+fi
+
+# Setup dropbear SSH server if specified on cmdline
+if grep -q SSH /proc/cmdline; then
+    
+    ifup eth0
+    
+    if [ ! -d /etc/dropbear ] ; then
+        mkdir -p /etc/dropbear
+    fi
+    
+    if [ ! -f /etc/dropbear/dropbear_rsa_host_key ] ; then
+        echo -n "generating rsa key... "
+        /usr/bin/dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key > /dev/null 2>&1
+    fi
+
+    if [ ! -f /etc/dropbear/dropbear_dss_host_key ] ; then
+        echo -n "generating dsa key... "
+        /usr/bin/dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key > /dev/null 2>&1
+    fi
+
+    umask 077
+    
+    start-stop-daemon -S -q -p /var/run/dropbear.pid --exec /usr/sbin/dropbear
+fi
+
+# Mouse acceleration
+#export QWS_MOUSE_PROTO=:accel=1
+
+if grep -q rescueshell /proc/cmdline; then
+	sh
+elif grep -q runinstaller /proc/cmdline; then
+	/usr/bin/recovery -runinstaller -qws 2>/tmp/debug 
+else
+	/usr/bin/recovery -qws 2>/tmp/debug 
+fi
+
+# Recovery should have rebooted
+
+echo Recovery application crashed 
+echo Starting shell
+sh
+

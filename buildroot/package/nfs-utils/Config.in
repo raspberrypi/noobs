@@ -1,0 +1,36 @@
+config BR2_PACKAGE_NFS_UTILS
+	bool "nfs-utils"
+	select BR2_PACKAGE_LIBTIRPC if !BR2_TOOLCHAIN_HAS_NATIVE_RPC
+	depends on BR2_LARGEFILE
+	help
+	  The NFS Linux kernel server.
+	  Warning: We do not force largefile support on here on purpose.
+	  Enable it yourself if you want to access big exports!
+
+	  http://sourceforge.net/projects/nfs
+
+comment "nfs-utils requires a toolchain with LARGEFILE support"
+	depends on !BR2_LARGEFILE
+
+menu "NFS utilities selection"
+	depends on BR2_PACKAGE_NFS_UTILS
+
+config BR2_PACKAGE_NFS_UTILS_RPCDEBUG
+	bool "rpcdebug"
+	depends on BR2_PACKAGE_NFS_UTILS
+	help
+	  The RPC debugging utility
+
+config BR2_PACKAGE_NFS_UTILS_RPC_LOCKD
+	bool "rpc.lockd"
+	depends on BR2_PACKAGE_NFS_UTILS
+	help
+	  NFS lock manager for Linux kernels older than 2.4
+
+config BR2_PACKAGE_NFS_UTILS_RPC_RQUOTAD
+	bool "rpc.rquotad"
+	depends on BR2_PACKAGE_NFS_UTILS
+	help
+	  NFS remote quota server
+
+endmenu

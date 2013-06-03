@@ -1,0 +1,85 @@
+---
+ confdata.c          |    4 ++--
+ gconf.glade         |    2 +-
+ mconf.c             |    4 ++--
+ zconf.tab.c_shipped |    2 +-
+ zconf.y             |    2 +-
+ 5 files changed, 7 insertions(+), 7 deletions(-)
+
+Index: b/gconf.glade
+===================================================================
+--- a/gconf.glade
++++ b/gconf.glade
+@@ -4,7 +4,7 @@
+ 
+ <widget class="GtkWindow" id="window1">
+   <property name="visible">True</property>
+-  <property name="title" translatable="yes">Gtk Kernel Configurator</property>
++  <property name="title" translatable="yes">Gtk Buildroot Configurator</property>
+   <property name="type">GTK_WINDOW_TOPLEVEL</property>
+   <property name="window_position">GTK_WIN_POS_NONE</property>
+   <property name="modal">False</property>
+Index: b/mconf.c
+===================================================================
+--- a/mconf.c
++++ b/mconf.c
+@@ -178,9 +178,9 @@
+ 	"Arrow keys navigate the menu.  "
+ 	"<Enter> selects submenus --->.  "
+ 	"Highlighted letters are hotkeys.  "
+-	"Pressing <Y> includes, <N> excludes, <M> modularizes features.  "
++	"Pressing <Y> selectes a feature, while <N> will exclude a feature.  "
+ 	"Press <Esc><Esc> to exit, <?> for Help, </> for Search.  "
+-	"Legend: [*] built-in  [ ] excluded  <M> module  < > module capable"),
++	"Legend: [*] feature is selected  [ ] feature is excluded"),
+ radiolist_instructions[] = N_(
+ 	"Use the arrow keys to navigate this window or "
+ 	"press the hotkey of the item you wish to select "
+Index: b/zconf.tab.c_shipped
+===================================================================
+--- a/zconf.tab.c_shipped
++++ b/zconf.tab.c_shipped
+@@ -2259,7 +2259,7 @@
+ 	modules_sym = sym_lookup(NULL, 0);
+ 	modules_sym->type = S_BOOLEAN;
+ 	modules_sym->flags |= SYMBOL_AUTO;
+-	rootmenu.prompt = menu_add_prompt(P_MENU, "Linux Kernel Configuration", NULL);
++	rootmenu.prompt = menu_add_prompt(P_MENU, "Buildroot Configuration", NULL);
+ 
+ 	if (getenv("ZCONF_DEBUG"))
+ 		zconfdebug = 1;
+Index: b/zconf.y
+===================================================================
+--- a/zconf.y
++++ b/zconf.y
+@@ -496,7 +496,7 @@
+ 	modules_sym = sym_lookup(NULL, 0);
+ 	modules_sym->type = S_BOOLEAN;
+ 	modules_sym->flags |= SYMBOL_AUTO;
+-	rootmenu.prompt = menu_add_prompt(P_MENU, "Linux Kernel Configuration", NULL);
++	rootmenu.prompt = menu_add_prompt(P_MENU, "Buildroot Configuration", NULL);
+ 
+ 	if (getenv("ZCONF_DEBUG"))
+ 		zconfdebug = 1;
+Index: b/confdata.c
+===================================================================
+--- a/confdata.c
++++ b/confdata.c
+@@ -25,7 +26,7 @@
+ static const char *conf_filename;
+ static int conf_lineno, conf_warnings, conf_unsaved;
+ 
+-const char conf_defname[] = "arch/$ARCH/defconfig";
++const char conf_defname[] = ".defconfig";
+ 
+ static void conf_warning(const char *fmt, ...)
+ {
+@@ -63,7 +64,7 @@
+ 
+ const char *conf_get_configname(void)
+ {
+-	char *name = getenv("KCONFIG_CONFIG");
++	char *name = getenv("BUILDROOT_CONFIG");
+ 
+ 	return name ? name : ".config";
+ }

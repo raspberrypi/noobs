@@ -1,0 +1,220 @@
+#!/usr/bin/python
+
+# Usage (the graphviz package must be installed in your distribution)
+#  ./scripts/graph-depends [package-name] > test.dot
+#  dot -Tpdf test.dot -o test.pdf
+#
+# With no arguments, graph-depends will draw a complete graph of
+# dependencies for the current configuration. With an argument,
+# graph-depends will draw a graph of dependencies for the given
+# package name.
+#
+# Limitations
+#
+#  * Some packages have dependencies that depend on the Buildroot
+#    configuration. For example, many packages have a dependency on
+#    openssl if openssl has been enabled. This tool will graph the
+#    dependencies as they are with the current Buildroot
+#    configuration.
+#
+# Copyright (C) 2010-2013 Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+
+import sys
+import subprocess
+
+# In FULL_MODE, we draw the full dependency graph for all selected
+# packages
+FULL_MODE = 1
+
+# In PKG_MODE, we only draw the dependency graph for a given package
+PKG_MODE  = 2
+
+mode = 0
+
+if len(sys.argv) == 1:
+    mode = FULL_MODE
+elif len(sys.argv) == 2:
+    mode = PKG_MODE
+    rootpkg  = sys.argv[1]
+else:
+    print "Usage: graph-depends [package-name]"
+    sys.exit(1)
+
+allpkgs = []
+
+# Execute the "make show-targets" command to get the list of the main
+# Buildroot TARGETS and return it formatted as a Python list. This
+# list is used as the starting point for full dependency graphs
+def get_targets():
+    sys.stderr.write("Getting targets\n")
+    cmd = ["make", "-s", "show-targets"]
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output = p.communicate()[0].strip()
+    if p.returncode != 0:
+        return None
+    if output == '':
+        return []
+    return output.split(' ')
+
+# Execute the "make <pkg>-show-depends" command to get the list of
+# dependencies of a given list of packages, and return the list of
+# dependencies formatted as a Python dictionary.
+def get_depends(pkgs):
+    sys.stderr.write("Getting dependencies for %s\n" % pkgs)
+    cmd = ["make", "-s" ]
+    for pkg in pkgs:
+        cmd.append("%s-show-depends" % pkg)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output = p.communicate()[0]
+    if p.returncode != 0:
+        sys.stderr.write("Error getting dependencies %s\n" % pkgs)
+        sys.exit(1)
+    output = output.split("\n")
+    if len(output) != len(pkgs) + 1:
+        sys.stderr.write("Error getting dependencies\n")
+        sys.exit(1)
+    deps = {}
+    for i in range(0, len(pkgs)):
+        pkg = pkgs[i]
+        pkg_deps = output[i].split(" ")
+        if pkg_deps == ['']:
+            deps[pkg] = []
+        else:
+            deps[pkg] = pkg_deps
+    return deps
+
+# Recursive function that builds the tree of dependencies for a given
+# list of packages. The dependencies are built in a list called
+# 'dependencies', which contains tuples of the form (pkg1 ->
+# pkg2_on_which_pkg1_depends, pkg3 -> pkg4_on_which_pkg3_depends) and
+# the function finally returns this list.
+def get_all_depends(pkgs):
+    dependencies = []
+
+    # Filter the packages for which we already have the dependencies
+    filtered_pkgs = []
+    for pkg in pkgs:
+        if pkg in allpkgs:
+            continue
+        filtered_pkgs.append(pkg)
+        allpkgs.append(pkg)
+
+    if len(filtered_pkgs) == 0:
+        return []
+
+    depends = get_depends(filtered_pkgs)
+
+    deps = set()
+    for pkg in filtered_pkgs:
+        pkg_deps = depends[pkg]
+
+        # This package has no dependency.
+        if pkg_deps == []:
+            continue
+
+        # Add dependencies to the list of dependencies
+        for dep in pkg_deps:
+            dependencies.append((pkg, dep))
+            deps.add(dep)
+
+    if len(deps) != 0:
+        newdeps = get_all_depends(deps)
+        if newdeps != None:
+            dependencies += newdeps
+
+    return dependencies
+
+# The Graphviz "dot" utility doesn't like dashes in node names. So for
+# node names, we strip all dashes.
+def pkg_node_name(pkg):
+    return pkg.replace("-","")
+
+# Helper function for remove_redundant_deps(). This function tells
+# whether package "pkg" is the dependency of another package that is
+# not the special "all" package.
+def has_redundant_deps(deps, pkg):
+    for dep in deps:
+        if dep[0] != "all" and dep[1] == pkg:
+            return True
+    return False
+
+# This function removes redundant dependencies of the special "all"
+# package. This "all" package is created to reflect the origin of the
+# selection for all packages that are not themselves selected by any
+# other package. So for example if you enable libpng, zlib is enabled
+# as a dependency. But zlib being selected by libpng, it also appears
+# as a dependency of the "all" package. This needlessly complicates
+# the generated dependency graph. So when we have the dependency list
+# (all -> zlib, all -> libpn, libpng -> zlib), we get rid of the 'all
+# -> zlib' dependency, because zlib is already a dependency of a
+# regular package.
+def remove_redundant_deps(deps):
+    newdeps = []
+    for dep in deps:
+        if dep[0] != "all":
+            newdeps.append(dep)
+            continue
+        if not has_redundant_deps(deps, dep[1]):
+            newdeps.append(dep)
+            continue
+        sys.stderr.write("Removing redundant dep all -> %s\n" % dep[1])
+    return newdeps
+
+TARGET_EXCEPTIONS = [
+    "target-generic-issue",
+    "target-generic-getty-busybox",
+    "target-generic-do-remount-rw",
+    "target-finalize",
+    "erase-fakeroots",
+    "target-generic-hostname",
+    "target-root-passwd",
+    "target-post-image",
+]
+
+# In full mode, start with the result of get_targets() to get the main
+# targets and then use get_all_depends() for all targets
+if mode == FULL_MODE:
+    targets = get_targets()
+    dependencies = []
+    allpkgs.append('all')
+    filtered_targets = []
+    for tg in targets:
+        # Skip uninteresting targets
+        if tg in TARGET_EXCEPTIONS:
+            continue
+        dependencies.append(('all', tg))
+        filtered_targets.append(tg)
+    deps = get_all_depends(filtered_targets)
+    if deps != None:
+        dependencies += deps
+
+# In pkg mode, start directly with get_all_depends() on the requested
+# package
+elif mode == PKG_MODE:
+    dependencies = get_all_depends([rootpkg])
+
+dependencies = remove_redundant_deps(dependencies)
+
+# Start printing the graph data
+print "digraph G {"
+
+# First, the dependencies. Usage of set allows to remove duplicated
+# dependencies in the graph
+for dep in set(dependencies):
+    print "%s -> %s" % (pkg_node_name(dep[0]), pkg_node_name(dep[1]))
+
+# Then, the node attributes: color, style and label.
+for pkg in allpkgs:
+    if pkg == 'all':
+        print "all [label = \"ALL\"]"
+        print "all [color=lightblue,style=filled]"
+        continue
+
+    print "%s [label = \"%s\"]" % (pkg_node_name(pkg), pkg)
+
+    if mode == PKG_MODE and pkg == rootpkg:
+        print "%s [color=lightblue,style=filled]" % pkg_node_name(rootpkg)
+    else:
+        print "%s [color=grey,style=filled]" % pkg_node_name(pkg)
+
+print "}"

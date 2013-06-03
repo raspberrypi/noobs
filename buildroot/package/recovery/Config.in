@@ -1,0 +1,7 @@
+config BR2_PACKAGE_RECOVERY
+        bool "recovery"
+    select BR2_PACKAGE_QT
+    select BR2_PACKAGE_LIBCURL
+        help
+          recovery GUI 
+

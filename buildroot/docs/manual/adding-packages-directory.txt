@@ -1,0 +1,207 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Package directory
+~~~~~~~~~~~~~~~~~
+
+First of all, create a directory under the +package+ directory for
+your software, for example +libfoo+.
+
+Some packages have been grouped by topic in a sub-directory:
++multimedia+, +x11r7+, +efl+ and +matchbox+. If your package fits in
+one of these categories, then create your package directory in these.
+New subdirectories are discouraged, however.
+
+
++Config.in+ file
+~~~~~~~~~~~~~~~~
+
+Then, create a file named +Config.in+. This file will contain the
+option descriptions related to our +libfoo+ software that will be used
+and displayed in the configuration tool. It should basically contain:
+
+---------------------------
+config BR2_PACKAGE_LIBFOO
+	bool "libfoo"
+	help
+	  This is a comment that explains what libfoo is.
+
+	  http://foosoftware.org/libfoo/
+---------------------------
+
+The +bool+ line, +help+ line and other meta-informations about the
+configuration option must be indented with one tab. The help text
+itself should be indented with one tab and two spaces, and it must
+mention the upstream URL of the project.
+
+You can add other sub-options into a +if
+BR2_PACKAGE_LIBFOO...endif+ statement to configure particular things
+in your software. You can look at examples in other packages. The
+syntax of the +Config.in+ file is the same as the one for the kernel
+Kconfig file. The documentation for this syntax is available at
+http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt[]
+
+Finally you have to add your new +libfoo/Config.in+ to
++package/Config.in+ (or in a category subdirectory if you decided to
+put your package in one of the existing categories). The files
+included there are 'sorted alphabetically' per category and are 'NOT'
+supposed to contain anything but the 'bare' name of the package.
+
+--------------------------
+source "package/libfoo/Config.in"
+--------------------------
+
+[[depends-on-vs-select]]
+Choosing +depends on+ or +select+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The +Config.in+ file of your package must also ensure that
+dependencies are enabled. Typically, Buildroot uses the following
+rules:
+
+* Use a +select+ type of dependency for dependencies on
+  libraries. These dependencies are generally not obvious and it
+  therefore make sense to have the kconfig system ensure that the
+  dependencies are selected. For example, the _libgtk2_ package uses
+  +select BR2_PACKAGE_LIBGLIB2+ to make sure this library is also
+  enabled.
+  The +select+ keyword express the dependency with a backward
+  semantic.
+
+* Use a +depends on+ type of dependency when the user really needs to
+  be aware of the dependency. Typically, Buildroot uses this type of
+  dependency for dependencies on toolchain options (target
+  architecture, MMU support, C library, C++ support, large file
+  support, thread support, RPC support, IPV6 support, WCHAR support),
+  or for dependencies on "big" things, such as the X.org system. For
+  dependencies on toolchain options, there should be a +comment+ that
+  is displayed when the option is not
+  enabled, so that the user knows why the package is not available.
+  The +depends on+ keyword express the dependency with a forward
+  semantic.
+
+.Note
+The current problem with the _kconfig_ language is that these two
+dependency semantics are not internally linked. Therefore, it may be
+possible to select a package, whom one of its dependencies/requirement
+is not met.
+
+An example illustrates both the usage of +select+ and +depends on+.
+
+--------------------------
+config BR2_PACKAGE_ACL
+        bool "acl"
+        select BR2_PACKAGE_ATTR
+        depends on BR2_LARGEFILE
+        help
+          POSIX Access Control Lists, which are used to define more
+          fine-grained discretionary access rights for files and
+          directories.
+          This package also provides libacl.
+
+          http://savannah.nongnu.org/projects/acl
+
+comment "acl requires a toolchain with LARGEFILE support"
+        depends on !BR2_LARGEFILE
+--------------------------
+
+
+Note that these two dependency types are only transitive with the
+dependencies of the same kind.
+
+This means, in the following example:
+
+--------------------------
+config BR2_PACKAGE_A
+        bool "Package A"
+
+config BR2_PACKAGE_B
+        bool "Package B"
+        depends on BR2_PACKAGE_A
+
+config BR2_PACKAGE_C
+        bool "Package C"
+        depends on BR2_PACKAGE_B
+
+config BR2_PACKAGE_D
+        bool "Package D"
+        select BR2_PACKAGE_B
+
+config BR2_PACKAGE_E
+        bool "Package E"
+        select BR2_PACKAGE_D
+--------------------------
+
+* Selecting +Package C+ will be visible if +Package B+ has been
+  selected, which in turn is only visible if +Package A+ has been
+  selected.
+
+* Selecting +Package E+ will select +Package D+, which will select
+  +Package B+, it will not check for the dependencies of +Package B+,
+  so it will not select +Package A+.
+
+* Since +Package B+ is selected but +Package A+ is not, this violates
+  the dependency of +Package B+ on +Package A+.  Therefore, in such a
+  situation, the transitive dependency has to be added explicitly:
+
+--------------------------
+config BR2_PACKAGE_D
+	bool "Package D"
+	select BR2_PACKAGE_B
+	depends on BR2_PACKAGE_A
+
+config BR2_PACKAGE_E
+	bool "Package E"
+	select BR2_PACKAGE_D
+	depends on BR2_PACKAGE_A
+--------------------------
+
+Overall, for package library dependencies, +select+ should be
+preferred.
+
+Note that such dependencies will ensure that the dependency option
+is also enabled, but not necessarily built before your package. To do
+so, the dependency also needs to be expressed in the +.mk+ file of the
+package.
+
+Further formatting details: see xref:writing-rules-config-in[the
+coding style].
+
+The +.mk+ file
+~~~~~~~~~~~~~~
+[[adding-packages-mk]]
+
+Finally, here's the hardest part. Create a file named +libfoo.mk+. It
+describes how the package should be downloaded, configured, built,
+installed, etc.
+
+Depending on the package type, the +.mk+ file must be written in a
+different way, using different infrastructures:
+
+* *Makefiles for generic packages* (not using autotools or CMake):
+  These are based on an infrastructure similar to the one used for
+  autotools-based packages, but require a little more work from the
+  developer. They specify what should be done for the configuration,
+  compilation, installation and cleanup of the package. This
+  infrastructure must be used for all packages that do not use the
+  autotools as their build system. In the future, other specialized
+  infrastructures might be written for other build systems.  We cover
+  them through in a xref:generic-package-tutorial[tutorial] and a
+  xref:generic-package-reference[reference].
+
+* *Makefiles for autotools-based software* (autoconf, automake, etc.):
+  We provide a dedicated infrastructure for such packages, since
+  autotools is a very common build system. This infrastructure 'must'
+  be used for new packages that rely on the autotools as their build
+  system. We cover them through a xref:autotools-package-tutorial[tutorial]
+  and xref:autotools-package-reference[reference].
+
+* *Makefiles for cmake-based software*: We provide a dedicated
+   infrastructure for such packages, as CMake is a more and more
+   commonly used build system and has a standardized behaviour. This
+   infrastructure 'must' be used for new packages that rely on
+   CMake. We cover them through a xref:cmake-package-tutorial[tutorial]
+   and xref:cmake-package-reference[reference].
+
+Further formating details: see xref:writing-rules-mk[the writing
+rules].

@@ -1,0 +1,33 @@
+config BR2_PACKAGE_LVM2
+	bool "lvm2 & device mapper"
+	depends on BR2_LARGEFILE
+	depends on BR2_USE_MMU # needs fork()
+	help
+	  This is LVM2, the rewrite of The Linux Logical Volume Manager.
+	  LVM supports enterprise level volume management of disk and disk
+	  subsystems by grouping arbitrary disks into volume groups. The total
+	  capacity of volume groups can be allocated to logical volumes, which
+	  are accessed as regular block devices.
+
+	  The Linux Kernel Device Mapper is the LVM
+	  (Linux Logical Volume Management) Team's implementation of a
+	  minimalistic kernel-space driver that handles volume management,
+	  while keeping knowledge of the underlying device layout in
+	  user-space. This makes it useful for not only LVM, but EVMS,
+	  software raid, and other drivers that create "virtual" block devices.
+
+config BR2_PACKAGE_LVM2_DMSETUP_ONLY
+	bool "install dmsetup only"
+	depends on BR2_PACKAGE_LVM2
+	help
+	  Install dmsetup only and skip the LVM2 suite.
+
+config BR2_PACKAGE_LVM2_APP_LIBRARY
+	bool "install application library"
+	depends on BR2_PACKAGE_LVM2
+	depends on !BR2_PACKAGE_LVM2_DMSETUP_ONLY
+	help
+	  Install application library (liblvm2app).
+
+comment "lvm2 requires a toolchain with LARGEFILE support"
+        depends on !BR2_LARGEFILE

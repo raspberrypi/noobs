@@ -1,0 +1,6 @@
+config BR2_PACKAGE_LINUX_FUSION
+	depends on BR2_LINUX_KERNEL
+	bool "linux-fusion communication layer for DirectFB multi"
+	help
+	  DirectFB Communication Layer allowing multiple DirectFB
+	  applications to run concurrently
