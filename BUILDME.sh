@@ -8,7 +8,7 @@ cd buildroot
 
 # Delete buildroot build directory to force rebuild
 if [ -e output/build ]; then
-	rm -rf output/build/recovery* || true
+    rm -rf output/build/recovery* || true
 fi
 
 # Let buildroot build everything
@@ -19,10 +19,8 @@ cp output/images/zImage ../output/recovery.img
 cp output/images/rootfs.cpio.lzo ../output/recovery.rfs
 
 # Ensure that output dir contains files necessary to boot
-if [ ! -e ../output/bootcode.bin ]; then
-	cp output/images/rpi-firmware/start_cd.elf ../output/recovery.elf
-	cp output/images/rpi-firmware/bootcode.bin ../output
-fi
+cp output/images/rpi-firmware/start_cd.elf ../output/recovery.elf
+cp output/images/rpi-firmware/bootcode.bin ../output
 
 # Add build-date timestamp to files$
 
