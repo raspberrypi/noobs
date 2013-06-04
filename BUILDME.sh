@@ -11,6 +11,12 @@ if [ -e output/build ]; then
     rm -rf output/build/recovery* || true
 fi
 
+# Redownload firmware from raspberrypi/firmware master HEAD to update to latest
+if [ $1 = "update-firmware" ]; then
+    rm -rf output/build/rpi-firmware-master
+    rm -rf dl/rpi-firmware-master.tar.gz
+fi
+
 # Let buildroot build everything
 make
 
@@ -25,7 +31,7 @@ cp output/images/rpi-firmware/bootcode.bin ../output
 # Add build-date timestamp to files$
 
 rm ../output/BUILT* || true
-touch ../output/"BUILT-"$(date +"%m-%d-%Y")
+touch ../output/"BUILT-"$(date +"%Y-%m-%d")
 
 cd ..
 
