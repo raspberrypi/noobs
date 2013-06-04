@@ -1,6 +1,8 @@
 # Raspberry Pi Recovery System
 #### (New Out Of Box Software)
 
+![alt text](http://www.raspberrypi.org/wp-content/uploads/2013/06/mainwindow.png "NOOBS Screenshot")
+
 The Raspberry Pi Recovery System is designed to make it easy to select and install operating systems for the Raspberry Pi on an SD card without requiring either network access or a more complicated SD card imaging operation.
 
 ### About
