@@ -12,7 +12,7 @@ if [ -e output/build ]; then
 fi
 
 # Redownload firmware from raspberrypi/firmware master HEAD to update to latest
-if [ $1 = "update-firmware" ]; then
+if [ -n $1 = "update-firmware" ]; then
     rm -rf output/build/rpi-firmware-master
     rm -rf dl/rpi-firmware-master.tar.gz
 fi
