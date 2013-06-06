@@ -104,10 +104,6 @@
         <translation>Mounten FAT partitie</translation>
     </message>
     <message>
-        <source>SD card contains extra files that do not belong to this distribution. Please copy them to another disk and delete them from card.</source>
-        <translation type="obsolete">SD kaart bevat extra bestanden die niet bij deze software horen. Kopieer deze naar een andere schijf en verwijder deze.</translation>
-    </message>
-    <message>
         <location filename="initdrivethread.cpp" line="133"/>
         <source>Saving boot files to memory</source>
         <translation>Opslaan van opstartbestanden in geheugen</translation>
@@ -150,8 +146,8 @@
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
-        <source>Error formatting boot partition (vfat)</source>
-        <translation>Fout bij formateren boot partitie (vfat)</translation>
+        <source>Error formatting boot partition (fat)</source>
+        <translation>Fout bij formateren boot partitie (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="167"/>
@@ -250,54 +246,49 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="19"/>
-        <source>System recovery</source>
-        <translation>Systeem herstel</translation>
-    </message>
-    <message>
+        <location filename="mainwindow.ui" line="83"/>
         <location filename="mainwindow.ui" line="86"/>
-        <location filename="mainwindow.ui" line="89"/>
         <source>Install OS</source>
         <translation>Installeer</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="92"/>
+        <location filename="mainwindow.ui" line="89"/>
         <source>Return</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="101"/>
+        <location filename="mainwindow.ui" line="98"/>
         <source>Exit</source>
         <translation>Afsluiten</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="104"/>
+        <location filename="mainwindow.ui" line="101"/>
         <source>Esc</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="116"/>
+        <location filename="mainwindow.ui" line="113"/>
         <source>Advanced</source>
         <translation>Geavanceerd</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="125"/>
+        <location filename="mainwindow.ui" line="122"/>
         <source>Add image</source>
         <translation>Image toevoegen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="137"/>
+        <location filename="mainwindow.ui" line="134"/>
         <source>Remove image</source>
         <translation>Image verwijderen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="149"/>
+        <location filename="mainwindow.ui" line="146"/>
         <source>Edit config</source>
         <translation>Wijzig config</translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="155"/>
         <location filename="mainwindow.ui" line="158"/>
-        <location filename="mainwindow.ui" line="161"/>
         <source>Online help</source>
         <translation>Online help</translation>
     </message>
@@ -307,7 +298,7 @@
         <translation>[AANBEVOLEN]</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="211"/>
+        <location filename="mainwindow.cpp" line="223"/>
         <source>Confirm</source>
         <translation>Bevestigen</translation>
     </message>
@@ -332,43 +323,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="212"/>
+        <location filename="mainwindow.cpp" line="224"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Weet u zeker dat u de image wilt installeren?
 Hierbij worden alle bestaande bestanden verwijderd.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="245"/>
-        <source>Starting image write</source>
-        <translation>Bezig met wegschrijven image</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="272"/>
+        <location filename="mainwindow.cpp" line="289"/>
         <source>Restore complete</source>
         <translation>Klaar met herstellen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="273"/>
+        <location filename="mainwindow.cpp" line="290"/>
         <source>Image applied successfully</source>
         <translation>Image successvol weggeschreven</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="281"/>
+        <location filename="mainwindow.cpp" line="298"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="346"/>
+        <location filename="mainwindow.cpp" line="363"/>
         <source>Enabling network interface</source>
         <translation>Activeren netwerk verbinding</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="366"/>
+        <location filename="mainwindow.cpp" line="383"/>
         <source>No network access</source>
         <translation>Geen netwerk verbinding</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="367"/>
+        <location filename="mainwindow.cpp" line="384"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Een bekabelde netwerk verbinding is vereist voor deze functionaliteit. Controleer of de netwerk kabel aangesloten zit.</translation>
     </message>

@@ -146,8 +146,8 @@
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
-        <source>Error formatting boot partition (vfat)</source>
-        <translation>Erreur pendant le formatage de la partition de démarrage (VFAT)</translation>
+        <source>Error formatting boot partition (fat)</source>
+        <translation>Erreur pendant le formatage de la partition de démarrage (FAT)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="167"/>
@@ -246,54 +246,49 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="19"/>
-        <source>System recovery</source>
-        <translation>Récupération Système</translation>
-    </message>
-    <message>
+        <location filename="mainwindow.ui" line="83"/>
         <location filename="mainwindow.ui" line="86"/>
-        <location filename="mainwindow.ui" line="89"/>
         <source>Install OS</source>
         <translation>Restaurer image</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="92"/>
+        <location filename="mainwindow.ui" line="89"/>
         <source>Return</source>
         <translation>Retour</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="101"/>
+        <location filename="mainwindow.ui" line="98"/>
         <source>Exit</source>
         <translation>Sortie</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="104"/>
+        <location filename="mainwindow.ui" line="101"/>
         <source>Esc</source>
         <translation>Échap</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="116"/>
+        <location filename="mainwindow.ui" line="113"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="125"/>
+        <location filename="mainwindow.ui" line="122"/>
         <source>Add image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="137"/>
+        <location filename="mainwindow.ui" line="134"/>
         <source>Remove image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="149"/>
+        <location filename="mainwindow.ui" line="146"/>
         <source>Edit config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="155"/>
         <location filename="mainwindow.ui" line="158"/>
-        <location filename="mainwindow.ui" line="161"/>
         <source>Online help</source>
         <translation type="unfinished"></translation>
     </message>
@@ -323,47 +318,42 @@
         <translation>[RECOMMANDÉ]</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="211"/>
+        <location filename="mainwindow.cpp" line="223"/>
         <source>Confirm</source>
         <translation>Confirmer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="212"/>
+        <location filename="mainwindow.cpp" line="224"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Êtes-vous sûr de vouloir écrire l&apos;image? CELA EFFACERA TOUTES VOS DONNÉES EXISTANTES!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="245"/>
-        <source>Starting image write</source>
-        <translation>Commencement de l’écriture de l’image</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="272"/>
+        <location filename="mainwindow.cpp" line="289"/>
         <source>Restore complete</source>
         <translation>Restauration complète</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="273"/>
+        <location filename="mainwindow.cpp" line="290"/>
         <source>Image applied successfully</source>
         <translation>Écriture de l’image réussite</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="281"/>
+        <location filename="mainwindow.cpp" line="298"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="346"/>
+        <location filename="mainwindow.cpp" line="363"/>
         <source>Enabling network interface</source>
         <translation>Activation de l’interface réseau</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="366"/>
+        <location filename="mainwindow.cpp" line="383"/>
         <source>No network access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="367"/>
+        <location filename="mainwindow.cpp" line="384"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
