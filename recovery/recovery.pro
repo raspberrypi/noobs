@@ -49,7 +49,8 @@ TRANSLATIONS += translation_nl.ts \
     translation_pt.ts \
     translation_ja.ts \
     translation_fr.ts \
-    translation_hu.ts
+    translation_hu.ts \
+    translation_fi.ts
 
 OTHER_FILES += \
     README.txt
