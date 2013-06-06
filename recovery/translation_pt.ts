@@ -6,17 +6,17 @@
     <message>
         <location filename="confeditdialog.ui" line="+22"/>
         <source>Config editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Configurações</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="+81"/>
         <source>Error</source>
-        <translation type="unfinished">Erro</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Error mounting boot partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de montagem da partição de boot</translation>
     </message>
 </context>
 <context>
@@ -30,7 +30,7 @@
     <message>
         <location line="-25"/>
         <source>Resizing file system</source>
-        <translation>Redimensionando arquivos de sistema</translation>
+        <translation>Redimensionando sistema de arquivos</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -51,17 +51,17 @@
     <message>
         <location line="-15"/>
         <source>Creating FAT partition for RiscOS</source>
-        <translation type="unfinished"></translation>
+        <translation>Criando partição FAT para RiscOS</translation>
     </message>
     <message>
         <location line="+79"/>
         <source>Image file corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo de imagem corrompido</translation>
     </message>
     <message>
         <location line="-7"/>
         <source>Unknown image format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensão de arquivo de imagem desconhecida. Esperando .lzo, .gz, .xz, .bz2 ou .zip</translation>
     </message>
     <message>
         <location line="+38"/>
@@ -157,37 +157,37 @@
     <message>
         <location line="+19"/>
         <source>SD card does not have a MBR. Cannot resize FAT partition.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartão SD não tem um MBR (Master Boot Record). Não se pode redimensionar partição FAT.</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Removing partitions 2,3,4</source>
-        <translation type="unfinished"></translation>
+        <translation>Removendo partições 2,3,4</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Resizing FAT partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Redimensionando partição FAT</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>Error resizing existing FAT partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao redimensionar partição FAT existente</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Creating extended partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Criando partição extendida</translation>
     </message>
     <message>
         <location line="+35"/>
         <source>Error creating extended partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao criar partição extendida</translation>
     </message>
     <message>
         <location line="+21"/>
         <source>Error mounting system partition.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao montar partição de sistema.</translation>
     </message>
     <message>
         <location line="-210"/>
@@ -197,17 +197,17 @@
     <message>
         <location line="+10"/>
         <source>Error opening %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao abrir %1</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Writing RiscOS blob</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravando BLOB do RiscOS</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Error writing RiscOS blob</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao gravar BLOB do RiscOS</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -274,33 +274,33 @@
     <message>
         <location line="+12"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avançado</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Add image</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Imagem</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>Remove image</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover Imagem</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>Edit config</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Configuração</translation>
     </message>
     <message>
         <location line="+9"/>
         <location line="+3"/>
         <source>Online help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda Online</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="+105"/>
         <source>[RECOMMENDED]</source>
-        <translation type="unfinished"></translation>
+        <translation>[RECOMENDADO]</translation>
     </message>
     <message>
         <location line="+106"/>
@@ -310,22 +310,22 @@
     <message>
         <location line="-171"/>
         <source>Pi Recovery - Built:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Restauração do Pi - Feita: %1</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>Setting up SD card</source>
-        <translation type="unfinished">Configurando cartão SD</translation>
+        <translation>Configurando cartão SD</translation>
     </message>
     <message>
         <location line="+39"/>
         <source>No OS Images Found on SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhuma imagem de SO encontrada no cartão SD</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Please add at least one OS image to the /images directory in order to proceed</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor adicione pelo menos uma imagem de SO ao diretório /images para proceder</translation>
     </message>
     <message>
         <location line="+121"/>
@@ -360,12 +360,12 @@
     <message>
         <location line="+20"/>
         <source>No network access</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem acesso de rede</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>
 </context>
 <context>
@@ -373,12 +373,12 @@
     <message>
         <location filename="progressslideshowdialog.cpp" line="+104"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 MB de %2 MB gravado(s) (%3 MB/s)</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>%1 MB written (%2 MB/sec)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 MB gravado(s) (%2 MB/s)</translation>
     </message>
 </context>
 <context>
