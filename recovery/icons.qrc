@@ -16,10 +16,12 @@
         <file>icons/de.png</file>
         <file>icons/pt.png</file>
         <file>icons/ja.png</file>
+        <file>icons/hu.png</file>
         <file>translation_de.qm</file>
         <file>translation_pt.qm</file>
         <file>translation_ja.qm</file>
-        <file>translation_fr.qm</file>  
+        <file>translation_fr.qm</file>
+        <file>translation_hu.qm</file>
         <file>icons/world.png</file>
     </qresource>
 </RCC>
