@@ -146,8 +146,8 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Error formatting boot partition (vfat)</source>
-        <translation>Erro ao formatar partição de boot (VFAT)</translation>
+        <source>Error formatting boot partition (fat)</source>
+        <translation>Erro ao formatar partição de boot (FAT)</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -246,12 +246,7 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="+19"/>
-        <source>System recovery</source>
-        <translation>Recuperação do sistema</translation>
-    </message>
-    <message>
-        <location line="+67"/>
+        <location filename="mainwindow.ui" line="+83"/>
         <location line="+3"/>
         <source>Install OS</source>
         <translation>Restaurar imagem</translation>
@@ -303,12 +298,12 @@
         <translation>[RECOMENDADO]</translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+118"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="-171"/>
+        <location line="-183"/>
         <source>Pi Recovery - Built:%1</source>
         <translation>Restauração do Pi - Feita: %1</translation>
     </message>
@@ -328,17 +323,12 @@
         <translation>Por favor adicione pelo menos uma imagem de SO ao diretório /images para proceder</translation>
     </message>
     <message>
-        <location line="+121"/>
+        <location line="+133"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
     <message>
-        <location line="+33"/>
-        <source>Starting image write</source>
-        <translation>Iniciando gravação da imagem</translation>
-    </message>
-    <message>
-        <location line="+27"/>
+        <location line="+65"/>
         <source>Restore complete</source>
         <translation>Restauração concluída</translation>
     </message>
