@@ -160,7 +160,7 @@ bool InitDriveThread::method_reformatDrive()
     emit statusUpdate(tr("Formatting boot partition (fat)"));
     if (!formatBootPartition())
     {
-       emit error(tr("Error formatting boot partition (vfat)"));
+       emit error(tr("Error formatting boot partition (fat)"));
        return false;
     }
 
