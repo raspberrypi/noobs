@@ -96,11 +96,11 @@ To add a new translation:
 - Add to recovery/recovery.pro `TRANSLATIONS += translation_<languagecode>.ts`
 - Run `lupdate recovery.pro` which extracts strings from the source code and generates/updates the .ts files.
 - The .ts can then be send to the translator, opened in Qt Linguist and filled in.
-- Turn the .ts XML file into a binary .qm file by running `lrelease translation_code.ts`
-- The .qm file needs to be added to "icons.qrc". This file contains a list with resource files that will be embedded into the
-  application's executable during build.
-
-Can add a flag icon to the "icons" folder and add that flag to "icons.qrc" as well.
+- Add a line for the .ts file in to "icons.qrc", but substitute .ts extension with .qm. This file contains a list
+  of resource files that will be embedded into the application's executable during build.
+- Add a flag icon for your language from http://www.famfamfam.com/lab/icons/flags/ flag icon collection or if it
+  doesn't have the one you need, you may use some other small png icon for it. Copy the icon file to the "icons"
+  folder and add a line for it into "icons.qrc" as well.
 
 
 ### Legal compliance
