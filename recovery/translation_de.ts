@@ -6,7 +6,7 @@
     <message>
         <location filename="confeditdialog.ui" line="22"/>
         <source>Config editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurationseditor</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="81"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="confeditdialog.cpp" line="82"/>
         <source>Error mounting boot partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Einbinden der Bootpartition</translation>
     </message>
 </context>
 <context>
@@ -51,17 +51,17 @@
     <message>
         <location filename="imagewritethread.cpp" line="92"/>
         <source>Creating FAT partition for RiscOS</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzeuge FAT-Partition für RiscOS</translation>
     </message>
     <message>
         <location filename="imagewritethread.cpp" line="171"/>
         <source>Image file corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>Image-Datei beschädigt bzw. ungültig</translation>
     </message>
     <message>
         <location filename="imagewritethread.cpp" line="164"/>
         <source>Unknown image format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation>Die Dateierweiterung der Imagedatei ist unbekannt.  Es werden .lzo .gz, .xz, .bz2 und .zip unterstützt</translation>
+        <translation>Die Dateierweiterung der Imagedatei ist unbekannt. Unterstüzt werden .lzo .gz, .xz, .bz2 und .zip</translation>
     </message>
     <message>
         <location filename="imagewritethread.cpp" line="202"/>
@@ -127,7 +127,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="148"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>Fehler beim Löschen der Partitionstabelle (MBR/GPT).  Die SD-Karte ist möglicherweise beschädigt oder meldet eine falsche Kapazität.</translation>
+        <translation>Fehler beim Löschen der Partitionstabelle (MBR/GPT). Die SD-Karte ist möglicherweise beschädigt oder meldet eine falsche Kapazität.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="152"/>
@@ -157,57 +157,57 @@
     <message>
         <location filename="initdrivethread.cpp" line="186"/>
         <source>SD card does not have a MBR. Cannot resize FAT partition.</source>
-        <translation type="unfinished"></translation>
+        <translation>SD-Karte hat keinen MBR (Master Boot Record). Kann die FAT-Partition nicht ändern.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="190"/>
         <source>Removing partitions 2,3,4</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne Partitionen 2,3,4</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="204"/>
         <source>Resizing FAT partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestehende FAT-Partition in Größe verändern</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="216"/>
         <source>Error resizing existing FAT partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei Größenänderung der bestehenden FAT-Partition</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="223"/>
         <source>Creating extended partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Lege Erweiterte Partition an</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="258"/>
         <source>Error creating extended partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anlegen der Erweiterten Partition</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="279"/>
         <source>Error mounting system partition.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Einbinden der Systempartition</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="69"/>
         <source>Editing cmdline.txt</source>
-        <translation>cmdline.txt wird bearbeitet</translation>
+        <translation>cmdline.txt bearbeiten</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="79"/>
         <source>Error opening %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Öffnen von %1</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="92"/>
         <source>Writing RiscOS blob</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreibe RiscOS blob</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="95"/>
         <source>Error writing RiscOS blob</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Schreiben des RiscOS blob</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="102"/>
@@ -235,7 +235,7 @@
     <message>
         <location filename="languagedialog.ui" line="86"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="languagedialog.ui" line="106"/>
@@ -264,38 +264,38 @@
     <message>
         <location filename="mainwindow.ui" line="101"/>
         <source>Esc</source>
-        <translation></translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="113"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweitert</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="122"/>
         <source>Add image</source>
-        <translation type="unfinished"></translation>
+        <translation>Betriebssystem hinzufügen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="134"/>
         <source>Remove image</source>
-        <translation type="unfinished"></translation>
+        <translation>Betriebssystem ertfernen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="146"/>
         <source>Edit config</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen bearbeiten</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="155"/>
         <location filename="mainwindow.ui" line="158"/>
         <source>Online help</source>
-        <translation type="unfinished"></translation>
+        <translation>Online-Hilfe</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="105"/>
         <source>[RECOMMENDED]</source>
-        <translation type="unfinished"></translation>
+        <translation>[EMPFOHLEN]</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="223"/>
@@ -305,27 +305,27 @@
     <message>
         <location filename="mainwindow.cpp" line="40"/>
         <source>Pi Recovery - Built:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pi Wiederherstellung - Built: %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="52"/>
         <source>Setting up SD card</source>
-        <translation type="unfinished">Die SD-Karte wird eingerichtet</translation>
+        <translation>Die SD-Karte wird eingerichtet</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="91"/>
         <source>No OS Images Found on SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Betriebssystem auf der SD-Karte gefunden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="91"/>
         <source>Please add at least one OS image to the /images directory in order to proceed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte fügen Sie mind. ein Betriebssystem dem Ordner /images hinzu um fortzufahren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="224"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
-        <translation>Bist Du sicher, dass Du das Image schreiben möchtest?  ALLE DATEN AUF DER SD-KARTE GEHEN VERLOREN!</translation>
+        <translation>Bist Du sicher, dass Du das Image schreiben möchtest? ALLE DATEN AUF DER SD-KARTE GEHEN VERLOREN!</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="289"/>
@@ -345,17 +345,17 @@
     <message>
         <location filename="mainwindow.cpp" line="363"/>
         <source>Enabling network interface</source>
-        <translation type="unfinished">Die Netzwerkschnittstelle wird aktiviert</translation>
+        <translation>Die Netzwerkschnittstelle wird aktiviert</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="383"/>
         <source>No network access</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Netzwerk gefunden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="384"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierfür ist eine kabelgebundene Netzwerkverbindung erforderlich. Bitte stecken Sie ein Netzwerkkabel ein.</translation>
     </message>
 </context>
 <context>
@@ -363,12 +363,12 @@
     <message>
         <location filename="progressslideshowdialog.cpp" line="104"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
-        <translation>%1 MB von %2 MB (%3 MB/sec)</translation>
+        <translation>%1 MB von %2 MB (%3 MB/Sek)</translation>
     </message>
     <message>
         <location filename="progressslideshowdialog.cpp" line="109"/>
         <source>%1 MB written (%2 MB/sec)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 MB geschrieben (%2 MB/Sek)</translation>
     </message>
 </context>
 <context>
