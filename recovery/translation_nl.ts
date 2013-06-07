@@ -392,13 +392,11 @@ Hierbij worden alle bestaande bestanden verwijderd.</translation>
     <message>
         <location filename="languagedialog.cpp" line="25"/>
         <source>&amp;Cancel</source>
-        <oldsource>&amp;amp;Cancel</oldsource>
         <translation>&amp;Annuleren</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="27"/>
         <source>&amp;Close</source>
-        <oldsource>&amp;amp;Close</oldsource>
         <translation>&amp;Sluiten</translation>
     </message>
     <message>
@@ -409,7 +407,6 @@ Hierbij worden alle bestaande bestanden verwijderd.</translation>
     <message>
         <location filename="languagedialog.cpp" line="28"/>
         <source>&amp;Yes</source>
-        <oldsource>&amp;amp;Yes</oldsource>
         <translation>&amp;Ja</translation>
     </message>
     <message>

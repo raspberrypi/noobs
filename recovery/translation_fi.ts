@@ -187,7 +187,6 @@
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
         <source>Error formatting boot partition (fat)</source>
-        <oldsource>Error formatting boot partition (vfat)</oldsource>
         <translation>Virhe alustettaessa käynnistysosiota (FAT)</translation>
     </message>
     <message>

@@ -147,7 +147,6 @@
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
         <source>Error formatting boot partition (fat)</source>
-        <oldsource>Error formatting boot partition (fat)</oldsource>
         <translation>Hiba történt a boot partíció formázása közben (fat)</translation>
     </message>
     <message>
