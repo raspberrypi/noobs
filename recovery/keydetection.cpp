@@ -25,10 +25,7 @@
  *                                                                                                                                                                            
  */
 
-#define BITS_PER_LONG (sizeof(unsigned long) * 8)
-#define LONG(x) ((x)/BITS_PER_LONG)
-#define OFF(x)  ((x)%BITS_PER_LONG)
-#define test_bit(bit, array)  ((array[LONG(bit)] >> OFF(bit)) & 1)
+#define test_bit(bit, array)  (array[bit / 8] & (1 << (bit % 8)))
 
 
 bool KeyDetection::isF10pressed()
@@ -93,7 +90,7 @@ bool KeyDetection::_isF10pressed(int fd)
         qDebug() << "Error getting global key state";
     }
 
-    bool pressed = (keymap[KEY_F10/8] & (1<<(KEY_F10 % 8))) || (keymap[KEY_LEFTSHIFT/8] & (1<<(KEY_LEFTSHIFT % 8))) || (keymap[KEY_RIGHTSHIFT/8] & (1<<(KEY_RIGHTSHIFT % 8)));
+    bool pressed = test_bit(KEY_F10, keymap) || test_bit(KEY_LEFTSHIFT, keymap) || test_bit(KEY_RIGHTSHIFT, keymap);
     //qDebug() << "Key press detection:" << pressed;
 
     return pressed;
