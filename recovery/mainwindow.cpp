@@ -29,6 +29,9 @@
 /* Flag to keep track wheter or not we already repartitioned. */
 bool MainWindow::_partInited = false;
 
+/* Which ListItem (if any) points to the recommended image. */
+QListWidgetItem *recommendedItem = NULL;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -101,7 +104,8 @@ void MainWindow::populate()
 
         if (!l.isEmpty())
         {
-            QListWidgetItem *recommendedItem = l.first();
+            recommendedItem = l.first();
+            recommendedItem->setData(Qt::UserRole, recommendedItem->text());
             recommendedItem->setText(recommendedItem->text()+" "+tr("[RECOMMENDED]"));
             ui->list->setCurrentItem(recommendedItem);
         }
@@ -308,7 +312,12 @@ void MainWindow::on_list_currentRowChanged()
 void MainWindow::changeEvent(QEvent* event)
 {
     if (event && event->type() == QEvent::LanguageChange)
+    {
         ui->retranslateUi(this);
+        if (recommendedItem)
+        {
+            recommendedItem->setText(recommendedItem->data(Qt::UserRole).toString()+" "+tr("[RECOMMENDED]"));
+        }
 
     QMainWindow::changeEvent(event);
 }
