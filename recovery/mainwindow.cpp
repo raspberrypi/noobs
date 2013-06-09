@@ -105,7 +105,6 @@ void MainWindow::populate()
         if (!l.isEmpty())
         {
             recommendedItem = l.first();
-            recommendedItem->setData(Qt::UserRole, recommendedItem->text());
             recommendedItem->setText(recommendedItem->text()+" "+tr("[RECOMMENDED]"));
             ui->list->setCurrentItem(recommendedItem);
         }
@@ -316,8 +315,9 @@ void MainWindow::changeEvent(QEvent* event)
         ui->retranslateUi(this);
         if (recommendedItem)
         {
-            recommendedItem->setText(recommendedItem->data(Qt::UserRole).toString()+" "+tr("[RECOMMENDED]"));
+            recommendedItem->setText(imageFilenameToFriendlyName(recommendedItem->data(Qt::UserRole).toString())+" "+tr("[RECOMMENDED]"));
         }
+    }
 
     QMainWindow::changeEvent(event);
 }
