@@ -140,7 +140,7 @@ void MainWindow::repopulate()
             iconFilename = "/mnt/images/Archlinux.png";
         else if (iter.key().contains("pidora", Qt::CaseInsensitive))
             iconFilename = "/mnt/images/Pidora.png";       
-        else if (iter.key().contains("wheezy", Qt::CaseInsensitive))
+        else if (iter.key().contains("wheezy", Qt::CaseInsensitive) || iter.key().contains("raspbian", Qt::CaseInsensitive))
             iconFilename = "/mnt/images/Raspbian.png";
         else if (iter.key().contains("OpenELEC", Qt::CaseInsensitive))
             iconFilename = "/mnt/images/OpenELEC.png";
