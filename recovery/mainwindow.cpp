@@ -134,34 +134,35 @@ void MainWindow::repopulate()
 
     for (QMap<QString,QString>::const_iterator iter = images.constBegin(); iter != images.constEnd(); iter++)
     {
-        if (iter.key().contains("risc", Qt::CaseInsensitive))
+        if (iter.key().contains("risc", Qt::CaseInsensitive) && QFile::exists("/mnt/images/RiscOS.png"))
             iconFilename = "/mnt/images/RiscOS.png";
-        else if (iter.key().contains("arch", Qt::CaseInsensitive))
+        else if (iter.key().contains("arch", Qt::CaseInsensitive) && QFile::exists("/mnt/images/Archlinux.png"))
             iconFilename = "/mnt/images/Archlinux.png";
-        else if (iter.key().contains("pidora", Qt::CaseInsensitive))
+        else if (iter.key().contains("pidora", Qt::CaseInsensitive) && QFile::exists("/mnt/images/Pidora.png"))
             iconFilename = "/mnt/images/Pidora.png";       
-        else if (iter.key().contains("wheezy", Qt::CaseInsensitive) || iter.key().contains("raspbian", Qt::CaseInsensitive))
+        else if ((iter.key().contains("wheezy", Qt::CaseInsensitive) || iter.key().contains("raspbian", Qt::CaseInsensitive)) && QFile::exists("/mnt/images/Raspbian.png"))
             iconFilename = "/mnt/images/Raspbian.png";
-        else if (iter.key().contains("OpenELEC", Qt::CaseInsensitive))
+        else if (iter.key().contains("OpenELEC", Qt::CaseInsensitive) && QFile::exists("/mnt/images/OpenELEC.png"))
             iconFilename = "/mnt/images/OpenELEC.png";
-        else if (iter.key().contains("raspbmc", Qt::CaseInsensitive))
+        else if (iter.key().contains("raspbmc", Qt::CaseInsensitive) && QFile::exists("/mnt/images/RaspBMC.png"))
             iconFilename = "/mnt/images/RaspBMC.png";
         else
             iconFilename = "/mnt/images/default.png";
 
         QIcon icon;
+        if (QFile::exists(iconFilename))
+        {
+            haveicons = true;
+            icon = QIcon(iconFilename);
+            QSize iconsize = icon.availableSizes().first();
             
-        haveicons = true;
-        icon = QIcon(iconFilename);
-        QSize iconsize = icon.availableSizes().first();
-        
-        if (iconsize.width() > currentsize.width() || iconsize.height() > currentsize.height())
+            if (iconsize.width() > currentsize.width() || iconsize.height() > currentsize.height())
             {
                 /* Make all icons as large as the largest icon we have */
                 currentsize = QSize(qMax(iconsize.width(), currentsize.width()),qMax(iconsize.height(), currentsize.width()));
                 ui->list->setIconSize(currentsize);
             }
-        
+        }
         QListWidgetItem *item = new QListWidgetItem(icon, iter.value(), ui->list);
         item->setData(Qt::UserRole, iter.key());
     }
