@@ -16,6 +16,7 @@
 #include <QTranslator>
 #include <QDir>
 #include <QLocale>
+#include <QKeyEvent>
 
 /* Extra strings for lupdate to detect and hand over to translator to translate */
 #if 0
@@ -35,6 +36,8 @@ LanguageDialog::LanguageDialog(QWidget *parent) :
     _trans(NULL), _qttrans(NULL)
 {
     ui->setupUi(this);
+    ui->langCombo->installEventFilter(this);
+    ui->langCombo->setFocusPolicy(Qt::StrongFocus);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_QuitOnClose, false);
 
@@ -121,4 +124,16 @@ void LanguageDialog::changeEvent(QEvent* event)
         ui->retranslateUi(this);
 
     QDialog::changeEvent(event);
+}
+
+void LanguageDialog::keyPressEvent(QKeyEvent* event)
+{
+    switch (event->key())
+    {
+    case Qt::Key_L:
+        ui->langCombo->showPopup();
+        break;
+    default:
+        QDialog::keyPressEvent(event);
+    }
 }

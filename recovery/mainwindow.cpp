@@ -20,7 +20,7 @@
 /* Main window
  *
  * Initial author: Floris Bos
- * Maintained by Raspberry Pi 
+ * Maintained by Raspberry Pi
  *
  * See LICENSE.txt for license details
  *
@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     setContextMenuPolicy(Qt::NoContextMenu);
-    setWindowTitle(QString(tr("Pi Recovery - Built:%1")).arg(QString::fromLocal8Bit(__DATE__)));
+    setWindowTitle(QString(tr("NOOBS - Built: %1")).arg(QString::fromLocal8Bit(__DATE__)));
     _kc << 0x01000013 << 0x01000013 << 0x01000015 << 0x01000015 << 0x01000012
         << 0x01000014 << 0x01000012 << 0x01000014 << 0x42 << 0x41;
     ui->list->installEventFilter(this);
@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
         _qpd = new QProgressDialog( tr("Setting up SD card"), QString(), 0, 0, this);
         _qpd->setWindowModality(Qt::WindowModal);
         _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-        
+
         InitDriveThread *idt = new InitDriveThread(this);
         connect(idt, SIGNAL(statusUpdate(QString)), _qpd, SLOT(setLabelText(QString)));
         connect(idt, SIGNAL(completed()), _qpd, SLOT(deleteLater()));
@@ -142,7 +142,7 @@ void MainWindow::repopulate()
         else if (iter.key().contains("arch", Qt::CaseInsensitive) && QFile::exists("/mnt/images/Archlinux.png"))
             iconFilename = "/mnt/images/Archlinux.png";
         else if (iter.key().contains("pidora", Qt::CaseInsensitive) && QFile::exists("/mnt/images/Pidora.png"))
-            iconFilename = "/mnt/images/Pidora.png";       
+            iconFilename = "/mnt/images/Pidora.png";
         else if ((iter.key().contains("wheezy", Qt::CaseInsensitive) || iter.key().contains("raspbian", Qt::CaseInsensitive)) && QFile::exists("/mnt/images/Raspbian.png"))
             iconFilename = "/mnt/images/Raspbian.png";
         else if (iter.key().contains("OpenELEC", Qt::CaseInsensitive) && QFile::exists("/mnt/images/OpenELEC.png"))
@@ -158,7 +158,7 @@ void MainWindow::repopulate()
             haveicons = true;
             icon = QIcon(iconFilename);
             QSize iconsize = icon.availableSizes().first();
-            
+
             if (iconsize.width() > currentsize.width() || iconsize.height() > currentsize.height())
             {
                 /* Make all icons as large as the largest icon we have */
@@ -231,7 +231,7 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
         setEnabled(false);
 
         QString imagefile = ui->list->currentItem()->data(Qt::UserRole).toString();
-       
+
         /* Optional file containing size of uncompressed image */
         QString sizefile = "/mnt/images/"+basefile(imagefile)+".size";
         QString slidesDirectory;
@@ -243,7 +243,7 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
             slidesDirectory = "/mnt/slides/Archlinux";
         else if (basefile(imagefile).contains("pidora", Qt::CaseInsensitive))
             slidesDirectory = "/mnt/slides/Pidora";
-        else if ((basefile(imagefile).contains("wheezy", Qt::CaseInsensitive)) || (basefile(imagefile).contains("raspbian", Qt::CaseInsensitive))) 
+        else if ((basefile(imagefile).contains("wheezy", Qt::CaseInsensitive)) || (basefile(imagefile).contains("raspbian", Qt::CaseInsensitive)))
             slidesDirectory = "/mnt/slides/Raspbian";
         else if (basefile(imagefile).contains("OpenELEC", Qt::CaseInsensitive))
             slidesDirectory = "/mnt/slides/OpenELEC";
@@ -256,7 +256,7 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
 
         ProgressSlideshowDialog *p = new ProgressSlideshowDialog(slidesDirectory, "", 20, this);
         connect(t, SIGNAL(parsedImagesize(uint)), p, SLOT(setMaximum(uint)));
-        
+
         if (QFile::exists(sizefile))
             {
                 QFile f(sizefile);
