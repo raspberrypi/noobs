@@ -239,122 +239,151 @@
     </message>
     <message>
         <location filename="languagedialog.ui" line="106"/>
-        <source>Language:  </source>
-        <translation>Taal:</translation>
+        <source>Language (L):  </source>
+        <translation type="unfinished">Taal:</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="83"/>
-        <location filename="mainwindow.ui" line="86"/>
+        <location filename="mainwindow.ui" line="95"/>
         <source>Install OS</source>
         <translation>Installeer</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="89"/>
+        <location filename="mainwindow.ui" line="98"/>
+        <source>Installs the selected operating system image onto this SD card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="101"/>
         <source>Return</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="98"/>
-        <source>Exit</source>
-        <translation>Afsluiten</translation>
+        <location filename="mainwindow.ui" line="110"/>
+        <source>Exit (Esc)</source>
+        <translation>Afsluiten (Esc)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="101"/>
+        <location filename="mainwindow.ui" line="113"/>
+        <source>Exits and boots the installed operating system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="116"/>
         <source>Esc</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="113"/>
+        <location filename="mainwindow.ui" line="128"/>
         <source>Advanced</source>
         <translation>Geavanceerd</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="122"/>
+        <location filename="mainwindow.ui" line="137"/>
         <source>Add image</source>
         <translation>Image toevoegen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="134"/>
+        <location filename="mainwindow.ui" line="149"/>
         <source>Remove image</source>
         <translation>Image verwijderen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="146"/>
-        <source>Edit config</source>
-        <translation>Wijzig config</translation>
+        <location filename="mainwindow.ui" line="161"/>
+        <source>Edit config (e)</source>
+        <translation>Wijzig config (e)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="155"/>
-        <location filename="mainwindow.ui" line="158"/>
-        <source>Online help</source>
-        <translation>Online help</translation>
+        <location filename="mainwindow.ui" line="164"/>
+        <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="105"/>
+        <location filename="mainwindow.ui" line="167"/>
+        <source>e</source>
+        <translation>e</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="176"/>
+        <source>Online help (h)</source>
+        <translation>Online help (h)</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="179"/>
+        <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="182"/>
+        <source>h</source>
+        <translation>h</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="108"/>
+        <location filename="mainwindow.cpp" line="319"/>
         <source>[RECOMMENDED]</source>
         <translation>[AANBEVOLEN]</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="223"/>
+        <location filename="mainwindow.cpp" line="227"/>
         <source>Confirm</source>
         <translation>Bevestigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="40"/>
-        <source>Pi Recovery - Built:%1</source>
+        <location filename="mainwindow.cpp" line="43"/>
+        <source>NOOBS - Built: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="52"/>
+        <location filename="mainwindow.cpp" line="55"/>
         <source>Setting up SD card</source>
         <translation type="unfinished">SD card voorbereiden</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="91"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>No OS Images Found on SD Card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="91"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>Please add at least one OS image to the /images directory in order to proceed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="224"/>
+        <location filename="mainwindow.cpp" line="228"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Weet u zeker dat u de image wilt installeren?
 Hierbij worden alle bestaande bestanden verwijderd.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="289"/>
+        <location filename="mainwindow.cpp" line="293"/>
         <source>Restore complete</source>
         <translation>Klaar met herstellen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="290"/>
+        <location filename="mainwindow.cpp" line="294"/>
         <source>Image applied successfully</source>
         <translation>Image successvol weggeschreven</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="298"/>
+        <location filename="mainwindow.cpp" line="302"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="363"/>
+        <location filename="mainwindow.cpp" line="373"/>
         <source>Enabling network interface</source>
         <translation>Activeren netwerk verbinding</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="383"/>
+        <location filename="mainwindow.cpp" line="393"/>
         <source>No network access</source>
         <translation>Geen netwerk verbinding</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="384"/>
+        <location filename="mainwindow.cpp" line="394"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Een bekabelde netwerk verbinding is vereist voor deze functionaliteit. Controleer of de netwerk kabel aangesloten zit.</translation>
     </message>
@@ -375,42 +404,42 @@ Hierbij worden alle bestaande bestanden verwijderd.</translation>
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="languagedialog.cpp" line="22"/>
+        <location filename="languagedialog.cpp" line="23"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="23"/>
+        <location filename="languagedialog.cpp" line="24"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="24"/>
+        <location filename="languagedialog.cpp" line="25"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="25"/>
+        <location filename="languagedialog.cpp" line="26"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuleren</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="27"/>
+        <location filename="languagedialog.cpp" line="28"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluiten</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="26"/>
+        <location filename="languagedialog.cpp" line="27"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="28"/>
+        <location filename="languagedialog.cpp" line="29"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="29"/>
+        <location filename="languagedialog.cpp" line="30"/>
         <source>&amp;No</source>
         <translation>&amp;Nee</translation>
     </message>

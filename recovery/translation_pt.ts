@@ -239,17 +239,21 @@
     </message>
     <message>
         <location line="+20"/>
-        <source>Language:  </source>
-        <translation>Língua:</translation>
+        <source>Language (L):  </source>
+        <translation type="unfinished">Língua:</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="+83"/>
-        <location line="+3"/>
+        <location filename="mainwindow.ui" line="+95"/>
         <source>Install OS</source>
         <translation>Restaurar imagem</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Installs the selected operating system image onto this SD card.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
@@ -258,8 +262,13 @@
     </message>
     <message>
         <location line="+9"/>
-        <source>Exit</source>
-        <translation>Sair</translation>
+        <source>Exit (Esc)</source>
+        <translation>Sair (Esc)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Exits and boots the installed operating system.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
@@ -283,29 +292,49 @@
     </message>
     <message>
         <location line="+12"/>
-        <source>Edit config</source>
-        <translation>Editar Configuração</translation>
+        <source>Edit config (e)</source>
+        <translation>Editar Configuração (e)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>e</source>
+        <translation>e</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location line="+3"/>
-        <source>Online help</source>
-        <translation>Ajuda Online</translation>
+        <source>Online help (h)</source>
+        <translation>Ajuda Online (h)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+105"/>
+        <location line="+3"/>
+        <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>h</source>
+        <translation>h</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="+108"/>
+        <location line="+211"/>
         <source>[RECOMMENDED]</source>
         <translation>[RECOMENDADO]</translation>
     </message>
     <message>
-        <location line="+118"/>
+        <location line="-92"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="-183"/>
-        <source>Pi Recovery - Built:%1</source>
-        <translation>Restauração do Pi - Feita: %1</translation>
+        <location line="-184"/>
+        <source>NOOBS - Built: %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+12"/>
@@ -323,7 +352,7 @@
         <translation>Por favor adicione pelo menos uma imagem de SO ao diretório /images para proceder</translation>
     </message>
     <message>
-        <location line="+133"/>
+        <location line="+134"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
@@ -343,7 +372,7 @@
         <translation></translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+71"/>
         <source>Enabling network interface</source>
         <translation type="unfinished">Habilitando interface da rede</translation>
     </message>
@@ -374,7 +403,7 @@
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="languagedialog.cpp" line="+22"/>
+        <location filename="languagedialog.cpp" line="+23"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>

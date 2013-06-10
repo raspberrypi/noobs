@@ -107,7 +107,7 @@
      <normaloff>:/icons/door_in.png</normaloff>:/icons/door_in.png</iconset>
    </property>
    <property name="text">
-    <string>Exit (ESC)</string>
+    <string>Exit (Esc)</string>
    </property>
    <property name="toolTip">
     <string>Exits and boots the installed operating system.</string>
@@ -158,13 +158,13 @@
      <normaloff>:/icons/page_white_edit.png</normaloff>:/icons/page_white_edit.png</iconset>
    </property>
    <property name="text">
-    <string>Edit config (E)</string>
+    <string>Edit config (e)</string>
    </property>
    <property name="toolTip">
     <string>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</string>
    </property>
    <property name="shortcut">
-    <string>E</string>
+    <string>e</string>
    </property>
   </action>
   <action name="actionBrowser">
@@ -173,13 +173,13 @@
      <normaloff>:/icons/world.png</normaloff>:/icons/world.png</iconset>
    </property>
    <property name="text">
-    <string>Online help (H)</string>
+    <string>Online help (h)</string>
    </property>
    <property name="toolTip">
     <string>Opens a web browser displaying the Raspberry Pi Forum.</string>
    </property>
    <property name="shortcut">
-    <string>H</string>
+    <string>h</string>
    </property>
   </action>
  </widget>
