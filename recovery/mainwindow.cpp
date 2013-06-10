@@ -237,17 +237,17 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
         QString slidesDirectory;
 
         /* Image specific slide directory */
-        if (basefile(imagefile).contains("risc", Qt::CaseInsensitive))
+        if (basefile(imagefile).contains("risc", Qt::CaseInsensitive) && QDir("/mnt/slides/RISCOS").exists())
             slidesDirectory = "/mnt/slides/RISCOS";
-        else if (basefile(imagefile).contains("arch", Qt::CaseInsensitive))
+        else if (basefile(imagefile).contains("arch", Qt::CaseInsensitive) && QDir("/mnt/slides/Archlinux").exists())
             slidesDirectory = "/mnt/slides/Archlinux";
-        else if (basefile(imagefile).contains("pidora", Qt::CaseInsensitive))
+        else if (basefile(imagefile).contains("pidora", Qt::CaseInsensitive) && QDir("/mnt/slides/Pidora").exists())
             slidesDirectory = "/mnt/slides/Pidora";
-        else if ((basefile(imagefile).contains("wheezy", Qt::CaseInsensitive)) || (basefile(imagefile).contains("raspbian", Qt::CaseInsensitive)))
+        else if (((basefile(imagefile).contains("wheezy", Qt::CaseInsensitive)) || (basefile(imagefile).contains("raspbian", Qt::CaseInsensitive)))  && QDir("/mnt/slides/Raspbian").exists())
             slidesDirectory = "/mnt/slides/Raspbian";
-        else if (basefile(imagefile).contains("OpenELEC", Qt::CaseInsensitive))
+        else if (basefile(imagefile).contains("OpenELEC", Qt::CaseInsensitive) && QDir("/mnt/slides/OpenELEC").exists())
             slidesDirectory = "/mnt/slides/OpenELEC";
-        else if (basefile(imagefile).contains("raspbmc", Qt::CaseInsensitive))
+        else if (basefile(imagefile).contains("raspbmc", Qt::CaseInsensitive) && QDir("/mnt/slides/RaspBMC").exists())
             slidesDirectory = "/mnt/slides/RaspBMC";
         else
             slidesDirectory = "/mnt/slides/default";
