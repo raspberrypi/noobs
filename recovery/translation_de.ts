@@ -106,7 +106,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="133"/>
         <source>Saving boot files to memory</source>
-        <translation>Die Boot-Dateien werden im Hauptspeicher gesicher</translation>
+        <translation>Die Boot-Dateien werden im Hauptspeicher gesichert</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="136"/>
@@ -227,7 +227,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="124"/>
         <source>SD card broken (writes do not persist)</source>
-        <translation>Die SD-Karte ist kaputt (geschriebene Daten blieben nicht erhalten)</translation>
+        <translation>Die SD-Karte ist defekt (geschriebene Daten bleiben nicht erhalten)</translation>
     </message>
 </context>
 <context>
@@ -249,7 +249,7 @@
         <location filename="mainwindow.ui" line="83"/>
         <location filename="mainwindow.ui" line="86"/>
         <source>Install OS</source>
-        <translation>Image wiederherstellen</translation>
+        <translation>System installieren</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="89"/>
@@ -274,12 +274,12 @@
     <message>
         <location filename="mainwindow.ui" line="122"/>
         <source>Add image</source>
-        <translation>Betriebssystem hinzufügen</translation>
+        <translation>System hinzufügen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="134"/>
         <source>Remove image</source>
-        <translation>Betriebssystem ertfernen</translation>
+        <translation>System ertfernen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="146"/>
@@ -305,7 +305,7 @@
     <message>
         <location filename="mainwindow.cpp" line="40"/>
         <source>Pi Recovery - Built:%1</source>
-        <translation>Pi Wiederherstellung - Built: %1</translation>
+        <translation>Pi Installation - Erstelldatum: %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="52"/>
