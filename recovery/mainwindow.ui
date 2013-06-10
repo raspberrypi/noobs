@@ -110,8 +110,8 @@
     <string>Exit (ESC)</string>
    </property>
    <property name="toolTip">
-    <string>Exits and boots the installed operating system.</string>string>
-     </property>property>
+    <string>Exits and boots the installed operating system.</string>
+     </property>
     <property name="shortcut">
     <string>Esc</string>
    </property>
@@ -161,7 +161,7 @@
     <string>Edit config (E)</string>
    </property>
    <property name="toolTip">
-    <string>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</string>string>
+    <string>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</string>
    </property>
    <property name="shortcut">
     <string>E</string>
