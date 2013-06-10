@@ -49,7 +49,10 @@ LanguageDialog::LanguageDialog(QWidget *parent) :
         QString langcode = langfile.mid(12);
         langcode.chop(3);
         QLocale loc(langcode);
-        QString languagename = QLocale::languageToString(loc.language());
+        /* Display languagename in English, e.g. German, French */
+        /* QString languagename = QLocale::languageToString(loc.language()); */
+        /* should Display languagename in native language, e.g. Deutsch, Français  */
+        QString languagename = QLocale::nativeLanguageName(loc.language());
         QString iconfilename = ":/icons/"+langcode+".png";
 
         if (QFile::exists(iconfilename))
