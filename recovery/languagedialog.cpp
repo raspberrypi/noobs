@@ -1,11 +1,11 @@
 /* Language selection dialog
  *
- *                                                                                                                                                                           
- * Initial author: Floris Bos                                                                                                                                                 
- * Maintained by Raspberry Pi                                                                                                                                                  
- *                                                                                                                                                                            
- * See LICENSE.txt for license details                                                                                                                                        
- *                                                                                                                                                                            
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 #include "languagedialog.h"
@@ -52,7 +52,7 @@ LanguageDialog::LanguageDialog(QWidget *parent) :
         /* Display languagename in English, e.g. German, French */
         /* QString languagename = QLocale::languageToString(loc.language()); */
         /* should Display languagename in native language, e.g. Deutsch, Français  */
-        QString languagename = QLocale::nativeLanguageName(loc.language());
+        QString languagename = loc.nativeLanguageName();
         QString iconfilename = ":/icons/"+langcode+".png";
 
         if (QFile::exists(iconfilename))
