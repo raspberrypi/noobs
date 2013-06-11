@@ -321,68 +321,68 @@
         <translation>h</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="108"/>
-        <location filename="mainwindow.cpp" line="319"/>
+        <location filename="mainwindow.cpp" line="107"/>
+        <location filename="mainwindow.cpp" line="318"/>
         <source>[RECOMMENDED]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="227"/>
+        <location filename="mainwindow.cpp" line="226"/>
         <source>Confirm</source>
         <translation>確認</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="43"/>
-        <source>NOOBS - Built: %1</source>
+        <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="55"/>
+        <location filename="mainwindow.cpp" line="54"/>
         <source>Setting up SD card</source>
         <translation type="unfinished">SDカードのセットアップ</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="94"/>
+        <location filename="mainwindow.cpp" line="93"/>
         <source>No OS Images Found on SD Card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="94"/>
+        <location filename="mainwindow.cpp" line="93"/>
         <source>Please add at least one OS image to the /images directory in order to proceed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="228"/>
+        <location filename="mainwindow.cpp" line="227"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>本当にイメージを書き込んでもよいですか?この操作で既存のすべてのデータは削除されます!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="293"/>
+        <location filename="mainwindow.cpp" line="292"/>
         <source>Restore complete</source>
         <translation>リストア完了</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="294"/>
+        <location filename="mainwindow.cpp" line="293"/>
         <source>Image applied successfully</source>
         <translation>イメージは正常に適用されました</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="302"/>
+        <location filename="mainwindow.cpp" line="301"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="373"/>
+        <location filename="mainwindow.cpp" line="384"/>
         <source>Enabling network interface</source>
         <translation type="unfinished">ネットワーク·インターフェースを有効にしています</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="393"/>
+        <location filename="mainwindow.cpp" line="404"/>
         <source>No network access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="394"/>
+        <location filename="mainwindow.cpp" line="405"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -390,12 +390,12 @@
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="104"/>
+        <location filename="progressslideshowdialog.cpp" line="113"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="109"/>
+        <location filename="progressslideshowdialog.cpp" line="118"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation type="unfinished"></translation>
     </message>
