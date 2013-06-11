@@ -36,8 +36,6 @@ LanguageDialog::LanguageDialog(QWidget *parent) :
     _trans(NULL), _qttrans(NULL)
 {
     ui->setupUi(this);
-    ui->langCombo->installEventFilter(this);
-    ui->langCombo->setFocusPolicy(Qt::StrongFocus);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_QuitOnClose, false);
 
@@ -126,14 +124,7 @@ void LanguageDialog::changeEvent(QEvent* event)
     QDialog::changeEvent(event);
 }
 
-void LanguageDialog::keyPressEvent(QKeyEvent* event)
+void LanguageDialog::on_actionOpenComboBox_triggered()
 {
-    switch (event->key())
-    {
-    case Qt::Key_L:
-        ui->langCombo->showPopup();
-        break;
-    default:
-        QDialog::keyPressEvent(event);
-    }
+    ui->langCombo->showPopup();
 }

@@ -33,7 +33,8 @@ protected:
     QTranslator *_trans, *_qttrans;
     QString _currentLang;
     virtual void changeEvent(QEvent *event);
-    virtual void keyPressEvent(QKeyEvent* event);
+    void on_actionOpenComboBox_triggered();
+
 private slots:
     void on_langCombo_currentIndexChanged(int index);
 };
