@@ -321,7 +321,7 @@
         <translation>h</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+108"/>
+        <location filename="mainwindow.cpp" line="+107"/>
         <location line="+211"/>
         <source>[RECOMMENDED]</source>
         <translation>[RECOMENDADO]</translation>
@@ -332,12 +332,12 @@
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="-184"/>
-        <source>NOOBS - Built: %1</source>
+        <location line="-183"/>
+        <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+11"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -372,7 +372,7 @@
         <translation></translation>
     </message>
     <message>
-        <location line="+71"/>
+        <location line="+83"/>
         <source>Enabling network interface</source>
         <translation type="unfinished">Habilitando interface da rede</translation>
     </message>
@@ -390,7 +390,7 @@
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="+104"/>
+        <location filename="progressslideshowdialog.cpp" line="+113"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%1 MB de %2 MB gravado(s) (%3 MB/s)</translation>
     </message>

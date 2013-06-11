@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     setContextMenuPolicy(Qt::NoContextMenu);
-    setWindowTitle(QString(tr("NOOBS v1.1 - Built: %1")).arg(QString::fromLocal8Bit(__DATE__)));
+    setWindowTitle(QString(tr("NOOBS v%1 - Built: %2")).arg(VERSION_NUMBER, QString::fromLocal8Bit(__DATE__)));
     _kc << 0x01000013 << 0x01000013 << 0x01000015 << 0x01000015 << 0x01000012
         << 0x01000014 << 0x01000012 << 0x01000014 << 0x42 << 0x41;
     ui->list->installEventFilter(this);
