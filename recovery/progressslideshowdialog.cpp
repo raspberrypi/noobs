@@ -24,28 +24,37 @@ ProgressSlideshowDialog::ProgressSlideshowDialog(const QString &slidesDirectory,
     _maxSectors(0),
     ui(new Ui::ProgressSlideshowDialog)
 {
-    QDir dir(slidesDirectory, "*.jpg *.jpeg *.png");
-
     ui->setupUi(this);
     setLabelText(statusMsg);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 
-    _slides = dir.entryList();
-    _slides.sort();
+    QDir dir(slidesDirectory, "*.jpg *.jpeg *.png");
+    if (dir.exists())
+    {
+        _slides = dir.entryList();
+        _slides.sort();
+        qDebug() << "Slides directory:" << _slidesDirectory << "Available slides" << _slides;
+    }
 
-    qDebug() << "Slides directory:" << _slidesDirectory << "Available slides" << _slides;
     if (_slides.isEmpty())
-        return;
+    {
+        /* Resize window to just show progress bar */
+        ui->imagespace->setMinimumSize(0, 0);
+        resize(this->width(), 50);
 
-    /* Resize window to size of first image in slide directory */
-    QPixmap pixmap(_slidesDirectory+"/"+_slides.first());
-    ui->imagespace->setMinimumSize(pixmap.width(), pixmap.height());
-    resize(pixmap.width(), pixmap.height()+50);
-
-    ui->imagespace->setPixmap(pixmap);
-
-    connect(&_timer, SIGNAL(timeout()), this, SLOT(nextSlide()));
-    _timer.start(changeInterval * 1000);
+    }
+    else
+    {
+        /* Resize window to size of first image in slide directory */
+        QPixmap pixmap(_slidesDirectory+"/"+_slides.first());
+        ui->imagespace->setMinimumSize(pixmap.width(), pixmap.height());
+        resize(pixmap.width(), pixmap.height()+50);
+    
+        ui->imagespace->setPixmap(pixmap);
+    
+        connect(&_timer, SIGNAL(timeout()), this, SLOT(nextSlide()));
+        _timer.start(changeInterval * 1000);
+    }
     connect(&_iotimer, SIGNAL(timeout()), this, SLOT(updateIOstats()));
     enableIOaccounting();
 }
