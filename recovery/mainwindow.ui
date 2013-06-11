@@ -16,11 +16,11 @@
    </font>
   </property>
   <property name="focusPolicy">
-   <enum>Qt::TabFocus</enum>
+   <enum>Qt::NoFocus</enum>
   </property>
  <widget class="QWidget" name="centralWidget">
   <property name="focusPolicy">
-   <enum>Qt::TabFocus</enum>
+   <enum>Qt::NoFocus</enum>
   </property>
  <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="margin">
@@ -42,7 +42,7 @@
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="focusPolicy">
-    <enum>Qt::TabFocus</enum>
+    <enum>Qt::NoFocus</enum>
    </property>
    <property name="movable">
     <bool>false</bool>
