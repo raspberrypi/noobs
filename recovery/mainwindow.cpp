@@ -322,15 +322,16 @@ void MainWindow::changeEvent(QEvent* event)
     QMainWindow::changeEvent(event);
 }
 
-void MainWindow::toggleDisplay()
+void MainWindow::displayMode(QString cmd, QString mode)
 {
-    QString HDMI_PREFFERED = "/bin/sh /usr/bin/tvservice -p";
+    QProcess::execute("tvservice -o");
+    QProcess::execute(cmd);
+    QProcess::execute("fbset -depth 8");
+    QProcess::execute("fbset -depth 16");
+// TODO: Fixup xres, yres, vxres, vyres on fbset after resolution
+// change
 
-    QProcess p;
-    p.setProcessChannelMode(p.SeparateChannels);
-    p.start(HDMI_PREFFERED);
-    p.closeWriteChannel();
-
+    QMessageBox::information(this, tr("Display Mode"), tr("Display mode changed to")+mode);
 }
 
 bool MainWindow::eventFilter(QObject *, QEvent *event)
@@ -339,9 +340,18 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
     {
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
 
-        // Toggle HDMI preferred mode
-        if (keyEvent->key() == Qt::Key_P)
-            toggleDisplay();
+        // HDMI preferred mode
+        if (keyEvent->key() == Qt::Key_1)
+            displayMode("tvservice -p", tr("HDMI preferred mode"));
+        // HDMI safe mode
+        if (keyEvent->key() == Qt::Key_2)
+            displayMode("tvservice -e \"DMT 4\"", tr("HDMI safe mode"));
+        // Composite PAL
+        if (keyEvent->key() == Qt::Key_3)
+            displayMode("tvservice -c \"NTSC 4:3\"", tr("composite PAL mode"));
+        // Composite NTSC
+        if (keyEvent->key() == Qt::Key_4)
+            displayMode("tvservice -c \"PAL 4:3\"", tr("composite NTSC mode"));
         else if (_kc.at(_kcpos) == keyEvent->key())
         {
             _kcpos++;

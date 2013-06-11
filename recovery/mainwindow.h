@@ -43,7 +43,7 @@ protected:
     virtual bool eventFilter(QObject *obj, QEvent *event);
     void inputSequence();
     void repopulate();
-    void toggleDisplay();
+    void displayMode(QString cmd, QString mode);
 
 protected slots:
     void populate();
