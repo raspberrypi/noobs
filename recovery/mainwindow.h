@@ -4,12 +4,12 @@
 /* Main window
  *
  * Initial author: Floris Bos
- *                                                                                                                                                                             
- * Initial author: Floris Bos                                                                                                                                                
- * Maintained by Raspberry Pi                                                                                                                                                
- *                                                                                                                                                                       
- * See LICENSE.txt for license details                                                                                                                                 
- *                                                                                                                                                                   
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 #include <QMainWindow>
@@ -23,11 +23,11 @@ class QProgressDialog;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
+
 protected:
     Ui::MainWindow *ui;
     QDialog *_qpd;
@@ -43,6 +43,7 @@ protected:
     virtual bool eventFilter(QObject *obj, QEvent *event);
     void inputSequence();
     void repopulate();
+    void toggleDisplay();
 
 protected slots:
     void populate();

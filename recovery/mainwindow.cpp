@@ -40,11 +40,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     setContextMenuPolicy(Qt::NoContextMenu);
-    setWindowTitle(QString(tr("NOOBS - Built: %1")).arg(QString::fromLocal8Bit(__DATE__)));
+    setWindowTitle(QString(tr("NOOBS v1.1 - Built: %1")).arg(QString::fromLocal8Bit(__DATE__)));
     _kc << 0x01000013 << 0x01000013 << 0x01000015 << 0x01000015 << 0x01000012
         << 0x01000014 << 0x01000012 << 0x01000014 << 0x42 << 0x41;
     ui->list->installEventFilter(this);
-
     ui->advToolBar->setVisible(false);
 
     if (qApp->arguments().contains("-runinstaller") && !_partInited)
@@ -323,13 +322,27 @@ void MainWindow::changeEvent(QEvent* event)
     QMainWindow::changeEvent(event);
 }
 
+void MainWindow::toggleDisplay()
+{
+    QString HDMI_PREFFERED = "/bin/sh /usr/bin/tvservice -p";
+
+    QProcess p;
+    p.setProcessChannelMode(p.SeparateChannels);
+    p.start(HDMI_PREFFERED);
+    p.closeWriteChannel();
+
+}
+
 bool MainWindow::eventFilter(QObject *, QEvent *event)
 {
     if (event->type() == QEvent::KeyPress)
     {
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
 
-        if (_kc.at(_kcpos) == keyEvent->key())
+        // Toggle HDMI preferred mode
+        if (keyEvent->key() == Qt::Key_P)
+            toggleDisplay();
+        else if (_kc.at(_kcpos) == keyEvent->key())
         {
             _kcpos++;
             if (_kcpos == _kc.size())
@@ -339,9 +352,7 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
             }
         }
         else
-        {
-            _kcpos = 0;
-        }
+            _kcpos=0;
     }
 
     return false;
