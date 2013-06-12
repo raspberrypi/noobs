@@ -44,6 +44,8 @@ protected:
     void inputSequence();
     void repopulate();
     void displayMode(QString cmd, QString mode);
+    void update_window_title();
+    void update_recommended_label();
 
 protected slots:
     void populate();

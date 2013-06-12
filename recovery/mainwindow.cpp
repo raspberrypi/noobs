@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     setContextMenuPolicy(Qt::NoContextMenu);
-    setWindowTitle(QString(tr("NOOBS v%1 - Built: %2")).arg(VERSION_NUMBER, QString::fromLocal8Bit(__DATE__)));
+    update_window_title();
     _kc << 0x01000013 << 0x01000013 << 0x01000015 << 0x01000015 << 0x01000012
         << 0x01000014 << 0x01000012 << 0x01000014 << 0x42 << 0x41;
     ui->list->installEventFilter(this);
@@ -104,7 +104,7 @@ void MainWindow::populate()
         if (!l.isEmpty())
         {
             recommendedItem = l.first();
-            recommendedItem->setText(recommendedItem->text()+" "+tr("[RECOMMENDED]"));
+            update_recommended_label();
             ui->list->setCurrentItem(recommendedItem);
         }
         else
@@ -308,15 +308,26 @@ void MainWindow::on_list_currentRowChanged()
     ui->actionRemove_image->setEnabled(true);
 }
 
+void MainWindow::update_window_title()
+{
+    setWindowTitle(QString(tr("NOOBS v%1 - Built: %2")).arg(VERSION_NUMBER, QString::fromLocal8Bit(__DATE__)));
+}
+
+void MainWindow::update_recommended_label()
+{
+    if (recommendedItem)
+    {
+        recommendedItem->setText(imageFilenameToFriendlyName(recommendedItem->data(Qt::UserRole).toString())+" "+tr("[RECOMMENDED]"));
+    }
+}
+
 void MainWindow::changeEvent(QEvent* event)
 {
     if (event && event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
-        if (recommendedItem)
-        {
-            recommendedItem->setText(imageFilenameToFriendlyName(recommendedItem->data(Qt::UserRole).toString())+" "+tr("[RECOMMENDED]"));
-        }
+        update_window_title();
+        update_recommended_label();
     }
 
     QMainWindow::changeEvent(event);
