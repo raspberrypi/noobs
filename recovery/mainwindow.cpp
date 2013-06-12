@@ -342,7 +342,7 @@ void MainWindow::displayMode(QString cmd, QString mode)
 // TODO: Fixup xres, yres, vxres, vyres on fbset after resolution
 // change
 
-    QMessageBox::information(this, tr("Display Mode"), tr("Display mode changed to")+mode);
+    QMessageBox::information(this, tr("Display Mode"), QString(tr("Display mode changed to %1")).arg(mode));
 }
 
 bool MainWindow::eventFilter(QObject *, QEvent *event)
