@@ -30,10 +30,10 @@ QT_TRANSLATE_NOOP("QDialogButtonBox","&Yes")
 QT_TRANSLATE_NOOP("QDialogButtonBox","&No")
 #endif
 
-LanguageDialog::LanguageDialog(QWidget *parent) :
+LanguageDialog::LanguageDialog(QString *currentLangCode, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LanguageDialog),
-    _trans(NULL), _qttrans(NULL)
+    _trans(NULL), _qttrans(NULL), _currentLang(currentLangCode)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -70,7 +70,7 @@ LanguageDialog::~LanguageDialog()
 
 void LanguageDialog::changeLanguage(const QString &langcode)
 {
-    if (langcode == _currentLang)
+    if (langcode == *_currentLang)
         return;
 
     if (_trans)
@@ -108,7 +108,7 @@ void LanguageDialog::changeLanguage(const QString &langcode)
         }
     }
 
-    _currentLang = langcode;
+    *_currentLang = langcode;
 }
 
 void LanguageDialog::on_langCombo_currentIndexChanged(int index)

@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
     GpioInput gpio(3);
     QApplication a(argc, argv);
     RightButtonFilter rbf;
+    QString currentLangCode;
 
     // Intercept right mouse clicks sent to the title bar
     a.installEventFilter(&rbf);
@@ -98,13 +99,13 @@ int main(int argc, char *argv[])
 
 #ifdef ENABLE_LANGUAGE_CHOOSER
     // Language chooser at the bottom center
-    LanguageDialog ld;
+    LanguageDialog ld(&currentLangCode);
     ld.setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, ld.size(), a.desktop()->availableGeometry()));
     ld.show();
 #endif
 
     // Main window in the middle of screen
-    MainWindow mw;
+    MainWindow mw(&currentLangCode);
     mw.setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, mw.size(), a.desktop()->availableGeometry()));
     mw.show();
 

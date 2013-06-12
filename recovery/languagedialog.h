@@ -24,14 +24,14 @@ class LanguageDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit LanguageDialog(QWidget *parent = 0);
+    explicit LanguageDialog(QString *currentLangCode, QWidget *parent = 0);
     ~LanguageDialog();
     void changeLanguage(const QString &langcode);
 
 protected:
     Ui::LanguageDialog *ui;
     QTranslator *_trans, *_qttrans;
-    QString _currentLang;
+    QString *_currentLang;
     virtual void changeEvent(QEvent *event);
 
 private slots:
