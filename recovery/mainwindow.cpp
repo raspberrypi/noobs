@@ -313,6 +313,7 @@ void MainWindow::changeEvent(QEvent* event)
     if (event && event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        setWindowTitle(QString(tr("NOOBS v%1 - Built: %2")).arg(VERSION_NUMBER, QString::fromLocal8Bit(__DATE__)));
         if (recommendedItem)
         {
             recommendedItem->setText(imageFilenameToFriendlyName(recommendedItem->data(Qt::UserRole).toString())+" "+tr("[RECOMMENDED]"));
