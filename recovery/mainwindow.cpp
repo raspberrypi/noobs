@@ -16,6 +16,11 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QKeyEvent>
+#include <QApplication>
+
+#ifdef Q_WS_QWS
+#include <QWSServer>
+#endif
 
 /* Main window
  *
@@ -335,14 +340,16 @@ void MainWindow::changeEvent(QEvent* event)
 
 void MainWindow::displayMode(QString cmd, QString mode)
 {
-    QProcess::execute("tvservice -o");
-    QProcess::execute(cmd);
-    QProcess::execute("fbset -depth 8");
-    QProcess::execute("fbset -depth 16");
+    QProcess *process = new QProcess(this);
+    process->start(QString("sh -c \"tvservice -o; tvservice %1; fbset -depth 8; fbset -depth 16\"").arg(cmd));
+    process->waitForFinished(4000);
+
+    QWSServer::instance()->refresh();
+
 // TODO: Fixup xres, yres, vxres, vyres on fbset after resolution
 // change
-
-    QMessageBox::information(this, tr("Display Mode"), QString(tr("Display mode changed to %1")).arg(mode));
+// TODO: Save choice and write choice to config.txt for installed OS
+//    QMessageBox::information(this, tr("Display Mode"), QString(tr("Display mode changed to %1")).arg(mode));
 }
 
 bool MainWindow::eventFilter(QObject *, QEvent *event)
@@ -353,16 +360,16 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
 
         // HDMI preferred mode
         if (keyEvent->key() == Qt::Key_1)
-            displayMode("tvservice -p", tr("HDMI preferred mode"));
+            displayMode("-p", tr("HDMI preferred mode"));
         // HDMI safe mode
         if (keyEvent->key() == Qt::Key_2)
-            displayMode("tvservice -e \"DMT 4\"", tr("HDMI safe mode"));
+            displayMode("-e \'DMT 4\'", tr("HDMI safe mode"));
         // Composite PAL
         if (keyEvent->key() == Qt::Key_3)
-            displayMode("tvservice -c \"NTSC 4:3\"", tr("composite PAL mode"));
+            displayMode("-c \'NTSC 4:3\'", tr("composite PAL mode"));
         // Composite NTSC
         if (keyEvent->key() == Qt::Key_4)
-            displayMode("tvservice -c \"PAL 4:3\"", tr("composite NTSC mode"));
+            displayMode("-c \'PAL 4:3\'", tr("composite NTSC mode"));
         else if (_kc.at(_kcpos) == keyEvent->key())
         {
             _kcpos++;
