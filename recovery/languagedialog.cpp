@@ -65,9 +65,10 @@ LanguageDialog::LanguageDialog(QString *currentLangCode, QWidget *parent) :
         else
             ui->langCombo->addItem(languagename, langcode);
 
-        if (langcode == startLang)
+        if (langcode.compare(startLang, Qt::CaseInsensitive) == 0)
         {
             validStartLang = true;
+            startLang = langcode;
             ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
         }
     }
