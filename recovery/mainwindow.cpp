@@ -17,6 +17,7 @@
 #include <QPainter>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QDesktopWidget>
 
 #ifdef Q_WS_QWS
 #include <QWSServer>
@@ -338,18 +339,27 @@ void MainWindow::changeEvent(QEvent* event)
     QMainWindow::changeEvent(event);
 }
 
-void MainWindow::displayMode(QString cmd, QString mode)
+void MainWindow::displayMode(QString cmd, QString mode, QString xres, QString yres)
 {
+    // Trigger framebuffer resize
     QProcess *process = new QProcess(this);
-    process->start(QString("sh -c \"tvservice -o; tvservice %1; fbset -depth 8; fbset -depth 16\"").arg(cmd));
+    process->start(QString("sh -c \"tvservice -o; tvservice %1; fbset -depth 8; fbset -depth 16; fbset -xres %2 -yres %3\"").arg(cmd, xres, yres));
     process->waitForFinished(4000);
 
+    // Refresh screen
     QWSServer::instance()->refresh();
 
-// TODO: Fixup xres, yres, vxres, vyres on fbset after resolution
-// change
-// TODO: Save choice and write choice to config.txt for installed OS
-//    QMessageBox::information(this, tr("Display Mode"), QString(tr("Display mode changed to %1")).arg(mode));
+    // TODO: Write choice to config.txt of installed OS
+    // during OS install and use this choice if present by default
+
+    // Inform user of resolution change. Time out in case they can't
+    // see it
+    QMessageBox *mbox = new QMessageBox;
+    mbox->setWindowTitle(tr("Display Mode Changed"));
+    mbox->setText(QString(tr("Display mode changed to %1")).arg(mode));
+    mbox->show();
+    QTimer::singleShot(4000, mbox, SLOT(hide()));
+
 }
 
 bool MainWindow::eventFilter(QObject *, QEvent *event)
@@ -360,16 +370,16 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
 
         // HDMI preferred mode
         if (keyEvent->key() == Qt::Key_1)
-            displayMode("-p", tr("HDMI preferred mode"));
+            displayMode("-p", tr("HDMI preferred mode"), "1280", "720");
         // HDMI safe mode
         if (keyEvent->key() == Qt::Key_2)
-            displayMode("-e \'DMT 4\'", tr("HDMI safe mode"));
+            displayMode("-e \'DMT 4\'", tr("HDMI safe mode"), "640", "480");
         // Composite PAL
         if (keyEvent->key() == Qt::Key_3)
-            displayMode("-c \'NTSC 4:3\'", tr("composite PAL mode"));
+            displayMode("-c \'NTSC 4:3\'", tr("composite PAL mode"), "720", "576");
         // Composite NTSC
         if (keyEvent->key() == Qt::Key_4)
-            displayMode("-c \'PAL 4:3\'", tr("composite NTSC mode"));
+            displayMode("-c \'PAL 4:3\'", tr("composite NTSC mode"), "625", "525");
         else if (_kc.at(_kcpos) == keyEvent->key())
         {
             _kcpos++;

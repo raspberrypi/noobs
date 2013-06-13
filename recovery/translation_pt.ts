@@ -242,6 +242,16 @@
         <source>Language (L):  </source>
         <translation type="unfinished">Língua:</translation>
     </message>
+    <message>
+        <location line="+18"/>
+        <source>openComboBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>L</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -321,23 +331,22 @@
         <translation>h</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+107"/>
-        <location line="+211"/>
+        <location filename="mainwindow.cpp" line="+326"/>
         <source>[RECOMMENDED]</source>
         <translation>[RECOMENDADO]</translation>
     </message>
     <message>
-        <location line="-92"/>
+        <location line="-94"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="-183"/>
+        <location line="+87"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-259"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -372,7 +381,37 @@
         <translation></translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="+51"/>
+        <source>Display Mode Changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Display mode changed to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>HDMI preferred mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>HDMI safe mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>composite PAL mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>composite NTSC mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
         <source>Enabling network interface</source>
         <translation type="unfinished">Habilitando interface da rede</translation>
     </message>

@@ -1,1 +1,0 @@
-runinstaller reboot=q quiet vt.cur_default=1 coherent_pool=6M elevator=deadline

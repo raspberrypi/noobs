@@ -243,6 +243,16 @@
         <oldsource>Language:  </oldsource>
         <translation type="unfinished">Kieli:</translation>
     </message>
+    <message>
+        <location filename="languagedialog.ui" line="124"/>
+        <source>openComboBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="languagedialog.ui" line="127"/>
+        <source>L</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -322,68 +332,97 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="43"/>
+        <location filename="mainwindow.cpp" line="319"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="54"/>
+        <location filename="mainwindow.cpp" line="60"/>
         <source>Setting up SD card</source>
         <translation>Valmistellaan SD muistikorttia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="93"/>
+        <location filename="mainwindow.cpp" line="99"/>
         <source>No OS Images Found on SD Card</source>
         <translation>SD muistikortilta ei löytynyt yhtään levykuvaa</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="93"/>
+        <location filename="mainwindow.cpp" line="99"/>
         <source>Please add at least one OS image to the /images directory in order to proceed</source>
         <translation>Lisää vähintään yksi levykuva /images kansioon jos haluat jatkaa</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="107"/>
-        <location filename="mainwindow.cpp" line="318"/>
+        <location filename="mainwindow.cpp" line="326"/>
         <source>[RECOMMENDED]</source>
         <translation>[SUOSITELTU]</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="226"/>
+        <location filename="mainwindow.cpp" line="232"/>
         <source>Confirm</source>
         <translation>Vahvista</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="227"/>
+        <location filename="mainwindow.cpp" line="233"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Varoitus: tämä asentaa valityn käyttöjärjestelmän. Koko SD muistikortti tyhjennetään enne tätä.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="292"/>
+        <location filename="mainwindow.cpp" line="298"/>
         <source>Restore complete</source>
         <translation>Palautus on valmis</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="293"/>
+        <location filename="mainwindow.cpp" line="299"/>
         <source>Image applied successfully</source>
         <translation>Levykuva kirjoitettu onnistuneesti</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="301"/>
+        <location filename="mainwindow.cpp" line="307"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="384"/>
+        <location filename="mainwindow.cpp" line="358"/>
+        <source>Display Mode Changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="359"/>
+        <source>Display mode changed to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="373"/>
+        <source>HDMI preferred mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="376"/>
+        <source>HDMI safe mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="379"/>
+        <source>composite PAL mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="382"/>
+        <source>composite NTSC mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="422"/>
         <source>Enabling network interface</source>
         <translation>Avataan verkkoyhteyttä</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="404"/>
+        <location filename="mainwindow.cpp" line="442"/>
         <source>No network access</source>
         <translation>Ei verkkoyhteyttä</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="405"/>
+        <location filename="mainwindow.cpp" line="443"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Tämä ominausuus tarvitsee langallisen verkkoyhteyden toimiakseen. Liitä verkkokaapeli verkko porttiin.</translation>
     </message>
