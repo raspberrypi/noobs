@@ -23,12 +23,12 @@
 #endif
 
 /*
- *                                                                                                                                                                           
- * Initial author: Floris Bos                                                                                                                                              
- * Maintained by Raspberry Pi                                                                                                                                             
- *                                                                                                                                                                   
- * See LICENSE.txt for license details                                                                                                                            
- *                                                                                                                                                             
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 void reboot_to_extended()
@@ -47,6 +47,17 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     RightButtonFilter rbf;
     QString currentLangCode;
+    bool runinstaller = false;
+
+    // Process command-line arguments
+    for (int i=1; i<argc; i++)
+    {
+        if (strcmp(argv[i], "-runinstaller") == 0)
+            runinstaller = true;
+        else if (strcmp(argv[i], "-lang") == 0)
+            if (argc > i+1)
+                currentLangCode = argv[++i];
+    }
 
     // Intercept right mouse clicks sent to the title bar
     a.installEventFilter(&rbf);
@@ -79,7 +90,7 @@ int main(int argc, char *argv[])
 #endif
 
     // If -runinstaller is not specified, only continue if SHIFT is pressed, GPIO is triggered or no OS is installed (/dev/mmcblk0p6 does not exist)
-    bool bailout = (argc < 2 || strcmp(argv[1], "-runinstaller") != 0)
+    bool bailout = !runinstaller
          && gpio.value() != 0
          && !KeyDetection::isF10pressed()
          && QFile::exists(FAT_PARTITION_OF_IMAGE);

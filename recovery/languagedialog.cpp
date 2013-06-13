@@ -35,6 +35,9 @@ LanguageDialog::LanguageDialog(QString *currentLangCode, QWidget *parent) :
     ui(new Ui::LanguageDialog),
     _trans(NULL), _qttrans(NULL), _currentLang(currentLangCode)
 {
+    /* Need to make a temp copy becuase it gets modified by callbacks */
+    QString startLang = *_currentLang;
+
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_QuitOnClose, false);
@@ -45,6 +48,7 @@ LanguageDialog::LanguageDialog(QString *currentLangCode, QWidget *parent) :
     QDir dir(":/", "translation_*.qm");
     QStringList translations = dir.entryList();
 
+    bool validStartLang = false;
     foreach (QString langfile, translations)
     {
         QString langcode = langfile.mid(12);
@@ -60,7 +64,14 @@ LanguageDialog::LanguageDialog(QString *currentLangCode, QWidget *parent) :
             ui->langCombo->addItem(QIcon(iconfilename), languagename, langcode);
         else
             ui->langCombo->addItem(languagename, langcode);
+
+        if (langcode == startLang)
+        {
+            validStartLang = true;
+            ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
+        }
     }
+    *_currentLang = (validStartLang ? startLang : "");
 }
 
 LanguageDialog::~LanguageDialog()
