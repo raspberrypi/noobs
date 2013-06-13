@@ -98,7 +98,7 @@
     <string>Installs the selected operating system image onto this SD card.</string>
    </property>
    <property name="shortcut">
-    <string>Return</string>
+    <string notr="true">Return</string>
    </property>
   </action>
   <action name="actionCancel">
@@ -113,7 +113,7 @@
     <string>Exits and boots the installed operating system.</string>
      </property>
     <property name="shortcut">
-    <string>Esc</string>
+    <string notr="true">Esc</string>
    </property>
   </action>
   <action name="actionAdvanced">
@@ -164,7 +164,7 @@
     <string>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</string>
    </property>
    <property name="shortcut">
-    <string>e</string>
+    <string notr="true">e</string>
    </property>
   </action>
   <action name="actionBrowser">
@@ -179,7 +179,7 @@
     <string>Opens a web browser displaying the Raspberry Pi Forum.</string>
    </property>
    <property name="shortcut">
-    <string>h</string>
+    <string notr="true">h</string>
    </property>
   </action>
  </widget>

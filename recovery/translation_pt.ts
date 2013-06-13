@@ -242,16 +242,6 @@
         <source>Language (L):  </source>
         <translation type="unfinished">Língua:</translation>
     </message>
-    <message>
-        <location line="+18"/>
-        <source>openComboBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>L</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -266,12 +256,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Return</source>
-        <translation>Retorno</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location line="+12"/>
         <source>Exit (Esc)</source>
         <translation>Sair (Esc)</translation>
     </message>
@@ -281,12 +266,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Esc</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+12"/>
+        <location line="+15"/>
         <source>Advanced</source>
         <translation>Avançado</translation>
     </message>
@@ -311,12 +291,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>e</source>
-        <translation>e</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location line="+12"/>
         <source>Online help (h)</source>
         <translation>Ajuda Online (h)</translation>
     </message>
@@ -326,27 +301,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>h</source>
-        <translation>h</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="+326"/>
+        <location filename="mainwindow.cpp" line="+333"/>
         <source>[RECOMMENDED]</source>
         <translation>[RECOMENDADO]</translation>
     </message>
     <message>
-        <location line="-94"/>
+        <location line="-101"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="+87"/>
+        <location line="+94"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-259"/>
+        <location line="-266"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -366,7 +336,7 @@
         <translation>Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+72"/>
         <source>Restore complete</source>
         <translation>Restauração concluída</translation>
     </message>

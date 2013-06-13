@@ -85,7 +85,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <property name="styleSheet">
+   <property name="styleSheet">
    <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -121,10 +121,10 @@
   </layout>
   <action name="actionOpenComboBox">
    <property name="text">
-    <string>openComboBox</string>
+    <string notr="true">openComboBox</string>
    </property>
    <property name="shortcut">
-    <string>L</string>
+    <string notr="true">L</string>
    </property>
    <property name="shortcutContext">
     <enum>Qt::ApplicationShortcut</enum>

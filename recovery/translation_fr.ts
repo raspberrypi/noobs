@@ -242,16 +242,6 @@
         <source>Language (L):  </source>
         <translation type="unfinished">Langue: </translation>
     </message>
-    <message>
-        <location filename="languagedialog.ui" line="124"/>
-        <source>openComboBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="languagedialog.ui" line="127"/>
-        <source>L</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -266,11 +256,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="101"/>
-        <source>Return</source>
-        <translation>Retour</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="110"/>
         <source>Exit (Esc)</source>
         <translation>Sortie (Esc)</translation>
@@ -279,11 +264,6 @@
         <location filename="mainwindow.ui" line="113"/>
         <source>Exits and boots the installed operating system.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="116"/>
-        <source>Esc</source>
-        <translation>Échap</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="128"/>
@@ -311,12 +291,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="167"/>
-        <source>e</source>
-        <oldsource>E</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="176"/>
         <source>Online help (h)</source>
         <oldsource>Online help (H)</oldsource>
@@ -328,13 +302,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="182"/>
-        <source>h</source>
-        <oldsource>H</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="319"/>
+        <location filename="mainwindow.cpp" line="326"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -354,7 +322,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="326"/>
+        <location filename="mainwindow.cpp" line="333"/>
         <source>[RECOMMENDED]</source>
         <translation>[RECOMMANDÉ]</translation>
     </message>
@@ -369,62 +337,62 @@
         <translation>Êtes-vous sûr de vouloir écrire l&apos;image? CELA EFFACERA TOUTES VOS DONNÉES EXISTANTES!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="298"/>
+        <location filename="mainwindow.cpp" line="305"/>
         <source>Restore complete</source>
         <translation>Restauration complète</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="299"/>
+        <location filename="mainwindow.cpp" line="306"/>
         <source>Image applied successfully</source>
         <translation>Écriture de l’image réussite</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="307"/>
+        <location filename="mainwindow.cpp" line="314"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="358"/>
+        <location filename="mainwindow.cpp" line="365"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="359"/>
+        <location filename="mainwindow.cpp" line="366"/>
         <source>Display mode changed to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="373"/>
+        <location filename="mainwindow.cpp" line="380"/>
         <source>HDMI preferred mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="376"/>
+        <location filename="mainwindow.cpp" line="383"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="379"/>
+        <location filename="mainwindow.cpp" line="386"/>
         <source>composite PAL mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="382"/>
+        <location filename="mainwindow.cpp" line="389"/>
         <source>composite NTSC mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="422"/>
+        <location filename="mainwindow.cpp" line="429"/>
         <source>Enabling network interface</source>
         <translation>Activation de l’interface réseau</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="442"/>
+        <location filename="mainwindow.cpp" line="449"/>
         <source>No network access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="443"/>
+        <location filename="mainwindow.cpp" line="450"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
