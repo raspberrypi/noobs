@@ -239,8 +239,8 @@
     </message>
     <message>
         <location filename="languagedialog.ui" line="106"/>
-        <source>Language (L):  </source>
-        <translation type="unfinished">言語: </translation>
+        <source>Language (l): </source>
+        <translation>言語 (l): </translation>
     </message>
 </context>
 <context>
@@ -302,7 +302,7 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="333"/>
-        <source>[RECOMMENDED]</source>
+        <source>RECOMMENDED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

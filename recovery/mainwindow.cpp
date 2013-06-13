@@ -330,7 +330,7 @@ void MainWindow::update_recommended_label()
 {
     if (recommendedItem)
     {
-        recommendedItem->setText(imageFilenameToFriendlyName(recommendedItem->data(Qt::UserRole).toString())+" "+tr("[RECOMMENDED]"));
+        recommendedItem->setText(imageFilenameToFriendlyName(recommendedItem->data(Qt::UserRole).toString())+QString(" [%1]").arg(tr("RECOMMENDED")));
     }
 }
 

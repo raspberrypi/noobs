@@ -239,9 +239,8 @@
     </message>
     <message>
         <location filename="languagedialog.ui" line="106"/>
-        <source>Language (L):  </source>
-        <oldsource>Language:  </oldsource>
-        <translation type="unfinished">Kieli:</translation>
+        <source>Language (l): </source>
+        <translation>Kieli (l): </translation>
     </message>
 </context>
 <context>
@@ -323,8 +322,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="333"/>
-        <source>[RECOMMENDED]</source>
-        <translation>[SUOSITELTU]</translation>
+        <source>RECOMMENDED</source>
+        <translation>SUOSITELTU</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="232"/>

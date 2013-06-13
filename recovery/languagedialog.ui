@@ -103,7 +103,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Language (L):  </string>
+      <string>Language (l): </string>
      </property>
     </widget>
    </item>
