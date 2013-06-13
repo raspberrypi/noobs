@@ -239,8 +239,8 @@
     </message>
     <message>
         <location line="+20"/>
-        <source>Language (L):  </source>
-        <translation type="unfinished">Língua:</translation>
+        <source>Language (l): </source>
+        <translation>Língua (l): </translation>
     </message>
 </context>
 <context>
@@ -302,8 +302,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="+333"/>
-        <source>[RECOMMENDED]</source>
-        <translation>[RECOMENDADO]</translation>
+        <source>RECOMMENDED</source>
+        <translation>RECOMENDADO</translation>
     </message>
     <message>
         <location line="-101"/>
