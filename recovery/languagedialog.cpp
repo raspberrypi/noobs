@@ -30,11 +30,14 @@ QT_TRANSLATE_NOOP("QDialogButtonBox","&Yes")
 QT_TRANSLATE_NOOP("QDialogButtonBox","&No")
 #endif
 
-LanguageDialog::LanguageDialog(QWidget *parent) :
+LanguageDialog::LanguageDialog(QString *currentLangCode, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LanguageDialog),
-    _trans(NULL), _qttrans(NULL)
+    _trans(NULL), _qttrans(NULL), _currentLang(currentLangCode)
 {
+    /* Need to make a temp copy becuase it gets modified by callbacks */
+    QString startLang = *_currentLang;
+
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_QuitOnClose, false);
@@ -45,6 +48,7 @@ LanguageDialog::LanguageDialog(QWidget *parent) :
     QDir dir(":/", "translation_*.qm");
     QStringList translations = dir.entryList();
 
+    bool validStartLang = false;
     foreach (QString langfile, translations)
     {
         QString langcode = langfile.mid(12);
@@ -60,7 +64,15 @@ LanguageDialog::LanguageDialog(QWidget *parent) :
             ui->langCombo->addItem(QIcon(iconfilename), languagename, langcode);
         else
             ui->langCombo->addItem(languagename, langcode);
+
+        if (langcode.compare(startLang, Qt::CaseInsensitive) == 0)
+        {
+            validStartLang = true;
+            startLang = langcode;
+            ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
+        }
     }
+    *_currentLang = (validStartLang ? startLang : "");
 }
 
 LanguageDialog::~LanguageDialog()
@@ -70,7 +82,7 @@ LanguageDialog::~LanguageDialog()
 
 void LanguageDialog::changeLanguage(const QString &langcode)
 {
-    if (langcode == _currentLang)
+    if (langcode == *_currentLang)
         return;
 
     if (_trans)
@@ -108,7 +120,7 @@ void LanguageDialog::changeLanguage(const QString &langcode)
         }
     }
 
-    _currentLang = langcode;
+    *_currentLang = langcode;
 }
 
 void LanguageDialog::on_langCombo_currentIndexChanged(int index)

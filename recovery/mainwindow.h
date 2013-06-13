@@ -25,7 +25,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QString *currentLangCode, QWidget *parent = 0);
     ~MainWindow();
 
 protected:
@@ -35,6 +35,7 @@ protected:
     int _kcpos;
     bool _silent, _allowSilent;
     static bool _partInited;
+    QString *_currentLang;
 
     QMap<QString,QString> listInstalledImages();
     QString basefile(const QString &filename);

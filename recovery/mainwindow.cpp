@@ -38,10 +38,10 @@ bool MainWindow::_partInited = false;
 /* Which ListItem (if any) points to the recommended image. */
 QListWidgetItem *recommendedItem = NULL;
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QString *currentLangCode, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _qpd(NULL), _kcpos(0), _silent(false), _allowSilent(true)
+    _qpd(NULL), _kcpos(0), _silent(false), _allowSilent(true), _currentLang(currentLangCode)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
@@ -256,6 +256,13 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
             slidesDirectory = "/mnt/slides/RaspBMC";
         else
             slidesDirectory = "/mnt/slides/default";
+
+        /* Check if a subdirectory of localised slides exists */
+        QString localisedSlidesDirectory = slidesDirectory + "/" + *_currentLang;
+        if (QDir(localisedSlidesDirectory).exists())
+        {
+            slidesDirectory = localisedSlidesDirectory;
+        }
 
         ImageWriteThread *t = new ImageWriteThread(imagefile, this);
 
