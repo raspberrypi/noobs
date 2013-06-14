@@ -394,9 +394,9 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
         if (keyEvent->key() == Qt::Key_1)
         {
             QProcess *p = new QProcess(this);
-            p->start(QString("sh -c \"tvservice -m CEA &> set; tvservice -m DMT >> set 2&>1; grep prefer set | cut -d \" \" -f 8 | cut -d x -f 1; grep prefer set | cut -d \" \" -f 8 | cut -d x -f 2"));
+            p->start(QString("sh -c \"tvservice -m CEA &> set; tvservice -m DMT >> set 2&>1; grep prefer set | cut -d \' \' -f 6 | cut -d x -f 1; grep prefer set | cut -d \' \' -f 6 | cut -d x -f 2"));
             p->setProcessChannelMode(QProcess::MergedChannels);
-            p->waitForFinished();
+            p->waitForFinished(4000);
 
             QTextStream stream(p);
             QString xres = stream.readLine();
