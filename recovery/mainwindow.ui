@@ -97,9 +97,6 @@
    <property name="toolTip">
     <string>Installs the selected operating system image onto this SD card.</string>
    </property>
-   <property name="shortcut">
-    <string notr="true">Return</string>
-   </property>
   </action>
   <action name="actionCancel">
    <property name="icon">

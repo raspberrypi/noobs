@@ -414,6 +414,9 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
         // Composite NTSC
         if (keyEvent->key() == Qt::Key_4)
             displayMode("-c \'PAL 4:3\'", tr("composite NTSC mode"), "625", "525");
+        // Catch Return key to trigger OS install
+        if (keyEvent->key() == Qt::Key_Return)
+            on_actionWrite_image_to_disk_triggered();
         else if (_kc.at(_kcpos) == keyEvent->key())
         {
             _kcpos++;
