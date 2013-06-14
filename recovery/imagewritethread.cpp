@@ -15,12 +15,12 @@
  * - Extracts image file to extended partition
  * - enlarges the ext4 partition to span the disk
  * - patches /etc/fstab and cmdline.txt
- *                                                                                                                                                                            
- * Initial author: Floris Bos                                                                                                                                                 
- * Maintained by Raspberry Pi                                                                                                                                                   
- *                                                                                                                                                                            
- * See LICENSE.txt for license details                                                                                                                                        
- *                                                                                                                                                                            
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 #define MB  1048576
@@ -312,10 +312,10 @@ void ImageWriteThread::replaceMMCBLKreferences(const QString &filename)
         return;
 
 #ifdef USE_EXTENDED_PARTITIONS
-    data.replace("mmcblk0p1", "mmcblk0p5");
-    data.replace("mmcblk0p2", "mmcblk0p6");
-    data.replace("mmcblk0p3", "mmcblk0p7");
-    data.replace("mmcblk0p4", "mmcblk0p8");
+    data.replace("mmcblk0p1", "mmcblk0p6");
+    data.replace("mmcblk0p2", "mmcblk0p7");
+    data.replace("mmcblk0p3", "mmcblk0p8");
+    data.replace("mmcblk0p4", "mmcblk0p9");
 #else
     data.replace("mmcblk0p3", "mmcblk0p4");
     data.replace("mmcblk0p2", "mmcblk0p3");

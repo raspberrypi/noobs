@@ -48,7 +48,7 @@ protected:
     virtual bool eventFilter(QObject *obj, QEvent *event);
     void inputSequence();
     void repopulate();
-    void displayMode(QString cmd, QString mode, QString xres, QString yres);
+    void displayMode(QString cmd, QString mode);
     void update_window_title();
     void update_recommended_label();
 

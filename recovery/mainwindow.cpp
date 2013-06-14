@@ -349,14 +349,24 @@ void MainWindow::changeEvent(QEvent* event)
     QMainWindow::changeEvent(event);
 }
 
-void MainWindow::displayMode(QString cmd, QString mode, QString xres, QString yres)
+void MainWindow::displayMode(QString cmd, QString mode)
 {
     // Trigger framebuffer resize
-    QProcess *process = new QProcess(this);
-    process->start(QString("sh -c \"tvservice -o; tvservice %1; fbset -depth 8; fbset -depth 16; fbset -xres %2 -yres %3\"").arg(cmd, xres, yres));
-    process->waitForFinished(4000);
+    QProcess *resize = new QProcess(this);
+    resize->start(QString("sh -c \"tvservice -o; tvservice %1;\"").arg(cmd));
+    resize->waitForFinished(4000);
 
-    // Update screen resolution
+    // Update screen resolution with current value (even if we didn't
+    // get what we thought we'd get)
+    QProcess *update = new QProcess(this);
+    update->start(QString("sh -c \"tvservice -s | cut -d , -f 2 | cut -d \' \' -f 2 | cut -d x -f 1;tvservice -s | cut -d , -f 2 | cut -d \' \' -f 2 | cut -d x -f 2\""));
+    update->waitForFinished(4000);
+    update->setProcessChannelMode(QProcess::MergedChannels);
+
+    QTextStream stream(update);
+    QString xres = stream.readLine();
+    QString yres = stream.readLine();
+
     QScreen::instance()->setMode(xres.toInt(), yres.toInt(), 16);
 
     // Update UI item locations
@@ -371,15 +381,19 @@ void MainWindow::displayMode(QString cmd, QString mode, QString xres, QString yr
     // TODO: Write choice to config.txt of installed OS
     // during OS install and use this choice if present by default
 
-    // Inform user of resolution change. Time out in case they can't
-    // see it
+    // Inform user of resolution change with message box.
     QMessageBox *mbox = new QMessageBox;
     mbox->setWindowTitle(tr("Display Mode Changed"));
     mbox->setText(QString(tr("Display mode changed to %1")).arg(mode));
+    mbox->setStandardButtons(0);
     mbox->show();
-    QTimer::singleShot(6000, mbox, SLOT(hide()));
+    QTimer::singleShot(2000, mbox, SLOT(hide()));
 
-}
+    // In case they can't see the message box, inform that mode change
+    // is occuring by turning on the LED during the change
+    QProcess *led_blink = new QProcess(this);
+    led_blink->start("sh -c \"echo 1 > /sys/class/leds/led0/brightness; sleep 3; echo 0 > /sys/class/leds/led0/brightness\"");
+    }
 
 bool MainWindow::eventFilter(QObject *, QEvent *event)
 {
@@ -392,28 +406,16 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
 
         // HDMI preferred mode
         if (keyEvent->key() == Qt::Key_1)
-        {
-            QProcess *p = new QProcess(this);
-            p->start(QString("sh -c \"tvservice -m CEA &> set; tvservice -m DMT >> set 2&>1; grep prefer set | cut -d \' \' -f 6 | cut -d x -f 1; grep prefer set | cut -d \' \' -f 6 | cut -d x -f 2"));
-            p->setProcessChannelMode(QProcess::MergedChannels);
-            p->waitForFinished(4000);
-
-            QTextStream stream(p);
-            QString xres = stream.readLine();
-            QString yres = stream.readLine();
-
-            displayMode("-p", tr("HDMI preferred mode"), xres, yres);
-        }
-
+            displayMode("-p", tr("HDMI preferred mode"));
         // HDMI safe mode
         if (keyEvent->key() == Qt::Key_2)
-            displayMode("-e \'DMT 4\'", tr("HDMI safe mode"), "640", "480");
+            displayMode("-e \'DMT 4\'", tr("HDMI safe mode"));
         // Composite PAL
         if (keyEvent->key() == Qt::Key_3)
-            displayMode("-c \'NTSC 4:3\'", tr("composite PAL mode"), "720", "576");
+            displayMode("-c \'NTSC 4:3\'", tr("composite PAL mode"));
         // Composite NTSC
         if (keyEvent->key() == Qt::Key_4)
-            displayMode("-c \'PAL 4:3\'", tr("composite NTSC mode"), "625", "525");
+            displayMode("-c \'PAL 4:3\'", tr("composite NTSC mode"));
         // Catch Return key to trigger OS install
         if (keyEvent->key() == Qt::Key_Return)
             on_actionWrite_image_to_disk_triggered();
