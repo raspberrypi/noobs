@@ -69,24 +69,25 @@ int main(int argc, char *argv[])
     if (QFile::exists(":/icons/raspberry_icon.png"))
         a.setWindowIcon(QIcon(":/icons/raspberry_icon.png"));
 
-    if (QFile::exists(":/wallpaper.png"))
-    {
-#ifdef CENTER_BACKGROUND_IMAGE
+    //if (QFile::exists(":/wallpaper.png"))
+    // {
+//#ifdef CENTER_BACKGROUND_IMAGE
         // Using QSplashScreen to get a centered background image
         QWSServer::setBackground(BACKGROUND_COLOR);
         QSplashScreen *splash = new QSplashScreen(QPixmap(":/wallpaper.png"));
         splash->show();
         QApplication::processEvents();
-#else
+//#else
         // Scale background image to fit screen
-        QRect dim = a.desktop()->availableGeometry();
-        QWSServer::setBackground(QImage(":/wallpaper.png").scaled(dim.width(), dim.height()));
-#endif
-    }
-    else
-    {
-        QWSServer::setBackground(BACKGROUND_COLOR);
-    }
+//        QRect dim = a.desktop()->availableGeometry();
+        //       QWSServer::setBackground(QImage(":/wallpaper.png").scaled(dim.width(), dim.height()));
+//#endif
+//    }
+//    else
+//    {
+//        QWSServer::setBackground(BACKGROUND_COLOR);
+        //   }
+//#endif
 #endif
 
     // If -runinstaller is not specified, only continue if SHIFT is pressed, GPIO is triggered or no OS is installed (/dev/mmcblk0p6 does not exist)
@@ -110,13 +111,13 @@ int main(int argc, char *argv[])
 
 #ifdef ENABLE_LANGUAGE_CHOOSER
     // Language chooser at the bottom center
-    LanguageDialog ld(&currentLangCode);
-    ld.setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, ld.size(), a.desktop()->availableGeometry()));
-    ld.show();
+    LanguageDialog* ld = new LanguageDialog(&currentLangCode);
+    ld->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, ld->size(), a.desktop()->availableGeometry()));
+    ld->show();
 #endif
 
     // Main window in the middle of screen
-    MainWindow mw(&currentLangCode);
+    MainWindow mw(&currentLangCode, splash, ld);
     mw.setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, mw.size(), a.desktop()->availableGeometry()));
     mw.show();
 

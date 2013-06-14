@@ -5,6 +5,7 @@
 #include "confeditdialog.h"
 #include "progressslideshowdialog.h"
 #include "config.h"
+#include "languagedialog.h"
 #include <QMessageBox>
 #include <QProgressDialog>
 #include <QMap>
@@ -17,6 +18,8 @@
 #include <QPainter>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QScreen>
+#include <QSplashScreen>
 #include <QDesktopWidget>
 
 #ifdef Q_WS_QWS
@@ -38,10 +41,10 @@ bool MainWindow::_partInited = false;
 /* Which ListItem (if any) points to the recommended image. */
 QListWidgetItem *recommendedItem = NULL;
 
-MainWindow::MainWindow(QString *currentLangCode, QWidget *parent) :
+MainWindow::MainWindow(QString *currentLangCode, QSplashScreen *splash, LanguageDialog *ld, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _qpd(NULL), _kcpos(0), _silent(false), _allowSilent(true), _currentLang(currentLangCode)
+    _qpd(NULL), _kcpos(0), _silent(false), _allowSilent(true), _currentLang(currentLangCode), _splash(splash), _ld(ld)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
@@ -353,7 +356,16 @@ void MainWindow::displayMode(QString cmd, QString mode, QString xres, QString yr
     process->start(QString("sh -c \"tvservice -o; tvservice %1; fbset -depth 8; fbset -depth 16; fbset -xres %2 -yres %3\"").arg(cmd, xres, yres));
     process->waitForFinished(4000);
 
+    // Update screen resolution
+    QScreen::instance()->setMode(xres.toInt(), yres.toInt(), 16);
+
+    // Update UI item locations
+    _splash->setPixmap(QPixmap(":/wallpaper.png"));
+    _ld->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, _ld->size(), qApp->desktop()->availableGeometry()));
+    this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
+
     // Refresh screen
+    qApp->processEvents();
     QWSServer::instance()->refresh();
 
     // TODO: Write choice to config.txt of installed OS
@@ -365,7 +377,7 @@ void MainWindow::displayMode(QString cmd, QString mode, QString xres, QString yr
     mbox->setWindowTitle(tr("Display Mode Changed"));
     mbox->setText(QString(tr("Display mode changed to %1")).arg(mode));
     mbox->show();
-    QTimer::singleShot(4000, mbox, SLOT(hide()));
+    QTimer::singleShot(6000, mbox, SLOT(hide()));
 
 }
 
@@ -375,9 +387,24 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
     {
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
 
+        // Let user find the best display mode for their display
+        // experimentally by using keys 1-4. NOOBS will default to using HDMI preferred mode.
+
         // HDMI preferred mode
         if (keyEvent->key() == Qt::Key_1)
-            displayMode("-p", tr("HDMI preferred mode"), "1280", "720");
+        {
+            QProcess *p = new QProcess(this);
+            p->start(QString("sh -c \"tvservice -m CEA &> set; tvservice -m DMT >> set 2&>1; grep prefer set | cut -d \" \" -f 8 | cut -d x -f 1; grep prefer set | cut -d \" \" -f 8 | cut -d x -f 2"));
+            p->setProcessChannelMode(QProcess::MergedChannels);
+            p->waitForFinished();
+
+            QTextStream stream(p);
+            QString xres = stream.readLine();
+            QString yres = stream.readLine();
+
+            displayMode("-p", tr("HDMI preferred mode"), xres, yres);
+        }
+
         // HDMI safe mode
         if (keyEvent->key() == Qt::Key_2)
             displayMode("-e \'DMT 4\'", tr("HDMI safe mode"), "640", "480");

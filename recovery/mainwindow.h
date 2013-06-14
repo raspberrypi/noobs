@@ -11,9 +11,10 @@
  * See LICENSE.txt for license details
  *
  */
-
+#include "languagedialog.h"
 #include <QMainWindow>
 #include <QModelIndex>
+#include <QSplashScreen>
 
 namespace Ui {
 class MainWindow;
@@ -25,7 +26,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QString *currentLangCode, QWidget *parent = 0);
+    explicit MainWindow(QString *currentLangCode, QSplashScreen *splash, LanguageDialog *ld, QWidget *parent = 0);
     ~MainWindow();
 
 protected:
@@ -36,6 +37,9 @@ protected:
     bool _silent, _allowSilent;
     static bool _partInited;
     QString *_currentLang;
+    QSplashScreen *_splash;
+    LanguageDialog *_ld;
+
 
     QMap<QString,QString> listInstalledImages();
     QString basefile(const QString &filename);

@@ -17,6 +17,12 @@ if [ -n "$1" ] && [ "$1" = "update-firmware" ]; then
     rm -rf dl/rpi-firmware-master.tar.gz
 fi
 
+# Redownload userland from raspberrypi/userland master HEAD to update to latest
+if [ -n "$1" ] && [ "$1" = "update-userland" ]; then
+    rm -rf output/build/rpi-userland-master
+    rm -rf dl/rpi-userland-master.tar.gz
+fi
+
 # Let buildroot build everything
 make
 
