@@ -36,6 +36,7 @@ protected:
     int _kcpos;
     bool _silent, _allowSilent;
     static bool _partInited;
+    static int _currentMode;
     QString *_currentLang;
     QSplashScreen *_splash;
     LanguageDialog *_ld;

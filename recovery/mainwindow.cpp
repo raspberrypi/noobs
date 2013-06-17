@@ -38,6 +38,9 @@
 /* Flag to keep track wheter or not we already repartitioned. */
 bool MainWindow::_partInited = false;
 
+/* Flag to keep track of current display mode. */
+int MainWindow::_currentMode = 0;
+
 /* Which ListItem (if any) points to the recommended image. */
 QListWidgetItem *recommendedItem = NULL;
 
@@ -405,17 +408,29 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
         // experimentally by using keys 1-4. NOOBS will default to using HDMI preferred mode.
 
         // HDMI preferred mode
-        if (keyEvent->key() == Qt::Key_1)
+        if (keyEvent->key() == Qt::Key_1 && _currentMode != 0)
+        {
             displayMode("-p", tr("HDMI preferred mode"));
+            _currentMode = 0;
+        }
         // HDMI safe mode
-        if (keyEvent->key() == Qt::Key_2)
+        if (keyEvent->key() == Qt::Key_2 && _currentMode != 1)
+        {
             displayMode("-e \'DMT 4\'", tr("HDMI safe mode"));
+            _currentMode = 1;
+        }
         // Composite PAL
-        if (keyEvent->key() == Qt::Key_3)
+        if (keyEvent->key() == Qt::Key_3 && _currentMode != 2)
+        {
             displayMode("-c \'NTSC 4:3\'", tr("composite PAL mode"));
-        // Composite NTSC
-        if (keyEvent->key() == Qt::Key_4)
+            _currentMode = 2;
+        }
+         // Composite NTSC
+        if (keyEvent->key() == Qt::Key_4 && _currentMode != 3)
+        {
             displayMode("-c \'PAL 4:3\'", tr("composite NTSC mode"));
+            _currentMode = 3;
+        }
         // Catch Return key to trigger OS install
         if (keyEvent->key() == Qt::Key_Return)
             on_actionWrite_image_to_disk_triggered();

@@ -47,4 +47,4 @@ cat rpi-firmware-head >> "../output/"BUILT-"$(date +"%Y-%m-%d")"
 cd ..
 
 clear
-echo "Build complete. Copy files in \'output\' directory onto a clean FAT formatted SD card to use."
+echo "Build complete. Copy files in 'output' directory onto a clean FAT formatted SD card to use."
