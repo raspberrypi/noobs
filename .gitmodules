@@ -1,0 +1,3 @@
+[submodule "output"]
+	path = output
+	url = https://github.com/raspberrypi/noobs_binaries.git
