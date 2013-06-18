@@ -416,7 +416,7 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
         // HDMI safe mode
         if (keyEvent->key() == Qt::Key_2 && _currentMode != 1)
         {
-            displayMode("-e \'DMT 4\'", tr("HDMI safe mode"));
+            displayMode("-e \'DMT 4 DVI\'", tr("HDMI safe mode"));
             _currentMode = 1;
         }
         // Composite PAL
