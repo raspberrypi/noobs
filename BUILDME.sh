@@ -40,9 +40,12 @@ cp output/images/rpi-firmware/bootcode.bin ../output
 
 # Create build-date timestamp file containing Git HEAD info for build
 rm -f ../output/BUILT* || true
-echo "NOOBS Git HEAD @ "`git rev-parse --verify HEAD` > "../output/"BUILT-"$(date +"%Y-%m-%d")"
-cat rpi-userland-head >> "../output/"BUILT-"$(date +"%Y-%m-%d")"
-cat rpi-firmware-head >> "../output/"BUILT-"$(date +"%Y-%m-%d")"
+BUILD_INFO="../output/BUILD-DATA"
+echo "Build-date: $(date +"%Y-%m-%d")" > "$BUILD_INFO"
+echo "NOOBS Version: "`git describe` >> "$BUILD_INFO"
+echo "NOOBS Git HEAD @ "`git rev-parse --verify HEAD` >> "$BUILD_INFO"
+cat rpi-userland-head >> "$BUILD_INFO"
+cat rpi-firmware-head >> "$BUILD_INFO"
 
 cd ..
 
