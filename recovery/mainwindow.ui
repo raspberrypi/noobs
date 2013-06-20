@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,8 +15,14 @@
     <pointsize>11</pointsize>
    </font>
   </property>
-   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
+  </property>
+ <widget class="QWidget" name="centralWidget">
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
+  </property>
+ <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="margin">
      <number>0</number>
     </property>
@@ -35,6 +41,12 @@
    </layout>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
    <property name="iconSize">
     <size>
      <width>22</width>
@@ -83,10 +95,7 @@
     <string>Install OS</string>
    </property>
    <property name="toolTip">
-    <string>Install OS</string>
-   </property>
-   <property name="shortcut">
-    <string>Return</string>
+    <string>Installs the selected operating system image onto this SD card.</string>
    </property>
   </action>
   <action name="actionCancel">
@@ -95,10 +104,13 @@
      <normaloff>:/icons/door_in.png</normaloff>:/icons/door_in.png</iconset>
    </property>
    <property name="text">
-    <string>Exit</string>
+    <string>Exit (Esc)</string>
    </property>
-   <property name="shortcut">
-    <string>Esc</string>
+   <property name="toolTip">
+    <string>Exits and boots the installed operating system.</string>
+     </property>
+    <property name="shortcut">
+    <string notr="true">Esc</string>
    </property>
   </action>
   <action name="actionAdvanced">
@@ -143,7 +155,13 @@
      <normaloff>:/icons/page_white_edit.png</normaloff>:/icons/page_white_edit.png</iconset>
    </property>
    <property name="text">
-    <string>Edit config</string>
+    <string>Edit config (e)</string>
+   </property>
+   <property name="toolTip">
+    <string>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">e</string>
    </property>
   </action>
   <action name="actionBrowser">
@@ -152,10 +170,13 @@
      <normaloff>:/icons/world.png</normaloff>:/icons/world.png</iconset>
    </property>
    <property name="text">
-    <string>Online help</string>
+    <string>Online help (h)</string>
    </property>
    <property name="toolTip">
-    <string>Online help</string>
+    <string>Opens a web browser displaying the Raspberry Pi Forum.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">h</string>
    </property>
   </action>
  </widget>

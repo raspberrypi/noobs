@@ -85,7 +85,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <property name="styleSheet">
+   <property name="styleSheet">
    <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -103,12 +103,16 @@
       </font>
      </property>
      <property name="text">
-      <string>Language:  </string>
+      <string>Language (l): </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QComboBox" name="langCombo">
+     <addaction name="actionOpenComboBox"/>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -118,6 +122,17 @@
     </widget>
    </item>
   </layout>
+  <action name="actionOpenComboBox">
+   <property name="text">
+    <string notr="true">openComboBox</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">L</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

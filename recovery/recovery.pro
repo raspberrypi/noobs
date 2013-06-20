@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = recovery
 TEMPLATE = app
 
+system(sh updateqm.sh)
+
 SOURCES += main.cpp\
         mainwindow.cpp \
     imagewritethread.cpp \
@@ -46,7 +48,9 @@ TRANSLATIONS += translation_nl.ts \
     translation_de.ts \
     translation_pt.ts \
     translation_ja.ts \
-    translation_fr.ts
+    translation_fr.ts \
+    translation_hu.ts \
+    translation_fi.ts
 
 OTHER_FILES += \
     README.txt

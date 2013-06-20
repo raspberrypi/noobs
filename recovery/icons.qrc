@@ -1,25 +1,28 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/nl.png</file>
-        <file>icons/gb.png</file>
         <file>icons/raspberry_icon.png</file>
         <file>icons/backups.png</file>
         <file>icons/door_in.png</file>
-        <file>translation_nl.qm</file>
         <file>icons/page_white_edit.png</file>
         <file>icons/setting_tools.png</file>
         <file>icons/add.png</file>
         <file>icons/delete.png</file>
         <file>wallpaper.png</file>
-        <file>icons/es.png</file>
-        <file>icons/fr.png</file>
-        <file>icons/de.png</file>
-        <file>icons/pt.png</file>
-        <file>icons/ja.png</file>
-        <file>translation_de.qm</file>
-        <file>translation_pt.qm</file>
-        <file>translation_ja.qm</file>
-        <file>translation_fr.qm</file>  
         <file>icons/world.png</file>
+        <file>icons/gb.png</file>
+        <file>translation_nl.qm</file>
+        <file>icons/nl.png</file>
+        <file>translation_de.qm</file>
+        <file>icons/de.png</file>
+        <file>translation_pt.qm</file>
+        <file>icons/pt.png</file>
+        <file>translation_ja.qm</file>
+        <file>icons/ja.png</file>
+        <file>translation_fr.qm</file>
+        <file>icons/fr.png</file>
+        <file>translation_hu.qm</file>
+        <file>icons/hu.png</file>
+        <file>translation_fi.qm</file>
+        <file>icons/fi.png</file>
     </qresource>
 </RCC>

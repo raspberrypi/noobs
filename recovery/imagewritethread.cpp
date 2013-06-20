@@ -15,12 +15,12 @@
  * - Extracts image file to extended partition
  * - enlarges the ext4 partition to span the disk
  * - patches /etc/fstab and cmdline.txt
- *                                                                                                                                                                            
- * Initial author: Floris Bos                                                                                                                                                 
- * Maintained by Raspberry Pi                                                                                                                                                   
- *                                                                                                                                                                            
- * See LICENSE.txt for license details                                                                                                                                        
- *                                                                                                                                                                            
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 #define MB  1048576
@@ -312,10 +312,8 @@ void ImageWriteThread::replaceMMCBLKreferences(const QString &filename)
         return;
 
 #ifdef USE_EXTENDED_PARTITIONS
+    data.replace("mmcblk0p5", "mmcblk0p6");
     data.replace("mmcblk0p1", "mmcblk0p5");
-    data.replace("mmcblk0p2", "mmcblk0p6");
-    data.replace("mmcblk0p3", "mmcblk0p7");
-    data.replace("mmcblk0p4", "mmcblk0p8");
 #else
     data.replace("mmcblk0p3", "mmcblk0p4");
     data.replace("mmcblk0p2", "mmcblk0p3");
@@ -340,51 +338,81 @@ int ImageWriteThread::startOfSecondPartition()
 
 bool ImageWriteThread::resizePartition()
 {
-    mbr_table mbr;
-    int lastPartition = -1;
+    mbr_table ebr, lbr;
 
     QFile f("/dev/mmcblk0");
     f.open(f.ReadWrite);
 
     f.seek(_offsetInBytes);
-    f.read((char *) &mbr, sizeof(mbr));
+    f.read((char *) &ebr, sizeof(ebr));
 
 #ifdef USE_EXTENDED_PARTITIONS
-    // Using MBR inside image as an extended partition table
 
     int sizeOfDisk = getFileContents("/sys/class/block/mmcblk0/size").trimmed().toULongLong();
     int sizeOfExtended = sizeOfDisk-startOfSecondPartition();
+    int sizeOfLogical = sizeOfExtended - ebr.part[1].starting_sector;
 
-    // We want to resize the last logical partition that is actually in use
-    for (int i=3; i>=0; i--)
-    {
-        if (mbr.part[i].starting_sector)
-        {
-            // Enlarge partition
-            mbr.part[i].nr_of_sectors = sizeOfExtended - mbr.part[i].starting_sector;
-            // Linux only cares about LBA, zeroing out obsolete head/sector/cylinder fields
-            mbr.part[i].begin_hsc[0] = mbr.part[i].begin_hsc[1] = mbr.part[i].begin_hsc[2] = 0;
-            mbr.part[i].end_hsc[0] = mbr.part[i].end_hsc[1] = mbr.part[i].end_hsc[2] = 0;
-
-            lastPartition = i;
-            break;
-        }
+    if (!(ebr.signature[0] == 0x55 && ebr.signature[1] == 0xAA)){
+        emit error(tr("Extended boot record (EBR) not found"));
+        return false;
     }
-    if (lastPartition == -1)
+
+    if (ebr.part[1].starting_sector)
     {
-        emit error(tr("No partitions found inside image"));
+        // Enlarge partition
+        ebr.part[1].nr_of_sectors = sizeOfExtended - ebr.part[1].starting_sector;
+        // Linux only cares about LBA, zeroing out
+        // obsolete head/sector/cylinder fields
+        ebr.part[1].begin_hsc[0] = ebr.part[1].begin_hsc[1] = ebr.part[1].begin_hsc[2] = 0;
+        ebr.part[1].end_hsc[0] = ebr.part[1].end_hsc[1] = ebr.part[1].end_hsc[2] = 0;
+    }
+    else
+    {
+        emit error(tr("No partitions found inside image's extended boot record (EBR)"));
         return false;
     }
 
     // Write our modified extended MBR to disk
     f.seek(_offsetInBytes);
-    f.write((char *) &mbr, sizeof(mbr));
+    f.write((char *) &ebr, sizeof(ebr));
+
+    int logicalOffsetinBytes = _offsetInBytes + ebr.part[1].starting_sector*512;
+
+    // Handle logical partition
+    f.seek(logicalOffsetinBytes);
+    f.read((char *) &lbr, sizeof(lbr));
+
+    if (!(lbr.signature[0] == 0x55 && lbr.signature[1] == 0xAA)){
+        emit error(tr("Logical boot record (LBR) not found"));
+        return false;
+    }
+
+    if (lbr.part[0].starting_sector)
+    {
+        // Enlarge partition
+        lbr.part[0].nr_of_sectors = sizeOfLogical - lbr.part[0].starting_sector;
+        // Linux only cares about LBA, zeroing out
+        // obsolete head/sector/cylinder fields
+        lbr.part[0].begin_hsc[0] = lbr.part[0].begin_hsc[1] = lbr.part[0].begin_hsc[2] = 0;
+        lbr.part[0].end_hsc[0] = lbr.part[0].end_hsc[1] = lbr.part[0].end_hsc[2] = 0;
+    }
+    else
+    {
+        emit error(tr("No partitions found inside image's logical boot record (LBR)"));
+        return false;
+    }
+
+    // Write our modified extended MBR to disk
+    f.seek(logicalOffsetinBytes);
+    f.write((char *) &lbr, sizeof(lbr));
     f.flush();
+
     // Tell Linux to re-read the partition table
     ioctl(f.handle(), BLKRRPART);
+
     f.close();
 
-    QString lastPartStr = "/dev/mmcblk0p"+QString::number(lastPartition+5);
+    QString lastPartStr = "/dev/mmcblk0p6";
 #else
     // Rewriting primary MBR
 

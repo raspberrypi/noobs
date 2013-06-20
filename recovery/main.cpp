@@ -23,12 +23,12 @@
 #endif
 
 /*
- *                                                                                                                                                                           
- * Initial author: Floris Bos                                                                                                                                              
- * Maintained by Raspberry Pi                                                                                                                                             
- *                                                                                                                                                                   
- * See LICENSE.txt for license details                                                                                                                            
- *                                                                                                                                                             
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 void reboot_to_extended()
@@ -46,6 +46,18 @@ int main(int argc, char *argv[])
     GpioInput gpio(3);
     QApplication a(argc, argv);
     RightButtonFilter rbf;
+    QString currentLangCode;
+    bool runinstaller = false;
+
+    // Process command-line arguments
+    for (int i=1; i<argc; i++)
+    {
+        if (strcmp(argv[i], "-runinstaller") == 0)
+            runinstaller = true;
+        else if (strcmp(argv[i], "-lang") == 0)
+            if (argc > i+1)
+                currentLangCode = argv[++i];
+    }
 
     // Intercept right mouse clicks sent to the title bar
     a.installEventFilter(&rbf);
@@ -57,28 +69,29 @@ int main(int argc, char *argv[])
     if (QFile::exists(":/icons/raspberry_icon.png"))
         a.setWindowIcon(QIcon(":/icons/raspberry_icon.png"));
 
-    if (QFile::exists(":/wallpaper.png"))
-    {
-#ifdef CENTER_BACKGROUND_IMAGE
+    //if (QFile::exists(":/wallpaper.png"))
+    // {
+//#ifdef CENTER_BACKGROUND_IMAGE
         // Using QSplashScreen to get a centered background image
         QWSServer::setBackground(BACKGROUND_COLOR);
         QSplashScreen *splash = new QSplashScreen(QPixmap(":/wallpaper.png"));
         splash->show();
         QApplication::processEvents();
-#else
+//#else
         // Scale background image to fit screen
-        QRect dim = a.desktop()->availableGeometry();
-        QWSServer::setBackground(QImage(":/wallpaper.png").scaled(dim.width(), dim.height()));
-#endif
-    }
-    else
-    {
-        QWSServer::setBackground(BACKGROUND_COLOR);
-    }
+//        QRect dim = a.desktop()->availableGeometry();
+        //       QWSServer::setBackground(QImage(":/wallpaper.png").scaled(dim.width(), dim.height()));
+//#endif
+//    }
+//    else
+//    {
+//        QWSServer::setBackground(BACKGROUND_COLOR);
+        //   }
+//#endif
 #endif
 
     // If -runinstaller is not specified, only continue if SHIFT is pressed, GPIO is triggered or no OS is installed (/dev/mmcblk0p6 does not exist)
-    bool bailout = (argc < 2 || strcmp(argv[1], "-runinstaller") != 0)
+    bool bailout = !runinstaller
          && gpio.value() != 0
          && !KeyDetection::isF10pressed()
          && QFile::exists(FAT_PARTITION_OF_IMAGE);
@@ -98,13 +111,13 @@ int main(int argc, char *argv[])
 
 #ifdef ENABLE_LANGUAGE_CHOOSER
     // Language chooser at the bottom center
-    LanguageDialog ld;
-    ld.setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, ld.size(), a.desktop()->availableGeometry()));
-    ld.show();
+    LanguageDialog* ld = new LanguageDialog(&currentLangCode);
+    ld->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignHCenter | Qt::AlignBottom, ld->size(), a.desktop()->availableGeometry()));
+    ld->show();
 #endif
 
     // Main window in the middle of screen
-    MainWindow mw;
+    MainWindow mw(&currentLangCode, splash, ld);
     mw.setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, mw.size(), a.desktop()->availableGeometry()));
     mw.show();
 

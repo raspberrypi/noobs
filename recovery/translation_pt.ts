@@ -146,8 +146,8 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Error formatting boot partition (vfat)</source>
-        <translation>Erro ao formatar partição de boot (VFAT)</translation>
+        <source>Error formatting boot partition (fat)</source>
+        <translation>Erro ao formatar partição de boot (FAT)</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -239,40 +239,34 @@
     </message>
     <message>
         <location line="+20"/>
-        <source>Language:  </source>
-        <translation>Língua:</translation>
+        <source>Language (l): </source>
+        <translation>Língua (l): </translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="+19"/>
-        <source>System recovery</source>
-        <translation>Recuperação do sistema</translation>
-    </message>
-    <message>
-        <location line="+67"/>
-        <location line="+3"/>
+        <location filename="mainwindow.ui" line="+95"/>
         <source>Install OS</source>
         <translation>Restaurar imagem</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Return</source>
-        <translation>Retorno</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Exit</source>
-        <translation>Sair</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Esc</source>
-        <translation></translation>
+        <source>Installs the selected operating system image onto this SD card.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+12"/>
+        <source>Exit (Esc)</source>
+        <translation>Sair (Esc)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Exits and boots the installed operating system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
         <source>Advanced</source>
         <translation>Avançado</translation>
     </message>
@@ -288,32 +282,41 @@
     </message>
     <message>
         <location line="+12"/>
-        <source>Edit config</source>
-        <translation>Editar Configuração</translation>
+        <source>Edit config (e)</source>
+        <translation>Editar Configuração (e)</translation>
     </message>
     <message>
-        <location line="+9"/>
         <location line="+3"/>
-        <source>Online help</source>
-        <translation>Ajuda Online</translation>
+        <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+105"/>
-        <source>[RECOMMENDED]</source>
-        <translation>[RECOMENDADO]</translation>
+        <location line="+12"/>
+        <source>Online help (h)</source>
+        <translation>Ajuda Online (h)</translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+3"/>
+        <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="+333"/>
+        <source>RECOMMENDED</source>
+        <translation>RECOMENDADO</translation>
+    </message>
+    <message>
+        <location line="-101"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="-171"/>
-        <source>Pi Recovery - Built:%1</source>
-        <translation>Restauração do Pi - Feita: %1</translation>
+        <location line="+94"/>
+        <source>NOOBS v%1 - Built: %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="-266"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -328,17 +331,12 @@
         <translation>Por favor adicione pelo menos uma imagem de SO ao diretório /images para proceder</translation>
     </message>
     <message>
-        <location line="+121"/>
+        <location line="+134"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
     <message>
-        <location line="+33"/>
-        <source>Starting image write</source>
-        <translation>Iniciando gravação da imagem</translation>
-    </message>
-    <message>
-        <location line="+27"/>
+        <location line="+72"/>
         <source>Restore complete</source>
         <translation>Restauração concluída</translation>
     </message>
@@ -353,7 +351,37 @@
         <translation></translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+51"/>
+        <source>Display Mode Changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Display mode changed to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>HDMI preferred mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>HDMI safe mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>composite PAL mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>composite NTSC mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
         <source>Enabling network interface</source>
         <translation type="unfinished">Habilitando interface da rede</translation>
     </message>
@@ -371,7 +399,7 @@
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="+104"/>
+        <location filename="progressslideshowdialog.cpp" line="+113"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%1 MB de %2 MB gravado(s) (%3 MB/s)</translation>
     </message>
@@ -384,7 +412,7 @@
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="languagedialog.cpp" line="+22"/>
+        <location filename="languagedialog.cpp" line="+23"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>

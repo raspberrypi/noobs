@@ -4,16 +4,17 @@
 /* Main window
  *
  * Initial author: Floris Bos
- *                                                                                                                                                                             
- * Initial author: Floris Bos                                                                                                                                                
- * Maintained by Raspberry Pi                                                                                                                                                
- *                                                                                                                                                                       
- * See LICENSE.txt for license details                                                                                                                                 
- *                                                                                                                                                                   
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
-
+#include "languagedialog.h"
 #include <QMainWindow>
 #include <QModelIndex>
+#include <QSplashScreen>
 
 namespace Ui {
 class MainWindow;
@@ -23,11 +24,11 @@ class QProgressDialog;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    
+
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QString *currentLangCode, QSplashScreen *splash, LanguageDialog *ld, QWidget *parent = 0);
     ~MainWindow();
-    
+
 protected:
     Ui::MainWindow *ui;
     QDialog *_qpd;
@@ -35,6 +36,11 @@ protected:
     int _kcpos;
     bool _silent, _allowSilent;
     static bool _partInited;
+    static int _currentMode;
+    QString *_currentLang;
+    QSplashScreen *_splash;
+    LanguageDialog *_ld;
+
 
     QMap<QString,QString> listInstalledImages();
     QString basefile(const QString &filename);
@@ -43,6 +49,9 @@ protected:
     virtual bool eventFilter(QObject *obj, QEvent *event);
     void inputSequence();
     void repopulate();
+    void displayMode(QString cmd, QString mode);
+    void update_window_title();
+    void update_recommended_label();
 
 protected slots:
     void populate();

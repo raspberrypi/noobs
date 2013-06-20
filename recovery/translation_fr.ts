@@ -146,8 +146,8 @@
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
-        <source>Error formatting boot partition (vfat)</source>
-        <translation>Erreur pendant le formatage de la partition de démarrage (VFAT)</translation>
+        <source>Error formatting boot partition (fat)</source>
+        <translation>Erreur pendant le formatage de la partition de démarrage (FAT)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="167"/>
@@ -239,131 +239,159 @@
     </message>
     <message>
         <location filename="languagedialog.ui" line="106"/>
-        <source>Language:  </source>
-        <translation>Langue: </translation>
+        <source>Language (l): </source>
+        <translation>Langue (l): </translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="19"/>
-        <source>System recovery</source>
-        <translation>Récupération Système</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="86"/>
-        <location filename="mainwindow.ui" line="89"/>
+        <location filename="mainwindow.ui" line="95"/>
         <source>Install OS</source>
         <translation>Restaurer image</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="92"/>
-        <source>Return</source>
-        <translation>Retour</translation>
+        <location filename="mainwindow.ui" line="98"/>
+        <source>Installs the selected operating system image onto this SD card.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="101"/>
-        <source>Exit</source>
-        <translation>Sortie</translation>
+        <location filename="mainwindow.ui" line="110"/>
+        <source>Exit (Esc)</source>
+        <translation>Sortie (Esc)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="104"/>
-        <source>Esc</source>
-        <translation>Échap</translation>
+        <location filename="mainwindow.ui" line="113"/>
+        <source>Exits and boots the installed operating system.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="116"/>
+        <location filename="mainwindow.ui" line="128"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="125"/>
+        <location filename="mainwindow.ui" line="137"/>
         <source>Add image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="137"/>
+        <location filename="mainwindow.ui" line="149"/>
         <source>Remove image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="149"/>
-        <source>Edit config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="158"/>
         <location filename="mainwindow.ui" line="161"/>
-        <source>Online help</source>
+        <source>Edit config (e)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="40"/>
-        <source>Pi Recovery - Built:%1</source>
+        <location filename="mainwindow.ui" line="164"/>
+        <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="52"/>
+        <location filename="mainwindow.ui" line="176"/>
+        <source>Online help (h)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="179"/>
+        <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="326"/>
+        <source>NOOBS v%1 - Built: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="60"/>
         <source>Setting up SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="91"/>
+        <location filename="mainwindow.cpp" line="99"/>
         <source>No OS Images Found on SD Card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="91"/>
+        <location filename="mainwindow.cpp" line="99"/>
         <source>Please add at least one OS image to the /images directory in order to proceed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="105"/>
-        <source>[RECOMMENDED]</source>
-        <translation>[RECOMMANDÉ]</translation>
+        <location filename="mainwindow.cpp" line="333"/>
+        <source>RECOMMENDED</source>
+        <translation>RECOMMANDÉ</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="211"/>
+        <location filename="mainwindow.cpp" line="232"/>
         <source>Confirm</source>
         <translation>Confirmer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="212"/>
+        <location filename="mainwindow.cpp" line="233"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Êtes-vous sûr de vouloir écrire l&apos;image? CELA EFFACERA TOUTES VOS DONNÉES EXISTANTES!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="245"/>
-        <source>Starting image write</source>
-        <translation>Commencement de l’écriture de l’image</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="272"/>
+        <location filename="mainwindow.cpp" line="305"/>
         <source>Restore complete</source>
         <translation>Restauration complète</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="273"/>
+        <location filename="mainwindow.cpp" line="306"/>
         <source>Image applied successfully</source>
         <translation>Écriture de l’image réussite</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="281"/>
+        <location filename="mainwindow.cpp" line="314"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="346"/>
+        <location filename="mainwindow.cpp" line="365"/>
+        <source>Display Mode Changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="366"/>
+        <source>Display mode changed to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="380"/>
+        <source>HDMI preferred mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="383"/>
+        <source>HDMI safe mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="386"/>
+        <source>composite PAL mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="389"/>
+        <source>composite NTSC mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="429"/>
         <source>Enabling network interface</source>
         <translation>Activation de l’interface réseau</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="366"/>
+        <location filename="mainwindow.cpp" line="449"/>
         <source>No network access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="367"/>
+        <location filename="mainwindow.cpp" line="450"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -371,12 +399,12 @@
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="104"/>
+        <location filename="progressslideshowdialog.cpp" line="113"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%1 MB sur %2 MB écrite (%3 MB/sec)</translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="109"/>
+        <location filename="progressslideshowdialog.cpp" line="118"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation>%1 MB écrite (%2 MB/sec) </translation>
     </message>
@@ -384,42 +412,42 @@
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="languagedialog.cpp" line="22"/>
+        <location filename="languagedialog.cpp" line="23"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="24"/>
+        <location filename="languagedialog.cpp" line="25"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="25"/>
+        <location filename="languagedialog.cpp" line="26"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="26"/>
+        <location filename="languagedialog.cpp" line="27"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="27"/>
+        <location filename="languagedialog.cpp" line="28"/>
         <source>&amp;Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="28"/>
+        <location filename="languagedialog.cpp" line="29"/>
         <source>&amp;Yes</source>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="29"/>
+        <location filename="languagedialog.cpp" line="30"/>
         <source>&amp;No</source>
         <translation>&amp;Non</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="23"/>
+        <location filename="languagedialog.cpp" line="24"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
