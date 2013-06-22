@@ -23,7 +23,7 @@ for i in $*; do
     if [ $i = "update-userland" ]; then
         rm -rf output/build/rpi-userland-master
         rm -rf dl/rpi-userland-master.tar.gz
-        echo "rpi-userland Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/firmware | sed -n 2p` > rpi-userland-head &
+        echo "rpi-userland Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/userland | sed -n 2p` > rpi-userland-head &
     fi
 done
 
