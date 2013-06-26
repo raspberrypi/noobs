@@ -183,14 +183,15 @@ bool InitDriveThread::method_resizePartitions()
 
     if (!QFile::exists("/dev/mmcblk0p1"))
     {
-        //emit error(tr("SD card does not have a MBR. Cannot resize FAT partition."));
-        // Warn user that their SD card does not have an MBR and ask
+        // SD card does not have a MBR.
+
+        // TODO: Warn user that their SD card does not have an MBR and ask
         // if they would like us to create one for them
 
         // Create MBR containing single FAT partition
         QProcess proc;
         proc.setProcessChannelMode(proc.MergedChannels);
-        proc.start("parted /dev/mmcblk0 --script -- mkpartfs primary fat32 0 -1");
+        proc.start("parted /dev/mmcblk0 --script -- mkpartfs primary fat32 8192s -1");
         proc.waitForFinished(-1);
         if (proc.exitCode() != 0)
         {
@@ -291,7 +292,7 @@ bool InitDriveThread::method_resizePartitions()
         QThread::msleep(1500);
     }
 
-    //QProcess::execute("/sbin/dosfslabel /dev/mmcblk0p1 RECOVERY");
+    QProcess::execute("/sbin/mlabel p:RECOVERY");
 
     emit statusUpdate(tr("Mounting FAT partition"));
     if (!mountSystemPartition())
