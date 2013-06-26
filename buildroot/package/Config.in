@@ -3,7 +3,7 @@ menu "Package Selection for the target"
 source "package/recovery/Config.in"
 source "package/arora/Config.in"
 source "package/busybox/Config.in"
-
+source "package/mtools/Config.in"
 # Audio and video applications
 source "package/multimedia/Config.in"
 

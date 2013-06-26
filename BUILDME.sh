@@ -16,14 +16,12 @@ for i in $*; do
     if [ $i = "update-firmware" ]; then
         rm -rf output/build/rpi-firmware-master
         rm -rf dl/rpi-firmware-master.tar.gz
-        echo "rpi-firmware Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/firmware | sed -n 2p` > rpi-firmware-head &
     fi
 
     # Redownload userland from raspberrypi/userland master HEAD to update to latest
     if [ $i = "update-userland" ]; then
         rm -rf output/build/rpi-userland-master
         rm -rf dl/rpi-userland-master.tar.gz
-        echo "rpi-userland Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/firmware | sed -n 2p` > rpi-userland-head &
     fi
 done
 
@@ -44,8 +42,8 @@ BUILD_INFO="../output/BUILD-DATA"
 echo "Build-date: $(date +"%Y-%m-%d")" > "$BUILD_INFO"
 echo "NOOBS Version: "`git describe` >> "$BUILD_INFO"
 echo "NOOBS Git HEAD @ "`git rev-parse --verify HEAD` >> "$BUILD_INFO"
-cat rpi-userland-head >> "$BUILD_INFO"
-cat rpi-firmware-head >> "$BUILD_INFO"
+cat dl/rpi-userland-head.version >> "$BUILD_INFO"
+cat dl/rpi-firmware-head.version >> "$BUILD_INFO"
 
 cd ..
 
