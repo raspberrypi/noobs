@@ -70,7 +70,7 @@
     </message>
     <message>
         <location filename="imagewritethread.cpp" line="268"/>
-        <location filename="imagewritethread.cpp" line="452"/>
+        <location filename="imagewritethread.cpp" line="480"/>
         <source>Error mounting ext4 partition</source>
         <translation>Virhe liitettäessä ext4 osiota</translation>
     </message>
@@ -80,12 +80,27 @@
         <translation>Virhe liitettäessä FAT osiota</translation>
     </message>
     <message>
-        <location filename="imagewritethread.cpp" line="375"/>
-        <source>No partitions found inside image</source>
-        <translation>En löydä levykuvatiedostosta osioita</translation>
+        <location filename="imagewritethread.cpp" line="356"/>
+        <source>Extended boot record (EBR) not found</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="imagewritethread.cpp" line="464"/>
+        <location filename="imagewritethread.cpp" line="371"/>
+        <source>No partitions found inside image&apos;s extended boot record (EBR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="imagewritethread.cpp" line="386"/>
+        <source>Logical boot record (LBR) not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="imagewritethread.cpp" line="401"/>
+        <source>No partitions found inside image&apos;s logical boot record (LBR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="imagewritethread.cpp" line="492"/>
         <source>Error resizing ext4 partition</source>
         <translation>Virhe muutettaessa ext4 osion kokoa</translation>
     </message>
@@ -99,7 +114,7 @@
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="45"/>
-        <location filename="initdrivethread.cpp" line="276"/>
+        <location filename="initdrivethread.cpp" line="297"/>
         <source>Mounting FAT partition</source>
         <translation>Liitetään FAT osiota</translation>
     </message>
@@ -195,37 +210,42 @@
         <translation>Kopioidaan käynnistystiedostoja medialle</translation>
     </message>
     <message>
-        <location filename="initdrivethread.cpp" line="186"/>
-        <source>SD card does not have a MBR. Cannot resize FAT partition.</source>
-        <translation>SD muistikorttilla ei ole MBR osiotaulua. FAT osion kokoa ei voida muuttaa.</translation>
+        <location filename="initdrivethread.cpp" line="199"/>
+        <source>Error creating MBR</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="initdrivethread.cpp" line="190"/>
+        <location filename="initdrivethread.cpp" line="207"/>
+        <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="211"/>
         <source>Removing partitions 2,3,4</source>
         <translation>Poistetaan osiot 2, 3 ja 4</translation>
     </message>
     <message>
-        <location filename="initdrivethread.cpp" line="204"/>
+        <location filename="initdrivethread.cpp" line="225"/>
         <source>Resizing FAT partition</source>
         <translation>Muutetaan FAT osion kokoa</translation>
     </message>
     <message>
-        <location filename="initdrivethread.cpp" line="216"/>
+        <location filename="initdrivethread.cpp" line="237"/>
         <source>Error resizing existing FAT partition</source>
         <translation>Virhe muutettaessa FAT osion kokoa</translation>
     </message>
     <message>
-        <location filename="initdrivethread.cpp" line="223"/>
+        <location filename="initdrivethread.cpp" line="244"/>
         <source>Creating extended partition</source>
         <translation>Luodaan &apos;extended&apos; tyyppinen osio</translation>
     </message>
     <message>
-        <location filename="initdrivethread.cpp" line="258"/>
+        <location filename="initdrivethread.cpp" line="279"/>
         <source>Error creating extended partition</source>
         <translation>Virhe luotaessa &apos;extended&apos; tyyppistä osiota</translation>
     </message>
     <message>
-        <location filename="initdrivethread.cpp" line="279"/>
+        <location filename="initdrivethread.cpp" line="300"/>
         <source>Error mounting system partition.</source>
         <translation>Virhe liitettäessä järjestelmäosiota.</translation>
     </message>
@@ -256,142 +276,142 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="110"/>
+        <location filename="mainwindow.ui" line="107"/>
         <source>Exit (Esc)</source>
         <translation>Lopeta (Esc)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="113"/>
+        <location filename="mainwindow.ui" line="110"/>
         <source>Exits and boots the installed operating system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="128"/>
+        <location filename="mainwindow.ui" line="125"/>
         <source>Advanced</source>
         <translation>Edistynyt</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="137"/>
+        <location filename="mainwindow.ui" line="134"/>
         <source>Add image</source>
         <translation>Lisää levykuva</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="149"/>
+        <location filename="mainwindow.ui" line="146"/>
         <source>Remove image</source>
         <translation>Poista levykuva</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="161"/>
+        <location filename="mainwindow.ui" line="158"/>
         <source>Edit config (e)</source>
         <translation>Muokkaa asetuksia (e)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="164"/>
+        <location filename="mainwindow.ui" line="161"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="176"/>
+        <location filename="mainwindow.ui" line="173"/>
         <source>Online help (h)</source>
         <translation>Verkko ohje (h)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="179"/>
+        <location filename="mainwindow.ui" line="176"/>
         <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="326"/>
+        <location filename="mainwindow.cpp" line="332"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="60"/>
+        <location filename="mainwindow.cpp" line="66"/>
         <source>Setting up SD card</source>
         <translation>Valmistellaan SD muistikorttia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="99"/>
+        <location filename="mainwindow.cpp" line="105"/>
         <source>No OS Images Found on SD Card</source>
         <translation>SD muistikortilta ei löytynyt yhtään levykuvaa</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="99"/>
+        <location filename="mainwindow.cpp" line="105"/>
         <source>Please add at least one OS image to the /images directory in order to proceed</source>
         <translation>Lisää vähintään yksi levykuva /images kansioon jos haluat jatkaa</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="333"/>
+        <location filename="mainwindow.cpp" line="339"/>
         <source>RECOMMENDED</source>
         <translation>SUOSITELTU</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="232"/>
+        <location filename="mainwindow.cpp" line="238"/>
         <source>Confirm</source>
         <translation>Vahvista</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="233"/>
+        <location filename="mainwindow.cpp" line="239"/>
         <source>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</source>
         <translation>Varoitus: tämä asentaa valityn käyttöjärjestelmän. Koko SD muistikortti tyhjennetään enne tätä.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="305"/>
+        <location filename="mainwindow.cpp" line="311"/>
         <source>Restore complete</source>
         <translation>Palautus on valmis</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="306"/>
+        <location filename="mainwindow.cpp" line="312"/>
         <source>Image applied successfully</source>
         <translation>Levykuva kirjoitettu onnistuneesti</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="314"/>
+        <location filename="mainwindow.cpp" line="320"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="365"/>
+        <location filename="mainwindow.cpp" line="389"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="366"/>
+        <location filename="mainwindow.cpp" line="390"/>
         <source>Display mode changed to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="380"/>
+        <location filename="mainwindow.cpp" line="413"/>
         <source>HDMI preferred mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="383"/>
+        <location filename="mainwindow.cpp" line="419"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="386"/>
+        <location filename="mainwindow.cpp" line="425"/>
         <source>composite PAL mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="389"/>
+        <location filename="mainwindow.cpp" line="431"/>
         <source>composite NTSC mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="429"/>
+        <location filename="mainwindow.cpp" line="476"/>
         <source>Enabling network interface</source>
         <translation>Avataan verkkoyhteyttä</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="449"/>
+        <location filename="mainwindow.cpp" line="496"/>
         <source>No network access</source>
         <translation>Ei verkkoyhteyttä</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="450"/>
+        <location filename="mainwindow.cpp" line="497"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Tämä ominausuus tarvitsee langallisen verkkoyhteyden toimiakseen. Liitä verkkokaapeli verkko porttiin.</translation>
     </message>

@@ -59,7 +59,27 @@
         <translation>Arquivo de imagem corrompido</translation>
     </message>
     <message>
-        <location line="-7"/>
+        <location line="+185"/>
+        <source>Extended boot record (EBR) not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>No partitions found inside image&apos;s extended boot record (EBR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Logical boot record (LBR) not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>No partitions found inside image&apos;s logical boot record (LBR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-237"/>
         <source>Unknown image format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Extensão de arquivo de imagem desconhecida. Esperando .lzo, .gz, .xz, .bz2 ou .zip</translation>
     </message>
@@ -70,22 +90,17 @@
     </message>
     <message>
         <location line="+66"/>
-        <location line="+184"/>
+        <location line="+212"/>
         <source>Error mounting ext4 partition</source>
         <translation>Erro de montagem da partição ext4</translation>
     </message>
     <message>
-        <location line="-170"/>
+        <location line="-198"/>
         <source>Error mounting FAT partition of image</source>
         <translation>Erro de montagem da partição FAT na imagem</translation>
     </message>
     <message>
-        <location line="+93"/>
-        <source>No partitions found inside image</source>
-        <translation>Nenhuma partição encontrada dentro da imagem</translation>
-    </message>
-    <message>
-        <location line="+89"/>
+        <location line="+210"/>
         <source>Error resizing ext4 partition</source>
         <translation>Erro de redimensionamento da partição ext4</translation>
     </message>
@@ -99,12 +114,12 @@
     </message>
     <message>
         <location line="+4"/>
-        <location line="+231"/>
+        <location line="+252"/>
         <source>Mounting FAT partition</source>
         <translation>Montando a partição FAT</translation>
     </message>
     <message>
-        <location line="-143"/>
+        <location line="-164"/>
         <source>Saving boot files to memory</source>
         <translation>Salvando arquivos de boot para a memória</translation>
     </message>
@@ -155,9 +170,14 @@
         <translation>Copiando arquivos de boot para o armazenamento</translation>
     </message>
     <message>
-        <location line="+19"/>
-        <source>SD card does not have a MBR. Cannot resize FAT partition.</source>
-        <translation>Cartão SD não tem um MBR (Master Boot Record). Não se pode redimensionar partição FAT.</translation>
+        <location line="+32"/>
+        <source>Error creating MBR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
@@ -190,7 +210,7 @@
         <translation>Erro ao montar partição de sistema.</translation>
     </message>
     <message>
-        <location line="-210"/>
+        <location line="-231"/>
         <source>Editing cmdline.txt</source>
         <translation>Editando cmdline.txt</translation>
     </message>
@@ -256,7 +276,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+9"/>
         <source>Exit (Esc)</source>
         <translation>Sair (Esc)</translation>
     </message>
@@ -301,7 +321,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+333"/>
+        <location filename="mainwindow.cpp" line="+339"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
@@ -351,7 +371,7 @@
         <translation></translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+69"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -361,27 +381,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+23"/>
         <source>HDMI preferred mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>composite PAL mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>composite NTSC mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+45"/>
         <source>Enabling network interface</source>
         <translation type="unfinished">Habilitando interface da rede</translation>
     </message>
