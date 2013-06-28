@@ -1,14 +1,11 @@
 /* Prepare SD card for first use thread
  *
  * Initial author: Floris Bos
- *
- * Initial author: Floris Bos
  * Maintained by Raspberry Pi
  *
  * See LICENSE.txt for license details
  *
  */
-
 
 #include "initdrivethread.h"
 #include "mbr.h"

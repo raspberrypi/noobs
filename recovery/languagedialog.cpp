@@ -1,6 +1,5 @@
 /* Language selection dialog
  *
- *
  * Initial author: Floris Bos
  * Maintained by Raspberry Pi
  *

@@ -8,12 +8,12 @@
  * - Extracts image file to extended partition
  * - enlarges the ext4 partition to span the disk
  * - patches /etc/fstab and cmdline.txt
- *                                                                                                                                                                             
- * Initial author: Floris Bos                                                                                                                                                  
- * Maintained by Raspberry Pi                                                                                                                                                    
- *                                                                                                                                                                             
- * See LICENSE.txt for license details                                                                                                                                         
- *                                                                                                                                                                             
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 class ImageWriteThread : public QThread
@@ -45,7 +45,7 @@ protected:
     qint64 getUncompressedSizeZIP(const QString &filename);
     qint64 getUncompressedSizeLZO(const QString &filename);
     qint64 getUncompressedSizeXZ(const QString &filename);
-    
+
 signals:
     void error(const QString &msg);
     void statusUpdate(const QString &msg);
@@ -53,7 +53,7 @@ signals:
     void completed();
 
 public slots:
-    
+
 };
 
 #endif // IMAGEWRITETHREAD_H

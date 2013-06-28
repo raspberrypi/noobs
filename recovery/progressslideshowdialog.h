@@ -4,14 +4,11 @@
 /* Progress dialog with slideshow
  *
  * Initial author: Floris Bos
- *                                                                                                                                                                             
- * Initial author: Floris Bos                                                                                                                                                
- * Maintained by Raspberry Pi                                                                                                                                                
- *                                                                                                                                                                       
- * See LICENSE.txt for license details                                                                                                                                 
- *                                                                                                                                                                   
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
-
 
 #include <QProgressDialog>
 #include <QTimer>
@@ -24,7 +21,7 @@ class ProgressSlideshowDialog;
 class ProgressSlideshowDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
     explicit ProgressSlideshowDialog(const QString &slidesDirectory, const QString &statusMsg = "", int changeInterval = 20, QWidget *parent = 0);
     ~ProgressSlideshowDialog();
@@ -46,7 +43,7 @@ protected:
 
     int sectorsWritten();
 
-    
+
 private:
     Ui::ProgressSlideshowDialog *ui;
 };

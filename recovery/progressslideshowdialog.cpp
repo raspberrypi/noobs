@@ -8,12 +8,10 @@
 /* Progress dialog with slideshow
  *
  * Initial author: Floris Bos
- *                                                                                                                                                                            
- * Initial author: Floris Bos                                                                                                                                              
- * Maintained by Raspberry Pi                                                                                                                                             
- *                                                                                                                                                                   
- * See LICENSE.txt for license details                                                                                                                            
- *                                                                                                                                                             
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 ProgressSlideshowDialog::ProgressSlideshowDialog(const QString &slidesDirectory, const QString &statusMsg, int changeInterval, QWidget *parent) :
@@ -49,9 +47,9 @@ ProgressSlideshowDialog::ProgressSlideshowDialog(const QString &slidesDirectory,
         QPixmap pixmap(_slidesDirectory+"/"+_slides.first());
         ui->imagespace->setMinimumSize(pixmap.width(), pixmap.height());
         resize(pixmap.width(), pixmap.height()+50);
-    
+
         ui->imagespace->setPixmap(pixmap);
-    
+
         connect(&_timer, SIGNAL(timeout()), this, SLOT(nextSlide()));
         _timer.start(changeInterval * 1000);
     }

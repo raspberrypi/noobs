@@ -4,12 +4,11 @@
 
 /* Class to query the value of a gpio input using /sys/class/gpio
  *
- *                                                                                                                                                                            
- * Initial author: Floris Bos                                                                                                                                                  
- * Maintained by Raspberry Pi                                                                                                                                                    
- *                                                                                                                                                                             
- * See LICENSE.txt for license details                                                                                                                                         
- *                                                                                                                                                                            
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 GpioInput::GpioInput(int number)
