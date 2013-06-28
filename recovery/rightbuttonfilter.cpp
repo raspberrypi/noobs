@@ -1,16 +1,14 @@
 #include "rightbuttonfilter.h"
 #include <QMouseEvent>
 
-/*
- *                                                                                                                                                                             
- * Initial author: Floris Bos                                                                                                                                                
- * Maintained by Raspberry Pi                                                                                                                                                
- *                                                                                                                                                                       
- * See LICENSE.txt for license details                                                                                                                                 
- *                                                                                                                                                                   
+/* Eats right button clicks
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
-
-/* Eats right button clicks */
 
 RightButtonFilter::RightButtonFilter(QObject *parent) :
     QObject(parent)

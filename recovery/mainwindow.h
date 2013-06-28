@@ -4,13 +4,12 @@
 /* Main window
  *
  * Initial author: Floris Bos
- *
- * Initial author: Floris Bos
  * Maintained by Raspberry Pi
  *
  * See LICENSE.txt for license details
  *
  */
+
 #include "languagedialog.h"
 #include <QMainWindow>
 #include <QModelIndex>

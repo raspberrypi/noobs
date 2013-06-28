@@ -4,10 +4,12 @@
 /* Prepare SD card for first use thread
  *
  * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
  *
- * --- INSERT LICENSE TEXT HERE ---
+ * See LICENSE.txt for license details
  *
  */
+
 #include <QThread>
 #include "config.h"
 
@@ -35,15 +37,15 @@ protected:
     bool writeRiscOSblob();
 #endif
     QByteArray getFileContents(const QString &filename);
-    
+
 signals:
     void error(const QString &msg);
     void statusUpdate(const QString &msg);
     void completed();
 
-    
+
 public slots:
-    
+
 };
 
 #endif // INITDRIVETHREAD_H

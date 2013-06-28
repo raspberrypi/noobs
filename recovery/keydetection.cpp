@@ -17,12 +17,12 @@
  *
  * In practice we are usually started earlier than USB is up & running though,
  * so we have to wait for a keyboard device to appear.
- *                                                                                                                                                                           
- * Initial author: Floris Bos                                                                                                                                                 
- * Maintained by Raspberry Pi                                                                                                                                                   
- *                                                                                                                                                                            
- * See LICENSE.txt for license details                                                                                                                                        
- *                                                                                                                                                                            
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 #define test_bit(bit, array)  (array[bit / 8] & (1 << (bit % 8)))
