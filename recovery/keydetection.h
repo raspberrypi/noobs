@@ -2,12 +2,12 @@
 #define KEYDETECTION_H
 
 /* Key detection class
- *                                                                                                                                                                            
- * Initial author: Floris Bos                                                                                                                                                  
- * Maintained by Raspberry Pi                                                                                                                                                    
- *                                                                                                                                                                             
- * See LICENSE.txt for license details                                                                                                                                         
- *                                                                                                                                                                            
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 class KeyDetection

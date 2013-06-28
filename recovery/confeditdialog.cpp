@@ -1,10 +1,11 @@
 /* Configuration edit dialog
  *
- * Initial author: Floris Bos                                                                                                                                              
- * Maintained by Raspberry Pi                                                                                                                                                   
- *                                                                                                                                                                            
- * See LICENSE.txt for license details                                                                                                                                       
- *                                                                                                                                                                             */
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
+ */
 
 #include "confeditdialog.h"
 #include "ui_confeditdialog.h"
