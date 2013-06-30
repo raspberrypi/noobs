@@ -185,10 +185,18 @@ bool InitDriveThread::method_resizePartitions()
         // TODO: Warn user that their SD card does not have an MBR and ask
         // if they would like us to create one for them
 
+        emit statusUpdate(tr("Zeroing partition table"));
+        if (!zeroMbr())
+        {
+            emit error(tr("Error zero'ing MBR/GPT. SD card may be broken or advertising wrong capacity."));
+            return false;
+        }
+
         // Create MBR containing single FAT partition
+        emit statusUpdate(tr("Writing new MBR"));
         QProcess proc;
         proc.setProcessChannelMode(proc.MergedChannels);
-        proc.start("parted /dev/mmcblk0 --script -- mkpartfs primary fat32 8192s -1");
+        proc.start("/usr/sbin/parted /dev/mmcblk0 --script -- mktable msdos mkpartfs primary fat32 8192s -1");
         proc.waitForFinished(-1);
         if (proc.exitCode() != 0)
         {
