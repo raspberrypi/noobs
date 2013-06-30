@@ -29,6 +29,7 @@ define RECOVERY_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 package/recovery/unicode-fonts/DejaVuSans-Bold.ttf $(TARGET_DIR)/usr/lib/fonts/DejaVuSans-Bold.ttf
 	$(INSTALL) -m 0755 package/recovery/unicode-fonts/DroidSansJapanese.ttf $(TARGET_DIR)/usr/lib/fonts/DroidSansJapanese.ttf
 	$(INSTALL) -m 0755 package/recovery/data/data $(TARGET_DIR)/usr/data
+	$(INSTALL) -m 0644 $(@D)/cmdline.txt $(BINARIES_DIR)/cmdline.txt
 endef
 
 $(eval $(generic-package))
