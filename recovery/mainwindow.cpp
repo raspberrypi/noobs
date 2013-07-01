@@ -500,7 +500,7 @@ void MainWindow::startBrowser()
     else
     {
         QProcess *proc = new QProcess(this);
-        proc->start(QString("arora -lang %1 " HOMEPAGE).arg(*_currentLang));
+        proc->start(QString("arora -lang %1 " HOMEPAGE).arg(*_currentLang!=""?*_currentLang:"en"));
     }
 }
 
