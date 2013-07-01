@@ -1,0 +1,17 @@
+--- arora-master.orig/src/browserapplication.cpp
++++ arora-master/src/browserapplication.cpp
+@@ -164,6 +164,14 @@ BrowserApplication::BrowserApplication(i
+     QTimer::singleShot(0, this, SLOT(postLaunch()));
+ #endif
+     languageManager();
++
++    for (int i=1; i<argc; i++)
++    {
++        if (strcmp(argv[i], "-lang") == 0)
++            if (argc > i+1)
++                if (s_languageManager)
++                    s_languageManager->setCurrentLanguage(QString::fromLocal8Bit(argv[++i]));
++    }
+ }
+ 
+ BrowserApplication::~BrowserApplication()
