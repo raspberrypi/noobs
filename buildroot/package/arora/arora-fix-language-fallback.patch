@@ -1,0 +1,20 @@
+--- arora-master.orig/src/utils/languagemanager.cpp
++++ arora-master/src/utils/languagemanager.cpp
+@@ -125,7 +125,7 @@ QString LanguageManager::convertStringTo
+     foreach (const QString &language, m_languages) {
+         QString country = QLocale(language).name().split(QLatin1Char('_')).value(0);
+         if (country == fallback)
+-            return country;
++            return language;
+     }
+ 
+     return QString();
+@@ -246,7 +246,7 @@ void LanguageManager::chooseNewLanguage() 
+ 
+     QStringList items;
+     int defaultItem = -1;
+-    QString current = currentLanguage();
++    QString current = convertStringToLanguageFile(currentLanguage());
+     foreach (const QString &name, m_languages) {
+         QLocale locale(name);
+         QString string = QString(QLatin1String("%1, %2 (%3) %4"))
