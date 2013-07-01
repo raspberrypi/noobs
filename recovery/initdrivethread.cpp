@@ -13,6 +13,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QMessageBox>
 #include <unistd.h>
 #include <linux/fs.h>
 #include <sys/ioctl.h>
@@ -182,35 +183,50 @@ bool InitDriveThread::method_resizePartitions()
     {
         // SD card does not have a MBR.
 
-        // TODO: Warn user that their SD card does not have an MBR and ask
+        // Warn user that their SD card does not have an MBR and ask
         // if they would like us to create one for them
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error: No MBR present on SD Card");
+        msgBox.setText("Would you like NOOBS to create one for you?\nWARNING: This will erase all data on your SD card");
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.setDefaultButton(QMessageBox::No);
 
-        emit statusUpdate(tr("Zeroing partition table"));
-        if (!zeroMbr())
+        if(msgBox.exec() == QMessageBox::Yes)
         {
-            emit error(tr("Error zero'ing MBR/GPT. SD card may be broken or advertising wrong capacity."));
+
+            emit statusUpdate(tr("Zeroing partition table"));
+            if (!zeroMbr())
+            {
+                emit error(tr("Error zero'ing MBR/GPT. SD card may be broken or advertising wrong capacity."));
+                return false;
+            }
+
+            // Create MBR containing single FAT partition
+            emit statusUpdate(tr("Writing new MBR"));
+            QProcess proc;
+            proc.setProcessChannelMode(proc.MergedChannels);
+            proc.start("/usr/sbin/parted /dev/mmcblk0 --script -- mktable msdos mkpartfs primary fat32 8192s -1");
+            proc.waitForFinished(-1);
+            if (proc.exitCode() != 0)
+            {
+                // Warn user if we failed to create an MBR on their card
+                emit error(tr("Error creating MBR")+"\n"+proc.readAll());
+                return false;
+            }
+            qDebug() << "Created missing MBR on SD card. parted output:" << proc.readAll();
+
+            // Advise user that their SD card has now been formatted
+            // suitably for installing NOOBS and that they will have to
+            // re-copy the files before rebooting
+            emit error(tr("SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot"));
+            return false;
+        }
+        else
+        {
+            emit error(tr("SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again."));
             return false;
         }
 
-        // Create MBR containing single FAT partition
-        emit statusUpdate(tr("Writing new MBR"));
-        QProcess proc;
-        proc.setProcessChannelMode(proc.MergedChannels);
-        proc.start("/usr/sbin/parted /dev/mmcblk0 --script -- mktable msdos mkpartfs primary fat32 8192s -1");
-        proc.waitForFinished(-1);
-        if (proc.exitCode() != 0)
-        {
-            // Warn user if we failed to create an MBR on their card
-            emit error(tr("Error creating MBR")+"\n"+proc.readAll());
-            return false;
-        }
-        qDebug() << "Created missing MBR on SD card. parted output:" << proc.readAll();
-
-        // Advise user that their SD card has now been formatted
-        // suitably for installing NOOBS and that they will have to
-        // re-copy the files before rebooting
-        emit error(tr("SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot"));
-        return false;
     }
 
     emit statusUpdate(tr("Removing partitions 2,3,4"));
