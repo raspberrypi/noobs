@@ -30,7 +30,7 @@ public:
 
 public slots:
     void setLabelText(const QString &text);
-    void setMaximum(unsigned int bytes);
+    void setMaximum(qint64 bytes);
     void nextSlide();
     void updateIOstats();
 
