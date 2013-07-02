@@ -24,7 +24,7 @@ struct mbr_partition_entry {
 struct mbr_table {
     char bootcode[446];
     mbr_partition_entry part[4];
-    char signature[2];
+    unsigned char signature[2];
 } __attribute__ ((packed));
 
 #endif // MBR_H
