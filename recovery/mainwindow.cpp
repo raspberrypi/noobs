@@ -71,6 +71,9 @@ MainWindow::MainWindow(QString *currentLangCode, QSplashScreen *splash, Language
         connect(idt, SIGNAL(statusUpdate(QString)), _qpd, SLOT(setLabelText(QString)));
         connect(idt, SIGNAL(completed()), _qpd, SLOT(deleteLater()));
         connect(idt, SIGNAL(error(QString)), this, SLOT(onError(QString)));
+        connect(idt, SIGNAL(query(QString, QString, QMessageBox::StandardButton*)),
+                this, SLOT(onQuery(QString, QString, QMessageBox::StandardButton*)),
+                Qt::BlockingQueuedConnection);
 
         idt->start();
         _qpd->exec();
@@ -318,6 +321,13 @@ void MainWindow::onError(const QString &msg)
 {
     _qpd->hide();
     QMessageBox::critical(this, tr("Error"), msg, QMessageBox::Close);
+    setEnabled(true);
+}
+
+void MainWindow::onQuery(const QString &msg, const QString &title, QMessageBox::StandardButton* answer)
+{
+    _qpd->hide();
+    *answer = QMessageBox::question(this, title, msg, QMessageBox::Yes|QMessageBox::No);
     setEnabled(true);
 }
 

@@ -14,6 +14,7 @@
 #include <QMainWindow>
 #include <QModelIndex>
 #include <QSplashScreen>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -58,6 +59,7 @@ protected slots:
     /* Events from ImageWriterThread */
     void onError(const QString &msg);
     void onCompleted();
+    void onQuery(const QString &msg, const QString &title, QMessageBox::StandardButton* answer);
 
 private slots:
     /* UI events */

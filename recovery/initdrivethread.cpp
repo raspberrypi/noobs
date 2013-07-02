@@ -185,13 +185,12 @@ bool InitDriveThread::method_resizePartitions()
 
         // Warn user that their SD card does not have an MBR and ask
         // if they would like us to create one for them
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Error: No MBR present on SD Card");
-        msgBox.setText("Would you like NOOBS to create one for you?\nWARNING: This will erase all data on your SD card");
-        msgBox.setStandardButtons(QMessageBox::Yes);
-        msgBox.setDefaultButton(QMessageBox::No);
+        QMessageBox::StandardButton answer;
+        emit query(tr("Would you like NOOBS to create one for you?\nWARNING: This will erase all data on your SD card"),
+                   tr("Error: No MBR present on SD Card"),
+                   &answer);
 
-        if(msgBox.exec() == QMessageBox::Yes)
+        if(answer == QMessageBox::Yes)
         {
 
             emit statusUpdate(tr("Zeroing partition table"));

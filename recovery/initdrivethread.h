@@ -11,6 +11,7 @@
  */
 
 #include <QThread>
+#include <QMessageBox>
 #include "config.h"
 
 class InitDriveThread : public QThread
@@ -42,7 +43,7 @@ signals:
     void error(const QString &msg);
     void statusUpdate(const QString &msg);
     void completed();
-
+    void query(const QString &msg, const QString &title, QMessageBox::StandardButton* answer);
 
 public slots:
 
