@@ -96,7 +96,7 @@ void ProgressSlideshowDialog::disableIOaccounting()
     ui->mbwrittenLabel->setText("");
 }
 
-void ProgressSlideshowDialog::setMaximum(unsigned int bytes)
+void ProgressSlideshowDialog::setMaximum(qint64 bytes)
 {
     _maxSectors = bytes/512;
     ui->progressBar->setMaximum(_maxSectors);

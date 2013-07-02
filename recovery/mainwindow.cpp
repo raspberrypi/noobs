@@ -273,13 +273,13 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
         ImageWriteThread *t = new ImageWriteThread(imagefile, this);
 
         ProgressSlideshowDialog *p = new ProgressSlideshowDialog(slidesDirectory, "", 20, this);
-        connect(t, SIGNAL(parsedImagesize(uint)), p, SLOT(setMaximum(uint)));
+        connect(t, SIGNAL(parsedImagesize(qint64)), p, SLOT(setMaximum(qint64)));
 
         if (QFile::exists(sizefile))
             {
                 QFile f(sizefile);
                 f.open(f.ReadOnly);
-                p->setMaximum(f.readAll().trimmed().toUInt());
+                p->setMaximum(f.readAll().trimmed().toLongLong());
                 f.close();
                 t->setParseArchiveHeader(false);
             }
