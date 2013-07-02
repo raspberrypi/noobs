@@ -173,7 +173,8 @@ bool InitDriveThread::method_reformatDrive()
 
 bool InitDriveThread::method_resizePartitions()
 {
-    int newSizeOfRescuePartition = sizeofBootFilesInKB()/1000 + 100;
+    int newStartOfRescuePartition = getFileContents("/sys/class/block/mmcblk0p1/start").trimmed().toInt();
+    int newSizeOfRescuePartition  = sizeofBootFilesInKB()/1000 + 100;
 
     if (!umountSystemPartition())
     {
@@ -224,7 +225,14 @@ bool InitDriveThread::method_resizePartitions()
 
     emit statusUpdate(tr("Resizing FAT partition"));
 
-    QString cmd = "/usr/sbin/parted --script /dev/mmcblk0 resize 1 2048s "+QString::number(newSizeOfRescuePartition)+"M";
+    /* Relocating the start of the FAT partition is a write intensive operation
+     * only move it when it is not aligned on a MiB boundary already */
+    if (newStartOfRescuePartition < 2048 || newStartOfRescuePartition % 2048 != 0)
+    {
+        newStartOfRescuePartition = 8192; /* 4 MiB */
+    }
+
+    QString cmd = "/usr/sbin/parted --script /dev/mmcblk0 resize 1 "+QString::number(newStartOfRescuePartition)+"s "+QString::number(newSizeOfRescuePartition)+"M";
     qDebug() << "Executing" << cmd;
     QProcess p;
     p.setProcessChannelMode(p.MergedChannels);
