@@ -354,6 +354,7 @@ void MainWindow::changeEvent(QEvent* event)
 
 void MainWindow::displayMode(QString cmd, QString mode)
 {
+#ifdef Q_WS_QWS
     // Trigger framebuffer resize
     QProcess *resize = new QProcess(this);
     resize->start(QString("sh -c \"tvservice -o; tvservice %1;\"").arg(cmd));
@@ -396,7 +397,11 @@ void MainWindow::displayMode(QString cmd, QString mode)
     // is occuring by turning on the LED during the change
     QProcess *led_blink = new QProcess(this);
     led_blink->start("sh -c \"echo 1 > /sys/class/leds/led0/brightness; sleep 3; echo 0 > /sys/class/leds/led0/brightness\"");
-    }
+#else
+    Q_UNUSED(cmd)
+    Q_UNUSED(mode)
+#endif
+}
 
 bool MainWindow::eventFilter(QObject *, QEvent *event)
 {
