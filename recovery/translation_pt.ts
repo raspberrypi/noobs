@@ -9,7 +9,7 @@
         <translation>Editor de Configurações</translation>
     </message>
     <message>
-        <location filename="confeditdialog.cpp" line="+81"/>
+        <location filename="confeditdialog.cpp" line="+82"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
@@ -22,13 +22,13 @@
 <context>
     <name>ImageWriteThread</name>
     <message>
-        <location filename="imagewritethread.cpp" line="+59"/>
-        <location line="+29"/>
+        <location filename="imagewritethread.cpp" line="+57"/>
+        <location line="+35"/>
         <source>Writing image to SD card</source>
         <translation>Gravando imagem no cartão SD</translation>
     </message>
     <message>
-        <location line="-25"/>
+        <location line="-31"/>
         <source>Resizing file system</source>
         <translation>Redimensionando sistema de arquivos</translation>
     </message>
@@ -44,12 +44,17 @@
     </message>
     <message>
         <location line="+4"/>
-        <location line="+32"/>
+        <location line="+38"/>
         <source>Finish writing (sync)</source>
         <translation>Finalizando a gravação</translation>
     </message>
     <message>
-        <location line="-15"/>
+        <location line="-23"/>
+        <source>RISCOS cannot be installed. Size of rescue partition too large.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Creating FAT partition for RiscOS</source>
         <translation>Criando partição FAT para RiscOS</translation>
     </message>
@@ -108,18 +113,18 @@
 <context>
     <name>InitDriveThread</name>
     <message>
-        <location filename="initdrivethread.cpp" line="+41"/>
+        <location filename="initdrivethread.cpp" line="+39"/>
         <source>SD card too small. Must be at least %1 MB</source>
         <translation>Cartão SD pequeno demais. Deve ter pelo menos %1 MB</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location line="+252"/>
+        <location line="+282"/>
         <source>Mounting FAT partition</source>
         <translation>Montando a partição FAT</translation>
     </message>
     <message>
-        <location line="-164"/>
+        <location line="-194"/>
         <source>Saving boot files to memory</source>
         <translation>Salvando arquivos de boot para a memória</translation>
     </message>
@@ -130,22 +135,24 @@
     </message>
     <message>
         <location line="+5"/>
-        <location line="+39"/>
+        <location line="+40"/>
         <source>Error unmounting system partition.</source>
         <translation>Erro desmontando a partição do sistema.</translation>
     </message>
     <message>
-        <location line="-35"/>
+        <location line="-36"/>
+        <location line="+54"/>
         <source>Zeroing partition table</source>
         <translation>Zerando tabela de partição</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-51"/>
+        <location line="+54"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
         <translation>Erro zerando MBR/GPT. Cartão SD pode estar defeituoso ou relatando a capacidade incorretamente.</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-50"/>
         <source>Creating partitions</source>
         <translation>Criando partições</translation>
     </message>
@@ -170,7 +177,23 @@
         <translation>Copiando arquivos de boot para o armazenamento</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+25"/>
+        <source>Would you like NOOBS to create one for you?
+WARNING: This will erase all data on your SD card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error: No MBR present on SD Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Writing new MBR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Error creating MBR</source>
         <translation type="unfinished"></translation>
     </message>
@@ -180,7 +203,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
+        <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Removing partitions 2,3,4</source>
         <translation>Removendo partições 2,3,4</translation>
     </message>
@@ -190,7 +218,7 @@
         <translation>Redimensionando partição FAT</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+19"/>
         <source>Error resizing existing FAT partition</source>
         <translation>Erro ao redimensionar partição FAT existente</translation>
     </message>
@@ -210,7 +238,7 @@
         <translation>Erro ao montar partição de sistema.</translation>
     </message>
     <message>
-        <location line="-231"/>
+        <location line="-261"/>
         <source>Editing cmdline.txt</source>
         <translation>Editando cmdline.txt</translation>
     </message>
@@ -321,27 +349,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+339"/>
+        <location filename="mainwindow.cpp" line="+349"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-101"/>
+        <location line="-108"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+101"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-266"/>
+        <location line="-276"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
         <source>No OS Images Found on SD Card</source>
         <translation>Nenhuma imagem de SO encontrada no cartão SD</translation>
     </message>
@@ -371,7 +399,7 @@
         <translation></translation>
     </message>
     <message>
-        <location line="+69"/>
+        <location line="+77"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -381,7 +409,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+27"/>
         <source>HDMI preferred mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -419,7 +447,7 @@
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="+113"/>
+        <location filename="progressslideshowdialog.cpp" line="+111"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%1 MB de %2 MB gravado(s) (%3 MB/s)</translation>
     </message>
@@ -432,7 +460,7 @@
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="languagedialog.cpp" line="+23"/>
+        <location filename="languagedialog.cpp" line="+22"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>

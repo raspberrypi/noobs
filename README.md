@@ -67,7 +67,7 @@ In order to setup an SD card with a newly built version of NOOBS, you will need 
 - Format an SD card that is 4GB or greater in size as FAT
 - Replace the `/images` directory in `/output` with the copy contained in the release version of NOOBS (see above for download links)
 - Copy the files in the `/output` directory onto the SD card
- 
+
 ## About the Buildroot infrastructure
 
 To add extra packages: `cd buildroot ; make menuconfig`
@@ -102,6 +102,11 @@ References:
 http://qt-project.org/doc/qt-4.8/i18n-source-translation.html
 
 http://qt-project.org/doc/qt-4.8/linguist-manual.html
+
+To set up a git pre-commit hook to automatically update the translation files, run the following commands in the project root:
+
+- sudo chmod +x pre-commit-translation-update-hook.sh
+- cp pre-commit-translation-update-hook.sh .git/hooks/pre-commit
 
 To add a new translation:
 
