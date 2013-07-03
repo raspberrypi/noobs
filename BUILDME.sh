@@ -28,7 +28,11 @@ done
 # Let buildroot build everything
 make
 
-# Copy recovery kernel and rootfs to output dir
+# Create output dir and copy files
+mkdir -p ../output
+cp ../sdcontent/riscos-boot.bin ../output
+cp -r ../sdcontent/slides ../output
+cp -r ../sdcontent/images ../output
 cp output/images/zImage ../output/recovery.img
 cp output/images/rootfs.cpio.lzo ../output/recovery.rfs
 
