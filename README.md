@@ -1,27 +1,32 @@
-# Raspberry Pi Recovery System
-#### (New Out Of Box Software)
+# NOOBS (New Out of Box Software)
+#### (An easy OS image installer for the Raspberry Pi)
 
 ![alt text](http://www.raspberrypi.org/wp-content/uploads/2013/06/mainwindow.png "NOOBS Screenshot")
 
-The Raspberry Pi Recovery System is designed to make it easy to select and install operating systems for the Raspberry Pi on an SD card without requiring either network access or a more complicated SD card imaging operation.
+NOOBS is designed to make it easy to select and install operating systems for the Raspberry Pi on an SD card without requiring either network access or a more complicated SD card imaging operation.
+
+The latest official release of NOOBS can be downloaded from http://downloads.raspberrypi.org/noobs.
+
+For information on previous releases and version changelists, visit https://github.com/raspberrypi/noobs/releases.
 
 ### About
-The Recovery system works by creating a FAT partition on your SD card containing heavily compressed versions of OS images. At boot you can press SHIFT to enter the recovery app and easily reinstall the existing OS or choose to install a different one.
+NOOBS works by creating a FAT partition on your SD card containing heavily compressed versions of OS images. At boot you can press SHIFT to enter the recovery app and easily reinstall the existing OS or choose to install a different one.
 
-The Recovery System currently has the following functionality;
-- <b>Restore Image</b>: Writes the selected OS image onto the remainder of the SD card. Only one OS can be imaged at a time.
+NOOBS currently has the following functionality;
+- <b>Install OS</b>: Writes the selected OS image onto the remainder of the SD card. Only one OS can be imaged at a time.
 - <b>Edit Config</b>: Opens a text editor allowing the cmdline and config for the installed OS to be edited.
 - <b>Online Help</b>: [Networking Required] Open a browser that displays the raspberrypi.org/forum, allowing people to quickly access help and troubleshooting.
-- <b>Exit</b>: Quits the recovery app and reboots the Pi into the installed OS.
+- <b>Exit</b>: Quits NOOBS and reboots the Pi into the installed OS.
+- <b>Language Selection</b>: Allows the user to select the language to be displayed.
+- <b>Display Mode Selection</b>: By default, NOOBS will output over HDMI at your display’s preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.
 
 ### Setup
 
-To setup a blank SD card with the Recovery System;
-- Format an SD card that is 4GB or greater in size as FAT32
-- Copy the files in the `/output` directory onto the SD card
-- Place any OS images you want to be able to install into the `/images` directory on the SD card
+To setup a blank SD card with NOOBS;
+- Format an SD card that is 4GB or greater in size as FAT (see instructions on how to do this below)
+- Extract the files from the NOOBS zip file and copy onto the SD card
 
-On first boot the "Recovery" FAT partition will be automatically resized to a minimum and a list of OS images that are available to install will be displayed. If there is only one OS image contained within `/images` then this will be automatically installed on first boot.
+On first boot the "RECOVERY" FAT partition will be automatically resized to a minimum and a list of OS images that are available to install will be displayed. If there is only one OS image contained within `/images` then this will be automatically installed on first boot.
 
 ### How to Format an SD card as FAT
 
@@ -33,7 +38,7 @@ For <b>Linux</b> users we recommend `gparted` (or the command line version `part
 
 ===
 
-## How to Rebuild the Recovery System
+## How to Rebuild NOOBS
 
 #### Get Build Dependencies
 
@@ -56,6 +61,13 @@ to lower the number to prevent swapping.
 
 "Build options" -> "Number of jobs to run simultaneously"
 
+## How to run your Build
+
+In order to setup an SD card with a newly built version of NOOBS, you will need to;
+- Format an SD card that is 4GB or greater in size as FAT
+- Replace the `/images` directory in `/output` with the copy contained in the release version of NOOBS (see above for download links)
+- Copy the files in the `/output` directory onto the SD card
+ 
 ## About the Buildroot infrastructure
 
 To add extra packages: `cd buildroot ; make menuconfig`
