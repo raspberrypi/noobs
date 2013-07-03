@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_WS_QWS
     QWSServer::setCursorVisible(false);
+#endif
 
     // Set wallpaper and icon, if we have resource files for that
     if (QFile::exists(":/icons/raspberry_icon.png"))
@@ -73,7 +74,9 @@ int main(int argc, char *argv[])
     // {
 //#ifdef CENTER_BACKGROUND_IMAGE
         // Using QSplashScreen to get a centered background image
+#ifdef Q_WS_QWS
         QWSServer::setBackground(BACKGROUND_COLOR);
+#endif
         QSplashScreen *splash = new QSplashScreen(QPixmap(":/wallpaper.png"));
         splash->show();
         QApplication::processEvents();
@@ -87,8 +90,6 @@ int main(int argc, char *argv[])
 //    {
 //        QWSServer::setBackground(BACKGROUND_COLOR);
         //   }
-//#endif
-#endif
 
     // If -runinstaller is not specified, only continue if SHIFT is pressed, GPIO is triggered or no OS is installed (/dev/mmcblk0p6 does not exist)
     bool bailout = !runinstaller

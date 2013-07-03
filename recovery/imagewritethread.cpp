@@ -23,8 +23,6 @@
  *
  */
 
-#define MB  1048576
-
 ImageWriteThread::ImageWriteThread(const QString &image, QObject *parent) :
     QThread(parent),
     _image(image),
@@ -54,7 +52,7 @@ void ImageWriteThread::run()
 
     /* Find out the end of our FAT partition, we dd after that */
     _offsetInSectors = startOfSecondPartition();
-    _offsetInBytes   = _offsetInSectors * 512;
+    _offsetInBytes   = qint64(_offsetInSectors) * 512;
 
     emit statusUpdate(tr("Writing image to SD card"));
     if (!dd())
@@ -82,8 +80,14 @@ void ImageWriteThread::run_riscos()
     /* RiscOS likes to be at a fixed location */
     mbr_table extended_mbr;
     _offsetInSectors    = RISCOS_SECTOR_OFFSET;
-    _offsetInBytes      = _offsetInSectors * 512;
+    _offsetInBytes      = qint64(_offsetInSectors) * 512;
     int startOfExtended = startOfSecondPartition();
+
+    if (startOfExtended > RISCOS_SECTOR_OFFSET)
+    {
+        emit error(tr("RISCOS cannot be installed. Size of rescue partition too large."));
+        return;
+    }
 
     emit statusUpdate(tr("Writing image to SD card"));
     if (!dd())
@@ -176,10 +180,10 @@ bool ImageWriteThread::dd()
         emit parsedImagesize(unCompSize);
     }
 
-    if (_offsetInBytes % MB == 0)
+    if (_offsetInSectors % 2048 == 0)
     {
         /* Use 1 MB block size if our partition is nicely aligned on a MB boundary */
-        cmd += " | dd of=/dev/mmcblk0 conv=fsync obs=1M seek="+QString::number(_offsetInBytes/MB)+"\"";
+        cmd += " | dd of=/dev/mmcblk0 conv=fsync obs=1M seek="+QString::number(_offsetInSectors/2048)+"\"";
     }
     else
     {
@@ -376,7 +380,7 @@ bool ImageWriteThread::resizePartition()
     f.seek(_offsetInBytes);
     f.write((char *) &ebr, sizeof(ebr));
 
-    int logicalOffsetinBytes = _offsetInBytes + ebr.part[1].starting_sector*512;
+    qint64 logicalOffsetinBytes = _offsetInBytes + qint64(ebr.part[1].starting_sector)*512;
 
     // Handle logical partition
     f.seek(logicalOffsetinBytes);
