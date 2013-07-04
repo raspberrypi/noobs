@@ -42,6 +42,9 @@ cp output/images/rpi-firmware/bootcode.bin ../output
 cp output/images/cmdline.txt ../output/recovery.cmdline
 touch ../output/RECOVERY_FILES_DO_NOT_EDIT
 
+# Add USB fixes to cmdline in order to make more devices work
+sed -e 's/$/ dwc_otg.lpm_enable=0 dwc_otg.speed=1/' -i ../output/recovery.cmdline
+
 # Create build-date timestamp file containing Git HEAD info for build
 rm -f ../output/BUILT* || true
 BUILD_INFO="../output/BUILD-DATA"
