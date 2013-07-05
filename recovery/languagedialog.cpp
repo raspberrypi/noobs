@@ -16,6 +16,8 @@
 #include <QDir>
 #include <QLocale>
 #include <QKeyEvent>
+#include <QWSServer>
+#include <QKbdDriverFactory>
 
 /* Extra strings for lupdate to detect and hand over to translator to translate */
 #if 0
@@ -41,7 +43,8 @@ LanguageDialog::LanguageDialog(QString *currentLangCode, QWidget *parent) :
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_QuitOnClose, false);
 
-    ui->langCombo->addItem(QIcon(":/icons/gb.png"), "English", "");
+    ui->langCombo->addItem(QIcon(":/icons/gb.png"), "English (UK)", "gb");
+    ui->langCombo->addItem(QIcon(":/icons/us.png"), "English (US)", "us");
 
     /* Search for translation resource files */
     QDir dir(":/", "translation_*.qm");
@@ -79,6 +82,25 @@ LanguageDialog::~LanguageDialog()
     delete ui;
 }
 
+void LanguageDialog::changeKeyboardLayout(const QString &langcode)
+{
+#ifdef Q_WS_QWS
+    QString keymapfile = QString("/keymaps/%1.qmap").arg(langcode);
+
+    if (QFile::exists(keymapfile))
+    {
+        // Loading keymaps from resources directly is broken, so copy to
+        // /tmp first
+        QFile::copy(keymapfile, "/tmp/"+langcode);
+        keymapfile = "/tmp/"+langcode;
+
+        QWSServer *q = QWSServer::instance();
+        q->closeKeyboard();
+        q->setKeyboardHandler(QKbdDriverFactory::create("TTY", "keymap="+keymapfile));
+    }
+#endif
+}
+
 void LanguageDialog::changeLanguage(const QString &langcode)
 {
     if (langcode == *_currentLang)
@@ -98,7 +120,7 @@ void LanguageDialog::changeLanguage(const QString &langcode)
         _qttrans = NULL;
     }
 
-    if (!langcode.isEmpty() )
+    if (!(langcode == "us" || langcode == "gb"))
     {
         /* qt_<languagecode>.qm are generic language translation files provided by the Qt team
          * this can translate common things like the "OK" and "Cancel" button of dialog boxes
@@ -118,6 +140,9 @@ void LanguageDialog::changeLanguage(const QString &langcode)
             QApplication::installTranslator(_trans);
         }
     }
+
+    /* Update keyboard layout */
+    changeKeyboardLayout(langcode);
 
     *_currentLang = langcode;
 }

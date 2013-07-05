@@ -24,5 +24,6 @@
         <file>icons/hu.png</file>
         <file>translation_fi.qm</file>
         <file>icons/fi.png</file>
+        <file>icons/us.png</file>
     </qresource>
 </RCC>

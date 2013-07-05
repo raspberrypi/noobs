@@ -25,6 +25,7 @@ public:
     explicit LanguageDialog(QString *currentLangCode, QWidget *parent = 0);
     ~LanguageDialog();
     void changeLanguage(const QString &langcode);
+    void changeKeyboardLayout(const QString &langcode);
 
 protected:
     Ui::LanguageDialog *ui;
