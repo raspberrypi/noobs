@@ -93,7 +93,7 @@ Wrap code that calls Qt Embedded specific classes (such as QWSServer) between
 ```C
 #ifdef Q_WS_QWS
 ```
-and 
+and
 ```C
 #endif
 ```
@@ -108,7 +108,7 @@ http://qt-project.org/doc/qt-4.8/i18n-source-translation.html
 http://qt-project.org/doc/qt-4.8/linguist-manual.html
 
 To set up a git pre-commit hook to automatically update the translation files, run the following commands in the project root:
-- `sudo chmod +x pre-commit-translation-update-hook.sh`
+- `chmod +x pre-commit-translation-update-hook.sh`
 - `cp pre-commit-translation-update-hook.sh .git/hooks/pre-commit`
 
 To add a new translation:
