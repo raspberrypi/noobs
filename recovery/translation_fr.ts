@@ -460,42 +460,42 @@ WARNING: This will erase all data on your SD card</source>
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="languagedialog.cpp" line="22"/>
+        <location filename="languagedialog.cpp" line="24"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="24"/>
+        <location filename="languagedialog.cpp" line="26"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="25"/>
+        <location filename="languagedialog.cpp" line="27"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="26"/>
+        <location filename="languagedialog.cpp" line="28"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="27"/>
+        <location filename="languagedialog.cpp" line="29"/>
         <source>&amp;Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="28"/>
+        <location filename="languagedialog.cpp" line="30"/>
         <source>&amp;Yes</source>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="29"/>
+        <location filename="languagedialog.cpp" line="31"/>
         <source>&amp;No</source>
         <translation>&amp;Non</translation>
     </message>
     <message>
-        <location filename="languagedialog.cpp" line="23"/>
+        <location filename="languagedialog.cpp" line="25"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>

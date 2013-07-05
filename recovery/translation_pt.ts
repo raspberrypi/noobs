@@ -460,7 +460,7 @@ WARNING: This will erase all data on your SD card</source>
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="languagedialog.cpp" line="+22"/>
+        <location filename="languagedialog.cpp" line="+24"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
