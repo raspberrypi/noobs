@@ -2,7 +2,7 @@
 # Automatically update the translation files on every commit
 #
 # To enable this commit hook, run the following commands in the project root:
-# sudo chmod +x pre-commit-translation-update-hook.sh
+# chmod +x pre-commit-translation-update-hook.sh
 # cp pre-commit-translation-update-hook.sh .git/hooks/pre-commit
 
 cd "$(git rev-parse --show-toplevel)"
