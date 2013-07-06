@@ -15,10 +15,10 @@ NOOBS works by creating a FAT partition on your SD card containing heavily compr
 NOOBS currently has the following functionality:
 - <b>Install OS</b>: Writes the selected OS image onto the remainder of the SD card. Only one OS can be imaged at a time.
 - <b>Edit Config</b>: Opens a text editor allowing the cmdline and config for the installed OS to be edited.
-- <b>Online Help</b>: [Networking Required] Open a browser that displays the Raspberry Pi forums ( http://www.raspberrypi.org/phpBB3/ ), allowing people to quickly access help and troubleshooting.
+- <b>Online Help</b>: [Networking Required] Open a browser that displays the Raspberry Pi Forum ( http://www.raspberrypi.org/phpBB3/ ), allowing people to quickly access help and troubleshooting.
 - <b>Exit</b>: Quits NOOBS and reboots the Pi into the installed OS.
 - <b>Language Selection</b>: Allows the user to select the language to be displayed.
-- <b>Display Mode Selection</b>: By default, NOOBS will output over HDMI at your display’s preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.
+- <b>Display Mode Selection</b>: By default, NOOBS will output over HDMI at your display's preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.
 
 ### Setup
 
