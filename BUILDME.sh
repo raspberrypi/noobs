@@ -30,10 +30,8 @@ make
 
 # Create output dir and copy files
 mkdir -p ../output
-cp ../sdcontent/INSTRUCTIONS-README.txt ../output
-cp ../sdcontent/riscos-boot.bin ../output
-cp -r ../sdcontent/slides ../output
-cp -r ../sdcontent/images ../output
+mkdir -p ../output/os
+cp -r ../sdcontent/* ../output
 cp output/images/zImage ../output/recovery.img
 cp output/images/rootfs.cpio.lzo ../output/recovery.rfs
 

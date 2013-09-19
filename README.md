@@ -1,32 +1,40 @@
 # NOOBS (New Out of Box Software)
-#### (An easy OS image installer for the Raspberry Pi)
+#### An easy Operating System installer for the Raspberry Pi
 
-![alt text](http://www.raspberrypi.org/wp-content/uploads/2013/06/mainwindow.png "NOOBS Screenshot")
+NOOBS is designed to make it easy to select and install operating systems for the Raspberry Pi without having to worry about manually imaging your SD card.
 
-NOOBS is designed to make it easy to select and install operating systems for the Raspberry Pi on an SD card without requiring either network access or a more complicated SD card imaging operation.
-
-The latest official release of NOOBS can be downloaded from http://downloads.raspberrypi.org/noobs
+The latest official release of NOOBS can be downloaded from http://downloads.raspberrypi.org/NOOBS_latest
 
 For information on previous releases and version changelists, visit https://github.com/raspberrypi/noobs/releases
 
-### About
-NOOBS works by creating a FAT partition on your SD card containing heavily compressed versions of OS images. At boot you can press SHIFT to enter the recovery app and easily reinstall the existing OS or choose to install a different one.
+![alt text](http://downloads.raspberrypi.org/NOOBS/screenshots/os_installed.png "NOOBS Interface")
 
-NOOBS currently has the following functionality:
-- <b>Install OS</b>: Writes the selected OS image onto the remainder of the SD card. Only one OS can be imaged at a time.
-- <b>Edit Config</b>: Opens a text editor allowing the cmdline and config for the installed OS to be edited.
+### About
+On first boot NOOBS will format your SD card and allow you to select which OSes you want to install from a list. This OS list is automatically generated from both locally available OSes (i.e. those contained in the `/os` directory on disk) or those available from our remote repository (wired network connection required).
+
+Only the latest version of each OS will ever be displayed meaning that you can be sure that you have installed the most up-to-date release of your selected OS.
+
+On any subsequent boot you can then press the SHIFT key to enter the NOOBS interface and easily reinstall your choice of OSes.
+
+The NOOBS interface provides the following functionality:
+- <b>Install</b>: Installs the selected OSes onto your SD card. Changing this selection erases all OSes currently installed.
+- <b>Edit Config</b>: Opens a text editor allowing the cmdline and config for the selected installed OS to be edited.
 - <b>Online Help</b>: [Networking Required] Open a browser that displays the Raspberry Pi Forum ( http://www.raspberrypi.org/phpBB3/ ), allowing people to quickly access help and troubleshooting.
-- <b>Exit</b>: Quits NOOBS and reboots the Pi into the installed OS.
-- <b>Language Selection</b>: Allows the user to select the language to be displayed.
+- <b>Exit</b>: Quits NOOBS and reboots the Pi into the OS boot menu.
+- <b>Language Selection</b>: Allows you to select the language to be displayed.
+- <b>Keyboard Layout Selection</b>: Allows you to select the keyboard layout to be used.
 - <b>Display Mode Selection</b>: By default, NOOBS will output over HDMI at your display's preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.
 
+Note that all user settings (language, keyboard layout, display mode) will persist between reboots and will also be automatically passed to the installed OSes. This means that if you can see the NOOBS interface on your display device then you should be able to see the OS CLI/GUI when it boots too!
 ### Setup
 
 To setup a blank SD card with NOOBS:
 - Format an SD card that is 4GB or greater in size as FAT (see instructions on how to do this below)
-- Extract the files from the NOOBS zip file and copy onto the SD card
+- Download and extract the files from the NOOBS zip file.
+- Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card.
+<b> Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.</b>
 
-On first boot the "RECOVERY" FAT partition will be automatically resized to a minimum and a list of OS images that are available to install will be displayed. If there is only one OS image contained within `/images` then this will be automatically installed on first boot.
+On first boot the "RECOVERY" FAT partition will be automatically resized to a minimum and a list of OSes that are available to install will be displayed.
 
 ### How to Format an SD card as FAT
 
@@ -38,7 +46,130 @@ For <b>Linux</b> users we recommend `gparted` (or the command line version `part
 
 ===
 
+### Screenshots
+
+#### OS Installation
+
+Simply select the checkbox next to each OS you want to install using either a mouse or keyboard (arrow keys to traverse the list, enter to toggle the selected OS's checkbox), then click the "Install" icon (or press "i" on your keyboard) to install the selection. The icons shown on the right of the list indicate whether the OS is being installed from the SD card (SD card icon) or from the online OS repository (Ethernet icon).
+
+![alt text](http://downloads.raspberrypi.org/NOOBS/screenshots/os_selected.png "Select your choice of OSes to install")
+
+#### Online Help via Web Browser
+
+The built-in Arora web browser allows you to easily get help via the Raspberry Pi Forums (wired network connection required).
+
+![alt text](http://downloads.raspberrypi.org/NOOBS/screenshots/browser.png "Search the Raspberry Pi forums for help via the built-in web browser")
+
+#### Easy Config File Editor
+
+The built-in config file editor allows you to edit the config file of the OS currently highlighted in the OS list. This allows you to easily add license keys to different OS installs through the same interface.
+
+Note that the output mode selected by the user through pressing one of number keys 1 to 4 (for HDMI preferred, HDMI VGA, Composite PAL and Composite NTSC respectively), will be automatically set in the `config.txt` files of your installed OSes. This means that you shouldn't have to worry about manually changing your display settings to get your installed OS to display correctly on your display device.
+
+![alt text](http://downloads.raspberrypi.org/NOOBS/screenshots/config_editor.png "Easily edit the config files of any installed OS")
+
+#### Installer Slideshow
+
+An installer slideshow guides you through your first steps with each OS while it installs.
+
+![alt text](http://downloads.raspberrypi.org/NOOBS/screenshots/installer_slides.png "An installer slideshow guides you through your first steps with each OS")
+
+#### OS Boot Selector
+
+After multiple OSes have been installed, you can select which OS to boot through this selection window that is automatically displayed. NOOBS will remember your choice and boot this OS by default unless a different option has been selected within 10 seconds.
+
+Note that if only one OS is installed then the boot selector will not be displayed and the OS will be automatically booted.
+
+![alt text](http://downloads.raspberrypi.org/NOOBS/screenshots/boot_select.png "Easily select which OS you want to boot from a list of those currently installed")
+
+==
+
+## Advanced Usage (for experts and teachers)
+
+### How to Automatically Install an OS
+
+Even if you are using your Pi without a display, you can still use NOOBS to easily install an OS of your choice. To set up NOOBS to automatically and silently (i.e. without requiring any user input) install a specific OS, follow these steps:
+
+1. Copy the OS folder for the OS you want to install into the `/os` dir (or alternatively delete all other OSes contained in the `/os` dir so that only your chosen OS remains.
+
+2. If the OS you want to automatically install has multiple flavours available, edit the `flavours.json` file so that it only contains the flavour entry that you want to install.
+
+2. Edit the `recovery.cmdline` file in the root NOOBS directory and append `silentinstall` to the arguments list.
+
+When you now boot your Pi using an SD card containing the modified version of NOOBS that you just created, it will automatically install the OS you chose and boot into it after the installation has finished.
+
+### How to create a custom OS version
+
+There are two main use cases for which you may want to create a custom version of one of the standard OS releases that is suitable for installation via NOOBS:
+- If you are a teacher wanting to easily deploy a custom OS release containing pre-defined set of packages and files onto a number of SD cards (e.g. to provision a class set of Raspberry Pi's or quickly restore a Raspberry Pi back to custom "factory" settings).
+- If you want to be able to back up your existing installed packages and files so that any future OS re-install does not force you back to a clean install.
+
+The following steps allow you to create a modified copy of one of the standard OS releases that contains your custom files, packages and settings.
+
+1. Download a base version of NOOBS from http://downloads.raspberrypi.org/NOOBS_latest
+
+2. Extract the NOOBS zipfile
+
+3. Navigate to the `os` directory
+
+4. Create a copy of the folder containing the OS release that you want to modify and rename it with a custom name.
+
+5. Edit the following fields in the `os.json` file contained in the folder that you just created
+  1. "name" - replace the name of the base OS with the name of your custom OS version
+  2. "description" - replace the description of the standard OS install with one for your custom OS version
+
+6. [Optional] Rename or replace the existing `<OS>.png` icon file with one matching the name of your custom OS version
+
+7. [Optional] Replace the PNG image files in the `slides` and `slides_vga` directory with your own custom installer slides
+
+8. Edit the following fields in the `partitions.json` file contained in the folder that you just created
+  1. "partition_size_nominal" - replace the numerical value with the size of the paritions in your custom OS version
+  2. "uncompressed_tarball_size" - replace the numerical value with the size of your filesystem tarballs when uncompressed
+
+9. Replace the `.tar.xz` root and boot filesystem tarballs with copies created from your custom OS version. The name of these tarballs needs to match the labels given in `partitions.json`.
+  1. To create the root tarball you will need to run `tar -cvpf <label>.tar --directory=/ --exclude=proc --exclude=sys --exclude=dev/pts` from within the root filesystem of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
+  2. To create the boot tarball you will need to run `tar -cvpf <label>.tar .` at the root directory of the boot partition of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
+
+### How to change the default Language, Keyboard layout, Display mode or Boot Partition
+
+Edit the `recovery.cmdline` file in the root NOOBS directory and append the following arguments where relevant:
+- `lang=<two-letter language code>` (e.g. `lang=de` or `lang=en`)
+- `keyboard=<two-letter layout code>` (e.g. `keyboard=de` or `keyboard=us`)
+- `display=<display mode number>` (e.g. `display=1` or `display=3`)
+- `partition=<partition_number>` (e.g. `partition=5`)
+
+Note that these defaults will be overwritten by any changes made in the GUI to these settings.
+
+===
+
+## Troubleshooting
+
+#### How to boot into "Safe Mode"
+
+To boot into a basic busybox shell rather than launching the NOOBS GUI, you can either:
+
+1. Append `rescueshell` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
+
+2. Insert a physical jumper between pins 5 & 6 of GPIO header P1.
+
+#### How to force Recovery Mode being entered if you don't have a keyboard
+
+To force Recovery Mode to be entered on boot and to show the NOOBS interface, you normally press the `SHIFT` key during bootup. If you don't have a keyboard or the `SHIFT` keypress isn't being detected, you should complete the following steps to force the NOOBS interface to be displayed on boot:
+
+1. Append `gpiotriggerenable` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
+2. Reboot
+
+To force Recovery Mode being entered on boot, connect GPIO pin 3 on header P1 to GND (pin 25). If GPIO pin 3 remains unconnected then it will boot through to the installed OS as normal.
+
+#### How to change display output modes
+
+By default, NOOBS will output over HDMI at your display’s preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.
+
+===
+
 ## How to Rebuild NOOBS
+
+Note that this will require a minimum of 6GB free disk space.
 
 #### Get Build Dependencies
 
@@ -63,7 +194,7 @@ to lower the number to prevent swapping:
 
 In order to setup an SD card with a newly built version of NOOBS, you will need to:
 - Format an SD card that is 4GB or greater in size as FAT
-- Replace the `/images` directory in `/output` with the copy contained in the release version of NOOBS (see above for download links)
+- Replace the `/os` directory in `/output` with the copy contained in the release version of NOOBS (see above for download links)
 - Copy the files in the `/output` directory onto the SD card
 
 ## About the Buildroot infrastructure
@@ -142,6 +273,7 @@ Recovery software directly links to:
 Currently used icon sets:
 - http://www.fatcow.com/free-icons - Creative commons Attribution license
 - http://www.famfamfam.com/lab/icons/flags - "These flag icons are available for free use for any purpose with no requirement for attribution."
+- http://www.oxygen-icons.org/ - Available under Creative Common Attribution-ShareAlike 3.0 and LGPL license
 
 Licenses of utility software build by buildroot:
 Type `cd buildroot ; make legal-info` to generate a list, which will be available under `output/legal-info`.

@@ -18,8 +18,8 @@ NOOBS INSTALLATION INSTRUCTIONS
       i. We recommend using gparted (or the command line version parted)
       ii. Format the entire disk as FAT
 3. Extract the files contained in this NOOBS zip file.
-5. Copy the extracted files onto the SD card that you just formatted.
-6. Insert the SD card into your Pi and connect the power supply.
+4. Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card. Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.
+5. Insert the SD card into your Pi and connect the power supply.
 
 Your Pi will now boot into NOOBS and should display a list of operating systems that you can choose to install.
 If your display remains blank, you should select the correct output mode for your display by pressing one of the following number keys on your keyboard:

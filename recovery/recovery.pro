@@ -4,28 +4,32 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = recovery
 TEMPLATE = app
+LIBS += -lqjson
 
-system(sh updateqm.sh)
+system(sh updateqm.sh 2>/dev/null)
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    imagewritethread.cpp \
     languagedialog.cpp \
     initdrivethread.cpp \
     keydetection.cpp \
     gpioinput.cpp \
     progressslideshowdialog.cpp \
     confeditdialog.cpp \
-    rightbuttonfilter.cpp
+    rightbuttonfilter.cpp \
+    json.cpp \
+    multiimagewritethread.cpp \
+    util.cpp \
+    twoiconsdelegate.cpp \
+    bootselectiondialog.cpp
 
 HEADERS  += mainwindow.h \
-    imagewritethread.h \
     languagedialog.h \
     initdrivethread.h \
     config.h \
@@ -34,12 +38,18 @@ HEADERS  += mainwindow.h \
     mbr.h \
     progressslideshowdialog.h \
     confeditdialog.h \
-    rightbuttonfilter.h
+    rightbuttonfilter.h \
+    json.h \
+    multiimagewritethread.h \
+    util.h \
+    twoiconsdelegate.h \
+    bootselectiondialog.h
 
 FORMS    += mainwindow.ui \
     languagedialog.ui \
     progressslideshowdialog.ui \
-    confeditdialog.ui
+    confeditdialog.ui \
+    bootselectiondialog.ui
 
 RESOURCES += \
     icons.qrc

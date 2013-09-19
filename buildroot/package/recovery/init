@@ -11,7 +11,8 @@
 /bin/hostname -F /etc/hostname
 
 # Load kbd driver
-/sbin/modprobe usbkbd
+#/sbin/modprobe usbkbd
+/sbin/modprobe usbhid
 
 # Set up ACT LED to be triggered by mmc0
 echo mmc0 > /sys/class/leds/led0/trigger
@@ -28,48 +29,44 @@ if grep -q vncinstall /proc/cmdline; then
     ifup eth0
 fi
 
-# Setup dropbear SSH server if specified on cmdline
-if grep -q SSH /proc/cmdline; then
-
-    ifup eth0
-
-    if [ ! -d /etc/dropbear ] ; then
-        mkdir -p /etc/dropbear
-    fi
-
-    if [ ! -f /etc/dropbear/dropbear_rsa_host_key ] ; then
-        echo -n "generating rsa key... "
-        /usr/bin/dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key > /dev/null 2>&1
-    fi
-
-    if [ ! -f /etc/dropbear/dropbear_dss_host_key ] ; then
-        echo -n "generating dsa key... "
-        /usr/bin/dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key > /dev/null 2>&1
-    fi
-
-    umask 077
-
-    start-stop-daemon -S -q -p /var/run/dropbear.pid --exec /usr/sbin/dropbear
-fi
-
 # Mouse acceleration
 #export QWS_MOUSE_PROTO=:accel=1
 
-if grep -q rescueshell /proc/cmdline; then
+SAFE_MODE=`vcgencmd get_config safe_mode_gpio`
+
+if [ ${SAFE_MODE#*=} -eq 1 ] || [ `grep -q rescueshell /proc/cmdline` ]; then
     sh
 else
     RUN_INSTALLER=
+    GPIO_TRIGGER=
     DEFAULT_LANG=
+    DEFAULT_KBD=
+    DEFAULT_DISPLAY=
+    DEFAULT_PARTITION=
+
     if grep -q runinstaller /proc/cmdline; then
         RUN_INSTALLER=-runinstaller
+    fi
+    if grep -q gpiotriggerenable /proc/cmdline; then
+        GPIO_TRIGGER=-gpiotriggerenable
     fi
     for p in `cat /proc/cmdline` ; do
         if [ "${p%%=*}" == "lang" ] ; then
             DEFAULT_LANG="-lang ${p#*=}";
-            break;
+        fi
+        if [ "${p%%=*}" == "keyboard" ] ; then
+            DEFAULT_KBD="-kbdlayout ${p#*=}";
+        fi
+        if [ "${p%%=*}" == "display" ] ; then
+            DEFAULT_DISPLAY="-dispmode ${p#*=}"
+        fi
+        if [ "${p%%=*}" == "partition" ] ; then
+            DEFAULT_PARTITION="-partition ${p#*=}"
         fi
     done
-    /usr/bin/recovery $RUN_INSTALLER $DEFAULT_LANG -qws 2>/tmp/debug
+
+    /usr/bin/recovery $RUN_INSTALLER $GPIO_TRIGGER $DEFAULT_KBD $DEFAULT_LANG $DEFAULT_DISPLAY $DEFAULT_PARTITION -qws 2>/tmp/debug
+
 fi
 
 # Recovery should have rebooted

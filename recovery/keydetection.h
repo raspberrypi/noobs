@@ -14,6 +14,7 @@ class KeyDetection
 {
 public:
     static bool isF10pressed();
+    static bool waitForKeyboard();
 protected:
     static int openKeyboard();
     static bool _isF10pressed(int fd);

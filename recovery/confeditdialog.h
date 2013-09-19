@@ -24,7 +24,7 @@ class ConfEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConfEditDialog(QWidget *parent = 0);
+    explicit ConfEditDialog(const QString &partition, QWidget *parent = 0);
     ~ConfEditDialog();
 
 public slots:

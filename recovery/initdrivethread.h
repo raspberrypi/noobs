@@ -34,10 +34,10 @@ protected:
     bool zeroMbr();
     bool formatBootPartition();
     bool partitionDrive();
+    bool formatSettingsPartition();
 #ifdef RISCOS_BLOB_FILENAME
     bool writeRiscOSblob();
 #endif
-    QByteArray getFileContents(const QString &filename);
 
 signals:
     void error(const QString &msg);
