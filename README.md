@@ -94,7 +94,7 @@ Even if you are using your Pi without a display, you can still use NOOBS to easi
 
 2. If the OS you want to automatically install has multiple flavours available, edit the `flavours.json` file so that it only contains the flavour entry that you want to install.
 
-2. Edit the `recovery.cmdline` file in the root NOOBS directory and append `silentinstall` to the arguments list.
+3. Edit the `recovery.cmdline` file in the root NOOBS directory and append `silentinstall` to the arguments list.
 
 When you now boot your Pi using an SD card containing the modified version of NOOBS that you just created, it will automatically install the OS you chose and boot into it after the installation has finished.
 
