@@ -165,6 +165,9 @@ To force Recovery Mode being entered on boot, connect GPIO pin 3 on header P1 to
 
 By default, NOOBS will output over HDMI at your display’s preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.
 
+If you don't have a keyboard, you can still change the display mode used by NOOBS through editing the `recovery.cmdline` file in the root NOOBS directory prior to first boot and appending the following argument:
+- `display=<display mode number>` (e.g. `display=1` or `display=3`)
+
 ===
 
 ## How to Rebuild NOOBS
