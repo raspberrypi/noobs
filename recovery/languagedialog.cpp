@@ -55,7 +55,6 @@ LanguageDialog::LanguageDialog(const QString &defaultLang, const QString &defaul
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     QString savedLang = settings.value("language", defaultLang).toString();
     QString savedKeyLayout = settings.value("keyboard_layout", defaultKeyboard).toString();
-    QProcess::execute("umount /settings");
 
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -125,11 +124,11 @@ void LanguageDialog::changeKeyboardLayout(const QString &langcode)
 #endif
 
         // Save new language choice to INI files
-        QProcess::execute("mount -o rw -t ext4 " SETTINGS_PARTITION " /settings");
+        QProcess::execute("mount -o remount, rw /settings");
         QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
         settings.setValue("keyboard_layout", langcode);
         settings.sync();
-        QProcess::execute("umount /settings");
+        QProcess::execute("mount -o remount, ro /settings");
 }
 
 void LanguageDialog::changeLanguage(const QString &langcode)
@@ -203,11 +202,11 @@ void LanguageDialog::changeLanguage(const QString &langcode)
     _currentLang = langcode;
 
     // Save new language choice to INI file
-    QProcess::execute("mount -o rw -t ext4 " SETTINGS_PARTITION " /settings");
+    QProcess::execute("mount -o remount,rw /settings");
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     settings.setValue("language", langcode);
     settings.sync();
-    QProcess::execute("umount /settings");
+    QProcess::execute("mount -o remount,ro /settings");
 
 }
 

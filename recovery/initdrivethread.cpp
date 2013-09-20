@@ -382,7 +382,7 @@ bool InitDriveThread::formatBootPartition()
 
 bool InitDriveThread::formatSettingsPartition()
 {
-    return QProcess::execute("/usr/sbin/mkfs.ext4 " SETTINGS_PARTITION) == 0;
+    return QProcess::execute("/usr/sbin/mkfs.ext4 -L SETTINGS " SETTINGS_PARTITION) == 0;
 }
 
 bool InitDriveThread::zeroMbr()

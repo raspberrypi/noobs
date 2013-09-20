@@ -362,7 +362,10 @@ emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
     else if (QFile::exists(folder+"/icon.png"))
         ventry["icon"] = folder+"/icon.png";
     installed_os.append(ventry);
+
+    QProcess::execute("mount -o remount,rw /settings");
     Json::saveToFile("/settings/installed_os.json", installed_os);
+    QProcess::execute("mount -o remount,ro /settings");
 
     return true;
 }

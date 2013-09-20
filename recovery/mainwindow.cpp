@@ -136,19 +136,18 @@ void MainWindow::populate()
         QTimer::singleShot(2000, this, SLOT(hideDialogIfNoNetwork()));
     }
 
-    QDir dir;
-    dir.mkdir("/settings");
     if (QFile::exists(SETTINGS_PARTITION))
     {
         /* Try mounting read-only first, if fails try read-write as it may recover from journal */
-        if (QProcess::execute("mount -o ro -t ext4 " SETTINGS_PARTITION " /settings") != 0
-                && QProcess::execute("mount -t ext4 " SETTINGS_PARTITION " /settings") != 0)
+        if (QProcess::execute("mount -o remount,ro /settings")!=0
+            && QProcess::execute("mount -o remount,rw /settings")!=0)
         {
             if (QMessageBox::question(this,
                                       tr("Error mounting settings partition"),
                                       tr("Persistent settings partition seems corrupt. Reformat?"),
                                       QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
             {
+                QProcess::execute("umount /settings");
                 if (QProcess::execute("/usr/sbin/mkfs.ext4 " SETTINGS_PARTITION) != 0
                     || QProcess::execute("mount " SETTINGS_PARTITION " /settings") != 0)
                 {
