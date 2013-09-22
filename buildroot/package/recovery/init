@@ -39,6 +39,8 @@ if [ ${SAFE_MODE#*=} -eq 1 ] || [ `grep -q rescueshell /proc/cmdline` ]; then
 else
     RUN_INSTALLER=
     GPIO_TRIGGER=
+    KEYBOARD_NO_TRIGGER=
+    FORCE_TRIGGER=
     DEFAULT_LANG=
     DEFAULT_KBD=
     DEFAULT_DISPLAY=
@@ -49,6 +51,12 @@ else
     fi
     if grep -q gpiotriggerenable /proc/cmdline; then
         GPIO_TRIGGER=-gpiotriggerenable
+    fi
+    if grep -q keyboardtriggerdisable /proc/cmdline; then
+        KEYBOARD_NO_TRIGGER=-keyboardtriggerdisable
+    fi
+    if grep -q forcetrigger /proc/cmdline; then
+        FORCE_TRIGGER=-forcetrigger
     fi
     for p in `cat /proc/cmdline` ; do
         if [ "${p%%=*}" == "lang" ] ; then
@@ -65,7 +73,7 @@ else
         fi
     done
 
-    /usr/bin/recovery $RUN_INSTALLER $GPIO_TRIGGER $DEFAULT_KBD $DEFAULT_LANG $DEFAULT_DISPLAY $DEFAULT_PARTITION -qws 2>/tmp/debug
+    /usr/bin/recovery $RUN_INSTALLER $GPIO_TRIGGER $KEYBOARD_NO_TRIGGER $FORCE_TRIGGER $DEFAULT_KBD $DEFAULT_LANG $DEFAULT_DISPLAY $DEFAULT_PARTITION -qws 2>/tmp/debug
 
 fi
 

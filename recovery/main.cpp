@@ -83,6 +83,8 @@ int main(int argc, char *argv[])
 
     bool runinstaller = false;
     bool gpio_trigger = false;
+    bool keyboard_trigger = true;
+    bool force_trigger = false;
 
     QString defaultLang = "en";
     QString defaultKeyboard = "gb";
@@ -98,6 +100,12 @@ int main(int argc, char *argv[])
         // Enables use of GPIO 3 to force NOOBS to launch by pulling low
         else if (strcmp(argv[i], "-gpiotriggerenable") == 0)
             gpio_trigger = true;
+        // Disables use of keyboard to trigger recovery GUI
+        else if (strcmp(argv[i], "-keyboardtriggerdisable") == 0)
+            keyboard_trigger = false;
+        // Forces display of recovery GUI every time
+        else if (strcmp(argv[i], "-forcetrigger") == 0)
+            force_trigger = true;
         // Allow default language to be specified in commandline
         else if (strcmp(argv[i], "-lang") == 0)
         {
@@ -145,8 +153,9 @@ int main(int argc, char *argv[])
     // If -runinstaller is not specified, only continue if SHIFT is pressed, GPIO is triggered,
     // or no OS is installed (/dev/mmcblk0p5 does not exist)
     bool bailout = !runinstaller
+        && !force_trigger
         && !(gpio_trigger && (gpio.value() == 0 ))
-        && !KeyDetection::isF10pressed()
+        && !(keyboard_trigger && KeyDetection::isF10pressed())
         && QFile::exists(FAT_PARTITION_OF_IMAGE);
 
     // Keyboard detection done, load normal hid driver

@@ -161,6 +161,20 @@ To force Recovery Mode to be entered on boot and to show the NOOBS interface, yo
 
 To force Recovery Mode being entered on boot, connect GPIO pin 3 on header P1 to GND (pin 25). If GPIO pin 3 remains unconnected then it will boot through to the installed OS as normal.
 
+Alternatively, if you are unable to (or don't want to) use GPIO to trigger Recovery Mode, you can:
+
+1. Append `forcetrigger` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
+2. Reboot
+
+Note that with this option enabled, the Recovery Mode will be displayed *every* time you boot from your NOOBS card (until you edit `recovery.cmdline` again).
+
+#### How to prevent the keyboard from entering Recovery Mode
+
+To prevent a `SHIFT` keypress from entering Recovery Mode on boot (maybe you have a problematic keyboard which is erroneously triggering every time you boot), you can:
+
+1. Append `keyboardtriggerdisable` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
+2. Reboot
+
 #### How to change display output modes
 
 By default, NOOBS will output over HDMI at your display’s preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.

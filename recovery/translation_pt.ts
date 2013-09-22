@@ -312,7 +312,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+249"/>
+        <location filename="mainwindow.cpp" line="+248"/>
         <location line="+662"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
@@ -328,12 +328,12 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-412"/>
+        <location line="-411"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+61"/>
         <source>Error mounting settings partition</source>
         <translation type="unfinished"></translation>
     </message>
@@ -343,7 +343,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Reformat failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -380,12 +380,12 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-396"/>
+        <location line="-395"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+312"/>
+        <location line="+311"/>
         <source>The install process will begin shortly.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -597,7 +597,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>Error opening /dev/mmcblk0 for writing</source>
         <translation type="unfinished"></translation>
     </message>
