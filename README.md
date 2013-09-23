@@ -140,6 +140,16 @@ Edit the `recovery.cmdline` file in the root NOOBS directory and append the foll
 
 Note that these defaults will be overwritten by any changes made in the GUI to these settings.
 
+### How to bypass the Recovery splashscreen and boot directly into a fixed partition
+
+After you have installed your chosen OSes, add the following file to the root directory of NOOBS to force the indicated partition to be booted at power-on.
+
+1. Add a text file named `autoboot.txt` to the root directory of NOOBS.
+
+2. Add `boot_partition=<partition number>` to the file and save it to disk.
+
+This will also prevent the splashscreen from being displayed at boot.
+
 ===
 
 ## Troubleshooting
@@ -152,7 +162,7 @@ To boot into a basic busybox shell rather than launching the NOOBS GUI, you can 
 
 2. Insert a physical jumper between pins 5 & 6 of GPIO header P1.
 
-#### How to force Recovery Mode being entered if you don't have a keyboard
+#### How to enable using the GPIO to trigger entering Recovery Mode
 
 To force Recovery Mode to be entered on boot and to show the NOOBS interface, you normally press the `SHIFT` key during bootup. If you don't have a keyboard or the `SHIFT` keypress isn't being detected, you should complete the following steps to force the NOOBS interface to be displayed on boot:
 
@@ -161,14 +171,18 @@ To force Recovery Mode to be entered on boot and to show the NOOBS interface, yo
 
 To force Recovery Mode being entered on boot, connect GPIO pin 3 on header P1 to GND (pin 25). If GPIO pin 3 remains unconnected then it will boot through to the installed OS as normal.
 
-Alternatively, if you are unable to (or don't want to) use GPIO to trigger Recovery Mode, you can:
+#### How to force Recovery Mode being entered on boot (overrides GPIO or keyboard input)
+
+Alternatively, if you are unable to use either the GPIO or keyboard to trigger entering Recovery Mode, you can:
 
 1. Append `forcetrigger` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
 2. Reboot
 
-Note that with this option enabled, the Recovery Mode will be displayed *every* time you boot from your NOOBS card (until you edit `recovery.cmdline` again).
+Note that with this option enabled, the Recovery Mode will be displayed <b>every</b> time you boot from your NOOBS card (until you edit `recovery.cmdline` again).
 
-#### How to prevent the keyboard from entering Recovery Mode
+#### How to disable using the keyboard to trigger entering Recovery Mode
+
+In some rare cases, you may find that NOOBS incorrectly detects a `SHIFT` keypress from your keyboard regardless of the presence of user input. In such cases it may be helpful to disable using the keyboard to trigger Recovery Mode being entered.
 
 To prevent a `SHIFT` keypress from entering Recovery Mode on boot (maybe you have a problematic keyboard which is erroneously triggering every time you boot), you can:
 
