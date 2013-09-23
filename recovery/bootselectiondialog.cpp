@@ -80,8 +80,11 @@ BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidge
                 }
             }
         }
-        QListWidgetItem *item = new QListWidgetItem(icon, m.value("name").toString()+"\n"+m.value("description").toString(), ui->list);
-        item->setData(Qt::UserRole, m);
+        if (m.value("name").toString()!="Data Partition (Advanced)")
+        {
+            QListWidgetItem *item = new QListWidgetItem(icon, m.value("name").toString()+"\n"+m.value("description").toString(), ui->list);
+            item->setData(Qt::UserRole, m);
+        }
     }
 
     if (ui->list->count() != 0)
