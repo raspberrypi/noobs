@@ -154,6 +154,10 @@ This will also prevent the splashscreen from being displayed at boot.
 
 ## Troubleshooting
 
+#### What to do if your SHIFT keypress isn't detected
+
+Try pressing shift only when the grey splashscreen is displayed rather than holding it from boot up.
+
 #### How to boot into "Safe Mode"
 
 To boot into a basic busybox shell rather than launching the NOOBS GUI, you can either:
