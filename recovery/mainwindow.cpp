@@ -858,6 +858,7 @@ void MainWindow::downloadListComplete()
 
     if (reply->error() != reply->NoError || httpstatuscode < 200 || httpstatuscode > 399)
     {
+        _qpd->hide();
         QMessageBox::critical(this, tr("Download error"), tr("Error downloading distribution list from Internet"), QMessageBox::Close);
     }
     else
