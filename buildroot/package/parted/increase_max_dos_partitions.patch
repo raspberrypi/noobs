@@ -1,0 +1,12 @@
+diff -urN parted-2.3.orig/libparted/labels/dos.c parted-2.3/libparted/labels/dos.c
+--- parted-2.3.orig/libparted/labels/dos.c	2010-05-25 14:42:21.000000000 +0100
++++ parted-2.3/libparted/labels/dos.c	2013-09-06 11:07:46.421786138 +0100
+@@ -103,7 +103,7 @@
+  * (i.e. 1022 is sometimes used to indicate "use LBA").
+  */
+ #define MAX_CHS_CYLINDER	1021
+-#define MAX_TOTAL_PART		16
++#define MAX_TOTAL_PART		64
+ 
+ typedef struct _DosRawPartition		DosRawPartition;
+ typedef struct _DosRawTable		DosRawTable;

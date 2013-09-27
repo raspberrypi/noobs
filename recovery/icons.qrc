@@ -5,8 +5,6 @@
         <file>icons/door_in.png</file>
         <file>icons/page_white_edit.png</file>
         <file>icons/setting_tools.png</file>
-        <file>icons/add.png</file>
-        <file>icons/delete.png</file>
         <file>wallpaper.png</file>
         <file>icons/world.png</file>
         <file>icons/gb.png</file>
@@ -24,5 +22,9 @@
         <file>icons/hu.png</file>
         <file>translation_fi.qm</file>
         <file>icons/fi.png</file>
+        <file>icons/us.png</file>
+        <file>icons/download.png</file>
+        <file>icons/hdd.png</file>
+        <file>icons/keyboard.png</file>
     </qresource>
 </RCC>

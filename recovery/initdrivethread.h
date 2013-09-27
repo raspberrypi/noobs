@@ -4,11 +4,14 @@
 /* Prepare SD card for first use thread
  *
  * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
  *
- * --- INSERT LICENSE TEXT HERE ---
+ * See LICENSE.txt for license details
  *
  */
+
 #include <QThread>
+#include <QMessageBox>
 #include "config.h"
 
 class InitDriveThread : public QThread
@@ -31,19 +34,19 @@ protected:
     bool zeroMbr();
     bool formatBootPartition();
     bool partitionDrive();
+    bool formatSettingsPartition();
 #ifdef RISCOS_BLOB_FILENAME
     bool writeRiscOSblob();
 #endif
-    QByteArray getFileContents(const QString &filename);
-    
+
 signals:
     void error(const QString &msg);
     void statusUpdate(const QString &msg);
     void completed();
+    void query(const QString &msg, const QString &title, QMessageBox::StandardButton* answer);
 
-    
 public slots:
-    
+
 };
 
 #endif // INITDRIVETHREAD_H

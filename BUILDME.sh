@@ -28,13 +28,18 @@ done
 # Let buildroot build everything
 make
 
-# Copy recovery kernel and rootfs to output dir
+# Create output dir and copy files
+mkdir -p ../output
+mkdir -p ../output/os
+cp -r ../sdcontent/* ../output
 cp output/images/zImage ../output/recovery.img
 cp output/images/rootfs.cpio.lzo ../output/recovery.rfs
 
 # Ensure that output dir contains files necessary to boot
 cp output/images/rpi-firmware/start_cd.elf ../output/recovery.elf
 cp output/images/rpi-firmware/bootcode.bin ../output
+cp output/images/cmdline.txt ../output/recovery.cmdline
+touch ../output/RECOVERY_FILES_DO_NOT_EDIT
 
 # Create build-date timestamp file containing Git HEAD info for build
 rm -f ../output/BUILT* || true

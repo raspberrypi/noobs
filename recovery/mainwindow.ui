@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>301</height>
+    <width>575</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="font">
@@ -18,15 +18,12 @@
   <property name="focusPolicy">
    <enum>Qt::NoFocus</enum>
   </property>
- <widget class="QWidget" name="centralWidget">
-  <property name="focusPolicy">
-   <enum>Qt::NoFocus</enum>
-  </property>
- <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="margin">
-     <number>0</number>
-    </property>
-    <item>
+  <widget class="QWidget" name="centralWidget">
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
      <widget class="QListWidget" name="list">
       <property name="font">
        <font>
@@ -36,6 +33,35 @@
       <property name="spacing">
        <number>1</number>
       </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>65</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>Disk space</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="neededLabel">
+         <property name="text">
+          <string>Needed:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="availableLabel">
+         <property name="text">
+          <string>Available:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
@@ -49,12 +75,12 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>22</width>
-     <height>22</height>
+     <width>40</width>
+     <height>40</height>
     </size>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextBesideIcon</enum>
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -68,11 +94,14 @@
    <addaction name="actionCancel"/>
   </widget>
   <widget class="QToolBar" name="advToolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="windowTitle">
     <string/>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextBesideIcon</enum>
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -80,8 +109,6 @@
    <attribute name="toolBarBreak">
     <bool>true</bool>
    </attribute>
-   <addaction name="actionAdd_image"/>
-   <addaction name="actionRemove_image"/>
   </widget>
   <action name="actionWrite_image_to_disk">
    <property name="enabled">
@@ -92,10 +119,13 @@
      <normaloff>:/icons/backups.png</normaloff>:/icons/backups.png</iconset>
    </property>
    <property name="text">
-    <string>Install OS</string>
+    <string>Install (i)</string>
    </property>
    <property name="toolTip">
     <string>Installs the selected operating system image onto this SD card.</string>
+   </property>
+   <property name="shortcut">
+    <string>I</string>
    </property>
   </action>
   <action name="actionCancel">
@@ -108,8 +138,8 @@
    </property>
    <property name="toolTip">
     <string>Exits and boots the installed operating system.</string>
-     </property>
-    <property name="shortcut">
+   </property>
+   <property name="shortcut">
     <string notr="true">Esc</string>
    </property>
   </action>
@@ -123,27 +153,6 @@
    </property>
    <property name="text">
     <string>Advanced</string>
-   </property>
-  </action>
-  <action name="actionAdd_image">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
-   </property>
-   <property name="text">
-    <string>Add image</string>
-   </property>
-  </action>
-  <action name="actionRemove_image">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
-   </property>
-   <property name="text">
-    <string>Remove image</string>
    </property>
   </action>
   <action name="actionEdit_config">
@@ -161,7 +170,7 @@
     <string>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</string>
    </property>
    <property name="shortcut">
-    <string notr="true">e</string>
+    <string notr="true">E</string>
    </property>
   </action>
   <action name="actionBrowser">
@@ -176,7 +185,7 @@
     <string>Opens a web browser displaying the Raspberry Pi Forum.</string>
    </property>
    <property name="shortcut">
-    <string notr="true">h</string>
+    <string notr="true">H</string>
    </property>
   </action>
  </widget>

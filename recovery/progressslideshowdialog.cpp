@@ -3,38 +3,50 @@
 #include <QDir>
 #include <QFile>
 #include <QPixmap>
+#include <QDesktopWidget>
 #include <QDebug>
 
 /* Progress dialog with slideshow
  *
  * Initial author: Floris Bos
- *                                                                                                                                                                            
- * Initial author: Floris Bos                                                                                                                                              
- * Maintained by Raspberry Pi                                                                                                                                             
- *                                                                                                                                                                   
- * See LICENSE.txt for license details                                                                                                                            
- *                                                                                                                                                             
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
-ProgressSlideshowDialog::ProgressSlideshowDialog(const QString &slidesDirectory, const QString &statusMsg, int changeInterval, QWidget *parent) :
+ProgressSlideshowDialog::ProgressSlideshowDialog(const QStringList &slidesDirectories, const QString &statusMsg, int changeInterval, QWidget *parent) :
     QDialog(parent),
-    _slidesDirectory(slidesDirectory),
     _pos(0),
     _changeInterval(changeInterval),
     _maxSectors(0),
+    _pausedAt(0),
     ui(new Ui::ProgressSlideshowDialog)
 {
     ui->setupUi(this);
     setLabelText(statusMsg);
-    setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 
-    QDir dir(slidesDirectory, "*.jpg *.jpeg *.png");
-    if (dir.exists())
+    QRect s = QApplication::desktop()->screenGeometry();
+    if (s.height() < 400)
+        setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    else
+        setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+
+    foreach (QString slidesDirectory, slidesDirectories)
     {
-        _slides = dir.entryList();
-        _slides.sort();
-        qDebug() << "Slides directory:" << _slidesDirectory << "Available slides" << _slides;
+        QDir dir(slidesDirectory, "*.jpg *.jpeg *.png");
+        if (dir.exists())
+        {
+            QStringList s = dir.entryList();
+            s.sort();
+
+            foreach (QString slide, s)
+            {
+                _slides.append(slidesDirectory+"/"+slide);
+            }
+        }
     }
+    qDebug() << "Available slides" << _slides;
 
     if (_slides.isEmpty())
     {
@@ -46,12 +58,12 @@ ProgressSlideshowDialog::ProgressSlideshowDialog(const QString &slidesDirectory,
     else
     {
         /* Resize window to size of first image in slide directory */
-        QPixmap pixmap(_slidesDirectory+"/"+_slides.first());
+        QPixmap pixmap(_slides.first());
         ui->imagespace->setMinimumSize(pixmap.width(), pixmap.height());
         resize(pixmap.width(), pixmap.height()+50);
-    
+
         ui->imagespace->setPixmap(pixmap);
-    
+
         connect(&_timer, SIGNAL(timeout()), this, SLOT(nextSlide()));
         _timer.start(changeInterval * 1000);
     }
@@ -69,6 +81,7 @@ void ProgressSlideshowDialog::setLabelText(const QString &text)
     QString txt = text;
     txt.replace('\n',' ');
     ui->statusLabel->setText(txt);
+    qDebug() << text;
 }
 
 void ProgressSlideshowDialog::nextSlide()
@@ -76,7 +89,7 @@ void ProgressSlideshowDialog::nextSlide()
     if (++_pos >= _slides.size())
         _pos = 0;
 
-    QString newSlide = _slidesDirectory+"/"+_slides.at(_pos);
+    QString newSlide = _slides.at(_pos);
     if (QFile::exists(newSlide))
         ui->imagespace->setPixmap(QPixmap(newSlide));
 }
@@ -96,7 +109,19 @@ void ProgressSlideshowDialog::disableIOaccounting()
     ui->mbwrittenLabel->setText("");
 }
 
-void ProgressSlideshowDialog::setMaximum(unsigned int bytes)
+void ProgressSlideshowDialog::pauseIOaccounting()
+{
+    _iotimer.stop();
+    _pausedAt = sectorsWritten();
+}
+
+void ProgressSlideshowDialog::resumeIOaccounting()
+{
+    _sectorsStart += sectorsWritten()-_pausedAt;
+    _iotimer.start(1000);
+}
+
+void ProgressSlideshowDialog::setMaximum(qint64 bytes)
 {
     _maxSectors = bytes/512;
     ui->progressBar->setMaximum(_maxSectors);

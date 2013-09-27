@@ -1,16 +1,14 @@
 #ifndef MBR_H
 #define MBR_H
 
-/*
- *                                                                                                                                                                             
- * Initial author: Floris Bos                                                                                                                                                
- * Maintained by Raspberry Pi                                                                                                                                                
- *                                                                                                                                                                       
- * See LICENSE.txt for license details                                                                                                                                 
- *                                                                                                                                                                   
+/* MBR on disk structures
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
-
-/* MBR on disk structures */
 
 struct mbr_partition_entry {
     unsigned char bootable;
@@ -24,7 +22,7 @@ struct mbr_partition_entry {
 struct mbr_table {
     char bootcode[446];
     mbr_partition_entry part[4];
-    char signature[2];
+    unsigned char signature[2];
 } __attribute__ ((packed));
 
 #endif // MBR_H

@@ -19,6 +19,8 @@ endef
 
 define ARORA_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/arora $(TARGET_DIR)/usr/bin/arora
+	$(INSTALL) -d -m 0755 $(TARGET_DIR)/.qws/share/data/Arora/locale
+	$(INSTALL) -D -m 0755 $(@D)/src/.qm/locale/*.qm $(TARGET_DIR)/.qws/share/data/Arora/locale
 endef
 
 $(eval $(generic-package))

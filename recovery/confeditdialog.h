@@ -3,15 +3,12 @@
 
 /* Configuration edit dialog
  *
- *                                                                                                                                                                             
- * Initial author: Floris Bos                                                                                                                                                  
- * Maintained by Raspberry Pi                                                                                                                                                    
- *                                                                                                                                                                            
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
  *
- * See LICENSE.txt for license details                                                                                                                                      
- *                                                                                                                                                                            
+ * See LICENSE.txt for license details
+ *
  */
-
 
 #include <QDialog>
 #include <QList>
@@ -25,14 +22,14 @@ class ConfEditDialogTab;
 class ConfEditDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
-    explicit ConfEditDialog(QWidget *parent = 0);
+    explicit ConfEditDialog(const QString &partition, QWidget *parent = 0);
     ~ConfEditDialog();
 
 public slots:
     virtual void accept();
-    
+
 private:
     Ui::ConfEditDialog *ui;
     QList<ConfEditDialogTab *> _tabs;

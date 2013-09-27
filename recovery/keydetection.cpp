@@ -17,23 +17,19 @@
  *
  * In practice we are usually started earlier than USB is up & running though,
  * so we have to wait for a keyboard device to appear.
- *                                                                                                                                                                           
- * Initial author: Floris Bos                                                                                                                                                 
- * Maintained by Raspberry Pi                                                                                                                                                   
- *                                                                                                                                                                            
- * See LICENSE.txt for license details                                                                                                                                        
- *                                                                                                                                                                            
+ *
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
  */
 
 #define test_bit(bit, array)  (array[bit / 8] & (1 << (bit % 8)))
 
-
-bool KeyDetection::isF10pressed()
+bool KeyDetection::waitForKeyboard()
 {
     int fd = -1;
-#ifdef VERBOSE_KEYPRESS_DETECTION
-    printf("Hold down F10 to access recovery menu. Waiting for keyboard...\n");
-#endif
 
     // Wait up to 2.1 seconds for a keyboard to appear.
     for (int i=0; i<21; i++)
@@ -41,26 +37,26 @@ bool KeyDetection::isF10pressed()
         usleep(100000);
         fd = openKeyboard();
         if (fd != -1)
-            break;
+        {
+            close(fd);
+            return true;
+        }
     }
 
-#ifdef VERBOSE_KEYPRESS_DETECTION
-    // Delete last line
-    printf("\033[A\033[2K");
-#endif
+    return false;
+}
+
+bool KeyDetection::isF10pressed()
+{
+    int fd = openKeyboard();
+
     if (fd == -1)
     {
         qDebug() << "No keyboard found...";
-#ifdef VERBOSE_KEYPRESS_DETECTION
-        printf("No keyboard found...\n");
-#endif
         return false;
     }
 
-    // Wait up to 0.2 seconds for keypress to register
-    //for (int i=0; i<20; i++)
-
-    // Wait 2 seconds
+    // Wait 2 seconds for key press
     for (int i=0; i<200; i++)
     {
         if (_isF10pressed(fd))
@@ -71,10 +67,9 @@ bool KeyDetection::isF10pressed()
     // Final check
     bool pressed = _isF10pressed(fd);
 
-#ifdef VERBOSE_KEYPRESS_DETECTION
     if (!pressed)
-        printf("No key press detected...\n");
-#endif
+        qDebug() << "No key press detected...";
+
 
     close(fd);
 

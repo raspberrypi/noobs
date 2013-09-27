@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>269</width>
+    <width>400</width>
     <height>45</height>
    </rect>
   </property>
@@ -83,12 +83,41 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string notr="true"/>
   </property>
    <property name="styleSheet">
    <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="3">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string notr="true">(9):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QComboBox" name="keyCombo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="langLabel">
      <property name="minimumSize">
@@ -119,6 +148,15 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <addaction name="actionOpenComboBox"/>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Keyboard</string>
+     </property>
+     <addaction name="actionOpenKeyCombo"/>
     </widget>
    </item>
   </layout>
@@ -126,8 +164,31 @@
    <property name="text">
     <string notr="true">openComboBox</string>
    </property>
+   <property name="iconText">
+    <string notr="true">openComboBox</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">openComboBox</string>
+   </property>
    <property name="shortcut">
     <string notr="true">L</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
+  </action>
+  <action name="actionOpenKeyCombo">
+   <property name="text">
+    <string notr="true">openKeyCombo</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">openKeyCombo</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">openKeyCombo</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">9</string>
    </property>
    <property name="shortcutContext">
     <enum>Qt::ApplicationShortcut</enum>

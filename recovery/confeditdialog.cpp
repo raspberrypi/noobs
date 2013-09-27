@@ -1,10 +1,11 @@
 /* Configuration edit dialog
  *
- * Initial author: Floris Bos                                                                                                                                              
- * Maintained by Raspberry Pi                                                                                                                                                   
- *                                                                                                                                                                            
- * See LICENSE.txt for license details                                                                                                                                       
- *                                                                                                                                                                             */
+ * Initial author: Floris Bos
+ * Maintained by Raspberry Pi
+ *
+ * See LICENSE.txt for license details
+ *
+ */
 
 #include "confeditdialog.h"
 #include "ui_confeditdialog.h"
@@ -63,7 +64,7 @@ protected:
 /* --- */
 
 
-ConfEditDialog::ConfEditDialog(QWidget *parent) :
+ConfEditDialog::ConfEditDialog(const QString &partition, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConfEditDialog)
 {
@@ -75,7 +76,7 @@ ConfEditDialog::ConfEditDialog(QWidget *parent) :
     ui->setupUi(this);
     ui->tabWidget->clear();
 
-    if (QProcess::execute("mount -t vfat " FAT_PARTITION_OF_IMAGE " /boot") != 0)
+    if (QProcess::execute("mount -t vfat "+partition+" /boot") != 0)
     {
         QMessageBox::critical(this,
                               tr("Error"),

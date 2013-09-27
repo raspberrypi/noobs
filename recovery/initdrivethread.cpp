@@ -1,21 +1,20 @@
 /* Prepare SD card for first use thread
  *
  * Initial author: Floris Bos
- *
- * Initial author: Floris Bos
  * Maintained by Raspberry Pi
  *
  * See LICENSE.txt for license details
  *
  */
 
-
 #include "initdrivethread.h"
 #include "mbr.h"
+#include "util.h"
 #include <QProcess>
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QMessageBox>
 #include <unistd.h>
 #include <linux/fs.h>
 #include <sys/ioctl.h>
@@ -27,7 +26,6 @@ InitDriveThread::InitDriveThread(QObject *parent) :
 
 void InitDriveThread::run()
 {
-    int blocksneeded = MINIMUM_SDCARD_SIZE * 1024 * 2;
     QDir dir;
 
     emit statusUpdate("Waiting for SD card to be ready");
@@ -36,17 +34,11 @@ void InitDriveThread::run()
         QThread::usleep(100);
     }
 
-    if (sizeofSDCardInBlocks() < blocksneeded)
-    {
-        emit error(tr("SD card too small. Must be at least %1 MB").arg(MINIMUM_SDCARD_SIZE));
-        return;
-    }
-
     emit statusUpdate(tr("Mounting FAT partition"));
     mountSystemPartition();
 
-    if (sizeofBootFilesInKB() > (MAXIMUM_BOOTFILES_SIZE*1024))
-    {
+    //if (sizeofBootFilesInKB() > (MAXIMUM_BOOTFILES_SIZE*1024))
+    //{
         //emit error(tr("SD card contains extra files that do not belong to this distribution. Please copy them to another disk and delete them from card."));
         //return;
 
@@ -55,17 +47,23 @@ void InitDriveThread::run()
         {
             return;
         }
-    }
-    else
+//}
+//  else
+//  {
+        //      // Reformat the drive
+        //if (!method_reformatDrive())
+            //{
+            //return;
+            //      }
+// }
+
+    emit statusUpdate(tr("Formatting settings partition"));
+    if (!formatSettingsPartition())
     {
-        // Reformat the drive
-        if (!method_reformatDrive())
-        {
-            return;
-        }
+        emit error(tr("Error formatting settings partition"));
     }
 
-    dir.mkdir("/mnt/images");
+    dir.mkdir("/mnt/os");
     emit statusUpdate(tr("Editing cmdline.txt"));
 
     QString cmdlinefilename = "/mnt/recovery.cmdline";
@@ -119,6 +117,8 @@ void InitDriveThread::run()
     f.open(f.ReadOnly);
     QByteArray cmdlineread = f.readAll();
     f.close();
+    umountSystemPartition();
+
     if (cmdlineread != line)
     {
         emit error(tr("SD card broken (writes do not persist)"));
@@ -173,7 +173,8 @@ bool InitDriveThread::method_reformatDrive()
 
 bool InitDriveThread::method_resizePartitions()
 {
-    int newSizeOfRescuePartition = sizeofBootFilesInKB()/1000 + 100;
+    int newStartOfRescuePartition = getFileContents("/sys/class/block/mmcblk0p1/start").trimmed().toInt();
+    int newSizeOfRescuePartition  = sizeofBootFilesInKB()/1000 + 100;
 
     if (!umountSystemPartition())
     {
@@ -185,27 +186,48 @@ bool InitDriveThread::method_resizePartitions()
     {
         // SD card does not have a MBR.
 
-        // TODO: Warn user that their SD card does not have an MBR and ask
+        // Warn user that their SD card does not have an MBR and ask
         // if they would like us to create one for them
+        QMessageBox::StandardButton answer;
+        emit query(tr("Would you like NOOBS to create one for you?\nWARNING: This will erase all data on your SD card"),
+                   tr("Error: No MBR present on SD Card"),
+                   &answer);
 
-        // Create MBR containing single FAT partition
-        QProcess proc;
-        proc.setProcessChannelMode(proc.MergedChannels);
-        proc.start("parted /dev/mmcblk0 --script -- mkpartfs primary fat32 8192s -1");
-        proc.waitForFinished(-1);
-        if (proc.exitCode() != 0)
+        if(answer == QMessageBox::Yes)
         {
-            // Warn user if we failed to create an MBR on their card
-            emit error(tr("Error creating MBR")+"\n"+proc.readAll());
+            emit statusUpdate(tr("Zeroing partition table"));
+            if (!zeroMbr())
+            {
+                emit error(tr("Error zero'ing MBR/GPT. SD card may be broken or advertising wrong capacity."));
+                return false;
+            }
+
+            // Create MBR containing single FAT partition
+            emit statusUpdate(tr("Writing new MBR"));
+            QProcess proc;
+            proc.setProcessChannelMode(proc.MergedChannels);
+            proc.start("/usr/sbin/parted /dev/mmcblk0 --script -- mktable msdos mkpartfs primary fat32 8192s -1");
+            proc.waitForFinished(-1);
+            if (proc.exitCode() != 0)
+            {
+                // Warn user if we failed to create an MBR on their card
+                emit error(tr("Error creating MBR")+"\n"+proc.readAll());
+                return false;
+            }
+            qDebug() << "Created missing MBR on SD card. parted output:" << proc.readAll();
+
+            // Advise user that their SD card has now been formatted
+            // suitably for installing NOOBS and that they will have to
+            // re-copy the files before rebooting
+            emit error(tr("SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot"));
             return false;
         }
-        qDebug() << "Created missing MBR on SD card. parted output:" << proc.readAll();
+        else
+        {
+            emit error(tr("SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again."));
+            return false;
+        }
 
-        // Advise user that their SD card has now been formatted
-        // suitably for installing NOOBS and that they will have to
-        // re-copy the files before rebooting
-        emit error(tr("SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot"));
-        return false;
     }
 
     emit statusUpdate(tr("Removing partitions 2,3,4"));
@@ -224,7 +246,14 @@ bool InitDriveThread::method_resizePartitions()
 
     emit statusUpdate(tr("Resizing FAT partition"));
 
-    QString cmd = "/usr/sbin/parted --script /dev/mmcblk0 resize 1 2048s "+QString::number(newSizeOfRescuePartition)+"M";
+    /* Relocating the start of the FAT partition is a write intensive operation
+     * only move it when it is not aligned on a MiB boundary already */
+    if (newStartOfRescuePartition < 2048 || newStartOfRescuePartition % 2048 != 0)
+    {
+        newStartOfRescuePartition = 8192; /* 4 MiB */
+    }
+
+    QString cmd = "/usr/sbin/parted --script /dev/mmcblk0 resize 1 "+QString::number(newStartOfRescuePartition)+"s "+QString::number(newSizeOfRescuePartition)+"M";
     qDebug() << "Executing" << cmd;
     QProcess p;
     p.setProcessChannelMode(p.MergedChannels);
@@ -240,7 +269,6 @@ bool InitDriveThread::method_resizePartitions()
     qDebug() << "parted done, output:" << p.readAll();
     QThread::msleep(500);
 
-#ifdef USE_EXTENDED_PARTITIONS
     emit statusUpdate(tr("Creating extended partition"));
 
     mbr_table extended_mbr;
@@ -251,9 +279,13 @@ bool InitDriveThread::method_resizePartitions()
     // Align on 4 MiB boundary
     startOfExtended += 8192-(startOfExtended % 8192);
 
-    partitionTable = QByteArray::number(startOfOurPartition)+","+QByteArray::number(sizeOfOurPartition)+",0E\n"; /* FAT partition */
-    partitionTable += QByteArray::number(startOfExtended)+",,X\n"; /* Extended partition with all remaining space */
-    partitionTable += "0,0\n";
+    int sizeOfDisk = getFileContents("/sys/class/block/mmcblk0/size").trimmed().toULongLong();
+    int sizeOfExtended = sizeOfDisk - startOfExtended - SETTINGS_PARTITION_SIZE ;
+    int startOfSettings = startOfExtended+sizeOfExtended;
+
+    partitionTable  = QByteArray::number(startOfOurPartition)+","+QByteArray::number(sizeOfOurPartition)+",0E\n"; /* FAT partition */
+    partitionTable += QByteArray::number(startOfExtended)+","+QByteArray::number(sizeOfExtended)+",X\n"; /* Extended partition with all remaining space */
+    partitionTable += QByteArray::number(startOfSettings)+",,L\n"; /* Settings partition */
     partitionTable += "0,0\n";
     qDebug() << "Writing partition table" << partitionTable;
 
@@ -281,7 +313,6 @@ bool InitDriveThread::method_resizePartitions()
     }
     qDebug() << "sfdisk done, output:" << proc.readAll();
     QThread::msleep(500);
-#endif
 
     /* For reasons unknown Linux sometimes
      * only finds /dev/mmcblk0p2 and /dev/mmcblk0p1 goes missing */
@@ -349,6 +380,10 @@ bool InitDriveThread::formatBootPartition()
     return QProcess::execute("/sbin/mkdosfs -n RECOVERY /dev/mmcblk0p1") == 0;
 }
 
+bool InitDriveThread::formatSettingsPartition()
+{
+    return QProcess::execute("/usr/sbin/mkfs.ext4 -L SETTINGS " SETTINGS_PARTITION) == 0;
+}
 
 bool InitDriveThread::zeroMbr()
 {
@@ -366,20 +401,23 @@ bool InitDriveThread::partitionDrive()
 {
     /* Partition layout:
      *
-     * First MB (2048 blocks) kept empty for alignment
+     * First 1MB (2048 blocks) kept empty for alignment
      * Followed by FAT partition of RESCUE_PARTITION_SIZE (default 1 GB)
      * Followed by extended partition spanning remainder of space
+     * Followed by NOOBS persistent settings partition
      */
     QByteArray partitionTable;
     int rescueBlocks = RESCUE_PARTITION_SIZE*1024*2;
 
-#ifdef USE_EXTENDED_PARTITIONS
     mbr_table extended_mbr;
     int startOfExtended = 2048+rescueBlocks;
+    int sizeOfDisk = getFileContents("/sys/class/block/mmcblk0/size").trimmed().toULongLong();
+    int sizeOfExtended = sizeOfDisk - startOfExtended - SETTINGS_PARTITION_SIZE;
+    int startOfSettings = startOfExtended + sizeOfExtended;
 
     partitionTable = "2048,"+QByteArray::number(rescueBlocks)+",0E\n"; /* FAT partition */
-    partitionTable += QByteArray::number(startOfExtended)+",,X\n"; /* Extended partition with all remaining space */
-    partitionTable += "0,0\n";
+    partitionTable += QByteArray::number(startOfExtended)+","+QByteArray::number(sizeOfExtended)+",X\n"; /* Extended partition with all remaining space */
+    partitionTable += QByteArray::number(startOfSettings)+",,L\n"; /* Settings partition */
     partitionTable += "0,0\n";
 
     /* Write out empty extended partition table with signature */
@@ -391,12 +429,6 @@ bool InitDriveThread::partitionDrive()
     f.seek(startOfExtended*512);
     f.write((char *) &extended_mbr, sizeof(extended_mbr));
     f.close();
-#else
-    partitionTable = "2048,"+QByteArray::number(rescueBlocks)+",0E\n" /* FAT partition */
-            "0,0\n"
-            "0,0\n"
-            "0,0\n";
-#endif
 
     /* Write main partition table */
     QString cmd = QString("/sbin/sfdisk -uS /dev/mmcblk0");
@@ -409,17 +441,6 @@ bool InitDriveThread::partitionDrive()
     QThread::msleep(500);
 
     return proc.exitCode() == 0;
-}
-
-QByteArray InitDriveThread::getFileContents(const QString &filename)
-{
-    QByteArray r;
-    QFile f(filename);
-    f.open(f.ReadOnly);
-    r = f.readAll();
-    f.close();
-
-    return r;
 }
 
 #ifdef RISCOS_BLOB_FILENAME
