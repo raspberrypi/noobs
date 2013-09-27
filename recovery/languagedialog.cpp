@@ -39,7 +39,7 @@ LanguageDialog *LanguageDialog::_instance = NULL;
 LanguageDialog::LanguageDialog(const QString &defaultLang, const QString &defaultKeyboard, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LanguageDialog),
-    _trans(NULL), _qttrans(NULL), _currentLang(currentLangCode)
+    _trans(NULL), _qttrans(NULL)
 {
     _instance = this;
 
@@ -75,7 +75,6 @@ LanguageDialog::LanguageDialog(const QString &defaultLang, const QString &defaul
     QDir dir(":/", "translation_*.qm");
     QStringList translations = dir.entryList();
 
-    bool validStartLang = false;
     foreach (QString langfile, translations)
     {
         QString langcode = langfile.mid(12);

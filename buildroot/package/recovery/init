@@ -17,9 +17,6 @@
 # Set up ACT LED to be triggered by mmc0
 echo mmc0 > /sys/class/leds/led0/trigger
 
-# Set up ACT LED to be triggered by mmc0
-echo mmc0 > /sys/class/leds/led0/trigger
-
 # Rescue shell available on tty2 and tty3
 echo 2 >/sys/module/vt/parameters/cur_default
 /sbin/getty -L tty2 0 vt100 &

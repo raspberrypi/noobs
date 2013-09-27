@@ -14,8 +14,6 @@ LIBS += -lqjson
 
 system(sh updateqm.sh 2>/dev/null)
 
-system(sh updateqm.sh)
-
 SOURCES += main.cpp\
         mainwindow.cpp \
     languagedialog.cpp \

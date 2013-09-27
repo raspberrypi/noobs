@@ -496,19 +496,6 @@ void MainWindow::update_window_title()
     setWindowTitle(QString(tr("NOOBS v%1 - Built: %2")).arg(VERSION_NUMBER, QString::fromLocal8Bit(__DATE__)));
 }
 
-void MainWindow::update_window_title()
-{
-    setWindowTitle(QString(tr("NOOBS v%1 - Built: %2")).arg(VERSION_NUMBER, QString::fromLocal8Bit(__DATE__)));
-}
-
-void MainWindow::update_recommended_label()
-{
-    if (recommendedItem)
-    {
-        recommendedItem->setText(imageFilenameToFriendlyName(recommendedItem->data(Qt::UserRole).toString())+QString(" [%1]").arg(tr("RECOMMENDED")));
-    }
-}
-
 void MainWindow::changeEvent(QEvent* event)
 {
     if (event && event->type() == QEvent::LanguageChange)

@@ -141,7 +141,6 @@
    </item>
    <item row="0" column="1">
     <widget class="QComboBox" name="langCombo">
-     <addaction name="actionOpenComboBox"/>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
