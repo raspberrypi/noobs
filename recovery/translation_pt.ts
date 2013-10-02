@@ -5,12 +5,12 @@
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="+19"/>
-        <location filename="bootselectiondialog.cpp" line="+245"/>
+        <location filename="bootselectiondialog.cpp" line="+248"/>
         <source>Select OS to boot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="-202"/>
+        <location filename="bootselectiondialog.cpp" line="-205"/>
         <source>Cannot display boot menu</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20,7 +20,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+143"/>
+        <location line="+146"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -313,12 +313,12 @@ WARNING: This will erase all data on your SD card</source>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="+248"/>
-        <location line="+662"/>
+        <location line="+663"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-507"/>
+        <location line="-508"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
@@ -360,12 +360,12 @@ WARNING: This will erase all data on your SD card</source>
     </message>
     <message>
         <location line="+73"/>
-        <location line="+398"/>
+        <location line="+399"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-624"/>
+        <location line="-625"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
@@ -423,7 +423,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+264"/>
+        <location line="+265"/>
         <location line="+311"/>
         <location line="+10"/>
         <source>Download error</source>
@@ -465,13 +465,13 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-580"/>
-        <location line="+579"/>
+        <location line="-581"/>
+        <location line="+580"/>
         <source>No network access</source>
         <translation>Sem acesso de rede</translation>
     </message>
     <message>
-        <location line="-578"/>
+        <location line="-579"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>

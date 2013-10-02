@@ -5,7 +5,7 @@
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="19"/>
-        <location filename="bootselectiondialog.cpp" line="245"/>
+        <location filename="bootselectiondialog.cpp" line="248"/>
         <source>Select OS to boot</source>
         <translation>Selecteer besturingssysteem</translation>
     </message>
@@ -20,22 +20,22 @@
         <translation>Fout bij mounten instellingen partitie</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="186"/>
+        <location filename="bootselectiondialog.cpp" line="189"/>
         <source>HDMI safe mode</source>
         <translation>HDMI safe mode</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="190"/>
+        <location filename="bootselectiondialog.cpp" line="193"/>
         <source>composite PAL mode</source>
         <translation>composite PAL mode</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="194"/>
+        <location filename="bootselectiondialog.cpp" line="197"/>
         <source>composite NTSC mode</source>
         <translation>composite NTSC mode</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="250"/>
+        <location filename="bootselectiondialog.cpp" line="253"/>
         <source>Previously selected OS will boot in %1 seconds</source>
         <translation>Besturingssysteem wordt gestart in %1 seconden</translation>
     </message>
@@ -314,7 +314,7 @@ WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translatio
     </message>
     <message>
         <location filename="mainwindow.cpp" line="248"/>
-        <location filename="mainwindow.cpp" line="910"/>
+        <location filename="mainwindow.cpp" line="911"/>
         <source>RECOMMENDED</source>
         <translation>AANBEVOLEN</translation>
     </message>
@@ -362,7 +362,7 @@ Hierbij worden alle bestaande bestanden verwijderd.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="477"/>
-        <location filename="mainwindow.cpp" line="875"/>
+        <location filename="mainwindow.cpp" line="876"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
@@ -426,50 +426,50 @@ Would you like to make this setting permanent?</source>
 De instelling opslaan?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="861"/>
-        <location filename="mainwindow.cpp" line="1172"/>
-        <location filename="mainwindow.cpp" line="1182"/>
+        <location filename="mainwindow.cpp" line="862"/>
+        <location filename="mainwindow.cpp" line="1173"/>
+        <location filename="mainwindow.cpp" line="1183"/>
         <source>Download error</source>
         <translation>Fout bij downloaden</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="861"/>
+        <location filename="mainwindow.cpp" line="862"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Fout downloaden van lijst met besturingssystemen van Internet</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="875"/>
+        <location filename="mainwindow.cpp" line="876"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Fout bij parsen list.json</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1063"/>
+        <location filename="mainwindow.cpp" line="1064"/>
         <source>Needed</source>
         <translation>Nodig</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1064"/>
+        <location filename="mainwindow.cpp" line="1065"/>
         <source>Available</source>
         <translation>Beschikbaar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1172"/>
+        <location filename="mainwindow.cpp" line="1173"/>
         <source>Error downloading meta file</source>
         <translation>Fout bij downloaden meta bestand</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1182"/>
+        <location filename="mainwindow.cpp" line="1183"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Fout bij wegschrijven gedownload bestand naar SD kaart. SD kaart of bestandssysteem kan beschadigd zijn.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1297"/>
+        <location filename="mainwindow.cpp" line="1298"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Een bekabelde netwerk verbinding is vereist indien er geen lokale images zijn. Controleer of de netwerk kabel aangesloten zit.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="717"/>
-        <location filename="mainwindow.cpp" line="1296"/>
+        <location filename="mainwindow.cpp" line="1297"/>
         <source>No network access</source>
         <translation>Geen netwerk verbinding</translation>
     </message>
