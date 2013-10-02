@@ -34,7 +34,7 @@ fi
 
 SAFE_MODE=`vcgencmd get_config safe_mode_gpio`
 
-if [ ${SAFE_MODE#*=} -eq 1 ] || [ `grep -q rescueshell /proc/cmdline` ]; then
+if ( [ ${SAFE_MODE#*=} -eq 1 ] && ! grep -q disablesafemode /proc/cmdline ) || grep -q rescueshell /proc/cmdline; then
     sh
 else
     RUN_INSTALLER=
