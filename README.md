@@ -127,7 +127,7 @@ The following steps allow you to create a modified copy of one of the standard O
   2. "uncompressed_tarball_size" - replace the numerical value with the size of your filesystem tarballs when uncompressed
 
 9. Replace the `.tar.xz` root and boot filesystem tarballs with copies created from your custom OS version. The name of these tarballs needs to match the labels given in `partitions.json`.
-  1. To create the root tarball you will need to run `tar -cvpf <label>.tar --directory=/ --exclude=proc --exclude=sys --exclude=dev/pts` from within the root filesystem of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
+  1. To create the root tarball you will need to run `tar -cvpf <label>.tar /* --exclude=proc/* --exclude=sys/* --exclude=dev/pts/*` from within the root filesystem of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
   2. To create the boot tarball you will need to run `tar -cvpf <label>.tar .` at the root directory of the boot partition of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
 
 ### How to change the default Language, Keyboard layout, Display mode or Boot Partition
