@@ -243,9 +243,8 @@ Kernel configuration used: `buildroot/kernelconfig-recovery`
 Main differences with bcmrpi_defconfig:
 - `CONFIG_BLK_DEV_INITRD=y` - initramfs support
 - `CONFIG_INPUT_EVDEV=y` - evdev support built-in
-- `CONFIG_USB_HID=m` - usb HID driver and alternative driver build as module
-- `CONFIG_USB_KBD=m`
-- All other modules disabled.
+- `CONFIG_USB_HID=y` - usb HID driver built-in
+- All modules disabled.
 
 ## Modifying Qt source
 
