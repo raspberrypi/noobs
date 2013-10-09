@@ -158,9 +158,6 @@ int main(int argc, char *argv[])
         && !(keyboard_trigger && KeyDetection::isF10pressed())
         && QFile::exists(FAT_PARTITION_OF_IMAGE);
 
-    // Keyboard detection done, load normal hid driver
-    //QProcess::execute("/sbin/modprobe usbhid");
-
     // Default to booting first extended partition
     putFileContents("/sys/module/bcm2708/parameters/reboot_part", "5\n");
 
