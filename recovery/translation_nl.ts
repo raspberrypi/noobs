@@ -69,12 +69,12 @@
     <message>
         <location filename="initdrivethread.cpp" line="60"/>
         <source>Formatting settings partition</source>
-        <translation>Formateren instellingen partitie</translation>
+        <translation>Formatteren instellingen partitie</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="63"/>
         <source>Error formatting settings partition</source>
-        <translation>Fout bij formateren instellingen partitie</translation>
+        <translation>Fout bij formatteren instellingen partitie</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="133"/>
@@ -84,7 +84,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="136"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation>Fout bij opslaan boot bestanden naar geheugen. SD kaart mogelijk kapot.</translation>
+        <translation>Fout bij opslaan boot bestanden naar geheugen. SD kaart is mogelijk beschadigd.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="141"/>
@@ -102,7 +102,7 @@
         <location filename="initdrivethread.cpp" line="148"/>
         <location filename="initdrivethread.cpp" line="201"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>Fout bij wissen MBR/GPT. SD kaart kan kapot zijn.</translation>
+        <translation>Fout bij wissen MBR/GPT. SD kaart kan beschadigd zijn.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="152"/>
@@ -117,12 +117,12 @@
     <message>
         <location filename="initdrivethread.cpp" line="160"/>
         <source>Formatting boot partition (fat)</source>
-        <translation>Formateren opstart partitie (fat)</translation>
+        <translation>Formatteren opstart partitie (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation>Fout bij formateren boot partitie (fat)</translation>
+        <translation>Fout bij formatteren boot partitie (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="167"/>
@@ -154,12 +154,12 @@ WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translatio
     <message>
         <location filename="initdrivethread.cpp" line="222"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>SD kaart is nu op de juiste wijze geformateerd. Kopieer opnieuw de NOOBS bestanden naar de SD kaart en start opnieuw op</translation>
+        <translation>SD kaart is nu op de juiste wijze geformatteerd. Kopieer de NOOBS bestanden opnieuw naar de SD kaart en start opnieuw op</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="227"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>SD kaart niet juist geformateerd. Formateer opnieuw met SD Association Formatting Tool en probeer het nogmaals.</translation>
+        <translation>SD kaart niet juist geformatteerd. Formatteer opnieuw met SD Association Formatting Tool en probeer het nogmaals.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="233"/>
@@ -351,7 +351,7 @@ WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translatio
     <message>
         <location filename="mainwindow.cpp" line="154"/>
         <source>SD card might be damaged</source>
-        <translation>SD kaart kan kapot zijn</translation>
+        <translation>SD kaart kan beschadigd zijn</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="404"/>
