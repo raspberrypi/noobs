@@ -508,7 +508,32 @@ void MainWindow::changeEvent(QEvent* event)
         ui->retranslateUi(this);
         update_window_title();
         updateNeeded();
-        //repopulate();
+
+        /* Translate [installed] and [recommended] labels */
+        for (int i=0; i<ui->list->count(); i++)
+        {
+            QVariantMap m = ui->list->item(i)->data(Qt::UserRole).toMap();
+
+            bool installed   = m.value("installed").toBool();
+            bool recommended = m.value("recommended").toBool();
+
+            if (installed || recommended)
+            {
+                QString friendlyname = m.value("name").toString();
+                QString description = m.value("description").toString();
+
+                if (recommended)
+                    friendlyname += " ["+tr("RECOMMENDED")+"]";
+                if (installed)
+                {
+                    friendlyname += " ["+tr("INSTALLED")+"]";
+                }
+                if (!description.isEmpty())
+                    friendlyname += "\n"+description;
+
+                ui->list->item(i)->setText(friendlyname);
+            }
+        }
     }
 
     QMainWindow::changeEvent(event);
@@ -913,7 +938,10 @@ void MainWindow::processJson(QVariant json)
 
                     bool recommended = (name == RECOMMENDED_IMAGE);
                     if (recommended)
+                    {
                         name += " ["+tr("RECOMMENDED")+"]";
+                        item.insert("recommended", true);
+                    }
 
                     QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description);
                     witem->setCheckState(Qt::Unchecked);
