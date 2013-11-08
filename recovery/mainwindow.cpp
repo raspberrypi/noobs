@@ -104,10 +104,13 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
         /* If silentinstall is specified, auto-install single image in /os */
         _allowSilent = true;
     }
+    else
+    {
+        startNetworking();
+    }
 
     /* Disable online help buttons until network is functional */
     ui->actionBrowser->setEnabled(false);
-    startNetworking();
     QTimer::singleShot(1, this, SLOT(populate()));
 }
 
