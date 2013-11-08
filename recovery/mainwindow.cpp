@@ -388,7 +388,7 @@ QMap<QString, QVariantMap> MainWindow::listImages()
             {
                 QVariantMap pv = v.toMap();
                 nominal_size += pv.value("partition_size_nominal").toInt();
-                nominal_size += 1; /* Overhead per partition for EBR */
+                nominal_size += 4; /* Overhead per partition for EBR */
             }
 
             i.value().insert("nominal_size", nominal_size);
