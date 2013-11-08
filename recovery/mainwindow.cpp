@@ -59,8 +59,8 @@ int MainWindow::_currentMode = 0;
 MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay), _splash(splash),
-    _silent(false), _allowSilent(false), _settings(NULL),
+    _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
+    _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
     _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
 {
     ui->setupUi(this);
@@ -491,7 +491,9 @@ void MainWindow::onQuery(const QString &msg, const QString &title, QMessageBox::
 void MainWindow::on_list_currentRowChanged()
 {
     QListWidgetItem *item = ui->list->currentItem();
-    ui->actionEdit_config->setEnabled(item && item->data(Qt::UserRole).toMap().contains("partitions"));
+    ui->actionEdit_config->setEnabled(item
+                                      && item->data(Qt::UserRole).toMap().contains("partitions")
+                                      && item->data(Qt::UserRole).toMap().value("bootable", true) == true );
 }
 
 void MainWindow::update_window_title()
@@ -1047,6 +1049,7 @@ void MainWindow::updateNeeded()
     bool enableOk = false;
     QColor colorNeededLabel = Qt::black;
     bool bold = false;
+    bool datapartition = false;
 
     _neededMB = 0;
     QList<QListWidgetItem *> selected = selectedItems();
@@ -1062,6 +1065,10 @@ void MainWindow::updateNeeded()
             int startSector = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
             _neededMB += (RISCOS_SECTOR_OFFSET - startSector)/2048;
         }
+        if (entry.value("name").toString().contains("data partition", Qt::CaseInsensitive))
+        {
+            datapartition = true;
+        }
     }
 
     ui->neededLabel->setText(QString("%1: %2 MB").arg(tr("Needed"), QString::number(_neededMB)));
@@ -1075,9 +1082,10 @@ void MainWindow::updateNeeded()
     }
     else
     {
-        if (_neededMB)
+        if (_neededMB && !(datapartition && selected.count() == 1))
         {
-            /* Enable OK button if a selection has been made that fits on the card */
+            /* Enable OK button if a selection has been made that fits on the card
+               and it is not only the data partition that has been selected */
             enableOk = true;
         }
     }
