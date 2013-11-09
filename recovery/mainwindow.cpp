@@ -943,15 +943,29 @@ void MainWindow::processJson(QVariant json)
                         item.insert("recommended", true);
                     }
 
-                    QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description);
-                    witem->setCheckState(Qt::Unchecked);
-                    witem->setData(Qt::UserRole, item);
-                    witem->setData(SecondIconRole, internetIcon);
+                    QListWidgetItem *witem = searchForOlderItem(name, item.value("release_date"));
 
-                    if (recommended)
-                        ui->list->insertItem(0, witem);
+                    if (witem)
+                    {
+                        /* Older version is locally available. Replace info with newer Internet version */
+                        item.insert("installed", witem->data(Qt::UserRole).toMap().value("installed", false));
+                        witem->setData(Qt::UserRole, item);
+                        witem->setData(SecondIconRole, internetIcon);
+                        ui->list->update();
+                    }
                     else
-                        ui->list->addItem(witem);
+                    {
+                        witem = new QListWidgetItem(name+"\n"+description);
+                        witem->setCheckState(Qt::Unchecked);
+
+                        witem->setData(Qt::UserRole, item);
+                        witem->setData(SecondIconRole, internetIcon);
+
+                        if (recommended)
+                            ui->list->insertItem(0, witem);
+                        else
+                            ui->list->addItem(witem);
+                    }
                 }
             }
         }
@@ -967,10 +981,23 @@ void MainWindow::processJson(QVariant json)
                 if (!iconurl.isEmpty())
                     iconurls.insert(iconurl);
 
-                QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description, ui->list);
-                witem->setCheckState(Qt::Unchecked);
-                witem->setData(Qt::UserRole, os);
-                witem->setData(SecondIconRole, internetIcon);
+                QListWidgetItem *witem = searchForOlderItem(name, os.value("release_date"));
+
+                if (witem)
+                {
+                    /* Older version is locally available. Replace info with newer Internet version */
+                    os.insert("installed", witem->data(Qt::UserRole).toMap().value("installed", false));
+                    witem->setData(Qt::UserRole, os);
+                    witem->setData(SecondIconRole, internetIcon);
+                    ui->list->update();
+                }
+                else
+                {
+                    witem = new QListWidgetItem(name+"\n"+description, ui->list);
+                    witem->setCheckState(Qt::Unchecked);
+                    witem->setData(Qt::UserRole, os);
+                    witem->setData(SecondIconRole, internetIcon);
+                }
             }
         }
     }
@@ -1016,6 +1043,22 @@ bool MainWindow::alreadyHasItem(const QVariant &name, const QVariant &releasedat
     }
 
     return false;
+}
+
+QListWidgetItem *MainWindow::searchForOlderItem(const QVariant &name, const QVariant &releasedate)
+{
+    for (int i=0; i<ui->list->count(); i++)
+    {
+        QListWidgetItem *item = ui->list->item(i);
+        QVariantMap m = item->data(Qt::UserRole).toMap();
+
+        if (m.value("name").toString() == name.toString() && m.value("release_date").toString() < releasedate.toString())
+        {
+            return item;
+        }
+    }
+
+    return NULL;
 }
 
 void MainWindow::downloadIconComplete()

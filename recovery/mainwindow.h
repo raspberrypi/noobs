@@ -62,6 +62,7 @@ protected:
     void rebuildInstalledList();
     void remountSettingsRW();
     bool alreadyHasItem(const QVariant &name, const QVariant &releasedate);
+    QListWidgetItem *searchForOlderItem(const QVariant &name, const QVariant &releasedate);
     QList<QListWidgetItem *> selectedItems();
     void updateNeeded();
     void downloadMetaFile(const QString &url, const QString &saveAs);
