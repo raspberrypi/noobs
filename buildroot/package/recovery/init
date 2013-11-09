@@ -22,7 +22,26 @@ echo 2 >/sys/module/vt/parameters/cur_default
 if grep -q vncinstall /proc/cmdline; then
     # VNC server mode. Mainly useful for making screenshots
     export QWS_DISPLAY="VNC:size=800x600:depth=32:0"
+
+    while [ ! -e /sys/class/net/eth0 ]
+    do
+        echo "Waiting for eth0 to become ready..."
+        sleep 1
+    done
+
     ifup eth0
+    IPADDR=`ifconfig | sed -n 's/.*inet addr:\([0-9.]\+\)\s.*/\1/p' | grep -v 127.0.0.1 | head -1`
+    if [ -n "$IPADDR" ]; then
+        echo
+        echo Connect with your VNC client to $IPADDR
+        echo or remove \'vncinstall\' from recovery.cmdline to disable this mode
+        echo
+    else
+        echo
+        echo Error obtaining IP-address using DHCP
+        echo Unable to offer VNC service. Remove \'vncinstall\' from recovery.cmdline for normal installation.
+        echo
+    fi
 fi
 
 # Mouse acceleration
