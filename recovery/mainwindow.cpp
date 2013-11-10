@@ -59,8 +59,8 @@ int MainWindow::_currentMode = 0;
 MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay), _splash(splash),
-    _silent(false), _allowSilent(false), _settings(NULL),
+    _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
+    _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
     _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
 {
     ui->setupUi(this);
@@ -104,10 +104,13 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
         /* If silentinstall is specified, auto-install single image in /os */
         _allowSilent = true;
     }
+    else
+    {
+        startNetworking();
+    }
 
     /* Disable online help buttons until network is functional */
     ui->actionBrowser->setEnabled(false);
-    startNetworking();
     QTimer::singleShot(1, this, SLOT(populate()));
 }
 
@@ -385,7 +388,7 @@ QMap<QString, QVariantMap> MainWindow::listImages()
             {
                 QVariantMap pv = v.toMap();
                 nominal_size += pv.value("partition_size_nominal").toInt();
-                nominal_size += 1; /* Overhead per partition for EBR */
+                nominal_size += 4; /* Overhead per partition for EBR */
             }
 
             i.value().insert("nominal_size", nominal_size);
@@ -488,7 +491,9 @@ void MainWindow::onQuery(const QString &msg, const QString &title, QMessageBox::
 void MainWindow::on_list_currentRowChanged()
 {
     QListWidgetItem *item = ui->list->currentItem();
-    ui->actionEdit_config->setEnabled(item && item->data(Qt::UserRole).toMap().contains("partitions"));
+    ui->actionEdit_config->setEnabled(item
+                                      && item->data(Qt::UserRole).toMap().contains("partitions")
+                                      && item->data(Qt::UserRole).toMap().value("bootable", true) == true );
 }
 
 void MainWindow::update_window_title()
@@ -503,7 +508,32 @@ void MainWindow::changeEvent(QEvent* event)
         ui->retranslateUi(this);
         update_window_title();
         updateNeeded();
-        //repopulate();
+
+        /* Translate [installed] and [recommended] labels */
+        for (int i=0; i<ui->list->count(); i++)
+        {
+            QVariantMap m = ui->list->item(i)->data(Qt::UserRole).toMap();
+
+            bool installed   = m.value("installed").toBool();
+            bool recommended = m.value("recommended").toBool();
+
+            if (installed || recommended)
+            {
+                QString friendlyname = m.value("name").toString();
+                QString description = m.value("description").toString();
+
+                if (recommended)
+                    friendlyname += " ["+tr("RECOMMENDED")+"]";
+                if (installed)
+                {
+                    friendlyname += " ["+tr("INSTALLED")+"]";
+                }
+                if (!description.isEmpty())
+                    friendlyname += "\n"+description;
+
+                ui->list->item(i)->setText(friendlyname);
+            }
+        }
     }
 
     QMainWindow::changeEvent(event);
@@ -908,17 +938,34 @@ void MainWindow::processJson(QVariant json)
 
                     bool recommended = (name == RECOMMENDED_IMAGE);
                     if (recommended)
+                    {
                         name += " ["+tr("RECOMMENDED")+"]";
+                        item.insert("recommended", true);
+                    }
 
-                    QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description);
-                    witem->setCheckState(Qt::Unchecked);
-                    witem->setData(Qt::UserRole, item);
-                    witem->setData(SecondIconRole, internetIcon);
+                    QListWidgetItem *witem = searchForOlderItem(name, item.value("release_date"));
 
-                    if (recommended)
-                        ui->list->insertItem(0, witem);
+                    if (witem)
+                    {
+                        /* Older version is locally available. Replace info with newer Internet version */
+                        item.insert("installed", witem->data(Qt::UserRole).toMap().value("installed", false));
+                        witem->setData(Qt::UserRole, item);
+                        witem->setData(SecondIconRole, internetIcon);
+                        ui->list->update();
+                    }
                     else
-                        ui->list->addItem(witem);
+                    {
+                        witem = new QListWidgetItem(name+"\n"+description);
+                        witem->setCheckState(Qt::Unchecked);
+
+                        witem->setData(Qt::UserRole, item);
+                        witem->setData(SecondIconRole, internetIcon);
+
+                        if (recommended)
+                            ui->list->insertItem(0, witem);
+                        else
+                            ui->list->addItem(witem);
+                    }
                 }
             }
         }
@@ -934,10 +981,23 @@ void MainWindow::processJson(QVariant json)
                 if (!iconurl.isEmpty())
                     iconurls.insert(iconurl);
 
-                QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description, ui->list);
-                witem->setCheckState(Qt::Unchecked);
-                witem->setData(Qt::UserRole, os);
-                witem->setData(SecondIconRole, internetIcon);
+                QListWidgetItem *witem = searchForOlderItem(name, os.value("release_date"));
+
+                if (witem)
+                {
+                    /* Older version is locally available. Replace info with newer Internet version */
+                    os.insert("installed", witem->data(Qt::UserRole).toMap().value("installed", false));
+                    witem->setData(Qt::UserRole, os);
+                    witem->setData(SecondIconRole, internetIcon);
+                    ui->list->update();
+                }
+                else
+                {
+                    witem = new QListWidgetItem(name+"\n"+description, ui->list);
+                    witem->setCheckState(Qt::Unchecked);
+                    witem->setData(Qt::UserRole, os);
+                    witem->setData(SecondIconRole, internetIcon);
+                }
             }
         }
     }
@@ -983,6 +1043,22 @@ bool MainWindow::alreadyHasItem(const QVariant &name, const QVariant &releasedat
     }
 
     return false;
+}
+
+QListWidgetItem *MainWindow::searchForOlderItem(const QVariant &name, const QVariant &releasedate)
+{
+    for (int i=0; i<ui->list->count(); i++)
+    {
+        QListWidgetItem *item = ui->list->item(i);
+        QVariantMap m = item->data(Qt::UserRole).toMap();
+
+        if (m.value("name").toString() == name.toString() && m.value("release_date").toString() < releasedate.toString())
+        {
+            return item;
+        }
+    }
+
+    return NULL;
 }
 
 void MainWindow::downloadIconComplete()
@@ -1044,6 +1120,7 @@ void MainWindow::updateNeeded()
     bool enableOk = false;
     QColor colorNeededLabel = Qt::black;
     bool bold = false;
+    bool datapartition = false;
 
     _neededMB = 0;
     QList<QListWidgetItem *> selected = selectedItems();
@@ -1059,6 +1136,10 @@ void MainWindow::updateNeeded()
             int startSector = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
             _neededMB += (RISCOS_SECTOR_OFFSET - startSector)/2048;
         }
+        if (entry.value("name").toString().contains("data partition", Qt::CaseInsensitive))
+        {
+            datapartition = true;
+        }
     }
 
     ui->neededLabel->setText(QString("%1: %2 MB").arg(tr("Needed"), QString::number(_neededMB)));
@@ -1072,9 +1153,10 @@ void MainWindow::updateNeeded()
     }
     else
     {
-        if (_neededMB)
+        if (_neededMB && !(datapartition && selected.count() == 1))
         {
-            /* Enable OK button if a selection has been made that fits on the card */
+            /* Enable OK button if a selection has been made that fits on the card
+               and it is not only the data partition that has been selected */
             enableOk = true;
         }
     }
