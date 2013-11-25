@@ -5,7 +5,7 @@
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="19"/>
-        <location filename="bootselectiondialog.cpp" line="248"/>
+        <location filename="bootselectiondialog.cpp" line="249"/>
         <source>Select OS to boot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20,22 +20,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="189"/>
+        <location filename="bootselectiondialog.cpp" line="190"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="193"/>
+        <location filename="bootselectiondialog.cpp" line="194"/>
         <source>composite PAL mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="197"/>
+        <location filename="bootselectiondialog.cpp" line="198"/>
         <source>composite NTSC mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="253"/>
+        <location filename="bootselectiondialog.cpp" line="254"/>
         <source>Previously selected OS will boot in %1 seconds</source>
         <translation type="unfinished"></translation>
     </message>
@@ -312,18 +312,19 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="248"/>
-        <location filename="mainwindow.cpp" line="911"/>
+        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="526"/>
+        <location filename="mainwindow.cpp" line="942"/>
         <source>RECOMMENDED</source>
         <translation>EMPFOHLEN</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="403"/>
+        <location filename="mainwindow.cpp" line="406"/>
         <source>Confirm</source>
         <translation>Bestätigung</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="496"/>
+        <location filename="mainwindow.cpp" line="501"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -333,145 +334,146 @@ WARNING: This will erase all data on your SD card</source>
         <translation>Die SD-Karte wird eingerichtet</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="146"/>
+        <location filename="mainwindow.cpp" line="149"/>
         <source>Error mounting settings partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="147"/>
+        <location filename="mainwindow.cpp" line="150"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="154"/>
+        <location filename="mainwindow.cpp" line="157"/>
         <source>Reformat failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="154"/>
+        <location filename="mainwindow.cpp" line="157"/>
         <source>SD card might be damaged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="404"/>
+        <location filename="mainwindow.cpp" line="407"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation type="unfinished">Bist Du sicher, dass Du das Image schreiben möchtest? ALLE DATEN AUF DER SD-KARTE GEHEN VERLOREN!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="477"/>
-        <location filename="mainwindow.cpp" line="876"/>
+        <location filename="mainwindow.cpp" line="480"/>
+        <location filename="mainwindow.cpp" line="906"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="254"/>
+        <location filename="mainwindow.cpp" line="529"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="596"/>
+        <location filename="mainwindow.cpp" line="626"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="528"/>
+        <location filename="mainwindow.cpp" line="558"/>
         <source>HDMI preferred mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="133"/>
+        <location filename="mainwindow.cpp" line="136"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="444"/>
+        <location filename="mainwindow.cpp" line="447"/>
         <source>The install process will begin shortly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="467"/>
+        <location filename="mainwindow.cpp" line="470"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="468"/>
+        <location filename="mainwindow.cpp" line="471"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="532"/>
+        <location filename="mainwindow.cpp" line="562"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="536"/>
+        <location filename="mainwindow.cpp" line="566"/>
         <source>composite PAL mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="540"/>
+        <location filename="mainwindow.cpp" line="570"/>
         <source>composite NTSC mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="597"/>
+        <location filename="mainwindow.cpp" line="627"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="862"/>
-        <location filename="mainwindow.cpp" line="1173"/>
-        <location filename="mainwindow.cpp" line="1183"/>
+        <location filename="mainwindow.cpp" line="892"/>
+        <location filename="mainwindow.cpp" line="1255"/>
+        <location filename="mainwindow.cpp" line="1265"/>
         <source>Download error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="862"/>
+        <location filename="mainwindow.cpp" line="892"/>
         <source>Error downloading distribution list from Internet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="876"/>
+        <location filename="mainwindow.cpp" line="906"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1064"/>
+        <location filename="mainwindow.cpp" line="1145"/>
         <source>Needed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1065"/>
+        <location filename="mainwindow.cpp" line="1146"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1173"/>
+        <location filename="mainwindow.cpp" line="1255"/>
         <source>Error downloading meta file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1183"/>
+        <location filename="mainwindow.cpp" line="1265"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1298"/>
+        <location filename="mainwindow.cpp" line="1380"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="717"/>
-        <location filename="mainwindow.cpp" line="1297"/>
+        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="1379"/>
         <source>No network access</source>
         <translation>Kein Netzwerk gefunden</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="718"/>
+        <location filename="mainwindow.cpp" line="748"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Hierfür ist eine kabelgebundene Netzwerkverbindung erforderlich. Bitte stecken Sie ein Netzwerkkabel ein.</translation>
     </message>
@@ -504,126 +506,131 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished">Das Schreiben wird beendet (sync)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="158"/>
+        <location filename="multiimagewritethread.cpp" line="164"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="181"/>
+        <location filename="multiimagewritethread.cpp" line="187"/>
         <source>Nominal partition size not specified or zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="207"/>
+        <location filename="multiimagewritethread.cpp" line="213"/>
         <source>%1: Creating partition entry</source>
         <oldsource>Creating partition entry</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="213"/>
+        <location filename="multiimagewritethread.cpp" line="219"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="227"/>
+        <location filename="multiimagewritethread.cpp" line="233"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="230"/>
-        <location filename="multiimagewritethread.cpp" line="254"/>
+        <location filename="multiimagewritethread.cpp" line="236"/>
+        <location filename="multiimagewritethread.cpp" line="280"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="220"/>
+        <location filename="multiimagewritethread.cpp" line="226"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="235"/>
+        <location filename="multiimagewritethread.cpp" line="140"/>
+        <source>No partitions defined in partitions.json</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="241"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="237"/>
+        <location filename="multiimagewritethread.cpp" line="243"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="251"/>
+        <location filename="multiimagewritethread.cpp" line="277"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="258"/>
+        <location filename="multiimagewritethread.cpp" line="284"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="286"/>
+        <location filename="multiimagewritethread.cpp" line="298"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="297"/>
+        <location filename="multiimagewritethread.cpp" line="309"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="340"/>
+        <location filename="multiimagewritethread.cpp" line="352"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="345"/>
+        <location filename="multiimagewritethread.cpp" line="357"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="348"/>
+        <location filename="multiimagewritethread.cpp" line="360"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="401"/>
+        <location filename="multiimagewritethread.cpp" line="415"/>
         <source>Error opening /dev/mmcblk0 for writing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="419"/>
+        <location filename="multiimagewritethread.cpp" line="433"/>
         <source>Internal error in partitioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="502"/>
+        <location filename="multiimagewritethread.cpp" line="516"/>
         <source>Error creating file system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="544"/>
-        <location filename="multiimagewritethread.cpp" line="606"/>
+        <location filename="multiimagewritethread.cpp" line="558"/>
+        <location filename="multiimagewritethread.cpp" line="620"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="568"/>
+        <location filename="multiimagewritethread.cpp" line="582"/>
         <source>Error downloading or extracting tarball</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="627"/>
+        <location filename="multiimagewritethread.cpp" line="641"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation type="unfinished"></translation>
     </message>
