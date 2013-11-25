@@ -5,12 +5,12 @@
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="+19"/>
-        <location filename="bootselectiondialog.cpp" line="+248"/>
+        <location filename="bootselectiondialog.cpp" line="+249"/>
         <source>Select OS to boot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="-205"/>
+        <location filename="bootselectiondialog.cpp" line="-206"/>
         <source>Cannot display boot menu</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20,7 +20,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+146"/>
+        <location line="+147"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -312,28 +312,29 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+248"/>
-        <location line="+663"/>
+        <location filename="mainwindow.cpp" line="+251"/>
+        <location line="+275"/>
+        <location line="+416"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-508"/>
+        <location line="-536"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="+93"/>
+        <location line="+95"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-411"/>
+        <location line="-416"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
     <message>
-        <location line="+61"/>
+        <location line="+64"/>
         <source>Error mounting settings partition</source>
         <translation type="unfinished"></translation>
     </message>
@@ -360,17 +361,18 @@ WARNING: This will erase all data on your SD card</source>
     </message>
     <message>
         <location line="+73"/>
-        <location line="+399"/>
+        <location line="+426"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-625"/>
+        <location line="-652"/>
+        <location line="+275"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+345"/>
+        <location line="+97"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -380,7 +382,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-395"/>
+        <location line="-422"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
@@ -402,7 +404,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+64"/>
+        <location line="+91"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -424,13 +426,13 @@ Would you like to make this setting permanent?</source>
     </message>
     <message>
         <location line="+265"/>
-        <location line="+311"/>
+        <location line="+363"/>
         <location line="+10"/>
         <source>Download error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-321"/>
+        <location line="-373"/>
         <source>Error downloading distribution list from Internet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -440,7 +442,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+239"/>
         <source>Needed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -450,7 +452,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+109"/>
         <source>Error downloading meta file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -465,13 +467,13 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-581"/>
-        <location line="+580"/>
+        <location line="-633"/>
+        <location line="+632"/>
         <source>No network access</source>
         <translation>Sem acesso de rede</translation>
     </message>
     <message>
-        <location line="-579"/>
+        <location line="-631"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>
@@ -504,7 +506,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished">Finalizando a gravação</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+41"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -533,18 +535,23 @@ Would you like to make this setting permanent?</source>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+24"/>
+        <location line="+44"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-34"/>
+        <location line="-54"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="-86"/>
+        <source>No partitions defined in partitions.json</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+101"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation type="unfinished"></translation>
     </message>
@@ -555,7 +562,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+34"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
         <translation type="unfinished"></translation>
@@ -567,7 +574,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+14"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
         <translation type="unfinished"></translation>
@@ -597,7 +604,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+55"/>
         <source>Error opening /dev/mmcblk0 for writing</source>
         <translation type="unfinished"></translation>
     </message>
