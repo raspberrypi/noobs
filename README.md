@@ -149,7 +149,7 @@ After you have installed your chosen OSes, add the following file to the root di
 
 2. Add `boot_partition=<partition number>` to the file and save it to disk.
 
-This will also prevent the splashscreen from being displayed at boot. The partition number can be found by running `sudo fdisk -l` the partition will be one of the FAT32 partitions `/dev/mmcblk0p5` would be partition 5.
+This will also prevent the splashscreen from being displayed at boot. The partition number can be found by running `sudo fdisk -l` the partition will be one of the FAT32 partitions `/dev/mmcblk0p5` would be partition 5. Note that once an `autoboot.txt` file is present, there's then no way to force the NOOBS GUI to display, until you delete (or rename) the `autoboot.txt` file.
 
 ===
 
