@@ -148,7 +148,7 @@ After you have installed your chosen OSes, add the following file to the root di
 
 2. Add `boot_partition=<partition number>` to the file and save it to disk.
 
-This will also prevent the splashscreen from being displayed at boot.
+This will also prevent the splashscreen from being displayed at boot. Note that once an `autoboot.txt` file is present, there's then no way to force the NOOBS GUI to display, until you delete (or rename) the `autoboot.txt` file.
 
 ===
 
