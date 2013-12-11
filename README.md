@@ -210,7 +210,7 @@ Note that this will require a minimum of 6GB free disk space.
 
 On Ubuntu:
 
-`sudo apt-get install build-essential rsync texinfo libncurses-dev whois`
+`sudo apt-get install build-essential rsync texinfo libncurses-dev whois unzip`
 
 #### Run Build Script
 
