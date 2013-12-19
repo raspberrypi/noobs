@@ -176,7 +176,7 @@ void MainWindow::populate()
         _settings->sync();
         QProcess::execute("mount -o remount,ro /settings");
 
- }
+    }
 
 
     QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
@@ -299,7 +299,7 @@ void MainWindow::repopulate()
             ui->list->insertItem(0, item);
         else
             ui->list->addItem(item);
-  }
+    }
 
     if (haveicons)
     {
@@ -347,7 +347,7 @@ QMap<QString, QVariantMap> MainWindow::listImages()
                         fm["recommended"] = true;
                     fm["folder"] = imagefolder;
                     fm["release_date"] = osv.value("release_date");
-                    images[imagefolder+"#"+name] = fm;
+                    images[name] = fm;
                 }
             }
         }
@@ -357,11 +357,11 @@ QMap<QString, QVariantMap> MainWindow::listImages()
             if (name.contains(RECOMMENDED_IMAGE))
                 osv["recommended"] = true;
             osv["folder"] = imagefolder;
-            images[imagefolder+"#"+name] = osv;
+            images[name] = osv;
         }
     }
 
-    /* Also add information about files downloaded from Internet */
+    /* Also add information about files already installed (if newer) */
     if (_settings)
     {
         QVariantList i = Json::loadFromFile("/settings/installed_os.json").toList();
@@ -369,9 +369,11 @@ QMap<QString, QVariantMap> MainWindow::listImages()
         {
             QVariantMap m = v.toMap();
             m["installed"] = true;
-            QString flavour = m.value("name").toString();
-            QString imagefolder = m.value("folder").toString();
-            images[imagefolder+"#"+flavour] = m;
+            QString name = m.value("name").toString();
+            if (m.value("release_date").toString() > images[name].value("release_date").toString())
+            {
+                images[name] = m;
+            }
         }
     }
 
@@ -1036,7 +1038,7 @@ bool MainWindow::alreadyHasItem(const QVariant &name, const QVariant &releasedat
     for (int i=0; i<ui->list->count(); i++)
     {
         QVariantMap m = ui->list->item(i)->data(Qt::UserRole).toMap();
-        if (m.value("name").toString() == name.toString() && m.value("release_date").toString() == releasedate.toString())
+        if (m.value("name").toString() == name.toString() && m.value("release_date").toString() >= releasedate.toString())
         {
             return true;
         }
