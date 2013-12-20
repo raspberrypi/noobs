@@ -150,6 +150,7 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
         QByteArray label = partition.value("label").toByteArray();
         QString tarball  = partition.value("tarball").toString();
         bool emptyfs     = partition.value("empty_fs", false).toBool();
+        bool is_fatfs    = (fstype == "fat" || fstype == "FAT");
 
         if (!emptyfs && tarball.isEmpty())
         {
@@ -165,22 +166,55 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
                 return false;
             }
         }
-        if (label.size() > 15)
-        {
-            label.clear();
+        int max_label_length = 16;
+        // FAT labels are only uppercase and limited to 11 chars
+        if (is_fatfs) {
+            label = label.toUpper();
+            max_label_length = 11;
         }
-        else if (!isLabelAvailable(label))
+        if (label.size() > max_label_length)
         {
-            for (int i=0; i<10; i++)
+            label.resize(max_label_length);
+        }
+        bool found_unique_label = false;
+        if (!isLabelAvailable(label))
+        {
+            // make room for the appended digit if necessary
+            if ((label.size() + 1) > max_label_length)
+            {
+                label.resize(max_label_length - 1);
+            }
+            // start the numbering at 1, because (root, root1, root2) looks better than (root, root0, root1)
+            for (int i=1; i<10; i++)
             {
                 if (isLabelAvailable(label+QByteArray::number(i)))
                 {
-                    label = label+QByteArray::number(i);
+                    label.append(QByteArray::number(i));
+                    found_unique_label = true;
                     break;
                 }
             }
+            // in the unlikely event that a unique label still hasn't been found, append a 2-digit number
+            if (!found_unique_label)
+            {
+                // make room for the appended digits if necessary
+                if ((label.size() + 2) > max_label_length)
+                {
+                    label.resize(max_label_length - 2);
+                }
+                for (int i=10; i<100; i++)
+                {
+                    if (isLabelAvailable(label+QByteArray::number(i)))
+                    {
+                        label.append(QByteArray::number(i));
+                        found_unique_label = true;
+                        break;
+                    }
+                }
+            }
+        } else {
+            found_unique_label = true;
         }
-
         int partsizeMB = partition.value("partition_size_nominal").toInt();
         if (!partsizeMB)
         {
@@ -196,14 +230,14 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
         int parttype;
         int specialOffset = 0;
 
-        if (fstype == "FAT" || fstype == "fat")
+        if (is_fatfs)
             parttype = 0x0c; /* FAT32 LBA */
         else if (fstype == "swap")
             parttype = 0x82;
         else
             parttype = 0x83; /* Linux native */
 
-        if (folder.contains("risc", Qt::CaseInsensitive) && (fstype == "FAT" || fstype == "fat"))
+        if (folder.contains("risc", Qt::CaseInsensitive) && is_fatfs)
         {
             /* Let Risc OS start at known offset */
             int startSector   = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
