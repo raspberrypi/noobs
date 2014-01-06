@@ -368,12 +368,12 @@ QMap<QString, QVariantMap> MainWindow::listImages()
         foreach (QVariant v, i)
         {
             QVariantMap m = v.toMap();
-            m["installed"] = true;
             QString name = m.value("name").toString();
             if (m.value("release_date").toString() > images[name].value("release_date").toString())
             {
                 images[name] = m;
             }
+            images[name]["installed"] = true;
         }
     }
 
