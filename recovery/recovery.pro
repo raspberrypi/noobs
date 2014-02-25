@@ -56,6 +56,7 @@ RESOURCES += \
 
 TRANSLATIONS += translation_nl.ts \
     translation_de.ts \
+    translation_es.ts \
     translation_pt.ts \
     translation_ja.ts \
     translation_fr.ts \
