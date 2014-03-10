@@ -60,7 +60,8 @@ TRANSLATIONS += translation_nl.ts \
     translation_ja.ts \
     translation_fr.ts \
     translation_hu.ts \
-    translation_fi.ts
+    translation_fi.ts \
+    translation_it.ts
 
 OTHER_FILES += \
     README.txt
