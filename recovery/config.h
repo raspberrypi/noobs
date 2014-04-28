@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 /* Version number displayed in the title bar */
-#define VERSION_NUMBER "1.3.2"
+#define VERSION_NUMBER "1.3.5"
 
 /* Color of the background */
 // #define BACKGROUND_COLOR  Qt::white
@@ -21,7 +21,7 @@
 #define HOMEPAGE  "http://www.raspberrypi.org/phpBB3/"
 
 /* Location to download the list of available distributions from */
-#define DEFAULT_REPO_SERVER  "http://downloads.raspberrypi.org/os_list.json"
+#define DEFAULT_REPO_SERVER  "http://downloads.raspberrypi.org/os_list_v2.json"
 
 /* Size of recovery FAT partition in MB.
  * First partition starts at offset 1 MB (sector 2048)
@@ -42,8 +42,9 @@
 #define FAT_PARTITION_OF_IMAGE  "/dev/mmcblk0p5"
 
 /* RiscOS magic */
-#define RISCOS_SECTOR_OFFSET (1536 * 2048)
-#define RISCOS_FAT_SIZE      (48 * 2048)
+#define RISCOS_OFFSET_KEY "riscos_offset"
+#define RISCOS_OFFSET (1760)
+#define RISCOS_SECTOR_OFFSET (RISCOS_OFFSET * 2048)
 
 #define RISCOS_BLOB_FILENAME  "/mnt/riscos-boot.bin"
 #define RISCOS_BLOB_SECTOR_OFFSET  (1)

@@ -314,6 +314,23 @@ void MainWindow::repopulate()
     }
 }
 
+/* Whether this OS should be displayed in the list of installable OSes */
+bool canInstallOs(const QString& name, const QVariantMap& values)
+{
+    /* Can't simply pull "name" from "values" because in some JSON files it's "os_name" and in others it's "name"
+
+    /* RISC_OS needs a matching riscos_offset */
+    if (nameMatchesRiscOS(name))
+    {
+        if (!values.contains(RISCOS_OFFSET_KEY) || (values.value(RISCOS_OFFSET_KEY).toInt() != RISCOS_OFFSET))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 QMap<QString, QVariantMap> MainWindow::listImages()
 {
     QMap<QString,QVariantMap> images;
@@ -329,32 +346,36 @@ QMap<QString, QVariantMap> MainWindow::listImages()
             continue;
         QVariantMap osv = Json::loadFromFile(imagefolder+"/os.json").toMap();
 
-        if (QFile::exists(imagefolder+"/flavours.json"))
+        QString basename = osv.value("name").toString();
+        if (canInstallOs(basename, osv))
         {
-            QVariantMap v = Json::loadFromFile(imagefolder+"/flavours.json").toMap();
-            QVariantList fl = v.value("flavours").toList();
-
-            foreach (QVariant f, fl)
+            if (QFile::exists(imagefolder+"/flavours.json"))
             {
-                QVariantMap fm  = f.toMap();
-                if (fm.contains("name"))
+                QVariantMap v = Json::loadFromFile(imagefolder+"/flavours.json").toMap();
+                QVariantList fl = v.value("flavours").toList();
+
+                foreach (QVariant f, fl)
                 {
-                    QString name = fm.value("name").toString();
-                    if (name == RECOMMENDED_IMAGE)
-                        fm["recommended"] = true;
-                    fm["folder"] = imagefolder;
-                    fm["release_date"] = osv.value("release_date");
-                    images[imagefolder+"#"+name] = fm;
+                    QVariantMap fm  = f.toMap();
+                    if (fm.contains("name"))
+                    {
+                        QString name = fm.value("name").toString();
+                        if (name == RECOMMENDED_IMAGE)
+                            fm["recommended"] = true;
+                        fm["folder"] = imagefolder;
+                        fm["release_date"] = osv.value("release_date");
+                        images[imagefolder+"#"+name] = fm;
+                    }
                 }
             }
-        }
-        else
-        {
-            QString name = osv.value("name").toString();
-            if (name.contains(RECOMMENDED_IMAGE))
-                osv["recommended"] = true;
-            osv["folder"] = imagefolder;
-            images[imagefolder+"#"+name] = osv;
+            else
+            {
+                QString name = basename;
+                if (name.contains(RECOMMENDED_IMAGE))
+                    osv["recommended"] = true;
+                osv["folder"] = imagefolder;
+                images[imagefolder+"#"+name] = osv;
+            }
         }
     }
 
@@ -885,59 +906,62 @@ void MainWindow::processJson(QVariant json)
     {
         QVariantMap  os = osv.toMap();
 
-        if (os.contains("flavours"))
+        QString basename = os.value("os_name").toString();
+        if (canInstallOs(basename, os))
         {
-            QVariantList flavours = os.value("flavours").toList();
-
-            foreach (QVariant flv, flavours)
+            if (os.contains("flavours"))
             {
-                QVariantMap flavour = flv.toMap();
-                QVariantMap item = os;
-                QString name        = flavour.value("name").toString();
-                QString description = flavour.value("description").toString();
-                QString iconurl     = flavour.value("icon").toString();
+                QVariantList flavours = os.value("flavours").toList();
 
-                item.insert("name", name);
-                item.insert("description", description);
-                item.insert("icon", iconurl);
-
-                if (!alreadyHasItem(name, item.value("release_date")))
+                foreach (QVariant flv, flavours)
                 {
+                    QVariantMap flavour = flv.toMap();
+                    QVariantMap item = os;
+                    QString name        = flavour.value("name").toString();
+                    QString description = flavour.value("description").toString();
+                    QString iconurl     = flavour.value("icon").toString();
+
+                    item.insert("name", name);
+                    item.insert("description", description);
+                    item.insert("icon", iconurl);
+
+                    if (!alreadyHasItem(name, item.value("release_date")))
+                    {
+                        if (!iconurl.isEmpty())
+                            iconurls.insert(iconurl);
+
+                        bool recommended = (name == RECOMMENDED_IMAGE);
+                        if (recommended)
+                            name += " ["+tr("RECOMMENDED")+"]";
+
+                        QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description);
+                        witem->setCheckState(Qt::Unchecked);
+                        witem->setData(Qt::UserRole, item);
+                        witem->setData(SecondIconRole, internetIcon);
+
+                        if (recommended)
+                            ui->list->insertItem(0, witem);
+                        else
+                            ui->list->addItem(witem);
+                    }
+                }
+            }
+            if (os.contains("description"))
+            {
+                QString name = basename;
+                QString description = os.value("description").toString();
+                if (!alreadyHasItem(name, os.value("release_date")))
+                {
+                    os["name"] = name;
+                    QString iconurl = os.value("icon").toString();
                     if (!iconurl.isEmpty())
                         iconurls.insert(iconurl);
 
-                    bool recommended = (name == RECOMMENDED_IMAGE);
-                    if (recommended)
-                        name += " ["+tr("RECOMMENDED")+"]";
-
-                    QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description);
+                    QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description, ui->list);
                     witem->setCheckState(Qt::Unchecked);
-                    witem->setData(Qt::UserRole, item);
+                    witem->setData(Qt::UserRole, os);
                     witem->setData(SecondIconRole, internetIcon);
-
-                    if (recommended)
-                        ui->list->insertItem(0, witem);
-                    else
-                        ui->list->addItem(witem);
                 }
-            }
-        }
-        if (os.contains("description"))
-        {
-            QString name = os.value("os_name").toString();
-            QString description = os.value("description").toString();
-
-            if (!alreadyHasItem(name, os.value("release_date")))
-            {
-                os["name"] = name;
-                QString iconurl = os.value("icon").toString();
-                if (!iconurl.isEmpty())
-                    iconurls.insert(iconurl);
-
-                QListWidgetItem *witem = new QListWidgetItem(name+"\n"+description, ui->list);
-                witem->setCheckState(Qt::Unchecked);
-                witem->setData(Qt::UserRole, os);
-                witem->setData(SecondIconRole, internetIcon);
             }
         }
     }
@@ -1053,7 +1077,7 @@ void MainWindow::updateNeeded()
         QVariantMap entry = item->data(Qt::UserRole).toMap();
         _neededMB += entry.value("nominal_size").toInt();
 
-        if (entry.value("name").toString().contains("risc", Qt::CaseInsensitive))
+        if (nameMatchesRiscOS(entry.value("name").toString()))
         {
             /* RiscOS needs to start at a predetermined sector, calculate the extra space needed for that */
             int startSector = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();

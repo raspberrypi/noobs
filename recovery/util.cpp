@@ -89,3 +89,8 @@ void getOverscan(int &top, int &bottom, int &left, int &right)
         ::close(fd);
     }
 }
+
+bool nameMatchesRiscOS(const QString &name)
+{
+    return name.contains("risc", Qt::CaseInsensitive);
+}

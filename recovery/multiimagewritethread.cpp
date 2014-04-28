@@ -62,8 +62,26 @@ void MultiImageWriteThread::run()
                 }
             }
         }
-        if (folder.contains("risc", Qt::CaseInsensitive))
+        if (nameMatchesRiscOS(folder))
         {
+            /* Check the riscos_offset in os.json matches what we're expecting.
+               In theory we shouldn't hit either of these errors because the invalid RISC_OS
+               should have been filtered out already (not added to OS-list) in mainwindow.cpp */
+            QVariantMap vos = Json::loadFromFile(folder+"/os.json").toMap();
+            if (vos.contains(RISCOS_OFFSET_KEY))
+            {
+                int riscos_offset = vos.value(RISCOS_OFFSET_KEY).toInt();
+                if (riscos_offset != RISCOS_OFFSET)
+                {
+                    emit error(tr("RISCOS cannot be installed. RISCOS offset value mismatch."));
+                    return;
+                }
+            }
+            else
+            {
+                emit error(tr("RISCOS cannot be installed. RISCOS offset value missing."));
+                return;
+            }
             if (startSector > RISCOS_SECTOR_OFFSET-2048)
             {
                 emit error(tr("RISCOS cannot be installed. Size of recovery partition too large."));
@@ -102,7 +120,7 @@ void MultiImageWriteThread::run()
     {
         for (QMultiMap<QString,QString>::const_iterator iter = _images.constBegin(); iter != _images.constEnd(); iter++)
         {
-            if (iter.key().contains("risc", Qt::CaseInsensitive))
+            if (nameMatchesRiscOS(iter.key()))
             {
                 if (!processImage(iter.key(), iter.value()))
                     return;
@@ -197,7 +215,7 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
         else
             parttype = 0x83; /* Linux native */
 
-        if (folder.contains("risc", Qt::CaseInsensitive) && (fstype == "FAT" || fstype == "fat"))
+        if (nameMatchesRiscOS(folder) && (fstype == "FAT" || fstype == "fat"))
         {
             /* Let Risc OS start at known offset */
             int startSector   = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
