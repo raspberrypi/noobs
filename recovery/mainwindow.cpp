@@ -59,8 +59,8 @@ int MainWindow::_currentMode = 0;
 MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay), _splash(splash),
-    _silent(false), _allowSilent(false), _settings(NULL),
+    _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
+    _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
     _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
 {
     ui->setupUi(this);
@@ -317,7 +317,13 @@ void MainWindow::repopulate()
 /* Whether this OS should be displayed in the list of installable OSes */
 bool canInstallOs(const QString& name, const QVariantMap& values)
 {
-    /* Can't simply pull "name" from "values" because in some JSON files it's "os_name" and in others it's "name"
+    /* Can't simply pull "name" from "values" because in some JSON files it's "os_name" and in others it's "name" */
+
+    /* If it's not bootable, is isn't really an OS, so is always installable */
+    if (!canBootOs(name, values))
+    {
+        return true;
+    }
 
     /* RISC_OS needs a matching riscos_offset */
     if (nameMatchesRiscOS(name))
@@ -326,6 +332,27 @@ bool canInstallOs(const QString& name, const QVariantMap& values)
         {
             return false;
         }
+    }
+
+    return true;
+}
+
+/* Whether this OS is supported */
+bool isSupportedOs(const QString& name, const QVariantMap& values)
+{
+    /* Can't simply pull "name" from "values" because in some JSON files it's "os_name" and in others it's "name" */
+
+    /* If it's not bootable, is isn't really an OS, so is always supported */
+    if (!canBootOs(name, values))
+    {
+        return true;
+    }
+
+    /* Check the feature_level flag */
+    quint64 featurelevel = values.value("feature_level", 58364).toULongLong();
+    quint64 mask = (quint64)1 << readBoardRevision();
+    if ((featurelevel & mask) != mask) {
+        return false;
     }
 
     return true;
@@ -364,7 +391,8 @@ QMap<QString, QVariantMap> MainWindow::listImages()
                             fm["recommended"] = true;
                         fm["folder"] = imagefolder;
                         fm["release_date"] = osv.value("release_date");
-                        images[imagefolder+"#"+name] = fm;
+                        QString imagekey = imagefolder+"#"+name;
+                        images[imagekey] = fm;
                     }
                 }
             }
@@ -374,7 +402,8 @@ QMap<QString, QVariantMap> MainWindow::listImages()
                 if (name.contains(RECOMMENDED_IMAGE))
                     osv["recommended"] = true;
                 osv["folder"] = imagefolder;
-                images[imagefolder+"#"+name] = osv;
+                QString imagekey = imagefolder+"#"+name;
+                images[imagekey] = osv;
             }
         }
     }
@@ -386,10 +415,18 @@ QMap<QString, QVariantMap> MainWindow::listImages()
         foreach (QVariant v, i)
         {
             QVariantMap m = v.toMap();
-            m["installed"] = true;
             QString flavour = m.value("name").toString();
             QString imagefolder = m.value("folder").toString();
-            images[imagefolder+"#"+flavour] = m;
+            QString imageKey = imagefolder+"#"+flavour;
+            if (images.contains(imageKey))
+            {
+                images[imageKey]["installed"] = true;
+            }
+            else
+            {
+                m["installed"] = true;
+                images[imageKey] = m;
+            }
         }
     }
 
@@ -425,46 +462,65 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
                                         tr("Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed."),
                                         QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
     {
-        setEnabled(false);
-        _numMetaFilesToDownload = 0;
-
+        /* See if any of the OSes are unsupported */
+        bool allSupported = true;
+        QString unsupportedOses;
         QList<QListWidgetItem *> selected = selectedItems();
         foreach (QListWidgetItem *item, selected)
         {
             QVariantMap entry = item->data(Qt::UserRole).toMap();
-
-            if (!entry.contains("folder"))
-            {
-                QDir d;
-                QString folder = "/settings/os/"+entry.value("name").toString();
-                folder.replace(' ', '_');
-                if (!d.exists(folder))
-                    d.mkpath(folder);
-
-                downloadMetaFile(entry.value("os_info").toString(), folder+"/os.json");
-                downloadMetaFile(entry.value("partitions_info").toString(), folder+"/partitions.json");
-
-                if (entry.contains("marketing_info"))
-                    downloadMetaFile(entry.value("marketing_info").toString(), folder+"/marketing.tar");
-
-                if (entry.contains("partition_setup"))
-                    downloadMetaFile(entry.value("partition_setup").toString(), folder+"/partition_setup.sh");
-
-                if (entry.contains("icon"))
-                    downloadMetaFile(entry.value("icon").toString(), folder+"/icon.png");
+            QString name = entry.value("name").toString();
+            if (!isSupportedOs(name, entry)) {
+                allSupported = false;
+                unsupportedOses += "\n" + name;
             }
         }
+        if (_silent || allSupported || QMessageBox::warning(this,
+                                        tr("Confirm"),
+                                        tr("Warning: incompatible Operating System(s) detected. The following OSes aren't supported on this revision of Raspberry Pi and may fail to boot or function correctly:") + unsupportedOses,
+                                        QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        {
+            setEnabled(false);
+            _numMetaFilesToDownload = 0;
 
-        if (_numMetaFilesToDownload == 0)
-        {
-            /* All OSes selected are local */
-            startImageWrite();
-        }
-        else if (!_silent)
-        {
-            _qpd = new QProgressDialog(tr("The install process will begin shortly."), QString(), 0, 0, this);
-            _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-            _qpd->show();
+            QList<QListWidgetItem *> selected = selectedItems();
+            foreach (QListWidgetItem *item, selected)
+            {
+                QVariantMap entry = item->data(Qt::UserRole).toMap();
+
+                if (!entry.contains("folder"))
+                {
+                    QDir d;
+                    QString folder = "/settings/os/"+entry.value("name").toString();
+                    folder.replace(' ', '_');
+                    if (!d.exists(folder))
+                        d.mkpath(folder);
+
+                    downloadMetaFile(entry.value("os_info").toString(), folder+"/os.json");
+                    downloadMetaFile(entry.value("partitions_info").toString(), folder+"/partitions.json");
+
+                    if (entry.contains("marketing_info"))
+                        downloadMetaFile(entry.value("marketing_info").toString(), folder+"/marketing.tar");
+
+                    if (entry.contains("partition_setup"))
+                        downloadMetaFile(entry.value("partition_setup").toString(), folder+"/partition_setup.sh");
+
+                    if (entry.contains("icon"))
+                        downloadMetaFile(entry.value("icon").toString(), folder+"/icon.png");
+                }
+            }
+
+            if (_numMetaFilesToDownload == 0)
+            {
+                /* All OSes selected are local */
+                startImageWrite();
+            }
+            else if (!_silent)
+            {
+                _qpd = new QProgressDialog(tr("The install process will begin shortly."), QString(), 0, 0, this);
+                _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+                _qpd->show();
+            }
         }
     }
 }
