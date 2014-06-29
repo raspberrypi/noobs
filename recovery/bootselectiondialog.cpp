@@ -80,7 +80,7 @@ BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidge
                 }
             }
         }
-        if (canBootOs(m.value("name").toString(), m))
+        if (m.value("name").toString()!="Data Partition")
         {
             QListWidgetItem *item = new QListWidgetItem(icon, m.value("name").toString()+"\n"+m.value("description").toString(), ui->list);
             item->setData(Qt::UserRole, m);

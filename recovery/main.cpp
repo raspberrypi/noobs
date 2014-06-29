@@ -63,7 +63,10 @@ int main(int argc, char *argv[])
     // Wait for keyboard to appear before displaying anything
     KeyDetection::waitForKeyboard();
 
-    int rev = readBoardRevision();
+    QFile f("/sys/module/bcm2708/parameters/boardrev");
+    f.open(f.ReadOnly);
+    int rev = f.readAll().trimmed().toInt();
+    f.close();
 
     qDebug() << "Board revision is " << rev;
 
