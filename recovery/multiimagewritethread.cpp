@@ -373,6 +373,8 @@ emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
     ventry["folder"]      = folder;
     ventry["release_date"]= releasedate;
     ventry["partitions"]  = vpartitions;
+    if (vos.contains("bootable"))
+        ventry["bootable"] = vos.value("bootable").toBool();
     QString iconfilename = folder+"/"+flavour+".png";
     iconfilename.replace(" ", "_");
     if (QFile::exists(iconfilename))

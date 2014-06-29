@@ -94,3 +94,37 @@ bool nameMatchesRiscOS(const QString &name)
 {
     return name.contains("risc", Qt::CaseInsensitive);
 }
+
+static uint revision = 0;
+uint readBoardRevision()
+{
+    if (revision == 0)
+    {
+        QFile f("/sys/module/bcm2708/parameters/boardrev");
+        f.open(f.ReadOnly);
+        revision = f.readAll().trimmed().toUInt();
+        f.close();
+    }
+    return revision;
+}
+
+/* Whether this OS should be displayed in the list of bootable OSes */
+bool canBootOs(const QString& name, const QVariantMap& values)
+{
+    /* Can't simply pull "name" from "values" because in some JSON files it's "os_name" and in others it's "name" */
+
+    /* Check if it's explicitly not bootable */
+    bool bootable = values.value("bootable", true).toBool();
+    if (!bootable)
+    {
+        return false;
+    }
+
+    /* Data Partition isn't bootable */
+    if (name == "Data Partition")
+    {
+        return false;
+    }
+
+    return true;
+}
