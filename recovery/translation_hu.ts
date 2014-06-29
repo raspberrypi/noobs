@@ -314,17 +314,18 @@ FIGYELEM: ez letörli az SD kártyát lévő összes adatot</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="248"/>
-        <location filename="mainwindow.cpp" line="911"/>
+        <location filename="mainwindow.cpp" line="991"/>
         <source>RECOMMENDED</source>
         <translation>AJÁNLOTT</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="403"/>
+        <location filename="mainwindow.cpp" line="461"/>
+        <location filename="mainwindow.cpp" line="479"/>
         <source>Confirm</source>
         <translation>Megerősítés</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="496"/>
+        <location filename="mainwindow.cpp" line="573"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Kiadva: %2</translation>
     </message>
@@ -354,14 +355,14 @@ FIGYELEM: ez letörli az SD kártyát lévő összes adatot</translation>
         <translation>Lehet, hogy az SD kártya meg van sérülve</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="404"/>
+        <location filename="mainwindow.cpp" line="462"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation>Figyelem: a kiválasztott operációs rendszer(ek) telepítésre kerül(nek). Az SD kártyán lévő ÖSSZES ADAT FELÜL LESZ ÍRVA, beleértve az összes jelenleg telepített OS-t.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="477"/>
-        <location filename="mainwindow.cpp" line="876"/>
+        <location filename="mainwindow.cpp" line="554"/>
+        <location filename="mainwindow.cpp" line="953"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
@@ -371,12 +372,12 @@ FIGYELEM: ez letörli az SD kártyát lévő összes adatot</translation>
         <translation>TELEPÍTVE</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="596"/>
+        <location filename="mainwindow.cpp" line="673"/>
         <source>Display Mode Changed</source>
         <translation>Megjelenítési mód megváltoztatva</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="528"/>
+        <location filename="mainwindow.cpp" line="605"/>
         <source>HDMI preferred mode</source>
         <translation>Előnyben részesített HDMI mód</translation>
     </message>
@@ -386,94 +387,99 @@ FIGYELEM: ez letörli az SD kártyát lévő összes adatot</translation>
         <translation>Kérlek várj, amíg a NOOBS elindul</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="444"/>
+        <location filename="mainwindow.cpp" line="480"/>
+        <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="520"/>
         <source>The install process will begin shortly.</source>
         <translation>A telepítési folyamat hamarosan elkezdődik.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="467"/>
+        <location filename="mainwindow.cpp" line="544"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation>Telepített OS(-ek)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="468"/>
+        <location filename="mainwindow.cpp" line="545"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation>OS(-ek) sikeresen telepítve</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="532"/>
+        <location filename="mainwindow.cpp" line="609"/>
         <source>HDMI safe mode</source>
         <translation>Biztonságos HDMI mód</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="536"/>
+        <location filename="mainwindow.cpp" line="613"/>
         <source>composite PAL mode</source>
         <translation>kompozit PAL mód</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="540"/>
+        <location filename="mainwindow.cpp" line="617"/>
         <source>composite NTSC mode</source>
         <translation>kompozit NTSC mód</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="597"/>
+        <location filename="mainwindow.cpp" line="674"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Megjelenítési mód megváltoztatva erre: %1
 El szeretnéd menteni ezt a beállítást?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="862"/>
-        <location filename="mainwindow.cpp" line="1173"/>
-        <location filename="mainwindow.cpp" line="1183"/>
+        <location filename="mainwindow.cpp" line="939"/>
+        <location filename="mainwindow.cpp" line="1253"/>
+        <location filename="mainwindow.cpp" line="1263"/>
         <source>Download error</source>
         <translation>Letöltési hiba</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="862"/>
+        <location filename="mainwindow.cpp" line="939"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Nem sikerült a disztribúciós lista letöltése az internetről</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="876"/>
+        <location filename="mainwindow.cpp" line="953"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Nem sikerült a szerverről letöltött list.json feldolgozása</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1064"/>
+        <location filename="mainwindow.cpp" line="1144"/>
         <source>Needed</source>
         <translation>Szükséges</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1065"/>
+        <location filename="mainwindow.cpp" line="1145"/>
         <source>Available</source>
         <translation>Elérhető</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1173"/>
+        <location filename="mainwindow.cpp" line="1253"/>
         <source>Error downloading meta file</source>
         <translation>Nem sikerült a metafájl letöltése</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1183"/>
+        <location filename="mainwindow.cpp" line="1263"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Nem sikerült a letöltött fájl SD kártyára történő kiírása. Az SD kártya vagy a fájlrendszer sérült lehet.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1298"/>
+        <location filename="mainwindow.cpp" line="1378"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Vezetékes hálózati kapcsolat szükséges a NOOBS helyi lemezképfájlok nélküli használatához. Kérlek, csatlakoztasd a Pi-t az internethez.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="717"/>
-        <location filename="mainwindow.cpp" line="1297"/>
+        <location filename="mainwindow.cpp" line="794"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>No network access</source>
         <translation>Nincs hálózati hozzáférés</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="718"/>
+        <location filename="mainwindow.cpp" line="795"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Vezetékes hálózati hozzáférés szükséges ehhez a funkcióhoz. Kérlek, hogy csatlakoztasd a Pi-t az internethez.</translation>
     </message>
@@ -486,146 +492,156 @@ El szeretnéd menteni ezt a beállítást?</translation>
         <translation>A partitions.json érvénytelen</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="69"/>
+        <location filename="multiimagewritethread.cpp" line="87"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
         <translation>A RISCOS nem telepíthető. A recovery partíció mérete túl nagy.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="93"/>
+        <location filename="multiimagewritethread.cpp" line="111"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
         <translation>Nincs elég szabad hely. %1 MB szükséges, és csak %2 MB van</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="97"/>
+        <location filename="multiimagewritethread.cpp" line="115"/>
         <source>Clearing existing EBR</source>
         <translation>A már létező EBR lenullázása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="123"/>
+        <location filename="multiimagewritethread.cpp" line="141"/>
         <source>Finish writing (sync)</source>
         <translation>Írás befejezése (szink.)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="158"/>
+        <location filename="multiimagewritethread.cpp" line="176"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>&apos;%1&apos; fájl nem létezik</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="181"/>
+        <location filename="multiimagewritethread.cpp" line="199"/>
         <source>Nominal partition size not specified or zero</source>
         <translation>A nominális partícióméret nincs megadva vagy nulla</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="207"/>
+        <location filename="multiimagewritethread.cpp" line="225"/>
         <source>%1: Creating partition entry</source>
         <oldsource>Creating partition entry</oldsource>
         <translation>%1: Partíciós bejegyzés létrehozása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="213"/>
+        <location filename="multiimagewritethread.cpp" line="231"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
         <translation>%1: OS lemezképfájl kiírása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="227"/>
+        <location filename="multiimagewritethread.cpp" line="245"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
         <translation>%1: Fájlrendszer felcsatolása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="230"/>
-        <location filename="multiimagewritethread.cpp" line="254"/>
+        <location filename="multiimagewritethread.cpp" line="248"/>
+        <location filename="multiimagewritethread.cpp" line="272"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
         <translation>%1: Nem sikerült a fájlrendszer felcsatolása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="220"/>
+        <location filename="multiimagewritethread.cpp" line="238"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation>%1: Fájlrendszer létrehozása (%2)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="235"/>
+        <location filename="multiimagewritethread.cpp" line="76"/>
+        <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="82"/>
+        <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="253"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation>%1: A fájlrendszer letöltése és kibontása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="237"/>
+        <location filename="multiimagewritethread.cpp" line="255"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
         <translation>%1: A fájlrendszer kibontása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="251"/>
+        <location filename="multiimagewritethread.cpp" line="269"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
         <translation>%1: FAT partíció felcsatolása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="258"/>
+        <location filename="multiimagewritethread.cpp" line="276"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
         <translation>%1: os_config.json létrehozása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="286"/>
+        <location filename="multiimagewritethread.cpp" line="304"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
         <translation>%1: Megjelenítési mód elmentése a config.txt fájlba</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="297"/>
+        <location filename="multiimagewritethread.cpp" line="315"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
         <translation>%1: Partícióbeállító parancsfájl futtatása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="340"/>
+        <location filename="multiimagewritethread.cpp" line="358"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
         <translation>%1: Hiba történt a partícióbeállító parancsfájl futtatása közben</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="345"/>
+        <location filename="multiimagewritethread.cpp" line="363"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
         <translation>%1: FAT partíció lecsatolása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="348"/>
+        <location filename="multiimagewritethread.cpp" line="366"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
         <translation>%1: Nem sikerült a lecsatolás</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="401"/>
+        <location filename="multiimagewritethread.cpp" line="421"/>
         <source>Error opening /dev/mmcblk0 for writing</source>
         <translation>Nem sikerült megnyitni /dev/mmcblk0-t írásra</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="419"/>
+        <location filename="multiimagewritethread.cpp" line="439"/>
         <source>Internal error in partitioning</source>
         <translation>Belső hiba van a partícionálásban</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="502"/>
+        <location filename="multiimagewritethread.cpp" line="522"/>
         <source>Error creating file system</source>
         <translation>Nem sikerült a fájlrendszer létrehozása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="544"/>
-        <location filename="multiimagewritethread.cpp" line="606"/>
+        <location filename="multiimagewritethread.cpp" line="564"/>
+        <location filename="multiimagewritethread.cpp" line="626"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Ismeretlen tömörítettfájl-kiterjesztés. Elfogadottak: .lzo, .gz, .xz, .bz2 vagy .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="568"/>
+        <location filename="multiimagewritethread.cpp" line="588"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Nem sikerült a tömörített fájl letöltése vagy kibontása</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="627"/>
+        <location filename="multiimagewritethread.cpp" line="647"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>Nem sikerült az OS letöltése vagy kiírása az SD kártyára</translation>
     </message>

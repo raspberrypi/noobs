@@ -313,22 +313,23 @@ WARNING: This will erase all data on your SD card</source>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="+248"/>
-        <location line="+663"/>
+        <location line="+743"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-508"/>
+        <location line="-530"/>
+        <location line="+18"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="+93"/>
+        <location line="+94"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-411"/>
+        <location line="-488"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -353,24 +354,24 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+250"/>
+        <location line="+308"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation type="unfinished">Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+92"/>
         <location line="+399"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-625"/>
+        <location line="-702"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+345"/>
+        <location line="+422"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -380,17 +381,22 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-395"/>
+        <location line="-472"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+311"/>
+        <location line="+347"/>
+        <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
         <source>The install process will begin shortly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+24"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation type="unfinished"></translation>
@@ -424,13 +430,13 @@ Would you like to make this setting permanent?</source>
     </message>
     <message>
         <location line="+265"/>
-        <location line="+311"/>
+        <location line="+314"/>
         <location line="+10"/>
         <source>Download error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-321"/>
+        <location line="-324"/>
         <source>Error downloading distribution list from Internet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -440,7 +446,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+191"/>
         <source>Needed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -465,13 +471,13 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-581"/>
-        <location line="+580"/>
+        <location line="-584"/>
+        <location line="+583"/>
         <source>No network access</source>
         <translation>Sem acesso de rede</translation>
     </message>
     <message>
-        <location line="-579"/>
+        <location line="-582"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>
@@ -484,7 +490,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+43"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -544,7 +550,17 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="-162"/>
+        <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+171"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation type="unfinished"></translation>
     </message>
@@ -597,7 +613,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+55"/>
         <source>Error opening /dev/mmcblk0 for writing</source>
         <translation type="unfinished"></translation>
     </message>
