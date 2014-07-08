@@ -421,6 +421,7 @@ QMap<QString, QVariantMap> MainWindow::listImages()
             if (images.contains(imageKey))
             {
                 images[imageKey]["installed"] = true;
+                images[imageKey]["partitions"] = m["partitions"];
             }
             else
             {
