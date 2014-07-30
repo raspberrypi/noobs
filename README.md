@@ -97,6 +97,7 @@ Even if you are using your Pi without a display, you can still use NOOBS to easi
 3. Edit the `recovery.cmdline` file in the root NOOBS directory and append `silentinstall` to the arguments list.
 
 When you now boot your Pi using an SD card containing the modified version of NOOBS that you just created, it will automatically install the OS you chose and boot into it after the installation has finished.
+(Note that there's currently a small bug in NOOBS which means _if_ you use silentinstall with the Ethernet connected, then after NOOBS finishes installing the OS, it crashes rather than rebooting as expected. Simply power off and on again, and your chosen OS will boot as expected.)
 
 ### How to create a custom OS version
 
