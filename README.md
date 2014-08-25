@@ -174,7 +174,7 @@ To force Recovery Mode to be entered on boot and to show the NOOBS interface, yo
 1. Append `gpiotriggerenable` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
 2. Reboot
 
-To force Recovery Mode being entered on boot, connect GPIO pin 3 on header P1 to GND (pin 25). If GPIO pin 3 remains unconnected then it will boot through to the installed OS as normal.
+To force Recovery Mode being entered on boot, connect pin 3 on header P1 to GND (pin 25). If pin 3 remains unconnected then it will boot through to the installed OS as normal.
 
 #### How to force Recovery Mode being entered on boot (overrides GPIO or keyboard input)
 
