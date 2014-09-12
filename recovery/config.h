@@ -18,7 +18,7 @@
 #define ENABLE_LANGUAGE_CHOOSER
 
 /* Website launched when launching Arora */
-#define HOMEPAGE  "http://www.raspberrypi.org/phpBB3/"
+#define HOMEPAGE  "http://www.raspberrypi.org/help/"
 
 /* Location to download the list of available distributions from */
 #define DEFAULT_REPO_SERVER  "http://downloads.raspberrypi.org/os_list_v2.json"
