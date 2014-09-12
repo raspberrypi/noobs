@@ -295,10 +295,17 @@ void MainWindow::repopulate()
         else
             item->setCheckState(Qt::Unchecked);
 
-        if (folder.startsWith("/mnt"))
-            item->setData(SecondIconRole, localIcon);
+        if (m["source"] == SOURCE_INSTALLED_OS)
+        {
+            item->setData(SecondIconRole, QIcon());
+        }
         else
-            item->setData(SecondIconRole, internetIcon);
+        {
+            if (folder.startsWith("/mnt"))
+                item->setData(SecondIconRole, localIcon);
+            else
+                item->setData(SecondIconRole, internetIcon);
+        }
 
         if (recommended)
             ui->list->insertItem(0, item);
