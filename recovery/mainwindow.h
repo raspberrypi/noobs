@@ -61,7 +61,7 @@ protected:
     QStringList getFlavours(const QString &folder);
     void rebuildInstalledList();
     void remountSettingsRW();
-    bool alreadyHasItem(const QVariant &name, const QVariant &releasedate);
+    QListWidgetItem *findItem(const QVariant &name);
     QList<QListWidgetItem *> selectedItems();
     void updateNeeded();
     void downloadMetaFile(const QString &url, const QString &saveAs);
@@ -76,6 +76,7 @@ protected slots:
     void ifupFinished(int exitCode);
     void downloadListComplete();
     void processJson(QVariant json);
+    void processJsonOs(const QString &name, QVariantMap &details, QSet<QString> &iconurls);
     /* Events from ImageWriterThread */
     void onError(const QString &msg);
     void onCompleted();
