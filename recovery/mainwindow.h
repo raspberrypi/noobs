@@ -45,12 +45,14 @@ protected:
     QSplashScreen *_splash;
     QSettings *_settings;
     bool _activatedEth;
+    bool _hasUSB;
     int _numInstalledOS;
     QNetworkAccessManager *_netaccess;
     int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
     QMessageBox *_displayModeBox;
 
     QMap<QString,QVariantMap> listImages();
+    QMap<QString,QVariantMap> listImagesInDir(const QString &mountpoint, const QString &source);
     virtual void changeEvent(QEvent * event);
     virtual bool eventFilter(QObject *obj, QEvent *event);
     void inputSequence();
