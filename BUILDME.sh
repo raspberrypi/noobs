@@ -6,6 +6,8 @@ set -e
 
 cd buildroot
 
+BUILDROOT_DL_DIR=${BUILDROOT_DL_DIR:-"dl"}
+
 # Delete buildroot build directory to force rebuild
 if [ -e output/build ]; then
     rm -rf output/build/recovery* || true
@@ -15,13 +17,13 @@ for i in $*; do
     # Redownload firmware from raspberrypi/firmware master HEAD to update to latest
     if [ $i = "update-firmware" ]; then
         rm -rf output/build/rpi-firmware-master
-        rm -rf dl/rpi-firmware-master.tar.gz
+        rm -rf "$BUILDROOT_DL_DIR"/rpi-firmware-master.tar.gz
     fi
 
     # Redownload userland from raspberrypi/userland master HEAD to update to latest
     if [ $i = "update-userland" ]; then
         rm -rf output/build/rpi-userland-master
-        rm -rf dl/rpi-userland-master.tar.gz
+        rm -rf "$BUILDROOT_DL_DIR"/rpi-userland-master.tar.gz
     fi
 done
 
@@ -47,8 +49,8 @@ BUILD_INFO="../output/BUILD-DATA"
 echo "Build-date: $(date +"%Y-%m-%d")" > "$BUILD_INFO"
 echo "NOOBS Version: "`git describe` >> "$BUILD_INFO"
 echo "NOOBS Git HEAD @ "`git rev-parse --verify HEAD` >> "$BUILD_INFO"
-cat dl/rpi-userland-head.version >> "$BUILD_INFO"
-cat dl/rpi-firmware-head.version >> "$BUILD_INFO"
+cat "$BUILDROOT_DL_DIR"/rpi-userland-head.version >> "$BUILD_INFO"
+cat "$BUILDROOT_DL_DIR"/rpi-firmware-head.version >> "$BUILD_INFO"
 
 cd ..
 

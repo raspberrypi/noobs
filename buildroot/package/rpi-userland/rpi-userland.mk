@@ -13,7 +13,7 @@ RPI_USERLAND_CONF_OPT = -DVMCS_INSTALL_PREFIX=/usr
 
 # we're downloading a branchname rather than a commit-id, so this gets the commit-id we just downloaded
 define RPI_USERLAND_GET_CURRENT_VERSION
-	echo "rpi-userland Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/userland | grep refs/heads/$(RPI_USERLAND_VERSION)` > $(BR2_DL_DIR)/rpi-userland-head.version
+	echo "rpi-userland Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/userland | grep refs/heads/$(RPI_USERLAND_VERSION)` > $(BUILDROOT_DL_DIR)/rpi-userland-head.version
 endef
 
 RPI_USERLAND_POST_DOWNLOAD_HOOKS += RPI_USERLAND_GET_CURRENT_VERSION

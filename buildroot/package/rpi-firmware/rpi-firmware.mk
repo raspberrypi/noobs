@@ -11,7 +11,7 @@ RPI_FIRMWARE_LICENSE_FILES = boot/LICENCE.broadcom
 
 # we're downloading a branchname rather than a commit-id, so this gets the commit-id we just downloaded
 define RPI_FIRMWARE_GET_CURRENT_VERSION
-	echo "rpi-firmware Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/firmware | grep refs/heads/$(RPI_FIRMWARE_VERSION)` > $(BR2_DL_DIR)/rpi-firmware-head.version
+	echo "rpi-firmware Git HEAD @ "`git ls-remote --heads https://github.com/raspberrypi/firmware | grep refs/heads/$(RPI_FIRMWARE_VERSION)` > $(BUILDROOT_DL_DIR)/rpi-firmware-head.version
 endef
 
 RPI_FIRMWARE_POST_DOWNLOAD_HOOKS += RPI_FIRMWARE_GET_CURRENT_VERSION
