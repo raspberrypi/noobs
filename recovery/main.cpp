@@ -39,6 +39,10 @@ void reboot_to_extended(const QString &defaultPartition, bool setDisplayMode)
     // Unmount any open file systems
     QProcess::execute("umount -r /mnt");
     QProcess::execute("umount -r /settings");
+    if (QFile::exists(USB_MOUNTPOINT))
+    {
+        QProcess::execute("umount -r " USB_MOUNTPOINT);
+    }
 
     if (QFile::exists("/dev/mmcblk0p7"))
     {

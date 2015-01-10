@@ -148,7 +148,7 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
 
     int firstPartition = _part;
 
-    QString os_name = (folder.split("/")).at(3);
+    QString os_name = (folder.split("/os/")).at(1);
 
     qDebug() << "Processing OS:" << os_name;
 

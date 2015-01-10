@@ -52,6 +52,7 @@
 
 /* To keep track of where the different OSes get 'installed' from */
 #define SOURCE_SDCARD "sdcard"
+#define SOURCE_USB "usb"
 #define SOURCE_NETWORK "network"
 #define SOURCE_INSTALLED_OS "installed_os"
 
@@ -66,7 +67,7 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     ui(new Ui::MainWindow),
     _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
     _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
-    _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
+    _activatedEth(false), _hasUSB(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
@@ -121,6 +122,10 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
 
 MainWindow::~MainWindow()
 {
+    if (_hasUSB)
+    {
+        QProcess::execute("umount " USB_MOUNTPOINT);
+    }
     QProcess::execute("umount /mnt");
     delete ui;
 }
@@ -186,6 +191,16 @@ void MainWindow::populate()
 
     QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
 
+    if (QFile::exists(USB_DEVICE))
+    {
+        QDir dir;
+        dir.mkdir(USB_MOUNTPOINT);
+        if (QProcess::execute("mount -o ro -t vfat " USB_DEVICE " " USB_MOUNTPOINT) == 0)
+        {
+            _hasUSB = true;
+        }
+    }
+
     // Fill in list of images
     repopulate();
     _availableMB = (getFileContents("/sys/class/block/mmcblk0p3/start").trimmed().toULongLong()-getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong())/2048;
@@ -230,6 +245,7 @@ void MainWindow::repopulate()
     bool haveicons = false;
     QSize currentsize = ui->list->iconSize();
     QIcon localIcon(":/icons/hdd.png");
+    QIcon usbIcon(":/icons/usbstick.png");
     QIcon internetIcon(":/icons/download.png");
     _numInstalledOS = 0;
 
@@ -302,9 +318,17 @@ void MainWindow::repopulate()
         else
         {
             if (folder.startsWith("/mnt"))
+            {
                 item->setData(SecondIconRole, localIcon);
+            }
+            else if (folder.startsWith("/media/usb"))
+            {
+                item->setData(SecondIconRole, usbIcon);
+            }
             else
+            {
                 item->setData(SecondIconRole, internetIcon);
+            }
         }
 
         if (recommended)
@@ -373,21 +397,19 @@ bool isSupportedOs(const QString& name, const QVariantMap& values)
     return true;
 }
 
-QMap<QString, QVariantMap> MainWindow::listImages()
+QMap<QString, QVariantMap> MainWindow::listImagesInDir(const QString& mountpoint, const QString& source)
 {
     QMap<QString,QVariantMap> images;
-
-    /* Local image folders */
-    QDir dir("/mnt/os", "", QDir::Name, QDir::Dirs | QDir::NoDotAndDotDot);
+    QDir dir(mountpoint, "", QDir::Name, QDir::Dirs | QDir::NoDotAndDotDot);
     QStringList list = dir.entryList();
 
     foreach (QString image,list)
     {
-        QString imagefolder = "/mnt/os/"+image;
+        QString imagefolder = mountpoint+"/"+image;
         if (!QFile::exists(imagefolder+"/os.json"))
             continue;
         QVariantMap osv = Json::loadFromFile(imagefolder+"/os.json").toMap();
-        osv["source"] = SOURCE_SDCARD;
+        osv["source"] = source;
 
         QString basename = osv.value("name").toString();
         if (canInstallOs(basename, osv))
@@ -420,6 +442,26 @@ QMap<QString, QVariantMap> MainWindow::listImages()
                 osv["folder"] = imagefolder;
                 images[name] = osv;
             }
+        }
+    }
+    return images;
+}
+
+
+QMap<QString, QVariantMap> MainWindow::listImages()
+{
+    QMap<QString,QVariantMap> images;
+
+    /* Local image folders */
+    images = listImagesInDir("/mnt/os", SOURCE_SDCARD);
+
+    /* USB image folders */
+    if (_hasUSB)
+    {
+        QMap<QString,QVariantMap> usbImages = listImagesInDir(USB_MOUNTPOINT "/os", SOURCE_USB);
+        for (QMap<QString,QVariantMap>::iterator i = usbImages.begin(); i != usbImages.end(); i++)
+        {
+            images.insert(i.key(), i.value());
         }
     }
 

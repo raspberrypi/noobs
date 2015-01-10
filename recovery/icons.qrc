@@ -26,5 +26,6 @@
         <file>icons/download.png</file>
         <file>icons/hdd.png</file>
         <file>icons/keyboard.png</file>
+        <file>icons/usbstick.png</file>
     </qresource>
 </RCC>
