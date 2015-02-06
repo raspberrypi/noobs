@@ -5,13 +5,13 @@
 #############################################################
 
 
-RECOVERY_VERSION=1.0
-RECOVERY_SITE=$(TOPDIR)/../recovery
-RECOVERY_SITE_METHOD=local
+RECOVERY_VERSION = 1.0
+RECOVERY_SITE = $(TOPDIR)/../recovery
+RECOVERY_SITE_METHOD = local
 RECOVERY_LICENSE = BSD-3c
 RECOVERY_LICENSE_FILES = LICENSE.txt
 RECOVERY_INSTALL_STAGING = NO
-RECOVERY_DEPENDENCIES=qt
+RECOVERY_DEPENDENCIES = qt qjson
 
 define RECOVERY_BUILD_CMDS
 	(cd $(@D) ; $(QT_QMAKE))
@@ -25,6 +25,7 @@ define RECOVERY_INSTALL_TARGET_CMDS
 	rm $(TARGET_DIR)/init || true
 	$(INSTALL) -m 0755 package/recovery/init $(TARGET_DIR)/init
 	rm -f $(TARGET_DIR)/usr/lib/fonts/*
+	mkdir -p $(TARGET_DIR)/usr/lib/fonts/
 	$(INSTALL) -m 0755 package/recovery/unicode-fonts/DejaVuSans.ttf $(TARGET_DIR)/usr/lib/fonts/DejaVuSans.ttf
 	$(INSTALL) -m 0755 package/recovery/unicode-fonts/DejaVuSans-Bold.ttf $(TARGET_DIR)/usr/lib/fonts/DejaVuSans-Bold.ttf
 	$(INSTALL) -m 0755 package/recovery/unicode-fonts/DroidSansJapanese.ttf $(TARGET_DIR)/usr/lib/fonts/DroidSansJapanese.ttf

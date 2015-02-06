@@ -1,5 +1,9 @@
 config BR2_PACKAGE_ARORA
         bool "arora"
     select BR2_PACKAGE_QT
+    select BR2_PACKAGE_QT_WEBKIT
+    select BR2_PACKAGE_QT_GIF
+    select BR2_PACKAGE_QT_QTJPEG
+    select BR2_PACKAGE_QT_QTPNG
         help
           Arora web browser 
