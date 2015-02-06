@@ -13,10 +13,10 @@ config BR2_PACKAGE_PERF
 
 	  This package builds and install the userspace 'perf'
 	  command. It is up to the user to ensure that the kernel
-	  configuration has all suitable options enable to allow a
+	  configuration has all the suitable options enabled to allow a
 	  proper operation of 'perf'.
 
 	  https://perf.wiki.kernel.org/
 
-comment "perf only available if Linux kernel is enabled, and requires largefile support"
+comment "perf needs a toolchain w/ largefile and a Linux kernel to be built"
 	depends on !BR2_LINUX_KERNEL || !BR2_LARGEFILE

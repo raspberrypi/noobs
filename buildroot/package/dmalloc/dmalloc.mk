@@ -1,10 +1,10 @@
-#############################################################
+################################################################################
 #
 # dmalloc
 #
-#############################################################
+################################################################################
 
-DMALLOC_VERSION = 5.4.3
+DMALLOC_VERSION = 5.5.2
 DMALLOC_SOURCE = dmalloc-$(DMALLOC_VERSION).tgz
 DMALLOC_SITE = http://dmalloc.com/releases
 
@@ -13,19 +13,29 @@ DMALLOC_LICENSE = MIT-like
 DMALLOC_LICENSE_FILES = dmalloc.h.1
 
 DMALLOC_INSTALL_STAGING = YES
-DMALLOC_CONF_OPT = --enable-shlib
+DMALLOC_CONF_OPTS = --enable-shlib
+DMALLOC_CFLAGS = $(TARGET_CFLAGS)
 
 ifeq ($(BR2_INSTALL_LIBSTDCPP),y)
-DMALLOC_CONF_OPT += --enable-cxx
+DMALLOC_CONF_OPTS += --enable-cxx
 else
-DMALLOC_CONF_OPT += --disable-cxx
+DMALLOC_CONF_OPTS += --disable-cxx
 endif
 
 ifeq ($(BR2_TOOLCHAIN_HAS_THREADS),y)
-DMALLOC_CONF_OPT += --enable-threads
+DMALLOC_CONF_OPTS += --enable-threads
 else
-DMALLOC_CONF_OPT += --disable-threads
+DMALLOC_CONF_OPTS += --disable-threads
 endif
+
+# dmalloc has some assembly function that are not present in thumb1 mode:
+# Error: lo register required -- `str lr,[sp,#4]'
+# so, we desactivate thumb mode
+ifeq ($(BR2_ARM_INSTRUCTIONS_THUMB),y)
+DMALLOC_CFLAGS += -marm
+endif
+
+DMALLOC_CONF_ENV = CFLAGS="$(DMALLOC_CFLAGS)"
 
 define DMALLOC_POST_PATCH
 	$(SED) 's/^ac_cv_page_size=0$$/ac_cv_page_size=12/' $(@D)/configure
@@ -47,17 +57,8 @@ define DMALLOC_INSTALL_STAGING_CMDS
 endef
 
 define DMALLOC_INSTALL_TARGET_CMDS
-	mv $(STAGING_DIR)/usr/lib/libdmalloc*.so $(TARGET_DIR)/usr/lib
+	cp -dpf $(STAGING_DIR)/usr/lib/libdmalloc*.so $(TARGET_DIR)/usr/lib
 	cp -dpf $(STAGING_DIR)/usr/bin/dmalloc $(TARGET_DIR)/usr/bin/dmalloc
 endef
-
-define DMALLOC_CLEAN_CMDS
-	-rm -f $(TARGET_DIR)/usr/lib/libdmalloc*
-	-rm -f $(STAGING_DIR)/usr/lib/libdmalloc*
-	rm -f $(STAGING_DIR)/usr/include/dmalloc.h
-	rm -f $(TARGET_DIR)/usr/bin/dmalloc
-	-$(MAKE) -C $(DMALLOC_DIR) clean
-endef
-
 
 $(eval $(autotools-package))

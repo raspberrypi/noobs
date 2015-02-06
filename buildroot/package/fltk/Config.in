@@ -2,6 +2,9 @@ config BR2_PACKAGE_FLTK
 	bool "fltk"
 	depends on BR2_INSTALL_LIBSTDCPP
 	depends on BR2_PACKAGE_XORG7
+	depends on BR2_USE_MMU # fork()
+	select BR2_PACKAGE_JPEG
+	select BR2_PACKAGE_LIBPNG
 	select BR2_PACKAGE_XLIB_LIBXT
 	select BR2_PACKAGE_XLIB_LIBX11
 	select BR2_PACKAGE_XLIB_LIBXEXT
@@ -11,5 +14,6 @@ config BR2_PACKAGE_FLTK
 
 	  http://www.fltk.org/
 
-comment "fltk requires a toolchain with C++ support enabled"
-	depends on !BR2_INSTALL_LIBSTDCPP && BR2_PACKAGE_XORG7
+comment "fltk needs a toolchain w/ C++"
+	depends on BR2_USE_MMU && BR2_PACKAGE_XORG7
+	depends on !BR2_INSTALL_LIBSTDCPP

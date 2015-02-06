@@ -1,6 +1,7 @@
 config BR2_PACKAGE_GIBLIB
 	bool "giblib"
 	depends on BR2_PACKAGE_XORG7
+	depends on !BR2_STATIC_LIBS
 	select BR2_PACKAGE_IMLIB2
 	select BR2_PACKAGE_IMLIB2_X
 	help
@@ -8,3 +9,5 @@ config BR2_PACKAGE_GIBLIB
 
 	  http://linuxbrit.co.uk/giblib/
 
+comment "giblib support needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

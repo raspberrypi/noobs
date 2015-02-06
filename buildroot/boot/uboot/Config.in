@@ -14,29 +14,16 @@ config BR2_TARGET_UBOOT_BOARDNAME
 
 choice
 	prompt "U-Boot Version"
-	default BR2_TARGET_UBOOT_2013_04
 	help
 	  Select the specific U-Boot version you want to use
 
-config BR2_TARGET_UBOOT_2013_04
-	bool "2013.04"
+config BR2_TARGET_UBOOT_LATEST_VERSION
+	bool "2015.01"
 
-config BR2_TARGET_UBOOT_2013_01
-	bool "2013.01.01"
-
-config BR2_TARGET_UBOOT_2012_10
-	bool "2012.10"
-
-config BR2_TARGET_UBOOT_2012_07
-	bool "2012.07"
-
-config BR2_TARGET_UBOOT_2012_04
-	bool "2012.04.01"
-	depends on BR2_DEPRECATED
-
-config BR2_TARGET_UBOOT_2011_12
-	bool "2011.12"
-	depends on BR2_DEPRECATED
+config BR2_TARGET_UBOOT_CUSTOM_VERSION
+	bool "Custom version"
+	help
+	  This option allows to use a specific official versions
 
 config BR2_TARGET_UBOOT_CUSTOM_TARBALL
 	bool "Custom tarball"
@@ -44,25 +31,44 @@ config BR2_TARGET_UBOOT_CUSTOM_TARBALL
 config BR2_TARGET_UBOOT_CUSTOM_GIT
 	bool "Custom Git repository"
 
+config BR2_TARGET_UBOOT_CUSTOM_HG
+	bool "Custom Mercurial repository"
+
 endchoice
 
-if BR2_TARGET_UBOOT_CUSTOM_TARBALL
+config BR2_TARGET_UBOOT_CUSTOM_VERSION_VALUE
+	string "U-Boot version"
+	depends on BR2_TARGET_UBOOT_CUSTOM_VERSION
 
 config BR2_TARGET_UBOOT_CUSTOM_TARBALL_LOCATION
 	string "URL of custom U-Boot tarball"
+	depends on BR2_TARGET_UBOOT_CUSTOM_TARBALL
+
+if BR2_TARGET_UBOOT_CUSTOM_GIT || BR2_TARGET_UBOOT_CUSTOM_HG
+
+config BR2_TARGET_UBOOT_CUSTOM_REPO_URL
+	string "URL of custom repository"
+	default BR2_TARGET_UBOOT_CUSTOM_GIT_REPO_URL \
+		if BR2_TARGET_UBOOT_CUSTOM_GIT_REPO_URL != ""  # legacy
+
+config BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION
+	string "Custom repository version"
+	default BR2_TARGET_UBOOT_CUSTOM_GIT_VERSION \
+		if BR2_TARGET_UBOOT_CUSTOM_GIT_VERSION != ""  # legacy
+	help
+	  Revision to use in the typical format used by Git/Mercurial
+	  E.G. a sha id, a tag, branch, ..
 
 endif
 
 config BR2_TARGET_UBOOT_VERSION
 	string
-	default "2013.04"	if BR2_TARGET_UBOOT_2013_04
-	default "2013.01.01"	if BR2_TARGET_UBOOT_2013_01
-	default "2012.10"	if BR2_TARGET_UBOOT_2012_10
-	default "2012.07"	if BR2_TARGET_UBOOT_2012_07
-	default "2012.04.01"	if BR2_TARGET_UBOOT_2012_04
-	default "2011.12"	if BR2_TARGET_UBOOT_2011_12
+	default "2015.01"	if BR2_TARGET_UBOOT_LATEST_VERSION
+	default BR2_TARGET_UBOOT_CUSTOM_VERSION_VALUE \
+		if BR2_TARGET_UBOOT_CUSTOM_VERSION
 	default "custom"	if BR2_TARGET_UBOOT_CUSTOM_TARBALL
-	default $BR2_TARGET_UBOOT_CUSTOM_GIT_VERSION if BR2_TARGET_UBOOT_CUSTOM_GIT
+	default BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION \
+		if BR2_TARGET_UBOOT_CUSTOM_GIT || BR2_TARGET_UBOOT_CUSTOM_HG
 
 config BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR
 	string "custom patch dir"
@@ -72,16 +78,6 @@ config BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR
 	  named uboot-<something>.patch.
 
 	  Most users may leave this empty
-
-if BR2_TARGET_UBOOT_CUSTOM_GIT
-
-config BR2_TARGET_UBOOT_CUSTOM_GIT_REPO_URL
-	string "URL of custom Git repository"
-
-config BR2_TARGET_UBOOT_CUSTOM_GIT_VERSION
-	string "Custom Git version"
-
-endif
 
 choice
 	prompt "U-Boot binary format"
@@ -100,6 +96,9 @@ config BR2_TARGET_UBOOT_FORMAT_BIN
 config BR2_TARGET_UBOOT_FORMAT_IMG
 	bool "u-boot.img"
 
+config BR2_TARGET_UBOOT_FORMAT_IMX
+	bool "u-boot.imx"
+
 config BR2_TARGET_UBOOT_FORMAT_NAND_BIN
 	bool "u-boot-nand.bin"
 
@@ -111,7 +110,30 @@ config BR2_TARGET_UBOOT_FORMAT_LDR
 	depends on BR2_bfin
 	bool "u-boot.ldr"
 
+config BR2_TARGET_UBOOT_FORMAT_ELF
+	bool "u-boot.elf"
+
+config BR2_TARGET_UBOOT_FORMAT_SB
+	depends on BR2_arm
+	bool "u-boot.sb"
+
+config BR2_TARGET_UBOOT_FORMAT_CUSTOM
+	bool "Custom (specify below)"
+	help
+	  On some platforms, the standard U-Boot binary is not called
+	  u-boot.bin, but u-boot<something>.bin. If this is your case,
+	  you should select this option and specify the correct name
+	  in BR2_TARGET_UBOOT_FORMAT_CUSTOM_NAME.
+
 endchoice
+
+config BR2_TARGET_UBOOT_FORMAT_CUSTOM_NAME
+	string "U-Boot binary format: custom name"
+	depends on BR2_TARGET_UBOOT_FORMAT_CUSTOM
+	help
+	  Specify the correct name of the output binary created by
+	  U-Boot, if it is not one of the default names. For example:
+	  u-boot_magic.bin
 
 config BR2_TARGET_UBOOT_OMAP_IFT
 	depends on BR2_TARGET_UBOOT_FORMAT_BIN
@@ -147,6 +169,7 @@ endif
 
 menuconfig BR2_TARGET_UBOOT_NETWORK
 	bool "Custom Network Settings"
+	depends on BR2_DEPRECATED_SINCE_2014_05
 	help
 	  Custom network settings for U-boot
 
@@ -191,21 +214,23 @@ config BR2_TARGET_UBOOT_ETH1ADDR
 endif # BR2_TARGET_UBOOT_NETWORK
 
 config BR2_TARGET_UBOOT_SPL
-	bool "U-Boot SPL support"
+	bool "Install U-Boot SPL binary image"
 	depends on !BR2_TARGET_XLOADER
 	help
-	  Enable the U-Boot SPL support. SPL is a first stage
-	  bootloader loaded into internal memory in charge of
-	  enabling and configuring the external memory (DDR),
-	  and load the u-boot program into DDR.
+	  Install the U-Boot SPL binary image to the images
+	  directory.
+	  SPL is a first stage bootloader loaded into internal
+	  memory in charge of enabling and configuring the
+	  external memory (DDR), and load the u-boot program
+	  into DDR.
 
 config BR2_TARGET_UBOOT_SPL_NAME
-	string "U-Boot SPL target name"
-	default "u-boot-spl.bin"
+	string "U-Boot SPL binary image name"
+	default "spl/u-boot-spl.bin"
 	depends on BR2_TARGET_UBOOT_SPL
 	help
 	  This is the name of the SPL binary, generated during
-	  u-boot build. For most platform it is u-boot-spl.bin
+	  u-boot build. For most platform it is spl/u-boot-spl.bin
 	  but not always. It is MLO on OMAP for example.
 
 menuconfig BR2_TARGET_UBOOT_ENVIMAGE
@@ -228,6 +253,20 @@ config BR2_TARGET_UBOOT_ENVIMAGE_SIZE
 	help
 	  Size of envronment, can be prefixed with 0x for hexadecimal
 	  values.
+
+config BR2_TARGET_UBOOT_ENVIMAGE_REDUNDANT
+	bool "Environment has two copies"
+	help
+	  Some platforms define in their U-Boot configuration that the
+	  U-Boot environment should be duplicated in two locations (for
+	  extra safety). Check your U-Boot configuration for the
+	  CONFIG_ENV_ADDR_REDUND and CONFIG_ENV_SIZE_REDUND settings to
+	  see if this is the case for your platform.
+
+	  If it is the case, then you should enable this option to
+	  ensure that the U-Boot environment image generated by
+	  Buildroot is compatible with the "redundant environment"
+	  mechanism of U-Boot.
 
 endif # BR2_TARGET_UBOOT_ENVIMAGE
 

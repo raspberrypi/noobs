@@ -1,27 +1,27 @@
-#############################################################
+################################################################################
 #
 # mtools
 #
-#############################################################
+################################################################################
 
-MTOOLS_VERSION       = 4.0.18
-MTOOLS_SOURCE        = mtools-$(MTOOLS_VERSION).tar.bz2
-MTOOLS_SITE          = $(BR2_GNU_MIRROR)/mtools/
-MTOOLS_LICENSE       = GPLv3+
+MTOOLS_VERSION = 4.0.18
+MTOOLS_SOURCE = mtools-$(MTOOLS_VERSION).tar.bz2
+MTOOLS_SITE = $(BR2_GNU_MIRROR)/mtools
+MTOOLS_LICENSE = GPLv3+
 MTOOLS_LICENSE_FILES = COPYING
-MTOOLS_LDFLAGS       = $(TARGET_LDFLAGS)
+MTOOLS_CONF_ENV = ac_cv_func_setpgrp_void=yes
+MTOOLS_CONF_OPTS = --without-x
 
-MTOOLS_CONF_OPT = --enable-xdf        \
-                  --enable-vold
-
-ifneq ($(BR2_ENABLE_LOCALE),y)
+# link with iconv if enabled
+ifeq ($(BR2_PACKAGE_LIBICONV),y)
 MTOOLS_DEPENDENCIES += libiconv
-MTOOLS_LDFLAGS += -liconv
+MTOOLS_CONF_ENV += LIBS=-liconv
+# We have no host dependencies
+HOST_MTOOLS_DEPENDENCIES =
 endif
 
-define MTOOLS_BUILD_CMDS
-  $(MAKE) CC="$(TARGET_CC)" LDFLAGS="$(MTOOLS_LDFLAGS)" -C $(@D)
-endef
+# Package does not build in parallel due to improper make rules
+MTOOLS_MAKE = $(MAKE1)
 
 define MTOOLS_INSTALL_TARGET_CMDS
   $(INSTALL) -m 0755 $(@D)/mlabel $(TARGET_DIR)/sbin/mlabel
@@ -30,3 +30,4 @@ define MTOOLS_INSTALL_TARGET_CMDS
 endef
 
 $(eval $(autotools-package))
+$(eval $(host-autotools-package))

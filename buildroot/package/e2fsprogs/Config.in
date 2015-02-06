@@ -3,6 +3,7 @@ config BR2_PACKAGE_E2FSPROGS
 	bool "e2fsprogs"
 	depends on BR2_LARGEFILE
 	depends on BR2_USE_WCHAR # util-linux
+	depends on BR2_USE_MMU # util-linux/libblkid
 	select BR2_PACKAGE_UTIL_LINUX
 	select BR2_PACKAGE_UTIL_LINUX_LIBBLKID
 	select BR2_PACKAGE_UTIL_LINUX_LIBUUID
@@ -49,6 +50,11 @@ config BR2_PACKAGE_E2FSPROGS_E2UNDO
 
 config BR2_PACKAGE_E2FSPROGS_E4DEFRAG
 	bool "e4defrag"
+	depends on !BR2_avr32 && !BR2_nios2 # fallocate not implemented
+	depends on !BR2_TOOLCHAIN_USES_UCLIBC # sync_file_range not impl
+
+comment "e4defrag needs an (e)glibc or musl toolchain"
+	depends on BR2_TOOLCHAIN_USES_UCLIBC
 
 config BR2_PACKAGE_E2FSPROGS_FILEFRAG
 	bool "filefrag"
@@ -78,7 +84,6 @@ config BR2_PACKAGE_E2FSPROGS_MKE2FS
 config BR2_PACKAGE_E2FSPROGS_MKLOSTFOUND
 	bool "mklost+found"
 	default y
-	depends on BR2_PACKAGE_E2FSPROGS
 
 config BR2_PACKAGE_E2FSPROGS_RESIZE2FS
 	bool "resize2fs"
@@ -94,5 +99,5 @@ config BR2_PACKAGE_E2FSPROGS_UUIDGEN
 
 endif
 
-comment "e2fsprogs requires a toolchain with LARGEFILE + WCHAR support"
+comment "e2fsprogs needs a toolchain w/ largefile, wchar"
 	depends on !(BR2_LARGEFILE && BR2_USE_WCHAR)

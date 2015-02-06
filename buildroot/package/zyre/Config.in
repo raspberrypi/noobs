@@ -1,17 +1,24 @@
 config BR2_PACKAGE_ZYRE
 	bool "zyre"
-	depends on BR2_INSTALL_LIBSTDCPP # filemq
-	depends on BR2_INET_IPV6 # filemq
-	depends on BR2_LARGEFILE # filemq
-	depends on BR2_USE_WCHAR # filemq
-	depends on BR2_TOOLCHAIN_HAS_THREADS # filemq
-	select BR2_PACKAGE_FILEMQ
+	depends on BR2_INSTALL_LIBSTDCPP # zeromq
+	depends on BR2_INET_IPV6 # zeromq
+	depends on BR2_LARGEFILE # zeromq
+	depends on BR2_USE_WCHAR # zeromq
+	depends on BR2_TOOLCHAIN_HAS_THREADS # zeromq
+	depends on BR2_USE_MMU # czmq
+	# uClibc toolchains provided by ADI don't have AI_ADDRCONFIG
+	# support, needed by czmq
+	depends on !BR2_TOOLCHAIN_EXTERNAL_BLACKFIN_UCLINUX_2012R2
+	select BR2_PACKAGE_CZMQ
+	select BR2_PACKAGE_ZEROMQ
 	help
 	  An open-source framework for proximity-based peer-to-peer
 	  applications.
 
 	  http://zyre.org
 
-comment "zyre requires a toolchain with C++, IPv6, LARGEFILE, WCHAR & thread support"
+comment "zyre needs a toolchain w/ C++, IPv6, largefile, wchar, threads"
+	depends on BR2_USE_MMU
+	depends on !BR2_TOOLCHAIN_EXTERNAL_BLACKFIN_UCLINUX_2012R2
 	depends on !(BR2_INSTALL_LIBSTDCPP && BR2_INET_IPV6 && BR2_LARGEFILE \
 		&& BR2_USE_WCHAR && BR2_TOOLCHAIN_HAS_THREADS)

@@ -1,15 +1,8 @@
 config BR2_PACKAGE_FLEX
 	bool "flex"
+	select BR2_PACKAGE_GETTEXT if BR2_NEEDS_GETTEXT_IF_LOCALE
 	help
 	  A fast lexical analyser generator.  A tool for generating
 	  programs that perform pattern-matching on text.
 
 	  http://flex.sourceforge.net/
-
-config BR2_PACKAGE_FLEX_BINARY
-	bool "Install tool in the target"
-	# needs fork()
-	depends on BR2_USE_MMU
-	depends on BR2_PACKAGE_FLEX
-	help
-	  Install the flex binary tool in the target filesystem.

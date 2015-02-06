@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 # A little script I whipped up to make it easy to
 # patch source trees and have sane error handling
 # -Erik
@@ -6,6 +6,8 @@
 # (c) 2002 Erik Andersen <andersen@codepoet.org>
 #
 # Parameters:
+# - "-s", optional. Silent operation, don't print anything if there
+# isn't any error.
 # - the build directory, optional, default value is '.'. The place where are
 # the package sources.
 # - the patch directory, optional, default '../kernel-patches'. The place
@@ -28,11 +30,21 @@
 # applied. The list of the patches applied is stored in '.applied_patches_list'
 # file in the build directory.
 
+silent=
+if [ "$1" = "-s" ] ; then
+    # add option to be used by the patch tool
+    silent=-s
+    shift
+fi
+
 # Set directories from arguments, or use defaults.
 builddir=${1-.}
 patchdir=${2-../kernel-patches}
 shift 2
 patchpattern=${@-*}
+
+# use a well defined sorting order
+export LC_COLLATE=C
 
 if [ ! -d "${builddir}" ] ; then
     echo "Aborting.  '${builddir}' is not a directory."
@@ -70,14 +82,20 @@ function apply_patch {
 	*.patch*)
 	type="patch"; uncomp="cat"; ;;
 	*)
-	echo "Unsupported format file for ${patch}, skip it";
-	return 0;
+	echo "Unsupported file type for ${path}/${patch}, skipping";
+	return 0
 	;;
     esac
-    echo ""
-    echo "Applying $patch using ${type}: "
-	echo $patch >> ${builddir}/.applied_patches_list
-    ${uncomp} "${path}/$patch" | patch -g0 -p1 -E -d "${builddir}"
+    if [ -z "$silent" ] ; then
+	echo ""
+	echo "Applying $patch using ${type}: "
+    fi
+    if [ ! -e "${path}/$patch" ] ; then
+	echo "Error: missing patch file ${path}/$patch"
+	exit 1
+    fi
+    echo $patch >> ${builddir}/.applied_patches_list
+    ${uncomp} "${path}/$patch" | patch -g0 -p1 -E -d "${builddir}" -t -N $silent
     if [ $? != 0 ] ; then
         echo "Patch failed!  Please fix ${patch}!"
 	exit 1
@@ -85,7 +103,7 @@ function apply_patch {
 }
 
 function scan_patchdir {
-    path=$1
+    local path=$1
     shift 1
     patches=${@-*}
 
@@ -93,7 +111,7 @@ function scan_patchdir {
     # to apply patches. Skip line starting with a dash.
     if [ -e "${path}/series" ] ; then
         for i in `grep -Ev "^#" ${path}/series 2> /dev/null` ; do
-            apply_patch "$path" "$i" || exit 1
+            apply_patch "$path" "$i"
         done
     else
         for i in `cd $path; ls -d $patches 2> /dev/null` ; do
@@ -106,7 +124,7 @@ function scan_patchdir {
                 tar -C "$unpackedarchivedir" -xaf "${path}/$i"
                 scan_patchdir "$unpackedarchivedir"
             else
-                apply_patch "$path" "$i" || exit 1
+                apply_patch "$path" "$i"
             fi
         done
     fi

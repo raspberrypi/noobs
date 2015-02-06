@@ -1,11 +1,11 @@
-#############################################################
+################################################################################
 #
 # gpsd
 #
-#############################################################
+################################################################################
 
-GPSD_VERSION = 3.8
-GPSD_SITE = http://download-mirror.savannah.gnu.org/releases/gpsd/
+GPSD_VERSION = 3.11
+GPSD_SITE = http://download-mirror.savannah.gnu.org/releases/gpsd
 GPSD_LICENSE = BSD-3c
 GPSD_LICENSE_FILES = COPYING
 GPSD_INSTALL_STAGING = YES
@@ -19,7 +19,6 @@ GPSD_SCONS_ENV = $(TARGET_CONFIGURE_OPTS)
 GPSD_SCONS_OPTS = \
 	arch=$(ARCH)\
 	prefix=/usr\
-	chrpath=no\
 	sysroot=$(STAGING_DIR)\
 	strip=no\
 	python=no
@@ -46,9 +45,9 @@ endif
 # Enable or disable Qt binding
 ifeq ($(BR2_PACKAGE_QT_NETWORK),y)
 	GPSD_SCONS_ENV += QMAKE="$(QT_QMAKE)"
-	GPSD_DEPENDENCIES += qt host-pkgconf
+	GPSD_DEPENDENCIES += qt
 else
-	GPSD_SCONS_OPTS += libQgpsmm=no
+	GPSD_SCONS_OPTS += qt=no
 endif
 
 # If libusb is available build it before so the package can use it
@@ -147,7 +146,7 @@ ifneq ($(BR2_PACKAGE_GPSD_TRUE_NORTH),y)
 	GPSD_SCONS_OPTS += tnt=no
 endif
 ifneq ($(BR2_PACKAGE_GPSD_UBX),y)
-	GPSD_SCONS_OPTS += ubx=no
+	GPSD_SCONS_OPTS += ublox=no
 endif
 
 # Features
@@ -207,10 +206,11 @@ define GPSD_INSTALL_TARGET_CMDS
 		$(SCONS) \
 		$(GPSD_SCONS_OPTS) \
 		install)
-	if [ ! -f $(TARGET_DIR)/etc/init.d/S50gpsd ]; then \
-		$(INSTALL) -m 0755 -D package/gpsd/S50gpsd $(TARGET_DIR)/etc/init.d/S50gpsd; \
-		$(SED) 's,^DEVICES=.*,DEVICES=$(BR2_PACKAGE_GPSD_DEVICES),' $(TARGET_DIR)/etc/init.d/S50gpsd; \
-	fi
+endef
+
+define GPSD_INSTALL_INIT_SYSV
+	$(INSTALL) -m 0755 -D package/gpsd/S50gpsd $(TARGET_DIR)/etc/init.d/S50gpsd
+	$(SED) 's,^DEVICES=.*,DEVICES=$(BR2_PACKAGE_GPSD_DEVICES),' $(TARGET_DIR)/etc/init.d/S50gpsd
 endef
 
 define GPSD_INSTALL_STAGING_CMDS
@@ -221,5 +221,18 @@ define GPSD_INSTALL_STAGING_CMDS
 		$(GPSD_SCONS_OPTS) \
 		install)
 endef
+
+ifeq ($(BR2_PACKAGE_HAS_UDEV),y)
+define GPSD_INSTALL_UDEV_RULES
+	(cd $(@D); \
+		$(GPSD_SCONS_ENV) \
+		DESTDIR=$(TARGET_DIR) \
+		$(SCONS) \
+		$(GPSD_SCONS_OPTS) \
+		udev-install)
+endef
+
+GPSD_POST_INSTALL_TARGET_HOOKS += GPSD_INSTALL_UDEV_RULES
+endif
 
 $(eval $(generic-package))

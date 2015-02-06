@@ -1,24 +1,33 @@
-#############################################################
+################################################################################
 #
-# PrBoom
+# prboom
 #
-#############################################################
+################################################################################
+
 PRBOOM_VERSION = 2.5.0
 PRBOOM_SITE = http://downloads.sourceforge.net/project/prboom/prboom%20stable/$(PRBOOM_VERSION)
 PRBOOM_CONF_ENV = ac_cv_type_uid_t=yes
 PRBOOM_DEPENDENCIES = sdl sdl_net sdl_mixer
+PRBOOM_LICENSE = GPLv2+
+PRBOOM_LICENSE_FILES = COPYING
 
 ifeq ($(BR2_PACKAGE_LIBPNG),y)
 PRBOOM_DEPENDENCIES += libpng
 endif
 
-PRBOOM_CONF_OPT = \
-		--oldincludedir=$(STAGING_DIR)/usr/include \
-		--with-sdl-prefix=$(STAGING_DIR)/usr \
-		--with-sdl-exec-prefix=$(STAGING_DIR)/usr \
-		--disable-cpu-opt \
-		--disable-sdltest \
-		--disable-gl
+ifeq ($(BR2_STATIC_LIBS),y)
+# SDL_mixer uses symbols from SDL, but ends up after it on the link
+# cmdline. Fix it by forcing the SDL libs at the very end
+PRBOOM_CONF_ENV += LIBS="$(shell $(STAGING_DIR)/usr/bin/sdl-config --static-libs)"
+endif
+
+PRBOOM_CONF_OPTS = \
+	--oldincludedir=$(STAGING_DIR)/usr/include \
+	--with-sdl-prefix=$(STAGING_DIR)/usr \
+	--with-sdl-exec-prefix=$(STAGING_DIR)/usr \
+	--disable-cpu-opt \
+	--disable-sdltest \
+	--disable-gl
 
 # endianness detection isn't used when cross compiling
 define PRBOOM_BIG_ENDIAN_FIXUP

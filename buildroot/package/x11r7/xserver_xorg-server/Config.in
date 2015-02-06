@@ -1,6 +1,7 @@
 config BR2_PACKAGE_XSERVER_XORG_SERVER
 	bool "xorg-server"
 	select BR2_PACKAGE_LIBDRM if BR2_PACKAGE_XSERVER_XORG_SERVER_MODULAR
+	select BR2_PACKAGE_LIBPCIACCESS if BR2_PACKAGE_XSERVER_XORG_SERVER_MODULAR
 	# We need a SHA1 implementation. If either openssl or
 	# libgcrypt are already part of the build, we'll use one of
 	# them, otherwise, use the small libsha1 library.
@@ -9,7 +10,6 @@ config BR2_PACKAGE_XSERVER_XORG_SERVER
 	select BR2_PACKAGE_XFONT_FONT_ALIAS if !BR2_PACKAGE_XSERVER_XORG_SERVER_BUILTIN_FONTS
 	select BR2_PACKAGE_XFONT_FONT_MISC_MISC if !BR2_PACKAGE_XSERVER_XORG_SERVER_BUILTIN_FONTS
 	select BR2_PACKAGE_XFONT_FONT_CURSOR_MISC if !BR2_PACKAGE_XSERVER_XORG_SERVER_BUILTIN_FONTS
-	select BR2_PACKAGE_XLIB_LIBPCIACCESS if BR2_PACKAGE_XSERVER_XORG_SERVER_MODULAR
 	select BR2_PACKAGE_XLIB_LIBX11
 	select BR2_PACKAGE_XLIB_LIBXAU
 	select BR2_PACKAGE_XLIB_LIBXCURSOR
@@ -36,6 +36,7 @@ config BR2_PACKAGE_XSERVER_XORG_SERVER
 	select BR2_PACKAGE_XPROTO_GLPROTO
 	select BR2_PACKAGE_XPROTO_INPUTPROTO
 	select BR2_PACKAGE_XPROTO_KBPROTO
+	select BR2_PACKAGE_XPROTO_PRESENTPROTO
 	select BR2_PACKAGE_XPROTO_RANDRPROTO
 	select BR2_PACKAGE_XPROTO_RENDERPROTO
 	select BR2_PACKAGE_XPROTO_RESOURCEPROTO
@@ -44,19 +45,19 @@ config BR2_PACKAGE_XSERVER_XORG_SERVER
 	select BR2_PACKAGE_XPROTO_XEXTPROTO
 	select BR2_PACKAGE_XPROTO_XF86BIGFONTPROTO
 	select BR2_PACKAGE_XPROTO_XF86DGAPROTO
-	select BR2_PACKAGE_XPROTO_XF86DRIPROTO if BR2_PACKAGE_MESA3D
 	select BR2_PACKAGE_XPROTO_XF86VIDMODEPROTO
 	select BR2_PACKAGE_XPROTO_XPROTO
 	select BR2_PACKAGE_XUTIL_UTIL_MACROS
 	select BR2_PACKAGE_XKEYBOARD_CONFIG
 	depends on !BR2_avr32
+	depends on BR2_USE_MMU # fork()
 	help
 	  X.Org X server
 
 	  http://xorg.freedesktop.org
 
 comment "xorg-xserver is BROKEN on AVR32"
-	depends on BR2_avr32
+	depends on BR2_avr32 && BR2_USE_MMU
 
 if BR2_PACKAGE_XSERVER_XORG_SERVER
 
@@ -75,7 +76,7 @@ config BR2_PACKAGE_XSERVER_XORG_SERVER_MODULAR
 	  input and graphics) are built separately from the X.org
 	  server (see the xdriver* packages).
 
-comment "Modular X.org requires largefile and C++ support"
+comment "Modular X.org needs a toolchain w/ largefile, C++"
 	depends on !(BR2_LARGEFILE && BR2_INSTALL_LIBSTDCPP)
 
 config BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE
@@ -89,15 +90,10 @@ config BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE
 
 endchoice
 
-config BR2_PACKAGE_XSERVER_XORG_SERVER_NULL_CURSOR
-    bool "Null root cursor"
-    help
-        Don't display root cursor.
-
 config BR2_PACKAGE_XSERVER_XORG_SERVER_AIGLX
-    bool "Enable AIGLX Extension"
-    help
-        Enable/Use AIGLX extension.
+	bool "Enable AIGLX Extension"
+	help
+	  Enable/Use AIGLX extension.
 
 if BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE
 
@@ -131,8 +127,8 @@ endif
 comment "Optional Servers"
 
 config BR2_PACKAGE_XSERVER_XORG_SERVER_XVFB
-    bool "Xvfb server"
-    help
-        Virtual frame buffer X server.
+	bool "Xvfb server"
+	help
+	  Virtual frame buffer X server.
 
 endif

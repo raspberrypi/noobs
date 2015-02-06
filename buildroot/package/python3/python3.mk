@@ -1,12 +1,22 @@
-#############################################################
+################################################################################
 #
 # python3
 #
-#############################################################
-PYTHON3_VERSION_MAJOR = 3.3
-PYTHON3_VERSION       = $(PYTHON3_VERSION_MAJOR).0
-PYTHON3_SOURCE        = Python-$(PYTHON3_VERSION).tar.bz2
-PYTHON3_SITE          = http://python.org/ftp/python/$(PYTHON3_VERSION)
+################################################################################
+
+PYTHON3_VERSION_MAJOR = 3.4
+PYTHON3_VERSION = $(PYTHON3_VERSION_MAJOR).2
+PYTHON3_SOURCE = Python-$(PYTHON3_VERSION).tar.xz
+PYTHON3_SITE = http://python.org/ftp/python/$(PYTHON3_VERSION)
+PYTHON3_LICENSE = Python software foundation license v2, others
+PYTHON3_LICENSE_FILES = LICENSE
+
+# Python itself doesn't use libtool, but it includes the source code
+# of libffi, which uses libtool. Unfortunately, it uses a beta version
+# of libtool for which we don't have a matching patch. However, this
+# is not a problem, because we don't use the libffi copy included in
+# the Python sources, but instead use an external libffi library.
+PYTHON3_LIBTOOL_PATCH = NO
 
 # Python needs itself and a "pgen" program to build itself, both being
 # provided in the Python sources. So in order to cross-compile Python,
@@ -14,7 +24,8 @@ PYTHON3_SITE          = http://python.org/ftp/python/$(PYTHON3_VERSION)
 # installed in $(HOST_DIR), as it is needed when cross-compiling
 # third-party Python modules.
 
-HOST_PYTHON3_CONF_OPT += 	\
+HOST_PYTHON3_CONF_OPTS += 	\
+	--without-ensurepip	\
 	--without-cxx-main 	\
 	--disable-sqlite3	\
 	--disable-tk		\
@@ -22,34 +33,19 @@ HOST_PYTHON3_CONF_OPT += 	\
 	--disable-curses	\
 	--disable-codecs-cjk	\
 	--disable-nis		\
-	--disable-unicodedata	\
-	--disable-dbm		\
-	--disable-gdbm		\
-	--disable-bsddb		\
+	--enable-unicodedata	\
 	--disable-test-modules	\
-	--disable-bz2		\
-	--disable-ssl
+	--disable-idle3		\
+	--disable-ossaudiodev	\
+	--disable-pyo-build
 
-HOST_PYTHON3_MAKE_ENV = \
-	PYTHON_MODULES_INCLUDE=$(HOST_DIR)/usr/include \
-	PYTHON_MODULES_LIB="$(HOST_DIR)/lib $(HOST_DIR)/usr/lib"
+# Make sure that LD_LIBRARY_PATH overrides -rpath.
+# This is needed because libpython may be installed at the same time that
+# python is called.
+HOST_PYTHON3_CONF_ENV += \
+	LDFLAGS="$(HOST_LDFLAGS) -Wl,--enable-new-dtags"
 
-HOST_PYTHON3_AUTORECONF = YES
-
-define HOST_PYTHON3_CONFIGURE_CMDS
-	(cd $(@D) && rm -rf config.cache; \
-	        $(HOST_CONFIGURE_OPTS) \
-		CFLAGS="$(HOST_CFLAGS)" \
-		LDFLAGS="$(HOST_LDFLAGS)" \
-                $(HOST_PYTHON3_CONF_ENV) \
-		./configure \
-		--prefix="$(HOST_DIR)/usr" \
-		--sysconfdir="$(HOST_DIR)/etc" \
-		$(HOST_PYTHON3_CONF_OPT) \
-	)
-endef
-
-PYTHON3_DEPENDENCIES  = host-python3 libffi
+PYTHON3_DEPENDENCIES = host-python3 libffi
 
 HOST_PYTHON3_DEPENDENCIES = host-expat host-zlib
 
@@ -61,94 +57,127 @@ endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3_CURSES),y)
 PYTHON3_DEPENDENCIES += ncurses
+else
+PYTHON3_CONF_OPTS += --disable-curses
+endif
+
+ifeq ($(BR2_PACKAGE_PYTHON3_DECIMAL),y)
+PYTHON3_DEPENDENCIES += mpdecimal
+PYTHON3_CONF_OPTS += --with-libmpdec=system
+else
+PYTHON3_CONF_OPTS += --with-libmpdec=none
 endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3_PYEXPAT),y)
 PYTHON3_DEPENDENCIES += expat
-PYTHON3_CONF_OPT += --with-expat=system
+PYTHON3_CONF_OPTS += --with-expat=system
 else
-PYTHON3_CONF_OPT += --with-expat=none
+PYTHON3_CONF_OPTS += --with-expat=none
 endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3_PYC_ONLY),y)
-PYTHON3_CONF_OPT += --enable-old-stdlib-cache
+PYTHON3_CONF_OPTS += --enable-old-stdlib-cache
+endif
+
+ifeq ($(BR2_PACKAGE_PYTHON3_PY_ONLY),y)
+PYTHON3_CONF_OPTS += --disable-pyc-build
 endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3_SQLITE),y)
 PYTHON3_DEPENDENCIES += sqlite
+else
+PYTHON3_CONF_OPTS += --disable-sqlite3
 endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3_SSL),y)
-PYTHON_DEPENDENCIES += openssl
+PYTHON3_DEPENDENCIES += openssl
+endif
+
+ifneq ($(BR2_PACKAGE_PYTHON3_CODECSCJK),y)
+PYTHON3_CONF_OPTS += --disable-codecs-cjk
+endif
+
+ifneq ($(BR2_PACKAGE_PYTHON3_UNICODEDATA),y)
+PYTHON3_CONF_OPTS += --disable-unicodedata
 endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3_BZIP2),y)
-PYTHON_DEPENDENCIES += bzip2
+PYTHON3_DEPENDENCIES += bzip2
 endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3_ZLIB),y)
 PYTHON3_DEPENDENCIES += zlib
 endif
 
+ifeq ($(BR2_PACKAGE_PYTHON3_OSSAUDIODEV),y)
+PYTHON3_CONF_OPTS += --enable-ossaudiodev
+else
+PYTHON3_CONF_OPTS += --disable-ossaudiodev
+endif
+
 PYTHON3_CONF_ENV += \
-	_PROJECT_BASE=$(PYTHON3_DIR) \
-	_PYTHON_HOST_PLATFORM=$(BR2_HOSTARCH) \
-	PYTHON_FOR_BUILD=$(HOST_PYTHON3_DIR)/python \
-	PGEN_FOR_BUILD=$(HOST_PYTHON3_DIR)/Parser/pgen \
 	ac_cv_have_long_long_format=yes \
 	ac_cv_file__dev_ptmx=yes \
 	ac_cv_file__dev_ptc=yes \
+	ac_cv_working_tzset=yes
 
-PYTHON3_CONF_OPT += \
+# uClibc is known to have a broken wcsftime() implementation, so tell
+# Python 3 to fall back to strftime() instead.
+ifeq ($(BR2_TOOLCHAIN_USES_UCLIBC),y)
+PYTHON3_CONF_ENV += ac_cv_func_wcsftime=no
+endif
+
+PYTHON3_CONF_OPTS += \
+	--without-ensurepip	\
 	--without-cxx-main 	\
 	--with-system-ffi	\
 	--disable-pydoc		\
 	--disable-test-modules	\
 	--disable-lib2to3	\
-	--disable-gdbm		\
 	--disable-tk		\
 	--disable-nis		\
-	--disable-dbm
+	--disable-idle3		\
+	--disable-pyo-build
 
-PYTHON3_MAKE_ENV = \
-	_PROJECT_BASE=$(PYTHON3_DIR) \
-	_PYTHON_HOST_PLATFORM=$(BR2_HOSTARCH) \
-	PYTHON_MODULES_INCLUDE=$(STAGING_DIR)/usr/include \
-	PYTHON_MODULES_LIB="$(STAGING_DIR)/lib $(STAGING_DIR)/usr/lib"
+# This is needed to make sure the Python build process doesn't try to
+# regenerate those files with the pgen program. Otherwise, it builds
+# pgen for the target, and tries to run it on the host.
 
-# python distutils adds -L$LIBDIR when linking binary extensions, causing
-# trouble for cross compilation
-define PYTHON3_FIXUP_LIBDIR
-	$(SED) 's|^LIBDIR=.*|LIBDIR= $(STAGING_DIR)/usr/lib|' \
-	   $(STAGING_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/config-3.3m/Makefile
+define PYTHON3_TOUCH_GRAMMAR_FILES
+	touch $(@D)/Include/graminit.h $(@D)/Python/graminit.c
 endef
 
-PYTHON3_POST_INSTALL_STAGING_HOOKS += PYTHON3_FIXUP_LIBDIR
-
-#
-# Development files removal
-#
-define PYTHON3_REMOVE_DEVFILES
-	rm -f $(TARGET_DIR)/usr/bin/python$(PYTHON3_VERSION_MAJOR)-config
-	rm -f $(TARGET_DIR)/usr/bin/python3-config
-endef
-
-ifneq ($(BR2_HAVE_DEVFILES),y)
-PYTHON3_POST_INSTALL_TARGET_HOOKS += PYTHON3_REMOVE_DEVFILES
-endif
+PYTHON3_POST_PATCH_HOOKS += PYTHON3_TOUCH_GRAMMAR_FILES
 
 #
 # Remove useless files. In the config/ directory, only the Makefile
 # and the pyconfig.h files are needed at runtime.
 #
 define PYTHON3_REMOVE_USELESS_FILES
-	for i in `find $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/config-3.3m/ \
+	rm -f $(TARGET_DIR)/usr/bin/python$(PYTHON3_VERSION_MAJOR)-config
+	rm -f $(TARGET_DIR)/usr/bin/python$(PYTHON3_VERSION_MAJOR)m-config
+	rm -f $(TARGET_DIR)/usr/bin/python3-config
+	rm -f $(TARGET_DIR)/usr/bin/smtpd.py.3
+	for i in `find $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/config-$(PYTHON3_VERSION_MAJOR)m/ \
 		-type f -not -name pyconfig.h -a -not -name Makefile` ; do \
 		rm -f $$i ; \
 	done
+	rm -rf $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/__pycache__/
+	rm -rf $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/lib-dynload/sysconfigdata/__pycache__
+	rm -rf $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/collections/__pycache__
+	rm -rf $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/importlib/__pycache__
 endef
 
 PYTHON3_POST_INSTALL_TARGET_HOOKS += PYTHON3_REMOVE_USELESS_FILES
+
+#
+# Make sure libpython gets stripped out on target
+#
+define PYTHON3_ENSURE_LIBPYTHON_STRIPPED
+	chmod u+w $(TARGET_DIR)/usr/lib/libpython$(PYTHON3_VERSION_MAJOR)*.so
+endef
+
+PYTHON3_POST_INSTALL_TARGET_HOOKS += PYTHON3_ENSURE_LIBPYTHON_STRIPPED
 
 PYTHON3_AUTORECONF = YES
 
@@ -160,26 +189,35 @@ ifneq ($(BR2_PACKAGE_PYTHON),y)
 PYTHON3_POST_INSTALL_TARGET_HOOKS += PYTHON3_INSTALL_SYMLINK
 endif
 
-ifeq ($(BR2_PACKAGE_PYTHON3_PY_ONLY),y)
-define PYTHON3_REMOVE_MODULES_FILES
-	for i in `find $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR) \
-		 -name __pycache__` ; do \
-		rm -rf $$i ; \
-	done
+# Some packages may have build scripts requiring python3, whatever is the
+# python version chosen for the target.
+# Only install the python symlink in the host tree if python3 is enabled
+# for the target.
+ifeq ($(BR2_PACKAGE_PYTHON3),y)
+define HOST_PYTHON3_INSTALL_SYMLINK
+	ln -fs python3 $(HOST_DIR)/usr/bin/python
+	ln -fs python3-config $(HOST_DIR)/usr/bin/python-config
 endef
+
+HOST_PYTHON3_POST_INSTALL_HOOKS += HOST_PYTHON3_INSTALL_SYMLINK
 endif
 
-ifeq ($(BR2_PACKAGE_PYTHON3_PYC_ONLY),y)
-define PYTHON3_REMOVE_MODULES_FILES
-	for i in `find $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR) \
-		 -name *.py` ; do \
-		rm -f $$i ; \
-	done
-endef
-endif
-
-PYTHON3_POST_INSTALL_TARGET_HOOKS += PYTHON3_REMOVE_MODULES_FILES
-
+# Provided to other packages
+PYTHON3_PATH = $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/sysconfigdata/:$(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/site-packages/
 
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))
+
+ifeq ($(BR2_PACKAGE_PYTHON3_PYC_ONLY),y)
+define PYTHON3_FINALIZE_TARGET
+	find $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR) -name '*.py' -print0 | xargs -0 rm -f
+endef
+endif
+
+ifeq ($(BR2_PACKAGE_PYTHON3_PY_ONLY),y)
+define PYTHON3_FINALIZE_TARGET
+	find $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR) -name '*.pyc' -print0 | xargs -0 rm -f
+endef
+endif
+
+TARGET_FINALIZE_HOOKS += PYTHON3_FINALIZE_TARGET

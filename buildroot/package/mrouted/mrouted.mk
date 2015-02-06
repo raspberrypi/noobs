@@ -1,13 +1,20 @@
-#############################################################
+################################################################################
 #
 # mrouted
 #
-#############################################################
+################################################################################
 
-MROUTED_VERSION = 3.9.6
-MROUTED_SOURCE = mrouted-$(MROUTED_VERSION).tar.bz2
-MROUTED_SITE = http://cloud.github.com/downloads/troglobit/mrouted
+MROUTED_VERSION = 3.9.7
+MROUTED_SITE = $(call github,troglobit,mrouted,$(MROUTED_VERSION))
 MROUTED_DEPENDENCIES = host-bison
+MROUTED_LICENSE = BSD-3c
+MROUTED_LICENSE_FILES = LICENSE
+
+define MROUTED_CONFIGURE_CMDS
+	(cd $(@D); \
+		$(TARGET_MAKE_ENV) $(@D)/configure --enable-rsrr \
+	)
+endef
 
 define MROUTED_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)
@@ -15,14 +22,6 @@ endef
 
 define MROUTED_INSTALL_TARGET_CMDS
 	$(MAKE) prefix=/usr DESTDIR=$(TARGET_DIR) -C $(@D) install
-endef
-
-define MROUTED_UNINSTALL_TARGET_CMDS
-	$(MAKE) prefix=/usr DESTDIR=$(TARGET_DIR) -C $(@D) uninstall
-endef
-
-define MROUTED_CLEAN_CMDS
-	$(MAKE) -C $(@D) clean
 endef
 
 $(eval $(generic-package))

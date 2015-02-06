@@ -1,16 +1,23 @@
-#############################################################
+################################################################################
 #
-# mtd provides jffs2 utilities
+# mtd
 #
-#############################################################
-MTD_VERSION = 1.5.0
+################################################################################
+
+MTD_VERSION = 1.5.1
 MTD_SOURCE = mtd-utils-$(MTD_VERSION).tar.bz2
 MTD_SITE = ftp://ftp.infradead.org/pub/mtd-utils
 MTD_LICENSE = GPLv2
 MTD_LICENSE_FILES = COPYING
 
+MTD_INSTALL_STAGING = YES
+
 ifeq ($(BR2_PACKAGE_MTD_MKFSJFFS2),y)
 MTD_DEPENDENCIES = zlib lzo
+endif
+
+ifeq ($(BR2_PACKAGE_MTD_MKFSUBIFS),y)
+MTD_DEPENDENCIES += util-linux zlib lzo
 endif
 
 ifeq ($(BR2_PACKAGE_BUSYBOX),y)
@@ -31,6 +38,7 @@ endef
 MKFS_JFFS2 = $(HOST_DIR)/usr/sbin/mkfs.jffs2
 SUMTOOL = $(HOST_DIR)/usr/sbin/sumtool
 
+MTD_STAGING_y = lib/libmtd.a ubi-utils/libubi.a
 MTD_TARGETS_$(BR2_PACKAGE_MTD_DOCFDISK)		+= docfdisk
 MTD_TARGETS_$(BR2_PACKAGE_MTD_DOC_LOADBIOS)	+= doc_loadbios
 MTD_TARGETS_$(BR2_PACKAGE_MTD_FLASHCP)		+= flashcp
@@ -69,24 +77,27 @@ MTD_TARGETS_UBI_$(BR2_PACKAGE_MTD_UBIRENAME)	+= ubirename
 MTD_TARGETS_UBI_$(BR2_PACKAGE_MTD_UBIRMVOL)	+= ubirmvol
 MTD_TARGETS_UBI_$(BR2_PACKAGE_MTD_UBIRSVOL)	+= ubirsvol
 MTD_TARGETS_UBI_$(BR2_PACKAGE_MTD_UBIUPDATEVOL)	+= ubiupdatevol
+MTD_TARGETS_UBI_$(BR2_PACKAGE_MTD_UBIBLOCK)	+= ubiblock
 
 MTD_TARGETS_y += $(addprefix ubi-utils/,$(MTD_TARGETS_UBI_y))
-
-# only call make if atleast a single tool is enabled
-ifneq ($(MTD_TARGETS_y),)
+MTD_TARGETS_$(BR2_PACKAGE_MTD_MKFSUBIFS) += mkfs.ubifs/mkfs.ubifs
 
 define MTD_BUILD_CMDS
 	$(TARGET_CONFIGURE_OPTS) $(MAKE1) CROSS=$(TARGET_CROSS) \
 		BUILDDIR=$(@D) WITHOUT_XATTR=1 WITHOUT_LARGEFILE=1 -C $(@D) \
-		$(addprefix $(@D)/,$(MTD_TARGETS_y))
+		$(addprefix $(@D)/,$(MTD_TARGETS_y)) \
+		$(addprefix $(@D)/,$(MTD_STAGING_y))
 endef
 
-endif
+define MTD_INSTALL_STAGING_CMDS
+	$(INSTALL) -D -m 0755 $(@D)/lib/libmtd.a $(STAGING_DIR)/usr/lib/libmtd.a
+	$(INSTALL) -D -m 0755 $(@D)/ubi-utils/libubi.a $(STAGING_DIR)/usr/lib/libubi.a
+endef
 
 define MTD_INSTALL_TARGET_CMDS
- for f in $(MTD_TARGETS_y) ; do \
-  install -D -m 0755 $(@D)/$$f $(TARGET_DIR)/usr/sbin/$${f##*/} ; \
- done
+	for f in $(MTD_TARGETS_y) ; do \
+		$(INSTALL) -D -m 0755 $(@D)/$$f $(TARGET_DIR)/usr/sbin/$${f##*/} ; \
+	done
 endef
 
 $(eval $(generic-package))

@@ -1,10 +1,10 @@
-#############################################################
+################################################################################
 #
 # wpa_supplicant
 #
-#############################################################
+################################################################################
 
-WPA_SUPPLICANT_VERSION = 2.0
+WPA_SUPPLICANT_VERSION = 2.3
 WPA_SUPPLICANT_SITE = http://hostap.epitest.fi/releases
 WPA_SUPPLICANT_LICENSE = GPLv2/BSD-3c
 WPA_SUPPLICANT_LICENSE_FILES = README
@@ -15,63 +15,62 @@ WPA_SUPPLICANT_DBUS_NEW_SERVICE = fi.w1.wpa_supplicant1
 WPA_SUPPLICANT_CFLAGS = $(TARGET_CFLAGS) -I$(STAGING_DIR)/usr/include/libnl3/
 WPA_SUPPLICANT_LDFLAGS = $(TARGET_LDFLAGS)
 
+WPA_SUPPLICANT_CONFIG_EDITS =
+
+WPA_SUPPLICANT_CONFIG_SET =
+
+WPA_SUPPLICANT_CONFIG_ENABLE = \
+	CONFIG_IEEE80211AC	\
+	CONFIG_IEEE80211N	\
+	CONFIG_IEEE80211R	\
+	CONFIG_INTERNAL_LIBTOMMATH
+
+WPA_SUPPLICANT_CONFIG_DISABLE = \
+	CONFIG_SMARTCARD
+
+# libnl-3 needs -lm (for rint) and -lpthread if linking statically
+# And library order matters hence stick -lnl-3 first since it's appended
+# in the wpa_supplicant Makefiles as in LIBS+=-lnl-3 ... thus failing
 ifeq ($(BR2_PACKAGE_LIBNL),y)
-	WPA_SUPPLICANT_DEPENDENCIES += libnl
-define WPA_SUPPLICANT_LIBNL_CONFIG
-	echo 'CONFIG_LIBNL32=y' >>$(WPA_SUPPLICANT_CONFIG)
-endef
+ifeq ($(BR2_STATIC_LIBS),y)
+	WPA_SUPPLICANT_LIBS += -lnl-3 -lm -lpthread
+endif
+	WPA_SUPPLICANT_DEPENDENCIES += host-pkgconf libnl
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_LIBNL32
 else
-define WPA_SUPPLICANT_LIBNL_CONFIG
-	$(SED) 's/^\(CONFIG_DRIVER_NL80211.*\)/#\1/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_DISABLE += CONFIG_DRIVER_NL80211
 endif
 
+# Trailing underscore on purpose to not enable CONFIG_EAPOL_TEST
 ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_EAP),y)
-define WPA_SUPPLICANT_EAP_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_EAP_AKA.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_FAST.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_GPSK.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_IKEV2.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_PAX.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_PSK.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_SAKE.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_SIM.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_TNC.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_TLSV1.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_EAP_
 else
-define WPA_SUPPLICANT_EAP_CONFIG
-	$(SED) 's/^\(CONFIG_EAP.*\)/#\1/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_DISABLE += CONFIG_EAP
+endif
+
+ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_HOTSPOT),y)
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_HS20 \
+		CONFIG_INTERWORKING
 endif
 
 ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_AP_SUPPORT),y)
-define WPA_SUPPLICANT_AP_CONFIG
-	echo 'CONFIG_AP=y' >>$(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_ENABLE += \
+		CONFIG_AP \
+		CONFIG_P2P
 endif
 
 ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_WPS),y)
-define WPA_SUPPLICANT_WPS_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_WPS.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_WPS
 endif
-
-define WPA_SUPPLICANT_LIBTOMMATH_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_INTERNAL_LIBTOMMATH.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-endef
 
 # Try to use openssl if it's already available
 ifeq ($(BR2_PACKAGE_OPENSSL),y)
 	WPA_SUPPLICANT_DEPENDENCIES += openssl
-define WPA_SUPPLICANT_TLS_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_TLS=openssl\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_EAP_PWD.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_LIBS += $(if $(BR2_STATIC_LIBS),-lcrypto -lz)
+	WPA_SUPPLICANT_CONFIG_EDITS += 's/\#\(CONFIG_TLS=openssl\)/\1/'
 else
-define WPA_SUPPLICANT_TLS_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_TLS=\).*/\2internal/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_DISABLE += CONFIG_EAP_PWD
+	WPA_SUPPLICANT_CONFIG_EDITS += 's/\#\(CONFIG_TLS=\).*/\1internal/'
 endif
 
 ifeq ($(BR2_PACKAGE_DBUS),y)
@@ -81,63 +80,53 @@ ifeq ($(BR2_PACKAGE_DBUS),y)
 		PKG_CONFIG_PATH="$(STAGING_DIR)/usr/lib/pkgconfig"
 
 ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_DBUS_OLD),y)
-define WPA_SUPPLICANT_DBUS_OLD_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_CTRL_IFACE_DBUS=\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_CTRL_IFACE_DBUS=
 define WPA_SUPPLICANT_INSTALL_DBUS_OLD
-	$(INSTALL) -D \
-	  $(@D)/wpa_supplicant/dbus/$(WPA_SUPPLICANT_DBUS_OLD_SERVICE).service \
-	  $(TARGET_DIR)/usr/share/dbus-1/system-services/$(WPA_SUPPLICANT_DBUS_OLD_SERVICE).service
+	$(INSTALL) -m 0644 -D \
+		$(@D)/wpa_supplicant/dbus/$(WPA_SUPPLICANT_DBUS_OLD_SERVICE).service \
+		$(TARGET_DIR)/usr/share/dbus-1/system-services/$(WPA_SUPPLICANT_DBUS_OLD_SERVICE).service
 endef
 endif
 
 ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_DBUS_NEW),y)
-define WPA_SUPPLICANT_DBUS_NEW_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_CTRL_IFACE_DBUS_NEW=\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_CTRL_IFACE_DBUS_NEW
 define WPA_SUPPLICANT_INSTALL_DBUS_NEW
-	$(INSTALL) -D \
-	  $(@D)/wpa_supplicant/dbus/$(WPA_SUPPLICANT_DBUS_NEW_SERVICE).service \
-	  $(TARGET_DIR)/usr/share/dbus-1/system-services/$(WPA_SUPPLICANT_DBUS_NEW_SERVICE).service
+	$(INSTALL) -m 0644 -D \
+		$(@D)/wpa_supplicant/dbus/$(WPA_SUPPLICANT_DBUS_NEW_SERVICE).service \
+		$(TARGET_DIR)/usr/share/dbus-1/system-services/$(WPA_SUPPLICANT_DBUS_NEW_SERVICE).service
 endef
 endif
 
 ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_DBUS_INTROSPECTION),y)
-define WPA_SUPPLICANT_DBUS_INTROSPECTION_CONFIG
-	$(SED) 's/\(#\)\(CONFIG_CTRL_IFACE_DBUS_INTRO=\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-endef
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_CTRL_IFACE_DBUS_INTRO
 endif
 
-define WPA_SUPPLICANT_DBUS_CONFIG
-	$(WPA_SUPPLICANT_DBUS_OLD_CONFIG)
-	$(WPA_SUPPLICANT_DBUS_NEW_CONFIG)
-	$(WPA_SUPPLICANT_DBUS_INTROSPECTION_CONFIG)
-endef
+endif
 
+ifeq ($(BR2_PACKAGE_WPA_SUPPLICANT_DEBUG_SYSLOG),y)
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_DEBUG_SYSLOG
+endif
+
+ifeq ($(BR2_PACKAGE_READLINE),y)
+	WPA_SUPPLICANT_DEPENDENCIES += readline
+	WPA_SUPPLICANT_CONFIG_ENABLE += CONFIG_READLINE
 endif
 
 define WPA_SUPPLICANT_CONFIGURE_CMDS
 	cp $(@D)/wpa_supplicant/defconfig $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_HS20.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_IEEE80211N.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_IEEE80211R.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_IEEE80211W.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_INTERWORKING.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(#\)\(CONFIG_DELAYED_MIC.*\)/\2/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(CONFIG_DRIVER_ATMEL\)/#\1/' $(WPA_SUPPLICANT_CONFIG)
-	$(SED) 's/\(CONFIG_SMARTCARD\)/#\1/' $(WPA_SUPPLICANT_CONFIG)
-	$(WPA_SUPPLICANT_LIBTOMMATH_CONFIG)
-	$(WPA_SUPPLICANT_TLS_CONFIG)
-	$(WPA_SUPPLICANT_EAP_CONFIG)
-	$(WPA_SUPPLICANT_WPS_CONFIG)
-	$(WPA_SUPPLICANT_LIBNL_CONFIG)
-	$(WPA_SUPPLICANT_DBUS_CONFIG)
-	$(WPA_SUPPLICANT_AP_CONFIG)
+	sed -i $(patsubst %,-e 's/^#\(%\)/\1/',$(WPA_SUPPLICANT_CONFIG_ENABLE)) \
+		$(patsubst %,-e 's/^\(%\)/#\1/',$(WPA_SUPPLICANT_CONFIG_DISABLE)) \
+		$(patsubst %,-e '1i%=y',$(WPA_SUPPLICANT_CONFIG_SET)) \
+		$(patsubst %,-e %,$(WPA_SUPPLICANT_CONFIG_EDITS)) \
+		$(WPA_SUPPLICANT_CONFIG)
 endef
 
+# LIBS for wpa_supplicant, LIBS_c for wpa_cli, LIBS_p for wpa_passphrase
 define WPA_SUPPLICANT_BUILD_CMDS
 	$(TARGET_MAKE_ENV) CFLAGS="$(WPA_SUPPLICANT_CFLAGS)" \
-		LDFLAGS="$(TARGET_LDFLAGS)" \
+		LDFLAGS="$(TARGET_LDFLAGS)" BINDIR=/usr/sbin \
+		LIBS="$(WPA_SUPPLICANT_LIBS)" LIBS_c="$(WPA_SUPPLICANT_LIBS)" \
+		LIBS_p="$(WPA_SUPPLICANT_LIBS)" \
 		$(MAKE) CC="$(TARGET_CC)" -C $(@D)/$(WPA_SUPPLICANT_SUBDIR)
 endef
 
@@ -157,9 +146,9 @@ endif
 
 ifeq ($(BR2_PACKAGE_DBUS),y)
 define WPA_SUPPLICANT_INSTALL_DBUS
-	$(INSTALL) -D \
-	  $(@D)/wpa_supplicant/dbus/dbus-wpa_supplicant.conf \
-	  $(TARGET_DIR)/etc/dbus-1/system.d/wpa_supplicant.conf
+	$(INSTALL) -m 0644 -D \
+		$(@D)/wpa_supplicant/dbus/dbus-wpa_supplicant.conf \
+		$(TARGET_DIR)/etc/dbus-1/system.d/wpa_supplicant.conf
 	$(WPA_SUPPLICANT_INSTALL_DBUS_OLD)
 	$(WPA_SUPPLICANT_INSTALL_DBUS_NEW)
 endef

@@ -1,12 +1,14 @@
-#############################################################
+################################################################################
 #
 # Build the squashfs root filesystem image
 #
-#############################################################
+################################################################################
 
-ifeq ($(BR2_TARGET_ROOTFS_SQUASHFS4),y)
 ROOTFS_SQUASHFS_DEPENDENCIES = host-squashfs
 
+ifeq ($(BR2_TARGET_ROOTFS_SQUASHFS4_LZ4),y)
+ROOTFS_SQUASHFS_ARGS += -comp lz4
+else
 ifeq ($(BR2_TARGET_ROOTFS_SQUASHFS4_LZO),y)
 ROOTFS_SQUASHFS_ARGS += -comp lzo
 else
@@ -20,16 +22,6 @@ ROOTFS_SQUASHFS_ARGS += -comp gzip
 endif
 endif
 endif
-
-else
-ROOTFS_SQUASHFS_DEPENDENCIES = host-squashfs3
-
-ifeq ($(BR2_ENDIAN),"BIG")
-ROOTFS_SQUASHFS_ARGS=-be
-else
-ROOTFS_SQUASHFS_ARGS=-le
-endif
-
 endif
 
 define ROOTFS_SQUASHFS_CMD

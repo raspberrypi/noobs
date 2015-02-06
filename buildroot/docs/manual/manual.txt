@@ -1,38 +1,69 @@
 // -*- mode:doc; -*-
 // vim: set syntax=asciidoc:
 
-The Buildroot user manual
-=========================
+= The Buildroot user manual
 :toc:
 
-Buildroot usage and documentation by Thomas Petazzoni. Contributions
-from Karsten Kruse, Ned Ludd, Martin Herren and others.
+Buildroot {sys:echo $\{BR2_VERSION%%-git*\}} manual generated on {localdate}
+{localtime} from git revision {sys:git rev-parse --short HEAD}
 
-Buildroot {sys:echo $\{BR2_VERSION%%-git*\}} manual generated on {docdate}
-{doctime} from git revision {sys:git rev-parse --short HEAD}
+The Buildroot manual is written by the Buildroot developers.
+It is licensed under the GNU General Public License, version 2. Refer to the
+http://git.buildroot.org/buildroot/tree/COPYING[COPYING] file in the Buildroot
+sources for the full text of this license.
+
+Copyright (C) 2004-2014 The Buildroot developers
 
 image::logo.png[]
 
-:leveloffset: 1
+= Getting started
 
 include::introduction.txt[]
 
-include::starting-up.txt[]
+include::prerequisite.txt[]
 
-include::working-with.txt[]
+include::getting.txt[]
+
+include::quickstart.txt[]
+
+include::resources.txt[]
+
+= User guide
+
+include::configure.txt[]
+
+include::configure-other-components.txt[]
+
+include::common-usage.txt[]
+
+include::customize.txt[]
 
 include::faq-troubleshooting.txt[]
 
-include::going-further.txt[]
-
-include::developer-guide.txt[]
+include::known-issues.txt[]
 
 include::legal-notice.txt[]
 
 include::beyond-buildroot.txt[]
 
-include::get-involved.txt[]
+= Developer guide
+
+include::how-buildroot-works.txt[]
+
+include::writing-rules.txt[]
+
+include::adding-board-support.txt[]
+
+include::adding-packages.txt[]
+
+include::patch-policy.txt[]
+
+include::download-infra.txt[]
+
+include::debugging-buildroot.txt[]
 
 include::contribute.txt[]
+
+= Appendix
 
 include::appendix.txt[]

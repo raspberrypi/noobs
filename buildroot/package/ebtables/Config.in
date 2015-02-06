@@ -7,5 +7,6 @@ config BR2_PACKAGE_EBTABLES
 
 	  http://ebtables.sourceforge.net
 
-comment "ebtables requires a toolchain with IPv6 support"
+comment "ebtables needs a toolchain w/ IPv6"
+	depends on BR2_USE_MMU
 	depends on !BR2_INET_IPV6

@@ -18,9 +18,9 @@ config BR2_PACKAGE_RECOVERY
     #    bootselectiondialog.cpp: mount, sh, tvservice, cut
     #    mainwindow.cpp: umount, mount, mkfs.ext4, sh, tvservice, cut, echo, sleep, arora, ifconfig, ifup, tar
     #    languagedialog.cpp: mount
-    #    initdrivethread.cpp: parted, sfdisk, partprobe, mlabel, cp, rm, du, mount, umount, mkdosfs, mkfs.ext4, dd
+    #    initdrivethread.cpp: parted, sfdisk, partprobe, mlabel, cp, rm, du, mount, umount, mkfs.fat, mkfs.ext4, dd
     #    confeditdialog.cpp: mount, umount
-    #    multiimagewritethread.cpp: mount, umount, sh, partprobe, mkdosfs, mkfs.ext4, findfs, sh, wget, gzip, xz, bzip2, lzop, unzip, tar, dd, blkid
+    #    multiimagewritethread.cpp: mount, umount, sh, partprobe, mkfs.fat, mkfs.ext4, findfs, sh, wget, gzip, xz, bzip2, lzop, unzip, tar, dd, blkid
     #
     # busybox provides: mount, hostname, echo, getty, grep, ifup, sh, cat, umount, ifdown, mknod, cut, sleep, ifconfig, tar, cp, rm, du, dd, gzip, xz, bzip2, lzop, unzip
     select BR2_PACKAGE_RPI_USERLAND # vcgencmd, tvservice
@@ -31,7 +31,7 @@ config BR2_PACKAGE_RECOVERY
     select BR2_PACKAGE_UTIL_LINUX # sfdisk, findfs, blkid
     select BR2_PACKAGE_MTOOLS # mlabel
     select BR2_PACKAGE_DOSFSTOOLS
-    select BR2_PACKAGE_DOSFSTOOLS_MKDOSFS # mkdosfs
+    select BR2_PACKAGE_DOSFSTOOLS_MKFS_FAT # mkfs.fat
     select BR2_PACKAGE_WGET # wget
         help
           recovery GUI 

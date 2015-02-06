@@ -1,17 +1,17 @@
-#############################################################
+################################################################################
 #
 # hplip
 #
-#############################################################
+################################################################################
 
-HPLIP_VERSION = 3.13.3
+HPLIP_VERSION = 3.13.10
 HPLIP_SITE = http://downloads.sourceforge.net/hplip/hplip
 HPLIP_AUTORECONF = YES
 HPLIP_DEPENDENCIES = cups libusb jpeg
 HPLIP_LICENSE = GPLv2 BSD-3c MIT
 HPLIP_LICENSE_FILES = COPYING
 
-HPLIP_CONF_OPT = \
+HPLIP_CONF_OPTS = \
 	--disable-qt4 \
 	--disable-scan-build \
 	--disable-gui-build \
@@ -30,10 +30,10 @@ HPLIP_CONF_OPT = \
 	--includedir=$(STAGING_DIR)/usr/include
 
 ifeq ($(BR2_PACKAGE_DBUS),y)
-	HPLIP_CONF_OPT += --enable-dbus-build
+	HPLIP_CONF_OPTS += --enable-dbus-build
 	HPLIP_DEPENDENCIES += dbus
 else
-	HPLIP_CONF_OPT += --disable-dbus-build
+	HPLIP_CONF_OPTS += --disable-dbus-build
 endif
 
 define HPLIP_POST_INSTALL_TARGET_FIXUP

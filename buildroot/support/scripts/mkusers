@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 myname="${0##*/}"
 
@@ -39,7 +39,7 @@ GROUP="${TARGET_DIR}/etc/group"
 # with /etc/group, so any use of gshadow must be conditional.
 GSHADOW="${TARGET_DIR}/etc/gshadow"
 
-# We can't simply source ${BUILDROOT_CONFIG} as it may contains constructs
+# We can't simply source ${BR2_CONFIG} as it may contains constructs
 # such as:
 #    BR2_DEFCONFIG="$(CONFIG_DIR)/defconfig"
 # which when sourced from a shell script will eventually try to execute
@@ -48,7 +48,7 @@ GSHADOW="${TARGET_DIR}/etc/gshadow"
 # So, we have to scan that file instead. Sigh... :-(
 PASSWD_METHOD="$( sed -r -e '/^BR2_TARGET_GENERIC_PASSWD_METHOD="(.*)"$/!d;'    \
                          -e 's//\1/;'                                           \
-                         "${BUILDROOT_CONFIG}"                                  \
+                         "${BR2_CONFIG}"                                        \
                 )"
 
 #----------------------------------------------------------------------------
@@ -63,7 +63,7 @@ get_uid() {
 get_ugid() {
     local username="${1}"
 
-    awk -F:i -v username="${username}"                          \
+    awk -F: -v username="${username}"                          \
         '$1 == username { printf( "%d\n", $4 ); }' "${PASSWD}"
 }
 
@@ -137,12 +137,16 @@ check_user_validity() {
         fi
 
         # check the group does not already exists with another gid
-        if [ -n "${_gid}" -a ${_gid} -ne ${gid} ]; then
+        # Need to split the check in two, otherwise '[' complains it
+        # is missing arguments when _gid is empty
+        if [ -n "${_gid}" ] && [ ${_gid} -ne ${gid} ]; then
             fail "group already exists with gid '${_gid}'\n"
         fi
 
         # check the user does not already exists with another gid
-        if [ -n "${_ugid}" -a ${_ugid} -ne ${gid} ]; then
+        # Need to split the check in two, otherwise '[' complains it
+        # is missing arguments when _ugid is empty
+        if [ -n "${_ugid}" ] && [ ${_ugid} -ne ${gid} ]; then
             fail "user already exists with gid '${_ugid}'\n"
         fi
     fi
@@ -156,7 +160,9 @@ check_user_validity() {
         fi
 
         # check the user does not already exists with another uid
-        if [ -n "${_uid}" -a ${_uid} -ne ${uid} ]; then
+        # Need to split the check in two, otherwise '[' complains it
+        # is missing arguments when _uid is empty
+        if [ -n "${_uid}" ] && [ ${_uid} -ne ${uid} ]; then
             fail "user already exists with uid '${_uid}'\n"
         fi
     fi
@@ -307,10 +313,10 @@ add_one_user() {
     esac
     case "${passwd}" in
         !=*)
-            _passwd='!'"$( encode_passwd "${passwd#!=}" )"
+            _passwd='!'"$( encode_password "${passwd#!=}" )"
             ;;
         =*)
-            _passwd="$( encode_passwd "${passwd#=}" )"
+            _passwd="$( encode_password "${passwd#=}" )"
             ;;
         *)
             _passwd="${passwd}"
@@ -336,7 +342,7 @@ add_one_user() {
     # (Note: stdout goes to the fakeroot-script)
     if [ "${home}" != "-" ]; then
         mkdir -p "${TARGET_DIR}/${home}"
-        printf "chown -R %d:%d '%s'\n" "${uid}" "${_gid}" "${TARGET_DIR}/${home}"
+        printf "chown -h -R %d:%d '%s'\n" "${uid}" "${_gid}" "${TARGET_DIR}/${home}"
     fi
 }
 
@@ -391,6 +397,7 @@ main() {
     # Now, add users whose uid is *not* automatic
     while read username uid group gid passwd home shell groups comment; do
         [ -n "${username}" ] || continue    # Package with no user
+        [ "${username}" != "-" ] || continue # Magic string to skip user creation
         [ ${uid} -ge 0     ] || continue    # Automatic uid
         add_one_user "${username}" "${uid}" "${group}" "${gid}" "${passwd}" \
                      "${home}" "${shell}" "${groups}" "${comment}"
@@ -399,6 +406,7 @@ main() {
     # Finally, add users whose uid *is* automatic
     while read username uid group gid passwd home shell groups comment; do
         [ -n "${username}" ] || continue    # Package with no user
+        [ "${username}" != "-" ] || continue # Magic string to skip user creation
         [ ${uid} -eq -1    ] || continue    # Non-automatic uid
         add_one_user "${username}" "${uid}" "${group}" "${gid}" "${passwd}" \
                      "${home}" "${shell}" "${groups}" "${comment}"

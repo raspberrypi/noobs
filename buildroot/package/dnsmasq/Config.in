@@ -20,6 +20,13 @@ config BR2_PACKAGE_DNSMASQ_DHCP
 	help
 	  Enable DHCP server support in dnsmasq.
 
+config BR2_PACKAGE_DNSMASQ_DNSSEC
+	bool "DNSSEC support"
+	select BR2_PACKAGE_GMP
+	select BR2_PACKAGE_NETTLE
+	help
+	  Enable DNSSEC validation and caching support.
+
 config BR2_PACKAGE_DNSMASQ_IDN
 	bool "IDN support"
 	depends on BR2_USE_WCHAR
@@ -33,7 +40,7 @@ config BR2_PACKAGE_DNSMASQ_LUA
 	bool "Lua scripting support"
 	select BR2_PACKAGE_LUA
 	help
-	  Enable lua scripting for dnsmasq
+	  Enable Lua scripting for dnsmasq
 
 config BR2_PACKAGE_DNSMASQ_CONNTRACK
 	bool "conntrack marking support"
@@ -42,7 +49,7 @@ config BR2_PACKAGE_DNSMASQ_CONNTRACK
 	help
 	  Enable DNS query connection marking in netfilter.
 
-comment "conntrack marking support requires a toolchain with LARGEFILE support"
+comment "conntrack marking support needs a toolchain w/ largefile"
 	depends on !BR2_LARGEFILE
 
 endif

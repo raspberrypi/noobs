@@ -7,25 +7,32 @@ config BR2_PACKAGE_RSH_REDONE
 
 	  http://packages.debian.org/source/sid/rsh-redone
 
-# this is incomplete in the source
-#config BR2_PACKAGE_RSH_REDONE_RCP
-#	bool "rcp"
-#	depends on BR2_PACKAGE_RSH_REDONE
+if BR2_PACKAGE_RSH_REDONE
 
 config BR2_PACKAGE_RSH_REDONE_RLOGIN
 	bool "rlogin"
-	depends on BR2_PACKAGE_RSH_REDONE
 
-# requires PAM
-#config BR2_PACKAGE_RSH_REDONE_RLOGIND
-#	bool "rlogind"
-#	depends on BR2_PACKAGE_RSH_REDONE
+config BR2_PACKAGE_RSH_REDONE_RLOGIND
+	bool "rlogind"
+	depends on !BR2_STATIC_LIBS
+	depends on BR2_ENABLE_LOCALE && BR2_USE_WCHAR
+	select BR2_PACKAGE_LINUX_PAM
+
+comment "rlogind needs a toolchain w/ wchar, locale, dynamic library"
+	depends on !(BR2_ENABLE_LOCALE && BR2_USE_WCHAR) \
+		|| BR2_STATIC_LIBS
 
 config BR2_PACKAGE_RSH_REDONE_RSH
 	bool "rsh"
-	depends on BR2_PACKAGE_RSH_REDONE
 
-# requires PAM
-#config BR2_PACKAGE_RSH_REDONE_RSHD
-#	bool "rshd"
-#	depends on BR2_PACKAGE_RSH_REDONE
+config BR2_PACKAGE_RSH_REDONE_RSHD
+	bool "rshd"
+	depends on BR2_ENABLE_LOCALE && BR2_USE_WCHAR
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_LINUX_PAM
+
+comment "rshd needs a toolchain w/ wchar, locale, dynamic library"
+	depends on !(BR2_ENABLE_LOCALE && BR2_USE_WCHAR) \
+		|| BR2_STATIC_LIBS
+
+endif

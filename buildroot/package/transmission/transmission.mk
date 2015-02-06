@@ -1,11 +1,12 @@
-#############################################################
+################################################################################
 #
 # transmission
 #
-#############################################################
-TRANSMISSION_VERSION = 2.33
-TRANSMISSION_SITE = http://download.transmissionbt.com/files/
-TRANSMISSION_SOURCE = transmission-$(TRANSMISSION_VERSION).tar.bz2
+################################################################################
+
+TRANSMISSION_VERSION = 2.84
+TRANSMISSION_SITE = http://download.transmissionbt.com/files
+TRANSMISSION_SOURCE = transmission-$(TRANSMISSION_VERSION).tar.xz
 TRANSMISSION_DEPENDENCIES = \
 	host-pkgconf \
 	host-intltool \
@@ -13,47 +14,48 @@ TRANSMISSION_DEPENDENCIES = \
 	libevent \
 	openssl \
 	zlib
-
-TRANSMISSION_CONF_OPT = \
+TRANSMISSION_AUTORECONF = YES
+TRANSMISSION_CONF_OPTS = \
 	--disable-libnotify \
 	--enable-lightweight
-
-define TRANSMISSION_INIT_SCRIPT_INSTALL
-	[ -f $(TARGET_DIR)/etc/init.d/S92transmission ] || \
-		$(INSTALL) -m 0755 -D package/transmission/S92transmission \
-			$(TARGET_DIR)/etc/init.d/S92transmission
-endef
+TRANSMISSION_LICENSE = GPLv2 or GPLv3 with OpenSSL exception
+TRANSMISSION_LICENSE_FILES = COPYING
 
 ifeq ($(BR2_PACKAGE_TRANSMISSION_UTP),y)
-	TRANSMISSION_CONF_OPT += --enable-utp
+	TRANSMISSION_CONF_OPTS += --enable-utp
 else
-	TRANSMISSION_CONF_OPT += --disable-utp
+	TRANSMISSION_CONF_OPTS += --disable-utp
 endif
 
 ifeq ($(BR2_PACKAGE_TRANSMISSION_CLI),y)
-	TRANSMISSION_CONF_OPT += --enable-cli
+	TRANSMISSION_CONF_OPTS += --enable-cli
 else
-	TRANSMISSION_CONF_OPT += --disable-cli
+	TRANSMISSION_CONF_OPTS += --disable-cli
 endif
 
 ifeq ($(BR2_PACKAGE_TRANSMISSION_DAEMON),y)
-	TRANSMISSION_CONF_OPT += --enable-daemon
-	TRANSMISSION_POST_INSTALL_TARGET_HOOKS += TRANSMISSION_INIT_SCRIPT_INSTALL
+	TRANSMISSION_CONF_OPTS += --enable-daemon
+
+define TRANSMISSION_INSTALL_INIT_SYSV
+	$(INSTALL) -m 0755 -D package/transmission/S92transmission \
+		$(TARGET_DIR)/etc/init.d/S92transmission
+endef
+
 else
-	TRANSMISSION_CONF_OPT += --disable-daemon
+	TRANSMISSION_CONF_OPTS += --disable-daemon
 endif
 
 ifeq ($(BR2_PACKAGE_TRANSMISSION_REMOTE),y)
-	TRANSMISSION_CONF_OPT += --enable-remote
+	TRANSMISSION_CONF_OPTS += --enable-remote
 else
-	TRANSMISSION_CONF_OPT += --disable-remote
+	TRANSMISSION_CONF_OPTS += --disable-remote
 endif
 
 ifeq ($(BR2_PACKAGE_TRANSMISSION_GTK),y)
-	TRANSMISSION_CONF_OPT += --enable-gtk
+	TRANSMISSION_CONF_OPTS += --enable-gtk
 	TRANSMISSION_DEPENDENCIES += libgtk2
 else
-	TRANSMISSION_CONF_OPT += --disable-gtk
+	TRANSMISSION_CONF_OPTS += --disable-gtk
 endif
 
 $(eval $(autotools-package))

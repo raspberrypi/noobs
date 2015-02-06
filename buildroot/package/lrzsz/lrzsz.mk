@@ -1,14 +1,14 @@
-#############################################################
+################################################################################
 #
-# lrzsz (provides zmodem)
+# lrzsz
 #
-#############################################################
+################################################################################
 
 LRZSZ_VERSION = 0.12.20
 LRZSZ_SITE = http://www.ohse.de/uwe/releases
-LRZSZ_SOURCE = lrzsz-$(LRZSZ_VERSION).tar.gz
-
-LRZSR_CONF_OPT = --disable-timesync
+LRZSZ_CONF_OPTS = --disable-timesync
+LRZSZ_LICENSE = GPLv2+
+LRZSZ_LICENSE_FILES = COPYING
 
 define LRZSZ_POST_CONFIGURE_HOOKS
 	$(SED) "s/-lnsl//;" $(@D)/src/Makefile
@@ -24,11 +24,6 @@ define LRZSZ_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 -D $(@D)/src/lsz $(TARGET_DIR)/usr/bin/sz
 	ln -sf rz $(TARGET_DIR)/usr/bin/lrz
 	ln -sf sz $(TARGET_DIR)/usr/bin/lsz
-endef
-
-define LRZSZ_CLEAN_CMDS
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,rz sz lrz lsz)
-	-$(MAKE) -C $(@D) clean
 endef
 
 $(eval $(autotools-package))

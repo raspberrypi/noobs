@@ -1,26 +1,23 @@
-#############################################################
+################################################################################
 #
 # autoconf
 #
-#############################################################
+################################################################################
 
-AUTOCONF_VERSION = 2.68
+AUTOCONF_VERSION = 2.69
+AUTOCONF_SOURCE = autoconf-$(AUTOCONF_VERSION).tar.xz
 AUTOCONF_SITE = $(BR2_GNU_MIRROR)/autoconf
 
 AUTOCONF_LICENSE = GPLv3+ with exceptions
 AUTOCONF_LICENSE_FILES = COPYINGv3 COPYING.EXCEPTION
 
-AUTOCONF_CONF_ENV = EMACS="no" ac_cv_path_M4=$(HOST_DIR)/usr/bin/m4 \
-		    ac_cv_prog_gnu_m4_gnu=no
-
-AUTOCONF_DEPENDENCIES = host-m4 perl
-
-HOST_AUTOCONF_CONF_ENV = EMACS="no" ac_cv_path_M4=$(HOST_DIR)/usr/bin/m4 \
-			ac_cv_prog_gnu_m4_gnu=no
+HOST_AUTOCONF_CONF_ENV = \
+	EMACS="no" \
+	ac_cv_path_M4=$(HOST_DIR)/usr/bin/m4 \
+	ac_cv_prog_gnu_m4_gnu=no
 
 HOST_AUTOCONF_DEPENDENCIES = host-m4 host-libtool
 
-$(eval $(autotools-package))
 $(eval $(host-autotools-package))
 
 # variables used by other packages

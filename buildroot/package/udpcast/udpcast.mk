@@ -1,13 +1,14 @@
-#############################################################
+################################################################################
 #
 # udpcast
 #
-#############################################################
+################################################################################
 
-UDPCAST_VERSION = 20071228
-UDPCAST_SOURCE = udpcast-$(UDPCAST_VERSION).tar.gz
+UDPCAST_VERSION = 20120424
 UDPCAST_SITE = http://www.udpcast.linux.lu/download
-UDPCAST_CONF_ENV = $(if $(BR_LARGEFILE),ac_cv_type_stat64=yes,ac_cv_type_stat64=no)
+UDPCAST_DEPENDENCIES = host-m4
+UDPCAST_LICENSE = BSD-2c, GPLv2+
+UDPCAST_LICENSE_FILES = COPYING
 
 define UDPCAST_REMOVE_UDP_SENDER
 	rm -f $(TARGET_DIR)/usr/sbin/udp-sender

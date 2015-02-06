@@ -4,6 +4,7 @@ config BR2_PACKAGE_COLLECTD
 	depends on BR2_USE_MMU
 	depends on BR2_INET_IPV6
 	depends on BR2_TOOLCHAIN_HAS_THREADS
+	depends on !BR2_STATIC_LIBS
 	help
 	  collectd is a daemon which collects system performance
 	  statistics periodically and provides mechanisms to store
@@ -58,11 +59,15 @@ config BR2_PACKAGE_COLLECTD_LOGFILE
 
 config BR2_PACKAGE_COLLECTD_NOTIFY_EMAIL
 	bool "notify_email"
+	depends on !BR2_STATIC_LIBS # libesmtp
 	select BR2_PACKAGE_LIBESMTP
 	select BR2_PACKAGE_OPENSSL
 	help
 	  Send an E-mail with the notification message to the
 	  configured recipients.
+
+comment "notify_email needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS
 
 config BR2_PACKAGE_COLLECTD_SYSLOG
 	bool "syslog"
@@ -104,6 +109,11 @@ config BR2_PACKAGE_COLLECTD_BIND
 	select BR2_PACKAGE_LIBXML2
 	help
 	  Collects BIND DNS statistics.
+
+config BR2_PACKAGE_COLLECTD_CGROUPS
+	bool "cgroups"
+	help
+	  Collects CGroups CPU usage accounting.
 
 config BR2_PACKAGE_COLLECTD_CONNTRACK
 	bool "conntrack"
@@ -216,6 +226,16 @@ config BR2_PACKAGE_COLLECTD_MD
 	help
 	  Collects software-RAID device information.
 
+config BR2_PACKAGE_COLLECTD_MEMCACHEC
+	bool "memcachec"
+	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_LIBMEMCACHED
+	help
+	  Query and parse data from a memcache daemon.
+
+comment "memcachec needs a toolchain w/ C++"
+	depends on !BR2_INSTALL_LIBSTDCPP
+
 config BR2_PACKAGE_COLLECTD_MEMCACHED
 	bool "memcached"
 	help
@@ -230,7 +250,9 @@ config BR2_PACKAGE_COLLECTD_MYSQL
 	bool "mysql"
 	depends on BR2_INSTALL_LIBSTDCPP # mysql
 	depends on BR2_USE_MMU # mysql
-	select BR2_PACKAGE_MYSQL_CLIENT
+	depends on BR2_TOOLCHAIN_HAS_THREADS # mysql
+	depends on !BR2_avr32 # mysql
+	select BR2_PACKAGE_MYSQL
 	help
 	  Connects to a MySQL database and issues a "show status" command.
 
@@ -271,10 +293,21 @@ config BR2_PACKAGE_COLLECTD_PROTOCOLS
 	help
 	  Collects information about the network protocols.
 
+config BR2_PACKAGE_COLLECTD_SENSORS
+	bool "sensors"
+	select BR2_PACKAGE_LM_SENSORS
+	help
+	  Collects data from lm-sensors.
+
 config BR2_PACKAGE_COLLECTD_SERIAL
 	bool "serial"
 	help
 	  Collects the traffic on serial interfaces.
+
+config BR2_PACKAGE_COLLECTD_STATSD
+	bool "StatsD"
+	help
+	  StatsD network protocol to allow clients to report "events".
 
 config BR2_PACKAGE_COLLECTD_SNMP
 	bool "snmp"
@@ -392,12 +425,14 @@ config BR2_PACKAGE_COLLECTD_RRDTOOL
 	help
 	  Writes values to RRD-files.
 
-comment "rrdtool support requires a toolchain with WCHAR support"
+comment "rrdtool support needs a toolchain w/ wchar"
 	depends on !BR2_USE_WCHAR
 
 config BR2_PACKAGE_COLLECTD_RIEMANN
 	bool "riemann"
 	depends on BR2_INSTALL_LIBSTDCPP # protobuf
+	# protobuf-c -> host-protobuf
+	depends on BR2_HOSTARCH = "x86_64" || BR2_HOSTARCH = "x86"
 	select BR2_PACKAGE_PROTOBUF_C
 	help
 	  Sends data to Riemann, a stream processing and monitoring system.
@@ -418,5 +453,6 @@ endmenu
 
 endif
 
-comment "collectd needs a toolchain with IPv6 and thread support"
-        depends on !BR2_TOOLCHAIN_HAS_THREADS || !BR2_INET_IPV6
+comment "collectd needs a toolchain w/ IPv6, threads, dynamic library"
+	depends on !BR2_TOOLCHAIN_HAS_THREADS || !BR2_INET_IPV6 || BR2_STATIC_LIBS
+	depends on BR2_USE_MMU

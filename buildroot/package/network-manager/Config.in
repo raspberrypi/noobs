@@ -1,15 +1,16 @@
 config BR2_PACKAGE_NETWORK_MANAGER
-	bool "NetworkManager"
-	depends on BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_UDEV
-	select BR2_PACKAGE_DBUS
+	bool "networkmanager"
+	depends on !BR2_avr32 # udev
 	depends on BR2_INET_IPV6
 	depends on BR2_LARGEFILE # acl
 	depends on BR2_USE_WCHAR # libglib2 and gnutls
-	depends on BR2_TOOLCHAIN_HAS_THREADS # dbus
+	depends on BR2_TOOLCHAIN_HAS_THREADS # dbus, libglib2
 	depends on BR2_USE_MMU # dbus
+	depends on BR2_PACKAGE_HAS_UDEV
+	depends on BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_7
+	select BR2_PACKAGE_DHCPCD if !BR2_PACKAGE_DHCP_CLIENT
+	select BR2_PACKAGE_DBUS
 	select BR2_PACKAGE_DBUS_GLIB
-	select BR2_PACKAGE_UDEV
-	select BR2_PACKAGE_UDEV_ALL_EXTRAS
 	select BR2_PACKAGE_GNUTLS
 	select BR2_PACKAGE_LIBGCRYPT
 	select BR2_PACKAGE_LIBNL
@@ -17,6 +18,8 @@ config BR2_PACKAGE_NETWORK_MANAGER
 	select BR2_PACKAGE_UTIL_LINUX_LIBUUID
 	select BR2_PACKAGE_WIRELESS_TOOLS
 	select BR2_PACKAGE_WIRELESS_TOOLS_LIB
+	select BR2_PACKAGE_READLINE
+	select BR2_PACKAGE_LIBNDP
 	help
 	  NetworkManager is a set of co-operative tools that make networking
 	  simple and straightforward. Whether WiFi, wired, 3G, or Bluetooth,
@@ -27,6 +30,32 @@ config BR2_PACKAGE_NETWORK_MANAGER
 
 	  http://projects.gnome.org/NetworkManager/
 
-comment "NetworkManager requires a toolchain with IPV6, LARGEFILE, WCHAR and thread support"
+if BR2_PACKAGE_NETWORK_MANAGER
+
+config BR2_PACKAGE_NETWORK_MANAGER_TUI
+	bool "nmtui support"
+	select BR2_PACKAGE_NEWT
+	help
+	  This option enables terminal based UI
+
+config BR2_PACKAGE_NETWORK_MANAGER_MODEM_MANAGER
+	bool "modem-manager support"
+	select BR2_PACKAGE_MODEM_MANAGER
+	select BR2_PACKAGE_MODEM_MANAGER_LIBMBIM
+	select BR2_PACKAGE_MODEM_MANAGER_LIBQMI
+	help
+	  This option enables support for ModemManager
+
+config BR2_PACKAGE_NETWORK_MANAGER_PPPD
+	bool "pppd support"
+	select BR2_PACKAGE_PPPD
+	help
+	  This option enables support for PPPD daemon
+endif
+
+comment "NetworkManager needs udev /dev management and a toolchain w/ IPv6, largefile, wchar, threads, headers >= 3.7"
+	depends on !BR2_avr32
+	depends on BR2_USE_MMU
 	depends on !BR2_INET_IPV6 || !BR2_LARGEFILE || !BR2_USE_WCHAR || \
-		!BR2_TOOLCHAIN_HAS_THREADS
+		!BR2_TOOLCHAIN_HAS_THREADS || \
+		!BR2_PACKAGE_HAS_UDEV || !BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_7

@@ -1,9 +1,14 @@
-comment "qt requires a toolchain with C++ support enabled"
-	depends on !BR2_INSTALL_LIBSTDCPP
+comment "qt needs a toolchain w/ C++, threads"
+	depends on !BR2_avr32
+	depends on BR2_USE_MMU
+	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_TOOLCHAIN_HAS_THREADS
 
 menuconfig BR2_PACKAGE_QT
 	bool "Qt"
+	depends on !BR2_avr32 # lacks TLS
+	depends on BR2_USE_MMU # fork
 	depends on BR2_INSTALL_LIBSTDCPP
+	depends on BR2_TOOLCHAIN_HAS_THREADS
 	help
 	  Qt is a cross-platform application and UI framework for
 	  developers using C++.
@@ -12,13 +17,60 @@ menuconfig BR2_PACKAGE_QT
 
 if BR2_PACKAGE_QT
 
+choice
+	prompt "Qt installation"
+	help
+	  Selects the type of installation: standard or embedded
+
+config BR2_PACKAGE_QT_EMBEDDED
+	bool "Qt embedded"
+	help
+	  The embedded Qt installation targets embedded systems without X.org.
+	  Provides backends for framebuffer.
+	  If unsure, say Y.
+
+comment "Qt standard (X11) not available (need X.org)"
+	depends on !BR2_PACKAGE_XORG7
+
+config BR2_PACKAGE_QT_X11
+	bool "Qt standard (X11)"
+	depends on BR2_PACKAGE_XORG7
+	select BR2_PACKAGE_FONTCONFIG
+	select BR2_PACKAGE_XLIB_LIBXI
+	select BR2_PACKAGE_XLIB_LIBX11
+	select BR2_PACKAGE_XLIB_LIBXRENDER
+	select BR2_PACKAGE_XLIB_LIBXCURSOR
+	select BR2_PACKAGE_XLIB_LIBXRANDR
+	select BR2_PACKAGE_XLIB_LIBXEXT
+	select BR2_PACKAGE_XLIB_LIBXV
+	select BR2_PACKAGE_QT_SYSTEMFREETYPE
+	select BR2_PACKAGE_QT_GUI_MODULE
+	help
+	  The standard Qt installation provides X.org backend. If you don't want to
+	  use X.org, say N.
+
+endchoice
+
 config BR2_PACKAGE_QT_DEBUG
 	bool "Compile with debug support"
 	help
 	  If unsure, say N.
 
 config BR2_PACKAGE_QT_DEMOS
-	bool "Compile and install demos and examples (with code)"
+	bool "Compile and install Qt demos (with code)"
+	select BR2_PACKAGE_QT_GUI_MODULE
+	help
+	  If unsure, say N.
+
+config BR2_PACKAGE_QT_TRANSLATION_FILES
+	bool "Install translation files"
+	help
+	  Install binary .qm translation files.
+	  Say y if you need these files. They will take about 8 MB
+	  on the target root filesystem.
+
+config BR2_PACKAGE_QT_EXAMPLES
+	bool "Compile and install Qt examples (with code)"
 	select BR2_PACKAGE_QT_GUI_MODULE
 	help
 	  If unsure, say N.
@@ -30,7 +82,7 @@ choice
 
 config BR2_PACKAGE_QT_SHARED
 	bool "Shared library"
-	depends on !BR2_PREFER_STATIC_LIB
+	depends on !BR2_STATIC_LIBS
 	help
 	  Create and use shared Qt libraries.
 	  If you have multiple programs that depend on Qt or intend to use
@@ -87,6 +139,9 @@ config BR2_PACKAGE_QT_GUI_MODULE
 	  video output, or you don't require Qt GUI, say n.
 
 if BR2_PACKAGE_QT_GUI_MODULE
+
+if BR2_PACKAGE_QT_EMBEDDED
+
 menu "Pixel depths"
 comment "Deselecting each option leads to Qt's default (8,16,32)"
 
@@ -144,6 +199,8 @@ config BR2_PACKAGE_QT_FONT_UNIFONT
 
 endmenu
 
+endif # BR2_PACKAGE_QT_EMBEDDED
+
 choice
 	prompt "freetype2 support"
 	default BR2_PACKAGE_QT_NOFREETYPE
@@ -152,11 +209,16 @@ choice
 
 config BR2_PACKAGE_QT_NOFREETYPE
 	bool "no freetype2 support"
+	depends on BR2_PACKAGE_QT_EMBEDDED
 	help
 	  Do not compile in Freetype2 support.
 
+comment "Qt freetype2 needs Qt embedded"
+	depends on BR2_PACKAGE_QT_X11
+
 config BR2_PACKAGE_QT_QTFREETYPE
 	bool "Qt freetype2"
+	depends on BR2_PACKAGE_QT_EMBEDDED
 	help
 	  Use the libfreetype bundled with Qt.
 
@@ -257,9 +319,11 @@ endchoice
 
 source "package/qt/Config.sql.in"
 if BR2_PACKAGE_QT_GUI_MODULE
+if BR2_PACKAGE_QT_EMBEDDED
 source "package/qt/Config.gfx.in"
 source "package/qt/Config.mouse.in"
 source "package/qt/Config.keyboard.in"
+endif
 
 config BR2_PACKAGE_QT_PHONON
 	bool "Phonon Module"
@@ -280,6 +344,14 @@ config BR2_PACKAGE_QT_PHONON_BACKEND
 	help
 	  Build the platform Phonon plugin.
 	  If unsure, say n.
+
+config BR2_PACKAGE_QT_OPENGL_ES
+	bool "OpenGL ES v2.x support"
+	depends on BR2_PACKAGE_HAS_LIBGLES
+	depends on BR2_PACKAGE_HAS_LIBEGL
+	help
+	  Enable the OpenGL ES v2.x support.
+
 endif
 
 config BR2_PACKAGE_QT_DBUS
@@ -290,7 +362,8 @@ config BR2_PACKAGE_QT_DBUS
 	help
 	  Build the Qt DBus module.
 
-comment "DBus Module requires a toolchain with thread support"
+comment "DBus Module needs a toolchain w/ threads"
+	depends on BR2_USE_MMU
 	depends on !BR2_TOOLCHAIN_HAS_THREADS
 
 config BR2_PACKAGE_QT_XML
@@ -334,23 +407,31 @@ config BR2_PACKAGE_QT_NETWORK
 	  Install the Network module.
 	  if unsure, say y
 
+config BR2_PACKAGE_QT_ARCH_SUPPORTS_WEBKIT
+	bool
+	# see src/3rdparty/webkit/Source/JavaScriptCore/wtf/Platform.h
+	# see http://lists.busybox.net/pipermail/buildroot/2014-November/112605.html
+	default y if BR2_arm || BR2_armeb || BR2_i386 || BR2_microblazeel || \
+		BR2_microblazebe || BR2_mips || BR2_mipsel || \
+		(BR2_mips64 || BR2_mips64el) && !BR2_MIPS_NABI32 || BR2_powerpc || \
+		BR2_powerpc64 || BR2_powerpc64el || BR2_sh4 || BR2_sh4eb || \
+		BR2_sh4a || BR2_sh4aeb || BR2_sparc || BR2_x86_64
+
 config BR2_PACKAGE_QT_WEBKIT
 	bool "WebKit Module"
 	depends on BR2_PACKAGE_QT_SHARED
 	depends on BR2_PACKAGE_QT_GUI_MODULE
 	depends on BR2_PACKAGE_QT_NETWORK
+	depends on BR2_PACKAGE_QT_ARCH_SUPPORTS_WEBKIT
+	depends on BR2_TOOLCHAIN_HAS_THREADS_NPTL # needs pthread_getattr_np()
 	help
 	  Build the WebKit module.
 	  If unsure, say n.
 
-comment "WebKit needs shared library/gui/network support"
+comment "WebKit needs shared library/NPTL toolchain/gui/network support"
 	depends on !(BR2_PACKAGE_QT_SHARED && BR2_PACKAGE_QT_GUI_MODULE && BR2_PACKAGE_QT_NETWORK)
-
-config BR2_PACKAGE_QT_JAVASCRIPTCORE
-	bool "JavaScriptCore JIT compiler"
-	help
-	  Build the JavaScriptCore JIT compiler
-	  If unsure, say y
+	depends on !BR2_TOOLCHAIN_HAS_THREADS_NPTL
+	depends on BR2_PACKAGE_QT_ARCH_SUPPORTS_WEBKIT
 
 config BR2_PACKAGE_QT_STL
 	bool "STL support"
@@ -368,12 +449,27 @@ config BR2_PACKAGE_QT_OPENSSL
 	  target.
 	  If unsure, say n.
 
+config BR2_PACKAGE_QT_ARCH_SUPPORTS_SCRIPT
+	bool
+	# see http://lists.busybox.net/pipermail/buildroot/2014-November/112605.html
+	default y if BR2_arm || BR2_armeb || aarch64 || BR2_i386 || \
+		BR2_microblazeel || BR2_microblazebe || BR2_mips || BR2_mipsel || \
+		BR2_mips64 || BR2_mips64el || BR2_nios2 || BR2_powerpc || \
+		BR2_powerpc64 || BR2_powerpc64el || BR2_sh4 || BR2_sh4eb || \
+		BR2_sh4a || BR2_sh4aeb || BR2_sparc || BR2_x86_64
+
 config BR2_PACKAGE_QT_SCRIPT
 	bool "Script Module"
+	depends on BR2_PACKAGE_QT_ARCH_SUPPORTS_SCRIPT
+	depends on BR2_TOOLCHAIN_HAS_THREADS_NPTL # needs pthread_getattr_np()
 	default y
 	help
 	  Build the Qt Script module.
 	  if unsure, say y.
+
+comment "Script Module needs a toolchain with NPTL"
+	depends on !BR2_TOOLCHAIN_HAS_THREADS_NPTL
+	depends on BR2_PACKAGE_QT_ARCH_SUPPORTS_SCRIPT
 
 config BR2_PACKAGE_QT_SCRIPTTOOLS
 	bool "Script Tools Module"
@@ -387,8 +483,14 @@ config BR2_PACKAGE_QT_DECLARATIVE
 	bool "Declarative module"
 	depends on BR2_PACKAGE_QT_SCRIPT
 	depends on BR2_PACKAGE_QT_GUI_MODULE
+	depends on BR2_PACKAGE_QT_SQL_MODULE
 	help
 	  Build the Qt Declarative Module for qml support
 	  if unsure, say n.
+
+config BR2_PACKAGE_QT_TEST
+	bool "Test Module"
+	help
+	  Install the Test module.
 
 endif # BR2_PACKAGE_QT

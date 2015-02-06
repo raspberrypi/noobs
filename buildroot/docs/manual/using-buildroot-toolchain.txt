@@ -1,8 +1,7 @@
 // -*- mode:doc; -*-
 // vim: set syntax=asciidoc:
 
-Using the generated toolchain outside Buildroot
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== Using the generated toolchain outside Buildroot
 
 You may want to compile, for your target, your own programs or other
 software that are not packaged in Buildroot. In order to do this you
@@ -19,5 +18,5 @@ libraries and header files are.
 
 It is also possible to generate the Buildroot toolchain in a directory
 other than +output/host+ by using the +Build options -> Host dir+
-option.  This could be useful if the toolchain must be shared with
+option. This could be useful if the toolchain must be shared with
 other users.

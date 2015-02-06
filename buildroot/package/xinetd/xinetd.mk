@@ -1,12 +1,12 @@
-#############################################################
+################################################################################
 #
 # xinetd
 #
-#############################################################
-XINETD_VERSION       = 2.3.15
-XINETD_SOURCE        = xinetd-$(XINETD_VERSION).tar.gz
-XINETD_SITE          = http://www.xinetd.org
-XINETD_LICENSE       = xinetd license
+################################################################################
+
+XINETD_VERSION = xinetd-2-3-15
+XINETD_SITE = $(call github,xinetd-org,xinetd,$(XINETD_VERSION))
+XINETD_LICENSE = xinetd license
 XINETD_LICENSE_FILES = COPYRIGHT
 
 XINETD_CFLAGS = $(TARGET_CFLAGS)
@@ -28,6 +28,6 @@ XINETD_CONF_ENV += \
 	CFLAGS="$(XINETD_CFLAGS)" \
 	LIBS="$(XINETD_LIBS)"
 
-XINETD_MAKE_OPT = AR="$(TARGET_AR)"
+XINETD_MAKE_OPTS = AR="$(TARGET_AR)"
 
 $(eval $(autotools-package))

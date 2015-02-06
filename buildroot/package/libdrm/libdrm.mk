@@ -1,39 +1,76 @@
-#############################################################
+################################################################################
 #
 # libdrm
 #
-#############################################################
-LIBDRM_VERSION = 2.4.38
+################################################################################
+
+LIBDRM_VERSION = 2.4.59
 LIBDRM_SOURCE = libdrm-$(LIBDRM_VERSION).tar.bz2
-LIBDRM_SITE = http://dri.freedesktop.org/libdrm/
+LIBDRM_SITE = http://dri.freedesktop.org/libdrm
+LIBDRM_LICENSE = MIT
+
 LIBDRM_INSTALL_STAGING = YES
 
 LIBDRM_DEPENDENCIES = \
-	xproto_glproto \
-	xproto_xf86vidmodeproto \
-	xlib_libXxf86vm \
-	xlib_libXmu \
-	xlib_libpciaccess \
-	xproto_dri2proto \
-	xlib_libpthread-stubs \
+	libpthread-stubs \
 	host-pkgconf
 
-ifeq ($(BR2_PACKAGE_XDRIVER_XF86_VIDEO_INTEL),y)
-LIBDRM_CONF_OPT += --enable-intel
-LIBDRM_DEPENDENCIES += libatomic_ops
+LIBDRM_CONF_OPTS = \
+	--disable-cairo-tests \
+	--disable-manpages
+
+ifeq ($(BR2_PACKAGE_LIBDRM_INTEL),y)
+LIBDRM_CONF_OPTS += --enable-intel
+LIBDRM_DEPENDENCIES += libatomic_ops libpciaccess
 else
-LIBDRM_CONF_OPT += --disable-intel
+LIBDRM_CONF_OPTS += --disable-intel
 endif
 
-ifneq ($(BR2_PACKAGE_XDRIVER_XF86_VIDEO_ATI),y)
-LIBDRM_CONF_OPT += --disable-radeon
+ifeq ($(BR2_PACKAGE_LIBDRM_RADEON),y)
+LIBDRM_CONF_OPTS += --enable-radeon
+else
+LIBDRM_CONF_OPTS += --disable-radeon
 endif
 
-ifeq ($(BR2_PACKAGE_UDEV),y)
-LIBDRM_CONF_OPT += --enable-udev
+ifeq ($(BR2_PACKAGE_LIBDRM_NOUVEAU),y)
+LIBDRM_CONF_OPTS += --enable-nouveau
+else
+LIBDRM_CONF_OPTS += --disable-nouveau
+endif
+
+ifeq ($(BR2_PACKAGE_LIBDRM_VMWGFX),y)
+LIBDRM_CONF_OPTS += --enable-vmwgfx
+else
+LIBDRM_CONF_OPTS += --disable-vmwgfx
+endif
+
+ifeq ($(BR2_PACKAGE_LIBDRM_OMAP),y)
+LIBDRM_CONF_OPTS += --enable-omap-experimental-api
+else
+LIBDRM_CONF_OPTS += --disable-omap-experimental-api
+endif
+
+ifeq ($(BR2_PACKAGE_LIBDRM_EXYNOS),y)
+LIBDRM_CONF_OPTS += --enable-exynos-experimental-api
+else
+LIBDRM_CONF_OPTS += --disable-exynos-experimental-api
+endif
+
+ifeq ($(BR2_PACKAGE_LIBDRM_FREEDRENO),y)
+LIBDRM_CONF_OPTS += --enable-freedreno-experimental-api
+else
+LIBDRM_CONF_OPTS += --disable-freedreno-experimental-api
+endif
+
+ifeq ($(BR2_PACKAGE_HAS_UDEV),y)
+LIBDRM_CONF_OPTS += --enable-udev
 LIBDRM_DEPENDENCIES += udev
 else
-LIBDRM_CONF_OPT += --disable-udev
+LIBDRM_CONF_OPTS += --disable-udev
+endif
+
+ifeq ($(BR2_PACKAGE_LIBDRM_INSTALL_TESTS),y)
+LIBDRM_CONF_OPTS += --enable-install-test-programs
 endif
 
 $(eval $(autotools-package))

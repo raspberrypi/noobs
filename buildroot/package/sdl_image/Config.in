@@ -8,8 +8,9 @@ config BR2_PACKAGE_SDL_IMAGE
 
 	  http://www.libsdl.org/projects/SDL_image/
 
+if BR2_PACKAGE_SDL_IMAGE
+
 menu "SDL_image file format support"
-	depends on BR2_PACKAGE_SDL_IMAGE
 
 config BR2_PACKAGE_SDL_IMAGE_BMP
 	bool "enable BMP file format support"
@@ -42,6 +43,10 @@ config BR2_PACKAGE_SDL_IMAGE_TIFF
 	bool "enable TIFF file format support"
 	select BR2_PACKAGE_TIFF
 
+config BR2_PACKAGE_SDL_IMAGE_WEBP
+	bool "enable WEBP file format support"
+	select BR2_PACKAGE_WEBP
+
 config BR2_PACKAGE_SDL_IMAGE_XCF
 	bool "enable XCF file format support"
 
@@ -52,3 +57,5 @@ config BR2_PACKAGE_SDL_IMAGE_XV
 	bool "enable XV file format support"
 
 endmenu
+
+endif

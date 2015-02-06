@@ -14,10 +14,35 @@ config BR2_HOSTARCH
 	string
 	option env="HOSTARCH"
 
+config BR2_EXTERNAL
+	string
+	option env="BR2_EXTERNAL"
+
+# Hidden boolean selected by packages in need of Java in order to build
+# (example: xbmc)
+config BR2_NEEDS_HOST_JAVA
+	bool
+
+# Hidden boolean selected by packages in need of javac in order to build
+# (example: classpath)
+config BR2_NEEDS_HOST_JAVAC
+	bool
+
+# Hidden boolean selected by packages in need of jar in order to build
+# (example: classpath)
+config BR2_NEEDS_HOST_JAR
+	bool
+
 # Hidden boolean selected by pre-built packages for x86, when they
 # need to run on x86-64 machines (example: pre-built external
 # toolchains, binary tools like SAM-BA, etc.).
 config BR2_HOSTARCH_NEEDS_IA32_LIBS
+	bool
+
+# Hidden boolean selected by packages that need to build 32 bits
+# binaries with the host compiler, even on 64 bits build machines (e.g
+# bootloaders).
+config BR2_HOSTARCH_NEEDS_IA32_COMPILER
 	bool
 
 source "arch/Config.in"
@@ -41,6 +66,10 @@ config BR2_BZR
 config BR2_GIT
 	string "Git command"
 	default "git"
+
+config BR2_CVS
+	string "CVS command"
+	default "cvs"
 
 config BR2_LOCALFILES
 	string "Local files retrieval command"
@@ -112,7 +141,7 @@ config BR2_DL_DIR
 	default "$(TOPDIR)/dl"
 	help
 	  Directory to store all the source files that we need to fetch.
-	  If the Linux shell environment has defined the BUILDROOT_DL_DIR
+	  If the Linux shell environment has defined the BR2_DL_DIR
 	  environment variable, then this overrides this configuration item.
 
 	  The default is $(TOPDIR)/dl
@@ -159,7 +188,7 @@ if !BR2_PRIMARY_SITE_ONLY
 
 config BR2_BACKUP_SITE
 	string "Backup download site"
-	default "http://sources.buildroot.net/"
+	default "http://sources.buildroot.net"
 	help
 	  Backup site to download from. If this option is set then buildroot
 	  will fall back to download package sources from here if the
@@ -167,7 +196,7 @@ config BR2_BACKUP_SITE
 
 config BR2_KERNEL_MIRROR
 	string "Kernel.org mirror"
-	default "http://www.kernel.org/pub/"
+	default "https://www.kernel.org/pub"
 	help
 	  kernel.org is mirrored on a number of servers around the world.
 	  The following allows you to select your preferred mirror.
@@ -191,17 +220,26 @@ config BR2_GNU_MIRROR
 	     http://ftp.gnu.org/pub/gnu
 	     http://mirror.aarnet.edu.au/pub/gnu
 
-config BR2_DEBIAN_MIRROR
-	string "Debian Software mirror"
-	default "http://ftp.debian.org"
-	help
-	  Debian has multiple software mirrors scattered around the world.
-	  The following allows you to select your preferred mirror.
-
-	  Usually, just add your country code like XX here:
-	  http://ftp.XX.debian.org
-
 endif
+
+config BR2_LUAROCKS_MIRROR
+	string "LuaRocks mirror"
+	default "http://rocks.moonscript.org"
+	help
+	  LuaRocks repository.
+
+	  See http://luarocks.org
+
+config BR2_CPAN_MIRROR
+	string "CPAN mirror (Perl packages)"
+	default "http://cpan.metacpan.org"
+	help
+	  CPAN (Comprehensive Perl Archive Network) is a repository
+	  of Perl packages. It has multiple software mirrors scattered
+	  around the world. This option allows you to select a mirror.
+
+	  The list of mirrors is available at:
+	  http://search.cpan.org/mirror
 
 endmenu
 
@@ -218,7 +256,7 @@ config BR2_CCACHE
 	help
 	  This option will enable the use of ccache, a compiler
 	  cache. It will cache the result of previous builds to speed
-	  up future builds. The cache is stored in
+	  up future builds. By default, the cache is stored in
 	  $HOME/.buildroot-ccache.
 
 	  Note that Buildroot does not try to invalidate the cache
@@ -228,17 +266,55 @@ config BR2_CCACHE
 	  ccache cache by removing the $HOME/.buildroot-ccache
 	  directory.
 
+if BR2_CCACHE
+
 config BR2_CCACHE_DIR
 	string "Compiler cache location"
-	depends on BR2_CCACHE
 	default "$(HOME)/.buildroot-ccache"
 	help
 	  Where ccache should store cached files.
 
-config BR2_DEPRECATED
-	bool "Show packages that are deprecated or obsolete"
+config BR2_CCACHE_INITIAL_SETUP
+	string "Compiler cache initial setup"
 	help
-	  This option hides outdated/obsolete versions of packages.
+	  Initial ccache settings to apply, such as --max-files or --max-size.
+
+	  For example, if your project is known to require more space than the
+	  default max cache size, then you might want to increase the cache size
+	  to a suitable amount using the -M (--max-size) option.
+
+	  The string you specify here is passed verbatim to ccache.  Refer to
+	  ccache documentation for more details.
+
+	  These initial settings are applied after ccache has been compiled.
+
+endif
+
+config BR2_DEPRECATED
+	bool "Show options and packages that are deprecated or obsolete"
+	help
+	  This option shows outdated/obsolete versions of packages and
+	  options that are otherwise hidden.
+
+if BR2_DEPRECATED
+
+config BR2_DEPRECATED_SINCE_2014_02
+	bool
+	default y
+
+config BR2_DEPRECATED_SINCE_2014_05
+	bool
+	default y
+
+config BR2_DEPRECATED_SINCE_2014_08
+	bool
+	default y
+
+config BR2_DEPRECATED_SINCE_2015_02
+	bool
+	default y
+
+endif
 
 config BR2_ENABLE_DEBUG
 	bool "build packages with debugging symbols"
@@ -286,7 +362,7 @@ choice
 
 config BR2_STRIP_strip
 	bool "strip"
-	depends on !BR2_ELF2FLT
+	depends on !BR2_PACKAGE_HOST_ELF2FLT
 	help
 	  Binaries and libraries in the target filesystem will be
 	  stripped using the normal 'strip' command. This allows to
@@ -297,7 +373,8 @@ config BR2_STRIP_strip
 config BR2_STRIP_sstrip
 	bool "sstrip"
 	select BR2_PACKAGE_SSTRIP_HOST
-	depends on !BR2_ELF2FLT
+	depends on !BR2_PACKAGE_HOST_ELF2FLT
+	depends on BR2_DEPRECATED_SINCE_2014_05
 	help
 	  Binaries and libraries in the target filesystem will be
 	  stripped using the 'sstrip' command, which strips a little
@@ -398,38 +475,100 @@ config BR2_OPTIMIZE_S
 
 endchoice
 
-config BR2_PREFER_STATIC_LIB
-	bool "prefer static libraries"
+config BR2_GOOGLE_BREAKPAD_ENABLE
+	bool "Enable google-breakpad support"
+	select BR2_PACKAGE_GOOGLE_BREAKPAD
+	depends on BR2_INSTALL_LIBSTDCPP
+	depends on BR2_TOOLCHAIN_USES_GLIBC
+	depends on BR2_PACKAGE_GOOGLE_BREAKPAD_ARCH_SUPPORTS
 	help
-	  Where possible, build and use static libraries for the target.
-	  This potentially increases your code size and should only be
-	  used if you know what you do.
+	  This option will enable the use of google breakpad, a
+	  library and tool suite that allows you to distribute an
+	  application to users with compiler-provided debugging
+	  information removed, record crashes in compact "minidump"
+	  files, send them back to your server and produce C and C++
+	  stack traces from these minidumps.  Breakpad can also write
+	  minidumps on request for programs that have not crashed.
+
+if BR2_GOOGLE_BREAKPAD_ENABLE
+
+config BR2_GOOGLE_BREAKPAD_INCLUDE_FILES
+	string "List of executables and libraries to extract symbols from"
+	default ""
+	help
+	  You may specify a space-separated list of binaries and
+	  libraries with full paths relative to $(TARGET_DIR) of which
+	  debug symbols will be dumped for further use with google
+	  breakpad.
+
+	  A directory structure that can be used by minidump-stackwalk
+	  will be created at:
+
+	  $(STAGING_DIR)/usr/share/google-breakpad-symbols
+
+endif
+
+config BR2_ENABLE_SSP
+	bool "build code with Stack Smashing Protection"
+	depends on BR2_TOOLCHAIN_HAS_SSP
+	help
+	  Enable stack smashing protection support using GCCs
+	  -fstack-protector-all option.
+
+	  See http://www.linuxfromscratch.org/hints/downloads/files/ssp.txt
+	  for details.
+
+	  Note that this requires the toolchain to have SSP
+	  support. This is always the case for glibc and eglibc
+	  toolchain, but is optional in uClibc toolchains.
+
+comment "enabling Stack Smashing Protection requires support in the toolchain"
+	depends on !BR2_TOOLCHAIN_HAS_SSP
+
+choice
+	bool "libraries"
+	default BR2_SHARED_LIBS if BR2_BINFMT_SUPPORTS_SHARED
+	default BR2_STATIC_LIBS if !BR2_BINFMT_SUPPORTS_SHARED
+	help
+	  Select the type of libraries you want to use on the target.
+
 	  The default is to build dynamic libraries and use those on
-	  the target filesystem.
+	  the target filesystem, except when the architecture and/or
+	  the selected binary format does not support shared
+	  libraries.
 
-	  WARNING: This is highly experimental at the moment.
-
-config BR2_HAVE_DOCUMENTATION
-	bool "documentation on the target"
-	# We no longer want to support a toolchain on the target
-	depends on BR2_DEPRECATED
+config BR2_STATIC_LIBS
+	bool "static only"
 	help
-	  Install the documentation, including manual pages and info
-	  pages, on the target.
-	  If you say n here, your target will not contain any
-	  documentation.
+	  Build and use only static libraries. No shared libraries
+	  will be instaled on the target. This potentially increases
+	  your code size and should only be used if you know what you
+	  are doing. Note that some packages may not be available when
+	  this option is enabled, due to their need for dynamic
+	  library support.
 
-config BR2_HAVE_DEVFILES
-	bool "development files in target filesystem"
-	# We no longer want to support a toolchain on the target
-	depends on BR2_DEPRECATED
+config BR2_SHARED_LIBS
+	bool "shared only"
+	depends on BR2_BINFMT_SUPPORTS_SHARED
 	help
-	  Install headers and static libraries in the
-	  target filesystem
+	  Build and use only shared libraries. This is the recommended
+	  solution as it saves space and build time.
+
+config BR2_SHARED_STATIC_LIBS
+	bool "both static and shared"
+	depends on BR2_BINFMT_SUPPORTS_SHARED
+	help
+	  Build both shared and static libraries, but link executables
+	  dynamically. While building both shared and static libraries
+	  take more time and more disk space, having static libraries
+	  may be useful to link some of the applications statically.
+
+endchoice
+
 
 config BR2_PACKAGE_OVERRIDE_FILE
 	string "location of a package override file"
-	default "$(TOPDIR)/local.mk"
+	default "$(CONFIG_DIR)/local.mk"
 	help
 	  A package override file is a short makefile that contains
 	  variable definitions of the form <pkg>_OVERRIDE_SRCDIR,
@@ -438,19 +577,43 @@ config BR2_PACKAGE_OVERRIDE_FILE
 	  Buildroot documentation for more details on this feature.
 
 config BR2_GLOBAL_PATCH_DIR
-	string "global patch directory"
+	string "global patch directories"
 	help
-	  You may specify a directory containing global package patches.
-	  For a specific version <packageversion> of a specific package
-	  <packagename>, patches are applied as follows.
+	  You may specify a space separated list of one or more directories
+	  containing global package patches. For a specific version
+	  <packageversion> of a specific package <packagename>, patches are
+	  applied as follows:
 
-	  First, the default Buildroot patch set for the package is applied.
+	  First, the default Buildroot patch set for the package is applied
+	  from the package's directory in Buildroot.
 
-	  If the directory $(BR2_GLOBAL_PATCH_DIR)/<packagename>/<packageversion>
-	  exists, then all *.patch files in the directory will be applied.
+	  Then for every directory - <global-patch-dir> - that exists in
+	  BR2_GLOBAL_PATCH_DIR, if the directory
+	  <global-patch-dir>/<packagename>/<packageversion>/ exists, then all
+	  *.patch files in this directory will be applied.
 
-	  Otherwise, if the directory $(BR2_GLOBAL_PATCH_DIR)/<packagename> exists,
+	  Otherwise, if the directory <global-patch-dir>/<packagename> exists,
 	  then all *.patch files in the directory will be applied.
+
+menu "Advanced"
+
+config BR2_COMPILER_PARANOID_UNSAFE_PATH
+	bool "paranoid check of library/header paths"
+	help
+	  By default, when this option is disabled, when the Buildroot
+	  cross-compiler will encounter an unsafe library or header
+	  path (such as /usr/include, or /usr/lib), the compiler will
+	  display a warning.
+
+	  By enabling this option, this warning is turned into an
+	  error, which will completely abort the build when such
+	  unsafe paths are encountered.
+
+	  Note that this mechanism is available for both the internal
+	  toolchain (through gcc and binutils patches) and external
+	  toolchain backends (through the external toolchain wrapper).
+
+endmenu
 
 endmenu
 
@@ -458,14 +621,21 @@ source "toolchain/Config.in"
 
 source "system/Config.in"
 
-source "package/Config.in"
+source "linux/Config.in"
 
-source "package/Config.in.host"
+source "package/Config.in"
 
 source "fs/Config.in"
 
 source "boot/Config.in"
 
-source "linux/Config.in"
+source "package/Config.in.host"
 
 source "Config.in.legacy"
+
+menu "User-provided options"
+	depends on BR2_EXTERNAL != "support/dummy-external"
+
+source "$BR2_EXTERNAL/Config.in"
+
+endmenu

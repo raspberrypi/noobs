@@ -1,8 +1,8 @@
-#############################################################
+################################################################################
 #
 # wipe
 #
-#############################################################
+################################################################################
 
 WIPE_VERSION = 2.3.1
 WIPE_SITE = http://downloads.sourceforge.net/project/wipe/wipe/$(WIPE_VERSION)
@@ -12,13 +12,7 @@ WIPE_LICENSE = GPLv2+
 WIPE_LICENSE_FILES = LICENSE
 
 define WIPE_INSTALL_TARGET_CMDS
-	$(INSTALL) -D $(@D)/wipe $(TARGET_DIR)/usr/bin/wipe
-	$(INSTALL) -D $(@D)/wipe.1 $(TARGET_DIR)/usr/share/man/man1/wipe.1
-endef
-
-define WIPE_UNINSTALL_TARGET_CMDS
-	rm -f $(TARGET_DIR)/usr/bin/wipe
-	rm -f $(TARGET_DIR)/usr/share/man/man1/wipe.1
+	$(INSTALL) -D -m 0755 $(@D)/wipe $(TARGET_DIR)/usr/bin/wipe
 endef
 
 $(eval $(autotools-package))

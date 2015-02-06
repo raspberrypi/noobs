@@ -1,6 +1,0 @@
-config BR2_PACKAGE_FLAC
-	bool "flac"
-	help
-          FLAC is an Open Source lossless audio codec.
-
-	  http://flac.sourceforge.net/

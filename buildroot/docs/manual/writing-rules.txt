@@ -1,8 +1,7 @@
 // -*- mode:doc; -*-
 // vim: set syntax=asciidoc:
 
-Coding style
-------------
+== Coding style
 
 Overall, these coding style rules are here to help you to add new files in
 Buildroot or refactor existing ones.
@@ -17,8 +16,7 @@ file,
 
 [[writing-rules-config-in]]
 
-+Config.in+ file
-~~~~~~~~~~~~~~~~
+=== +Config.in+ file
 
 +Config.in+ files contain entries for almost anything configurable in
 Buildroot.
@@ -49,23 +47,28 @@ http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt[].
 
 [[writing-rules-mk]]
 
-The +.mk+ file
-~~~~~~~~~~~~~~
+=== The +.mk+ file
 
+* Header: The file starts with a header. It contains the module name,
+preferably in lowercase, enclosed between separators made of 80 hashes. A
+blank line is mandatory after the header:
++
+---------------------
+################################################################################
+#
+# libfoo
+#
+################################################################################
+---------------------
++
 * Assignment: use +=+ preceded and followed by one space:
 +
 ---------------------
 LIBFOO_VERSION = 1.0
-LIBFOO_CONF_OPT += --without-python-support
+LIBFOO_CONF_OPTS += --without-python-support
 ---------------------
 +
-It is also possible to align the +=+ signs:
-+
----------------------
-LIBFOO_VERSION   = 1.0
-LIBFOO_SOURCE    = foo-$(LIBFOO_VERSION).tar.gz
-LIBFOO_CONF_OPT += --without-python-support
----------------------
+Do not align the +=+ signs.
 
 * Indentation: use tab only:
 +
@@ -87,17 +90,17 @@ YES:
 +
 ---------------------
 ifeq ($(BR2_PACKAGE_PYTHON),y)
-LIBFOO_CONF_OPT += --with-python-support
+LIBFOO_CONF_OPTS += --with-python-support
 LIBFOO_DEPENDENCIES += python
 else
-LIBFOO_CONF_OPT += --without-python-support
+LIBFOO_CONF_OPTS += --without-python-support
 endif
 ---------------------
 +
 NO:
 +
 ---------------------
-LIBFOO_CONF_OPT += --with$(if $(BR2_PACKAGE_PYTHON),,out)-python-support
+LIBFOO_CONF_OPTS += --with$(if $(BR2_PACKAGE_PYTHON),,out)-python-support
 LIBFOO_DEPENDENCIES += $(if $(BR2_PACKAGE_PYTHON),python,)
 ---------------------
 
@@ -129,8 +132,7 @@ LIBFOO_POST_INSTALL_TARGET_HOOKS += LIBFOO_REMOVE_DATA
 endif
 ---------------------
 
-The documentation
-~~~~~~~~~~~~~~~~~
+=== The documentation
 
 The documentation uses the
 http://www.methods.co.nz/asciidoc/[asciidoc] format.

@@ -3,8 +3,7 @@
 
 [[patch-policy]]
 
-Patching a package
-------------------
+== Patching a package
 
 While integrating a new package or updating an existing one, it may be
 necessary to patch the source of the software to get it cross-built within
@@ -15,47 +14,50 @@ the builds. It supports three ways of applying patch sets: downloaded patches,
 patches supplied within buildroot and patches located in a user-defined
 global patch directory.
 
-Providing patches
-~~~~~~~~~~~~~~~~~
+=== Providing patches
 
-Downloaded
-^^^^^^^^^^
+==== Downloaded
 
-If it is necessary to apply a patch that is available for download, then it
+If it is necessary to apply a patch that is available for download, then add it
 to the +<packagename>_PATCH+ variable. It is downloaded from the same site
 as the package itself. It can be a single patch, or a tarball containing a
 patch series.
 
 This method is typically used for packages from Debian.
 
-Within Buildroot
-^^^^^^^^^^^^^^^^
+==== Within Buildroot
 
 Most patches are provided within Buildroot, in the package
 directory; these typically aim to fix cross-compilation, libc support,
 or other such issues.
 
-These patch files should be named +<packagename>-<number>-<description>.patch+.
-
-A +series+ file, as used by +quilt+, may also be added in the
-package directory. In that case, the +series+ file defines the patch
-application order.
+These patch files should be named +<number>-<description>.patch+.
 
 .Notes
 - The patch files coming with Buildroot should not contain any package version
-reference in their filename.
-- The field +<number>+ in the patch file name refers to the 'apply order'.
+  reference in their filename.
+- The field +<number>+ in the patch file name refers to the 'apply order',
+  and shall start at 1; It is preferred to pad the number with zeros up to 4
+  digits, like 'git-format-patch' does. E.g.: +0001-foobar-the-buz.patch+
+- Previously, it was mandatory for patches to be prefixed with the name of
+  the package, like +<package>-<number>-<description>.patch+, but that is
+  no longer the case. Existing packages will be fixed as time passes. 'Do
+  not prefix patches with the package name.'
+- Previously, a +series+ file, as used by +quilt+, could also be added in
+  the package directory. In that case, the +series+ file defines the patch
+  application order. This is deprecated, and will be removed in the future.
+  'Do not use a series file.'
 
-Global patch directory
-^^^^^^^^^^^^^^^^^^^^^^
+
+==== Global patch directory
 
 The +BR2_GLOBAL_PATCH_DIR+ configuration file option can be
-used to specify a directory containing global package patches. See
-xref:packages-custom[] for details.
+used to specify a space separated list of one or more directories
+containing global package patches. See xref:customize-patches[] for
+details.
 
-
-How patches are applied
-~~~~~~~~~~~~~~~~~~~~~~~
+[[patch-apply-order]]
+=== How patches are applied
 
 . Run the +<packagename>_PRE_PATCH_HOOKS+ commands if defined;
 
@@ -64,25 +66,29 @@ How patches are applied
 . If +<packagename>_PATCH+ is defined, then patches from these
   tarballs are applied;
 
-. If there are some +*.patch+ files in the package directory or in the
-  a package subdirectory named +<packageversion>+, then:
+. If there are some +*.patch+ files in the package's Buildroot
+  directory or in a package subdirectory named +<packageversion>+,
+  then:
 +
 * If a +series+ file exists in the package directory, then patches are
   applied according to the +series+ file;
 +
 * Otherwise, patch files matching +<packagename>-*.patch+
   are applied in alphabetical order.
-  So, to ensure they are applied in the right order, it is hightly
-  recommended to named the patch files like this:
+  So, to ensure they are applied in the right order, it is highly
+  recommended to name the patch files like this:
   +<packagename>-<number>-<description>.patch+, where +<number>+
   refers to the 'apply order'.
+
+. If +BR2_GLOBAL_PATCH_DIR+ is defined, the directories will be
+  enumerated in the order they are specified. The patches are applied
+  as described in the previous step.
 
 . Run the +<packagename>_POST_PATCH_HOOKS+ commands if defined.
 
 If something goes wrong in the steps _3_ or _4_, then the build fails.
 
-Format and licensing of the package patches
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Format and licensing of the package patches
 
 Patches are released under the same license as the software that is
 modified.
@@ -105,7 +111,7 @@ At the end, the patch should look like:
 ---------------
 configure.ac: add C++ support test
 
-signed-off-by John Doe <john.doe@noname.org>
+Signed-off-by: John Doe <john.doe@noname.org>
 
 --- configure.ac.orig
 +++ configure.ac
@@ -124,8 +130,7 @@ AC_PROG_MAKE_SET
 +AM_CONDITIONAL([CXX_WORKS], [test "x$rw_cv_prog_cxx_works" = "xyes"])
 ---------------
 
-Integrating patches found on the Web
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Integrating patches found on the Web
 
 When integrating a patch of which you are not the author, you have to
 add a few things in the header of the patch itself.

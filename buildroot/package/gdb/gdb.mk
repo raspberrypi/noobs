@@ -1,31 +1,35 @@
-#############################################################
+################################################################################
 #
 # gdb
 #
-#############################################################
+################################################################################
 
 GDB_VERSION = $(call qstrip,$(BR2_GDB_VERSION))
-GDB_SITE    = $(BR2_GNU_MIRROR)/gdb
+GDB_SITE = $(BR2_GNU_MIRROR)/gdb
 
-# When no version is defined, it means that cross-gdb for the host has
-# not been enabled, and we will only build gdbserver or gdb for the
-# target. In this case, use the latest available version
-# automatically.
-ifeq ($(GDB_VERSION),)
-ifeq ($(BR2_bfin),y)
-GDB_VERSION = 6.6a
-else ifeq ($(BR2_avr32),y)
-GDB_VERSION = 6.7.1-avr32-2.1.5
-else
-GDB_VERSION = 7.5.1
+ifeq ($(BR2_arc),y)
+GDB_SITE = $(call github,foss-for-synopsys-dwc-arc-processors,binutils-gdb,$(GDB_VERSION))
+GDB_SOURCE = gdb-$(GDB_VERSION).tar.gz
+GDB_FROM_GIT = y
 endif
+
+ifeq ($(BR2_microblaze),y)
+GDB_SITE = $(call github,Xilinx,gdb,$(GDB_VERSION))
+GDB_SOURCE = gdb-$(GDB_VERSION).tar.gz
+GDB_FROM_GIT = y
 endif
 
 ifeq ($(GDB_VERSION),6.7.1-avr32-2.1.5)
-GDB_SITE = ftp://www.at91.com/pub/buildroot/
+GDB_SITE = ftp://www.at91.com/pub/buildroot
 endif
 
-GDB_SOURCE = gdb-$(GDB_VERSION).tar.bz2
+# Starting from 7.8.x, bz2 tarballs no longer available, use .tar.xz
+# instead.
+ifneq ($(filter 7.8.%,$(GDB_VERSION)),)
+GDB_SOURCE = gdb-$(GDB_VERSION).tar.xz
+endif
+
+GDB_SOURCE ?= gdb-$(GDB_VERSION).tar.bz2
 GDB_LICENSE = GPLv2+ LGPLv2+ GPLv3+ LGPLv3+
 GDB_LICENSE_FILES = COPYING COPYING.LIB COPYING3 COPYING3.LIB
 
@@ -38,8 +42,9 @@ GDB_DEPENDENCIES = ncurses
 endif
 
 # For the host variant, we really want to build with XML support,
-# which is needed to read XML descriptions of target architectures.
-HOST_GDB_DEPENDENCIES = host-expat
+# which is needed to read XML descriptions of target architectures. We
+# also need ncurses.
+HOST_GDB_DEPENDENCIES = host-expat host-ncurses
 
 # Apply the Xtensa specific patches
 XTENSA_CORE_NAME = $(call qstrip, $(BR2_XTENSA_CORE_NAME))
@@ -48,8 +53,17 @@ define GDB_XTENSA_PRE_PATCH
 	tar xf $(BR2_XTENSA_OVERLAY_DIR)/xtensa_$(XTENSA_CORE_NAME).tar \
 		-C $(@D) --strip-components=1 gdb
 endef
+GDB_PRE_PATCH_HOOKS += GDB_XTENSA_PRE_PATCH
 HOST_GDB_PRE_PATCH_HOOKS += GDB_XTENSA_PRE_PATCH
 endif
+
+# When gdb sources are fetched from the binutils-gdb repository, they
+# also contain the binutils sources, but binutils shouldn't be built,
+# so we disable it.
+GDB_DISABLE_BINUTILS_CONF_OPTS = \
+	--disable-binutils \
+	--disable-ld \
+	--disable-gas
 
 GDB_CONF_ENV = \
 	ac_cv_type_uintptr_t=yes \
@@ -62,16 +76,32 @@ GDB_CONF_ENV = \
 	bash_cv_have_mbstate_t=yes \
 	gdb_cv_func_sigsetjmp=yes
 
-GDB_CONF_OPT = \
+# The shared only build is not supported by gdb, so enable static build for
+# build-in libraries with --enable-static.
+GDB_CONF_OPTS = \
 	--without-uiout \
-	--disable-tui \
 	--disable-gdbtk \
 	--without-x \
 	--disable-sim \
+	$(GDB_DISABLE_BINUTILS_CONF_OPTS) \
 	$(if $(BR2_PACKAGE_GDB_SERVER),--enable-gdbserver) \
 	--with-curses \
 	--without-included-gettext \
-	--disable-werror
+	--disable-werror \
+	--enable-static
+
+ifeq ($(BR2_PACKAGE_GDB_TUI),y)
+	GDB_CONF_OPTS += --enable-tui
+else
+	GDB_CONF_OPTS += --disable-tui
+endif
+
+ifeq ($(BR2_PACKAGE_GDB_PYTHON),y)
+	GDB_CONF_OPTS += --with-python=$(TOPDIR)/package/gdb/gdb-python-config
+	GDB_DEPENDENCIES += python
+else
+	GDB_CONF_OPTS += --without-python
+endif
 
 # This removes some unneeded Python scripts and XML target description
 # files that are not useful for a normal usage of the debugger.
@@ -102,17 +132,38 @@ endif
 #  * --disable-shared, otherwise the old 6.7 version specific to AVR32
 #    doesn't build because it wants to link a shared libbfd.so against
 #    non-PIC liberty.a.
-HOST_GDB_CONF_OPT = \
+HOST_GDB_CONF_OPTS = \
 	--target=$(GNU_TARGET_NAME) \
 	--enable-static --disable-shared \
 	--without-uiout \
-	--disable-tui \
 	--disable-gdbtk \
 	--without-x \
 	--enable-threads \
 	--disable-werror \
 	--without-included-gettext \
+	$(GDB_DISABLE_BINUTILS_CONF_OPTS) \
 	--disable-sim
+
+ifeq ($(BR2_PACKAGE_HOST_GDB_TUI),y)
+	HOST_GDB_CONF_OPTS += --enable-tui
+else
+	HOST_GDB_CONF_OPTS += --disable-tui
+endif
+
+ifeq ($(BR2_PACKAGE_HOST_GDB_PYTHON),y)
+	HOST_GDB_CONF_OPTS += --with-python=$(HOST_DIR)/usr/bin/python2
+	HOST_GDB_DEPENDENCIES += host-python
+else
+	HOST_GDB_CONF_OPTS += --without-python
+endif
+
+ifeq ($(GDB_FROM_GIT),y)
+HOST_GDB_DEPENDENCIES += host-texinfo
+else
+# don't generate documentation
+GDB_CONF_ENV += ac_cv_prog_MAKEINFO=missing
+HOST_GDB_CONF_ENV += ac_cv_prog_MAKEINFO=missing
+endif
 
 # legacy $arch-linux-gdb symlink
 define HOST_GDB_ADD_SYMLINK
@@ -121,6 +172,8 @@ define HOST_GDB_ADD_SYMLINK
 endef
 
 HOST_GDB_POST_INSTALL_HOOKS += HOST_GDB_ADD_SYMLINK
+
+HOST_GDB_POST_INSTALL_HOOKS += gen_gdbinit_file
 
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))

@@ -1,12 +1,12 @@
-#############################################################
+################################################################################
 #
 # uemacs
 #
-#############################################################
+################################################################################
 
-UEMACS_VERSION = 4.0.15-lt
-UEMACS_SOURCE = em-$(UEMACS_VERSION).tar.bz2
-UEMACS_SITE = $(BR2_KERNEL_MIRROR)/software/editors/uemacs/
+UEMACS_VERSION = 8841922689769960fa074fbb053cb8507f2f3ed9
+UEMACS_SITE = $(BR2_KERNEL_MIRROR)/scm/editors/uemacs/uemacs.git
+UEMACS_SITE_METHOD = git
 UEMACS_DEPENDENCIES = ncurses
 
 define UEMACS_BUILD_CMDS
@@ -17,10 +17,6 @@ endef
 
 define UEMACS_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 -D $(@D)/em $(TARGET_DIR)/usr/bin/em
-endef
-
-define UEMACS_UNINSTALL_TARGET_CMDS
-	rm -f $(TARGET_DIR)/usr/bin/em
 endef
 
 $(eval $(generic-package))

@@ -2,20 +2,9 @@
 // vim: set syntax=asciidoc:
 
 [[make-tips]]
-'make' tips
------------
+=== 'make' tips
 
 This is a collection of tips that help you make the most of Buildroot.
-
-.Configuration searches:
-
-The +make *config+ commands offer a search tool. Read the help message in
-the different frontend menus to know how to use it:
-
-* in _menuconfig_, the search tool is called by pressing +/+;
-* in _xconfig_, the search tool is called by pressing +Ctrl+ + +f+.
-
-The result of the search shows the help message of the matching items.
 
 .Display all commands executed by make:
 
@@ -29,16 +18,14 @@ The result of the search shows the help message of the matching items.
  $ make help
 --------------------
 
-.Not all targets are always available,
-
+Not all targets are always available,
 some settings in the +.config+ file may hide some targets:
 
+* +busybox-menuconfig+ only works when +busybox+ is enabled;
 * +linux-menuconfig+ and +linux-savedefconfig+ only work when
   +linux+ is enabled;
-* +uclibc-menuconfig+ is only available when the
-  Buildroot internal toolchain backend is used;
-* +ctng-menuconfig+ is only available when the
-  crosstool-NG backend is used;
+* +uclibc-menuconfig+ is only available when the uClibc C library is
+  selected in the internal toolchain backend;
 * +barebox-menuconfig+ and +barebox-savedefconfig+ only work when the
   +barebox+ bootloader is enabled.
 
@@ -54,12 +41,31 @@ and target trees, the images and the toolchain):
  $ make clean
 --------------------
 
+.Generating the manual:
+
+The present manual sources are located in the 'docs/manual' directory.
+To generate the manual:
+
+---------------------------------
+ $ make manual-clean
+ $ make manual
+---------------------------------
+
+The manual outputs will be generated in 'output/docs/manual'.
+
+.Notes
+- A few tools are required to build the documentation (see:
+  xref:requirement-optional[]).
+
+.Resetting Buildroot for a new target:
+
 To delete all build products as well as the configuration:
 
 --------------------
  $ make distclean
 --------------------
 
-Note that if +ccache+ is enabled, running +make clean+ or +distclean+ does
+.Notes
+If +ccache+ is enabled, running +make clean+ or +distclean+ does
 not empty the compiler cache used by Buildroot. To delete it, refer
 to xref:ccache[].

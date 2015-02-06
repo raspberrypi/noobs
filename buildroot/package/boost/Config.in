@@ -1,4 +1,4 @@
-comment "boost requires a toolchain with C++, large file and thread support enabled"
+comment "boost needs a toolchain w/ C++, largefile, threads"
 	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_LARGEFILE || !BR2_TOOLCHAIN_HAS_THREADS
 
 config BR2_PACKAGE_BOOST
@@ -9,8 +9,6 @@ config BR2_PACKAGE_BOOST
 	# that unfortunately doesn't work. Until someone fixes that,
 	# let's depend on threads.
 	depends on BR2_TOOLCHAIN_HAS_THREADS
-	select BR2_PACKAGE_BZIP2
-	select BR2_PACKAGE_ZLIB
 	help
 	  A general purpose C++ library
 
@@ -18,11 +16,47 @@ config BR2_PACKAGE_BOOST
 
 if BR2_PACKAGE_BOOST
 
+choice
+	prompt "Layout"
+	default BR2_PACKAGE_BOOST_LAYOUT_SYSTEM
+	help
+	  Selects the layout of Boost binary names
+
+config BR2_PACKAGE_BOOST_LAYOUT_SYSTEM
+	bool "system"
+	help
+	  Boost binary names do not include the Boost version number
+	  or the name and version number of the compiler.
+
+config BR2_PACKAGE_BOOST_LAYOUT_TAGGED
+	bool "tagged"
+	help
+	  Boost binary names include the encoded build properties such
+	  as variant and threading, but do not include compiler name
+	  and version, or Boost version. This option is useful if you
+	  build several variants of Boost, using the same compiler.
+
+config BR2_PACKAGE_BOOST_LAYOUT_VERSIONED
+	bool "versioned"
+	help
+	  Boost binary names include the Boost version number, name
+	  and version of the compiler and encoded build properties.
+
+endchoice
+
+config BR2_PACKAGE_BOOST_LAYOUT
+	string
+	default "system" if BR2_PACKAGE_BOOST_LAYOUT_SYSTEM
+	default "tagged" if BR2_PACKAGE_BOOST_LAYOUT_TAGGED
+	default "versioned" if BR2_PACKAGE_BOOST_LAYOUT_VERSIONED
+
 config BR2_PACKAGE_BOOST_CHRONO
 	bool "boost-chrono"
 
 config BR2_PACKAGE_BOOST_CONTEXT
 	bool "boost-context"
+	depends on (BR2_arm || BR2_armeb || BR2_i386 || BR2_mips || BR2_mipsel \
+			|| BR2_powerpc || BR2_sparc || BR2_x86_64)
 
 config BR2_PACKAGE_BOOST_DATE_TIME
 	bool "boost-date_time"
@@ -41,12 +75,14 @@ config BR2_PACKAGE_BOOST_GRAPH_PARALLEL
 
 config BR2_PACKAGE_BOOST_IOSTREAMS
 	bool "boost-iostreams"
+	select BR2_PACKAGE_BZIP2
+	select BR2_PACKAGE_ZLIB
 
 config BR2_PACKAGE_BOOST_LOCALE
 	depends on BR2_USE_WCHAR
 	bool "boost-locale"
 
-comment "boost-locale requires a toolchain with wchar support"
+comment "boost-locale needs a toolchain w/ wchar"
 	depends on !BR2_USE_WCHAR
 
 config BR2_PACKAGE_BOOST_MATH
@@ -57,6 +93,10 @@ config BR2_PACKAGE_BOOST_MPI
 
 config BR2_PACKAGE_BOOST_PROGRAM_OPTIONS
 	bool "boost-program_options"
+
+config BR2_PACKAGE_BOOST_PYTHON
+	depends on BR2_PACKAGE_PYTHON || BR2_PACKAGE_PYTHON3
+	bool "boost-python"
 
 config BR2_PACKAGE_BOOST_RANDOM
 	bool "boost-random"
@@ -75,6 +115,7 @@ config BR2_PACKAGE_BOOST_SYSTEM
 
 config BR2_PACKAGE_BOOST_TEST
 	bool "boost-test"
+	depends on BR2_USE_MMU # fork()
 
 config BR2_PACKAGE_BOOST_THREAD
 	bool "boost-thread"
@@ -86,4 +127,3 @@ config BR2_PACKAGE_BOOST_WAVE
 	bool "boost-wave"
 
 endif
-

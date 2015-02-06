@@ -1,6 +1,7 @@
 menuconfig BR2_PACKAGE_SCONESERVER
 	bool "sconeserver"
 	depends on BR2_INSTALL_LIBSTDCPP
+	depends on BR2_TOOLCHAIN_HAS_THREADS_NPTL
 	select BR2_PACKAGE_PCRE
 	help
 	  Sconeserver is a modular, object-orientated and extremely versatile
@@ -26,6 +27,7 @@ config BR2_PACKAGE_SCONESERVER_HTTP_SCONESITE
 config BR2_PACKAGE_SCONESERVER_HTTP_SCONESITE_IMAGE
 	bool "http::sconesite::image"
 	depends on BR2_PACKAGE_SCONESERVER_HTTP_SCONESITE
+	depends on BR2_USE_MMU # imagemagick
 	select BR2_PACKAGE_IMAGEMAGICK
 	help
 	  http::sconesite::image module for Sconeserver
@@ -33,7 +35,8 @@ config BR2_PACKAGE_SCONESERVER_HTTP_SCONESITE_IMAGE
 config BR2_PACKAGE_SCONESERVER_MYSQL
 	bool "mysql"
 	depends on BR2_USE_MMU # mysql
-	select BR2_PACKAGE_MYSQL_CLIENT
+	depends on !BR2_avr32 # mysql
+	select BR2_PACKAGE_MYSQL
 	help
 	  MySQL module for Sconeserver
 
@@ -41,10 +44,16 @@ config BR2_PACKAGE_SCONESERVER_BLUETOOTH
 	bool "bluetooth"
 	depends on BR2_USE_WCHAR # bluez->libglib2
 	depends on BR2_USE_MMU # bluez->dbus
-	depends on BR2_TOOLCHAIN_HAS_THREADS # bluez->dbus
+	depends on BR2_TOOLCHAIN_HAS_THREADS # bluez->dbus, bluez->libglib2
+	depends on !BR2_avr32 # bluez_utils
+	depends on !BR2_STATIC_LIBS # bluez_utils
 	select BR2_PACKAGE_BLUEZ_UTILS
 	help
 	  Bluetooth module for Sconeserver
+
+comment "bluetooth support needs a toolchain w/ wchar, threads, dynamic library"
+	depends on !BR2_avr32 && BR2_USE_MMU
+	depends on !BR2_USE_WCHAR || !BR2_TOOLCHAIN_HAS_THREADS || BR2_STATIC_LIBS
 
 config BR2_PACKAGE_SCONESERVER_RSS
 	bool "rss"
@@ -56,6 +65,7 @@ config BR2_PACKAGE_SCONESERVER_LOCATION
 	bool "location"
 	depends on BR2_USE_MMU # gpsd
 	depends on BR2_TOOLCHAIN_HAS_THREADS # gpsd
+	depends on !BR2_microblaze # gpsd
 	select BR2_PACKAGE_GPSD
 	help
 	  Location module for Sconeserver
@@ -90,5 +100,5 @@ comment "ui module requires X.org"
 
 endif # BR2_PACKAGE_SCONESERVER
 
-comment "sconeserver requires a toolchain with C++ support enabled"
-	depends on !BR2_INSTALL_LIBSTDCPP
+comment "sconeserver needs a toolchain w/ C++, NPTL"
+	depends on !(BR2_INSTALL_LIBSTDCPP && BR2_TOOLCHAIN_HAS_THREADS_NPTL)

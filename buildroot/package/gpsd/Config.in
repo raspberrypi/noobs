@@ -1,11 +1,15 @@
-comment "gpsd needs a toolchain with thread support"
+comment "gpsd needs a toolchain w/ threads"
+	depends on BR2_USE_MMU
 	depends on !BR2_TOOLCHAIN_HAS_THREADS
+	depends on !BR2_microblaze
 
 config BR2_PACKAGE_GPSD
 	bool "gpsd"
 	# Uses fork()
 	depends on BR2_USE_MMU
 	depends on BR2_TOOLCHAIN_HAS_THREADS
+	# triggers gcc ice
+	depends on !BR2_microblaze
 	help
 	  gpsd is a service daemon that monitors one or more GPSes or AIS
 	  receivers attached to a host computer through serial or USB ports,
@@ -14,15 +18,15 @@ config BR2_PACKAGE_GPSD
 
 	  The D-Bus interface is included if dbus-glib is enabled.
 
-	  http://gpsd.berlios.de/
+	  http://www.catb.org/gpsd/
+
+if BR2_PACKAGE_GPSD
 
 config BR2_PACKAGE_GPSD_DEVICES
 	string "Where to look for GPSes"
 	default "/dev/ttyS1"
-	depends on BR2_PACKAGE_GPSD
 
 menu "Features"
-	depends on BR2_PACKAGE_GPSD
 
 config BR2_PACKAGE_GPSD_CLIENT_DEBUG
 	bool "client debugging support"
@@ -32,10 +36,11 @@ config BR2_PACKAGE_GPSD_OLDSTYLE
 
 config BR2_PACKAGE_GPSD_PROFILING
 	bool "profiling support"
-	depends on !BR2_TOOLCHAIN_BUILDROOT && !BR2_TOOLCHAIN_CTNG_uClibc && !BR2_TOOLCHAIN_EXTERNAL_UCLIBC
+	depends on BR2_TOOLCHAIN_USES_GLIBC
+	depends on !BR2_aarch64
 
 comment "profiling support not available with uClibc-based toolchain"
-	depends on BR2_TOOLCHAIN_BUILDROOT || BR2_TOOLCHAIN_CTNG_uClibc || BR2_TOOLCHAIN_EXTERNAL_UCLIBC
+	depends on !BR2_TOOLCHAIN_USES_GLIBC
 
 config BR2_PACKAGE_GPSD_NTP_SHM
 	bool "NTP time hinting support"
@@ -93,7 +98,6 @@ config BR2_PACKAGE_GPSD_SQUELCH
 endmenu
 
 menu "Protocols"
-	depends on BR2_PACKAGE_GPSD
 
 config BR2_PACKAGE_GPSD_AIVDM
 	bool "Aivdm"
@@ -170,6 +174,9 @@ config BR2_PACKAGE_GPSD_NMEA2000
 	bool "NMEA2000"
 	select BR2_PACKAGE_GPSD_NAVCOM
 	select BR2_PACKAGE_GPSD_AIVDM
+	# uClibc 0.9.31, used on AVR32, does not have the necessary
+	# CAN definitions.
+	depends on !BR2_avr32
 	help
 	  NMEA2000/CAN support
 
@@ -229,3 +236,5 @@ config BR2_PACKAGE_GPSD_UBX
 	  uBlox UBX binary support
 
 endmenu
+
+endif

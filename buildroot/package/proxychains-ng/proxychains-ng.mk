@@ -1,12 +1,14 @@
-#############################################################
+################################################################################
 #
 # proxychains-ng
 #
-#############################################################
+################################################################################
 
-PROXYCHAINS_NG_VERSION = 4.4
+PROXYCHAINS_NG_VERSION = 4.6
 PROXYCHAINS_NG_SOURCE = proxychains-$(PROXYCHAINS_NG_VERSION).tar.bz2
 PROXYCHAINS_NG_SITE = http://downloads.sourceforge.net/project/proxychains-ng
+PROXYCHAINS_NG_LICENSE = GPLv2+
+PROXYCHAINS_NG_LICENSE_FILES = COPYING
 
 define PROXYCHAINS_NG_CONFIGURE_CMDS
 	cd $(@D) && \

@@ -1,15 +1,15 @@
-#############################################################
+################################################################################
 #
 # nodejs
 #
-#############################################################
+################################################################################
 
-NODEJS_VERSION = 0.8.22
+NODEJS_VERSION = 0.10.36
 NODEJS_SOURCE = node-v$(NODEJS_VERSION).tar.gz
 NODEJS_SITE = http://nodejs.org/dist/v$(NODEJS_VERSION)
-NODEJS_DEPENDENCIES = host-python host-nodejs \
-    $(call qstrip,$(BR2_PACKAGE_NODEJS_MODULES_ADDITIONAL_DEPS))
-HOST_NODEJS_DEPENDENCIES = host-python
+NODEJS_DEPENDENCIES = host-python host-nodejs zlib \
+	$(call qstrip,$(BR2_PACKAGE_NODEJS_MODULES_ADDITIONAL_DEPS))
+HOST_NODEJS_DEPENDENCIES = host-python host-zlib
 NODEJS_LICENSE = MIT (core code); MIT, Apache and BSD family licenses (Bundled components)
 NODEJS_LICENSE_FILES = LICENSE
 
@@ -17,51 +17,58 @@ ifeq ($(BR2_PACKAGE_OPENSSL),y)
 	NODEJS_DEPENDENCIES += openssl
 endif
 
+# nodejs build system is based on python, but only support python-2.6 or
+# python-2.7. So, we have to enforce PYTHON interpreter to be python2.
 define HOST_NODEJS_CONFIGURE_CMDS
 	# Build with the static, built-in OpenSSL which is supplied as part of
 	# the nodejs source distribution.  This is needed on the host because
 	# NPM is non-functional without it, and host-openssl isn't part of
 	# buildroot.
 	(cd $(@D); \
-                ./configure \
+		$(HOST_CONFIGURE_OPTS) \
+		PYTHON=$(HOST_DIR)/usr/bin/python2 \
+		$(HOST_DIR)/usr/bin/python2 ./configure \
 		--prefix=$(HOST_DIR)/usr \
 		--without-snapshot \
 		--without-dtrace \
 		--without-etw \
+		--shared-zlib \
 	)
 endef
 
 define HOST_NODEJS_BUILD_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D)
+	$(HOST_MAKE_ENV) PYTHON=$(HOST_DIR)/usr/bin/python2 \
+		$(MAKE) -C $(@D) \
+		$(HOST_CONFIGURE_OPTS)
 endef
 
 define HOST_NODEJS_INSTALL_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) install
+	$(HOST_MAKE_ENV) PYTHON=$(HOST_DIR)/usr/bin/python2 \
+		$(MAKE) -C $(@D) install \
+		$(HOST_CONFIGURE_OPTS)
 endef
 
 ifeq ($(BR2_i386),y)
-NODEJS_CPU=ia32
+NODEJS_CPU = ia32
 else ifeq ($(BR2_x86_64),y)
-NODEJS_CPU=x64
+NODEJS_CPU = x64
+else ifeq ($(BR2_mipsel),y)
+NODEJS_CPU = mipsel
 else ifeq ($(BR2_arm),y)
-NODEJS_CPU=arm
-# V8 needs to know what floating point ABI the target is using.  There's also
-# a 'hard' option which we're not exposing here at the moment, because
-# buildroot itself doesn't really support it at present.
-ifeq ($(BR2_SOFT_FLOAT),y)
-NODEJS_ARM_FP=soft
-else
-NODEJS_ARM_FP=softfp
-endif
+NODEJS_CPU = arm
+# V8 needs to know what floating point ABI the target is using.
+NODEJS_ARM_FP = $(call qstrip,$(BR2_GCC_TARGET_FLOAT_ABI))
 endif
 
 define NODEJS_CONFIGURE_CMDS
 	(cd $(@D); \
 		$(TARGET_CONFIGURE_OPTS) \
 		LD="$(TARGET_CXX)" \
-		./configure \
+		PYTHON=$(HOST_DIR)/usr/bin/python2 \
+		$(HOST_DIR)/usr/bin/python2 ./configure \
 		--prefix=/usr \
 		--without-snapshot \
+		--shared-zlib \
 		$(if $(BR2_PACKAGE_OPENSSL),--shared-openssl,--without-ssl) \
 		$(if $(BR2_PACKAGE_NODEJS_NPM),,--without-npm) \
 		--without-dtrace \
@@ -73,7 +80,10 @@ define NODEJS_CONFIGURE_CMDS
 endef
 
 define NODEJS_BUILD_CMDS
-	$(TARGET_MAKE_ENV) $(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)
+	$(TARGET_MAKE_ENV) PYTHON=$(HOST_DIR)/usr/bin/python2 \
+		$(MAKE) -C $(@D) \
+		$(TARGET_CONFIGURE_OPTS) \
+		LD="$(TARGET_CXX)"
 endef
 
 #
@@ -105,7 +115,11 @@ endef
 endif
 
 define NODEJS_INSTALL_TARGET_CMDS
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D) DESTDIR=$(TARGET_DIR) install
+	$(TARGET_MAKE_ENV) PYTHON=$(HOST_DIR)/usr/bin/python2 \
+		$(MAKE) -C $(@D) install \
+		DESTDIR=$(TARGET_DIR) \
+		$(TARGET_CONFIGURE_OPTS) \
+		LD="$(TARGET_CXX)"
 	$(NODEJS_INSTALL_MODULES)
 endef
 

@@ -1,10 +1,11 @@
-#############################################################
+################################################################################
 #
 # wireless_tools
 #
-#############################################################
+################################################################################
 
-WIRELESS_TOOLS_VERSION = 29
+WIRELESS_TOOLS_VERSION_MAJOR = 30
+WIRELESS_TOOLS_VERSION = $(WIRELESS_TOOLS_VERSION_MAJOR).pre9
 WIRELESS_TOOLS_SITE = http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux
 WIRELESS_TOOLS_SOURCE = wireless_tools.$(WIRELESS_TOOLS_VERSION).tar.gz
 WIRELESS_TOOLS_LICENSE = GPLv2
@@ -16,7 +17,7 @@ WIRELESS_TOOLS_INSTALL_TARGETS = install-iwmulticall
 
 
 ifeq ($(BR2_PACKAGE_WIRELESS_TOOLS_LIB),y)
-	WIRELESS_TOOLS_BUILD_TARGETS += libiw.so.$(WIRELESS_TOOLS_VERSION)
+	WIRELESS_TOOLS_BUILD_TARGETS += libiw.so.$(WIRELESS_TOOLS_VERSION_MAJOR)
 	WIRELESS_TOOLS_INSTALL_TARGETS += install-dynamic
 
 define WIRELESS_TOOLS_INSTALL_STAGING_CMDS
@@ -31,17 +32,9 @@ define WIRELESS_TOOLS_BUILD_CMDS
 		$(WIRELESS_TOOLS_BUILD_TARGETS)
 endef
 
-define WIRELESS_TOOLS_CLEAN_CMDS
-	$(MAKE) -C $(@D) realclean
-endef
-
 define WIRELESS_TOOLS_INSTALL_TARGET_CMDS
 	$(MAKE) -C $(@D) PREFIX="$(TARGET_DIR)" LDCONFIG=/bin/true $(WIRELESS_TOOLS_INSTALL_TARGETS)
 	$(MAKE) -C $(@D) INSTALL_MAN="$(TARGET_DIR)/usr/share/man" install-man
-endef
-
-define WIRELESS_TOOLS_UNINSTALL_TARGET_CMDS
-	$(MAKE) -C $(@D) PREFIX="$(TARGET_DIR)" uninstall
 endef
 
 $(eval $(generic-package))

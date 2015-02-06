@@ -1,0 +1,25 @@
+Upstream-Status: Pending
+
+coreutils: fix for dummy-man usage
+
+The options should be before the final argument, otherwise, the following error
+would appear when compiling.
+
+"dummy-man: too many non-option arguments"
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+[Gustavo: update for 8.23]
+
+diff -Nura coreutils-8.23.orig/man/local.mk coreutils-8.23/man/local.mk
+--- coreutils-8.23.orig/man/local.mk	2014-10-24 16:52:29.720555852 -0300
++++ coreutils-8.23/man/local.mk	2014-10-24 16:52:59.381391498 -0300
+@@ -101,8 +101,8 @@
+ 	  && $(run_help2man)						\
+ 		     --source='$(PACKAGE_STRING)'			\
+ 		     --include=$(srcdir)/man/$$name.x			\
+-		     --output=$$t/$$name.1 $$t/$$argv			\
+ 		     --info-page='coreutils \(aq'$$name' invocation\(aq' \
++		     --output=$$t/$$name.1 $$t/$$argv			\
+ 	  && sed \
+ 	       -e 's|$*\.td/||g' \
+ 	       -e '/For complete documentation/d' \

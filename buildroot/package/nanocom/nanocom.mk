@@ -1,11 +1,12 @@
-#############################################################
+################################################################################
 #
 # nanocom
 #
-#############################################################
-NANOCOM_VERSION = 2.6.1
+################################################################################
+
+NANOCOM_VERSION = 1.0
 NANOCOM_SOURCE = nanocom.tar.gz
-NANOCOM_SITE = http://downloads.sourceforge.net/project/nanocom/nanocom/v1.0
+NANOCOM_SITE = http://downloads.sourceforge.net/project/nanocom/nanocom/v$(NANOCOM_VERSION)
 NANOCOM_LICENSE = GPLv2+
 NANOCOM_LICENSE_FILES = COPYING
 
@@ -20,10 +21,6 @@ endef
 
 define NANOCOM_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 -D $(@D)/nanocom $(TARGET_DIR)/usr/bin/nanocom
-endef
-
-define NANOCOM_UNINSTALL_TARGET_CMDS
-	$(RM) $(TARGET_DIR)/usr/bin/nanocom
 endef
 
 $(eval $(generic-package))

@@ -1,18 +1,18 @@
 #!/bin/sh
 # post-build fixups
-# for furthe details, see
-# http://boundarydevices.com/u-boot-conventions-for-i-mx6-nitrogen6x-and-sabrelite/
+# for further details, see
+#
+#  http://boundarydevices.com/u-boot-on-i-mx6/
+#
 
-TARGET_DIR=$1
-IMAGES_DIR=$1/../images
 BOARD_DIR="$(dirname $0)"
 
 # bd u-boot looks for bootscript here
-cp $BOARD_DIR/6q_bootscript $TARGET_DIR
+install -D -m 0644 $BOARD_DIR/6x_bootscript $TARGET_DIR/6x_bootscript
 
 # u-boot / update script for bd upgradeu command
-if [ -e $IMAGES_DIR/u-boot.bin ];
+if [ -e $BINARIES_DIR/u-boot.imx ];
 then
-    cp $IMAGES_DIR/u-boot.bin $TARGET_DIR
-    cp $BOARD_DIR/6q_upgrade $TARGET_DIR
+    install -D -m 0644 $BINARIES_DIR/u-boot.imx $TARGET_DIR/u-boot.imx
+    install -D -m 0644 $BOARD_DIR/6x_upgrade $TARGET_DIR/6x_upgrade
 fi

@@ -3,11 +3,9 @@
 
 [[legal-info]]
 
-Legal notice and licensing
-==========================
+== Legal notice and licensing
 
-Complying with open source licenses
------------------------------------
+=== Complying with open source licenses
 
 All of the end products of Buildroot (toolchain, root filesystem, kernel,
 bootloaders) contain open source software, released under various licenses.
@@ -39,16 +37,19 @@ There you will find:
 * +buildroot.config+: this is the Buildroot configuration file that is usually
   produced with +make menuconfig+, and which is necessary to reproduce the
   build.
-* The source code for all packages; this is saved in the +sources/+
-  subdirectory (except for proprietary packages, whose source code is not
-  saved);
-  patches applied to some packages by Buildroot are distributed with the
-  Buildroot sources and are not duplicated in the +sources/+ subdirectory.
-* A manifest file listing the configured packages, their version, license and
-  related information.
+* The source code for all packages; this is saved in the +sources/+ and
+  +host-sources/+ subdirectories for target and host packages respectively.
+  The source code for packages that set +<PKG>_REDISTRIBUTE = NO+ will not be
+  saved.
+  Patches applied to some packages by Buildroot are distributed with the
+  Buildroot sources and are not duplicated in the +sources/+ and +host-sources/+
+  subdirectories.
+* A manifest file (one for host and one for target packages) listing the
+  configured packages, their version, license and related information.
   Some of this information might not be defined in Buildroot; such items are
   marked as "unknown".
-* A +licenses/+ subdirectory, which contains the license text of packages.
+* The license texts of all packages, in the +licenses/+ and +host-licenses/+
+  subdirectories for target and host packages respectively.
   If the license file(s) are not defined in Buildroot, the file is not produced
   and a warning in the +README+ indicates this.
 
@@ -68,11 +69,10 @@ When you run +make legal-info+, Buildroot produces warnings in the +README+
 file to inform you of relevant material that could not be saved.
 
 [[legal-info-list-licenses]]
-License abbreviations
----------------------
+=== License abbreviations
 
 Here is a list of the licenses that are most widely used by packages in
-Buildroot, with the name used in the manifest file:
+Buildroot, with the name used in the manifest files:
 
 * `GPLv2`:
   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[
@@ -96,7 +96,7 @@ Buildroot, with the name used in the manifest file:
   GNU Library General Public License, version 2];
 * `LGPLv2+`:
   http://www.gnu.org/licenses/old-licenses/lgpl-2.0.html[
-  GNU Library General Public License, version 2.1]
+  GNU Library General Public License, version 2]
   or (at your option) any later version;
 * `LGPLv2.1`:
   http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html[
@@ -119,9 +119,11 @@ Buildroot, with the name used in the manifest file:
 * `BSD-3c`: BSD 3-clause license;
 * `BSD-2c`: BSD 2-clause license;
 * `MIT`: MIT-style license.
+* `Apache-2.0`:
+  http://apache.org/licenses/LICENSE-2.0.html[
+  Apache License, version 2.0];
 
-Complying with the Buildroot license
-------------------------------------
+=== Complying with the Buildroot license
 
 Buildroot itself is an open source software, released under the
 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[GNU General Public

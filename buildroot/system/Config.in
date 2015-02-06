@@ -1,16 +1,22 @@
 menu "System configuration"
 
 config BR2_TARGET_GENERIC_HOSTNAME
-       string "System hostname"
-       default "buildroot"
-       help
-         Select system hostname to be stored in /etc/hostname.
+	string "System hostname"
+	default "buildroot"
+	help
+	  Select system hostname to be stored in /etc/hostname.
+
+	  Leave empty to not create /etc/hostname, or to keep the
+	  one from a custom skeleton.
 
 config BR2_TARGET_GENERIC_ISSUE
-       string "System banner"
-       default "Welcome to Buildroot"
-       help
-         Select system banner (/etc/issue) to be displayed at login.
+	string "System banner"
+	default "Welcome to Buildroot"
+	help
+	  Select system banner (/etc/issue) to be displayed at login.
+
+	  Leave empty to not create /etc/issue, or to keep the
+	  one from a custom skeleton.
 
 choice
 	bool "Passwords encoding"
@@ -67,8 +73,44 @@ config BR2_TARGET_GENERIC_PASSWD_METHOD
 	default "sha-512"   if BR2_TARGET_GENERIC_PASSWD_SHA512
 
 choice
-	prompt "/dev management"
-	default BR2_ROOTFS_DEVICE_CREATION_STATIC
+	prompt "Init system"
+	default BR2_INIT_BUSYBOX
+
+config BR2_INIT_BUSYBOX
+	bool "BusyBox"
+	select BR2_PACKAGE_BUSYBOX
+
+config BR2_INIT_SYSV
+	bool "systemV"
+	select BR2_PACKAGE_BUSYBOX_SHOW_OTHERS # sysvinit
+	select BR2_PACKAGE_SYSVINIT
+
+config BR2_INIT_SYSTEMD
+	bool "systemd"
+	depends on BR2_PACKAGE_SYSTEMD_ARCH_SUPPORTS
+	depends on BR2_TOOLCHAIN_USES_GLIBC
+	depends on BR2_LARGEFILE
+	depends on BR2_USE_WCHAR
+	depends on BR2_INET_IPV6
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	depends on BR2_TOOLCHAIN_HAS_SSP
+	depends on BR2_USE_MMU
+	depends on !BR2_STATIC_LIBS
+	depends on BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_7
+	select BR2_PACKAGE_SYSTEMD
+
+comment 'systemd needs an (e)glibc toolchain, headers >= 3.7'
+	depends on !(BR2_TOOLCHAIN_USES_GLIBC \
+		&& BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_7)
+
+config BR2_INIT_NONE
+	bool "None"
+
+endchoice
+
+choice
+	prompt "/dev management" if !BR2_INIT_SYSTEMD
+	default BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_DEVTMPFS
 
 config BR2_ROOTFS_DEVICE_CREATION_STATIC
 	bool "Static using device table"
@@ -80,49 +122,26 @@ config BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_MDEV
 	bool "Dynamic using mdev"
 	select BR2_PACKAGE_BUSYBOX
 
-config BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_UDEV
-	bool "Dynamic using udev"
-	depends on BR2_LARGEFILE # udev
-	depends on BR2_USE_WCHAR # udev
-	select BR2_PACKAGE_UDEV
-
-comment "udev requires a toolchain with LARGEFILE + WCHAR support"
-	depends on !(BR2_LARGEFILE && BR2_USE_WCHAR)
-
-endchoice
-
-choice
-	prompt "Init system"
-	default BR2_INIT_BUSYBOX
-
-config BR2_INIT_BUSYBOX
-	bool "Busybox"
-	select BR2_PACKAGE_BUSYBOX
-
-config BR2_INIT_SYSV
-	bool "systemV"
-	select BR2_PACKAGE_SYSVINIT
-
-config BR2_INIT_SYSTEMD
-	bool "systemd"
+config BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_EUDEV
+	bool "Dynamic using eudev"
+	depends on !BR2_avr32 # eudev
 	depends on BR2_LARGEFILE
 	depends on BR2_USE_WCHAR
-	depends on BR2_INET_IPV6
-	depends on BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_UDEV
-	depends on BR2_TOOLCHAIN_HAS_THREADS
+	depends on !BR2_STATIC_LIBS
+	depends on BR2_USE_MMU # eudev
+	depends on BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_9
+	select BR2_PACKAGE_EUDEV
+
+comment "eudev needs a toolchain w/ largefile, wchar, dynamic library, headers >= 3.9"
+	depends on !BR2_avr32 # eudev
 	depends on BR2_USE_MMU
-	select BR2_PACKAGE_DBUS
-	select BR2_PACKAGE_SYSTEMD
-
-comment 'systemd requires largefile, wchar, IPv6, threads and udev support'
-	depends on !(BR2_LARGEFILE && BR2_USE_WCHAR && \
-		     BR2_INET_IPV6 && BR2_TOOLCHAIN_HAS_THREADS && \
-		     BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_UDEV)
-
-config BR2_INIT_NONE
-	bool "None"
+	depends on !BR2_LARGEFILE || !BR2_USE_WCHAR || BR2_STATIC_LIBS \
+		|| !BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_9
 
 endchoice
+
+comment "/dev management using udev (from systemd)"
+	depends on BR2_INIT_SYSTEMD
 
 config BR2_ROOTFS_DEVICE_TABLE
 	string "Path to the permission tables"
@@ -168,7 +187,7 @@ config BR2_ROOTFS_SKELETON_CUSTOM_PATH
 	string "custom target skeleton path"
 	default "system/skeleton"
 	help
-	  Path custom target skeleton.
+	  Path to custom target skeleton.
 endif
 
 if BR2_ROOTFS_SKELETON_DEFAULT
@@ -194,21 +213,70 @@ config BR2_TARGET_GENERIC_ROOT_PASSWD
 	  in the build log! Avoid using a valuable password if either the
 	  .config file or the build log may be distributed!
 
-config BR2_TARGET_GENERIC_GETTY_PORT
-	string "Port to run a getty (login prompt) on"
-	default "ttyS0"
+choice
+	bool "/bin/sh"
+	default BR2_SYSTEM_BIN_SH_DASH if !BR2_PACKAGE_BUSYBOX
 	help
-	  Specify a port to run a getty (login prompt) on.
-	  Set to the empty string to not run a getty.
+	  Select which shell will provide /bin/sh.
+
+# busybox has shells that work on noMMU
+config BR2_SYSTEM_BIN_SH_BUSYBOX
+	bool "busybox' default shell"
+	depends on BR2_PACKAGE_BUSYBOX
+
+config BR2_SYSTEM_BIN_SH_BASH
+	bool "bash"
+	depends on BR2_USE_MMU # bash
+	depends on BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	select BR2_PACKAGE_BASH
+
+config BR2_SYSTEM_BIN_SH_DASH
+	bool "dash"
+	depends on BR2_USE_MMU # dash
+	depends on BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	select BR2_PACKAGE_DASH
+
+config BR2_SYSTEM_BIN_SH_ZSH
+	bool "zsh"
+	depends on BR2_USE_MMU # zsh
+	depends on BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	select BR2_PACKAGE_ZSH
+
+comment "bash, dash, zsh need BR2_PACKAGE_BUSYBOX_SHOW_OTHERS"
+	depends on !BR2_PACKAGE_BUSYBOX_SHOW_OTHERS && BR2_PACKAGE_BUSYBOX
+
+config BR2_SYSTEM_BIN_SH_NONE
+	bool "none"
+
+endchoice # /bin/sh
+
+config BR2_SYSTEM_BIN_SH
+	string
+	default "/bin/busybox" if BR2_SYSTEM_BIN_SH_BUSYBOX
+	default "/bin/bash"    if BR2_SYSTEM_BIN_SH_BASH
+	default "/bin/dash"    if BR2_SYSTEM_BIN_SH_DASH
+	default "/bin/zsh"     if BR2_SYSTEM_BIN_SH_ZSH
+
+config BR2_TARGET_GENERIC_GETTY
+	bool "Run a getty (login prompt) after boot"
+	default y
+
+if BR2_TARGET_GENERIC_GETTY
+menu "getty options"
+config BR2_TARGET_GENERIC_GETTY_PORT
+	string "TTY port"
+	default "console"
+	help
+	  Specify a port to run a getty on.
 
 choice
-	prompt "Baudrate to use"
-	default BR2_TARGET_GENERIC_GETTY_BAUDRATE_115200
+	prompt "Baudrate"
+	default BR2_TARGET_GENERIC_GETTY_BAUDRATE_KEEP
 	help
 	  Select a baudrate to use.
 
 config BR2_TARGET_GENERIC_GETTY_BAUDRATE_KEEP
-       bool "keep kernel default"
+	bool "keep kernel default"
 config BR2_TARGET_GENERIC_GETTY_BAUDRATE_9600
 	bool "9600"
 config BR2_TARGET_GENERIC_GETTY_BAUDRATE_19200
@@ -231,10 +299,19 @@ config BR2_TARGET_GENERIC_GETTY_BAUDRATE
 	default "115200"	if BR2_TARGET_GENERIC_GETTY_BAUDRATE_115200
 
 config BR2_TARGET_GENERIC_GETTY_TERM
-	string "Value to assign the TERM environment variable"
+	string "TERM environment variable"
 	default "vt100"
 	help
 	  Specify a TERM type.
+
+config BR2_TARGET_GENERIC_GETTY_OPTIONS
+	string "other options to pass to getty"
+	default ""
+	help
+	  Any other flags you want to pass to getty,
+	  Refer to getty --help for details.
+endmenu
+endif
 
 config BR2_TARGET_GENERIC_REMOUNT_ROOTFS_RW
 	bool "remount root filesystem read-write during boot"
@@ -248,6 +325,54 @@ config BR2_TARGET_GENERIC_REMOUNT_ROOTFS_RW
 	  If unsure, say Y.
 
 endif # BR2_ROOTFS_SKELETON_DEFAULT
+
+config BR2_TARGET_TZ_INFO
+	bool "Install timezone info"
+	# No timezone for musl; only for uClibc or (e)glibc.
+	depends on BR2_TOOLCHAIN_USES_GLIBC || BR2_TOOLCHAIN_USES_UCLIBC
+	select BR2_PACKAGE_TZDATA if BR2_TOOLCHAIN_USES_GLIBC
+	select BR2_PACKAGE_TZ if BR2_TOOLCHAIN_USES_UCLIBC
+	help
+	  Say 'y' here to install timezone info.
+
+if BR2_TARGET_TZ_INFO
+
+config BR2_TARGET_TZ_ZONELIST
+	string "timezone list"
+	default "default"
+	help
+	  Space-separated list of time zones to compile.
+
+	  The value "default" includes all commonly used time zones. Note
+	  that this set consumes around 5.5M for (e)glibc and 2.1M for uClibc.
+
+	  The full list is the list of files in the time zone database source,
+	  not including the build and .tab files.
+
+config BR2_TARGET_LOCALTIME
+	string "default local time"
+	help
+	  The time zone to install as the default local time, expressed as a
+	  tzdata location, such as:
+	    GMT
+	    Europe/Paris
+	    America/New_York
+	    Pacific/Wallis
+	    ...
+
+	  If empty, no local time will be set, and the dates will be
+	  expressed in UTC.
+
+endif # BR2_TARGET_TZ_INFO
+
+config BR2_ROOTFS_USERS_TABLES
+	string "Path to the users tables"
+	help
+	  Specify a space-separated list of users table locations,
+	  that will be passed to the mkusers utility to create
+	  users on the system, with home directory, password, etc.
+
+	  See manual for details on the usage and syntax of these files.
 
 config BR2_ROOTFS_OVERLAY
 	string "Root filesystem overlay directories"
@@ -268,13 +393,13 @@ config BR2_ROOTFS_POST_BUILD_SCRIPT
 	  has finished and before Buildroot starts packing the files into
 	  selected filesystem images.
 
-	  This gives users the oportunity to do board-specific cleanups,
+	  This gives users the opportunity to do board-specific cleanups,
 	  add-ons and the like, so the generated files can be used directly
 	  without further processing.
 
-	  These scripts are called with the target directory name as first and
-	  only argument. Make sure the exit code of those scripts are 0,
-	  otherwise make will stop after calling them.
+	  These scripts are called with the target directory name as first
+	  argument. Make sure the exit code of those scripts are 0, otherwise
+	  make will stop after calling them.
 
 config BR2_ROOTFS_POST_IMAGE_SCRIPT
 	string "Custom scripts to run after creating filesystem images"
@@ -291,7 +416,23 @@ config BR2_ROOTFS_POST_IMAGE_SCRIPT
 	  action.
 
 	  These scripts are called with the images directory name as
-	  first and only argument. The script is executed from the
-	  main Buildroot source directory as the current directory.
+	  first argument. The script is executed from the main Buildroot
+	  source directory as the current directory.
+
+config BR2_ROOTFS_POST_SCRIPT_ARGS
+	string "Extra post-{build,image} arguments"
+	depends on BR2_ROOTFS_POST_BUILD_SCRIPT != "" || BR2_ROOTFS_POST_IMAGE_SCRIPT != ""
+	help
+	  Pass these additional arguments to each post-build or post-image
+	  scripts.
+
+	  Note that all the post-build and post-image scripts will be passed
+	  the same set of arguments, you can not pass different arguments to
+	  each script.
+
+	  Note also, as stated in their respective help text, that the first
+	  argument to each post-build or post-image script is the target
+	  directory / images directory. The arguments in this option will be
+	  passed *after* those.
 
 endmenu

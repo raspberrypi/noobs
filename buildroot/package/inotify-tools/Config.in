@@ -11,5 +11,6 @@ config BR2_PACKAGE_INOTIFY_TOOLS
 
 	  https://github.com/rvoicilas/inotify-tools
 
-comment "inotify-tools requires a toolchain with LARGEFILE support"
+comment "inotify-tools needs a toolchain w/ largefile"
+	depends on BR2_USE_MMU
 	depends on !BR2_LARGEFILE

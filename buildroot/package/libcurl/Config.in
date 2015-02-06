@@ -4,10 +4,13 @@ config BR2_PACKAGE_LIBCURL
 	  cURL is a tool for getting files from FTP, HTTP, Gopher, Telnet,
 	  and Dict servers, using any of the supported protocols.
 
-	  http://curl.haxx.nu/
+	  http://curl.haxx.se/
+
+if BR2_PACKAGE_LIBCURL
 
 config BR2_PACKAGE_CURL
 	bool "curl binary"
-	depends on BR2_PACKAGE_LIBCURL
 	help
 	  Install curl binary as well
+
+endif

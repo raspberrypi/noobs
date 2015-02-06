@@ -1,12 +1,12 @@
-#############################################################
+################################################################################
 #
 # zic
 #
-#############################################################
+################################################################################
 
-ZIC_VERSION = 2012j
+ZIC_VERSION = 2014d
 ZIC_SOURCE = tzcode$(ZIC_VERSION).tar.gz
-ZIC_SITE = http://www.iana.org/time-zones/repository/releases
+ZIC_SITE = ftp://ftp.iana.org/tz/releases
 ZIC_LICENSE = Public domain
 
 # Don't strip any path components during extraction.
@@ -20,8 +20,8 @@ define HOST_ZIC_BUILD_CMDS
 endef
 
 define HOST_ZIC_INSTALL_CMDS
-	mkdir -p $(HOST_DIR)/usr/sbin
-	install -D -m 755 $(@D)/zic $(HOST_DIR)/usr/sbin/zic
+	$(INSTALL) -D -m 755 $(@D)/zic $(HOST_DIR)/usr/sbin/zic
+	$(INSTALL) -D -m 644 $(@D)/tzfile.h $(HOST_DIR)/usr/include/tzfile.h
 endef
 
 $(eval $(host-generic-package))

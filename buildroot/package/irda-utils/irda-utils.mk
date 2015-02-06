@@ -1,12 +1,13 @@
-#############################################################
+################################################################################
 #
 # irda-utils
 #
-#############################################################
+################################################################################
 
 IRDA_UTILS_VERSION = 0.9.18
-IRDA_UTILS_SOURCE = irda-utils-$(IRDA_UTILS_VERSION).tar.gz
 IRDA_UTILS_SITE = http://downloads.sourceforge.net/project/irda/irda-utils/$(IRDA_UTILS_VERSION)
+IRDA_UTILS_LICENSE = GPLv2+
+IRDA_UTILS_LICENSE_FILES = man/COPYING
 
 IRDA_UTILS_CFLAGS = $(TARGET_CFLAGS) -I.
 ifeq ($(BR2_USE_MMU),)
@@ -22,10 +23,6 @@ define IRDA_UTILS_BUILD_CMDS
 		V=1 -C $(@D)
 endef
 
-define IRDA_UTILS_CLEAN_CMDS
-	$(MAKE) -C $(@D) clean
-endef
-
 IRDA_UTILS_SBINS-  =
 IRDA_UTILS_SBINS-y =
 IRDA_UTILS_SBINS-$(BR2_PACKAGE_IRDA_UTILS_IRATTACH) += irattach
@@ -35,12 +32,8 @@ IRDA_UTILS_SBINS- += $(IRDA_UTILS_SBINS-y)
 
 define IRDA_UTILS_INSTALL_TARGET_CMDS
 	for i in $(IRDA_UTILS_SBINS-y); do \
-		$(INSTALL) -m 0755 -D $(@D)/$$i/$$i $(TARGET_DIR)/usr/sbin/$$i; \
+		$(INSTALL) -m 0755 -D $(@D)/$$i/$$i $(TARGET_DIR)/usr/sbin/$$i || exit 1; \
 	done
-endef
-
-define IRDA_UTILS_UNINSTALL_TARGET_CMDS
-	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,$(IRDA_UTILS_SBINS-))
 endef
 
 $(eval $(generic-package))

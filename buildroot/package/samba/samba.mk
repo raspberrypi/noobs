@@ -1,10 +1,10 @@
-#############################################################
+################################################################################
 #
 # samba
 #
-#############################################################
+################################################################################
 
-SAMBA_VERSION = 3.6.13
+SAMBA_VERSION = 3.6.24
 SAMBA_SITE = http://ftp.samba.org/pub/samba/stable
 SAMBA_SUBDIR = source3
 SAMBA_INSTALL_STAGING = YES
@@ -19,20 +19,20 @@ SAMBA_DEPENDENCIES = popt \
 
 SAMBA_CONF_ENV = \
 	ac_cv_file__proc_sys_kernel_core_pattern=yes \
-	samba_cv_HAVE_GETTIMEOFDAY_TZ=yes \
+	libreplace_cv_HAVE_GETTIMEOFDAY_TZ=yes \
 	samba_cv_USE_SETREUID=yes \
 	samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=yes \
-	samba_cv_HAVE_IFACE_IFCONF=yes \
-	samba_cv_HAVE_MMAP=yes \
+	libreplace_cv_HAVE_IFACE_GETIFADDRS=yes \
+	libreplace_cv_HAVE_IFACE_IFCONF=yes \
+	libreplace_cv_HAVE_MMAP=yes \
 	samba_cv_HAVE_FCNTL_LOCK=yes \
-	samba_cv_HAVE_SECURE_MKSTEMP=yes \
+	libreplace_cv_HAVE_SECURE_MKSTEMP=yes \
 	samba_cv_CC_NEGATIVE_ENUM_VALUES=yes \
 	samba_cv_fpie=no \
 	libreplace_cv_HAVE_IPV6=$(if $(BR2_INET_IPV6),yes,no) \
 	$(if $(BR2_PACKAGE_SAMBA_AVAHI),AVAHI_LIBS=-pthread)
 
-SAMBA_CONF_OPT = \
-	--localstatedir=/var \
+SAMBA_CONF_OPTS = \
 	--with-piddir=/var/run \
 	--with-lockdir=/var/lock \
 	--with-logfilebase=/var/log \
@@ -60,15 +60,10 @@ SAMBA_CONF_OPT = \
 	$(if $(BR2_PACKAGE_SAMBA_SMBCLIENT),--with-readline=$(STAGING_DIR)) \
 	$(if $(BR2_PACKAGE_SAMBA_WINBINDD),--with-winbind,--without-winbind)
 
-SAMBA_INSTALL_TARGET_OPT = \
+SAMBA_INSTALL_TARGET_OPTS = \
 	DESTDIR=$(TARGET_DIR) -C $(SAMBA_DIR)/$(SAMBA_SUBDIR) \
 	installlibs installservers installbin installscripts \
 	$(if $(BR2_PACKAGE_SAMBA_SWAT),installswat)
-
-SAMBA_UNINSTALL_TARGET_OPT = \
-	DESTDIR=$(TARGET_DIR) -C $(SAMBA_DIR)/$(SAMBA_SUBDIR) \
-	uninstalllibs uninstallservers uninstallbin uninstallscripts \
-	$(if $(BR2_PACKAGE_SAMBA_SWAT),uninstallswat)
 
 # binaries to keep
 SAMBA_BINTARGETS_y = \
@@ -140,6 +135,22 @@ endef
 
 SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_REMOVE_UNNEEDED_BINARIES
 
+ifeq ($(BR2_PACKAGE_SAMBA_LIBNSS_WINS),y)
+define SAMBA_INSTALL_LIBNSS_WINS
+	$(INSTALL) -m 0755 -D $(@D)/nsswitch/libnss_wins.so $(TARGET_DIR)/lib/libnss_wins.so.2
+	ln -snf libnss_wins.so.2 $(TARGET_DIR)/lib/libnss_wins.so
+endef
+SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_INSTALL_LIBNSS_WINS
+endif
+
+ifeq ($(BR2_PACKAGE_SAMBA_LIBNSS_WINBIND),y)
+define SAMBA_INSTALL_LIBNSS_WINBIND
+	$(INSTALL) -m 0755 -D $(@D)/nsswitch/libnss_winbind.so $(TARGET_DIR)/lib/libnss_winbind.so.2
+	ln -snf libnss_winbind.so.2 $(TARGET_DIR)/lib/libnss_winbind.so
+endef
+SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_INSTALL_LIBNSS_WINBIND
+endif
+
 define SAMBA_REMOVE_SWAT_DOCUMENTATION
 	# Remove the documentation
 	rm -rf $(TARGET_DIR)/usr/swat/help/manpages
@@ -153,28 +164,26 @@ endef
 # --with-libiconv="" is to avoid detecting host libiconv and build failure
 ifeq ($(BR2_PACKAGE_SAMBA_LIBICONV),y)
 SAMBA_DEPENDENCIES += libiconv
-SAMBA_CONF_OPT += --with-libiconv=$(STAGING_DIR)
+SAMBA_CONF_OPTS += --with-libiconv=$(STAGING_DIR)
 else
-SAMBA_CONF_OPT += --with-libiconv=""
+SAMBA_CONF_OPTS += --with-libiconv=""
 endif
+
+# Compiled debug messages by level
+SAMBA_CONF_OPTS += CFLAGS="$(TARGET_CFLAGS) -DMAX_DEBUG_LEVEL=$(BR2_PACKAGE_SAMBA_MAX_DEBUGLEVEL)"
 
 ifeq ($(BR2_PACKAGE_SAMBA_SWAT),y)
-ifneq ($(BR2_HAVE_DOCUMENTATION),y)
 SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_REMOVE_SWAT_DOCUMENTATION
 endif
-endif
 
-define SAMBA_INSTALL_INITSCRIPTS_CONFIG
-	# install start/stop script
-	@if [ ! -f $(TARGET_DIR)/etc/init.d/S91smb ]; then \
-		$(INSTALL) -m 0755 -D package/samba/S91smb $(TARGET_DIR)/etc/init.d/S91smb; \
-	fi
-	# install config
-	@if [ ! -f $(TARGET_DIR)/etc/samba/smb.conf ]; then \
-		$(INSTALL) -m 0755 -D package/samba/simple.conf $(TARGET_DIR)/etc/samba/smb.conf; \
-	fi
+define SAMBA_INSTALL_CONFIG
+	$(INSTALL) -m 0644 -D package/samba/simple.conf $(TARGET_DIR)/etc/samba/smb.conf
 endef
 
-SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_INSTALL_INITSCRIPTS_CONFIG
+SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_INSTALL_CONFIG
+
+define SAMBA_INSTALL_INIT_SYSV
+	$(INSTALL) -m 0755 -D package/samba/S91smb $(TARGET_DIR)/etc/init.d/S91smb
+endef
 
 $(eval $(autotools-package))

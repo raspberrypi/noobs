@@ -1,5 +1,11 @@
+comment "lighttpd needs a toolchain w/ dynamic library"
+	depends on BR2_USE_MMU
+	depends on BR2_STATIC_LIBS
+
 config BR2_PACKAGE_LIGHTTPD
 	bool "lighttpd"
+	depends on BR2_USE_MMU # fork()
+	depends on !BR2_STATIC_LIBS
 	help
 	  lighttpd a secure, fast, compliant and very flexible web-server
 	  which has been optimized for high-performance environments. It
@@ -46,7 +52,6 @@ config BR2_PACKAGE_LIGHTTPD_WEBDAV
 
 config BR2_PACKAGE_LIGHTTPD_LUA
 	bool "lua support"
-	depends on BR2_PACKAGE_LIGHTTPD
 	select BR2_PACKAGE_LUA
 	help
 	  Enable Lua support. Needed to support mod_magnet

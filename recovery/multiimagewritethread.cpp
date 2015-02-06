@@ -490,7 +490,7 @@ bool MultiImageWriteThread::mkfs(const QByteArray &device, const QByteArray &fst
 
     if (fstype == "fat" || fstype == "FAT")
     {
-        cmd = "/sbin/mkdosfs ";
+        cmd = "/sbin/mkfs.fat ";
         if (!label.isEmpty())
         {
             cmd += "-n "+label+" ";

@@ -1,12 +1,16 @@
-#############################################################
+################################################################################
 #
 # libcurl
 #
-#############################################################
+################################################################################
 
-LIBCURL_VERSION = 7.28.1
+LIBCURL_VERSION = 7.40.0
 LIBCURL_SOURCE = curl-$(LIBCURL_VERSION).tar.bz2
 LIBCURL_SITE = http://curl.haxx.se/download
+LIBCURL_DEPENDENCIES = host-pkgconf \
+	$(if $(BR2_PACKAGE_ZLIB),zlib) \
+	$(if $(BR2_PACKAGE_LIBIDN),libidn) \
+	$(if $(BR2_PACKAGE_RTMPDUMP),rtmpdump)
 LIBCURL_LICENSE = ICS
 LIBCURL_LICENSE_FILES = COPYING
 LIBCURL_INSTALL_STAGING = YES
@@ -15,8 +19,8 @@ LIBCURL_INSTALL_STAGING = YES
 # on non-MMU platforms. Moreover, this authentication method is
 # probably almost never used. See
 # http://curl.haxx.se/docs/manpage.html#--ntlm.
-LIBCURL_CONF_OPT = --disable-verbose --disable-manual \
-	--enable-hidden-symbols --disable-ntlm-wb
+LIBCURL_CONF_OPTS = --disable-verbose --disable-manual --disable-ntlm-wb \
+	--enable-hidden-symbols --with-random=/dev/urandom
 LIBCURL_CONFIG_SCRIPTS = curl-config
 
 ifeq ($(BR2_PACKAGE_OPENSSL),y)
@@ -27,16 +31,28 @@ LIBCURL_CONF_ENV += ac_cv_lib_crypto_CRYPTO_lock=yes
 # Fix it by setting LD_LIBRARY_PATH to something sensible so those libs
 # are found first.
 LIBCURL_CONF_ENV += LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/lib:/usr/lib
-LIBCURL_CONF_OPT += --with-ssl=$(STAGING_DIR)/usr \
-	--with-random=/dev/urandom \
+LIBCURL_CONF_OPTS += --with-ssl=$(STAGING_DIR)/usr \
 	--with-ca-path=/etc/ssl/certs
+else ifeq ($(BR2_PACKAGE_GNUTLS),y)
+LIBCURL_CONF_OPTS += --with-gnutls=$(STAGING_DIR)/usr
+LIBCURL_DEPENDENCIES += gnutls
+else ifeq ($(BR2_PACKAGE_LIBNSS),y)
+LIBCURL_CONF_OPTS += --with-nss=$(STAGING_DIR)/usr
+LIBCURL_CONF_ENV += CPPFLAGS="$(TARGET_CPPFLAGS) `$(PKG_CONFIG_HOST_BINARY) nspr nss --cflags`"
+LIBCURL_DEPENDENCIES += libnss
 else
-LIBCURL_CONF_OPT += --without-ssl
+# polarssl support needs 1.3.x
+LIBCURL_CONF_OPTS += --without-ssl --without-gnutls \
+	--without-polarssl --without-nss
 endif
 
-# Recovery: edit for minimal configuration
-LIBCURL_CONF_OPT = --disable-verbose --enable-hidden-symbols --disable-ftp --disable-ldap --disable-ldaps --disable-rtsp --disable-dict --disable-telnet --disable-tftp --disable-pop3 --disable-imap --disable-smtp --disable-gopher --disable-manual --without-ssl --enable-file
-
+# Configure curl to support libssh2
+ifeq ($(BR2_PACKAGE_LIBSSH2),y)
+LIBCURL_DEPENDENCIES += libssh2
+LIBCURL_CONF_OPTS += --with-libssh2
+else
+LIBCURL_CONF_OPTS += --without-libssh2
+endif
 
 define LIBCURL_FIX_DOT_PC
 	printf 'Requires: openssl\n' >>$(@D)/libcurl.pc.in
@@ -51,8 +67,3 @@ LIBCURL_POST_INSTALL_TARGET_HOOKS += LIBCURL_TARGET_CLEANUP
 endif
 
 $(eval $(autotools-package))
-
-curl: libcurl
-curl-clean: libcurl-clean
-curl-dirclean: libcurl-dirclean
-curl-source: libcurl-source

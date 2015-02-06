@@ -2,8 +2,7 @@
 // vim: set syntax=asciidoc:
 
 [[adding-packages]]
-Adding new packages to Buildroot
---------------------------------
+== Adding new packages to Buildroot
 
 This section covers how new packages (userspace libraries or
 applications) can be integrated into Buildroot. It also shows how
@@ -17,6 +16,20 @@ include::adding-packages-generic.txt[]
 include::adding-packages-autotools.txt[]
 
 include::adding-packages-cmake.txt[]
+
+include::adding-packages-python.txt[]
+
+include::adding-packages-luarocks.txt[]
+
+include::adding-packages-perl.txt[]
+
+include::adding-packages-virtual.txt[]
+
+include::adding-packages-kconfig.txt[]
+
+include::adding-packages-asciidoc.txt[]
+
+include::adding-packages-hooks.txt[]
 
 include::adding-packages-gettext.txt[]
 

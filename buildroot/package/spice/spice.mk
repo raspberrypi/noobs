@@ -1,53 +1,53 @@
-#############################################################
+################################################################################
 #
-# Spice
+# spice
 #
-#############################################################
+################################################################################
 
-SPICE_VERSION         = 0.12.0
-SPICE_SOURCE          = spice-$(SPICE_VERSION).tar.bz2
-SPICE_SITE            = http://www.spice-space.org/download/releases/
-SPICE_LICENSE         = LGPLv2.1+
-SPICE_LICENSE_FILES   = COPYING
+SPICE_VERSION = 0.12.4
+SPICE_SOURCE = spice-$(SPICE_VERSION).tar.bz2
+SPICE_SITE = http://www.spice-space.org/download/releases
+SPICE_LICENSE = LGPLv2.1+
+SPICE_LICENSE_FILES = COPYING
 SPICE_INSTALL_STAGING = YES
-SPICE_DEPENDENCIES    = \
-    alsa-lib            \
-    celt051             \
-    jpeg                \
-    openssl             \
-    pixman              \
-    python-pyparsing    \
-    spice-protocol      \
+SPICE_DEPENDENCIES =        \
+	alsa-lib            \
+	celt051             \
+	jpeg                \
+	openssl             \
+	pixman              \
+	python-pyparsing    \
+	spice-protocol      \
 
 # We disable everything for now, because the dependency tree can become
 # quite deep if we try to enable some features, and I have not tested that.
-SPICE_CONF_OPT =            \
-  --disable-opengl          \
-  --disable-smartcard       \
-  --disable-automated-tests \
-  --without-sasl            \
+SPICE_CONF_OPTS =                 \
+	--disable-opengl          \
+	--disable-smartcard       \
+	--disable-automated-tests \
+	--without-sasl            \
 
 SPICE_DEPENDENCIES += host-pkgconf
 
 ifeq ($(BR2_PACKAGE_SPICE_CLIENT),y)
-SPICE_CONF_OPT += --enable-client
+SPICE_CONF_OPTS += --enable-client
 SPICE_DEPENDENCIES += xlib_libXfixes xlib_libXrandr
 else
-SPICE_CONF_OPT += --disable-client
+SPICE_CONF_OPTS += --disable-client
 endif
 
 ifeq ($(BR2_PACKAGE_SPICE_GUI),y)
-SPICE_CONF_OPT += --enable-gui
+SPICE_CONF_OPTS += --enable-gui
 SPICE_DEPENDENCIES += cegui06
 else
-SPICE_CONF_OPT += --disable-gui
+SPICE_CONF_OPTS += --disable-gui
 endif
 
 ifeq ($(BR2_PACKAGE_SPICE_TUNNEL),y)
-SPICE_CONF_OPT += --enable-tunnel
+SPICE_CONF_OPTS += --enable-tunnel
 SPICE_DEPENDENCIES += slirp
 else
-SPICE_CONF_OPT += --disable-tunnel
+SPICE_CONF_OPTS += --disable-tunnel
 endif
 
 SPICE_CONF_ENV = PYTHONPATH=$(TARGET_DIR)/usr/lib/python$(PYTHON_VERSION_MAJOR)/site-packages
@@ -58,7 +58,7 @@ SPICE_MAKE_ENV = PYTHONPATH=$(TARGET_DIR)/usr/lib/python$(PYTHON_VERSION_MAJOR)/
 # libjpeg isn't, hence the two-line tweak
 define SPICE_POST_INSTALL_STAGING_FIX_PC
 	$(SED) 's/^\(Requires.private:.*\)$$/\1 zlib/; s/^\(Libs.private:.*\)$$/\1 -ljpeg/;'    \
-	       "$(STAGING_DIR)/usr/lib/pkgconfig/spice-server.pc"
+		"$(STAGING_DIR)/usr/lib/pkgconfig/spice-server.pc"
 endef
 SPICE_POST_INSTALL_STAGING_HOOKS += SPICE_POST_INSTALL_STAGING_FIX_PC
 
@@ -75,6 +75,6 @@ SPICE_POST_INSTALL_STAGING_HOOKS += SPICE_POST_INSTALL_STAGING_FIX_PC
 #     Note that NOEXECSTACK on a kernel with address space randomization
 #     is generally sufficient to prevent most buffer overflow exploits
 #     without increasing code size.
-SPICE_CONF_OPT += gl_cv_warn__fstack_protector_all=no
+SPICE_CONF_OPTS += gl_cv_warn__fstack_protector_all=no
 
 $(eval $(autotools-package))

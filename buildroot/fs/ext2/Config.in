@@ -1,6 +1,6 @@
 config BR2_TARGET_ROOTFS_EXT2
 	bool "ext2/3/4 root filesystem"
-	select BR2_PACKAGE_HOST_E2FSPROGS
+	select BR2_PACKAGE_HOST_MKE2IMG
 	help
 	  Build an ext2/3/4 root filesystem
 
@@ -37,9 +37,12 @@ config BR2_TARGET_ROOTFS_EXT2_GEN
 
 # All ext generations are revision 1, except ext2r0, which is revision 0
 config BR2_TARGET_ROOTFS_EXT2_REV
-    int
-    default 0   if BR2_TARGET_ROOTFS_EXT2_2r0
-    default 1   if !BR2_TARGET_ROOTFS_EXT2_2r0
+	int
+	default 0   if BR2_TARGET_ROOTFS_EXT2_2r0
+	default 1   if !BR2_TARGET_ROOTFS_EXT2_2r0
+
+config BR2_TARGET_ROOTFS_EXT2_LABEL
+	string "filesystem label"
 
 config BR2_TARGET_ROOTFS_EXT2_BLOCKS
 	int "size in blocks (leave at 0 for auto calculation)"

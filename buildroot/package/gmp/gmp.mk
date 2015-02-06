@@ -1,15 +1,15 @@
-#############################################################
+################################################################################
 #
 # gmp
 #
-#############################################################
+################################################################################
 
-GMP_VERSION = 5.1.1
-GMP_SITE = ftp://ftp.gmplib.org/pub/gmp-$(GMP_VERSION)
-GMP_SOURCE = gmp-$(GMP_VERSION).tar.bz2
+GMP_VERSION = 6.0.0a
+GMP_SITE = $(BR2_GNU_MIRROR)/gmp
+GMP_SOURCE = gmp-$(GMP_VERSION).tar.xz
 GMP_INSTALL_STAGING = YES
 GMP_LICENSE = LGPLv3+
-GMP_LICENSE_FILES = COPYING.LIB
+GMP_LICENSE_FILES = COPYING.LESSERv3
 GMP_DEPENDENCIES = host-m4
 
 $(eval $(autotools-package))

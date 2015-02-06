@@ -1,5 +1,8 @@
 config BR2_PACKAGE_LIBGAIL
 	bool "libgail"
+	depends on BR2_USE_WCHAR # pango -> libglib2
+	depends on BR2_TOOLCHAIN_HAS_THREADS # pango -> libglib2
+	depends on BR2_USE_MMU # pango -> libglib2
 	depends on BR2_PACKAGE_LIBGTK2
 	select BR2_PACKAGE_PANGO
 	help
@@ -16,3 +19,8 @@ config BR2_PACKAGE_LIBGAIL
 	  program.
 
 	  http://developer.gnome.org/projects/gap
+
+comment "libgail needs a toolchain w/ wchar, threads"
+	depends on BR2_PACKAGE_LIBGTK2
+	depends on !BR2_USE_WCHAR || !BR2_TOOLCHAIN_HAS_THREADS
+	depends on BR2_USE_MMU

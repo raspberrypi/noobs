@@ -1,12 +1,14 @@
-#############################################################
+################################################################################
 #
 # portmap
 #
-#############################################################
+################################################################################
 
 PORTMAP_VERSION = 6.0
 PORTMAP_SOURCE = portmap-$(PORTMAP_VERSION).tgz
 PORTMAP_SITE = http://neil.brown.name/portmap
+PORTMAP_LICENSE = BSD-4c (portmap.c) SunRPC License (portmap.c from_local.c)
+PORTMAP_LICENSE_FILES = portmap.c from_local.c
 PORTMAP_SBINS = portmap pmap_dump pmap_set
 
 PORTMAP_FLAGS = NO_TCP_WRAPPER=1 NO_PIE=1 NO_PERROR=1
@@ -15,32 +17,17 @@ PORTMAP_FLAGS += NO_FORK=1
 endif
 
 define PORTMAP_BUILD_CMDS
-	CFLAGS="$(TARGET_CFLAGS)" \
-	$(MAKE) CC="$(TARGET_CC)" -C $(@D) $(PORTMAP_FLAGS)
-endef
-
-define PORTMAP_CLEAN_CMDS
-	$(MAKE) -C $(@D) clean
+	$(TARGET_CONFIGURE_OPTS) $(MAKE) -C $(@D) $(PORTMAP_FLAGS)
 endef
 
 define PORTMAP_INSTALL_TARGET_CMDS
 	for sbin in $(PORTMAP_SBINS); do \
-		$(INSTALL) -D $(@D)/$$sbin $(TARGET_DIR)/sbin/$$sbin; \
+		$(INSTALL) -D -m 0755 $(@D)/$$sbin $(TARGET_DIR)/sbin/$$sbin || exit 1; \
 	done
-	$(INSTALL) -D $(@D)/portmap.man \
-		$(TARGET_DIR)/usr/share/man/man8/portmap.8
-	$(INSTALL) -D $(@D)/pmap_dump.8 \
-		$(TARGET_DIR)/usr/share/man/man8/pmap_dump.8
-	$(INSTALL) -D $(@D)/pmap_set.8 \
-		$(TARGET_DIR)/usr/share/man/man8/pmap_set.8
-	$(INSTALL) -m 0755 package/portmap/S13portmap \
-		$(TARGET_DIR)/etc/init.d
 endef
 
-define PORTMAP_UNINSTALL_TARGET_CMDS
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,$(PORTMAP_SBINS))
-	rm -f $(addprefix $(TARGET_DIR)/usr/share/man/man8/, \
-		$(addsuffix .8,$(PORTMAP_SBINS)))
+define PORTMAP_INSTALL_INIT_SYSV
+	$(INSTALL) -D -m 0755 package/portmap/S13portmap $(TARGET_DIR)/etc/init.d/S13portmap
 endef
 
 $(eval $(generic-package))

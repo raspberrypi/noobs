@@ -1,8 +1,9 @@
-#############################################################
+################################################################################
 #
 # beecrypt
 #
-#############################################################
+################################################################################
+
 BEECRYPT_VERSION = 4.2.1
 BEECRYPT_SITE = http://downloads.sourceforge.net/project/beecrypt/beecrypt/$(BEECRYPT_VERSION)
 BEECRYPT_AUTORECONF = YES
@@ -10,21 +11,16 @@ BEECRYPT_INSTALL_STAGING = YES
 BEECRYPT_LICENSE = LGPLv2.1+
 BEECRYPT_LICENSE_FILES = COPYING.LIB
 
-# beecrypt contains C++ code that g++ 4.7 doesn't really
-# like. Upstream does not seem to be really active, so workaround this
-# by passing -fpermissive.
-BEECRYPT_CONF_ENV = \
-	CXXFLAGS="$(TARGET_CXXFLAGS) -fpermissive"
+BEECRYPT_CONF_OPTS = \
+	--disable-expert-mode \
+	--without-java \
+	--without-python \
+	--disable-openmp
 
-BEECRYPT_CONF_OPT = \
-		--without-java \
-		--without-python
-
-ifeq ($(BR2_PACKAGE_ICU),y)
-# C++ support needs icu
+ifeq ($(BR2_PACKAGE_BEECRYPT_CPP),y)
 BEECRYPT_DEPENDENCIES += icu
 else
-BEECRYPT_CONF_OPT += --without-cplusplus
+BEECRYPT_CONF_OPTS += --without-cplusplus
 
 # automake/libtool uses the C++ compiler to link libbeecrypt because of
 # (the optional) cppglue.cxx. Force it to use the C compiler instead.

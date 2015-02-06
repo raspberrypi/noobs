@@ -1,17 +1,20 @@
-#############################################################
+################################################################################
 #
 # zlib
 #
-#############################################################
+################################################################################
 
-ZLIB_VERSION = 1.2.7
-ZLIB_SOURCE =zlib-$(ZLIB_VERSION).tar.bz2
+ZLIB_VERSION = 1.2.8
+ZLIB_SOURCE = zlib-$(ZLIB_VERSION).tar.xz
 ZLIB_SITE = http://downloads.sourceforge.net/project/libpng/zlib/$(ZLIB_VERSION)
 ZLIB_LICENSE = zlib license
 ZLIB_LICENSE_FILES = README
 ZLIB_INSTALL_STAGING = YES
 
-ifeq ($(BR2_PREFER_STATIC_LIB),y)
+# It is not possible to build only a shared version of zlib, so we build both
+# shared and static, unless we only want the static libs, and we eventually
+# selectively remove what we do not want
+ifeq ($(BR2_STATIC_LIBS),y)
 ZLIB_PIC =
 ZLIB_SHARED = --static
 else
@@ -56,24 +59,18 @@ define ZLIB_INSTALL_TARGET_CMDS
 	$(MAKE1) -C $(@D) DESTDIR=$(TARGET_DIR) LDCONFIG=true install
 endef
 
+# We don't care removing the .a from target, since it not used at link
+# time to build other packages, and it is anyway removed later before
+# assembling the filesystem images anyway.
+ifeq ($(BR2_SHARED_LIBS),y)
+define ZLIB_RM_STATIC_STAGING
+	rm -f $(STAGING_DIR)/usr/lib/libz.a
+endef
+ZLIB_POST_INSTALL_STAGING_HOOKS += ZLIB_RM_STATIC_STAGING
+endif
+
 define HOST_ZLIB_INSTALL_CMDS
 	$(MAKE1) -C $(@D) LDCONFIG=true install
-endef
-
-define ZLIB_CLEAN_CMDS
-	-$(MAKE1) -C $(@D) clean
-endef
-
-define ZLIB_UNINSTALL_STAGING_CMDS
-	$(MAKE1) -C $(@D) DESTDIR=$(STAGING_DIR) uninstall
-endef
-
-define ZLIB_UNINSTALL_TARGET_CMDS
-	$(MAKE1) -C $(@D) DESTDIR=$(TARGET_DIR) uninstall
-endef
-
-define HOST_ZLIB_UNINSTALL_TARGET_CMDS
-	$(MAKE1) -C $(@D) uninstall
 endef
 
 $(eval $(generic-package))

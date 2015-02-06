@@ -377,7 +377,7 @@ bool InitDriveThread::umountSystemPartition()
 
 bool InitDriveThread::formatBootPartition()
 {
-    return QProcess::execute("/sbin/mkdosfs -n RECOVERY /dev/mmcblk0p1") == 0;
+    return QProcess::execute("/sbin/mkfs.fat -n RECOVERY /dev/mmcblk0p1") == 0;
 }
 
 bool InitDriveThread::formatSettingsPartition()

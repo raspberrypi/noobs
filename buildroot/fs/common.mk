@@ -16,9 +16,6 @@
 #  ROOTFS_$(FSTYPE)_PRE_GEN_HOOKS, a list of hooks to call before
 #  generating the filesystem image
 #
-#  ROOTFS_$(FSTYPE)_POST_GEN_HOOKS, a list of hooks to call after
-#  generating the filesystem image
-#
 #  ROOTFS_$(FSTYPE)_POST_TARGETS, the list of targets that should be
 #  run after running the main filesystem target. This is useful for
 #  initramfs, to rebuild the kernel once the initramfs is generated.
@@ -34,20 +31,48 @@
 FAKEROOT_SCRIPT = $(BUILD_DIR)/_fakeroot.fs
 FULL_DEVICE_TABLE = $(BUILD_DIR)/_device_table.txt
 ROOTFS_DEVICE_TABLES = $(call qstrip,$(BR2_ROOTFS_DEVICE_TABLE) \
-       $(BR2_ROOTFS_STATIC_DEVICE_TABLE))
+	$(BR2_ROOTFS_STATIC_DEVICE_TABLE))
 USERS_TABLE = $(BUILD_DIR)/_users_table.txt
+ROOTFS_USERS_TABLES = $(call qstrip,$(BR2_ROOTFS_USERS_TABLES))
 
+# Since this function will be called from within an $(eval ...)
+# all variable references except the arguments must be $$-quoted.
 define ROOTFS_TARGET_INTERNAL
 
 # extra deps
-ROOTFS_$(2)_DEPENDENCIES += host-fakeroot host-makedevs $$(if $$(BR2_TARGET_ROOTFS_$(2)_LZMA),host-lzma) $$(if $$(BR2_TARGET_ROOTFS_$(2)_LZO),host-lzop) $$(if $$(BR2_TARGET_ROOTFS_$(2)_XZ),host-xz)
+ROOTFS_$(2)_DEPENDENCIES += host-fakeroot host-makedevs \
+	$$(if $$(PACKAGES_USERS),host-mkpasswd)
 
-$$(BINARIES_DIR)/rootfs.$(1): $$(ROOTFS_$(2)_DEPENDENCIES)
+ifeq ($$(BR2_TARGET_ROOTFS_$(2)_GZIP),y)
+ROOTFS_$(2)_COMPRESS_EXT = .gz
+ROOTFS_$(2)_COMPRESS_CMD = gzip -9 -c
+endif
+ifeq ($$(BR2_TARGET_ROOTFS_$(2)_BZIP2),y)
+ROOTFS_$(2)_COMPRESS_EXT = .bz2
+ROOTFS_$(2)_COMPRESS_CMD = bzip2 -9 -c
+endif
+ifeq ($$(BR2_TARGET_ROOTFS_$(2)_LZMA),y)
+ROOTFS_$(2)_DEPENDENCIES += host-lzma
+ROOTFS_$(2)_COMPRESS_EXT = .lzma
+ROOTFS_$(2)_COMPRESS_CMD = $$(LZMA) -9 -c
+endif
+ifeq ($$(BR2_TARGET_ROOTFS_$(2)_LZO),y)
+ROOTFS_$(2)_DEPENDENCIES += host-lzop
+ROOTFS_$(2)_COMPRESS_EXT = .lzo
+ROOTFS_$(2)_COMPRESS_CMD = $$(LZOP) -9 -c
+endif
+ifeq ($$(BR2_TARGET_ROOTFS_$(2)_XZ),y)
+ROOTFS_$(2)_COMPRESS_EXT = .xz
+ROOTFS_$(2)_COMPRESS_CMD = xz -9 -C crc32 -c
+endif
+
+$$(BINARIES_DIR)/rootfs.$(1): target-finalize $$(ROOTFS_$(2)_DEPENDENCIES)
 	@$$(call MESSAGE,"Generating root filesystem image rootfs.$(1)")
 	$$(foreach hook,$$(ROOTFS_$(2)_PRE_GEN_HOOKS),$$(call $$(hook))$$(sep))
 	rm -f $$(FAKEROOT_SCRIPT)
 	rm -f $$(TARGET_DIR_WARNING_FILE)
-	echo "chown -R 0:0 $$(TARGET_DIR)" >> $$(FAKEROOT_SCRIPT)
+	rm -f $$(USERS_TABLE)
+	echo "chown -h -R 0:0 $$(TARGET_DIR)" >> $$(FAKEROOT_SCRIPT)
 ifneq ($$(ROOTFS_DEVICE_TABLES),)
 	cat $$(ROOTFS_DEVICE_TABLES) > $$(FULL_DEVICE_TABLE)
 ifeq ($$(BR2_ROOTFS_DEVICE_CREATION_STATIC),y)
@@ -56,28 +81,18 @@ endif
 	printf '$$(subst $$(sep),\n,$$(PACKAGES_PERMISSIONS_TABLE))' >> $$(FULL_DEVICE_TABLE)
 	echo "$$(HOST_DIR)/usr/bin/makedevs -d $$(FULL_DEVICE_TABLE) $$(TARGET_DIR)" >> $$(FAKEROOT_SCRIPT)
 endif
-	printf '$(subst $(sep),\n,$(PACKAGES_USERS))' > $(USERS_TABLE)
-	$(TOPDIR)/support/scripts/mkusers $(USERS_TABLE) $(TARGET_DIR) >> $(FAKEROOT_SCRIPT)
+ifneq ($$(ROOTFS_USERS_TABLES),)
+	cat $$(ROOTFS_USERS_TABLES) >> $$(USERS_TABLE)
+endif
+	printf '$$(subst $$(sep),\n,$$(PACKAGES_USERS))' >> $$(USERS_TABLE)
+	PATH=$$(BR_PATH) $$(TOPDIR)/support/scripts/mkusers $$(USERS_TABLE) $$(TARGET_DIR) >> $$(FAKEROOT_SCRIPT)
 	echo "$$(ROOTFS_$(2)_CMD)" >> $$(FAKEROOT_SCRIPT)
 	chmod a+x $$(FAKEROOT_SCRIPT)
-	$$(HOST_DIR)/usr/bin/fakeroot -- $$(FAKEROOT_SCRIPT)
-	cp support/misc/target-dir-warning.txt $$(TARGET_DIR_WARNING_FILE)
+	PATH=$$(BR_PATH) $$(HOST_DIR)/usr/bin/fakeroot -- $$(FAKEROOT_SCRIPT)
+	$$(INSTALL) -m 0644 support/misc/target-dir-warning.txt $$(TARGET_DIR_WARNING_FILE)
 	-@rm -f $$(FAKEROOT_SCRIPT) $$(FULL_DEVICE_TABLE)
-	$$(foreach hook,$$(ROOTFS_$(2)_POST_GEN_HOOKS),$$(call $$(hook))$$(sep))
-ifeq ($$(BR2_TARGET_ROOTFS_$(2)_GZIP),y)
-	gzip -9 -c $$@ > $$@.gz
-endif
-ifeq ($$(BR2_TARGET_ROOTFS_$(2)_BZIP2),y)
-	bzip2 -9 -c $$@ > $$@.bz2
-endif
-ifeq ($$(BR2_TARGET_ROOTFS_$(2)_LZMA),y)
-	$$(LZMA) -9 -c $$@ > $$@.lzma
-endif
-ifeq ($$(BR2_TARGET_ROOTFS_$(2)_LZO),y)
-	$$(LZOP) -9 -c $$@ > $$@.lzo
-endif
-ifeq ($$(BR2_TARGET_ROOTFS_$(2)_XZ),y)
-	$(XZ) -9 -C crc32 -c $$@ > $$@.xz
+ifneq ($$(ROOTFS_$(2)_COMPRESS_CMD),)
+	PATH=$$(BR_PATH) $$(ROOTFS_$(2)_COMPRESS_CMD) $$@ > $$@$$(ROOTFS_$(2)_COMPRESS_EXT)
 endif
 
 rootfs-$(1)-show-depends:
@@ -86,12 +101,12 @@ rootfs-$(1)-show-depends:
 rootfs-$(1): $$(BINARIES_DIR)/rootfs.$(1) $$(ROOTFS_$(2)_POST_TARGETS)
 
 ifeq ($$(BR2_TARGET_ROOTFS_$(2)),y)
-TARGETS += rootfs-$(1)
+TARGETS_ROOTFS += rootfs-$(1)
 endif
 endef
 
 define ROOTFS_TARGET
-$(call ROOTFS_TARGET_INTERNAL,$(1),$(call UPPERCASE,$(1)))
+	$(call ROOTFS_TARGET_INTERNAL,$(1),$(call UPPERCASE,$(1)))
 endef
 
-include fs/*/*.mk
+include $(sort $(wildcard fs/*/*.mk))

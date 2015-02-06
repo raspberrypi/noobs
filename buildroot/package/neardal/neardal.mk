@@ -1,12 +1,11 @@
-#############################################################
+################################################################################
 #
 # neardal
 #
-#############################################################
+################################################################################
 
-NEARDAL_VERSION = 0.8
-NEARDAL_SITE = http://github.com/connectivity/neardal/tarball/$(NEARDAL_VERSION)
-NEARDAL_SOURCE = connectivity-neardal-$(NEARDAL_VERSION).tar.gz
+NEARDAL_VERSION = da8e06d3884d214bb19b894d2b8fdc9c7ca8575f
+NEARDAL_SITE = $(call github,connectivity,neardal,$(NEARDAL_VERSION))
 NEARDAL_INSTALL_STAGING = YES
 NEARDAL_LICENSE = GPLv2
 NEARDAL_LICENSE_FILES = COPYING

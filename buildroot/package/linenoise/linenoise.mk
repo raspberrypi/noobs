@@ -1,12 +1,16 @@
-#############################################################
+################################################################################
 #
 # linenoise
 #
-#############################################################
-LINENOISE_VERSION = 27a3b4d5
-LINENOISE_SITE = http://github.com/antirez/linenoise/tarball/$(LINENOISE_VERSION)
+################################################################################
+
+LINENOISE_VERSION = cf1bdf5f89e10b504a0bec3efc8a8587eadecd2c
+LINENOISE_SITE = $(call github,antirez,linenoise,$(LINENOISE_VERSION))
 LINENOISE_LICENSE = BSD-2c
+LINENOISE_LICENSE_FILES = LICENSE
 LINENOISE_INSTALL_STAGING = YES
+# Static library only, nothing to install on target
+LINENOISE_INSTALL_TARGET = NO
 
 define LINENOISE_BUILD_CMDS
 	cd $(@D); $(TARGET_CC) $(TARGET_CFLAGS) -c linenoise.c
@@ -18,28 +22,6 @@ define LINENOISE_INSTALL_STAGING_CMDS
 	$(INSTALL) -m 644 -D $(@D)/linenoise.h          $(STAGING_DIR)/usr/include/linenoise.h
 	$(INSTALL) -m 644 -D $(@D)/liblinenoise.a       $(STAGING_DIR)/usr/lib/liblinenoise.a
 	$(INSTALL) -m 755 -D $(@D)/linenoise_example    $(STAGING_DIR)/usr/bin/linenoise_example
-endef
-
-define LINENOISE_UNINSTALL_STAGING_CMDS
-	rm -f   $(STAGING_DIR)/usr/include/linenoise.h
-	rm -f   $(STAGING_DIR)/usr/lib/liblinenoise.a
-	rm -f   $(STAGING_DIR)/usr/bin/linenoise_example
-endef
-
-define LINENOISE_INSTALL_TARGET_CMDS
-	$(INSTALL) -m 644 -D $(@D)/linenoise.h          $(TARGET_DIR)/usr/include/linenoise.h
-	$(INSTALL) -m 644 -D $(@D)/liblinenoise.a       $(TARGET_DIR)/usr/lib/liblinenoise.a
-	$(INSTALL) -m 755 -D $(@D)/linenoise_example    $(TARGET_DIR)/usr/bin/linenoise_example
-endef
-
-define LINENOISE_UNINSTALL_TARGET_CMDS
-	rm -f   $(TARGET_DIR)/usr/include/linenoise.h
-	rm -f   $(TARGET_DIR)/usr/lib/liblinenoise.a
-	rm -f   $(TARGET_DIR)/usr/bin/linenoise_example
-endef
-
-define LINENOISE_CLEAN_CMDS
-	rm -f $(@D)/*.o $(@D)/*.a $(@D)/linenoise_example
 endef
 
 $(eval $(generic-package))

@@ -1,19 +1,20 @@
-#############################################################
+################################################################################
 #
 # libhid
 #
-#############################################################
+################################################################################
 
 LIBHID_VERSION = 0.2.16
-LIBHID_SOURCE = libhid-$(LIBHID_VERSION).tar.gz
-LIBHID_SITE = http://alioth.debian.org/frs/download.php/1958
+LIBHID_SITE = http://sources.buildroot.net
 LIBHID_DEPENDENCIES = libusb-compat libusb
 LIBHID_INSTALL_STAGING = YES
 LIBHID_AUTORECONF = YES
+LIBHID_LICENSE = GPLv2
+LIBHID_LICENSE_FILES = COPYING
 # configure runs libusb-config for cflags/ldflags. Ensure it picks up
 # the target version
-LIBHID_CONF_ENV = PATH=$(STAGING_DIR)/usr/bin:$(TARGET_PATH)
-LIBHID_CONF_OPT = \
+LIBHID_CONF_ENV = PATH=$(STAGING_DIR)/usr/bin:$(BR_PATH)
+LIBHID_CONF_OPTS = \
 	--disable-swig \
 	--disable-werror \
 	--without-doxygen \

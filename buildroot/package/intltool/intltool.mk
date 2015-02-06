@@ -1,17 +1,15 @@
-#############################################################
+################################################################################
 #
 # intltool
 #
-#############################################################
+################################################################################
 
-INTLTOOL_VERSION = 0.40.6
-INTLTOOL_SOURCE = intltool-$(INTLTOOL_VERSION).tar.bz2
-INTLTOOL_SITE = http://ftp.acc.umu.se/pub/GNOME/sources/intltool/0.40/
+INTLTOOL_VERSION = 0.50.2
+INTLTOOL_SITE = https://launchpad.net/intltool/trunk/$(INTLTOOL_VERSION)/+download
+INTLTOOL_LICENSE = GPLv2+
+INTLTOOL_LICENSE_FILES = COPYING
 
 HOST_INTLTOOL_DEPENDENCIES = host-gettext host-libxml-parser-perl
-HOST_INTLTOOL_CONF_OPT = \
-  PERLLIB=$(HOST_DIR)/usr/lib/perl
 
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))
-

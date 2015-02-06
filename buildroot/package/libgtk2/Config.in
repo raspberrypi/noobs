@@ -8,27 +8,34 @@ config BR2_PACKAGE_LIBGTK2
 	select BR2_PACKAGE_LIBGLIB2
 	select BR2_PACKAGE_PANGO
 	select BR2_PACKAGE_GDK_PIXBUF
-	select BR2_PACKAGE_FONTCONFIG if BR2_PACKAGE_XORG7
-	select BR2_PACKAGE_XLIB_LIBX11 if BR2_PACKAGE_XORG7
-	select BR2_PACKAGE_XLIB_LIBXEXT if BR2_PACKAGE_XORG7
-	select BR2_PACKAGE_XLIB_LIBXRENDER if BR2_PACKAGE_XORG7
-	depends on BR2_PACKAGE_XORG7||BR2_PACKAGE_DIRECTFB
+	select BR2_PACKAGE_FONTCONFIG
+	select BR2_PACKAGE_XLIB_LIBX11
+	select BR2_PACKAGE_XLIB_LIBXEXT
+	select BR2_PACKAGE_XLIB_LIBXRENDER
+	depends on BR2_PACKAGE_XORG7
 	depends on BR2_USE_WCHAR # glib2
+	depends on BR2_TOOLCHAIN_HAS_THREADS # glib2
+	depends on BR2_USE_MMU # glib2
 	depends on BR2_INSTALL_LIBSTDCPP # pango
+	depends on BR2_ARCH_HAS_ATOMICS # cairo
 	help
 	  The GTK+ version 2 graphical user interface library
 
 	  http://www.gtk.org/
 
+if BR2_PACKAGE_LIBGTK2
+
 config BR2_PACKAGE_LIBGTK2_DEMO
 	bool "Install libgtk2 demo program"
-	depends on BR2_PACKAGE_LIBGTK2
 	help
 	  The GTK+ source base contains a gtk-demo program. This
 	  option allows to install this program to the target.
 
-comment "libgtk2 requires a toolchain with WCHAR and C++ support"
-	depends on !BR2_USE_WCHAR || !BR2_INSTALL_LIBSTDCPP
+endif
 
-comment "WARNING: Libgtk2 directfb backend is deprecated"
-	depends on BR2_PACKAGE_LIBGTK2 && !BR2_PACKAGE_XORG7
+comment "libgtk2 needs a toolchain w/ wchar, threads, C++"
+	depends on BR2_USE_MMU
+	depends on BR2_ARCH_HAS_ATOMICS
+	depends on BR2_PACKAGE_XORG7
+	depends on !BR2_USE_WCHAR || !BR2_INSTALL_LIBSTDCPP || \
+		!BR2_TOOLCHAIN_HAS_THREADS

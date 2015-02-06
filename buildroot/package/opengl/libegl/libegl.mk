@@ -1,20 +1,7 @@
-#############################################################
+################################################################################
 #
-# Virtual package for libEGL
+# libegl
 #
-#############################################################
+################################################################################
 
-LIBEGL_SOURCE =
-
-ifeq ($(BR2_PACKAGE_RPI_USERLAND),y)
-LIBEGL_DEPENDENCIES += rpi-userland
-endif
-
-ifeq ($(LIBEGL_DEPENDENCIES),y)
-define LIBEGL_CONFIGURE_CMDS
-	echo "No libEGL implementation selected. Configuration error."
-	exit 1
-endef
-endif
-
-$(eval $(generic-package))
+$(eval $(virtual-package))

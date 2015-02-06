@@ -1,5 +1,8 @@
-comment "weston requires udev"
-	depends on !BR2_PACKAGE_UDEV
+comment "weston needs udev and a toolchain w/ threads, dynamic library, headers >= 3.0"
+	depends on !BR2_avr32
+	depends on BR2_ARCH_HAS_ATOMICS
+	depends on !BR2_PACKAGE_HAS_UDEV || !BR2_TOOLCHAIN_HAS_THREADS || \
+		!BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_0 || BR2_STATIC_LIBS
 
 config BR2_PACKAGE_WESTON
 	bool "weston"
@@ -10,11 +13,16 @@ config BR2_PACKAGE_WESTON
 	select BR2_PACKAGE_LIBPNG
 	select BR2_PACKAGE_JPEG
 	select BR2_PACKAGE_MTDEV
-	depends on BR2_PACKAGE_UDEV
+	depends on BR2_PACKAGE_HAS_UDEV
+	depends on !BR2_avr32 # wayland
+	depends on !BR2_STATIC_LIBS # wayland
+	depends on BR2_TOOLCHAIN_HAS_THREADS # wayland
+	depends on BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_0
+	depends on BR2_ARCH_HAS_ATOMICS # cairo
 	# Runtime dependency
 	select BR2_PACKAGE_XKEYBOARD_CONFIG
-	# Make sure at least one backend is selected
-	select BR2_PACKAGE_WESTON_FBDEV
+	# Make sure at least one compositor is selected.
+	select BR2_PACKAGE_WESTON_FBDEV if !BR2_PACKAGE_WESTON_HAS_COMPOSITOR
 	help
 	  Weston is the reference implementation of a Wayland
 	  compositor, and a useful compositor in its own right.
@@ -25,7 +33,17 @@ config BR2_PACKAGE_WESTON
 
 if BR2_PACKAGE_WESTON
 
+# Helper to make sure at least one compositor is selected.
+config BR2_PACKAGE_WESTON_HAS_COMPOSITOR
+	bool
+
 config BR2_PACKAGE_WESTON_FBDEV
 	bool "fbdev compositor"
+
+# rpi-userland is an EGL/GLES provider, so we can't select it
+config BR2_PACKAGE_WESTON_RPI
+	bool "RPi compositor"
+	depends on BR2_PACKAGE_RPI_USERLAND
+	select BR2_PACKAGE_WESTON_HAS_COMPOSITOR
 
 endif

@@ -1,31 +1,56 @@
-#############################################################
+################################################################################
 #
 # tzdata
 #
-#############################################################
+################################################################################
 
-TZDATA_VERSION = 2012j
+TZDATA_VERSION = 2014d
 TZDATA_SOURCE = tzdata$(TZDATA_VERSION).tar.gz
-TZDATA_SITE = http://www.iana.org/time-zones/repository/releases
-TZDATA_DEPENDENCIES = host-zic
+TZDATA_SITE = ftp://ftp.iana.org/tz/releases
+TZDATA_DEPENDENCIES = host-tzdata
+HOST_TZDATA_DEPENDENCIES = host-zic
 TZDATA_LICENSE = Public domain
 
-TZDATA_DEFAULT_ZONELIST = africa antarctica asia australasia backward etcetera \
-			europe factory northamerica pacificnew southamerica
+TZDATA_DEFAULT_ZONELIST = \
+	africa antarctica asia australasia backward etcetera \
+	europe factory northamerica pacificnew southamerica
 
-ifeq ($(call qstrip,$(BR2_PACKAGE_TZDATA_ZONELIST)),default)
+ifeq ($(call qstrip,$(BR2_TARGET_TZ_ZONELIST)),default)
 TZDATA_ZONELIST = $(TZDATA_DEFAULT_ZONELIST)
 else
-TZDATA_ZONELIST = $(call qstrip,$(BR2_PACKAGE_TZDATA_ZONELIST))
+TZDATA_ZONELIST = $(call qstrip,$(BR2_TARGET_TZ_ZONELIST))
 endif
 
-# Don't strip any path components during extraction.
-define TZDATA_EXTRACT_CMDS
+TZDATA_LOCALTIME = $(call qstrip,$(BR2_TARGET_LOCALTIME))
+
+# No need to extract for target, we're using the host-installed files
+TZDATA_EXTRACT_CMDS =
+
+define TZDATA_INSTALL_TARGET_CMDS
+	$(INSTALL) -d -m 0755 $(TARGET_DIR)/usr/share/zoneinfo
+	cp -a $(HOST_DIR)/usr/share/zoneinfo/* $(TARGET_DIR)/usr/share/zoneinfo
+	cd $(TARGET_DIR)/usr/share/zoneinfo;    \
+	for zone in posix/*; do                 \
+	    ln -sfn "$${zone}" "$${zone##*/}";  \
+	done
+	if [ -n "$(TZDATA_LOCALTIME)" ]; then                           \
+	    if [ ! -f $(TARGET_DIR)/usr/share/zoneinfo/$(TZDATA_LOCALTIME) ]; then \
+	        printf "Error: '%s' is not a valid timezone, check your BR2_TARGET_LOCALTIME setting\n" \
+	               "$(TZDATA_LOCALTIME)";                           \
+	        exit 1;                                                 \
+	    fi;                                                         \
+	    cd $(TARGET_DIR)/etc;                                       \
+	    ln -sf ../usr/share/zoneinfo/$(TZDATA_LOCALTIME) localtime; \
+	    echo "$(TZDATA_LOCALTIME)" >timezone;                       \
+	fi
+endef
+
+define HOST_TZDATA_EXTRACT_CMDS
 	gzip -d -c $(DL_DIR)/$(TZDATA_SOURCE) \
 		| $(TAR) --strip-components=0 -C $(@D) -xf -
 endef
 
-define TZDATA_BUILD_CMDS
+define HOST_TZDATA_BUILD_CMDS
 	(cd $(@D); \
 		for zone in $(TZDATA_ZONELIST); do \
 			$(ZIC) -d _output/posix -y yearistype.sh $$zone; \
@@ -34,13 +59,10 @@ define TZDATA_BUILD_CMDS
 	)
 endef
 
-define TZDATA_INSTALL_TARGET_CMDS
-	mkdir -p $(TARGET_DIR)/usr/share/zoneinfo
-	cp -a $(@D)/_output/* $(TARGET_DIR)/usr/share/zoneinfo
-	cd $(TARGET_DIR)/usr/share/zoneinfo;    \
-	for zone in posix/*; do                 \
-	    ln -sfn "$${zone}" "$${zone##*/}";    \
-	done
+define HOST_TZDATA_INSTALL_CMDS
+	$(INSTALL) -d -m 0755 $(HOST_DIR)/usr/share/zoneinfo
+	cp -a $(@D)/_output/* $(@D)/*.tab $(HOST_DIR)/usr/share/zoneinfo
 endef
 
 $(eval $(generic-package))
+$(eval $(host-generic-package))

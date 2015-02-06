@@ -1,14 +1,13 @@
-#############################################################
+################################################################################
 #
-# libiqrf library
+# libiqrf
 #
-#############################################################
+################################################################################
 
-LIBIQRF_VERSION = v0.1.0
-LIBIQRF_SITE = http://github.com/nandra/libiqrf/tarball/$(LIBIQRF_VERSION)
+LIBIQRF_VERSION = v0.1.2
+LIBIQRF_SITE = $(call github,nandra,libiqrf,$(LIBIQRF_VERSION))
 LIBIQRF_INSTALL_STAGING = YES
-
 LIBIQRF_DEPENDENCIES = libusb
+LIBIQRF_LICENSE = LGPLv2.1+
 
-$(eval $(autotools-package))
-
+$(eval $(cmake-package))

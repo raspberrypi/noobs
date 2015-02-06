@@ -1,11 +1,10 @@
-#############################################################
+################################################################################
 #
 # fbset
 #
-#############################################################
+################################################################################
 
 FBSET_VERSION = 2.1
-FBSET_SOURCE = fbset-$(FBSET_VERSION).tar.gz
 FBSET_SITE = http://users.telenet.be/geertu/Linux/fbdev
 FBSET_DEPENDENCIES = host-bison host-flex
 FBSET_LICENSE = GPLv2
@@ -21,14 +20,6 @@ endef
 
 define FBSET_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 755 $(@D)/fbset $(TARGET_DIR)/usr/sbin/fbset
-endef
-
-define FBSET_UNINSTALL_TARGET_CMDS
-	rm -f $(TARGET_DIR)/usr/sbin/fbset
-endef
-
-define FBSET_CLEAN_CMDS
-	-$(MAKE) -C $(@D) clean
 endef
 
 $(eval $(generic-package))

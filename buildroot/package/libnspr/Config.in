@@ -1,3 +1,9 @@
+config BR2_PACKAGE_LIBNSPR_ARCH_SUPPORT
+	def_bool y
+	depends on !BR2_arc && !BR2_xtensa && !BR2_bfin
+
+if BR2_PACKAGE_LIBNSPR_ARCH_SUPPORT
+
 config BR2_PACKAGE_LIBNSPR
 	bool "libnspr"
 	depends on BR2_LARGEFILE
@@ -10,5 +16,7 @@ config BR2_PACKAGE_LIBNSPR
 
 	  http://www.mozilla.org/projects/nspr/
 
-comment "libnspr requires a toolchain with LARGEFILE and threads support"
-	depends on !BR2_LARGEFILE && !BR2_TOOLCHAIN_HAS_THREADS
+comment "libnspr needs a toolchain w/ largefile, threads"
+	depends on !BR2_LARGEFILE || !BR2_TOOLCHAIN_HAS_THREADS
+
+endif

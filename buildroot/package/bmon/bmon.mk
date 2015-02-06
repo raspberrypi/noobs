@@ -1,32 +1,23 @@
-#############################################################
+################################################################################
 #
 # bmon
 #
-#############################################################
+################################################################################
 
-BMON_VERSION = 2.1.0
-BMON_SOURCE = bmon-$(BMON_VERSION).tar.gz
-BMON_SITE = http://distfiles.gentoo.org/distfiles
+BMON_VERSION = 3.5
+BMON_SITE = https://github.com/tgraf/bmon/releases/download/v$(BMON_VERSION)/
+BMON_DEPENDENCIES = host-pkgconf libconfuse libnl ncurses
+BMON_LICENSE = BSD-2c
+BMON_LICENSE_FILES = LICENSE
+# For 0001-build-uclinux-is-also-linux.patch
+BMON_AUTORECONF = YES
 
-ifeq ($(BR2_PACKAGE_NCURSES),y)
-BMON_DEPENDENCIES += ncurses
-else
-BMON_CONF_OPT += --disable-curses
-endif
-
-ifeq ($(BR2_PACKAGE_ALSA_LIB),y)
-BMON_DEPENDENCIES += alsa-lib
-else
-BMON_CONF_OPT += --disable-asound
-endif
-
-ifneq ($(BR2_PREFER_STATIC_LIB),y)
 # link dynamically unless explicitly requested otherwise
-BMON_CONF_OPT += --disable-static
+ifeq ($(BR2_STATIC_LIBS),)
+BMON_CONF_OPTS += --disable-static
+else
+# forgets to explicitly link with pthread for libnl
+BMON_CONF_OPTS += LIBS=-lpthread
 endif
-
-define BMON_UNINSTALL_TARGET_CMDS
-	rm -f $(TARGET_DIR)/usr/bin/bmon
-endef
 
 $(eval $(autotools-package))

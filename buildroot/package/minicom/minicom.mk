@@ -1,11 +1,11 @@
-#############################################################
+################################################################################
 #
 # minicom
 #
-#############################################################
-MINICOM_VERSION = 2.6.1
-MINICOM_SOURCE = minicom-$(MINICOM_VERSION).tar.gz
-MINICOM_SITE = http://alioth.debian.org/frs/download.php/3700/
+################################################################################
+
+MINICOM_VERSION = 2.7
+MINICOM_SITE = http://sources.buildroot.net
 MINICOM_LICENSE = GPLv2+
 MINICOM_LICENSE_FILES = COPYING
 

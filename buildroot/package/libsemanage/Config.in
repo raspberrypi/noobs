@@ -1,0 +1,31 @@
+config BR2_PACKAGE_LIBSEMANAGE
+	bool "libsemanage"
+	select BR2_PACKAGE_LIBSELINUX
+	select BR2_PACKAGE_USTR
+	select BR2_PACKAGE_BZIP2
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	depends on BR2_LARGEFILE
+	depends on !BR2_STATIC_LIBS
+	help
+	  libsemanage is the policy management library. It uses
+	  libsepol for binary policy manipulation and libselinux for
+	  interacting with the SELinux system. It also exec's helper
+	  programs for loading policy and for checking whether the
+	  file_contexts configuration is valid (load_policy and
+	  setfiles from policycoreutils) presently, although this may
+	  change at least for the bootstrapping case (for rpm).
+
+	  http://selinuxproject.org/page/Main_Page
+
+if BR2_PACKAGE_LIBSEMANAGE
+
+config BR2_PACKAGE_LIBSEMANAGE_PYTHON_BINDINGS
+	depends on BR2_PACKAGE_PYTHON
+	bool "python bindings"
+	help
+	  Enable building python bindings
+
+endif
+
+comment "libsemanage needs a toolchain w/ largefile, threads, dynamic library"
+	depends on !BR2_TOOLCHAIN_HAS_THREADS || !BR2_LARGEFILE || BR2_STATIC_LIBS

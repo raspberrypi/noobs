@@ -1,11 +1,11 @@
-#############################################################
+################################################################################
 #
 # wireless-regdb
 #
-#############################################################
+################################################################################
 
-WIRELESS_REGDB_VERSION = 2013.02.13
-WIRELESS_REGDB_SOURCE = wireless-regdb-$(WIRELESS_REGDB_VERSION).tar.bz2
+WIRELESS_REGDB_VERSION = 2014.11.18
+WIRELESS_REGDB_SOURCE = wireless-regdb-$(WIRELESS_REGDB_VERSION).tar.xz
 WIRELESS_REGDB_SITE = http://kernel.org/pub/software/network/wireless-regdb
 WIRELESS_REGDB_LICENSE = ISC
 WIRELESS_REGDB_LICENSE_FILES = LICENSE

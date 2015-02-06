@@ -1,5 +1,7 @@
 config BR2_PACKAGE_CLASSPATH
 	bool "classpath"
+	select BR2_NEEDS_HOST_JAR
+	select BR2_NEEDS_HOST_JAVAC
 	depends on BR2_PACKAGE_JAMVM
 	depends on BR2_INET_IPV6
 	help
@@ -10,5 +12,6 @@ config BR2_PACKAGE_CLASSPATH
 
 	  http://classpath.org
 
-comment "classpath requires a toolchain with IPV6 support"
+comment "classpath needs a toolchain w/ IPv6"
+	depends on BR2_PACKAGE_JAMVM
 	depends on !BR2_INET_IPV6

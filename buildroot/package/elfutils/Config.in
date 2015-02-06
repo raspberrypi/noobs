@@ -1,15 +1,21 @@
-comment "elfutils requires a toolchain with LARGEFILE and WCHAR support"
-	depends on !BR2_LARGEFILE || !BR2_USE_WCHAR
+comment "elfutils needs a toolchain w/ largefile, wchar, dynamic library"
+	depends on !BR2_avr32
+	depends on !BR2_bfin
+	depends on !BR2_LARGEFILE || !BR2_USE_WCHAR || BR2_STATIC_LIBS
 
 config BR2_PACKAGE_ELFUTILS
 	bool "elfutils"
-	select BR2_PACKAGE_ARGP_STANDALONE if \
-	       BR2_TOOLCHAIN_BUILDROOT   || \
-	       BR2_TOOLCHAIN_CTNG_uClibc || \
-	       BR2_TOOLCHAIN_EXTERNAL_UCLIBC
+	select BR2_PACKAGE_ARGP_STANDALONE if BR2_TOOLCHAIN_USES_UCLIBC
 	select BR2_PACKAGE_GETTEXT if BR2_NEEDS_GETTEXT
 	depends on BR2_LARGEFILE
 	depends on BR2_USE_WCHAR
+	depends on !BR2_STATIC_LIBS
+	# canonicalize_file_name() not available on uClibc 0.9.31, used
+	# only for AVR32
+	depends on !BR2_avr32
+	# build issue caused by the _ prefix used on blackfin for
+	# assembly symbols
+	depends on !BR2_bfin
 	help
 	  Libraries/utilities to handle ELF objects (drop in
 	  replacement for libelf).
@@ -23,9 +29,7 @@ if BR2_PACKAGE_ELFUTILS
 
 config BR2_PACKAGE_ELFUTILS_PROGS
 	bool "Install programs"
-	depends on BR2_TOOLCHAIN_EXTERNAL_GLIBC || \
-		   BR2_TOOLCHAIN_CTNG_glibc     || \
-		   BR2_TOOLCHAIN_CTNG_eglibc
+	depends on BR2_TOOLCHAIN_USES_GLIBC
 	help
 	  This option tells elfutils to not only install the libelf
 	  libraries, but also the elfutils programs.

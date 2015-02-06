@@ -1,13 +1,15 @@
 #!/usr/bin/python
 
 # Usage (the graphviz package must be installed in your distribution)
-#  ./scripts/graph-depends [package-name] > test.dot
+#  ./support/scripts/graph-depends [-p package-name] > test.dot
 #  dot -Tpdf test.dot -o test.pdf
 #
 # With no arguments, graph-depends will draw a complete graph of
-# dependencies for the current configuration. With an argument,
-# graph-depends will draw a graph of dependencies for the given
-# package name.
+# dependencies for the current configuration.
+# If '-p <package-name>' is specified, graph-depends will draw a graph
+# of dependencies for the given package name.
+# If '-d <depth>' is specified, graph-depends will limit the depth of
+# the dependency graph to 'depth' levels.
 #
 # Limitations
 #
@@ -21,24 +23,56 @@
 
 import sys
 import subprocess
+import argparse
 
-# In FULL_MODE, we draw the full dependency graph for all selected
-# packages
-FULL_MODE = 1
-
-# In PKG_MODE, we only draw the dependency graph for a given package
-PKG_MODE  = 2
-
+# Modes of operation:
+MODE_FULL = 1   # draw full dependency graph for all selected packages
+MODE_PKG  = 2   # draw dependency graph for a given package
 mode = 0
 
-if len(sys.argv) == 1:
-    mode = FULL_MODE
-elif len(sys.argv) == 2:
-    mode = PKG_MODE
-    rootpkg  = sys.argv[1]
+# Limit drawing the dependency graph to this depth. 0 means 'no limit'.
+max_depth = 0
+
+# Whether to draw the transitive dependencies
+transitive = True
+
+parser = argparse.ArgumentParser(description="Graph pacakges dependencies")
+parser.add_argument("--package", '-p', metavar="PACKAGE",
+                    help="Graph the dependencies of PACKAGE")
+parser.add_argument("--depth", '-d', metavar="DEPTH", dest="depth", type=int, default=0,
+                    help="Limit the dependency graph to DEPTH levels; 0 means no limit.")
+parser.add_argument("--colours", "-c", metavar="COLOR_LIST", dest="colours",
+                    default="lightblue,grey,gainsboro",
+                    help="Comma-separated list of the three colours to use" \
+                       + " to draw the top-level package, the target" \
+                       + " packages, and the host packages, in this order." \
+                       + " Defaults to: 'lightblue,grey,gainsboro'")
+parser.add_argument("--transitive", dest="transitive", action='store_true',
+                    default=False)
+parser.add_argument("--no-transitive", dest="transitive", action='store_false',
+                    help="Draw (do not draw) transitive dependencies")
+args = parser.parse_args()
+
+if args.package is None:
+    mode = MODE_FULL
 else:
-    print "Usage: graph-depends [package-name]"
+    mode = MODE_PKG
+    rootpkg = args.package
+
+max_depth = args.depth
+
+transitive = args.transitive
+
+# Get the colours: we need exactly three colours,
+# so no need not split more than 4
+# We'll let 'dot' validate the colours...
+colours = args.colours.split(',',4)
+if len(colours) != 3:
+    sys.stderr.write("Error: incorrect colour list '%s'\n" % args.colours)
     sys.exit(1)
+root_colour = colours[0]
+target_colour = colours[1]
+host_colour = colours[2]
 
 allpkgs = []
 
@@ -47,8 +81,8 @@ allpkgs = []
 # list is used as the starting point for full dependency graphs
 def get_targets():
     sys.stderr.write("Getting targets\n")
-    cmd = ["make", "-s", "show-targets"]
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    cmd = ["make", "-s", "--no-print-directory", "show-targets"]
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, universal_newlines=True)
     output = p.communicate()[0].strip()
     if p.returncode != 0:
         return None
@@ -61,10 +95,10 @@ def get_targets():
 # dependencies formatted as a Python dictionary.
 def get_depends(pkgs):
     sys.stderr.write("Getting dependencies for %s\n" % pkgs)
-    cmd = ["make", "-s" ]
+    cmd = ["make", "-s", "--no-print-directory" ]
     for pkg in pkgs:
         cmd.append("%s-show-depends" % pkg)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, universal_newlines=True)
     output = p.communicate()[0]
     if p.returncode != 0:
         sys.stderr.write("Error getting dependencies %s\n" % pkgs)
@@ -119,7 +153,7 @@ def get_all_depends(pkgs):
 
     if len(deps) != 0:
         newdeps = get_all_depends(deps)
-        if newdeps != None:
+        if newdeps is not None:
             dependencies += newdeps
 
     return dependencies
@@ -129,51 +163,23 @@ def get_all_depends(pkgs):
 def pkg_node_name(pkg):
     return pkg.replace("-","")
 
-# Helper function for remove_redundant_deps(). This function tells
-# whether package "pkg" is the dependency of another package that is
-# not the special "all" package.
-def has_redundant_deps(deps, pkg):
-    for dep in deps:
-        if dep[0] != "all" and dep[1] == pkg:
-            return True
-    return False
-
-# This function removes redundant dependencies of the special "all"
-# package. This "all" package is created to reflect the origin of the
-# selection for all packages that are not themselves selected by any
-# other package. So for example if you enable libpng, zlib is enabled
-# as a dependency. But zlib being selected by libpng, it also appears
-# as a dependency of the "all" package. This needlessly complicates
-# the generated dependency graph. So when we have the dependency list
-# (all -> zlib, all -> libpn, libpng -> zlib), we get rid of the 'all
-# -> zlib' dependency, because zlib is already a dependency of a
-# regular package.
-def remove_redundant_deps(deps):
-    newdeps = []
-    for dep in deps:
-        if dep[0] != "all":
-            newdeps.append(dep)
-            continue
-        if not has_redundant_deps(deps, dep[1]):
-            newdeps.append(dep)
-            continue
-        sys.stderr.write("Removing redundant dep all -> %s\n" % dep[1])
-    return newdeps
-
 TARGET_EXCEPTIONS = [
+    "target-generic-securetty",
     "target-generic-issue",
     "target-generic-getty-busybox",
     "target-generic-do-remount-rw",
+    "target-generic-dont-remount-rw",
     "target-finalize",
     "erase-fakeroots",
     "target-generic-hostname",
     "target-root-passwd",
     "target-post-image",
+    "target-purgelocales",
 ]
 
 # In full mode, start with the result of get_targets() to get the main
 # targets and then use get_all_depends() for all targets
-if mode == FULL_MODE:
+if mode == MODE_FULL:
     targets = get_targets()
     dependencies = []
     allpkgs.append('all')
@@ -185,36 +191,109 @@ if mode == FULL_MODE:
         dependencies.append(('all', tg))
         filtered_targets.append(tg)
     deps = get_all_depends(filtered_targets)
-    if deps != None:
+    if deps is not None:
         dependencies += deps
+    rootpkg = 'all'
 
 # In pkg mode, start directly with get_all_depends() on the requested
 # package
-elif mode == PKG_MODE:
+elif mode == MODE_PKG:
     dependencies = get_all_depends([rootpkg])
 
-dependencies = remove_redundant_deps(dependencies)
+# Make the dependencies a dictionnary { 'pkg':[dep1, dep2, ...] }
+dict_deps = {}
+for dep in dependencies:
+    if dep[0] not in dict_deps:
+        dict_deps[dep[0]] = []
+    dict_deps[dep[0]].append(dep[1])
+
+# This function return True if pkg is a dependency (direct or
+# transitive) of pkg2, dependencies being listed in the deps
+# dictionary. Returns False otherwise.
+def is_dep(pkg,pkg2,deps):
+    if pkg2 in deps:
+        for p in deps[pkg2]:
+            if pkg == p:
+                return True
+            if is_dep(pkg,p,deps):
+                return True
+    return False
+
+# This function eliminates transitive dependencies; for example, given
+# these dependency chain: A->{B,C} and B->{C}, the A->{C} dependency is
+# already covered by B->{C}, so C is a transitive dependency of A, via B.
+# The functions does:
+#   - for each dependency d[i] of the package pkg
+#     - if d[i] is a dependency of any of the other dependencies d[j]
+#       - do not keep d[i]
+#     - otherwise keep d[i]
+def remove_transitive_deps(pkg,deps):
+    d = deps[pkg]
+    new_d = []
+    for i in range(len(d)):
+        keep_me = True
+        for j in range(len(d)):
+            if j==i:
+                continue
+            if is_dep(d[i],d[j],deps):
+                keep_me = False
+        if keep_me:
+            new_d.append(d[i])
+    return new_d
+
+# This function removes the dependency on the 'toolchain' package
+def remove_toolchain_deps(pkg,deps):
+    return [p for p in deps[pkg] if not p == 'toolchain']
+
+# This functions trims down the dependency list of all packages.
+# It applies in sequence all the dependency-elimination methods.
+def remove_extra_deps(deps):
+    for pkg in list(deps.keys()):
+        if not pkg == 'all':
+            deps[pkg] = remove_toolchain_deps(pkg,deps)
+    for pkg in list(deps.keys()):
+        if not transitive or pkg == 'all':
+            deps[pkg] = remove_transitive_deps(pkg,deps)
+    return deps
+
+dict_deps = remove_extra_deps(dict_deps)
+
+# Print the attributes of a node: label and fill-color
+def print_attrs(pkg):
+    name = pkg_node_name(pkg)
+    if pkg == 'all':
+        label = 'ALL'
+    else:
+        label = pkg
+    if pkg == 'all' or (mode == MODE_PKG and pkg == rootpkg):
+        color = root_colour
+    else:
+        if pkg.startswith('host') \
+        or pkg.startswith('toolchain') \
+        or pkg.startswith('rootfs'):
+            color = host_colour
+        else:
+            color = target_colour
+    print("%s [label = \"%s\"]" % (name, label))
+    print("%s [color=%s,style=filled]" % (name, color))
+
+# Print the dependency graph of a package
+def print_pkg_deps(depth, pkg):
+    if pkg in done_deps:
+        return
+    done_deps.append(pkg)
+    print_attrs(pkg)
+    if pkg not in dict_deps:
+        return
+    if max_depth == 0 or depth < max_depth:
+        for d in dict_deps[pkg]:
+            print("%s -> %s" % (pkg_node_name(pkg), pkg_node_name(d)))
+            print_pkg_deps(depth+1, d)
 
 # Start printing the graph data
-print "digraph G {"
+print("digraph G {")
 
-# First, the dependencies. Usage of set allows to remove duplicated
-# dependencies in the graph
-for dep in set(dependencies):
-    print "%s -> %s" % (pkg_node_name(dep[0]), pkg_node_name(dep[1]))
+done_deps = []
+print_pkg_deps(0, rootpkg)
 
-# Then, the node attributes: color, style and label.
-for pkg in allpkgs:
-    if pkg == 'all':
-        print "all [label = \"ALL\"]"
-        print "all [color=lightblue,style=filled]"
-        continue
-
-    print "%s [label = \"%s\"]" % (pkg_node_name(pkg), pkg)
-
-    if mode == PKG_MODE and pkg == rootpkg:
-        print "%s [color=lightblue,style=filled]" % pkg_node_name(rootpkg)
-    else:
-        print "%s [color=grey,style=filled]" % pkg_node_name(pkg)
-
-print "}"
+print("}")

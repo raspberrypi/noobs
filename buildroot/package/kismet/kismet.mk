@@ -1,15 +1,23 @@
-#############################################################
+################################################################################
 #
 # kismet
 #
-#############################################################
+################################################################################
 
-KISMET_VERSION = 2013-03-R1b
-KISMET_SITE = http://www.kismetwireless.net/code
+KISMET_VERSION = Kismet-2014-02-R1
+KISMET_SITE = http://www.kismetwireless.net/kismet.git
+KISMET_SITE_METHOD = git
 KISMET_DEPENDENCIES = host-pkgconf libpcap ncurses libnl
-KISMET_CONF_OPT += --with-netlink-version=3
+KISMET_CONF_OPTS += --with-netlink-version=3
 KISMET_LICENSE = GPLv2+
 KISMET_LICENSE_FILES = debian/copyright
+
+# We touch configure.in:
+KISMET_AUTORECONF = YES
+
+ifeq ($(BR2_STATIC_LIBS),y)
+KISMET_CONF_ENV = LIBS="-lpcap $(shell $(STAGING_DIR)/usr/bin/pcap-config --static --additional-libs)"
+endif
 
 ifeq ($(BR2_PACKAGE_PCRE),y)
 	KISMET_DEPENDENCIES += pcre
@@ -44,23 +52,6 @@ endif
 define KISMET_INSTALL_TARGET_CMDS
 	$(KISMET_INSTALL_TARGET_BINARIES)
 	$(KISMET_INSTALL_TARGET_CONFIGS)
-endef
-
-ifdef KISMET_TARGET_BINARIES
-define KISMET_UNINSTALL_TARGET_BINARIES
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/, $(KISMET_TARGET_BINARIES))
-endef
-endif
-
-ifdef KISMET_TARGET_CONFIGS
-define KISMET_UNINSTALL_TARGET_CONFIGS
-	rm -f $(addprefix $(TARGET_DIR)/etc/, $(KISMET_TARGET_CONFIGS))
-endef
-endif
-
-define KISMET_UNINSTALL_TARGET_CMDS
-	$(KISMET_UNINSTALL_TARGET_BINARIES)
-	$(KISMET_UNINSTALL_TARGET_CONFIGS)
 endef
 
 $(eval $(autotools-package))

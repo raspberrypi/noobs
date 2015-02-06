@@ -1,27 +1,28 @@
-#############################################################
+################################################################################
 #
 # cvs
 #
-#############################################################
+################################################################################
+
 CVS_VERSION = 1.12.13
 CVS_SOURCE = cvs_$(CVS_VERSION).orig.tar.gz
-CVS_PATCH = cvs_$(CVS_VERSION)-12.diff.gz
-CVS_SITE = $(BR2_DEBIAN_MIRROR)/debian/pool/main/c/cvs/
+CVS_PATCH = cvs_$(CVS_VERSION)-12+squeeze1.diff.gz
+CVS_SITE = http://snapshot.debian.org/archive/debian/20141023T043132Z/pool/main/c/cvs
 CVS_DEPENDENCIES = ncurses
 
 CVS_CONF_ENV = cvs_cv_func_printf_ptr=yes
 
-CVS_CONFIGURE_ARGS=--disable-old-info-format-support
+CVS_CONFIGURE_ARGS = --disable-old-info-format-support
 ifeq ($(BR2_PACKAGE_CVS_SERVER),y)
-CVS_CONFIGURE_ARGS+=--enable-server
+CVS_CONFIGURE_ARGS += --enable-server
 else
-CVS_CONFIGURE_ARGS+=--disable-server
+CVS_CONFIGURE_ARGS += --disable-server
 endif
 ifeq ($(BR2_PACKAGE_ZLIB),y)
-CVS_CONFIGURE_ARGS+=--with-external-zlib
+CVS_CONFIGURE_ARGS += --with-external-zlib
 endif
 
-CVS_CONF_OPT = $(CVS_CONFIGURE_ARGS)
+CVS_CONF_OPTS = $(CVS_CONFIGURE_ARGS)
 
 define CVS_BZIP_UNPACK
 	$(BZCAT) $(@D)/cvs-$(CVS_VERSION).tar.bz2 | tar -C $(BUILD_DIR) $(TAR_OPTIONS) -
@@ -37,7 +38,7 @@ define CVS_DEBIAN_PATCHES
 		 do $(SED) 's,^\+\+\+ .*cvs-$(CVS_VERSION)/,+++ cvs-$(CVS_VERSION)/,' $$i; \
 		 done; \
 		); \
-		support/scripts/apply-patches.sh $(@D) $(@D)/debian/patches \*; \
+		$(APPLY_PATCHES) $(@D) $(@D)/debian/patches \*; \
 	fi
 endef
 endif
@@ -45,9 +46,7 @@ endif
 CVS_POST_PATCH_HOOKS += CVS_DEBIAN_PATCHES
 
 define CVS_INSTALL_TARGET_CMDS
-	install -D $(@D)/src/cvs $(TARGET_DIR)/usr/bin/cvs
+	$(INSTALL) -D $(@D)/src/cvs $(TARGET_DIR)/usr/bin/cvs
 endef
 
 $(eval $(autotools-package))
-
-

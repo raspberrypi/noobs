@@ -1,8 +1,8 @@
 config BR2_PACKAGE_NEARD
 	bool "neard"
 	depends on BR2_USE_WCHAR # libglib2
-	depends on BR2_TOOLCHAIN_HAS_THREADS # libnl / dbus
-	depends on BR2_USE_MMU # dbus
+	depends on BR2_TOOLCHAIN_HAS_THREADS # libnl, dbus, libglib2
+	depends on BR2_USE_MMU # dbus, libglib2
 	select BR2_PACKAGE_DBUS
 	select BR2_PACKAGE_LIBGLIB2
 	select BR2_PACKAGE_LIBNL
@@ -14,11 +14,15 @@ config BR2_PACKAGE_NEARD
 
 	  https://01.org/linux-nfc/documentation/how-start-linux-nfc-code...
 
+if BR2_PACKAGE_NEARD
+
 config BR2_PACKAGE_NEARD_TOOLS
 	bool "neard tools"
-	depends on BR2_PACKAGE_NEARD
 	help
 	  Build and install neard tools.
 
-comment "neard requires a toolchain with WCHAR and threads support"
+endif
+
+comment "neard needs a toolchain w/ wchar, threads"
+	depends on BR2_USE_MMU
 	depends on !BR2_USE_WCHAR || !BR2_TOOLCHAIN_HAS_THREADS

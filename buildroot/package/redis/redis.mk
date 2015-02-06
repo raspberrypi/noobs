@@ -1,11 +1,11 @@
-#############################################################
+################################################################################
 #
 # redis
 #
-#############################################################
+################################################################################
 
-REDIS_VERSION = 2.6.11
-REDIS_SITE = http://redis.googlecode.com/files
+REDIS_VERSION = 2.8.19
+REDIS_SITE = http://download.redis.io/releases
 REDIS_LICENSE = BSD-3c (core); MIT and BSD family licenses (Bundled components)
 REDIS_LICENSE_FILES = COPYING
 
@@ -13,15 +13,15 @@ REDIS_LICENSE_FILES = COPYING
 # https://github.com/antirez/redis/pull/609).  We set PREFIX
 # instead.
 REDIS_BUILDOPTS = $(TARGET_CONFIGURE_OPTS) \
-    PREFIX=$(TARGET_DIR)/usr MALLOC=libc \
+	PREFIX=$(TARGET_DIR)/usr MALLOC=libc \
 
 define REDIS_BUILD_CMDS
-        $(TARGET_MAKE_ENV) $(MAKE) $(REDIS_BUILDOPTS) -C $(@D)
+	$(TARGET_MAKE_ENV) $(MAKE) $(REDIS_BUILDOPTS) -C $(@D)
 endef
 
 define REDIS_INSTALL_TARGET_CMDS
-        $(TARGET_MAKE_ENV) $(MAKE) $(REDIS_BUILDOPTS) -C $(@D) \
-	    LDCONFIG=true install
+	$(TARGET_MAKE_ENV) $(MAKE) $(REDIS_BUILDOPTS) -C $(@D) \
+		LDCONFIG=true install
 endef
 
 $(eval $(generic-package))

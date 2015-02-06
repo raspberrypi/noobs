@@ -1,32 +1,59 @@
-#############################################################
+################################################################################
 #
 # weston
 #
-#############################################################
+################################################################################
 
-WESTON_VERSION = 1.1.0
-WESTON_SITE = http://wayland.freedesktop.org/releases/
-WESTON_SOURCE = weston-$(WAYLAND_VERSION).tar.xz
+WESTON_VERSION = 1.6.0
+WESTON_SITE = http://wayland.freedesktop.org/releases
+WESTON_SOURCE = weston-$(WESTON_VERSION).tar.xz
 WESTON_LICENSE = MIT
 WESTON_LICENSE_FILES = COPYING
 
-WESTON_DEPENDENCIES = wayland libxkbcommon pixman libpng jpeg mtdev udev
-WESTON_CONF_OPT = \
+WESTON_DEPENDENCIES = host-pkgconf wayland libxkbcommon pixman libpng \
+	jpeg mtdev udev cairo
+
+WESTON_CONF_OPTS = \
+	--with-dtddir=$(STAGING_DIR)/usr/share/wayland \
 	--disable-egl \
+	--disable-simple-egl-clients \
 	--disable-xwayland \
 	--disable-x11-compositor \
 	--disable-drm-compositor \
 	--disable-wayland-compositor \
 	--disable-headless-compositor \
-	--disable-rpi-compositor \
 	--disable-weston-launch \
-	--disable-libunwind
+	--disable-colord
 
-ifeq ($(BR2_PACKAGE_WESTON_FBDEV),y)
-WESTON_CONF_OPT += --enable-fbdev-compositor
+ifeq ($(BR2_PACKAGE_LIBINPUT),y)
+WESTON_DEPENDENCIES += libinput
+WESTON_CONF_OPTS += --enable-libinput-backend
 else
-WESTON_CONF_OPT += --disable-fbdev-compositor
+WESTON_CONF_OPTS += --disable-libinput-backend
 endif
 
-$(eval $(autotools-package))
+ifeq ($(BR2_PACKAGE_LIBUNWIND),y)
+WESTON_DEPENDENCIES += libunwind
+else
+WESTON_CONF_OPTS += --disable-libunwind
+endif
 
+ifeq ($(BR2_PACKAGE_WESTON_FBDEV),y)
+WESTON_CONF_OPTS += --enable-fbdev-compositor
+else
+WESTON_CONF_OPTS += --disable-fbdev-compositor
+endif
+
+ifeq ($(BR2_PACKAGE_WESTON_RPI),y)
+WESTON_DEPENDENCIES += rpi-userland
+WESTON_CONF_OPTS += --enable-rpi-compositor \
+	--disable-resize-optimization \
+	--disable-setuid-install \
+	--disable-xwayland-test \
+	--disable-simple-egl-clients \
+	WESTON_NATIVE_BACKEND=rpi-backend.so
+else
+WESTON_CONF_OPTS += --disable-rpi-compositor
+endif # BR2_PACKAGE_WESTON_RPI
+
+$(eval $(autotools-package))

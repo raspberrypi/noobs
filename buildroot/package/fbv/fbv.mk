@@ -1,11 +1,10 @@
-#############################################################
+################################################################################
 #
 # fbv
 #
-#############################################################
+################################################################################
 
 FBV_VERSION = 1.0b
-FBV_SOURCE = fbv-$(FBV_VERSION).tar.gz
 FBV_SITE = http://s-tech.elsat.net.pl/fbv
 
 FBV_LICENSE = GPLv2
@@ -16,6 +15,12 @@ FBV_DEPENDENCIES = # empty
 FBV_CONFIGURE_OPTS = # empty
 ifeq ($(BR2_PACKAGE_FBV_PNG),y)
 FBV_DEPENDENCIES += libpng
+
+# libpng in turn depends on other libraries
+ifeq ($(BR2_STATIC_LIBS),y)
+FBV_CONFIGURE_OPTS += "--libs=$(shell $(PKG_CONFIG_HOST_BINARY) --libs libpng --static)"
+endif
+
 else
 FBV_CONFIGURE_OPTS += --without-libpng
 endif
@@ -25,12 +30,12 @@ else
 FBV_CONFIGURE_OPTS += --without-libjpeg
 endif
 ifeq ($(BR2_PACKAGE_FBV_GIF),y)
-FBV_DEPENDENCIES += libungif
+FBV_DEPENDENCIES += giflib
 else
 FBV_CONFIGURE_OPTS += --without-libungif
 endif
 
-#fbv donesn't support cross-compilation
+#fbv doesn't support cross-compilation
 define FBV_CONFIGURE_CMDS
 	(cd $(FBV_DIR); rm -f config.cache; \
 		$(TARGET_CONFIGURE_OPTS) \
@@ -46,12 +51,7 @@ define FBV_BUILD_CMDS
 endef
 
 define FBV_INSTALL_TARGET_CMDS
-	install -D $(@D)/fbv $(TARGET_DIR)/usr/bin/fbv
-endef
-
-define FBV_CLEAN_CMDS
-	rm -f $(TARGET_DIR)/usr/bin/fbv
-	-$(MAKE) -C $(@D) clean
+	$(INSTALL) -D $(@D)/fbv $(TARGET_DIR)/usr/bin/fbv
 endef
 
 $(eval $(autotools-package))

@@ -12,9 +12,13 @@ if BR2_PACKAGE_DIRECTFB
 config BR2_PACKAGE_DIRECTFB_MULTI
 	bool "directfb multi application"
 	select BR2_PACKAGE_LINUX_FUSION
+	depends on BR2_USE_MMU # madvise()
 	depends on BR2_LINUX_KERNEL
 	help
 	  Enable use of multiple concurrent DirectFB applications
+
+comment "directfb multi application needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL
 
 config BR2_PACKAGE_DIRECTFB_DEBUG
 	bool "directfb debugging"
@@ -93,12 +97,24 @@ config BR2_PACKAGE_DIRECTFB_SERIALMOUSE
 
 config BR2_PACKAGE_DIRECTFB_TSLIB
 	bool "enable touchscreen support"
+	depends on !BR2_STATIC_LIBS # tslib
 	default y
 	select BR2_PACKAGE_TSLIB
+
+comment "touchscreen support needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS
 
 config BR2_PACKAGE_DIRECTFB_GIF
 	bool "enable GIF support"
 	default y
+
+config BR2_PACKAGE_DIRECTFB_IMLIB2
+	bool "enable IMLIB2 support"
+	select BR2_PACKAGE_IMLIB2
+	depends on !BR2_STATIC_LIBS
+
+comment "imlib2 support needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS
 
 config BR2_PACKAGE_DIRECTFB_JPEG
 	bool "enable JPEG support"
@@ -109,6 +125,12 @@ config BR2_PACKAGE_DIRECTFB_PNG
 	bool "enable PNG support"
 	default y
 	select BR2_PACKAGE_LIBPNG
+
+config BR2_PACKAGE_DIRECTFB_SVG
+	bool "enable SVG support"
+	depends on BR2_ARCH_HAS_ATOMICS # cairo
+	default y
+	select BR2_PACKAGE_LIBSVG_CAIRO
 
 config BR2_PACKAGE_DIRECTFB_DITHER_RGB16
 	bool "enable advanced dithering of RGB16 surfaces"
@@ -121,5 +143,5 @@ config BR2_PACKAGE_DIRECTFB_TESTS
 
 endif # BR2_PACKAGE_DIRECTFB
 
-comment "directfb needs a toolchain with C++ and thread support"
+comment "directfb needs a toolchain w/ C++, threads"
 	depends on !BR2_TOOLCHAIN_HAS_THREADS || !BR2_INSTALL_LIBSTDCPP
