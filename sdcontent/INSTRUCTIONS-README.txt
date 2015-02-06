@@ -28,4 +28,4 @@ If your display remains blank, you should select the correct output mode for you
 3. Composite PAL mode - select either this mode or composite NTSC mode if you are using the composite RCA video connector.
 4. Composite NTSC mode
 
-If you are still having difficulties after following these instructions, then please visit the Raspberry Pi Forum ( http://www.raspberrypi.org/phpBB3/ ) for support.
+If you are still having difficulties after following these instructions, then please visit the Raspberry Pi Forums ( http://www.raspberrypi.org/forums/ ) for support.
