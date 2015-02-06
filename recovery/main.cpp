@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
         && QFile::exists(FAT_PARTITION_OF_IMAGE);
 
     // Default to booting first extended partition
-    putFileContents("/sys/module/bcm2708/parameters/reboot_part", "5\n");
+    setRebootPartition("5");
 
     if (bailout)
     {

@@ -139,7 +139,7 @@ void BootSelectionDialog::bootPartition()
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     QByteArray partition = settings.value("default_partition_to_boot", 800).toByteArray();
     qDebug() << "Booting partition" << partition;
-    putFileContents("/sys/module/bcm2708/parameters/reboot_part", partition+"\n");
+    setRebootPartition(partition);
     QDialog::accept();
 }
 

@@ -128,3 +128,8 @@ bool canBootOs(const QString& name, const QVariantMap& values)
 
     return true;
 }
+
+void setRebootPartition(QByteArray partition)
+{
+    putFileContents("/sys/module/bcm2708/parameters/reboot_part", partition+"\n");
+}
