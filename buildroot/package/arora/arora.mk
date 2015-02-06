@@ -5,7 +5,7 @@
 #############################################################
 
 ARORA_SITE=git://github.com/Arora/arora.git
-ARORA_VERSION=master
+ARORA_VERSION=c5421dcf7d68ba61c3a5bed580e8fd65395643e1
 ARORA_LICENSE = GPLv2
 ARORA_LICENSE_FILES = LICENSE.GPL2
 ARORA_INSTALL_STAGING=NO

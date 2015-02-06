@@ -7,9 +7,48 @@ set -e
 # Final directory where NOOBS files will be copied to
 NOOBS_OUTPUT_DIR="output"
 
-cd buildroot
 
-BUILDROOT_DL_DIR=${BUILDROOT_DL_DIR:-"dl"}
+function get_package_version {
+  PACKAGE=$1
+  CONFIG_FILE="package/$PACKAGE/$PACKAGE.mk"
+  if [ -f "$CONFIG_FILE" ]; then
+    CONFIG_VAR=$(echo "$PACKAGE-version" | tr '[:lower:]-' '[:upper:]_')
+    grep -E "^$CONFIG_VAR\s*=\s*.+$" "$CONFIG_FILE" | tr -d ' ' | cut -d= -f2
+  fi
+}
+
+
+function update_github_package_version {
+    PACKAGE=$1
+    GITHUB_REPO=$2
+    BRANCH=$3
+    CONFIG_FILE="package/$PACKAGE/$PACKAGE.mk"
+    if [ -f "$CONFIG_FILE" ]; then
+        OLDREV=$(get_package_version $PACKAGE)
+        if [ -z "$OLDREV" ]; then
+            echo "Error getting OLDREV for $PACKAGE";
+        else
+            REPO_API=https://api.github.com/repos/$GITHUB_REPO/git/refs/heads/$BRANCH
+            GITREV=$(curl -s ${REPO_API} | awk '{ if ($1 == "\"sha\":") { print substr($2, 2, 40) } }')
+            if [ -z "$GITREV" ]; then
+                echo "Error getting GITREV for $PACKAGE ($BRANCH)";
+            else
+                if [ "$OLDREV" == "$GITREV" ]; then
+                    echo "Package $PACKAGE ($BRANCH) is already newest version"
+                else
+                    CONFIG_VAR=$(echo "$PACKAGE-version" | tr '[:lower:]-' '[:upper:]_')
+                    sed -ri "s/(^$CONFIG_VAR\s*=\s*)[0-9a-f]+$/\1$GITREV/" "$CONFIG_FILE"
+                    echo "Package $PACKAGE ($BRANCH) updated to version $GITREV"
+                fi
+            fi
+        fi
+    else
+        echo "$CONFIG_FILE doesn't exist"
+    fi
+}
+
+
+cd buildroot
 
 # WARNING: don't try changing these - you'll break buildroot
 BUILD_DIR="output/build"
@@ -17,20 +56,23 @@ IMAGES_DIR="output/images"
 
 # Delete buildroot build directory to force rebuild
 if [ -e "$BUILD_DIR" ]; then
-    rm -rf "$BUILD_DIR/"recovery* || true
+    rm -rf "$BUILD_DIR/recovery-$(get_package_version recovery)" || true
 fi
 
 for i in $*; do
-    # Redownload firmware from raspberrypi/firmware master HEAD to update to latest
+    # Update raspberrypi/firmware master HEAD version in package/rpi-firmware/rpi-firmware.mk to latest
     if [ $i = "update-firmware" ]; then
-        rm -rf "$BUILD_DIR/rpi-firmware-master"
-        rm -rf "$BUILDROOT_DL_DIR"/rpi-firmware-master.tar.gz
+        update_github_package_version rpi-firmware raspberrypi/firmware master
     fi
 
-    # Redownload userland from raspberrypi/userland master HEAD to update to latest
+    # Update raspberrypi/userland master HEAD version in package/rpi-userland/rpi-userland.mk to latest
     if [ $i = "update-userland" ]; then
-        rm -rf "$BUILD_DIR/rpi-userland-master"
-        rm -rf "$BUILDROOT_DL_DIR"/rpi-userland-master.tar.gz
+        update_github_package_version rpi-userland raspberrypi/userland master
+    fi
+
+    # Early-exit (in case we want to just update config files without doing a build)
+    if [ $i = "nobuild" ]; then
+        exit
     fi
 done
 
@@ -56,8 +98,8 @@ BUILD_INFO="$FINAL_OUTPUT_DIR/BUILD-DATA"
 echo "Build-date: $(date +"%Y-%m-%d")" > "$BUILD_INFO"
 echo "NOOBS Version: $(git describe)" >> "$BUILD_INFO"
 echo "NOOBS Git HEAD @ $(git rev-parse --verify HEAD)" >> "$BUILD_INFO"
-cat "$BUILDROOT_DL_DIR"/rpi-userland-head.version >> "$BUILD_INFO"
-cat "$BUILDROOT_DL_DIR"/rpi-firmware-head.version >> "$BUILD_INFO"
+echo "rpi-userland Git master @ $(get_package_version rpi-userland)" >> "$BUILD_INFO"
+echo "rpi-firmware Git master @ $(get_package_version rpi-firmware)" >> "$BUILD_INFO"
 
 cd ..
 
