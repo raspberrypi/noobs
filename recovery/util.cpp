@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QDebug>
+#include <QList>
 
 /*
  * Convenience functions
@@ -100,10 +101,19 @@ uint readBoardRevision()
 {
     if (revision == 0)
     {
-        QFile f("/sys/module/bcm2708/parameters/boardrev");
-        f.open(f.ReadOnly);
-        revision = f.readAll().trimmed().toUInt();
-        f.close();
+        QProcess proc;
+        proc.start("vcgencmd otp_dump");
+        proc.waitForFinished();
+        QList<QByteArray> lines = proc.readAll().split('\n');
+        for (int i=0; i < lines.size(); i++)
+        {
+            if (lines.at(i).startsWith("30:"))
+            {
+                bool ok;
+                revision = lines.at(i).right(8).toUInt(&ok, 16) & 0xFFFFFF;
+                break;
+            }
+        }
     }
     return revision;
 }
