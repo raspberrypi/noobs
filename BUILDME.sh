@@ -107,6 +107,8 @@ if [ -e "$BUILD_DIR" ]; then
     rm -rf "$BUILD_DIR/recovery-$(get_package_version recovery)" || true
 fi
 
+SKIP_KERNEL_REBUILD=0
+
 for i in $*; do
     # Update raspberrypi/firmware master HEAD version in package/rpi-firmware/rpi-firmware.mk to latest
     if [ $i = "update-firmware" ]; then
@@ -121,6 +123,11 @@ for i in $*; do
     # Update raspberrypi/linux rpi-3.18.y HEAD version in buildroot/.config to latest
     if [ $i = "update-kernel" ]; then
         update_github_kernel_version raspberrypi/linux rpi-3.18.y
+    fi
+
+    # Option to build just recovery without completely rebuilding both kernels
+    if [ $i = "skip-kernel-rebuild" ]; then
+        SKIP_KERNEL_REBUILD=1
     fi
 
     # Early-exit (in case we want to just update config files without doing a build)
@@ -138,17 +145,21 @@ mkdir -p "$FINAL_OUTPUT_DIR"
 mkdir -p "$FINAL_OUTPUT_DIR/os"
 cp -r ../sdcontent/* "$FINAL_OUTPUT_DIR"
 
-# Rebuild kernel for ARMv7
-select_kernelconfig armv7
-make linux-reconfigure
-# copy ARMv7 kernel
-cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7.img"
+if [ $SKIP_KERNEL_REBUILD -ne 1 ]; then
+    # Rebuild kernel for ARMv7
+    select_kernelconfig armv7
+    make linux-reconfigure
+    # copy ARMv7 kernel
+    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7.img"
 
-# Rebuild kernel for ARMv6
-select_kernelconfig armv6
-make linux-reconfigure
-# copy ARMv6 kernel
-cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery.img"
+    # Rebuild kernel for ARMv6
+    select_kernelconfig armv6
+    make linux-reconfigure
+    # copy ARMv6 kernel
+    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery.img"
+else
+    echo "Warning: kernels in '$NOOBS_OUTPUT_DIR' directory haven't been updated"
+fi
 
 # copy rootfs
 cp "$IMAGES_DIR/rootfs.cpio.lzo" "$FINAL_OUTPUT_DIR/recovery.rfs"
