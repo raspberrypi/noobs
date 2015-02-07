@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 /* Version number displayed in the title bar */
-#define VERSION_NUMBER "1.3.10"
+#define VERSION_NUMBER "1.3.12"
 
 /* Color of the background */
 // #define BACKGROUND_COLOR  Qt::white
