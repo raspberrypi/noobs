@@ -363,11 +363,59 @@ bool isSupportedOs(const QString& name, const QVariantMap& values)
         return true;
     }
 
-    /* Check the feature_level flag */
-    quint64 featurelevel = values.value("feature_level", 58364).toULongLong();
-    quint64 mask = (quint64)1 << readBoardRevision();
-    if ((featurelevel & mask) != mask) {
+    uint board_revision = readBoardRevision();
+    if (values.find("supported_revisions") != values.end())
+    {
+        /* Check the supported revisions list */
+        QStringList revisions = values.value("supported_revisions").toString().remove(" ").split(",");
+        for (int i=0; i < revisions.size(); i++)
+        {
+            bool ok;
+            uint rev = revisions.at(i).toUInt(&ok, 10);
+            if (ok)
+            {
+                if ((rev & 0xffff) == (board_revision & 0xffff))
+                {
+                    return true;
+                }
+            }
+        }
         return false;
+    }
+    else if (values.find("supported_hex_revisions") != values.end())
+    {
+        /* Check the supported revisions list */
+        QStringList revisions = values.value("supported_hex_revisions").toString().remove(" ").split(",");
+        for (int i=0; i < revisions.size(); i++)
+        {
+            bool ok;
+            uint rev = revisions.at(i).toUInt(&ok, 16);
+            if (ok)
+            {
+                if ((rev & 0xffff) == (board_revision & 0xffff))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    else
+    {
+        /* Check the feature_level flag */
+        if (board_revision < 64) /* overflow otherwise */
+        {
+            quint64 featurelevel = values.value("feature_level", 58364).toULongLong();
+            quint64 mask = (quint64)1 << board_revision;
+            if ((featurelevel & mask) != mask)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     return true;
@@ -486,7 +534,8 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
         {
             QVariantMap entry = item->data(Qt::UserRole).toMap();
             QString name = entry.value("name").toString();
-            if (!isSupportedOs(name, entry)) {
+            if (!isSupportedOs(name, entry))
+            {
                 allSupported = false;
                 unsupportedOses += "\n" + name;
             }

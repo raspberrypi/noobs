@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <QFile>
+#include <QFileInfo>
 #include <QProcess>
 #include <QDebug>
 #include <QList>
@@ -139,7 +140,17 @@ bool canBootOs(const QString& name, const QVariantMap& values)
     return true;
 }
 
-void setRebootPartition(QByteArray partition)
+bool setRebootPartition(QByteArray partition)
 {
-    putFileContents("/sys/module/bcm2708/parameters/reboot_part", partition+"\n");
+    if (QFileInfo("/sys/module/bcm2708/parameters/reboot_part").exists())
+    {
+        putFileContents("/sys/module/bcm2708/parameters/reboot_part", partition+"\n");
+        return true;
+    }
+    else if (QFileInfo("/sys/module/bcm2709/parameters/reboot_part").exists())
+    {
+        putFileContents("/sys/module/bcm2709/parameters/reboot_part", partition+"\n");
+        return true;
+    }
+    return false;
 }

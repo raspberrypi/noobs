@@ -87,6 +87,15 @@ function update_github_kernel_version {
 }
 
 
+function select_kernelconfig {
+    ARCH=$1
+    CONFIG_FILE=.config
+    CONFIG_VAR=BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE
+    VAR_PREFIX=kernelconfig-recovery
+    sed -ri "s/(^$CONFIG_VAR=\"$VAR_PREFIX\.).+(\")$/\1$ARCH\2/" "$CONFIG_FILE"
+}
+
+
 cd buildroot
 
 # WARNING: don't try changing these - you'll break buildroot
@@ -128,7 +137,20 @@ FINAL_OUTPUT_DIR="../$NOOBS_OUTPUT_DIR"
 mkdir -p "$FINAL_OUTPUT_DIR"
 mkdir -p "$FINAL_OUTPUT_DIR/os"
 cp -r ../sdcontent/* "$FINAL_OUTPUT_DIR"
+
+# Rebuild kernel for ARMv7
+select_kernelconfig armv7
+make linux-reconfigure
+# copy ARMv7 kernel
+cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7.img"
+
+# Rebuild kernel for ARMv6
+select_kernelconfig armv6
+make linux-reconfigure
+# copy ARMv6 kernel
 cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery.img"
+
+# copy rootfs
 cp "$IMAGES_DIR/rootfs.cpio.lzo" "$FINAL_OUTPUT_DIR/recovery.rfs"
 
 # Ensure that final output dir contains files necessary to boot
