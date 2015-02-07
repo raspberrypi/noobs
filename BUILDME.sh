@@ -55,6 +55,38 @@ function get_kernel_version {
 }
 
 
+function update_github_kernel_version {
+    PACKAGE=kernel
+    GITHUB_REPO=$1
+    BRANCH=$2
+    CONFIG_FILE=.config
+    if [ -f "$CONFIG_FILE" ]; then
+        OLDREV=$(get_kernel_version)
+        if [ -z "$OLDREV" ]; then
+            echo "Error getting OLDREV for $PACKAGE";
+        else
+            REPO_API=https://api.github.com/repos/$GITHUB_REPO/git/refs/heads/$BRANCH
+            GITREV=$(curl -s ${REPO_API} | awk '{ if ($1 == "\"sha\":") { print substr($2, 2, 40) } }')
+            if [ -z "$GITREV" ]; then
+                echo "Error getting GITREV for $PACKAGE ($BRANCH)";
+            else
+                if [ "$OLDREV" == "$GITREV" ]; then
+                    echo "$PACKAGE ($BRANCH) is already newest version"
+                else
+                    CONFIG_VAR=BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION
+                    sed -ri "s/(^$CONFIG_VAR=\")[0-9a-f]+(\")$/\1$GITREV\2/" "$CONFIG_FILE"
+                    CONFIG_VAR=BR2_LINUX_KERNEL_VERSION
+                    sed -ri "s/(^$CONFIG_VAR=\")[0-9a-f]+(\")$/\1$GITREV\2/" "$CONFIG_FILE"
+                    echo "$PACKAGE ($BRANCH) updated to version $GITREV"
+                fi
+            fi
+        fi
+    else
+        echo "$CONFIG_FILE doesn't exist"
+    fi
+}
+
+
 cd buildroot
 
 # WARNING: don't try changing these - you'll break buildroot
@@ -75,6 +107,11 @@ for i in $*; do
     # Update raspberrypi/userland master HEAD version in package/rpi-userland/rpi-userland.mk to latest
     if [ $i = "update-userland" ]; then
         update_github_package_version rpi-userland raspberrypi/userland master
+    fi
+
+    # Update raspberrypi/linux rpi-3.18.y HEAD version in buildroot/.config to latest
+    if [ $i = "update-kernel" ]; then
+        update_github_kernel_version raspberrypi/linux rpi-3.18.y
     fi
 
     # Early-exit (in case we want to just update config files without doing a build)
