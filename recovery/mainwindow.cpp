@@ -41,6 +41,9 @@
 #include <QWSServer>
 #endif
 
+extern QString defaultRepos;
+extern QString extraRepos;
+
 /* Main window
  *
  * Initial author: Floris Bos
@@ -935,7 +938,8 @@ void MainWindow::ifupFinished(int)
             _cache->setMaximumCacheSize(8 * 1024 * 1024);
             _netaccess->setCache(_cache);
 
-            downloadList(DEFAULT_REPO_SERVER);
+            _reposNum=0;
+            downloadList(defaultRepos);
         }
         ui->actionBrowser->setEnabled(true);
         emit networkUp();
@@ -1009,6 +1013,11 @@ void MainWindow::downloadListComplete()
     }
 
     reply->deleteLater();
+
+    _reposNum++;
+    if (_reposNum ==1) && (!extraRepos.isEmpty())
+        downloadList(extraRepos);
+
 }
 
 void MainWindow::processJson(QVariant json)
