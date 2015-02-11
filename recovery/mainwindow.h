@@ -49,6 +49,8 @@ protected:
     QNetworkAccessManager *_netaccess;
     int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
     QMessageBox *_displayModeBox;
+    int _reposNum;
+
 
     QMap<QString,QVariantMap> listImages();
     virtual void changeEvent(QEvent * event);
