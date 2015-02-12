@@ -10,6 +10,10 @@
 /bin/mount -t devtmpfs dev /dev
 /bin/hostname -F /etc/hostname
 
+# Need this for SSH
+/bin/mkdir -p /dev/pts
+/bin/mount -t devpts devpts /dev/pts
+
 # Set up ACT LED to be triggered by mmc0
 echo mmc0 > /sys/class/leds/led0/trigger
 
@@ -24,6 +28,13 @@ if grep -q vncinstall /proc/cmdline; then
     export QWS_DISPLAY="VNC:size=800x600:depth=32:0"
     ifup eth0
 fi
+
+if grep -q ssh /proc/cmdline; then
+    # SSH server mode. Mainly useful for debugging
+    ifup eth0
+    . /etc/S50dropbear start &
+fi
+
 
 # Mouse acceleration
 #export QWS_MOUSE_PROTO=:accel=1
