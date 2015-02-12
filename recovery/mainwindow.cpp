@@ -1015,7 +1015,7 @@ void MainWindow::downloadListComplete()
     reply->deleteLater();
 
     _reposNum++;
-    if (_reposNum ==1) && (!extraRepos.isEmpty())
+    if ((_reposNum ==1) && (!extraRepos.isEmpty()))
         downloadList(extraRepos);
 
 }
