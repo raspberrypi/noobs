@@ -25,6 +25,14 @@ if grep -q vncinstall /proc/cmdline; then
     ifup eth0
 fi
 
+if grep -q ssh /proc/cmdline; then
+    # SSH server mode. Mainly useful for debugging
+    /bin/mkdir -p /dev/pts
+    /bin/mount -t devpts devpts /dev/pts
+    . /etc/S50dropbear start &
+fi
+
+
 # Mouse acceleration
 #export QWS_MOUSE_PROTO=:accel=1
 

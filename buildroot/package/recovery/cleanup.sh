@@ -14,6 +14,7 @@ BUILDROOT_TARGET_DIR="$BUILDROOT_OUTPUT_DIR/target"
 #	cp "$STAGING_FONTS_DIR/DejaVuSans-Bold.ttf" "$TARGET_FONTS_DIR"
 #fi
 
+cp output/target/etc/init.d/S50dropbear output/target/etc/S50dropbear
 # We do not use busybox's init system
 rm -f "$BUILDROOT_TARGET_DIR/etc/init.d/"*
 
