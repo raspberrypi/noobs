@@ -107,7 +107,7 @@ if [ -e "$BUILD_DIR" ]; then
     rm -rf "$BUILD_DIR/recovery-$(get_package_version recovery)" || true
 fi
 
-SKIP_KERNEL_REBUILD=0
+SKIP_KERNEL_REBUILD=1
 
 for i in $*; do
     # Update raspberrypi/firmware master HEAD version in package/rpi-firmware/rpi-firmware.mk to latest
