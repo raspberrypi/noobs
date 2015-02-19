@@ -34,6 +34,9 @@
  *
  */
 
+QString defaultRepos (DEFAULT_REPO_SERVER);
+QString extraRepos;
+
 void reboot_to_extended(const QString &defaultPartition, bool setDisplayMode)
 {
     // Unmount any open file systems
@@ -127,6 +130,19 @@ int main(int argc, char *argv[])
             if (argc > i+1)
                 defaultPartition = argv[i+1];
         }
+        // Allow default repos to be specified in commandline
+        else if (strcmp(argv[i], "-default_repos_server") == 0)
+        {
+             if (argc > i+1)
+                defaultRepos = argv[i+1];
+        }
+        // Allow Extra repos to be specified in commandline
+        else if (strcmp(argv[i], "-extra_repos_server") == 0)
+        {
+             if (argc > i+1)
+                extraRepos = argv[i+1];
+        }
+
     }
 
     // Intercept right mouse clicks sent to the title bar
