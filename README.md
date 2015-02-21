@@ -98,6 +98,12 @@ Even if you are using your Pi without a display, you can still use NOOBS to easi
 
 When you now boot your Pi using an SD card containing the modified version of NOOBS that you just created, it will automatically install the OS you chose and boot into it after the installation has finished.
 
+### How to install OSes from an alternative source
+
+An alternative source of OSes to be downloaded from the internet can be specified by adding <b>alt_image_source=http://newurl.com/os_list_v2.json</b> to the argument list in recovery.cmdline. This list of OSes will be added to the default download list. This can be useful for storing the default repository on a local LAN server.
+
+To suppress the default URL and only use the alternative image source for downloading OS images, add <b>no_default_source</b>.
+
 ### How to create a custom OS version
 
 There are two main use cases for which you may want to create a custom version of one of the standard OS releases that is suitable for installation via NOOBS:
