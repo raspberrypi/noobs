@@ -11,6 +11,7 @@
  */
 
 #include "languagedialog.h"
+#include "wifiselection.h"
 #include <QMainWindow>
 #include <QModelIndex>
 #include <QSplashScreen>
@@ -47,8 +48,10 @@ protected:
     bool _activatedEth;
     int _numInstalledOS;
     QNetworkAccessManager *_netaccess;
+    int _carrierCount;
     int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
     QMessageBox *_displayModeBox;
+    WifiSelection *_wifiDialog;
 
     QMap<QString,QVariantMap> listImages();
     virtual void changeEvent(QEvent * event);

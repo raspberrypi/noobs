@@ -29,6 +29,8 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkDiskCache>
+#include <QtNetwork/QNetworkConfiguration>
+#include <QtNetwork/QNetworkConfigurationManager>
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -66,7 +68,7 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     ui(new Ui::MainWindow),
     _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
     _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
-    _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
+    _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL), _carrierCount(0)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
@@ -890,31 +892,114 @@ void MainWindow::on_list_doubleClicked(const QModelIndex &index)
 
 void MainWindow::startNetworking()
 {
+
+    QNetworkConfiguration cfg;
+    QNetworkConfigurationManager ncm;
+    QList<QNetworkConfiguration> nc = ncm.allConfigurations();
+    QString inf = "eth0";
+    QStringList accpts;
+    QRegExp essid("^ *ESSID:\"(.*)\"");
+
+    /* Bring up all interfaces */
+
+    if (!_activatedEth) {
+        for (int i = 0; i< nc.size(); i++)
+        {
+            cfg = nc.at(i);
+            QProcess::execute("/sbin/ifconfig " + cfg.name() + " up");
+        }
+        _activatedEth = true;
+    }
+
+    /*
     if (!QFile::exists("/sys/class/net/eth0"))
     {
-        /* eth0 not available yet, check back in a tenth of a second */
+        */ /* eth0 not available yet, check back in a tenth of a second */ /*
         QTimer::singleShot(100, this, SLOT(startNetworking()));
         return;
     }
+    */
+
+    /*
+    for(int i = 0; i< nc.size(); i++)
+    {
+        cfg = nc.at(i);
+        qDebug() << "network: " << cfg.name() << " bearer: " << cfg.bearerType()
+                 << " purpose: " << cfg.purpose() << " state: " << cfg.state() << " type: " << cfg.type();
+    }
+    */
 
     QByteArray carrier = getFileContents("/sys/class/net/eth0/carrier").trimmed();
+
+    /*
     if (carrier.isEmpty() && !_activatedEth)
     {
         QProcess::execute("/sbin/ifconfig eth0 up");
         _activatedEth = true;
     }
+    */
 
-    if (carrier != "1")
+    qDebug()<<"Carrier: "<< carrier;
+
+    if ((carrier != "1")&&(_carrierCount < 20))
     {
         /* cable not detected yet, check back in a tenth of a second */
+        qDebug()<<"Waiting for carrier";
+        _carrierCount ++;
         QTimer::singleShot(100, this, SLOT(startNetworking()));
         return;
     }
 
+    /* if there is no carrier at this point let's try to see if we can start any other interface */
+
+    if ((carrier != "1")&&(_carrierCount < 21))
+    {
+        qDebug()<<"Start Network Access Points List";
+
+        for(int i = 0; i < nc.size(); i++)
+        {
+            cfg = nc.at(i);
+            if(cfg.name() != "eth0") {
+                QProcess *proc = new QProcess(this);
+                proc->start("/sbin/iwlist " + cfg.name() + " scanning");
+                proc->waitForFinished();
+
+                QTextStream stream(proc);
+                while (!stream.atEnd()) {
+                    if (essid.indexIn(stream.readLine(), 0) != -1) {
+                        accpts << essid.cap(1);
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < accpts.size(); i++)
+        {
+            qDebug()<<"AP: "<<accpts.at(i);
+        }
+
+        qDebug()<<"End Network Access Points List";
+
+        if (accpts.size() > 0)
+        {
+            _wifiDialog = new WifiSelection(this);
+            _wifiDialog->setAccPts(accpts);
+            _wifiDialog->exec();
+        }
+        else
+        {
+            /* go round again - temporary code */
+            _carrierCount = 0;
+            QTimer::singleShot(100, this, SLOT(startNetworking()));
+            return;
+        }
+    }
+
+
     QProcess *proc = new QProcess(this);
     connect(proc, SIGNAL(finished(int)), this, SLOT(ifupFinished(int)));
     /* Try enabling interface twice as sometimes it times out before getting a DHCP lease */
-    proc->start("sh -c \"ifup eth0 || ifup eth0\"");
+    proc->start("sh -c \"ifup " + inf + " || ifup " + inf + "\"");
 }
 
 void MainWindow::ifupFinished(int)

@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     multiimagewritethread.cpp \
     util.cpp \
     twoiconsdelegate.cpp \
-    bootselectiondialog.cpp
+    bootselectiondialog.cpp \
+    wifiselection.cpp
 
 HEADERS  += mainwindow.h \
     languagedialog.h \
@@ -43,13 +44,15 @@ HEADERS  += mainwindow.h \
     multiimagewritethread.h \
     util.h \
     twoiconsdelegate.h \
-    bootselectiondialog.h
+    bootselectiondialog.h \
+    wifiselection.h
 
 FORMS    += mainwindow.ui \
     languagedialog.ui \
     progressslideshowdialog.ui \
     confeditdialog.ui \
-    bootselectiondialog.ui
+    bootselectiondialog.ui \
+    wifiselection.ui
 
 RESOURCES += \
     icons.qrc
