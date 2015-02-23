@@ -34,6 +34,9 @@
  *
  */
 
+QString defaultRepos (DEFAULT_REPO_SERVER);
+QString extraRepos;
+
 void reboot_to_extended(const QString &defaultPartition, bool setDisplayMode)
 {
     // Unmount any open file systems
@@ -73,7 +76,6 @@ int main(int argc, char *argv[])
         gpioChannel = 0;
     else
         gpioChannel = 2;
-
     QApplication a(argc, argv);
     RightButtonFilter rbf;
     GpioInput gpio(gpioChannel);
@@ -82,6 +84,7 @@ int main(int argc, char *argv[])
     bool gpio_trigger = false;
     bool keyboard_trigger = true;
     bool force_trigger = false;
+    bool use_default_source = true;
 
     QString defaultLang = "en";
     QString defaultKeyboard = "gb";
@@ -127,6 +130,23 @@ int main(int argc, char *argv[])
             if (argc > i+1)
                 defaultPartition = argv[i+1];
         }
+        // Allow default repos to be specified in commandline
+        else if (strcmp(argv[i], "-no_default_source") == 0)
+        {
+             use_default_source = false;
+        }
+        // Allow Extra repos to be specified in commandline
+        else if (strcmp(argv[i], "-alt_image_source") == 0)
+        {
+             if (argc > i+1)
+                extraRepos = argv[i+1];
+        }
+    }
+
+    if (!use_default_source)
+    {
+        defaultRepos = extraRepos;
+        extraRepos = "";
     }
 
     // Intercept right mouse clicks sent to the title bar
