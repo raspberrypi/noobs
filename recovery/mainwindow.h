@@ -48,9 +48,12 @@ protected:
     bool _activatedEth;
     int _numInstalledOS;
     QNetworkAccessManager *_netaccess;
-    int _carrierCount;
     int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
     QMessageBox *_displayModeBox;
+    int _carrierCount;
+    QString _wifiSSID;
+    QString _wifiEnc;
+    QString _wifiPass;
     WifiSelection *_wifiDialog;
 
     QMap<QString,QVariantMap> listImages();

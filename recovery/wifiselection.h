@@ -15,11 +15,23 @@ class WifiSelection : public QDialog
 
 public:
     explicit WifiSelection(QWidget *parent = 0);
-    void setAccPts(QStringList &ac);
+    void setAccPts(QStringList &ac, QStringList &enc, QStringList &inter);
+    QString getAP();
+    QString getEnc();
+    QString getPass();
+    QString getInt();
     ~WifiSelection();
 
+protected:
+    QStringList _apSSID;
+    QStringList _apEnc;
+    QStringList _apInt;
+    int _apInd;
+    void accept();
+
+
 public slots:
-    void itemClicked(QListWidgetItem *itemClicked);
+    void listSelectionChanged();
 
 private:
     Ui::WifiSelection *ui;

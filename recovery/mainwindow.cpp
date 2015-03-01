@@ -68,7 +68,8 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     ui(new Ui::MainWindow),
     _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
     _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
-    _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL), _carrierCount(0)
+    _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL), _carrierCount(0),
+    _wifiSSID(""), _wifiEnc(""), _wifiPass(""), _wifiDialog(NULL)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
@@ -143,7 +144,7 @@ void MainWindow::populate()
         _qpd = new QProgressDialog(tr("Please wait while NOOBS initialises"), QString(), 0, 0, this);
         _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
         _qpd->show();
-        QTimer::singleShot(2000, this, SLOT(hideDialogIfNoNetwork()));
+        /* QTimer::singleShot(2000, this, SLOT(hideDialogIfNoNetwork())); */
     }
 
     if (QFile::exists(SETTINGS_PARTITION))
@@ -859,7 +860,7 @@ bool MainWindow::requireNetwork()
     {
         QMessageBox::critical(this,
                               tr("No network access"),
-                              tr("Wired network access is required for this feature. Please insert a network cable into the network port."),
+                              tr("Network access is required for this feature. Please insert a network cable into the network port or select a Wifi Network."),
                               QMessageBox::Close);
         return false;
     }
@@ -897,8 +898,9 @@ void MainWindow::startNetworking()
     QNetworkConfigurationManager ncm;
     QList<QNetworkConfiguration> nc = ncm.allConfigurations();
     QString inf = "eth0";
-    QStringList accpts;
-    QRegExp essid("^ *ESSID:\"(.*)\"");
+    QStringList accpts, accptsenc, accptsint;
+    QRegExp essid("^.*\t.*\t.*\t(.*)\t(.*)$");
+    QByteArray carrier = "";
 
     /* Bring up all interfaces */
 
@@ -907,99 +909,167 @@ void MainWindow::startNetworking()
         {
             cfg = nc.at(i);
             QProcess::execute("/sbin/ifconfig " + cfg.name() + " up");
+            if (QDir("/sys/class/net/" + cfg.name() + "/wireless").exists())
+            {
+                QProcess::execute("/usr/sbin/wpa_supplicant -D nl80211,wext -i " + cfg.name() +
+                                  " -c /etc/wpa_supplicant.conf -B");
+                QProcess::execute("/usr/sbin/wpa_cli -i " + cfg.name() + " scan");
+            }
         }
         _activatedEth = true;
     }
 
-    /*
-    if (!QFile::exists("/sys/class/net/eth0"))
-    {
-        */ /* eth0 not available yet, check back in a tenth of a second */ /*
-        QTimer::singleShot(100, this, SLOT(startNetworking()));
-        return;
-    }
-    */
+    /* work out whether any of the interfaces are live */
 
-    /*
-    for(int i = 0; i< nc.size(); i++)
+    for (int i = 0; i< nc.size(); i++)
     {
         cfg = nc.at(i);
-        qDebug() << "network: " << cfg.name() << " bearer: " << cfg.bearerType()
-                 << " purpose: " << cfg.purpose() << " state: " << cfg.state() << " type: " << cfg.type();
+        inf = cfg.name();
+        carrier = getFileContents("/sys/class/net/" + inf + "/carrier").trimmed();
+        qDebug()<<"Interface:" << inf << "Carrier:"<< carrier;
+
+        if (carrier == "1")
+        {
+            break;
+        }
     }
-    */
 
-    QByteArray carrier = getFileContents("/sys/class/net/eth0/carrier").trimmed();
-
-    /*
-    if (carrier.isEmpty() && !_activatedEth)
-    {
-        QProcess::execute("/sbin/ifconfig eth0 up");
-        _activatedEth = true;
-    }
-    */
-
-    qDebug()<<"Carrier: "<< carrier;
-
-    if ((carrier != "1")&&(_carrierCount < 20))
+    if ((carrier != "1") && (_carrierCount < 40))
     {
         /* cable not detected yet, check back in a tenth of a second */
-        qDebug()<<"Waiting for carrier";
         _carrierCount ++;
         QTimer::singleShot(100, this, SLOT(startNetworking()));
         return;
     }
 
-    /* if there is no carrier at this point let's try to see if we can start any other interface */
+    /* if there is no carrier at this point let's try to see if we can scan for wifi networks */
 
-    if ((carrier != "1")&&(_carrierCount < 21))
+    if ((carrier != "1") && (_carrierCount < 41))
     {
-        qDebug()<<"Start Network Access Points List";
-
         for(int i = 0; i < nc.size(); i++)
         {
             cfg = nc.at(i);
-            if(cfg.name() != "eth0") {
+            if (QDir("/sys/class/net/" + cfg.name() + "/wireless").exists())
+            {
                 QProcess *proc = new QProcess(this);
-                proc->start("/sbin/iwlist " + cfg.name() + " scanning");
+                proc->start("/usr/sbin/wpa_cli -i " + cfg.name() + " scan_results");
                 proc->waitForFinished();
 
                 QTextStream stream(proc);
                 while (!stream.atEnd()) {
                     if (essid.indexIn(stream.readLine(), 0) != -1) {
-                        accpts << essid.cap(1);
+                        QString flags, auth;
+                        flags = essid.cap(1);
+
+                        /* ignoring EAP as this feels a bit to structured for NOOBS */
+                        auth = "";
+
+                        if (flags.indexOf("[WPA2-EAP") >= 0)
+                                auth = "";
+                        else if (flags.indexOf("[WPA-EAP") >= 0)
+                                auth = "";
+                        else if (flags.indexOf("[WPA-PSK") >= 0)
+                                auth = "WPA-PSK";
+                        else if (flags.indexOf("[WPA2-PSK") >= 0)
+                                auth = "WPA2-PSK";
+                        else
+                                auth = "NONE";
+                        if ((flags.indexOf("WEP") >= 0)&&(auth == "NONE"))
+                                auth = "WEP";
+                        if (auth != "")
+                        {
+                            accpts << essid.cap(2);
+                            accptsenc << auth;
+                            accptsint << cfg.name();
+                        }
                     }
                 }
             }
         }
 
-        for (int i = 0; i < accpts.size(); i++)
-        {
-            qDebug()<<"AP: "<<accpts.at(i);
-        }
+        /* OK so we have some access points to choose from let's display then and get the passphase */
 
-        qDebug()<<"End Network Access Points List";
-
-        if (accpts.size() > 0)
+        if ((accpts.size() > 0)&&(_wifiDialog == NULL))
         {
+            int ret;
+
+            inf = "";
             _wifiDialog = new WifiSelection(this);
-            _wifiDialog->setAccPts(accpts);
-            _wifiDialog->exec();
+            _wifiDialog->setAccPts(accpts, accptsenc, accptsint);
+
+            ret = _wifiDialog->exec();
+
+            /* wireless network selected */
+
+            if ((ret == QDialog::Accepted) && (_wifiDialog->getAP() != ""))
+            {
+                _wifiSSID = _wifiDialog->getAP();
+                _wifiEnc = _wifiDialog->getEnc();
+                _wifiPass = _wifiDialog->getPass();
+                inf = _wifiDialog->getInt();
+            }
+
+            _wifiDialog->deleteLater();
+            _wifiDialog = NULL;
+
+            /* start the network using the wpa_cli command line interface */
+
+            if (inf != "")
+            {
+                QProcess::execute("/usr/sbin/wpa_cli -i " + inf + " add_network");
+                QStringList ss;
+                ss << "-i" << inf << "set_network" << "0" << "ssid" << "\"" + _wifiSSID + "\"";
+                QProcess::execute("/usr/sbin/wpa_cli", ss);
+                qDebug() << ss;
+                QStringList pa;
+                if (_wifiEnc == "NONE")
+                {
+                    pa << "-i" << inf << "set_network" << "0" << "key_mgmt" << "NONE";
+                }
+                else if(_wifiEnc == "WEP")
+                {
+                    QProcess::execute("/usr/sbin/wpa_cli -i " + inf + " key_mgmt NONE");
+                    pa << "-i" << inf << "set_network" << "0" << "wep_key0" << "\"" + _wifiPass + "\"";
+                }
+                else
+                {
+                    QProcess::execute("/usr/sbin/wpa_cli -i " + inf + " key_mgmt WPA-PSK");
+                    pa << "-i" << inf << "set_network" << "0" << "psk" << "\"" + _wifiPass + "\"";
+                }
+
+                QProcess::execute("/usr/sbin/wpa_cli", pa);
+                qDebug() << pa;
+                QProcess::execute("/usr/sbin/wpa_cli -i " + inf + " enable_network 0");
+
+                /* give the network time to come up */
+                _carrierCount = 50;
+            }
+
         }
-        else
-        {
-            /* go round again - temporary code */
-            _carrierCount = 0;
-            QTimer::singleShot(100, this, SLOT(startNetworking()));
-            return;
-        }
+
     }
 
+    /* Catch all keep going until we have an SSID, encryption and passphrase or the wired network is plugged in */
+
+    if (carrier != "1")
+    {
+        /* go round again - waiting for the carrier or disable if no network activated */
+        if ((_carrierCount > 200) && (_wifiDialog == NULL))
+        {
+            QTimer::singleShot(1000, this, SLOT(hideDialogIfNoNetwork()));
+        }
+        _carrierCount ++;
+        QTimer::singleShot(100, this, SLOT(startNetworking()));
+        return;
+    }
 
     QProcess *proc = new QProcess(this);
     connect(proc, SIGNAL(finished(int)), this, SLOT(ifupFinished(int)));
-    /* Try enabling interface twice as sometimes it times out before getting a DHCP lease */
-    proc->start("sh -c \"ifup " + inf + " || ifup " + inf + "\"");
+
+    /* Explicitly try and get a DCHP lease - note this used to be enacted twice using ifup that does not like wlan interfaces */
+
+    qDebug() <<"/sbin/udhcpc -i " + inf;
+    proc->start("/sbin/udhcpc -i " + inf);
 }
 
 void MainWindow::ifupFinished(int)
@@ -1537,7 +1607,23 @@ void MainWindow::hideDialogIfNoNetwork()
 {
     if (_qpd)
     {
-        QByteArray carrier = getFileContents("/sys/class/net/eth0/carrier").trimmed();
+        QNetworkConfiguration cfg;
+        QNetworkConfigurationManager ncm;
+        QList<QNetworkConfiguration> nc = ncm.allConfigurations();
+        QByteArray carrier = "";
+
+        for (int i = 0; i< nc.size(); i++)
+        {
+            cfg = nc.at(i);
+            carrier = getFileContents("/sys/class/net/" + cfg.name() + "/carrier").trimmed();
+            qDebug()<<"Dialog Interface:" << cfg.name() << "Carrier:"<< carrier;
+
+            if (carrier == "1")
+            {
+                break;
+            }
+        }
+
         if (carrier != "1")
         {
             /* No network cable inserted */
@@ -1550,7 +1636,7 @@ void MainWindow::hideDialogIfNoNetwork()
                 /* No local images either */
                 QMessageBox::critical(this,
                                       tr("No network access"),
-                                      tr("Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port."),
+                                      tr("Network access is required to use NOOBS without local images. Please insert a network cable into the network port or connect to a Wifi access point."),
                                       QMessageBox::Close);
             }
         }
