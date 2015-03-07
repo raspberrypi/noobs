@@ -160,11 +160,11 @@ Try pressing shift only when the grey splashscreen is displayed rather than hold
 
 #### How to boot into "Safe Mode"
 
-To boot into a basic busybox shell rather than launching the NOOBS GUI, you can either:
+To boot into a basic busybox shell rather than launching the NOOBS GUI, you can *either*:
 
 1. Append `rescueshell` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
 
-2. Insert a physical jumper between pins 5 & 6 of GPIO header P1.
+2. Insert a physical jumper between pins 5 & 6 of GPIO header P1. If you have external hardware or an addon board connected to the GPIO header, you may find that pin 5 is being pulled low and accidentally triggering "Safe Mode". To prevent this you can append `disablesafemode` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory.
 
 #### How to enable using the GPIO to trigger entering Recovery Mode
 
