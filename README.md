@@ -130,13 +130,14 @@ The following steps allow you to create a modified copy of one of the standard O
   1. To create the root tarball you will need to run `tar -cvpf <label>.tar /* --exclude=proc/* --exclude=sys/* --exclude=dev/pts/*` from within the root filesystem of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
   2. To create the boot tarball you will need to run `tar -cvpf <label>.tar .` at the root directory of the boot partition of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
 
-### How to change the default Language, Keyboard layout, Display mode or Boot Partition
+### How to change the default Language, Keyboard layout, Display mode, Boot Partition or ip address
 
 Edit the `recovery.cmdline` file in the root NOOBS directory and append the following arguments where relevant:
 - `lang=<two-letter language code>` (e.g. `lang=de` or `lang=en`)
 - `keyboard=<two-letter layout code>` (e.g. `keyboard=de` or `keyboard=us`)
 - `display=<display mode number>` (e.g. `display=1` or `display=3`)
 - `partition=<partition_number>` (e.g. `partition=5`)
+- `ip=<IP::GW:Netmask:hostname:Dev>` (e.g. `ip=192.168.3.10::192.168.3.1:255.255.255.0:RaspberryPi:eth0`)
 
 Note that these defaults will be overwritten by any changes made in the GUI to these settings.
 

@@ -87,6 +87,7 @@ int main(int argc, char *argv[])
     QString defaultKeyboard = "gb";
     QString defaultDisplay = "0";
     QString defaultPartition = "800";
+    QString defaultIP = "";
 
     // Process command-line arguments
     for (int i=1; i<argc; i++)
@@ -126,6 +127,12 @@ int main(int argc, char *argv[])
         {
             if (argc > i+1)
                 defaultPartition = argv[i+1];
+        }
+        // Allow default ip parameters to be specified in commandline
+        else if (strcmp(argv[i], "-ip") == 0)
+        {
+            if (argc > i+1)
+                defaultIP = argv[i+1];
         }
     }
 
@@ -169,7 +176,7 @@ int main(int argc, char *argv[])
 #endif
 
     // Main window in the middle of screen
-    MainWindow mw(defaultDisplay, splash);
+    MainWindow mw(defaultDisplay, splash, defaultIP);
     mw.setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, mw.size(), a.desktop()->availableGeometry()));
     mw.show();
 

@@ -52,4 +52,13 @@
 /* Maximum number of partitions */
 #define MAXIMUM_PARTITIONS  32
 
+/* for IP cmdline parameter */
+#define IP_CLIENT 0
+#define IP_SERVER 1
+#define IP_GATEWAY 2
+#define IP_NETMASK 3
+#define IP_HOSTNAME 4
+#define IP_DEVICE 5
+#define IP_AUTOCONF 6
+
 #endif // CONFIG_H
