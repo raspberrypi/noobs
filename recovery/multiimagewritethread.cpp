@@ -486,7 +486,8 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     Json::saveToFile("/mnt2/os_config.json", qm);
 
     emit statusUpdate(tr("%1: Saving display mode to config.txt").arg(os_name));
-    patchConfigTxt();
+    if ( ! image->managevideo())
+        patchConfigTxt();
 
     /* Partition setup script can either reside in the image folder
      * or inside the boot partition tarball */
