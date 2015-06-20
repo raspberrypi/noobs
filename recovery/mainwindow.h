@@ -87,6 +87,7 @@ protected slots:
     void downloadMetaComplete();
     void onQuery(const QString &msg, const QString &title, QMessageBox::StandardButton* answer);
     void hideDialogIfNoNetwork();
+    void showMoreAvailableDialogIfNoNetwork();
 
 private slots:
     /* UI events */

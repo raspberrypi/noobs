@@ -142,6 +142,7 @@ void MainWindow::populate()
         _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
         _qpd->show();
         QTimer::singleShot(2000, this, SLOT(hideDialogIfNoNetwork()));
+        QTimer::singleShot(2000, this, SLOT(showMoreAvailableDialogIfNoNetwork()));
     }
 
     if (QFile::exists(SETTINGS_PARTITION))
@@ -1469,5 +1470,18 @@ void MainWindow::hideDialogIfNoNetwork()
                                       QMessageBox::Close);
             }
         }
+    }
+}
+
+void MainWindow::showMoreAvailableDialogIfNoNetwork()
+{
+    QByteArray carrier = getFileContents("/sys/class/net/eth0/carrier").trimmed();
+    if (carrier != "1" && ui->list->count() > 0) /* We don't want to show this if hideDialogIfNoNetwork's messagebox showed too */
+    {
+        /* No network cable inserted, but have local images */
+        QMessageBox::information(this,
+                                 tr("More images are available online"),
+                                 tr("A greater variety of more up to date images may be available online. Please insert a network cable in to the network port to access them."),
+                                 QMessageBox::Close);
     }
 }
