@@ -61,7 +61,7 @@ bool MainWindow::_partInited = false;
 /* Flag to keep track of current display mode. */
 int MainWindow::_currentMode = 0;
 
-MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWidget *parent) :
+MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QString &defaultIP, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
@@ -77,6 +77,15 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     ui->list->setItemDelegate(new TwoIconsDelegate(this));
     ui->list->installEventFilter(this);
     ui->advToolBar->setVisible(false);
+
+    _ipList = defaultIP.split(":");
+    while (_ipList.count()<7)
+    {
+        _ipList.append("");
+    }
+    if (_ipList[IP_DEVICE].isEmpty())
+        _ipList[IP_DEVICE] = "eth0";
+
 
     QRect s = QApplication::desktop()->screenGeometry();
     if (s.height() < 500)
@@ -890,17 +899,19 @@ void MainWindow::on_list_doubleClicked(const QModelIndex &index)
 
 void MainWindow::startNetworking()
 {
-    if (!QFile::exists("/sys/class/net/eth0"))
+    if (!QFile::exists("/sys/class/net/"+_ipList[IP_DEVICE]))
     {
         /* eth0 not available yet, check back in a tenth of a second */
         QTimer::singleShot(100, this, SLOT(startNetworking()));
         return;
     }
 
-    QByteArray carrier = getFileContents("/sys/class/net/eth0/carrier").trimmed();
+    QByteArray carrier = getFileContents("/sys/class/net/"+_ipList[IP_DEVICE]+"/carrier").trimmed();
     if (carrier.isEmpty() && !_activatedEth)
     {
-        QProcess::execute("/sbin/ifconfig eth0 up");
+        //Here we activate the network device so that eth0 is visible, but it is not configured yet.
+        QString cmd = "/sbin/ip link set dev "+_ipList[IP_DEVICE]+ " up";
+        QProcess::execute(cmd);
         _activatedEth = true;
     }
 
@@ -911,10 +922,37 @@ void MainWindow::startNetworking()
         return;
     }
 
-    QProcess *proc = new QProcess(this);
-    connect(proc, SIGNAL(finished(int)), this, SLOT(ifupFinished(int)));
-    /* Try enabling interface twice as sometimes it times out before getting a DHCP lease */
-    proc->start("sh -c \"ifup eth0 || ifup eth0\"");
+    //We can specify a new host address regardless of IP networking
+    if (!_ipList[IP_HOSTNAME].isEmpty())
+    {
+        QString cmd = "hostname "+_ipList[IP_HOSTNAME];
+        QProcess::execute(cmd);
+    }
+
+    if (_ipList[IP_CLIENT].isEmpty())
+    {   //NO IP address given so just use dhcp
+        /* Try enabling interface twice as sometimes it times out before getting a DHCP lease */
+        QProcess *proc = new QProcess(this);
+        connect(proc, SIGNAL(finished(int)), this, SLOT(ifupFinished(int)));
+        proc->start("sh -c \"ifup eth0 || ifup eth0\"");
+    }
+    else
+    {   //Wants to use static address
+        QProcess *proc = new QProcess(this);
+        QString cmd = "/sbin/ifconfig "+_ipList[IP_DEVICE];
+        cmd += " "+_ipList[IP_CLIENT];
+        if (!_ipList[IP_NETMASK].isEmpty())
+            cmd += " netmask "+_ipList[IP_NETMASK];
+        cmd += " up";
+        connect(proc, SIGNAL(finished(int)), this, SLOT(ifupFinished(int)));
+        proc->start(cmd);
+
+        if (!_ipList[IP_GATEWAY].isEmpty())
+        {
+            cmd = "route add default gw "+_ipList[IP_GATEWAY];
+            QProcess::execute(cmd);
+        }
+    }
 }
 
 void MainWindow::ifupFinished(int)
@@ -1469,5 +1507,26 @@ void MainWindow::hideDialogIfNoNetwork()
                                       QMessageBox::Close);
             }
         }
+        else
+        {   //Got a carrier but not got os_list yet.
+            QTimer::singleShot(4000, this, SLOT(hideDialogIfTooLong()));
+        }
+    }
+}
+
+void MainWindow::hideDialogIfTooLong()
+{
+    if (_qpd)
+    {
+        /* Been waiting too long */
+        _qpd->hide();
+        _qpd->deleteLater();
+        _qpd = NULL;
+
+        QMessageBox::critical(this,
+                              tr("No internet access"),
+                              tr("Can't access download site. Check internet access"),
+                              QMessageBox::Close);
+
     }
 }

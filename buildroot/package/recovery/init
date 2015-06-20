@@ -41,6 +41,7 @@ else
     DEFAULT_KBD=
     DEFAULT_DISPLAY=
     DEFAULT_PARTITION=
+    DEFAULT_IP=
 
     if grep -q runinstaller /proc/cmdline; then
         RUN_INSTALLER=-runinstaller
@@ -67,9 +68,12 @@ else
         if [ "${p%%=*}" == "partition" ] ; then
             DEFAULT_PARTITION="-partition ${p#*=}"
         fi
+        if [ "${p%%=*}" == "ip" ] ; then
+            DEFAULT_IP="-ip ${p#*=}"
+        fi
     done
 
-    /usr/bin/recovery $RUN_INSTALLER $GPIO_TRIGGER $KEYBOARD_NO_TRIGGER $FORCE_TRIGGER $DEFAULT_KBD $DEFAULT_LANG $DEFAULT_DISPLAY $DEFAULT_PARTITION -qws 2>/tmp/debug
+    /usr/bin/recovery $RUN_INSTALLER $GPIO_TRIGGER $KEYBOARD_NO_TRIGGER $FORCE_TRIGGER $DEFAULT_KBD $DEFAULT_LANG $DEFAULT_DISPLAY $DEFAULT_PARTITION $DEFAULT_IP -qws 2>/tmp/debug
 
 fi
 

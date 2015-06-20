@@ -30,7 +30,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWidget *parent = 0);
+    explicit MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QString &defaultIP, QWidget *parent = 0);
     ~MainWindow();
 
 protected:
@@ -49,6 +49,7 @@ protected:
     QNetworkAccessManager *_netaccess;
     int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
     QMessageBox *_displayModeBox;
+    QStringList _ipList;
 
     QMap<QString,QVariantMap> listImages();
     virtual void changeEvent(QEvent * event);
@@ -87,6 +88,7 @@ protected slots:
     void downloadMetaComplete();
     void onQuery(const QString &msg, const QString &title, QMessageBox::StandardButton* answer);
     void hideDialogIfNoNetwork();
+    void hideDialogIfTooLong();
 
 private slots:
     /* UI events */
