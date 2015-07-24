@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl" sourcelanguage="en">
+<TS version="2.1" language="ast_ES">
 <context>
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="19"/>
         <location filename="bootselectiondialog.cpp" line="248"/>
         <source>Select OS to boot</source>
-        <translation>Selecteer besturingssysteem</translation>
+        <translation>Esbilla&apos;l SO p&apos;arrancar</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
         <source>Cannot display boot menu</source>
-        <translation>Kan opstartmenu niet weergeven</translation>
+        <translation>Nun pue amosase&apos;l menú d&apos;arranque</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
         <source>Error mounting settings partition</source>
-        <translation>Fout bij mounten instellingen partitie</translation>
+        <translation>Fallu montando la partición d&apos;axustes</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="189"/>
         <source>HDMI safe mode</source>
-        <translation>HDMI safe mode</translation>
+        <translation>Mou seguru HDMI</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="193"/>
         <source>composite PAL mode</source>
-        <translation>composite PAL mode</translation>
+        <translation>Mou compuestu PAL</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="197"/>
         <source>composite NTSC mode</source>
-        <translation>composite NTSC mode</translation>
+        <translation>mou compuestu NTSC</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="253"/>
         <source>Previously selected OS will boot in %1 seconds</source>
-        <translation>Besturingssysteem wordt gestart in %1 seconden</translation>
+        <translation>El SO esbilláu enantes arrancará en %1 segundos</translation>
     </message>
 </context>
 <context>
@@ -45,17 +45,17 @@
     <message>
         <location filename="confeditdialog.ui" line="22"/>
         <source>Config editor</source>
-        <translation>Configuratie</translation>
+        <translation>Editor de configuración</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="82"/>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Fallu</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="83"/>
         <source>Error mounting boot partition</source>
-        <translation>Fout bij mounten opstart partitie</translation>
+        <translation>Fallu montando la partición d&apos;arranque</translation>
     </message>
 </context>
 <context>
@@ -64,172 +64,172 @@
         <location filename="initdrivethread.cpp" line="37"/>
         <location filename="initdrivethread.cpp" line="328"/>
         <source>Mounting FAT partition</source>
-        <translation>Mounten FAT partitie</translation>
+        <translation>Montando partición FAT</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="60"/>
         <source>Formatting settings partition</source>
-        <translation>Formatteren instellingen partitie</translation>
+        <translation>Formatiando partición d&apos;axustes</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="63"/>
         <source>Error formatting settings partition</source>
-        <translation>Fout bij formatteren instellingen partitie</translation>
+        <translation>Fallu formatiando la partición d&apos;axustes</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="67"/>
+        <source>Editing cmdline.txt</source>
+        <translation>Editando cmdline.txt</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="77"/>
+        <source>Error opening %1</source>
+        <translation>Fallu abriendo %1</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="90"/>
+        <source>Writing RiscOS blob</source>
+        <translation>Escribiendo&apos;l blob de RiscOS</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="93"/>
+        <source>Error writing RiscOS blob</source>
+        <translation>Fallu escribiendo&apos;l blob de RiscOS</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="100"/>
+        <source>Unmounting boot partition</source>
+        <translation>Desmontando partición d&apos;arranque</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="103"/>
+        <source>Finish writing to disk (sync)</source>
+        <translation type="unfinished">Finóse cola escritura nel discu (sincronizando)</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="113"/>
+        <source>Mounting boot partition again</source>
+        <translation>Montando partición d&apos;arranque de nueves</translation>
+    </message>
+    <message>
+        <location filename="initdrivethread.cpp" line="124"/>
+        <source>SD card broken (writes do not persist)</source>
+        <translation>Tarxeta SD rota (nun persiste la escritura)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="133"/>
         <source>Saving boot files to memory</source>
-        <translation>Opslaan van opstartbestanden in geheugen</translation>
+        <translation>Guardando na memoria los ficheros d&apos;arranque</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="136"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation>Fout bij opslaan boot bestanden naar geheugen. SD kaart is mogelijk beschadigd.</translation>
+        <translation>Fallu guardando na memoria los ficheros d&apos;arranque. Quiciabes tea dañada la tarxeta SD.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="141"/>
         <location filename="initdrivethread.cpp" line="181"/>
         <source>Error unmounting system partition.</source>
-        <translation>Fout bij unmounten systeem partitie.</translation>
+        <translation>Fallu desmontando la partición del sistema.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="145"/>
         <location filename="initdrivethread.cpp" line="198"/>
         <source>Zeroing partition table</source>
-        <translation>Wissen partitie tabel</translation>
+        <translation>Balerando tabla de particiones</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="148"/>
         <location filename="initdrivethread.cpp" line="201"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>Fout bij wissen MBR/GPT. SD kaart kan beschadigd zijn.</translation>
+        <translation>Fallu al balerar el MBR/GPT. Quiciabes tea dañada la tarxeta SD o anuncie capacidá incorreuta.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="152"/>
         <source>Creating partitions</source>
-        <translation>Aanmaken partities</translation>
+        <translation>Creando les particiones</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="156"/>
         <source>Error partitioning</source>
-        <translation>Fout bij partitioneren</translation>
+        <translation>Fallu particionando</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="160"/>
         <source>Formatting boot partition (fat)</source>
-        <translation>Formatteren opstart partitie (fat)</translation>
+        <translation>Formatiando partición d&apos;arranque (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation>Fout bij formatteren boot partitie (fat)</translation>
+        <translation>Fallu formatiando la partición d&apos;arranque (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="167"/>
         <source>Copying boot files to storage</source>
-        <translation>Kopieeren van opstart bestanden</translation>
+        <translation>Copiando ficheros d&apos;arranque al almacenamientu</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="192"/>
         <source>Would you like NOOBS to create one for you?
 WARNING: This will erase all data on your SD card</source>
-        <translation>Wil je dat NOOBS een nieuwe partitietabel aanmaakt?
-WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translation>
+        <translation>¿Prestaríate que NOOBS cree una por ti?
+AVISU: Esto desaniciará tolos datos na to tarxeta SD</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="193"/>
         <source>Error: No MBR present on SD Card</source>
-        <translation>Fout: geen MBR op SD-kaart</translation>
+        <translation>Fallu: Nun hai MBR presente na tarxeta SD</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="206"/>
         <source>Writing new MBR</source>
-        <translation>Wegschrijven nieuwe MBR</translation>
+        <translation>Escribiendo&apos;l MBR nuevu</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="214"/>
         <source>Error creating MBR</source>
-        <translation>Fout bij aanmaken nieuwe MBR</translation>
+        <translation>Fallu creando&apos;l MBR</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="222"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>SD kaart is nu op de juiste wijze geformatteerd. Kopieer de NOOBS bestanden opnieuw naar de SD kaart en start opnieuw op</translation>
+        <translation>Agora formatióse la tarxeta SD tresnada pa la instalación de NOOBS. Por favor, copia de nueves los ficheros NOOBS na tarxeta y reanicia</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="227"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>SD kaart niet juist geformatteerd. Formatteer opnieuw met SD Association Formatting Tool en probeer het nogmaals.</translation>
+        <translation>Nun pudo formatiase correutamente la tarxeta SD. Por favor, reformátiala ya inténtalo de nueves.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="233"/>
         <source>Removing partitions 2,3,4</source>
-        <translation>Verwijderen van bestaande partities 2,3,4</translation>
+        <translation>Desaniciando particiones 2, 3, 4</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="247"/>
         <source>Resizing FAT partition</source>
-        <translation>Bezig met vergroten van FAT partitie</translation>
+        <translation>Redimensionando partición FAT</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="266"/>
         <source>Error resizing existing FAT partition</source>
-        <translation></translation>
+        <translation>Fallu redimensionando la partición FAT esistente</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="272"/>
         <source>Creating extended partition</source>
-        <translation>Aanmaken extended partitie</translation>
+        <translation>Creando partición estendida</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="311"/>
         <source>Error creating extended partition</source>
-        <translation></translation>
+        <translation>Fallu creando partición estendida</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="331"/>
         <source>Error mounting system partition.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="67"/>
-        <source>Editing cmdline.txt</source>
-        <translation>Aanpassen cmdline.txt</translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="77"/>
-        <source>Error opening %1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="90"/>
-        <source>Writing RiscOS blob</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="93"/>
-        <source>Error writing RiscOS blob</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="100"/>
-        <source>Unmounting boot partition</source>
-        <translation>Unmounten opstart partitie</translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="103"/>
-        <source>Finish writing to disk (sync)</source>
-        <translation>Bezig met wegschrijven (sync)</translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="113"/>
-        <source>Mounting boot partition again</source>
-        <translation>Mounten opstart partitie</translation>
-    </message>
-    <message>
-        <location filename="initdrivethread.cpp" line="124"/>
-        <source>SD card broken (writes do not persist)</source>
-        <translation>SD kaart kapot (writes do not persist)</translation>
+        <translation>Fallu montando la partición del sistema.</translation>
     </message>
 </context>
 <context>
@@ -237,12 +237,12 @@ WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translatio
     <message>
         <location filename="languagedialog.ui" line="135"/>
         <source>Language (l): </source>
-        <translation>Taal (l): </translation>
+        <translation>Llingua (l): </translation>
     </message>
     <message>
         <location filename="languagedialog.ui" line="156"/>
         <source>Keyboard</source>
-        <translation>Toetsenbord</translation>
+        <translation>Tecláu</translation>
     </message>
 </context>
 <context>
@@ -250,239 +250,235 @@ WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translatio
     <message>
         <location filename="mainwindow.ui" line="47"/>
         <source>Disk space</source>
-        <translation>Schijfruimte</translation>
+        <translation>Espaciu nel discu</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="53"/>
         <source>Needed:</source>
-        <translation>Nodig:</translation>
+        <translation>Necesariu:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="60"/>
         <source>Available:</source>
-        <translation>Beschikbaar:</translation>
+        <translation>Disponible:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="122"/>
         <source>Install (i)</source>
-        <translation>Installeer (i)</translation>
+        <translation>Instalar (i)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="125"/>
         <source>Installs the selected operating system image onto this SD card.</source>
-        <translation>Installeer het geselecteerde besturingssysteem.</translation>
+        <translation>Instala la imaxe del SO esbilláu nesta tarxeta SD.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="128"/>
         <source>I</source>
-        <translation></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="137"/>
         <source>Exit (Esc)</source>
-        <translation>Afsluiten (Esc)</translation>
+        <translation>Colar (Esc)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="140"/>
         <source>Exits and boots the installed operating system.</source>
-        <translation>Start het besturingssysteem.</translation>
+        <translation>Cola y arranca&apos;l sistema operativu instaláu.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="155"/>
         <source>Advanced</source>
-        <translation>Geavanceerd</translation>
+        <translation>Avanzáu</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="167"/>
         <source>Edit config (e)</source>
-        <translation>Wijzig config (e)</translation>
+        <translation>Editar conf (e)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="170"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
-        <translation>Bewerk config.txt en cmdline.txt.</translation>
+        <translation>Abre&apos;l config.txt y cmdline.txt nun editor de testu pa los SO instalaos.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="182"/>
         <source>Online help (h)</source>
-        <translation>Online help (h)</translation>
+        <translation>Ayuda en llinia (h)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="185"/>
         <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
-        <translation>Start een webbrowser en bezoeker het Raspberry Pi forum.</translation>
+        <translation>Abre un restolador web qu&apos;amuesa&apos;l foru de Raspberry Pi.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="90"/>
+        <source>Setting up SD card</source>
+        <translation>Configurando tarxeta SD</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="141"/>
+        <source>Please wait while NOOBS initialises</source>
+        <translation>Por favor, espera entrín NOOBS s&apos;anicia</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="154"/>
+        <source>Error mounting settings partition</source>
+        <translation>Fallu montando la partición d&apos;axustes</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="155"/>
+        <source>Persistent settings partition seems corrupt. Reformat?</source>
+        <translation>Paecen toyíos la partición d&apos;axustes persistentes. ¿Reformatiar?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="162"/>
+        <source>Reformat failed</source>
+        <translation>Reformatéu fallíu</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="162"/>
+        <source>SD card might be damaged</source>
+        <translation>Quiciabes tea dañada la tarxeta SD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="256"/>
         <location filename="mainwindow.cpp" line="1119"/>
         <source>RECOMMENDED</source>
-        <translation>AANBEVOLEN</translation>
+        <translation>ACONSEYÁU</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="259"/>
+        <source>INSTALLED</source>
+        <translation>INSTALÁU</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="525"/>
         <location filename="mainwindow.cpp" line="544"/>
         <source>Confirm</source>
-        <translation>Bevestigen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="638"/>
-        <source>NOOBS v%1 - Built: %2</source>
-        <translation>NOOBS v%1 - Built: %2</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="90"/>
-        <source>Setting up SD card</source>
-        <translation>SD card voorbereiden</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="154"/>
-        <source>Error mounting settings partition</source>
-        <translation>Fout bij mounten instellingen partitie</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="155"/>
-        <source>Persistent settings partition seems corrupt. Reformat?</source>
-        <translation>Instellingen partitie corrupt. Opnieuw formatteren?</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="162"/>
-        <source>Reformat failed</source>
-        <translation>Formatteren mislukt</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="162"/>
-        <source>SD card might be damaged</source>
-        <translation>SD kaart kan beschadigd zijn</translation>
+        <translation>Confirmar</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="526"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
-        <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
-        <translation>Weet u zeker dat u het besturingssysteem wilt installeren?
-Hierbij worden alle bestaande bestanden verwijderd.</translation>
+        <translation>Avisu: Esto instalará la escoyeta de SO. Sobrescribiránse tolos datos esistentes na tarxeta.SD, incluyendo cualesquier SO que yá tubiere instaláu.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="545"/>
+        <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
+        <translation>Avisu: Deteutáronse incompatibilidaes. Los SO de darréu nun tán sofitaos pola to revisión de Raspberry Pi y quiciabes fallen al arrancar o furrular correutamente:</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="585"/>
+        <source>The install process will begin shortly.</source>
+        <translation>Entamará ceo&apos;l procesu d&apos;instalación.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="609"/>
+        <source>OS(es) installed</source>
+        <translation>SO(s) instaláu(os)</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="610"/>
+        <source>OS(es) Installed Successfully</source>
+        <translation>SO(s) instaláu(os) con ésitu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="619"/>
         <location filename="mainwindow.cpp" line="1018"/>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Fallu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="259"/>
-        <source>INSTALLED</source>
-        <translation>GEINSTALLEERD</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="738"/>
-        <source>Display Mode Changed</source>
-        <translation>Resolutie aangepast</translation>
+        <location filename="mainwindow.cpp" line="638"/>
+        <source>NOOBS v%1 - Built: %2</source>
+        <translation>NOOBS v%1 - Construcción: %2</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="670"/>
         <source>HDMI preferred mode</source>
-        <translation>HDMI preferred mode</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="141"/>
-        <source>Please wait while NOOBS initialises</source>
-        <translation>Even geduld</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="545"/>
-        <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="585"/>
-        <source>The install process will begin shortly.</source>
-        <translation>Even geduld.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="609"/>
-        <source>OS(es) installed</source>
-        <oldsource>OS installed</oldsource>
-        <translation>Besturingssysteem geinstalleerd</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="610"/>
-        <source>OS(es) Installed Successfully</source>
-        <oldsource>OS Installed Successfully</oldsource>
-        <translation>Besturingssysteem successvol geinstalleerd</translation>
+        <translation>Mou preferíu de HDMI</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="674"/>
         <source>HDMI safe mode</source>
-        <translation>HDMI safe mode</translation>
+        <translation>Mou seguru de HDMI</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="678"/>
         <source>composite PAL mode</source>
-        <translation>composite PAL mode</translation>
+        <translation>mou PAL compuestu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="682"/>
         <source>composite NTSC mode</source>
-        <translation>composite NTSC mode</translation>
+        <translation>mou NTSC compuestu</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="738"/>
+        <source>Display Mode Changed</source>
+        <translation>Camudóse&apos;l mou de pantalla</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="739"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
-        <translation>Resolutie aangepast naar %1
-De instelling opslaan?</translation>
+        <translation>Camudóse&apos;l mou de pantalla a %1
+¿Prestaríate afitar dafechu esti axuste?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="859"/>
+        <location filename="mainwindow.cpp" line="1467"/>
+        <source>No network access</source>
+        <translation>Ensin accesu de rede</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="860"/>
+        <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
+        <translation>Ríquese l&apos;accesu a rede cableada pa esta carauterística. Por favor inxerta un cable de rede nel so puertu.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1004"/>
         <location filename="mainwindow.cpp" line="1343"/>
         <location filename="mainwindow.cpp" line="1353"/>
         <source>Download error</source>
-        <translation>Fout bij downloaden</translation>
+        <translation>Fallu de descarga</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1004"/>
         <source>Error downloading distribution list from Internet</source>
-        <translation>Fout downloaden van lijst met besturingssystemen van Internet</translation>
+        <translation>Fallu baxando&apos;l llistáu de distribuciones d&apos;intenet</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1018"/>
         <source>Error parsing list.json downloaded from server</source>
-        <translation>Fout bij parsen list.json</translation>
+        <translation>Fallu analizando&apos;l list.json baxáu del sirvidor</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1234"/>
         <source>Needed</source>
-        <translation>Nodig</translation>
+        <translation>Necesarios</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1235"/>
         <source>Available</source>
-        <translation>Beschikbaar</translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1343"/>
         <source>Error downloading meta file</source>
-        <translation>Fout bij downloaden meta bestand</translation>
+        <translation>Fallu baxando&apos;l ficheru meta</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1353"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation>Fout bij wegschrijven gedownload bestand naar SD kaart. SD kaart of bestandssysteem kan beschadigd zijn.</translation>
+        <translation>Fallu baxando&apos;l ficheru a la tarxeta SD. Quiciabes tean dañaos o&apos;l sistema ficheros o la tarxeta SD.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1468"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
-        <translation>Een bekabelde netwerk verbinding is vereist indien er geen lokale images zijn. Controleer of de netwerk kabel aangesloten zit.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="859"/>
-        <location filename="mainwindow.cpp" line="1467"/>
-        <source>No network access</source>
-        <translation>Geen netwerk verbinding</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="860"/>
-        <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
-        <translation>Een bekabelde netwerk verbinding is vereist voor deze functionaliteit. Controleer of de netwerk kabel aangesloten zit.</translation>
+        <translation>Ríquese l&apos;accesu a rede cableada pa usar NOOBS ensin imáxenes llocales. Por favor, inxerta un cable de rede nel so puertu.</translation>
     </message>
 </context>
 <context>
@@ -490,161 +486,149 @@ De instelling opslaan?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="44"/>
         <source>partitions.json invalid</source>
-        <translation>partitions.json corrupt</translation>
+        <translation>partitions.json non válidu</translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="76"/>
+        <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
+        <translation>Nun pue instalase RISCOS. Nun concasa&apos;l valor de compesación de RISCOS.</translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="82"/>
+        <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
+        <translation>Nun pue instalase RISCOS. Falta&apos;l valor de compesación de RISCOS.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="87"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
-        <translation>RISCOS kan niet geinstalleerd worden. Recovery partitie te groot.</translation>
+        <translation>Nun pue instalase RISCOS. El tamañu de la partción recovery ye pergrande.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="111"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
-        <translation>Niet genoeg schijfruimte. %1 MB nodig, %2 MB beschikbaar</translation>
+        <translation>Nun hai espaciu abondo nel discu. Necesítense %1 MB, consiguiéronse %2 MB</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="115"/>
         <source>Clearing existing EBR</source>
-        <translation>Wissen bestaande EBR</translation>
+        <translation>Llimpiando l&apos;ERB esistente</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="141"/>
         <source>Finish writing (sync)</source>
-        <translation>Bezig met wegschrijven (sync)</translation>
+        <translation type="unfinished">Finóse cola escritura (sincronizando)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="176"/>
         <source>File &apos;%1&apos; does not exist</source>
-        <translation>Bestand &apos;%1&apos; bestaat niet</translation>
+        <translation>Nun esiste&apos;l ficheru «%1»</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="199"/>
         <source>Nominal partition size not specified or zero</source>
-        <translation>Nominal partition size not specified or zero</translation>
+        <translation>Nun s&apos;especificó&apos;l tamañu de la partición nominal o ye cero</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="225"/>
         <source>%1: Creating partition entry</source>
-        <oldsource>Creating partition entry</oldsource>
-        <translation type="unfinished">Aanmaken partitie</translation>
+        <translation>%1:Creando la entrada de partición</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="231"/>
         <source>%1: Writing OS image</source>
-        <oldsource>Writing image</oldsource>
-        <translation type="unfinished">Wegschrijven image</translation>
+        <translation>%1:Escribiendo imaxe de SO</translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="238"/>
+        <source>%1: Creating filesystem (%2)</source>
+        <translation>%1: Creando&apos;l sistema ficheros (%2)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="245"/>
         <source>%1: Mounting file system</source>
-        <oldsource>Mounting file system</oldsource>
-        <translation type="unfinished">Mounten bestandssysteem</translation>
+        <translation>%1:Montando&apos;l sistema ficheros</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="248"/>
         <location filename="multiimagewritethread.cpp" line="272"/>
         <source>%1: Error mounting file system</source>
-        <oldsource>Error mounting file system</oldsource>
-        <translation type="unfinished">Fout bij mounten bestandssysteem</translation>
-    </message>
-    <message>
-        <location filename="multiimagewritethread.cpp" line="238"/>
-        <source>%1: Creating filesystem (%2)</source>
-        <translation type="unfinished">Aanmaken bestandssysteem (%1) {1:?} {2)?}</translation>
-    </message>
-    <message>
-        <location filename="multiimagewritethread.cpp" line="76"/>
-        <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="multiimagewritethread.cpp" line="82"/>
-        <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1:Fallu montando&apos;l sistema ficheros</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="253"/>
         <source>%1: Downloading and extracting filesystem</source>
-        <translation type="unfinished"></translation>
+        <translation>%1:Baxando y estrayendo&apos;l sistema ficheros</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="255"/>
         <source>%1: Extracting filesystem</source>
-        <oldsource>%1 Extracting filesystem</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Estrayendo&apos;l sistema ficheros</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="269"/>
         <source>%1: Mounting FAT partition</source>
-        <oldsource>Mouning FAT partition</oldsource>
-        <translation type="unfinished">Mounten FAT partitie</translation>
+        <translation>%1: Montando partición FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="276"/>
         <source>%1: Creating os_config.json</source>
-        <oldsource>Creating os_config.json</oldsource>
-        <translation type="unfinished">Aanmaken os_config.json</translation>
+        <translation>%1: Creando os_config.json</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="304"/>
         <source>%1: Saving display mode to config.txt</source>
-        <oldsource>Saving display mode to config.txt</oldsource>
-        <translation type="unfinished">Opslaan resolutie naar config.txt</translation>
+        <translation>%1: Guardando&apos;l mou de pantalla a config.txt</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="315"/>
         <source>%1: Running partition setup script</source>
-        <oldsource>Running partition setup script</oldsource>
-        <translation type="unfinished">Uitvoeren partition setup script</translation>
+        <translation>%1:Executando&apos;l script de configuración de particiones</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="358"/>
         <source>%1: Error executing partition setup script</source>
-        <oldsource>Error executing partition setup script</oldsource>
-        <translation type="unfinished">Fout bij uitvoeren partition setup script</translation>
+        <translation>%1: Fallu na execución del script de configuración de particiones</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="363"/>
         <source>%1: Unmounting FAT partition</source>
-        <oldsource>Unmounting FAT partition</oldsource>
-        <translation type="unfinished">Unmounten FAt partitie</translation>
+        <translation>%1:Desmontando partición FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="366"/>
         <source>%1: Error unmounting</source>
-        <oldsource>Error unmounting</oldsource>
-        <translation type="unfinished">Fout bij unmounten</translation>
+        <translation>%1:Fallu desmontando</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="421"/>
         <source>Error opening /dev/mmcblk0 for writing</source>
-        <translation>Fout bij openen /dev/mmcblk0</translation>
+        <translation>Fallu abriendo /dev/mmcblk0 pa escritura</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="439"/>
         <source>Internal error in partitioning</source>
-        <translation>Interne fout in partitietabel</translation>
+        <translation>Fallu internu nel particionáu</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="522"/>
         <source>Error creating file system</source>
-        <translation>Fout bij aanmaken bestandssysteem</translation>
+        <translation>Fallu creando&apos;l sistema ficheros</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="564"/>
         <location filename="multiimagewritethread.cpp" line="626"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconozse la estensión del formatu del ficheru de compresión. Esperábase .lzo, .gz, .xz, .bz2 o .zip</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="588"/>
         <source>Error downloading or extracting tarball</source>
-        <translation>Fout bij downloaden of uitpakken tarball</translation>
+        <translation>Fallu baxando o estrayendo&apos;l comprimíu</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="647"/>
         <source>Error downloading or writing OS to SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallu baxando o escribiendo&apos;l SO a la tarxeta SD</translation>
     </message>
 </context>
 <context>
@@ -652,12 +636,12 @@ De instelling opslaan?</translation>
     <message>
         <location filename="progressslideshowdialog.cpp" line="138"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
-        <translation>%1 MB van %2 MB weggeschreven (%3 MB/sec)</translation>
+        <translation>%1 MB de %2 MB escritos (%3 MB/seg)</translation>
     </message>
     <message>
         <location filename="progressslideshowdialog.cpp" line="143"/>
         <source>%1 MB written (%2 MB/sec)</source>
-        <translation>%1 MB weggeschreven (%2 MB/sec)</translation>
+        <translation>%1 MB escritos (%2 MB/seg)</translation>
     </message>
 </context>
 <context>
@@ -665,42 +649,42 @@ De instelling opslaan?</translation>
     <message>
         <location filename="languagedialog.cpp" line="27"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Aceutar</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="28"/>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation>&amp;Aceutar</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="29"/>
         <source>Cancel</source>
-        <translation>Annuleren</translation>
+        <translation>Encaboxar</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="30"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Annuleren</translation>
-    </message>
-    <message>
-        <location filename="languagedialog.cpp" line="32"/>
-        <source>&amp;Close</source>
-        <translation>&amp;Sluiten</translation>
+        <translation>&amp;Encaboxar</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="31"/>
         <source>Close</source>
-        <translation>Sluiten</translation>
+        <translation>Zarrar</translation>
+    </message>
+    <message>
+        <location filename="languagedialog.cpp" line="32"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Zarrar</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="33"/>
         <source>&amp;Yes</source>
-        <translation>&amp;Ja</translation>
+        <translation>&amp;Sí</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="34"/>
         <source>&amp;No</source>
-        <translation>&amp;Nee</translation>
+        <translation>&amp;Non</translation>
     </message>
 </context>
 </TS>

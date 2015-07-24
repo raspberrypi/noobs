@@ -54,7 +54,8 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     icons.qrc
 
-TRANSLATIONS += translation_nl.ts \
+TRANSLATIONS += translation_ast.ts \
+    translation_nl.ts \
     translation_de.ts \
     translation_pt.ts \
     translation_ja.ts \
