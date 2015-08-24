@@ -7,37 +7,37 @@
         <location filename="bootselectiondialog.ui" line="19"/>
         <location filename="bootselectiondialog.cpp" line="248"/>
         <source>Select OS to boot</source>
-        <translation>Wybierz system operacyjny do inicjalizacji</translation>
+        <translation>Wybierz system operacyjny do uruchomienia</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
         <source>Cannot display boot menu</source>
-        <translation>Nie można wyswietlic menu inicjalizacji</translation>
+        <translation>Nie można wyswietlic menu uruchamiania</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
         <source>Error mounting settings partition</source>
-        <translation>Błąd montowania partycji ustawień</translation>
+        <translation>Błąd montowania partycji z ustawieniami</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="189"/>
         <source>HDMI safe mode</source>
-        <translation>Tryb bezpieczny HDMI</translation>
+        <translation>tryb bezpieczny HDMI</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="193"/>
         <source>composite PAL mode</source>
-        <translation>Tryb Composite PAL</translation>
+        <translation>tryb composite PAL</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="197"/>
         <source>composite NTSC mode</source>
-        <translation>Tryb Composite NTSC</translation>
+        <translation>tryb composite NTSC</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="253"/>
         <source>Previously selected OS will boot in %1 seconds</source>
-        <translation>Poprzednio wybrany system operacyjny zostanie zainicjalizowany za %1 sekund</translation>
+        <translation>Poprzednio wybrany system operacyjny zostanie uruchomiony za %1 sekund</translation>
     </message>
 </context>
 <context>
@@ -69,12 +69,12 @@
     <message>
         <location filename="initdrivethread.cpp" line="60"/>
         <source>Formatting settings partition</source>
-        <translation>Formatowanie partycji ustawień</translation>
+        <translation>Formatowanie partycji z ustawieniami</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="63"/>
         <source>Error formatting settings partition</source>
-        <translation>Błąd formatowania partycji ustawień</translation>
+        <translation>Błąd formatowania partycji z ustawieniami</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="133"/>
@@ -102,7 +102,7 @@
         <location filename="initdrivethread.cpp" line="148"/>
         <location filename="initdrivethread.cpp" line="201"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>Błąd zerowania MBR/GPT. Karta SD może być uszkodzona, lub wskazuje złą pojemność.</translation>
+        <translation>Błąd zerowania MBR/GPT. Karta SD może być uszkodzona lub wskazuje złą pojemność.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="152"/>
@@ -154,12 +154,12 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="222"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>Karta SD została sformatowana i jest gotowa na instalacje NOOBS. Proszę ponownie skopiować pliki NOOBS na karte i zresetować komputer.</translation>
+        <translation>Karta SD została sformatowana i jest gotowa na instalacje NOOBS. Proszę ponownie skopiować pliki NOOBS na kartę i zresetować komputer.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="227"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>Karta SD nie została poprawnie sformatowana. Proszę sformatuj ją jeszcze raz używając Narzędzie formatowania skojarzeniowego SD (SD Association Formatting Tool) i spróbuj ponownie.</translation>
+        <translation>Karta SD nie została poprawnie sformatowana. Proszę sformatuj ją jeszcze raz używając narzędzie formatowania od SD Association i spróbuj ponownie.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="233"/>
@@ -169,12 +169,12 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="247"/>
         <source>Resizing FAT partition</source>
-        <translation>Zmiana wielkości partycji FAT</translation>
+        <translation>Zmiana rozmiaru partycji FAT</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="266"/>
         <source>Error resizing existing FAT partition</source>
-        <translation>Błąd zmiany wielkości partycji FAT</translation>
+        <translation>Błąd zmiany rozmiaru partycji FAT</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="272"/>
@@ -219,12 +219,12 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="103"/>
         <source>Finish writing to disk (sync)</source>
-        <translation>Ukończ zapisywanie do dysku (synchronizacja)</translation>
+        <translation>Ukończenie zapisywania do dysku (zrzucanie buforów)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="113"/>
         <source>Mounting boot partition again</source>
-        <translation>Ponowne montowanie partycji systemowej</translation>
+        <translation>Ponowne montowanie partycji rozruchowej</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="124"/>
@@ -270,7 +270,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.ui" line="125"/>
         <source>Installs the selected operating system image onto this SD card.</source>
-        <translation>Instaluje obraz wybranego systemu operacyjnego na tą kartę SD.</translation>
+        <translation>Instaluje obraz wybranego systemu operacyjnego na tę kartę SD.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="128"/>
@@ -285,7 +285,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.ui" line="140"/>
         <source>Exits and boots the installed operating system.</source>
-        <translation>Wychodzi i inicjalizuje wybrany system operacyjny.</translation>
+        <translation>Wychodzi i uruchamia wybrany system operacyjny.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="155"/>
@@ -300,7 +300,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.ui" line="170"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
-        <translation>Otwiera config.txt oraz cmdline.txt dla zainstalowanego systemu w edytorze tekstowy.</translation>
+        <translation>Otwiera config.txt oraz cmdline.txt dla zainstalowanego systemu w edytorze tekstowym.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="182"/>
@@ -336,12 +336,12 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="146"/>
         <source>Error mounting settings partition</source>
-        <translation>Błąd montowania partycji ustawieniowej</translation>
+        <translation>Błąd montowania partycji z ustawieniami</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="147"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
-        <translation>Partycja stałych ustawień zdaje się być uszkodzona. Sformatować ponownie?</translation>
+        <translation>Partycja ze stałymi ustawieniami zdaje się być uszkodzona. Sformatować ponownie?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="154"/>
@@ -378,12 +378,12 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="528"/>
         <source>HDMI preferred mode</source>
-        <translation>Tryb preferencji HDMI</translation>
+        <translation>tryb preferowany HDMI</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="133"/>
         <source>Please wait while NOOBS initialises</source>
-        <translation>Proszę czekać na inicjalizację NOOBS</translation>
+        <translation>Proszę czekać na uruchomienie NOOBS</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="444"/>
@@ -405,17 +405,17 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="532"/>
         <source>HDMI safe mode</source>
-        <translation>Tryb bezpieczny HDMI</translation>
+        <translation>tryb bezpieczny HDMI</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="536"/>
         <source>composite PAL mode</source>
-        <translation>Tryb Composite PAL</translation>
+        <translation>tryb composite PAL</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="540"/>
         <source>composite NTSC mode</source>
-        <translation>Tryb Composite NTSC</translation>
+        <translation>tryb composite NTSC</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="597"/>
@@ -439,7 +439,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="mainwindow.cpp" line="876"/>
         <source>Error parsing list.json downloaded from server</source>
-        <translation>Błąd analizowania list.json ściągniętej z servera</translation>
+        <translation>Błąd analizowania list.json pobranej z serwera</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1064"/>
@@ -459,7 +459,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1183"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation>Błąd zapisywanie ściągnietego pliku na kartę SD. Karta lub system plików mogą być uszkodzone.</translation>
+        <translation>Błąd zapisywania pobranego pliku na kartę SD. Karta lub system plików mogą być uszkodzone.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1298"/>
@@ -483,12 +483,12 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="44"/>
         <source>partitions.json invalid</source>
-        <translation>partitions.json jest nieprawidłowe</translation>
+        <translation>Plik partitions.json jest nieprawidłowy</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="69"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
-        <translation>RISCOS nie może być zainstalowany. Wielkość partycji odzyskiwania jest zbyt duża.</translation>
+        <translation>RISCOS nie może być zainstalowany. Rozmiar partycji odzyskiwania jest zbyt duży.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="93"/>
@@ -503,7 +503,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="123"/>
         <source>Finish writing (sync)</source>
-        <translation>Zakończ zapisywanie (synchronizacja)</translation>
+        <translation>Zakończenie zapisywania (zrzucanie buforów)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="158"/>
@@ -513,13 +513,13 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="181"/>
         <source>Nominal partition size not specified or zero</source>
-        <translation>Wartość wielkości partycji nie została określona lub jest zerem</translation>
+        <translation>Rozmiar partycji nie został określony lub jest zerem</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="207"/>
         <source>%1: Creating partition entry</source>
         <oldsource>Creating partition entry</oldsource>
-        <translation>%1: Tworzenie początku partycji</translation>
+        <translation>%1: Tworzenie wpisu partycji</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="213"/>
@@ -548,7 +548,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="235"/>
         <source>%1: Downloading and extracting filesystem</source>
-        <translation>%1: Ściąganie i rozpakowywanie systemu plików</translation>
+        <translation>%1: Pobieranie i rozpakowywanie systemu plików</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="237"/>
@@ -617,7 +617,7 @@ Czy chcesz zachować te ustawienia?</translation>
         <location filename="multiimagewritethread.cpp" line="544"/>
         <location filename="multiimagewritethread.cpp" line="606"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation>Nieznany format rozszerzenia kompresji pliku. Oczekiwane: .lzo, .gz, .xz, .bz2 lub .zip</translation>
+        <translation>Nieznane rozszerzenie skompresowanego pliku. Oczekiwane: .lzo, .gz, .xz, .bz2 lub .zip</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="568"/>
@@ -627,7 +627,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="627"/>
         <source>Error downloading or writing OS to SD card</source>
-        <translationBłąd pobierania lub zapisywania systemu operacyjnego na kartę SD</translation>
+        <translation>Błąd pobierania lub zapisywania systemu operacyjnego na kartę SD</translation>
     </message>
 </context>
 <context>
