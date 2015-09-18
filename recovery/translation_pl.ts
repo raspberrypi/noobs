@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl" sourcelanguage="en">
+<TS version="2.0" language="pl_PL" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -326,7 +326,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="496"/>
         <source>NOOBS v%1 - Built: %2</source>
-        <translation>NOOBS v%1 - Zbudowana: %2</translation>
+        <translation>NOOBS v%1 - Zbudowany: %2</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="85"/>
