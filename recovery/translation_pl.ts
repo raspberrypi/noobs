@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL" sourcelanguage="en">
+<TS version="2.0" language="pl" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -12,7 +12,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
         <source>Cannot display boot menu</source>
-        <translation>Nie można wyswietlic menu uruchamiania</translation>
+        <translation>Nie można wyświetlić menu uruchamiania</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
@@ -159,7 +159,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="227"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>Karta SD nie została poprawnie sformatowana. Proszę sformatuj ją jeszcze raz używając narzędzie formatowania od SD Association i spróbuj ponownie.</translation>
+        <translation>Karta SD nie została poprawnie sformatowana. Proszę sformatuj ją jeszcze raz używając narzędzie formatowania od SD Association (SD Association Card Formatter) i spróbuj ponownie.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="233"/>
@@ -219,7 +219,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="103"/>
         <source>Finish writing to disk (sync)</source>
-        <translation>Ukończenie zapisywania do dysku (zrzucanie buforów)</translation>
+        <translation>Kończenie zapisywania na dysk (zrzucanie buforów)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="113"/>
@@ -493,7 +493,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="93"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
-        <translation>Za malo miejsca na dysku. %1 MB jest wymagane, %2 MB jest dostępne</translation>
+        <translation>Za malo miejsca na dysku. Wymagane %1 MB, dostępne %2 MB</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="97"/>
@@ -503,7 +503,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="123"/>
         <source>Finish writing (sync)</source>
-        <translation>Zakończenie zapisywania (zrzucanie buforów)</translation>
+        <translation>Kończenie zapisywania (zrzucanie buforów)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="158"/>
