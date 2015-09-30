@@ -253,7 +253,11 @@ bool InitDriveThread::method_resizePartitions()
         newStartOfRescuePartition = 8192; /* 4 MiB */
     }
 
-    QString cmd = "/usr/sbin/parted --script /dev/mmcblk0 resize 1 "+QString::number(newStartOfRescuePartition)+"s "+QString::number(newSizeOfRescuePartition)+"M";
+    /* Parted needs start & End (not start & size) */
+    /* Convert size from MiB to sectors & add to start to get end position*/
+    int newEndOfRescuePartition =  newStartOfRescuePartition + (newSizeOfRescuePartition * 2048);
+
+    QString cmd = "/usr/sbin/parted --script /dev/mmcblk0 resize 1 "+QString::number(newStartOfRescuePartition)+"s "+QString::number(newEndOfRescuePartition)+"s";
     qDebug() << "Executing" << cmd;
     QProcess p;
     p.setProcessChannelMode(p.MergedChannels);
