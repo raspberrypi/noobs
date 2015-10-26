@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LINUX_FIRMWARE_VERSION = f66291398181d24856fd2d19454d246199abd5ea
+LINUX_FIRMWARE_VERSION = 3161bfa479d5e9ed4f46b57df9bcecbbc4f8eb3c
 LINUX_FIRMWARE_SITE = http://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 LINUX_FIRMWARE_SITE_METHOD = git
 
@@ -12,6 +12,11 @@ LINUX_FIRMWARE_SITE_METHOD = git
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_INTEL_SST_DSP),y)
 LINUX_FIRMWARE_FILES += intel/fw_sst_0f28.bin-48kHz_i2s_master
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.fw_sst_0f28
+endif
+
+ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_RADEON),y)
+LINUX_FIRMWARE_DIRS += radeon
+LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENSE.radeon
 endif
 
 # rt2501/rt61
@@ -40,7 +45,8 @@ LINUX_FIRMWARE_FILES += \
 	rtlwifi/rtl8192cfw.bin rtlwifi/rtl8192cfwU.bin 		\
 	rtlwifi/rtl8192cfwU_B.bin rtlwifi/rtl8192cufw.bin	\
 	rtlwifi/rtl8192defw.bin rtlwifi/rtl8192sefw.bin		\
-	rtlwifi/rtl8188efw.bin rtlwifi/rtl8192cufw_A.bin	\
+	rtlwifi/rtl8188efw.bin rtlwifi/rtl8188eufw.bin		\
+	rtlwifi/rtl8192cufw_A.bin				\
 	rtlwifi/rtl8192cufw_B.bin rtlwifi/rtl8192cufw_TMSC.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.rtlwifi_firmware.txt
 endif
@@ -146,6 +152,7 @@ endif
 
 # wl128x
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_TI_WL128X),y)
+# wl1271-nvs.bin and wl12xx-nvs.bin are symlinks to wl127x-nvs.bin
 LINUX_FIRMWARE_FILES += \
 	ti-connectivity/wl128x-fw-3.bin				\
 	ti-connectivity/wl128x-fw-ap.bin			\
@@ -154,6 +161,7 @@ LINUX_FIRMWARE_FILES += \
 	ti-connectivity/wl1271-nvs.bin				\
 	ti-connectivity/wl128x-nvs.bin				\
 	ti-connectivity/wl12xx-nvs.bin				\
+	ti-connectivity/wl127x-nvs.bin				\
 	ti-connectivity/wl128x-fw-4-mr.bin			\
 	ti-connectivity/wl128x-fw-4-plt.bin			\
 	ti-connectivity/wl128x-fw-4-sr.bin			\
@@ -161,19 +169,19 @@ LINUX_FIRMWARE_FILES += \
 	ti-connectivity/wl128x-fw-5-plt.bin			\
 	ti-connectivity/wl128x-fw-5-sr.bin			\
 	ti-connectivity/TIInit_7.2.31.bts
-# wl12xx-nvs.bin (above) is a symlink to:
-LINUX_FIRMWARE_FILES += ti-connectivity/wl127x-nvs.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.ti-connectivity
 endif
 
 # wl18xx
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_TI_WL18XX),y)
+# wl1271-nvs.bin is a symlink to wl127x-nvs.bin
 LINUX_FIRMWARE_FILES += \
 	ti-connectivity/wl18xx-fw.bin \
-	ti-connectivity/wl18xx-conf.bin \
 	ti-connectivity/wl18xx-fw-2.bin \
 	ti-connectivity/wl18xx-fw-3.bin \
 	ti-connectivity/wl18xx-fw-4.bin \
+	ti-connectivity/wl1271-nvs.bin \
+	ti-connectivity/wl127x-nvs.bin \
 	ti-connectivity/TIInit_7.2.31.bts
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.ti-connectivity
 endif
@@ -189,6 +197,11 @@ endif
 # most recent one.
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_5000),y)
 LINUX_FIRMWARE_FILES += iwlwifi-5000-5.ucode
+LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
+endif
+
+ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_6000G2A),y)
+LINUX_FIRMWARE_FILES += iwlwifi-6000g2a-6.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
@@ -287,12 +300,30 @@ endif
 # brcm43xxx
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_BRCM_BCM43XXX),y)
 LINUX_FIRMWARE_FILES += \
+	brcm/brcmfmac43143.bin brcm/brcmfmac43143-sdio.bin \
 	brcm/brcmfmac43236b.bin brcm/brcmfmac43241b0-sdio.bin \
 	brcm/brcmfmac43241b4-sdio.bin brcm/brcmfmac43362-sdio.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.broadcom_bcm43xx
 endif
 
 ifneq ($(LINUX_FIRMWARE_FILES),)
+define LINUX_FIRMWARE_INSTALL_FILES
+	$(TAR) c -C $(@D) $(sort $(LINUX_FIRMWARE_FILES)) | \
+		$(TAR) x -C $(TARGET_DIR)/lib/firmware
+endef
+endif
+
+ifneq ($(LINUX_FIRMWARE_DIRS),)
+# We need to rm-rf the destination directory to avoid copying
+# into it in itself, should we re-install the package.
+define LINUX_FIRMWARE_INSTALL_DIRS
+	$(foreach d,$(LINUX_FIRMWARE_DIRS), \
+		rm -rf $(TARGET_DIR)/lib/firmware/$(d); \
+		cp -a $(@D)/$(d) $(TARGET_DIR)/lib/firmware/$(d)$(sep))
+endef
+endif
+
+ifneq ($(LINUX_FIRMWARE_FILES)$(LINUX_FIRMWARE_DIRS),)
 
 # Most firmware files are under a proprietary license, so no need to
 # repeat it for every selections above. Those firmwares that have more
@@ -308,12 +339,12 @@ LINUX_FIRMWARE_ALL_LICENSE_FILES += WHENCE
 # duplicates
 LINUX_FIRMWARE_LICENSE_FILES = $(sort $(LINUX_FIRMWARE_ALL_LICENSE_FILES))
 
+endif
+
 define LINUX_FIRMWARE_INSTALL_TARGET_CMDS
 	mkdir -p $(TARGET_DIR)/lib/firmware
-	$(TAR) c -C $(@D) $(sort $(LINUX_FIRMWARE_FILES)) | \
-		$(TAR) x -C $(TARGET_DIR)/lib/firmware
+	$(LINUX_FIRMWARE_INSTALL_FILES)
+	$(LINUX_FIRMWARE_INSTALL_DIRS)
 endef
-
-endif
 
 $(eval $(generic-package))
