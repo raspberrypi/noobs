@@ -45,13 +45,9 @@ LanguageDialog::LanguageDialog(const QString &defaultLang, const QString &defaul
 
     setAttribute(Qt::WA_ShowWithoutActivating);
 
-    QDir settingsdir;
-    settingsdir.mkdir("/settings");
-
     qDebug() << "Default language is " << defaultLang;
     qDebug() << "Default keyboard layout is " << defaultKeyboard;
 
-    QProcess::execute("mount -o ro -t ext4 " SETTINGS_PARTITION " /settings");
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     QString savedLang = settings.value("language", defaultLang).toString();
     QString savedKeyLayout = settings.value("keyboard_layout", defaultKeyboard).toString();
@@ -124,11 +120,9 @@ void LanguageDialog::changeKeyboardLayout(const QString &langcode)
 #endif
 
         // Save new language choice to INI files
-        QProcess::execute("mount -o remount, rw /settings");
         QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
         settings.setValue("keyboard_layout", langcode);
         settings.sync();
-        QProcess::execute("mount -o remount, ro /settings");
 }
 
 void LanguageDialog::changeLanguage(const QString &langcode)
@@ -202,12 +196,9 @@ void LanguageDialog::changeLanguage(const QString &langcode)
     _currentLang = langcode;
 
     // Save new language choice to INI file
-    QProcess::execute("mount -o remount,rw /settings");
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     settings.setValue("language", langcode);
     settings.sync();
-    QProcess::execute("mount -o remount,ro /settings");
-
 }
 
 void LanguageDialog::on_langCombo_currentIndexChanged(int index)
@@ -215,7 +206,6 @@ void LanguageDialog::on_langCombo_currentIndexChanged(int index)
     QString langcode = ui->langCombo->itemData(index).toString();
 
     changeLanguage(langcode);
-
 }
 
 void LanguageDialog::changeEvent(QEvent* event)
@@ -241,7 +231,6 @@ void LanguageDialog::on_keyCombo_currentIndexChanged(int index)
     QString keycode = ui->keyCombo->itemData(index).toString();
 
     changeKeyboardLayout(keycode);
-
 }
 
 LanguageDialog *LanguageDialog::instance(const QString &defaultLang, const QString &defaultKeyboard)

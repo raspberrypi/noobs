@@ -9,6 +9,7 @@
 #include "json.h"
 #include "util.h"
 #include "twoiconsdelegate.h"
+#include "wifisettingsdialog.h"
 #include <QMessageBox>
 #include <QProgressDialog>
 #include <QMap>
@@ -29,6 +30,9 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkDiskCache>
+#include <QtNetwork/QNetworkInterface>
+#include <QtDBus/QDBusConnection>
+#include <QHostInfo>
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -66,7 +70,7 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     ui(new Ui::MainWindow),
     _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
     _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
-    _activatedEth(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
+    _hasWifi(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
@@ -104,6 +108,52 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
         setEnabled(true);
     }
 
+    /* Make sure the SD card is ready, and partition table is read by Linux */
+    if (!QFile::exists(SETTINGS_PARTITION))
+    {
+        _qpd = new QProgressDialog( tr("Waiting for SD card (settings partition)"), QString(), 0, 0, this);
+        _qpd->setWindowModality(Qt::WindowModal);
+        _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+        _qpd->show();
+
+        while (!QFile::exists(SETTINGS_PARTITION))
+        {
+            QApplication::processEvents(QEventLoop::WaitForMoreEvents, 250);
+        }
+        _qpd->hide();
+        _qpd->deleteLater();
+    }
+
+    _qpd = new QProgressDialog( tr("Mounting settings partition"), QString(), 0, 0, this);
+    _qpd->setWindowModality(Qt::WindowModal);
+    _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    _qpd->show();
+    QApplication::processEvents();
+
+    if (QProcess::execute("mount -t ext4 " SETTINGS_PARTITION " /settings") != 0)
+    {
+        _qpd->hide();
+
+        if (QMessageBox::question(this,
+                                  tr("Error mounting settings partition"),
+                                  tr("Persistent settings partition seems corrupt. Reformat?"),
+                                  QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        {
+            QProcess::execute("umount /settings");
+            if (QProcess::execute("/usr/sbin/mkfs.ext4 " SETTINGS_PARTITION) != 0
+                || QProcess::execute("mount " SETTINGS_PARTITION " /settings") != 0)
+            {
+                QMessageBox::critical(this, tr("Reformat failed"), tr("SD card might be damaged"), QMessageBox::Close);
+            }
+
+            rebuildInstalledList();
+        }
+    }
+    _qpd->hide();
+    _qpd->deleteLater();
+    _qpd = NULL;
+    QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
+
     if (getFileContents("/proc/cmdline").contains("silentinstall"))
     {
         /* If silentinstall is specified, auto-install single image in /os */
@@ -125,66 +175,37 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/* Mount FAT partition, discover which images we have, and fill in the list */
+/* Discover which images we have, and fill in the list */
 void MainWindow::populate()
 {
-    if (!QFile::exists("/dev/mmcblk0p1"))
-    {
-        // mmcblk0p1 not ready yet, check back in a tenth of a second
-        QTimer::singleShot(100, this, SLOT(populate()));
-        return;
-    }
-
     /* Ask user to wait while list is populated */
     if (!_allowSilent)
     {
         _qpd = new QProgressDialog(tr("Please wait while NOOBS initialises"), QString(), 0, 0, this);
         _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
         _qpd->show();
-        QTimer::singleShot(2000, this, SLOT(hideDialogIfNoNetwork()));
+
+        int timeout = 5000;
+        if (getFileContents("/settings/wpa_supplicant.conf").contains("ssid="))
+        {
+            /* Longer timeout if we have a wifi network configured */
+            timeout = 8000;
+        }
+        QTimer::singleShot(timeout, this, SLOT(hideDialogIfNoNetwork()));
+        _time.start();
     }
 
-    if (QFile::exists(SETTINGS_PARTITION))
+    _settings = new QSettings("/settings/noobs.conf", QSettings::IniFormat, this);
+
+    /* Restore saved display mode */
+    qDebug() << "Default display mode is " << _defaultDisplay;
+    int mode = _settings->value("display_mode", _defaultDisplay).toInt();
+    if (mode)
     {
-        /* Try mounting read-only first, if fails try read-write as it may recover from journal */
-        if (QProcess::execute("mount -o remount,ro /settings")!=0
-            && QProcess::execute("mount -o remount,rw /settings")!=0)
-        {
-            if (QMessageBox::question(this,
-                                      tr("Error mounting settings partition"),
-                                      tr("Persistent settings partition seems corrupt. Reformat?"),
-                                      QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
-            {
-                QProcess::execute("umount /settings");
-                if (QProcess::execute("/usr/sbin/mkfs.ext4 " SETTINGS_PARTITION) != 0
-                    || QProcess::execute("mount " SETTINGS_PARTITION " /settings") != 0)
-                {
-                    QMessageBox::critical(this, tr("Reformat failed"), tr("SD card might be damaged"), QMessageBox::Close);
-                }
-
-                rebuildInstalledList();
-                QProcess::execute("mount -o remount,ro " SETTINGS_PARTITION);
-            }
-        }
-
-        _settings = new QSettings("/settings/noobs.conf", QSettings::IniFormat, this);
-
-        /* Restore saved display mode */
-        qDebug() << "Default display mode is " << _defaultDisplay;
-        int mode = _settings->value("display_mode", _defaultDisplay).toInt();
-        if (mode)
-        {
-            displayMode(mode, true);
-        }
-        QProcess::execute("mount -o remount,rw /settings");
-        _settings->setValue("display_mode", _defaultDisplay);
-        _settings->sync();
-        QProcess::execute("mount -o remount,ro /settings");
-
+        displayMode(mode, true);
     }
-
-
-    QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
+    _settings->setValue("display_mode", _defaultDisplay);
+    _settings->sync();
 
     // Fill in list of images
     repopulate();
@@ -216,11 +237,6 @@ void MainWindow::populate()
 
     bool osInstalled = QFile::exists(FAT_PARTITION_OF_IMAGE);
     ui->actionCancel->setEnabled(osInstalled);
-}
-
-void MainWindow::remountSettingsRW()
-{
-    QProcess::execute("mount -o remount,rw /settings");
 }
 
 void MainWindow::repopulate()
@@ -519,8 +535,6 @@ QMap<QString, QVariantMap> MainWindow::listImages()
 
 void MainWindow::on_actionWrite_image_to_disk_triggered()
 {
-    remountSettingsRW();
-
     if (_silent || QMessageBox::warning(this,
                                         tr("Confirm"),
                                         tr("Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed."),
@@ -598,11 +612,9 @@ void MainWindow::on_actionCancel_triggered()
 void MainWindow::onCompleted()
 {
     _qpd->hide();
-    QProcess::execute("mount -o remount,rw /settings");
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     settings.setValue("default_partition_to_boot", "800");
     settings.sync();
-    QProcess::execute("mount -o remount,ro /settings");
 
     if (!_silent)
         QMessageBox::information(this,
@@ -615,16 +627,16 @@ void MainWindow::onCompleted()
 
 void MainWindow::onError(const QString &msg)
 {
-    _qpd->hide();
+    qDebug() << "Error:" << msg;
+    if (_qpd)
+        _qpd->hide();
     QMessageBox::critical(this, tr("Error"), msg, QMessageBox::Close);
     setEnabled(true);
 }
 
 void MainWindow::onQuery(const QString &msg, const QString &title, QMessageBox::StandardButton* answer)
 {
-    _qpd->hide();
     *answer = QMessageBox::question(this, title, msg, QMessageBox::Yes|QMessageBox::No);
-    setEnabled(true);
 }
 
 void MainWindow::on_list_currentRowChanged()
@@ -743,7 +755,6 @@ void MainWindow::displayMode(int modenr, bool silent)
 
         if (_displayModeBox->standardButton(_displayModeBox->clickedButton()) == QMessageBox::Yes)
         {
-            remountSettingsRW();
             _settings->setValue("display_mode", modenr);
             _settings->sync();
             ::sync();
@@ -853,7 +864,7 @@ void MainWindow::on_actionBrowser_triggered()
 
 bool MainWindow::requireNetwork()
 {
-    if (!QFile::exists("/tmp/resolv.conf"))
+    if (!isOnline())
     {
         QMessageBox::critical(this,
                               tr("No network access"),
@@ -890,43 +901,87 @@ void MainWindow::on_list_doubleClicked(const QModelIndex &index)
 
 void MainWindow::startNetworking()
 {
-    if (!QFile::exists("/sys/class/net/eth0"))
-    {
-        /* eth0 not available yet, check back in a tenth of a second */
-        QTimer::singleShot(100, this, SLOT(startNetworking()));
-        return;
-    }
+    QFile f("/settings/wpa_supplicant.conf");
 
-    QByteArray carrier = getFileContents("/sys/class/net/eth0/carrier").trimmed();
-    if (carrier.isEmpty() && !_activatedEth)
+    if ( f.exists() && f.size() == 0 )
     {
-        QProcess::execute("/sbin/ifconfig eth0 up");
-        _activatedEth = true;
+        /* Remove corrupt file */
+        f.remove();
     }
-
-    if (carrier != "1")
+    if ( !f.exists() )
     {
-        /* cable not detected yet, check back in a tenth of a second */
-        QTimer::singleShot(100, this, SLOT(startNetworking()));
-        return;
+        /* If user supplied a wpa_supplicant.conf on the FAT partition copy that one to settings
+           otherwise copy the default one stored in the initramfs */
+        if (QFile::exists("/mnt/wpa_supplicant.conf"))
+            QFile::copy("/mnt/wpa_supplicant.conf", "/settings/wpa_supplicant.conf");
+        else
+        {
+            qDebug() << "Copying /etc/wpa_supplicant.conf to /settings/wpa_supplicant.conf";
+            QFile::copy("/etc/wpa_supplicant.conf", "/settings/wpa_supplicant.conf");
+        }
     }
+    QFile::remove("/etc/wpa_supplicant.conf");
 
+    /* Enable dbus so that we can use it to talk to wpa_supplicant later */
+    qDebug() << "Starting dbus";
+    QProcess::execute("/etc/init.d/S30dbus start");
+
+    /* Run dhcpcd in background */
     QProcess *proc = new QProcess(this);
-    connect(proc, SIGNAL(finished(int)), this, SLOT(ifupFinished(int)));
-    /* Try enabling interface twice as sometimes it times out before getting a DHCP lease */
-    proc->start("sh -c \"ifup eth0 || ifup eth0\"");
+    qDebug() << "Starting dhcpcd";
+    proc->start("/sbin/dhcpcd --noarp -e wpa_supplicant_conf=/settings/wpa_supplicant.conf --denyinterfaces \"*_ap\"");
+
+    if ( isOnline() )
+    {
+        onOnlineStateChanged(true);
+    }
+    else
+    {
+        /* We could ask Qt's Bearer management to notify us once we are online,
+           but it tends to poll every 10 seconds.
+           Users are not that patient, so lets poll ourselves every 0.1 second */
+        //QNetworkConfigurationManager *_netconfig = new QNetworkConfigurationManager(this);
+        //connect(_netconfig, SIGNAL(onlineStateChanged(bool)), this, SLOT(onOnlineStateChanged(bool)));
+        connect(&_networkStatusPollTimer, SIGNAL(timeout()), SLOT(pollNetworkStatus()));
+        _networkStatusPollTimer.start(100);
+    }
 }
 
-void MainWindow::ifupFinished(int)
+bool MainWindow::isOnline()
 {
-    QProcess *p = qobject_cast<QProcess*> (sender());
+    /* Check if we have an IP-address other than localhost */
+    QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
 
-    if (QFile::exists("/etc/resolv.conf"))
+    foreach (QHostAddress a, addresses)
     {
-        qDebug() << "Network up";
+        if (a != QHostAddress::LocalHost && a != QHostAddress::LocalHostIPv6)
+            return true;
+    }
+
+    return false;
+}
+
+void MainWindow::pollNetworkStatus()
+{
+    if (!_hasWifi && QFile::exists("/sys/class/net/wlan0"))
+    {
+        _hasWifi = true;
+        ui->actionWifi->setEnabled(true);
+    }
+    if (isOnline())
+    {
+        _networkStatusPollTimer.stop();
+        onOnlineStateChanged(true);
+    }
+}
+
+void MainWindow::onOnlineStateChanged(bool online)
+{
+    if (online)
+    {
+        qDebug() << "Network up in" << _time.elapsed()/1000.0 << "seconds";
         if (!_netaccess)
         {
-            remountSettingsRW();
             QDir dir;
             dir.mkdir("/settings/cache");
             _netaccess = new QNetworkAccessManager(this);
@@ -940,8 +995,6 @@ void MainWindow::ifupFinished(int)
         ui->actionBrowser->setEnabled(true);
         emit networkUp();
     }
-
-    p->deleteLater();
 }
 
 void MainWindow::downloadList(const QString &urlstring)
@@ -1000,7 +1053,8 @@ void MainWindow::downloadListComplete()
 
     if (reply->error() != reply->NoError || httpstatuscode < 200 || httpstatuscode > 399)
     {
-        _qpd->hide();
+        if (_qpd)
+            _qpd->hide();
         QMessageBox::critical(this, tr("Download error"), tr("Error downloading distribution list from Internet"), QMessageBox::Close);
     }
     else
@@ -1452,8 +1506,7 @@ void MainWindow::hideDialogIfNoNetwork()
 {
     if (_qpd)
     {
-        QByteArray carrier = getFileContents("/sys/class/net/eth0/carrier").trimmed();
-        if (carrier != "1")
+        if (!isOnline())
         {
             /* No network cable inserted */
             _qpd->hide();
@@ -1463,11 +1516,37 @@ void MainWindow::hideDialogIfNoNetwork()
             if (ui->list->count() == 0)
             {
                 /* No local images either */
-                QMessageBox::critical(this,
-                                      tr("No network access"),
-                                      tr("Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port."),
-                                      QMessageBox::Close);
+                if (_hasWifi)
+                {
+                    QMessageBox::critical(this,
+                                          tr("No network access"),
+                                          tr("Network access is required to use NOOBS without local images. Please select your wifi network in the next screen."),
+                                          QMessageBox::Close);
+                    on_actionWifi_triggered();
+                }
+                else
+                {
+                    QMessageBox::critical(this,
+                                          tr("No network access"),
+                                          tr("Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port."),
+                                          QMessageBox::Close);
+                }
             }
+        }
+    }
+}
+
+void MainWindow::on_actionWifi_triggered()
+{
+    bool wasAlreadyOnlineBefore = !_networkStatusPollTimer.isActive();
+
+    WifiSettingsDialog wsd;
+    if ( wsd.exec() == wsd.Accepted )
+    {
+        if (wasAlreadyOnlineBefore)
+        {
+            /* Try to redownload list. Could have failed through previous access point */
+            downloadList(DEFAULT_REPO_SERVER);
         }
     }
 }

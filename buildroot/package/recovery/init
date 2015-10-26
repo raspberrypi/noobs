@@ -19,6 +19,9 @@ echo 2 >/sys/module/vt/parameters/cur_default
 /sbin/getty -L tty3 0 vt100 &
 /sbin/getty -L ttyAMA0 115200 vt100 &
 
+# Enable syslog
+/etc/init.d/S01logging start > /dev/null
+
 if grep -q vncinstall /proc/cmdline; then
     # VNC server mode. Mainly useful for making screenshots
     export QWS_DISPLAY="VNC:size=800x600:depth=32:0"

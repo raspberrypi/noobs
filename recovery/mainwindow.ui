@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
-  <widget class="QMainWindow" name="MainWindow">
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -90,6 +90,7 @@
    </attribute>
    <addaction name="actionWrite_image_to_disk"/>
    <addaction name="actionEdit_config"/>
+   <addaction name="actionWifi"/>
    <addaction name="actionBrowser"/>
    <addaction name="actionCancel"/>
   </widget>
@@ -186,6 +187,21 @@
    </property>
    <property name="shortcut">
     <string notr="true">H</string>
+   </property>
+  </action>
+  <action name="actionWifi">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/network-wireless.png</normaloff>:/icons/network-wireless.png</iconset>
+   </property>
+   <property name="text">
+    <string>Wifi networks (w)</string>
+   </property>
+   <property name="toolTip">
+    <string>Select a wifi network to connect to</string>
+   </property>
+   <property name="shortcut">
+    <string>W</string>
    </property>
   </action>
  </widget>

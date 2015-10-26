@@ -38,7 +38,8 @@ BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidge
     QDir dir;
     dir.mkdir("/settings");
 
-    if (QProcess::execute("mount -t ext4 -o ro " SETTINGS_PARTITION " /settings") != 0)
+    if (QProcess::execute("mount -o remount,ro /settings") != 0
+        && QProcess::execute("mount -t ext4 -o ro " SETTINGS_PARTITION " /settings") != 0)
     {
         QMessageBox::critical(this, tr("Cannot display boot menu"), tr("Error mounting settings partition"));
         return;

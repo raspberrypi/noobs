@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pt" sourcelanguage="en">
+<TS version="2.1" language="pt" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="+19"/>
-        <location filename="bootselectiondialog.cpp" line="+248"/>
+        <location filename="bootselectiondialog.cpp" line="+249"/>
         <source>Select OS to boot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -262,7 +262,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>Install (i)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -312,28 +312,44 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+248"/>
-        <location line="+663"/>
+        <location line="+12"/>
+        <source>Wifi networks (w)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select a wifi network to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="+272"/>
+        <location line="+901"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-508"/>
+        <location line="-634"/>
+        <location line="+19"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="+93"/>
+        <location line="+92"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-411"/>
+        <location line="-556"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
     <message>
-        <location line="+61"/>
+        <location line="+44"/>
         <source>Error mounting settings partition</source>
         <translation type="unfinished"></translation>
     </message>
@@ -353,24 +369,24 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+250"/>
+        <location line="+394"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation type="unfinished">Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
     <message>
-        <location line="+73"/>
-        <location line="+399"/>
+        <location line="+93"/>
+        <location line="+439"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-625"/>
+        <location line="-797"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+345"/>
+        <location line="+475"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -380,17 +396,32 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-395"/>
+        <location line="-568"/>
+        <source>Waiting for SD card (settings partition)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Mounting settings partition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+57"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+311"/>
+        <location line="+375"/>
+        <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
         <source>The install process will begin shortly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+22"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation type="unfinished"></translation>
@@ -423,14 +454,14 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+265"/>
-        <location line="+311"/>
+        <location line="+307"/>
+        <location line="+339"/>
         <location line="+10"/>
         <source>Download error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-321"/>
+        <location line="-349"/>
         <source>Error downloading distribution list from Internet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -440,7 +471,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+216"/>
         <source>Needed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -460,18 +491,24 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+116"/>
+        <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-581"/>
-        <location line="+580"/>
+        <location line="-661"/>
+        <location line="+652"/>
+        <location line="+8"/>
         <source>No network access</source>
         <translation>Sem acesso de rede</translation>
     </message>
     <message>
-        <location line="-579"/>
+        <location line="-659"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>
@@ -484,7 +521,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+43"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -544,7 +581,17 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="-162"/>
+        <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+171"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation type="unfinished"></translation>
     </message>
@@ -597,7 +644,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+55"/>
         <source>Error opening /dev/mmcblk0 for writing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -682,6 +729,100 @@ Would you like to make this setting permanent?</source>
         <location line="-6"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
+    </message>
+</context>
+<context>
+    <name>WifiSettingsDialog</name>
+    <message>
+        <location filename="wifisettingsdialog.cpp" line="+27"/>
+        <source>Advanced</source>
+        <translation type="unfinished">Avançado</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>No wifi interfaces available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+120"/>
+        <location line="+140"/>
+        <source>Shutting down access point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-53"/>
+        <source>Authenticated but still waiting for DHCP lease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Connecting to wifi failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Connecting to the wifi access point failed. Check your password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Changing access point frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Releasing old DHCP lease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Disconnecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Connecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="wifisettingsdialog.ui" line="+19"/>
+        <source>Wifi network selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Wifi network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Authentication method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Pressing the WPS button on my wifi router</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Password authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

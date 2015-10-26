@@ -26,5 +26,12 @@
         <file>icons/download.png</file>
         <file>icons/hdd.png</file>
         <file>icons/keyboard.png</file>
+        <file>icons/network-wireless.png</file>
+        <file>icons/network-wireless-connected-00.png</file>
+        <file>icons/network-wireless-connected-25.png</file>
+        <file>icons/network-wireless-connected-50.png</file>
+        <file>icons/network-wireless-connected-75.png</file>
+        <file>icons/network-wireless-connected-100.png</file>
+        <file>icons/tick.png</file>
     </qresource>
 </RCC>

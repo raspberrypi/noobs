@@ -15,7 +15,7 @@ BUILDROOT_TARGET_DIR="$BUILDROOT_OUTPUT_DIR/target"
 #fi
 
 # We do not use busybox's init system
-rm -f "$BUILDROOT_TARGET_DIR/etc/init.d/"*
+#rm -f "$BUILDROOT_TARGET_DIR/etc/init.d/"*
 
 # We do not use Qt's tga/ico plugins
 #rm -rf "$BUILDROOT_TARGET_DIR/usr/lib/qt/plugins"

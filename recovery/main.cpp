@@ -136,6 +136,9 @@ int main(int argc, char *argv[])
     QWSServer::setCursorVisible(false);
 #endif
 
+    QDir settingsdir;
+    settingsdir.mkdir("/settings");
+
     // Set wallpaper and icon, if we have resource files for that
     if (QFile::exists(":/icons/raspberry_icon.png"))
         a.setWindowIcon(QIcon(":/icons/raspberry_icon.png"));

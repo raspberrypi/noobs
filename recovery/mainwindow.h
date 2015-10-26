@@ -15,6 +15,8 @@
 #include <QModelIndex>
 #include <QSplashScreen>
 #include <QMessageBox>
+#include <QTimer>
+#include <QTime>
 
 namespace Ui {
 class MainWindow;
@@ -44,11 +46,13 @@ protected:
     static int _currentMode;
     QSplashScreen *_splash;
     QSettings *_settings;
-    bool _activatedEth;
+    bool _hasWifi;
     int _numInstalledOS;
     QNetworkAccessManager *_netaccess;
     int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
     QMessageBox *_displayModeBox;
+    QTimer _networkStatusPollTimer;
+    QTime _time;
 
     QMap<QString,QVariantMap> listImages();
     virtual void changeEvent(QEvent * event);
@@ -58,9 +62,9 @@ protected:
     void displayMode(int modenr, bool silent = false);
     void update_window_title();
     bool requireNetwork();
+    bool isOnline();
     QStringList getFlavours(const QString &folder);
     void rebuildInstalledList();
-    void remountSettingsRW();
     QListWidgetItem *findItem(const QVariant &name);
     QList<QListWidgetItem *> selectedItems();
     void updateNeeded();
@@ -73,7 +77,8 @@ protected slots:
     void populate();
     void startBrowser();
     void startNetworking();
-    void ifupFinished(int exitCode);
+    void pollNetworkStatus();
+    void onOnlineStateChanged(bool online);
     void downloadListComplete();
     void processJson(QVariant json);
     void processJsonOs(const QString &name, QVariantMap &details, QSet<QString> &iconurls);
@@ -98,6 +103,7 @@ private slots:
     void on_actionBrowser_triggered();
     void on_list_doubleClicked(const QModelIndex &index);
     void on_list_itemChanged(QListWidgetItem *item);
+    void on_actionWifi_triggered();
 
 signals:
     void networkUp();
