@@ -7,8 +7,9 @@
 /bin/mount -t proc proc /proc
 /bin/mount -o remount,rw,noatime /
 /bin/mount -t sysfs sysfs /sys
-/bin/mount -t devtmpfs dev /dev
+/bin/mount -t devtmpfs dev /dev 2>/dev/null
 /bin/hostname -F /etc/hostname
+/bin/mount -t tmpfs tmpfs /tmp
 
 # Set up ACT LED to be triggered by mmc0
 echo mmc0 > /sys/class/leds/led0/trigger
