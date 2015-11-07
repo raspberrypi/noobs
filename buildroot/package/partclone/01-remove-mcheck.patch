@@ -1,0 +1,11 @@
+--- partclone-0.2.84.orig/src/main.c    2015-10-13 08:27:56.000000000 +0200
++++ partclone-0.2.84/src/main.c 2015-10-27 17:09:32.324546758 +0100
+@@ -20,7 +20,6 @@
+ #include <sys/types.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <mcheck.h>
+ #include <stdint.h>
+ #include <stdarg.h>
+ #include <string.h>
+

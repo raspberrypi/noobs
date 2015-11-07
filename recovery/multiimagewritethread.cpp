@@ -3,6 +3,8 @@
 #include "json.h"
 #include "util.h"
 #include "mbr.h"
+#include "osinfo.h"
+#include "partitioninfo.h"
 #include <QDir>
 #include <QFile>
 #include <QDebug>
@@ -13,6 +15,7 @@
 #include <unistd.h>
 #include <linux/fs.h>
 #include <sys/ioctl.h>
+#include <QtEndian>
 
 MultiImageWriteThread::MultiImageWriteThread(QObject *parent) :
     QThread(parent), _extraSpacePerPartition(0), _part(5)
@@ -25,53 +28,39 @@ MultiImageWriteThread::MultiImageWriteThread(QObject *parent) :
 
 void MultiImageWriteThread::addImage(const QString &folder, const QString &flavour)
 {
-    _images.insert(folder, flavour);
+    _images.append(new OsInfo(folder, flavour, this));
+    //_images.insert(folder, flavour);
 }
 
 void MultiImageWriteThread::run()
 {
-    /* Calculate space requirements */
-    int totalnominalsize = 0, totaluncompressedsize = 0, numparts = 0, numexpandparts = 0, numext4expandparts = 0;
-    bool RiscOSworkaround = false;
-    int startSector = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
-    int availableMB = (getFileContents("/sys/class/block/mmcblk0p3/start").trimmed().toULongLong()-startSector)/2048;
+    /* Calculate space requirements, and check special requirements */
+    int totalnominalsize = 0, totaluncompressedsize = 0, numparts = 0, numexpandparts = 0;
+    int startSector = getFileContents("/sys/class/block/mmcblk0p5/start").trimmed().toULongLong()
+                    + getFileContents("/sys/class/block/mmcblk0p5/size").trimmed().toULongLong();
+    int totalSectors = getFileContents("/sys/class/block/mmcblk0/size").trimmed().toULongLong();
+    int availableMB = (totalSectors-startSector)/2048;
 
-    foreach (QString folder, _images.keys())
+    /* key: partition number, value: partition information */
+    QMap<int, PartitionInfo *> partitionMap;
+
+    foreach (OsInfo *image, _images)
     {
-        QVariantList partitions = Json::loadFromFile(folder+"/partitions.json").toMap().value("partitions").toList();
-        if (partitions.isEmpty())
+        QList<PartitionInfo *> *partitions = image->partitions();
+        if (partitions->isEmpty())
         {
             emit error(tr("partitions.json invalid"));
             return;
         }
 
-        foreach (QVariant pv, partitions)
-        {
-            QVariantMap partition = pv.toMap();
-            numparts++;
-            if ( partition.value("want_maximised").toBool() )
-                numexpandparts++;
-            totalnominalsize += partition.value("partition_size_nominal").toInt();
-            totaluncompressedsize += partition.value("uncompressed_tarball_size").toInt();
-            if (partition.value("filesystem_type").toString() == "ext4")
-            {
-                totaluncompressedsize += /*0.035*/ 0.01 * totalnominalsize; /* overhead for file system meta data */
-                if (partition.value("want_maximised").toBool())
-                {
-                    numext4expandparts++;
-                }
-            }
-        }
-        if (nameMatchesRiscOS(folder))
+        if (nameMatchesRiscOS( image->folder() ))
         {
             /* Check the riscos_offset in os.json matches what we're expecting.
                In theory we shouldn't hit either of these errors because the invalid RISC_OS
                should have been filtered out already (not added to OS-list) in mainwindow.cpp */
-            QVariantMap vos = Json::loadFromFile(folder+"/os.json").toMap();
-            if (vos.contains(RISCOS_OFFSET_KEY))
+            if (image->riscosOffset())
             {
-                int riscos_offset = vos.value(RISCOS_OFFSET_KEY).toInt();
-                if (riscos_offset != RISCOS_OFFSET)
+                if (image->riscosOffset() != RISCOS_OFFSET)
                 {
                     emit error(tr("RISCOS cannot be installed. RISCOS offset value mismatch."));
                     return;
@@ -89,19 +78,54 @@ void MultiImageWriteThread::run()
             }
 
             totalnominalsize += (RISCOS_SECTOR_OFFSET - startSector)/2048;
-            RiscOSworkaround = true;
+
+            partitions->first()->setRequiresPartitionNumber(6);
+            partitions->first()->setOffset(RISCOS_SECTOR_OFFSET);
+            partitions->last()->setRequiresPartitionNumber(7);
+        }
+
+        foreach (PartitionInfo *partition, *partitions)
+        {
+            numparts++;
+            if ( partition->wantMaximised() )
+                numexpandparts++;
+            totalnominalsize += partition->partitionSizeNominal();
+            totaluncompressedsize += partition->uncompressedTarballSize();
+            if (partition->fsType() == "ext4")
+            {
+                totaluncompressedsize += /*0.035*/ 0.01 * totalnominalsize; /* overhead for file system meta data */
+            }
+            int reqPart = partition->requiresPartitionNumber();
+            if (reqPart)
+            {
+                if (partitionMap.contains(reqPart))
+                {
+                    emit error(tr("More than one operating system requires partition number %1").arg(reqPart));
+                    return;
+                }
+                if (reqPart == 1 || reqPart == 2 || reqPart == 5)
+                {
+                    emit error(tr("Operating system cannot require a system partition (1,2,5)"));
+                    return;
+                }
+                partition->setPartitionDevice("/dev/mmcblk0p"+QByteArray::number(reqPart));
+                partitionMap.insert(reqPart, partition);
+            }
+
+            /* Maximum overhead per partition for alignment */
+#ifdef SHRINK_PARTITIONS_TO_MINIMIZE_GAPS
+            if (partition->wantMaximised() || (partition->partitionSizeNominal()*2048) % PARTITION_ALIGNMENT != 0)
+                totalnominalsize += PARTITION_ALIGNMENT/2048;
+#else
+            totalnominalsize += PARTITION_ALIGNMENT/2048;
+#endif
         }
     }
-
-    /* 4 MB overhead per partition (logical partition table) */
-    totalnominalsize += (numparts * 4);
 
     if (numexpandparts)
     {
         /* Extra spare space available for partitions that want to be expanded */
         _extraSpacePerPartition = (availableMB-totalnominalsize)/numexpandparts;
-        /* Ext4 file system meta data overhead */
-        //totaluncompressedsize += 0.035 * _extraSpacePerPartition * numext4expandparts;
     }
 
     emit parsedImagesize(qint64(totaluncompressedsize)*1024*1024);
@@ -112,29 +136,119 @@ void MultiImageWriteThread::run()
         return;
     }
 
-    emit statusUpdate(tr("Clearing existing EBR"));
-    clearEBR();
+    /* Assign logical partition numbers to partitions that did not reserve a special number */
+    int pnr;
+    if (partitionMap.isEmpty())
+        pnr = 6;
+    else
+        pnr = qMax(partitionMap.keys().last(), 5)+1;
 
-    /* Install RiscOS first */
-    if (RiscOSworkaround)
+    foreach (OsInfo *image, _images)
     {
-        for (QMultiMap<QString,QString>::const_iterator iter = _images.constBegin(); iter != _images.constEnd(); iter++)
+        foreach (PartitionInfo *partition, *(image->partitions()))
         {
-            if (nameMatchesRiscOS(iter.key()))
+            if (!partition->requiresPartitionNumber())
             {
-                if (!processImage(iter.key(), iter.value()))
-                    return;
-
-                _images.remove(iter.key());
-                break;
+                partitionMap.insert(pnr, partition);
+                partition->setPartitionDevice("/dev/mmcblk0p"+QByteArray::number(pnr));
+                pnr++;
             }
         }
     }
 
-    /* Process each image */
-    for (QMultiMap<QString,QString>::const_iterator iter = _images.constBegin(); iter != _images.constEnd(); iter++)
+    /* Set partition starting sectors and sizes.
+     * First allocate space to all logical partitions, then to primary partition 3 and 4 */
+    QList<PartitionInfo *> log_before_prim = partitionMap.values();
+    if (!log_before_prim.isEmpty() && log_before_prim.first()->requiresPartitionNumber() == 3)
+        log_before_prim.push_back(log_before_prim.takeFirst());
+    if (!log_before_prim.isEmpty() && log_before_prim.first()->requiresPartitionNumber() == 4)
+        log_before_prim.push_back(log_before_prim.takeFirst());
+
+    int offset = startSector;
+
+    foreach (PartitionInfo *p, log_before_prim)
     {
-        if (!processImage(iter.key(), iter.value()))
+        if (p->offset()) /* OS wants its partition at a fixed offset */
+        {
+            if (p->offset() <= offset)
+            {
+                emit error(tr("Fixed partition offset too low"));
+                return;
+            }
+
+            offset = p->offset();
+        }
+        else
+        {
+            offset += PARTITION_GAP;
+            /* Align at 4 MiB offset */
+            if (offset % PARTITION_ALIGNMENT != 0)
+            {
+                    offset += PARTITION_ALIGNMENT-(offset % PARTITION_ALIGNMENT);
+            }
+
+            p->setOffset(offset);
+        }
+
+        int partsizeMB = p->partitionSizeNominal();
+        if ( p->wantMaximised() )
+            partsizeMB += _extraSpacePerPartition;
+        int partsizeSectors = partsizeMB * 2048;
+
+        if (p == log_before_prim.last())
+        {
+            /* Let last partition have any remaining space that we couldn't divide evenly */
+            int spaceleft = totalSectors - offset - partsizeSectors;
+
+            if (spaceleft > 0 && p->wantMaximised())
+            {
+                partsizeSectors += spaceleft;
+            }
+        }
+        else
+        {
+#ifdef SHRINK_PARTITIONS_TO_MINIMIZE_GAPS
+            if (partsizeSectors % PARTITION_ALIGNMENT == 0 && p->fsType() != "raw")
+            {
+                /* Partition size is dividable by 4 MiB
+                   Take off a couple sectors of the end of our partition to make room
+                   for the EBR of the next partition, so the next partition can
+                   align nicely without having a 4 MiB gap */
+                partsizeSectors -= PARTITION_GAP;
+            }
+#endif
+            if (p->wantMaximised() && (partsizeSectors+PARTITION_GAP) % PARTITION_ALIGNMENT != 0)
+            {
+                /* Enlarge partition to close gap to next partition */
+                partsizeSectors += PARTITION_ALIGNMENT-((partsizeSectors+PARTITION_GAP) % PARTITION_ALIGNMENT);
+            }
+        }
+
+        p->setPartitionSizeSectors(partsizeSectors);
+        offset += partsizeSectors;
+    }
+
+    /* Delete information about previously installed operating systems */
+    QFile f("/settings/installed_os.json");
+    if (f.exists())
+        f.remove();
+
+    emit statusUpdate(tr("Writing partition table"));
+    if (!writePartitionTable(partitionMap))
+        return;
+
+    /* Zero out first sector of partitions, to make sure to get rid of previous file system (label) */
+    emit statusUpdate(tr("Zero'ing start of each partition"));
+    foreach (PartitionInfo *p, partitionMap.values())
+    {
+        if (p->partitionSizeSectors())
+            QProcess::execute("/bin/dd count=1 bs=512 if=/dev/zero of="+p->partitionDevice());
+    }
+
+    /* Install each operating system */
+    foreach (OsInfo *image, _images)
+    {
+        if (!processImage(image))
             return;
     }
 
@@ -143,33 +257,127 @@ void MultiImageWriteThread::run()
     emit completed();
 }
 
-bool MultiImageWriteThread::processImage(const QString &folder, const QString &flavour)
+bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *> &partitionMap)
 {
+    /* Write partition table using sfdisk */
 
-    int firstPartition = _part;
+    /* Fixed NOOBS partition */
+    int startP1 = getFileContents("/sys/class/block/mmcblk0p1/start").trimmed().toInt();
+    int sizeP1  = getFileContents("/sys/class/block/mmcblk0p1/size").trimmed().toInt();
+    /* Fixed start of extended partition. End is not fixed, as it depends on primary partition 3 & 4 */
+    int startP2 = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toInt();
+    /* Fixed settings partition */
+    int startP5 = getFileContents("/sys/class/block/mmcblk0p5/start").trimmed().toInt();
+    int sizeP5  = getFileContents("/sys/class/block/mmcblk0p5/size").trimmed().toInt();
 
-    QString os_name = (folder.split("/")).at(3);
+    if (!startP1 || !sizeP1 || !startP2 || !startP5 || !sizeP5)
+    {
+        emit error(tr("Error reading existing partition table"));
+        return false;
+    }
 
+    QByteArray partitionTable;
+    partitionTable  = QByteArray::number(startP1)+","+QByteArray::number(sizeP1)+",0E\n"; /* FAT partition */
+
+    /* Extended partition may not overlap P3 or P4 */
+    int startP3P4 = 0;
+    if (partitionMap.contains(3))
+        startP3P4 = partitionMap.value(3)->offset();
+    else if (partitionMap.contains(4))
+        startP3P4 = partitionMap.value(4)->offset();
+
+    if (startP3P4)
+    {
+        int sizeP2 = startP3P4 - startP2;
+        partitionTable += QByteArray::number(startP2)+","+QByteArray::number(sizeP2)+",X\n";
+    }
+    else
+    {
+        /* No P3 nor P4. Extended can have all remaining space */
+        partitionTable += QByteArray::number(startP2)+",,X\n";
+    }
+
+    /* Add partitions */
+    qDebug() << "partition map:" << partitionMap;
+    for (int i=3; i <= qMax(5, partitionMap.keys().last()); i++)
+    {
+        if (i == 5)
+        {
+            /* Settings partition */
+            partitionTable += QByteArray::number(startP5)+","+QByteArray::number(sizeP5)+",L\n";
+        }
+        else if (partitionMap.contains(i))
+        {
+            PartitionInfo *p = partitionMap.value(i);
+
+            partitionTable += QByteArray::number(p->offset())+","+QByteArray::number(p->partitionSizeSectors())+","+p->partitionType();
+            if (p->active())
+                partitionTable += " *";
+            partitionTable += "\n";
+        }
+        else
+        {
+            partitionTable += "0,0\n";
+        }
+    }
+
+    qDebug() << "New partition table:";
+    qDebug() << partitionTable;
+
+    /* Unmount everything before modifying partition table */
+    QProcess::execute("umount /mnt");
+    QProcess::execute("umount /settings");
+
+    /* Let sfdisk write a proper partition table */
+    QProcess proc;
+    proc.setProcessChannelMode(proc.MergedChannels);
+    proc.start("/sbin/sfdisk -uS /dev/mmcblk0");
+    proc.write(partitionTable);
+    proc.closeWriteChannel();
+    proc.waitForFinished(-1);
+
+    qDebug() << "sfdisk done, output:" << proc.readAll();
+    ::sync();
+    QThread::msleep(500);
+
+    QProcess::execute("/usr/sbin/partprobe");
+    QThread::msleep(500);
+
+    /* Remount */
+    QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
+    QProcess::execute("mount -t ext4 /dev/mmcblk0p5 /settings");
+
+    if (proc.exitCode() != 0)
+    {
+        emit error(tr("Error creating partition table")+"\n"+proc.readAll());
+        return false;
+    }
+
+    return true;
+}
+
+bool MultiImageWriteThread::processImage(OsInfo *image)
+{
+    QString os_name = image->name();
     qDebug() << "Processing OS:" << os_name;
 
-    QVariantList partitions = Json::loadFromFile(folder+"/partitions.json").toMap().value("partitions").toList();
-    foreach (QVariant pv, partitions)
-    {
-        QVariantMap partition = pv.toMap();
+    QList<PartitionInfo *> *partitions = image->partitions();
 
-        QByteArray fstype   = partition.value("filesystem_type").toByteArray();
-        QByteArray mkfsopt  = partition.value("mkfs_options").toByteArray();
-        QByteArray label = partition.value("label").toByteArray();
-        QString tarball  = partition.value("tarball").toString();
-        bool emptyfs     = partition.value("empty_fs", false).toBool();
+    foreach (PartitionInfo *p, *partitions)
+    {
+        QByteArray fstype   = p->fsType();
+        QByteArray mkfsopt  = p->mkfsOptions();
+        QByteArray label = p->label();
+        QString tarball  = p->tarball();
+        bool emptyfs     = p->emptyFS();
 
         if (!emptyfs && tarball.isEmpty())
         {
             /* If no tarball URL is specified, we expect the tarball to reside in the folder and be named <label.tar.xz> */
-            if (fstype == "raw")
-                tarball = folder+"/"+label+".xz";
+            if (fstype == "raw" || fstype.startsWith("partclone"))
+                tarball = image->folder()+"/"+label+".xz";
             else
-                tarball = folder+"/"+label+".tar.xz";
+                tarball = image->folder()+"/"+label+".tar.xz";
 
             if (!QFile::exists(tarball))
             {
@@ -192,39 +400,7 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
                 }
             }
         }
-
-        int partsizeMB = partition.value("partition_size_nominal").toInt();
-        if (!partsizeMB)
-        {
-            emit error(tr("Nominal partition size not specified or zero"));
-            return false;
-        }
-
-        if ( partition.value("want_maximised").toBool() )
-            partsizeMB += _extraSpacePerPartition;
-
-        QByteArray partdevice = "/dev/mmcblk0p"+QByteArray::number(_part);
-        int partsizeSectors = partsizeMB * 2048;
-        int parttype;
-        int specialOffset = 0;
-
-        if (fstype == "FAT" || fstype == "fat")
-            parttype = 0x0c; /* FAT32 LBA */
-        else if (fstype == "swap")
-            parttype = 0x82;
-        else
-            parttype = 0x83; /* Linux native */
-
-        if (nameMatchesRiscOS(folder) && (fstype == "FAT" || fstype == "fat"))
-        {
-            /* Let Risc OS start at known offset */
-            int startSector   = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
-            specialOffset = RISCOS_SECTOR_OFFSET - startSector - 2048;
-        }
-
-        emit statusUpdate(tr("%1: Creating partition entry").arg(os_name));
-        if (!addPartitionEntry(partsizeSectors, parttype, specialOffset))
-            return false;
+        QByteArray partdevice = p->partitionDevice();
 
         if (fstype == "raw")
         {
@@ -232,7 +408,13 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
             if (!dd(tarball, partdevice))
                 return false;
         }
-        else
+        else if (fstype.startsWith("partclone"))
+        {
+            emit statusUpdate(tr("%1: Writing OS image").arg(os_name));
+            if (!partclone_restore(tarball, partdevice))
+                return false;
+        }
+        else if (fstype != "unformatted")
         {
             emit runningMKFS();
             emit statusUpdate(tr("%1: Creating filesystem (%2)").arg(os_name, QString(fstype)));
@@ -243,7 +425,12 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
             if (!emptyfs)
             {
                 emit statusUpdate(tr("%1: Mounting file system").arg(os_name));
-                if (QProcess::execute("mount "+partdevice+" /mnt2") != 0)
+                QString mountcmd;
+                if (fstype == "ntfs")
+                    mountcmd = "/sbin/mount.ntfs-3g ";
+                else
+                    mountcmd = "mount ";
+                if (QProcess::execute(mountcmd+partdevice+" /mnt2") != 0)
                 {
                     emit error(tr("%1: Error mounting file system").arg(os_name));
                     return false;
@@ -267,7 +454,7 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
     }
 
     emit statusUpdate(tr("%1: Mounting FAT partition").arg(os_name));
-    if (QProcess::execute("mount /dev/mmcblk0p"+QString::number(firstPartition)+" /mnt2") != 0)
+    if (QProcess::execute("mount "+partitions->first()->partitionDevice()+" /mnt2") != 0)
     {
         emit error(tr("%1: Error mounting file system").arg(os_name));
         return false;
@@ -275,24 +462,21 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
 
     emit statusUpdate(tr("%1: Creating os_config.json").arg(os_name));
 
-    QString description = getDescription(folder, flavour);
+    QString description = getDescription(image->folder(), image->flavour());
     QVariantList vpartitions;
-    for (int i=firstPartition; i<_part; i++)
+    foreach (PartitionInfo *p, *partitions)
     {
-        vpartitions.append("/dev/mmcblk0p"+QString::number(i));
+        vpartitions.append(p->partitionDevice());
     }
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat);
     int videomode = settings.value("display_mode", 0).toInt();
     QString language = settings.value("language", "en").toString();
     QString keyboard = settings.value("keyboard_layout", "gb").toString();
 
-    QVariantMap vos = Json::loadFromFile(folder+"/os.json").toMap();
-    QVariant releasedate = vos.value("release_date");
-
     QVariantMap qm;
-    qm.insert("flavour", flavour);
-    qm.insert("release_date", releasedate);
-    qm.insert("imagefolder", folder);
+    qm.insert("flavour", image->flavour());
+    qm.insert("release_date", image->releaseDate());
+    qm.insert("imagefolder", image->folder());
     qm.insert("description", description);
     qm.insert("videomode", videomode);
     qm.insert("partitions", vpartitions);
@@ -306,7 +490,7 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
 
     /* Partition setup script can either reside in the image folder
      * or inside the boot partition tarball */
-    QString postInstallScript = folder+"/partition_setup.sh";
+    QString postInstallScript = image->folder()+"/partition_setup.sh";
     if (!QFile::exists(postInstallScript))
         postInstallScript = "/mnt2/partition_setup.sh";
 
@@ -325,10 +509,11 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
          *  partition_setup.sh part1=/dev/mmcblk0p3 id1=LABEL=BOOT part2=/dev/mmcblk0p4
          *  id2=UUID=550e8400-e29b-41d4-a716-446655440000
          */
-        for (int i=firstPartition, pcount = 1; i<_part; i++, pcount++)
+        int pnr = 1;
+        foreach (PartitionInfo *p, *partitions)
         {
-            QString part  = "/dev/mmcblk0p"+QString::number(i);
-            QString nr    = QString::number(pcount);
+            QString part  = p->partitionDevice();
+            QString nr    = QString::number(pnr);
             QString uuid  = getUUID(part);
             QString label = getLabel(part);
             QString id;
@@ -342,6 +527,7 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
             args << "part"+nr+"="+part << "id"+nr+"="+id;
             env.insert("part"+nr, part);
             env.insert("id"+nr, id);
+            pnr++;
         }
 
         qDebug() << "Executing: sh" << args;
@@ -360,7 +546,14 @@ bool MultiImageWriteThread::processImage(const QString &folder, const QString &f
         }
     }
 
-emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
+    PartitionInfo *p = partitions->first();
+    if (!p->bcdFile().isEmpty())
+    {
+        emit statusUpdate(tr("%1: Patching BCD file").arg(os_name));
+        patchBcdFile("/mnt2/"+p->bcdFile(), p->bcdDiskId(), p->bcdEfiSector(), p->bcdMainSector() );
+    }
+
+    emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
     if (QProcess::execute("umount /mnt2") != 0)
     {
         emit error(tr("%1: Error unmounting").arg(os_name));
@@ -368,118 +561,21 @@ emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
 
     /* Save information about installed operating systems in installed_os.json */
     QVariantMap ventry;
-    ventry["name"]        = flavour;
+    ventry["name"]        = image->flavour();
     ventry["description"] = description;
-    ventry["folder"]      = folder;
-    ventry["release_date"]= releasedate;
+    ventry["folder"]      = image->folder();
+    ventry["release_date"]= image->releaseDate();
     ventry["partitions"]  = vpartitions;
-    if (vos.contains("bootable"))
-        ventry["bootable"] = vos.value("bootable").toBool();
-    QString iconfilename = folder+"/"+flavour+".png";
+    ventry["bootable"]    = image->bootable();
+    QString iconfilename  = image->folder()+"/"+image->flavour()+".png";
     iconfilename.replace(" ", "_");
     if (QFile::exists(iconfilename))
         ventry["icon"] = iconfilename;
-    else if (QFile::exists(folder+"/icon.png"))
-        ventry["icon"] = folder+"/icon.png";
+    else if (QFile::exists(image->folder()+"/icon.png"))
+        ventry["icon"] = image->folder()+"/icon.png";
     installed_os.append(ventry);
 
-    QProcess::execute("mount -o remount,rw /settings");
     Json::saveToFile("/settings/installed_os.json", installed_os);
-    QProcess::execute("mount -o remount,ro /settings");
-
-    return true;
-}
-
-void MultiImageWriteThread::clearEBR()
-{
-    mbr_table ebr;
-    int startOfExtended = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
-
-    /* Write out empty extended partition table with signature */
-    memset(&ebr, 0, sizeof ebr);
-    ebr.signature[0] = 0x55;
-    ebr.signature[1] = 0xAA;
-    QFile f("/dev/mmcblk0");
-    f.open(f.ReadWrite);
-    f.seek(qint64(startOfExtended)*512);
-    f.write((char *) &ebr, sizeof(ebr));
-    f.close();
-}
-
-bool MultiImageWriteThread::addPartitionEntry(int sizeInSectors, int type, int specialOffset)
-{
-    /* Unmount everything before modifying partition table */
-    //QProcess::execute("umount -r /mnt");
-    //QProcess::execute("umount -r /settings");
-
-    unsigned int startOfExtended = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
-    unsigned int offsetInSectors = 0;
-    mbr_table ebr;
-    QFile f("/dev/mmcblk0");
-    if (!f.open(f.ReadWrite))
-    {
-        emit error(tr("Error opening /dev/mmcblk0 for writing"));
-        return false;
-    }
-
-    /* Find last EBR */
-    do
-    {
-        f.seek(qint64(startOfExtended+offsetInSectors)*512);
-        f.read((char *) &ebr, sizeof(ebr));
-
-        if (ebr.part[1].starting_sector)
-        {
-            if (ebr.part[1].starting_sector > offsetInSectors)
-            {
-                offsetInSectors = ebr.part[1].starting_sector;
-            }
-            else
-            {
-                emit error(tr("Internal error in partitioning"));
-                return false;
-            }
-        }
-    } while (ebr.part[1].starting_sector != 0);
-
-    if (ebr.part[0].starting_sector)
-    {
-        /* Add reference to new EBR to old last EBR */
-        ebr.part[1].starting_sector = offsetInSectors+ebr.part[0].starting_sector+ebr.part[0].nr_of_sectors;
-        ebr.part[1].nr_of_sectors = sizeInSectors + specialOffset + 2048;
-        ebr.part[1].id = 0x0F;
-
-        f.seek(qint64(startOfExtended+offsetInSectors)*512);
-        f.write((char *) &ebr, sizeof(ebr));
-        offsetInSectors = ebr.part[1].starting_sector;
-        qDebug() << "add tail";
-    }
-
-    memset(&ebr, 0, sizeof ebr);
-    ebr.signature[0] = 0x55;
-    ebr.signature[1] = 0xAA;
-
-    if (specialOffset)
-        ebr.part[0].starting_sector = 2048 + specialOffset;
-    else
-        ebr.part[0].starting_sector = ((((startOfExtended+offsetInSectors+specialOffset+2048)+6144)/8192)*8192) - (startOfExtended+offsetInSectors);
-
-    ebr.part[0].nr_of_sectors = sizeInSectors;
-    ebr.part[0].id = type;
-    f.seek(qint64(startOfExtended+offsetInSectors)*512);
-    f.write((char *) &ebr, sizeof(ebr));
-    f.flush();
-    /* Tell Linux to re-read the partition table */
-    ioctl(f.handle(), BLKRRPART);
-    f.close();
-
-    /* Call partprobe just in case. BLKRRPART should be enough though */
-    QProcess::execute("/usr/sbin/partprobe");
-    QThread::msleep(500);
-
-    /* Remount */
-    //QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
-    //QProcess::execute("mount -t ext4 /dev/mmcblk0p3 /settings");
 
     return true;
 }
@@ -499,6 +595,14 @@ bool MultiImageWriteThread::mkfs(const QByteArray &device, const QByteArray &fst
     else if (fstype == "ext4")
     {
         cmd = "/usr/sbin/mkfs.ext4 ";
+        if (!label.isEmpty())
+        {
+            cmd += "-L "+label+" ";
+        }
+    }
+    else if (fstype == "ntfs")
+    {
+        cmd = "/sbin/mkfs.ntfs --fast ";
         if (!label.isEmpty())
         {
             cmd += "-L "+label+" ";
@@ -652,6 +756,65 @@ bool MultiImageWriteThread::dd(const QString &imagePath, const QString &device)
     return true;
 }
 
+bool MultiImageWriteThread::partclone_restore(const QString &imagePath, const QString &device)
+{
+    QString cmd = "sh -o pipefail -c \"";
+
+    if (imagePath.startsWith("http:"))
+        cmd += "wget --no-verbose --tries=inf -O- "+imagePath+" | ";
+
+    if (imagePath.endsWith(".gz"))
+    {
+        cmd += "gzip -dc";
+    }
+    else if (imagePath.endsWith(".xz"))
+    {
+        cmd += "xz -dc";
+    }
+    else if (imagePath.endsWith(".bz2"))
+    {
+        cmd += "bzip2 -dc";
+    }
+    else if (imagePath.endsWith(".lzo"))
+    {
+        cmd += "lzop -dc";
+    }
+    else if (imagePath.endsWith(".zip"))
+    {
+        /* Note: the image must be the only file inside the .zip */
+        cmd += "unzip -p";
+    }
+    else
+    {
+        emit error(tr("Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip"));
+        return false;
+    }
+
+    if (!imagePath.startsWith("http:"))
+        cmd += " "+imagePath;
+
+    cmd += " | partclone.restore -q -s - -o "+device+" \"";
+
+    QTime t1;
+    t1.start();
+    qDebug() << "Executing:" << cmd;
+
+    QProcess p;
+    p.setProcessChannelMode(p.MergedChannels);
+    p.start(cmd);
+    p.closeWriteChannel();
+    p.waitForFinished(-1);
+
+    if (p.exitCode() != 0)
+    {
+        emit error(tr("Error downloading or writing OS to SD card")+"\n"+p.readAll());
+        return false;
+    }
+    qDebug() << "finished writing filesystem in" << (t1.elapsed()/1000.0) << "seconds";
+
+    return true;
+}
+
 void MultiImageWriteThread::patchConfigTxt()
 {
 
@@ -733,4 +896,51 @@ QString MultiImageWriteThread::getDescription(const QString &folder, const QStri
     }
 
     return "";
+}
+
+quint32 MultiImageWriteThread::getDiskId(const QString &device)
+{
+    mbr_table mbr;
+
+    QFile f(device);
+    f.open(f.ReadOnly);
+    f.read((char *) &mbr, sizeof(mbr));
+    f.close();
+
+    return qFromLittleEndian<quint32>(mbr.diskid);
+}
+
+bool MultiImageWriteThread::patchBcdFile(const QByteArray bcdfile, unsigned int origDiskId, unsigned int origEfiSector, unsigned int origMainSector)
+{
+    QByteArray data;
+    QFile f(bcdfile);
+
+    quint64 origOffsetEfi  = origEfiSector * 512;
+    quint64 origOffsetMain = origMainSector * 512;
+    quint32 newDiskId = getDiskId();
+    quint64 newOffsetEfi  = getFileContents("/sys/class/block/mmcblk0p3/start").trimmed().toULongLong() * 512;
+    quint64 newOffsetMain = getFileContents("/sys/class/block/mmcblk0p4/start").trimmed().toULongLong() * 512;
+    QByteArray search32(4, '\0'), replace32(4, '\0'), search64(8, '\0'), replace64(8, '\0');
+
+    f.open(f.ReadWrite);
+    data = f.readAll();
+
+    /* Search and replace partition offsets and disk IDs in binary BCD file */
+    qToLittleEndian<quint32>(origDiskId, (uchar *) search32.data());
+    qToLittleEndian<quint32>(newDiskId, (uchar *) replace32.data());
+    data.replace(search32, replace32);
+
+    qToLittleEndian<quint64>(origOffsetEfi, (uchar *) search64.data());
+    qToLittleEndian<quint64>(newOffsetEfi, (uchar *) replace64.data());
+    data.replace(search64, replace64);
+
+    qToLittleEndian<quint64>(origOffsetMain, (uchar *) search64.data());
+    qToLittleEndian<quint64>(newOffsetMain, (uchar *) replace64.data());
+    data.replace(search64, replace64);
+
+    f.seek(0);
+    f.write(data);
+    f.close();
+
+    return true;
 }

@@ -2,6 +2,7 @@ menu "Target packages"
 
 	source "package/busybox/Config.in"
 	source "package/arora/Config.in"
+	source "package/partclone/Config.in"
 	source "package/recovery/Config.in"
 
 menu "Audio and video applications"

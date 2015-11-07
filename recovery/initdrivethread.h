@@ -23,17 +23,13 @@ public:
 protected:
     virtual void run();
 
-    bool method_reformatDrive();
     bool method_resizePartitions();
-    bool saveBootFiles();
-    bool restoreBootFiles();
     int sizeofBootFilesInKB();
     int sizeofSDCardInBlocks();
     bool mountSystemPartition();
     bool umountSystemPartition();
     bool zeroMbr();
     bool formatBootPartition();
-    bool partitionDrive();
     bool formatSettingsPartition();
 #ifdef RISCOS_BLOB_FILENAME
     bool writeRiscOSblob();

@@ -40,6 +40,9 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <inttypes.h>
+#include <sys/reboot.h>
+#include <linux/reboot.h>
+#include <sys/time.h>
 
 #ifdef Q_WS_QWS
 #include <QWSServer>
@@ -209,7 +212,7 @@ void MainWindow::populate()
 
     // Fill in list of images
     repopulate();
-    _availableMB = (getFileContents("/sys/class/block/mmcblk0p3/start").trimmed().toULongLong()-getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong())/2048;
+    _availableMB = (getFileContents("/sys/class/block/mmcblk0/size").trimmed().toULongLong()-getFileContents("/sys/class/block/mmcblk0p5/start").trimmed().toULongLong()-getFileContents("/sys/class/block/mmcblk0p5/size").trimmed().toULongLong())/2048;
     updateNeeded();
 
     if (ui->list->count() != 0)
@@ -343,6 +346,9 @@ void MainWindow::repopulate()
             }
         }
     }
+
+    if (_numInstalledOS)
+        ui->actionCancel->setEnabled(true);
 }
 
 /* Whether this OS should be displayed in the list of installable OSes */

@@ -34,7 +34,9 @@ SOURCES += main.cpp\
     wpa_supplicant/wpafactory.cpp \
     wpa_supplicant/network.cpp \
     wpa_supplicant/interface.cpp \
-    wpa_supplicant/bss.cpp
+    wpa_supplicant/bss.cpp \
+    osinfo.cpp \
+    partitioninfo.cpp
 
 HEADERS  += mainwindow.h \
     languagedialog.h \
@@ -57,7 +59,9 @@ HEADERS  += mainwindow.h \
     wpa_supplicant/wpafactory.h \
     wpa_supplicant/network.h \
     wpa_supplicant/interface.h \
-    wpa_supplicant/bss.h
+    wpa_supplicant/bss.h \
+    osinfo.h \
+    partitioninfo.h
 
 FORMS    += mainwindow.ui \
     languagedialog.ui \

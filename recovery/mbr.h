@@ -20,7 +20,9 @@ struct mbr_partition_entry {
 } __attribute__ ((packed));
 
 struct mbr_table {
-    char bootcode[446];
+    char bootcode[440];
+    unsigned char diskid[4];
+    unsigned char flags[2];
     mbr_partition_entry part[4];
     unsigned char signature[2];
 } __attribute__ ((packed));

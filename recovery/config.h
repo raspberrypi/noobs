@@ -33,13 +33,20 @@
  * If files they are larger than number of MB, try resizing the FAT partition instead */
 #define MAXIMUM_BOOTFILES_SIZE  64
 
-#define SETTINGS_PARTITION  "/dev/mmcblk0p3"
-#define SETTINGS_PARTITION_SIZE  (32 * 2048)
+/* Partitioning settings */
+#define PARTITION_ALIGNMENT  8192
+#define PARTITION_GAP  2
+/* Allow partitions to be shrinked PARTITION_GAP sectors
+   if that prevents having a 4 MiB gap between the next one */
+#define SHRINK_PARTITIONS_TO_MINIMIZE_GAPS
+
+#define SETTINGS_PARTITION  "/dev/mmcblk0p5"
+#define SETTINGS_PARTITION_SIZE  (32 * 2048 - PARTITION_GAP)
 
 /* If the image name matches this exactly, mark it as recommended */
 #define RECOMMENDED_IMAGE "Raspbian"
 
-#define FAT_PARTITION_OF_IMAGE  "/dev/mmcblk0p5"
+#define FAT_PARTITION_OF_IMAGE  "/dev/mmcblk0p6"
 
 /* RiscOS magic */
 #define RISCOS_OFFSET_KEY "riscos_offset"

@@ -36,26 +36,35 @@
 
 void reboot_to_extended(const QString &defaultPartition, bool setDisplayMode)
 {
-    // Unmount any open file systems
-    QProcess::execute("umount -r /mnt");
-    QProcess::execute("umount -r /settings");
-
-    if (QFile::exists("/dev/mmcblk0p7"))
-    {
 #ifdef Q_WS_QWS
-        QWSServer::setBackground(Qt::white);
-        QWSServer::setCursorVisible(true);
+    QWSServer::setBackground(Qt::white);
+    QWSServer::setCursorVisible(true);
 #endif
-        BootSelectionDialog bsd(defaultPartition);
-        if (setDisplayMode)
-            bsd.setDisplayMode();
-        bsd.exec();
-    }
+    BootSelectionDialog bsd(defaultPartition);
+    if (setDisplayMode)
+        bsd.setDisplayMode();
+    bsd.exec();
 
     // Shut down networking
     QProcess::execute("ifdown -a");
+    // Unmount file systems
+    QProcess::execute("umount -ar");
+    ::sync();
     // Reboot
     ::reboot(RB_AUTOBOOT);
+}
+
+bool hasInstalledOS()
+{
+    bool installedOsFileExists = false;
+
+    if (QProcess::execute("mount -o ro " SETTINGS_PARTITION " /settings") == 0)
+    {
+        installedOsFileExists = QFile::exists("/settings/installed_os.json");
+        QProcess::execute("umount /settings");
+    }
+
+    return installedOsFileExists;
 }
 
 int main(int argc, char *argv[])
@@ -151,15 +160,12 @@ int main(int argc, char *argv[])
         QApplication::processEvents();
 
     // If -runinstaller is not specified, only continue if SHIFT is pressed, GPIO is triggered,
-    // or no OS is installed (/dev/mmcblk0p5 does not exist)
+    // or no OS is installed (/settings/installed_os.json does not exist)
     bool bailout = !runinstaller
         && !force_trigger
         && !(gpio_trigger && (gpio.value() == 0 ))
         && !(keyboard_trigger && KeyDetection::isF10pressed())
-        && QFile::exists(FAT_PARTITION_OF_IMAGE);
-
-    // Default to booting first extended partition
-    setRebootPartition("5");
+        && hasInstalledOS();
 
     if (bailout)
     {
