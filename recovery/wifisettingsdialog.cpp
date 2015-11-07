@@ -41,7 +41,7 @@ WifiSettingsDialog::WifiSettingsDialog(const QString &preferredInterface, QWidge
         }
         else
         {
-            QMessageBox::critical(this, tr("No wifi interfaces available"), tr("No wifi interfaces available"), QMessageBox::Close);
+            QMessageBox::critical(parent, tr("No wifi interfaces"), tr("No wifi interfaces available"), QMessageBox::Close);
             close();
         }
     }
