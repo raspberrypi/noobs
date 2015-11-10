@@ -120,9 +120,9 @@ for i in $*; do
         update_github_package_version rpi-userland raspberrypi/userland master
     fi
 
-    # Update raspberrypi/linux rpi-3.18.y HEAD version in buildroot/.config to latest
+    # Update raspberrypi/linux rpi-4.1.y HEAD version in buildroot/.config to latest
     if [ $i = "update-kernel" ]; then
-        update_github_kernel_version raspberrypi/linux rpi-3.18.y
+        update_github_kernel_version raspberrypi/linux rpi-4.1.y
     fi
 
     # Option to build just recovery without completely rebuilding both kernels
@@ -150,13 +150,13 @@ if [ $SKIP_KERNEL_REBUILD -ne 1 ]; then
     select_kernelconfig armv7
     make linux-reconfigure
     # copy ARMv7 kernel
-    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7.img"
+    package/rpi-firmware/mkknlimg "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7.img"
 
     # Rebuild kernel for ARMv6
     select_kernelconfig armv6
     make linux-reconfigure
     # copy ARMv6 kernel
-    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery.img"
+    package/rpi-firmware/mkknlimg "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery.img"
 else
     echo "Warning: kernels in '$NOOBS_OUTPUT_DIR' directory haven't been updated"
 fi
@@ -168,6 +168,7 @@ cp "$IMAGES_DIR/rootfs.squashfs" "$FINAL_OUTPUT_DIR/recovery.rfs"
 # Ensure that final output dir contains files necessary to boot
 cp "$IMAGES_DIR/rpi-firmware/start.elf" "$FINAL_OUTPUT_DIR/recovery.elf"
 cp "$IMAGES_DIR/rpi-firmware/bootcode.bin" "$FINAL_OUTPUT_DIR"
+cp -a $IMAGES_DIR/rpi-firmware/*.dtb "$IMAGES_DIR/rpi-firmware/overlays" "$FINAL_OUTPUT_DIR"
 cp "$IMAGES_DIR/cmdline.txt" "$FINAL_OUTPUT_DIR/recovery.cmdline"
 touch "$FINAL_OUTPUT_DIR/RECOVERY_FILES_DO_NOT_EDIT"
 
@@ -178,7 +179,7 @@ echo "NOOBS Version: $(git describe)" >> "$BUILD_INFO"
 echo "NOOBS Git HEAD @ $(git rev-parse --verify HEAD)" >> "$BUILD_INFO"
 echo "rpi-userland Git master @ $(get_package_version rpi-userland)" >> "$BUILD_INFO"
 echo "rpi-firmware Git master @ $(get_package_version rpi-firmware)" >> "$BUILD_INFO"
-echo "rpi-linux Git rpi-3.18.y @ $(get_kernel_version)" >> "$BUILD_INFO"
+echo "rpi-linux Git rpi-4.1.y @ $(get_kernel_version)" >> "$BUILD_INFO"
 
 cd ..
 

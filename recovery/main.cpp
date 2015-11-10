@@ -4,6 +4,7 @@
 #include "keydetection.h"
 #include "gpioinput.h"
 #include "rightbuttonfilter.h"
+#include "longpresshandler.h"
 #include "json.h"
 #include "util.h"
 #include "bootselectiondialog.h"
@@ -20,6 +21,7 @@
 #include <QProcess>
 #include <QDir>
 #include <QDebug>
+#include <QTime>
 
 #ifdef Q_WS_QWS
 #include <QWSServer>
@@ -69,8 +71,11 @@ bool hasInstalledOS()
 
 int main(int argc, char *argv[])
 {
-    // Wait for keyboard to appear before displaying anything
-    KeyDetection::waitForKeyboard();
+    bool hasTouchScreen = QFile::exists("/sys/devices/platform/rpi_ft5406");
+
+    // Unless we have a touch screen, wait for keyboard to appear before displaying anything
+    if (!hasTouchScreen)
+        KeyDetection::waitForKeyboard();
 
     int rev = readBoardRevision();
 
@@ -85,6 +90,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     RightButtonFilter rbf;
+    LongPressHandler lph;
     GpioInput gpio(gpioChannel);
 
     bool runinstaller = false;
@@ -141,6 +147,10 @@ int main(int argc, char *argv[])
     // Intercept right mouse clicks sent to the title bar
     a.installEventFilter(&rbf);
 
+    // Treat long holds as double-clicks
+    if (hasTouchScreen)
+        a.installEventFilter(&lph);
+
 #ifdef Q_WS_QWS
     QWSServer::setCursorVisible(false);
 #endif
@@ -164,8 +174,30 @@ int main(int argc, char *argv[])
     bool bailout = !runinstaller
         && !force_trigger
         && !(gpio_trigger && (gpio.value() == 0 ))
-        && !(keyboard_trigger && KeyDetection::isF10pressed())
         && hasInstalledOS();
+
+    if (bailout && keyboard_trigger)
+    {
+        QTime t;
+        t.start();
+
+        while (t.elapsed() < 2000)
+        {
+            QApplication::processEvents(QEventLoop::WaitForMoreEvents, 10);
+            if (QApplication::queryKeyboardModifiers().testFlag(Qt::ShiftModifier))
+            {
+                bailout = false;
+                qDebug() << "Shift detected";
+                break;
+            }
+            if (hasTouchScreen && QApplication::mouseButtons().testFlag(Qt::LeftButton))
+            {
+                bailout = false;
+                qDebug() << "Tap detected";
+                break;
+            }
+        }
+    }
 
     if (bailout)
     {

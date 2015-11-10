@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     wpa_supplicant/interface.cpp \
     wpa_supplicant/bss.cpp \
     osinfo.cpp \
-    partitioninfo.cpp
+    partitioninfo.cpp \
+    longpresshandler.cpp
 
 HEADERS  += mainwindow.h \
     languagedialog.h \
@@ -61,7 +62,8 @@ HEADERS  += mainwindow.h \
     wpa_supplicant/interface.h \
     wpa_supplicant/bss.h \
     osinfo.h \
-    partitioninfo.h
+    partitioninfo.h \
+    longpresshandler.h
 
 FORMS    += mainwindow.ui \
     languagedialog.ui \

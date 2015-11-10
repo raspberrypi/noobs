@@ -8,6 +8,8 @@
 #include <fcntl.h>
 #include <QDebug>
 #include <QDir>
+#include <QSet>
+#include <QTime>
 
 /* Key detection class
  *
@@ -30,18 +32,20 @@
 bool KeyDetection::waitForKeyboard()
 {
     int fd = -1;
+    QTime t;
 
     // Wait up to 2.1 seconds for a keyboard to appear.
-    for (int i=0; i<21; i++)
+    t.start();
+    do
     {
-        usleep(100000);
+        usleep(10000);
         fd = openKeyboard();
         if (fd != -1)
         {
             close(fd);
             return true;
         }
-    }
+    } while (t.elapsed() < 2100);
 
     return false;
 }
@@ -93,6 +97,7 @@ bool KeyDetection::_isF10pressed(int fd)
 
 int KeyDetection::openKeyboard()
 {
+    static QSet<QString> notKeyboards;
     int fd;
     u_int8_t evtype_bitmask[EV_MAX/8+1] = {0};
     QDir dir("/sys/class/input", "event*");
@@ -100,8 +105,10 @@ int KeyDetection::openKeyboard()
 
     foreach (QString inputDevice, inputDevices)
     {
+        if (notKeyboards.contains(inputDevice))
+            continue;
+
         QByteArray inputDeviceFile = "/dev/input/"+inputDevice.toLatin1();
-        qDebug() << "Testing if input device is a keyboard" << inputDeviceFile;
         fd = open(inputDeviceFile.constData(), O_RDONLY);
 
         if (ioctl(fd, EVIOCGBIT(0, EV_MAX), evtype_bitmask) != -1
@@ -112,6 +119,10 @@ int KeyDetection::openKeyboard()
             /* If the input device has keys and not relative or absolute data we assume it is a keyboard */
             qDebug() << "Keyboard found:" << inputDeviceFile;
             return fd;
+        }
+        else
+        {
+            notKeyboards.insert(inputDevice);
         }
 
         close(fd);
