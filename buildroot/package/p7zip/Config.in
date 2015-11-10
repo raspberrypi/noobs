@@ -1,0 +1,6 @@
+config BR2_PACKAGE_P7ZIP
+        bool "p7zip"
+        help
+          Installs 7z (without rar support)
+
+          http://p7zip.sourceforge.net/ 
