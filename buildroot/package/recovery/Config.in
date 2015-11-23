@@ -10,6 +10,7 @@ config BR2_PACKAGE_RECOVERY
     select BR2_PACKAGE_QT_MOUSE_PC
     select BR2_PACKAGE_QT_KEYBOARD_TTY
     select BR2_PACKAGE_QJSON
+    select BR2_PACKAGE_WPA_SUPPLICANT
     ### runtime dependencies
     # commands called from the init script: mount, hostname, echo, getty, grep, ifup, vcgencmd, sh, cat, recovery
     # commands called from recovery application using QProcess:
