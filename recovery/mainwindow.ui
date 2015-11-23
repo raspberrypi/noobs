@@ -190,6 +190,9 @@
    </property>
   </action>
   <action name="actionWifi">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons.qrc">
      <normaloff>:/icons/network-wireless.png</normaloff>:/icons/network-wireless.png</iconset>

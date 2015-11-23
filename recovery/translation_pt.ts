@@ -128,7 +128,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation>Removendo partições 2,3,4</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+14"/>
         <source>Resizing FAT partition</source>
         <translation>Redimensionando partição FAT</translation>
     </message>
@@ -148,7 +148,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation>Erro ao criar partição extendida</translation>
     </message>
     <message>
-        <location line="-221"/>
+        <location line="-203"/>
         <source>Error mounting system partition.</source>
         <translation>Erro ao montar partição de sistema.</translation>
     </message>
@@ -289,13 +289,13 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+274"/>
-        <location line="+901"/>
+        <location filename="mainwindow.cpp" line="+275"/>
+        <location line="+920"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-634"/>
+        <location line="-650"/>
         <location line="+19"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
@@ -306,7 +306,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-556"/>
+        <location line="-559"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -331,24 +331,24 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+394"/>
+        <location line="+397"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation type="unfinished">Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
     <message>
         <location line="+93"/>
-        <location line="+439"/>
+        <location line="+455"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-797"/>
+        <location line="-816"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+475"/>
+        <location line="+478"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -358,7 +358,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-568"/>
+        <location line="-571"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -373,7 +373,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+375"/>
+        <location line="+378"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -416,7 +416,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+323"/>
         <location line="+339"/>
         <location line="+10"/>
         <source>Download error</source>
@@ -463,14 +463,14 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-661"/>
-        <location line="+652"/>
+        <location line="-677"/>
+        <location line="+668"/>
         <location line="+8"/>
         <source>No network access</source>
         <translation>Sem acesso de rede</translation>
     </message>
     <message>
-        <location line="-659"/>
+        <location line="-675"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>
@@ -498,7 +498,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished">Finalizando a gravação</translation>
     </message>
     <message>
-        <location line="+140"/>
+        <location line="+129"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -510,7 +510,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+14"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
         <translation type="unfinished"></translation>
@@ -528,7 +528,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-375"/>
+        <location line="-355"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -568,17 +568,12 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+77"/>
         <source>Error creating partition table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+69"/>
-        <source>Error running partclone.ntfsfixboot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
+        <location line="+88"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation type="unfinished"></translation>
     </message>
@@ -619,7 +614,12 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+8"/>
+        <source>%1: Patching BCD file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
         <translation type="unfinished"></translation>
