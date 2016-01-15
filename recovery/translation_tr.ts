@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru" sourcelanguage="en">
+<TS version="2.0" language="tr" sourcelanguage="tr">
 <context>
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="19"/>
         <location filename="bootselectiondialog.cpp" line="248"/>
         <source>Select OS to boot</source>
-        <translation>Выберите ОС для запуска</translation>
+        <translation>Başlatılacak OS seçimi</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
         <source>Cannot display boot menu</source>
-        <translation>Невозможно показать меню загрузки</translation>
+        <translation>Boot menü görüntülenemiyor</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="43"/>
         <source>Error mounting settings partition</source>
-        <translation>Ошибка монтироваия настроек раздела</translation>
+        <translation>Bölüm ayarlarını yüklemede hata meydana geldi</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="189"/>
         <source>HDMI safe mode</source>
-        <translation>Безопасные режим HDMI</translation>
+        <translation>HDMI güvenli modu</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="193"/>
         <source>composite PAL mode</source>
-        <translation>Композитный PAL режим</translation>
+        <translation>Kompozit PAL modu</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="197"/>
         <source>composite NTSC mode</source>
-        <translation>Композитный NTSC режим</translation>
+        <translation>Kompozit PAL modu</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="253"/>
         <source>Previously selected OS will boot in %1 seconds</source>
-        <translation>Ранее выбранная ОС будет запущена через %1 сек.</translation>
+        <translation>Önceki seçmiş olduğunuz OS %1 saniye içerisinde başlatılacak</translation>
     </message>
 </context>
 <context>
@@ -45,17 +45,17 @@
     <message>
         <location filename="confeditdialog.ui" line="22"/>
         <source>Config editor</source>
-        <translation>Настройка редактора</translation>
+        <translation>Ayar düzenleyici</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="82"/>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Hata</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="83"/>
         <source>Error mounting boot partition</source>
-        <translation>Ошибка монтирования раздела загрузчика</translation>
+        <translation>Başlatılacak bölümü yüklemede hata meydana geldi</translation>
     </message>
 </context>
 <context>
@@ -64,39 +64,39 @@
         <location filename="initdrivethread.cpp" line="37"/>
         <location filename="initdrivethread.cpp" line="328"/>
         <source>Mounting FAT partition</source>
-        <translation>Монтирование FAT раздела</translation>
+        <translation>FAT bölümünü yükle</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="60"/>
         <source>Formatting settings partition</source>
-        <translation>Форматирование настроек раздела</translation>
+        <translation>Bölüm biçimlendirme ayarları</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="63"/>
         <source>Error formatting settings partition</source>
-        <translation>Ошибка форматирования настроек раздела</translation>
+        <translation>Bölümü biçimlendirmede hata meydana geldi</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="133"/>
         <source>Saving boot files to memory</source>
-        <translation>Сохранение файлов в память</translation>
+        <translation>Boot dosyalarını hafızaya kaydediliyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="136"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation>Ошибка сохранения файлов в память. SD карта может быть повреждена.</translation>
+        <translation>Boot dosyaları hafızaya kaydedilemiyor. SD kart muhtemelen arızalı.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="141"/>
         <location filename="initdrivethread.cpp" line="181"/>
         <source>Error unmounting system partition.</source>
-        <translation>Ошибка размонтирования системного раздела.</translation>
+        <translation>Sistem bölümünü çıkartmada hata meydana geldi.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="145"/>
         <location filename="initdrivethread.cpp" line="198"/>
         <source>Zeroing partition table</source>
-        <translation>Обнуление таблицы разделов</translation>
+        <translation>Bölüm tabloları sıfırlanıyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="148"/>
@@ -107,27 +107,27 @@
     <message>
         <location filename="initdrivethread.cpp" line="152"/>
         <source>Creating partitions</source>
-        <translation>Создание раздлеа</translation>
+        <translation>Bölüm yaratılıyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="156"/>
         <source>Error partitioning</source>
-        <translation>Ошибка разделения</translation>
+        <translation>Bölümlemede hata meydana geldi</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="160"/>
         <source>Formatting boot partition (fat)</source>
-        <translation>Форматирование раздела загрузки(fat)</translation>
+        <translation>Boot bölümü biçimlendiriliyor (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="163"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation>Ошибка форматирования раздела загрузки</translation>
+        <translation>Boot bölümünü biçimlendirmede hata (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="167"/>
         <source>Copying boot files to storage</source>
-        <translation>Копирование файлов загрузки на карту</translation>
+        <translation>Boot dosyaları depolama alanına kopyalanıyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="192"/>
@@ -144,12 +144,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="206"/>
         <source>Writing new MBR</source>
-        <translation>Запись нового MBR</translation>
+        <translation>Yeni MBR yazılıyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="214"/>
         <source>Error creating MBR</source>
-        <translation>Ошибка создания MBR</translation>
+        <translation>MBR'ı oluşturmada hata</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="222"/>
@@ -164,42 +164,42 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="233"/>
         <source>Removing partitions 2,3,4</source>
-        <translation>Удаление разделов 2,3,4</translation>
+        <translation>2,3,4 bölümleri siliniyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="247"/>
         <source>Resizing FAT partition</source>
-        <translation>Изменение размера раздела FAT verändern</translation>
+        <translation>FAT bölümünü boyutlandır</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="266"/>
         <source>Error resizing existing FAT partition</source>
-        <translation>Ошибка изменения разменра FAT раздела</translation>
+        <translation>FAT bölümünü boyutlandırmada hata meydana geldi</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="272"/>
         <source>Creating extended partition</source>
-        <translation>Создание дополнительного раздела</translation>
+        <translation>Bölümü genişletmede hata meydana geldi</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="311"/>
         <source>Error creating extended partition</source>
-        <translation>Ошибка создания дополнительного раздела</translation>
+        <translation>Genişletilen bölümü oluşturmada hata</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="331"/>
         <source>Error mounting system partition.</source>
-        <translation>Ошибка монтирования системного раздела</translation>
+        <translation>Sistem bölümünü yüklemede hata meydana geldi.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="67"/>
         <source>Editing cmdline.txt</source>
-        <translation>Редактирование cmdline.txt</translation>
+        <translation>cmdline.txt düzenleniyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="77"/>
         <source>Error opening %1</source>
-        <translation>Ошибка открытия %1</translation>
+        <translation>%1 açılamıyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="90"/>
@@ -237,12 +237,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="languagedialog.ui" line="135"/>
         <source>Language (l): </source>
-        <translation>Язык (l): </translation>
+        <translation>Dil (l): </translation>
     </message>
     <message>
         <location filename="languagedialog.ui" line="156"/>
         <source>Keyboard</source>
-        <translation>Клавиатура</translation>
+        <translation>Klavye</translation>
     </message>
 </context>
 <context>
@@ -250,22 +250,22 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="47"/>
         <source>Disk space</source>
-        <translation>Размер</translation>
+        <translation>Disk alanı</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="53"/>
         <source>Needed:</source>
-        <translation>Необходимо:</translation>
+        <translation>Gerekli:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="60"/>
         <source>Available:</source>
-        <translation>Доступно:</translation>
+        <translation>Mevcut:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="122"/>
         <source>Install (i)</source>
-        <translation>Установка (i)</translation>
+        <translation>Yükle (i)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="125"/>
@@ -280,7 +280,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="137"/>
         <source>Exit (Esc)</source>
-        <translation>Выход (Esc)</translation>
+        <translation>Çıkış (Esc)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="140"/>
@@ -290,12 +290,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="155"/>
         <source>Advanced</source>
-        <translation>Продвинутый</translation>
+        <translation>Gelişmiş</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="167"/>
         <source>Edit config (e)</source>
-        <translation>Редактировать конфиг (e)</translation>
+        <translation>Ayarları düzenle (e)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="170"/>
@@ -305,7 +305,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="182"/>
         <source>Online help (h)</source>
-        <translation>Онлайн помощь (h)</translation>
+        <translation>Çevrimiçi yardım (h)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="185"/>
@@ -316,12 +316,12 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="248"/>
         <location filename="mainwindow.cpp" line="911"/>
         <source>RECOMMENDED</source>
-        <translation>РЕКОМЕНДУЕТСЯ</translation>
+        <translation>ÖNERİLEN</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="403"/>
         <source>Confirm</source>
-        <translation>Подтвердить</translation>
+        <translation>Onayla</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="496"/>
@@ -368,12 +368,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="251"/>
         <source>INSTALLED</source>
-        <translation>УСТАНОВЛЕННО</translation>
+        <translation>YÜKLENEN</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="596"/>
         <source>Display Mode Changed</source>
-        <translation>Режим дисплея изменен</translation>
+        <translation>Görüntü Modu Değiştirildi</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="528"/>
@@ -394,28 +394,28 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="467"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
-        <translation>ОС установленны</translation>
+        <translation>ОS yüklendi</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="468"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
-        <translation>ОС установленны успешно</translation>
+        <translation>ОС Başarıyla Yüklendi</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="532"/>
         <source>HDMI safe mode</source>
-        <translation>Безопасный режим HDMI</translation>
+        <translation>HDMI güvenli modu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="536"/>
         <source>composite PAL mode</source>
-        <translation>Композитный PAL режим</translation>
+        <translation>Kompozit PAL modu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="540"/>
         <source>composite NTSC mode</source>
-        <translation>Композитный NTSC режим</translation>
+        <translation>Kompozit NTSC modu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="597"/>
@@ -429,7 +429,7 @@ Would you like to make this setting permanent?</source>
         <location filename="mainwindow.cpp" line="1173"/>
         <location filename="mainwindow.cpp" line="1183"/>
         <source>Download error</source>
-        <translation>Ошибка загрузки</translation>
+        <translation>İndirme hatası</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="862"/>
@@ -444,12 +444,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1064"/>
         <source>Needed</source>
-        <translation>Необходимо</translation>
+        <translation>Gerekli</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1065"/>
         <source>Available</source>
-        <translation>Доступно</translation>
+        <translation>Mevcut</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1173"/>
@@ -653,32 +653,32 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="languagedialog.cpp" line="29"/>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation>Kapat</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="30"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Отмена</translation>
+        <translation>&amp;Vazgeç</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="31"/>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation>Kapat</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="32"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>&amp;Kapat</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="33"/>
         <source>&amp;Yes</source>
-        <translation>&amp;Да</translation>
+        <translation>&amp;Evet</translation>
     </message>
     <message>
         <location filename="lang1uagedialog.cpp" line="34"/>
         <source>&amp;No</source>
-        <translation>&amp;Нет</translation>
+        <translation>&amp;Hayır</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="28"/>
