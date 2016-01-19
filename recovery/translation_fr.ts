@@ -7,12 +7,12 @@
         <location filename="bootselectiondialog.ui" line="19"/>
         <location filename="bootselectiondialog.cpp" line="249"/>
         <source>Select OS to boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez l'OS à demarrer</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
         <source>Cannot display boot menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d'afficher le menu de démarrage</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
@@ -100,17 +100,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="143"/>
         <source>Error: No MBR present on SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun MBR présent sur la carte SD</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="156"/>
         <source>Writing new MBR</source>
-        <translation type="unfinished"></translation>
+        <translation>Écriture du nouveau MBR</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="164"/>
         <source>Error creating MBR</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant la création du MBR</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="172"/>
@@ -125,12 +125,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="183"/>
         <source>Removing partitions 2,3,4</source>
-        <translation type="unfinished"></translation>
+        <translation>Supression des partitions 2,3,4</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="197"/>
         <source>Resizing FAT partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Redimensionnement de la partition FAT</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="221"/>
@@ -203,7 +203,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="languagedialog.ui" line="156"/>
         <source>Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Clavier</translation>
     </message>
 </context>
 <context>
@@ -211,17 +211,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="47"/>
         <source>Disk space</source>
-        <translation type="unfinished"></translation>
+        <translation>Espace disque</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="53"/>
         <source>Needed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Requis:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="60"/>
         <source>Available:</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="123"/>
@@ -236,7 +236,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="129"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="138"/>
@@ -251,7 +251,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="156"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancé</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="168"/>
@@ -271,12 +271,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="186"/>
         <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvre un navigateur internet et affiche le forum Raspberry Pi.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="198"/>
         <source>Wifi networks (w)</source>
-        <translation type="unfinished"></translation>
+        <translation>Réseaux Wifi (w)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="201"/>
@@ -286,7 +286,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="204"/>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="656"/>
@@ -345,17 +345,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="278"/>
         <source>INSTALLED</source>
-        <translation type="unfinished"></translation>
+        <translation>INSTALLÉ</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="756"/>
         <source>Display Mode Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode d'affichage changé</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="688"/>
         <source>HDMI preferred mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mode HDMI preferré</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
