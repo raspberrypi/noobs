@@ -370,7 +370,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="187"/>
         <source>Please wait while NOOBS initialises</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de patienter pendant l'initialisation de NOOBS</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="565"/>
@@ -380,19 +380,19 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="605"/>
         <source>The install process will begin shortly.</source>
-        <translation type="unfinished"></translation>
+        <translation>La procédure d'installation va bientôt commencer.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="627"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>OS(es) installé(s)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="628"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Installé avec succès</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="692"/>
@@ -435,7 +435,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1310"/>
         <source>Needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Requis</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1311"/>
@@ -495,7 +495,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="255"/>
         <source>Finish writing (sync)</source>
-        <translation type="unfinished">Écriture terminée (sync)</translation>
+        <translation>Écriture terminée (sync)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="384"/>
@@ -715,7 +715,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
         <source>No wifi interfaces available</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune interface wifi disponible</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
@@ -735,7 +735,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="269"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="275"/>
@@ -760,17 +760,17 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.ui" line="28"/>
         <source>Wifi network</source>
-        <translation type="unfinished"></translation>
+        <translation>Réseau Wifi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="55"/>
         <source>Authentication method</source>
-        <translation type="unfinished"></translation>
+        <translation>Méthode d'authentification</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="64"/>
         <source>Pressing the WPS button on my wifi router</source>
-        <translation type="unfinished"></translation>
+        <translation>Appuyez sur le bouton WPS de votre routeur</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="71"/>
@@ -780,12 +780,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.ui" line="96"/>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudo</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="110"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe</translation>
     </message>
 </context>
 </TS>
