@@ -420,7 +420,7 @@ Would you like to make this setting permanent?</source>
         <location filename="mainwindow.cpp" line="1419"/>
         <location filename="mainwindow.cpp" line="1429"/>
         <source>Download error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur durant le téléchargement</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1080"/>
@@ -450,7 +450,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1429"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Erreur lors de l'écriture des fichiers téléchargés. La carte SD ou le système de fichiers sont peut-être endommagés.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1545"/>
@@ -500,7 +500,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="384"/>
         <source>File &apos;%1&apos; does not exist</source>
-        <translation type="unfinished">Les fichiers &apos;%1&apos; n'existent pas</translation>
+        <translation>Les fichiers &apos;%1&apos; n'existent pas</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="407"/>
@@ -581,7 +581,7 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="442"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Extraction du sustème de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="456"/>
@@ -605,13 +605,13 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="499"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Lancement du script d'installation de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="544"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d'exécution du script d'installation de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="552"/>
@@ -745,7 +745,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="290"/>
         <source>Disconnecting</source>
-        <translation type="unfinished">Déconnexion</translation>
+        <translation>Déconnexion</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="295"/>
