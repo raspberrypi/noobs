@@ -150,7 +150,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="55"/>
         <source>Error mounting system partition.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant le montage de la partition système.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="60"/>
@@ -160,7 +160,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="70"/>
         <source>Error opening %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant l'ouverture de %1</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="83"/>
@@ -226,12 +226,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="123"/>
         <source>Install (i)</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer (i)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="126"/>
         <source>Installs the selected operating system image onto this SD card.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer l'OS selectionné sur cette carte SD.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="129"/>
@@ -246,7 +246,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="141"/>
         <source>Exits and boots the installed operating system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter et demarrer l'OS installé.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="156"/>
@@ -256,17 +256,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="168"/>
         <source>Edit config (e)</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la configuration (e)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="171"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvre les fichiers config.txt et cmdline.txt de l'OS installé dans un éditeur de texte.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="183"/>
         <source>Online help (h)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide en ligne</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="186"/>
@@ -291,12 +291,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="656"/>
         <source>NOOBS v%1 - Built: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>NOOBS v%1 - Built: %2</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="97"/>
         <source>Setting up SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramétrer la carte SD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="275"/>
@@ -355,7 +355,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="688"/>
         <source>HDMI preferred mode</source>
-        <translation type="unfinished">Mode HDMI preferré</translation>
+        <translation>Mode HDMI preferré</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
@@ -440,7 +440,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1311"/>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1419"/>
@@ -467,7 +467,7 @@ Would you like to make this setting permanent?</source>
         <location filename="mainwindow.cpp" line="1544"/>
         <location filename="mainwindow.cpp" line="1552"/>
         <source>No network access</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d'accés réseau</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="877"/>
@@ -480,7 +480,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="52"/>
         <source>partitions.json invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>partitions.json non valide</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="76"/>
@@ -490,7 +490,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="135"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas assez d'espace disque. %1 MB requis, %2 MB disponible</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="255"/>
@@ -500,52 +500,52 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="384"/>
         <source>File &apos;%1&apos; does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Les fichiers &apos;%1&apos; n'existent pas</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="407"/>
         <location filename="multiimagewritethread.cpp" line="413"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Ecriture de l'image de l'OS</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="427"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Montage du système de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="435"/>
         <location filename="multiimagewritethread.cpp" line="459"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Erreur pendant le montage du système de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="420"/>
         <source>%1: Creating filesystem (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Création du système de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="65"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS ne peut être installé. Les valeurs offset de RISCOS ne correspondent pas.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="71"/>
         <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS ne peut être installé. Les valeurs offset de RISCOS sont manquantes.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="103"/>
         <source>More than one operating system requires partition number %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus d'un OS demandent la partition %1</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="108"/>
         <source>Operating system cannot require a system partition (1,2,5)</source>
-        <translation type="unfinished"></translation>
+        <translation>L'OS ne peut demander une partition système (1,2,5)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="175"/>
@@ -555,7 +555,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="236"/>
         <source>Writing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecriture de la table de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="241"/>
@@ -565,17 +565,17 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="275"/>
         <source>Error reading existing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant la lécture de la table de partition existante</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="352"/>
         <source>Error creating partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant la création de la table de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="440"/>
         <source>%1: Downloading and extracting filesystem</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Téléchargement et extraction du système de fichier</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="442"/>
@@ -593,13 +593,13 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="463"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Création de os_config.json</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="488"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Sauvegarde du mode d'affichage dans config.txt</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="499"/>
@@ -616,7 +616,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="552"/>
         <source>%1: Patching BCD file</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Patchage du fichier BCD</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="556"/>
@@ -628,12 +628,12 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="559"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Erreur pendant le démontage</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="626"/>
         <source>Error creating file system</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant la création du système de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="668"/>
@@ -645,13 +645,13 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="692"/>
         <source>Error downloading or extracting tarball</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur durant le téléchargement ou l'extraction du tarball</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="751"/>
         <location filename="multiimagewritethread.cpp" line="810"/>
         <source>Error downloading or writing OS to SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur durant la téléchargement ou l'écriture de l'OS sur la carte SD</translation>
     </message>
 </context>
 <context>
@@ -692,7 +692,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="languagedialog.cpp" line="32"/>
         <source>&amp;Close</source>
-        <translation>Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <location filename="languagedialog.cpp" line="33"/>
@@ -725,12 +725,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to wifi failed</source>
-        <translation type="unfinished"></translation>
+        <translation>La connexion Wifi a échoué</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to the wifi access point failed. Check your password</source>
-        <translation type="unfinished"></translation>
+        <translation>La connexion au réseau wifi a échoué. Vérifiez votre mot de passe.</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="269"/>
@@ -745,17 +745,17 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="290"/>
         <source>Disconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Déconnexion</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="295"/>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion en cours</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="22"/>
         <source>Wifi network selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Selection du réseau Wifi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="28"/>
@@ -775,7 +775,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.ui" line="71"/>
         <source>Password authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentification par mot de passe</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="96"/>
