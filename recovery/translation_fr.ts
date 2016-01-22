@@ -120,7 +120,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="177"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La carte SD n'a pas été formatée correctement. Merci de la reformater en utilisant  fuck that tablet ffs</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="183"/>
@@ -135,17 +135,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="221"/>
         <source>Error resizing existing FAT partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur durant le redimmensionnement de la partition FAT existante</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="227"/>
         <source>Creating extended partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Création de la partition étendue</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="258"/>
         <source>Error creating extended partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur durant la création de la partition étendue</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="55"/>
@@ -165,12 +165,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="83"/>
         <source>Writing RiscOS blob</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecriture du blob de RiscOS</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="86"/>
         <source>Error writing RiscOS blob</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur durant l'écriture du blob de RiscOS</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="93"/>
@@ -281,7 +281,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="201"/>
         <source>Select a wifi network to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionnez le réseau wifi auquel se connecter</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
@@ -323,12 +323,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
         <source>Reformat failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Le reformatage a échoué</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
         <source>SD card might be damaged</source>
-        <translation type="unfinished"></translation>
+        <translation>La carte SD est potentiellement endommagée</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="546"/>
@@ -350,7 +350,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="756"/>
         <source>Display Mode Changed</source>
-        <translation>Mode d'affichage changé</translation>
+        <translation>Mode d'affichage modifié</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="688"/>
@@ -402,12 +402,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="696"/>
         <source>composite PAL mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode PAL composite</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="700"/>
         <source>composite NTSC mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode NTSC composite</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="757"/>
@@ -430,7 +430,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1094"/>
         <source>Error parsing list.json downloaded from server</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Erreur durant l'analyse du fichier list.json téléchargé</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1310"/>
@@ -581,13 +581,13 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="442"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
-        <translation>%1: Extraction du sustème de fichiers</translation>
+        <translation>%1: Extraction du système de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="456"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
-        <translation type="unfinished"></translation>
+        <translation                  1: Montage de la partition FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="463"/>
