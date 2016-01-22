@@ -32,7 +32,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="198"/>
         <source>composite NTSC mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode NTSC composite</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="254"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="confeditdialog.cpp" line="83"/>
         <source>Error mounting boot partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant le montage de la partition de boot</translation>
     </message>
 </context>
 <context>
@@ -120,7 +120,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="177"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation type="unfinished">La carte SD n'a pas été formatée correctement. Merci de la reformater en utilisant  fuck that tablet ffs</translation>
+        <translation>La carte SD n'a pas été formatée correctement. Merci de la reformater en utilisant l'outil de formatage.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="183"/>
@@ -281,7 +281,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="201"/>
         <source>Select a wifi network to connect to</source>
-        <translation>Selectionnez le réseau wifi auquel se connecter</translation>
+        <translation>Sélectionnez le réseau wifi auquel se connecter</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
@@ -334,7 +334,7 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="546"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
-        <translation type="unfinished">Êtes-vous sûr de vouloir écrire l&apos;image? CELA EFFACERA TOUTES VOS DONNÉES EXISTANTES!</translation>
+        <translation>Êtes-vous sûr de vouloir écrire l&apos;image? Ceca effacera toutes vos données existantes, OS(s) déjà installés inclus.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="639"/>
@@ -375,7 +375,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="565"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention: OS incompatible détecté. Les OS(es) suivant ne sont pas supportés sur cette version du raspberry pi et peuvent potentiellement ne pas démarrer ou fonctionner incorrectement</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="605"/>
@@ -413,7 +413,8 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="757"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode d'affichage changé en %1
+        Voudriez-vous faire ceci de façon permanente ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1080"/>
@@ -425,12 +426,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1080"/>
         <source>Error downloading distribution list from Internet</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant le téléchargement internet de la liste des distributions</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1094"/>
         <source>Error parsing list.json downloaded from server</source>
-        <translation type="unfinished">Erreur durant l'analyse du fichier list.json téléchargé</translation>
+        <translation>Erreur durant l'analyse du fichier list.json téléchargé</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1310"/>
@@ -450,17 +451,17 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1429"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation type="unfinished">Erreur lors de l'écriture des fichiers téléchargés. La carte SD ou le système de fichiers sont peut-être endommagés.</translation>
+        <translation>Erreur lors de l'écriture des fichiers téléchargés. La carte SD ou le système de fichiers sont peut-être endommagés.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1545"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion réseau requise pour utiliser NOOBS sans images locales. Merci de sélectionner votre réseau wifi dans le prochain écran.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1553"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion filaire requise pour utiliser NOOBS sans images locales. Merci d'insérer un cable réseau dans le port réseau.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="876"/>
@@ -472,7 +473,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="877"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion filaire requise pour cette fonctionnalitée. Merci d'insérer un cable réseau dans le port réseau.</translation>
     </message>
 </context>
 <context>
@@ -490,7 +491,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="135"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
-        <translation>Pas assez d'espace disque. %1 MB requis, %2 MB disponible</translation>
+        <translation>Pas assez d'espace disque. %1 MB requis, %2 MB disponibles</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="255"/>
@@ -500,7 +501,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="384"/>
         <source>File &apos;%1&apos; does not exist</source>
-        <translation>Les fichiers &apos;%1&apos; n'existent pas</translation>
+        <translation>Le fichier &apos;%1&apos; n'existe pas</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="407"/>
@@ -525,7 +526,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="420"/>
         <source>%1: Creating filesystem (%2)</source>
-        <translation>%1: Création du système de fichiers</translation>
+        <translation>%1: Création du système de fichiers (%2)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="65"/>
@@ -587,7 +588,7 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="456"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
-        <translation                  1: Montage de la partition FAT</translation>
+        <translation>%1: Montage de la partition FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="463"/>
@@ -605,13 +606,13 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="499"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
-        <translation>Lancement du script d'installation de partition</translation>
+        <translation>%1: Lancement du script d'installation de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="544"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
-        <translation>Erreur d'exécution du script d'installation de partition</translation>
+        <translation>%1: Erreur d'exécution du script d'installation de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="552"/>
@@ -622,7 +623,7 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="556"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Démontage de la partition FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="559"/>
@@ -640,7 +641,7 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="730"/>
         <location filename="multiimagewritethread.cpp" line="789"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de compression inconnue. Extension .lzo, .gz, .xz, .bz2 or .zip attendu</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="692"/>
@@ -651,7 +652,7 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="751"/>
         <location filename="multiimagewritethread.cpp" line="810"/>
         <source>Error downloading or writing OS to SD card</source>
-        <translation>Erreur durant la téléchargement ou l'écriture de l'OS sur la carte SD</translation>
+        <translation>Erreur durant le téléchargement ou l'écriture de l'OS sur la carte SD</translation>
     </message>
 </context>
 <context>
@@ -659,12 +660,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="progressslideshowdialog.cpp" line="138"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
-        <translation>%1 MB sur %2 MB écrite (%3 MB/sec)</translation>
+        <translation>%1 MB sur %2 MB écrit (%3 MB/sec)</translation>
     </message>
     <message>
         <location filename="progressslideshowdialog.cpp" line="143"/>
         <source>%1 MB written (%2 MB/sec)</source>
-        <translation>%1 MB écrite (%2 MB/sec) </translation>
+        <translation>%1 MB écrit (%2 MB/sec) </translation>
     </message>
 </context>
 <context>
@@ -720,7 +721,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
         <source>Authenticated but still waiting for DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentifié mais toujours en attente du bail DHCP</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
