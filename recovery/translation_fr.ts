@@ -17,7 +17,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
         <source>Error mounting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant le montage de la partition de réglages</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="190"/>
@@ -27,7 +27,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="194"/>
         <source>composite PAL mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode PAL composite</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="198"/>
@@ -69,12 +69,12 @@
     <message>
         <location filename="initdrivethread.cpp" line="45"/>
         <source>Formatting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatage de la partition de réglages</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="48"/>
         <source>Error formatting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant le formatage de la partition de réglages</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="131"/>
@@ -116,7 +116,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="172"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>La carte SD a été formatée pour accueillir l'installation de NOOBS. Merci de recopier les fichiers de NOOBS sur la carte SD et de redémarrer</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="177"/>
@@ -297,7 +297,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="97"/>
         <source>Setting up SD card</source>
-        <translation>Param&eacute;trer la carte SD</translation>
+        <translation>Param&eacute;trage la carte SD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="275"/>
@@ -314,12 +314,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="141"/>
         <source>Error mounting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant le montage de la partition de réglages</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="142"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
-        <translation type="unfinished"></translation>
+        <translation>La partition de réglages persistante semble être corrompue. Reformater?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
@@ -361,12 +361,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation>En attente de la carte SD (partition de configuration)</translation>
+        <translation>En attente de la carte SD (partition de réglages)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="130"/>
         <source>Mounting settings partition</source>
-        <translation>Montage de la partition de configuration</translation>
+        <translation>Montage de la partition de réglages</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="187"/>
@@ -487,7 +487,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="76"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS ne peut être installé. La taille de la partition de récupération semble trop importante.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="135"/>
