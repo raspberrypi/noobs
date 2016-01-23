@@ -7,12 +7,12 @@
         <location filename="bootselectiondialog.ui" line="19"/>
         <location filename="bootselectiondialog.cpp" line="249"/>
         <source>Select OS to boot</source>
-        <translation>Sélectionnez l'OS à demarrer</translation>
+        <translation>S&eacute;lectionnez l&apos;OS &agrave; d&eacute;marrer</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
         <source>Cannot display boot menu</source>
-        <translation>Impossible d'afficher le menu de démarrage</translation>
+        <translation>Impossible d&apos;afficher le menu de d&eacute;marrage</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
@@ -37,7 +37,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="254"/>
         <source>Previously selected OS will boot in %1 seconds</source>
-        <translation>L'OS sélectionné bootera dans % secondes</translation>
+        <translation>L&apos;OS s&eacute;lectionn&eacute; bootera dans % secondes</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="131"/>
         <source>Error unmounting system partition.</source>
-        <translation>Erreur pendant le montage de la partition système.</translation>
+        <translation>Erreur pendant le montage de la partition syst&egrave;me.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="148"/>
@@ -89,29 +89,29 @@
     <message>
         <location filename="initdrivethread.cpp" line="151"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>Erreur pendant l&apos;initialisation MBR/GPT. La carte SD est peut-être endommagée ou annonce une mauvaise capacité.</translation>
+        <translation>Erreur pendant l&apos;initialisation MBR/GPT. La carte SD est peut-être endommag&eacute;e ou annonce une mauvaise capacit&eacute;.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="142"/>
         <source>Would you like NOOBS to create one for you?
 WARNING: This will erase all data on your SD card</source>
-        <translation>Voulez-vous que NOOBS en crée un pour vous ?
-        ATTENTION: Cela effacera toutes les données de votre carte SD</translation>
+        <translation>Voulez-vous que NOOBS en cr&eacute;e un pour vous ?
+        ATTENTION: Cela effacera toutes les donn&eacute;es de votre carte SD</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="143"/>
         <source>Error: No MBR present on SD Card</source>
-        <translation>Aucun MBR présent sur la carte SD</translation>
+        <translation>Aucun MBR pr&eacute;sent sur la carte SD</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="156"/>
         <source>Writing new MBR</source>
-        <translation>Écriture du nouveau MBR</translation>
+        <translation>&eacute;criture du nouveau MBR</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="164"/>
         <source>Error creating MBR</source>
-        <translation>Erreur pendant la création du MBR</translation>
+        <translation>Erreur pendant la cr&eacute;ation du MBR</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="172"/>
@@ -121,7 +121,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="177"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>La carte SD n'a pas été formatée correctement. Merci de la reformater en utilisant l'outil de formatage.</translation>
+        <translation>La carte SD n&apos;a pas &eacute;t&eacute; format&eacute;e correctement. Merci de la reformater en utilisant l&apos;outil de formatage.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="183"/>
@@ -141,17 +141,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="227"/>
         <source>Creating extended partition</source>
-        <translation>Création de la partition étendue</translation>
+        <translation>Cr&eacute;ation de la partition &eacute;tendue</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="258"/>
         <source>Error creating extended partition</source>
-        <translation>Erreur durant la création de la partition étendue</translation>
+        <translation>Erreur durant la cr&eacute;ation de la partition &eacute;tendue</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="55"/>
         <source>Error mounting system partition.</source>
-        <translation>Erreur pendant le montage de la partition système.</translation>
+        <translation>Erreur pendant le montage de la partition syst&egrave;me.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="60"/>
@@ -161,7 +161,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="70"/>
         <source>Error opening %1</source>
-        <translation>Erreur pendant l'ouverture de %1</translation>
+        <translation>Erreur pendant l&apos;ouverture de %1</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="83"/>
@@ -171,27 +171,27 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="86"/>
         <source>Error writing RiscOS blob</source>
-        <translation>Erreur durant l'écriture du blob de RiscOS</translation>
+        <translation>Erreur durant l&apos;&eacute;criture du blob de RiscOS</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="93"/>
         <source>Unmounting boot partition</source>
-        <translation>Démontage de la partition de démarrage</translation>
+        <translation>D&eacute;montage de la partition de d&eacute;marrage</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="96"/>
         <source>Finish writing to disk (sync)</source>
-        <translation>Écriture sur la carte SD en cours de finalisation (sync)</translation>
+        <translation>&eacute;criture sur la carte SD en cours de finalisation (sync)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="106"/>
         <source>Mounting boot partition again</source>
-        <translation>Remontage de la partition de démarrage</translation>
+        <translation>Remontage de la partition de d&eacute;marrage</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="117"/>
         <source>SD card broken (writes do not persist)</source>
-        <translation>Carte SD défaillante (écriture non persistante)</translation>
+        <translation>Carte SD d&eacute;faillante (&eacute;criture non persistante)</translation>
     </message>
 </context>
 <context>
@@ -232,7 +232,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="126"/>
         <source>Installs the selected operating system image onto this SD card.</source>
-        <translation>Installer l'OS selectionné sur cette carte SD.</translation>
+        <translation>Installer l&apos;OS selectionn&eacute; sur cette carte SD.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="129"/>
@@ -247,12 +247,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="141"/>
         <source>Exits and boots the installed operating system.</source>
-        <translation>Quitter et demarrer l'OS installé.</translation>
+        <translation>Quitter et demarrer l&apos;OS install&eacute;.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="156"/>
         <source>Advanced</source>
-        <translation>Avancé</translation>
+        <translation>Avanc&eacute;</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="168"/>
@@ -262,7 +262,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="171"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
-        <translation>Ouvre les fichiers config.txt et cmdline.txt de l'OS installé dans un éditeur de texte.</translation>
+        <translation>Ouvre les fichiers config.txt et cmdline.txt de l&apos;OS install&eacute; dans un &eacute;diteur de texte.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="183"/>
@@ -277,12 +277,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="198"/>
         <source>Wifi networks (w)</source>
-        <translation>Réseaux Wifi (w)</translation>
+        <translation>R&eacute;seaux Wifi (w)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="201"/>
         <source>Select a wifi network to connect to</source>
-        <translation>Sélectionnez le réseau wifi auquel se connecter</translation>
+        <translation>S&eacute;lectionnez le r&eacute;seau wifi auquel se connecter</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
@@ -297,13 +297,13 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="97"/>
         <source>Setting up SD card</source>
-        <translation>Paramétrer la carte SD</translation>
+        <translation>Param&eacute;trer la carte SD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="275"/>
         <location filename="mainwindow.cpp" line="1195"/>
         <source>RECOMMENDED</source>
-        <translation>RECOMMANDÉ</translation>
+        <translation>RECOMMAND&eacute;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="545"/>
@@ -324,18 +324,18 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
         <source>Reformat failed</source>
-        <translation>Le reformatage a échoué</translation>
+        <translation>Le reformatage a &eacute;chou&eacute;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
         <source>SD card might be damaged</source>
-        <translation>La carte SD est potentiellement endommagée</translation>
+        <translation>La carte SD est potentiellement endommag&eacute;e</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="546"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
-        <translation>Êtes-vous sûr de vouloir écrire l&apos;image? Ceca effacera toutes vos données existantes, OS(s) déjà installés inclus.</translation>
+        <translation>Êtes-vous sûr de vouloir &eacute;crire l&apos;image? Ceca effacera toutes vos donn&eacute;es existantes, OS(s) d&eacute;j&agrave; install&eacute;s inclus.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="639"/>
@@ -346,17 +346,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="278"/>
         <source>INSTALLED</source>
-        <translation>INSTALLÉ</translation>
+        <translation>INSTALL&eacute;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="756"/>
         <source>Display Mode Changed</source>
-        <translation>Mode d'affichage modifié</translation>
+        <translation>Mode d&apos;affichage modifi&eacute;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="688"/>
         <source>HDMI preferred mode</source>
-        <translation>Mode HDMI preferré</translation>
+        <translation>Mode HDMI preferr&eacute;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
@@ -371,29 +371,29 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="187"/>
         <source>Please wait while NOOBS initialises</source>
-        <translation>Merci de patienter pendant l'initialisation de NOOBS</translation>
+        <translation>Merci de patienter pendant l&apos;initialisation de NOOBS</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="565"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation>Attention: OS incompatible détecté. Les OS(es) suivant ne sont pas supportés sur cette version du raspberry pi et peuvent potentiellement ne pas démarrer ou fonctionner incorrectement</translation>
+        <translation>Attention: OS incompatible d&eacute;tect&eacute;. Les OS(es) suivant ne sont pas support&eacute;s sur cette version du raspberry pi et peuvent potentiellement ne pas d&eacute;marrer ou fonctionner incorrectement</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="605"/>
         <source>The install process will begin shortly.</source>
-        <translation>La procédure d'installation va bientôt commencer.</translation>
+        <translation>La proc&eacute;dure d&apos;installation va bientôt commencer.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="627"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
-        <translation>OS(es) installé(s)</translation>
+        <translation>OS(es) install&eacute;(s)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="628"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
-        <translation>Installé avec succès</translation>
+        <translation>Install&eacute; avec succ&egrave;s</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="692"/>
@@ -414,7 +414,7 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="757"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
-        <translation>Mode d'affichage changé en %1
+        <translation>Mode d&apos;affichage chang&eacute; en %1
         Voudriez-vous faire ceci de façon permanente ?</translation>
     </message>
     <message>
@@ -422,17 +422,17 @@ Would you like to make this setting permanent?</source>
         <location filename="mainwindow.cpp" line="1419"/>
         <location filename="mainwindow.cpp" line="1429"/>
         <source>Download error</source>
-        <translation>Erreur durant le téléchargement</translation>
+        <translation>Erreur durant le t&eacute;l&eacute;chargement</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1080"/>
         <source>Error downloading distribution list from Internet</source>
-        <translation>Erreur pendant le téléchargement internet de la liste des distributions</translation>
+        <translation>Erreur pendant le t&eacute;l&eacute;chargement internet de la liste des distributions</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1094"/>
         <source>Error parsing list.json downloaded from server</source>
-        <translation>Erreur durant l'analyse du fichier list.json téléchargé</translation>
+        <translation>Erreur durant l&apos;analyse du fichier list.json t&eacute;l&eacute;charg&eacute;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1310"/>
@@ -452,29 +452,29 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1429"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation>Erreur lors de l'écriture des fichiers téléchargés. La carte SD ou le système de fichiers sont peut-être endommagés.</translation>
+        <translation>Erreur lors de l&apos;&eacute;criture des fichiers t&eacute;l&eacute;charg&eacute;s. La carte SD ou le syst&egrave;me de fichiers sont peut-être endommag&eacute;s.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1545"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
-        <translation>Connexion réseau requise pour utiliser NOOBS sans images locales. Merci de sélectionner votre réseau wifi dans le prochain écran.</translation>
+        <translation>Connexion r&eacute;seau requise pour utiliser NOOBS sans images locales. Merci de s&eacute;lectionner votre r&eacute;seau wifi dans le prochain &eacute;cran.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1553"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
-        <translation>Connexion filaire requise pour utiliser NOOBS sans images locales. Merci d'insérer un cable réseau dans le port réseau.</translation>
+        <translation>Connexion filaire requise pour utiliser NOOBS sans images locales. Merci d&apos;ins&eacute;rer un cable r&eacute;seau dans le port r&eacute;seau.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="876"/>
         <location filename="mainwindow.cpp" line="1544"/>
         <location filename="mainwindow.cpp" line="1552"/>
         <source>No network access</source>
-        <translation>Pas d'accés réseau</translation>
+        <translation>Pas d&apos;acc&eacute;s r&eacute;seau</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="877"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
-        <translation>Connexion filaire requise pour cette fonctionnalitée. Merci d'insérer un cable réseau dans le port réseau.</translation>
+        <translation>Connexion filaire requise pour cette fonctionnalit&eacute;e. Merci d&apos;ins&eacute;rer un cable r&eacute;seau dans le port r&eacute;seau.</translation>
     </message>
 </context>
 <context>
@@ -492,62 +492,62 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="135"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
-        <translation>Pas assez d'espace disque. %1 MB requis, %2 MB disponibles</translation>
+        <translation>Pas assez d&apos;espace disque. %1 MB requis, %2 MB disponibles</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="255"/>
         <source>Finish writing (sync)</source>
-        <translation>Écriture terminée (sync)</translation>
+        <translation>&eacute;criture termin&eacute;e (sync)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="384"/>
         <source>File &apos;%1&apos; does not exist</source>
-        <translation>Le fichier &apos;%1&apos; n'existe pas</translation>
+        <translation>Le fichier &apos;%1&apos; n&apos;existe pas</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="407"/>
         <location filename="multiimagewritethread.cpp" line="413"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
-        <translation>%1: Ecriture de l'image de l'OS</translation>
+        <translation>%1: Ecriture de l&apos;image de l&apos;OS</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="427"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
-        <translation>%1: Montage du système de fichiers</translation>
+        <translation>%1: Montage du syst&egrave;me de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="435"/>
         <location filename="multiimagewritethread.cpp" line="459"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
-        <translation>%1: Erreur pendant le montage du système de fichiers</translation>
+        <translation>%1: Erreur pendant le montage du syst&egrave;me de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="420"/>
         <source>%1: Creating filesystem (%2)</source>
-        <translation>%1: Création du système de fichiers (%2)</translation>
+        <translation>%1: Cr&eacute;ation du syst&egrave;me de fichiers (%2)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="65"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
-        <translation>RISCOS ne peut être installé. Les valeurs offset de RISCOS ne correspondent pas.</translation>
+        <translation>RISCOS ne peut être install&eacute;. Les valeurs offset de RISCOS ne correspondent pas.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="71"/>
         <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
-        <translation>RISCOS ne peut être installé. Les valeurs offset de RISCOS sont manquantes.</translation>
+        <translation>RISCOS ne peut être install&eacute;. Les valeurs offset de RISCOS sont manquantes.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="103"/>
         <source>More than one operating system requires partition number %1</source>
-        <translation>Plus d'un OS demandent la partition %1</translation>
+        <translation>Plus d&apos;un OS demandent la partition %1</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="108"/>
         <source>Operating system cannot require a system partition (1,2,5)</source>
-        <translation>L'OS ne peut demander une partition système (1,2,5)</translation>
+        <translation>L&apos;OS ne peut demander une partition syst&egrave;me (1,2,5)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="175"/>
@@ -567,23 +567,23 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="275"/>
         <source>Error reading existing partition table</source>
-        <translation>Erreur pendant la lécture de la table de partition existante</translation>
+        <translation>Erreur pendant la l&eacute;cture de la table de partition existante</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="352"/>
         <source>Error creating partition table</source>
-        <translation>Erreur pendant la création de la table de partition</translation>
+        <translation>Erreur pendant la cr&eacute;ation de la table de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="440"/>
         <source>%1: Downloading and extracting filesystem</source>
-        <translation>%1: Téléchargement et extraction du système de fichier</translation>
+        <translation>%1: T&eacute;l&eacute;chargement et extraction du syst&egrave;me de fichier</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="442"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
-        <translation>%1: Extraction du système de fichiers</translation>
+        <translation>%1: Extraction du syst&egrave;me de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="456"/>
@@ -595,25 +595,25 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="463"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
-        <translation>%1: Création de os_config.json</translation>
+        <translation>%1: Cr&eacute;ation de os_config.json</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="488"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
-        <translation>%1: Sauvegarde du mode d'affichage dans config.txt</translation>
+        <translation>%1: Sauvegarde du mode d&apos;affichage dans config.txt</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="499"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
-        <translation>%1: Lancement du script d'installation de partition</translation>
+        <translation>%1: Lancement du script d&apos;installation de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="544"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
-        <translation>%1: Erreur d'exécution du script d'installation de partition</translation>
+        <translation>%1: Erreur d&apos;ex&eacute;cution du script d&apos;installation de partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="552"/>
@@ -624,18 +624,18 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="556"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
-        <translation>%1: Démontage de la partition FAT</translation>
+        <translation>%1: D&eacute;montage de la partition FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="559"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
-        <translation>%1: Erreur pendant le démontage</translation>
+        <translation>%1: Erreur pendant le d&eacute;montage</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="626"/>
         <source>Error creating file system</source>
-        <translation>Erreur pendant la création du système de fichiers</translation>
+        <translation>Erreur pendant la cr&eacute;ation du syst&egrave;me de fichiers</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="668"/>
@@ -647,13 +647,13 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="692"/>
         <source>Error downloading or extracting tarball</source>
-        <translation>Erreur durant le téléchargement ou l'extraction du tarball</translation>
+        <translation>Erreur durant le t&eacute;l&eacute;chargement ou l&apos;extraction du tarball</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="751"/>
         <location filename="multiimagewritethread.cpp" line="810"/>
         <source>Error downloading or writing OS to SD card</source>
-        <translation>Erreur durant le téléchargement ou l'écriture de l'OS sur la carte SD</translation>
+        <translation>Erreur durant le t&eacute;l&eacute;chargement ou l&apos;&eacute;criture de l&apos;OS sur la carte SD</translation>
     </message>
 </context>
 <context>
@@ -661,12 +661,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="progressslideshowdialog.cpp" line="138"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
-        <translation>%1 MB sur %2 MB écrit (%3 MB/sec)</translation>
+        <translation>%1 MB sur %2 MB &eacute;crit (%3 MB/sec)</translation>
     </message>
     <message>
         <location filename="progressslideshowdialog.cpp" line="143"/>
         <source>%1 MB written (%2 MB/sec)</source>
-        <translation>%1 MB écrit (%2 MB/sec) </translation>
+        <translation>%1 MB &eacute;crit (%2 MB/sec) </translation>
     </message>
 </context>
 <context>
@@ -722,17 +722,17 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
         <source>Authenticated but still waiting for DHCP lease</source>
-        <translation>Authentifié mais toujours en attente du bail DHCP</translation>
+        <translation>Authentifi&eacute; mais toujours en attente du bail DHCP</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to wifi failed</source>
-        <translation>La connexion Wifi a échoué</translation>
+        <translation>La connexion Wifi a &eacute;chou&eacute;</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to the wifi access point failed. Check your password</source>
-        <translation>La connexion au réseau wifi a échoué. Vérifiez votre mot de passe.</translation>
+        <translation>La connexion au r&eacute;seau wifi a &eacute;chou&eacute;. V&eacute;rifiez votre mot de passe.</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="269"/>
@@ -747,7 +747,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="290"/>
         <source>Disconnecting</source>
-        <translation>Déconnexion</translation>
+        <translation>D&eacute;connexion</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="295"/>
@@ -757,17 +757,17 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.ui" line="22"/>
         <source>Wifi network selection</source>
-        <translation>Selection du réseau Wifi</translation>
+        <translation>Selection du r&eacute;seau Wifi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="28"/>
         <source>Wifi network</source>
-        <translation>Réseau Wifi</translation>
+        <translation>R&eacute;seau Wifi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="55"/>
         <source>Authentication method</source>
-        <translation>Méthode d'authentification</translation>
+        <translation>M&eacute;thode d&apos;authentification</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="64"/>
