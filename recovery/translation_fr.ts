@@ -37,7 +37,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="254"/>
         <source>Previously selected OS will boot in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>L'OS sélectionné bootera dans % secondes</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="confeditdialog.ui" line="22"/>
         <source>Config editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editeur de config</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="82"/>
@@ -95,7 +95,8 @@
         <location filename="initdrivethread.cpp" line="142"/>
         <source>Would you like NOOBS to create one for you?
 WARNING: This will erase all data on your SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous que NOOBS en crée un pour vous ?
+        ATTENTION: Cela effacera toutes les données de votre carte SD</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="143"/>
@@ -360,12 +361,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation type="unfinished"></translation>
+        <translation>En attente de la carte SD (partition de configuration)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="130"/>
         <source>Mounting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Montage de la partition de configuration</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="187"/>
