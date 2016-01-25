@@ -22,7 +22,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="190"/>
         <source>HDMI safe mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode HDMI sans &eacute;chec</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="194"/>
@@ -84,12 +84,12 @@
     <message>
         <location filename="initdrivethread.cpp" line="148"/>
         <source>Zeroing partition table</source>
-        <translation>Initialisation de la table de partitions</translation>
+        <translation>R&eacute;initialisation de la table de partitions</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="151"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>Erreur pendant l&apos;initialisation MBR/GPT. La carte SD est peut-être endommag&eacute;e ou annonce une mauvaise capacit&eacute;.</translation>
+        <translation>Erreur pendant la r&eacute;initialisation MBR/GPT. La carte SD est peut-&ecirc;tre endommag&eacute;e ou annonce une mauvaise capacit&eacute;.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="142"/>
@@ -319,7 +319,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="142"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
-        <translation>La partition de r&eacute;glages persistante semble être corrompue. Reformater?</translation>
+        <translation>La partition de r&eacute;glages persistante semble &ecirc;tre corrompue. Reformater?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
@@ -398,7 +398,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="692"/>
         <source>HDMI safe mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode HDMI sans &eacute;chec</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="696"/>
@@ -452,7 +452,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1429"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation>Erreur lors de l&apos;&eacute;criture des fichiers t&eacute;l&eacute;charg&eacute;s. La carte SD ou le syst&egrave;me de fichiers sont peut-être endommag&eacute;s.</translation>
+        <translation>Erreur lors de l&apos;&eacute;criture des fichiers t&eacute;l&eacute;charg&eacute;s. La carte SD ou le syst&egrave;me de fichiers sont peut-&ecirc;tre endommag&eacute;s.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1545"/>
@@ -487,7 +487,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="76"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
-        <translation>RISCOS ne peut être install&eacute;. La taille de la partition de r&eacute;cup&eacute;ration semble trop importante.</translation>
+        <translation>RISCOS ne peut &ecirc;tre install&eacute;. La taille de la partition de r&eacute;cup&eacute;ration semble trop importante.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="135"/>
@@ -532,12 +532,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="65"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
-        <translation>RISCOS ne peut être install&eacute;. Les valeurs offset de RISCOS ne correspondent pas.</translation>
+        <translation>RISCOS ne peut &ecirc;tre install&eacute;. Les valeurs offset de RISCOS ne correspondent pas.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="71"/>
         <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
-        <translation>RISCOS ne peut être install&eacute;. Les valeurs offset de RISCOS sont manquantes.</translation>
+        <translation>RISCOS ne peut &ecirc;tre install&eacute;. Les valeurs offset de RISCOS sont manquantes.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="103"/>
@@ -552,7 +552,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="175"/>
         <source>Fixed partition offset too low</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset de la partition corrig&eacute;. (Trop faible)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="236"/>
@@ -562,7 +562,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="241"/>
         <source>Zero&apos;ing start of each partition</source>
-        <translation type="unfinished"></translation>
+        <translation>R&eacute;initialisation du d&eacute;but de chaque partition</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="275"/>
@@ -742,7 +742,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="275"/>
         <source>Releasing old DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>Largage des anciens baux DHCP</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="290"/>
