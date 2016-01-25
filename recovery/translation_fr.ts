@@ -17,7 +17,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
         <source>Error mounting settings partition</source>
-        <translation>Erreur pendant le montage de la partition de réglages</translation>
+        <translation>Erreur pendant le montage de la partition de r&eacute;glages</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="190"/>
@@ -69,12 +69,12 @@
     <message>
         <location filename="initdrivethread.cpp" line="45"/>
         <source>Formatting settings partition</source>
-        <translation>Formatage de la partition de réglages</translation>
+        <translation>Formatage de la partition de r&eacute;glages</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="48"/>
         <source>Error formatting settings partition</source>
-        <translation>Erreur pendant le formatage de la partition de réglages</translation>
+        <translation>Erreur pendant le formatage de la partition de r&eacute;glages</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="131"/>
@@ -116,7 +116,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="172"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>La carte SD a été formatée pour accueillir l'installation de NOOBS. Merci de recopier les fichiers de NOOBS sur la carte SD et de redémarrer</translation>
+        <translation>La carte SD a &eacute;t&eacute; format&eacute;e pour accueillir l&apos;installation de NOOBS. Merci de recopier les fichiers de NOOBS sur la carte SD et de red&eacute;marrer</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="177"/>
@@ -267,12 +267,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="183"/>
         <source>Online help (h)</source>
-        <translation>Aide en ligne</translation>
+        <translation>Aide en ligne (h)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="186"/>
         <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
-        <translation>Ouvre un navigateur internet et affiche le forum Raspberry Pi.</translation>
+        <translation>Ouvre un navigateur internet affichant le forum Raspberry Pi.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="198"/>
@@ -297,7 +297,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="97"/>
         <source>Setting up SD card</source>
-        <translation>Param&eacute;trage la carte SD</translation>
+        <translation>Param&eacute;trage de la carte SD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="275"/>
@@ -314,12 +314,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="141"/>
         <source>Error mounting settings partition</source>
-        <translation>Erreur pendant le montage de la partition de réglages</translation>
+        <translation>Erreur pendant le montage de la partition de r&eacute;glages</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="142"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
-        <translation>La partition de réglages persistante semble être corrompue. Reformater?</translation>
+        <translation>La partition de r&eacute;glages persistante semble être corrompue. Reformater?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
@@ -335,7 +335,7 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="546"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
-        <translation>Êtes-vous sûr de vouloir &eacute;crire l&apos;image? Ceca effacera toutes vos donn&eacute;es existantes, OS(s) d&eacute;j&agrave; install&eacute;s inclus.</translation>
+        <translation>Attention: Cela installera le(s) syst&egrave;me(s) d&apos;exploitation selectionn&eacute;(s). Toutes vos donn&eacute;es existantes, OS(s) d&eacute;j&agrave; install&eacute;s inclus seront effac&eacute;s.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="639"/>
@@ -361,12 +361,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation>En attente de la carte SD (partition de réglages)</translation>
+        <translation>En attente de la carte SD (partition de r&eacute;glages)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="130"/>
         <source>Mounting settings partition</source>
-        <translation>Montage de la partition de réglages</translation>
+        <translation>Montage de la partition de r&eacute;glages</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="187"/>
@@ -447,7 +447,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1419"/>
         <source>Error downloading meta file</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur pendant le t&eacute;l&eacute;chargement des meta fichiers</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1429"/>
@@ -487,7 +487,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="76"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
-        <translation>RISCOS ne peut être installé. La taille de la partition de récupération semble trop importante.</translation>
+        <translation>RISCOS ne peut être install&eacute;. La taille de la partition de r&eacute;cup&eacute;ration semble trop importante.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="135"/>
