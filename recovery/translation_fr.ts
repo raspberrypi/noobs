@@ -37,7 +37,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="254"/>
         <source>Previously selected OS will boot in %1 seconds</source>
-        <translation>L&apos;OS s&eacute;lectionn&eacute; bootera dans % secondes</translation>
+        <translation>L&apos;OS s&eacute;lectionn&eacute; bootera dans %1 secondes</translation>
     </message>
 </context>
 <context>
@@ -242,7 +242,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="138"/>
         <source>Exit (Esc)</source>
-        <translation>Sortie (Esc)</translation>
+        <translation>Quitter (Esc)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="141"/>
@@ -381,7 +381,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="605"/>
         <source>The install process will begin shortly.</source>
-        <translation>La proc&eacute;dure d&apos;installation va bientôt commencer.</translation>
+        <translation>La proc&eacute;dure d&apos;installation va bient&ocirc;t commencer.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="627"/>
@@ -666,7 +666,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="progressslideshowdialog.cpp" line="143"/>
         <source>%1 MB written (%2 MB/sec)</source>
-        <translation>%1 MB &eacute;crit (%2 MB/sec) </translation>
+        <translation>%1 MB &eacute;crit (%2 MB/sec)</translation>
     </message>
 </context>
 <context>
