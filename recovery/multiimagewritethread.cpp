@@ -103,11 +103,17 @@ void MultiImageWriteThread::run()
                     emit error(tr("More than one operating system requires partition number %1").arg(reqPart));
                     return;
                 }
-                if (reqPart == 1 || reqPart == 2 || reqPart == 5)
+                if (reqPart == 1 || reqPart == 5)
                 {
-                    emit error(tr("Operating system cannot require a system partition (1,2,5)"));
+                    emit error(tr("Operating system cannot require a system partition (1,5)"));
                     return;
                 }
+                if ((reqPart == 2 && partitionMap.contains(4)) || (reqPart == 4 && partitionMap.contains(2)))
+                {
+                    emit error(tr("Operating system cannot claim both primary partitions 2 and 4"));
+                    return;
+                }
+
                 partition->setPartitionDevice("/dev/mmcblk0p"+QByteArray::number(reqPart));
                 partitionMap.insert(reqPart, partition);
             }
@@ -157,8 +163,10 @@ void MultiImageWriteThread::run()
     }
 
     /* Set partition starting sectors and sizes.
-     * First allocate space to all logical partitions, then to primary partition 3 and 4 */
+     * First allocate space to all logical partitions, then to primary partitions */
     QList<PartitionInfo *> log_before_prim = partitionMap.values();
+    if (!log_before_prim.isEmpty() && log_before_prim.first()->requiresPartitionNumber() == 2)
+        log_before_prim.push_back(log_before_prim.takeFirst());
     if (!log_before_prim.isEmpty() && log_before_prim.first()->requiresPartitionNumber() == 3)
         log_before_prim.push_back(log_before_prim.takeFirst());
     if (!log_before_prim.isEmpty() && log_before_prim.first()->requiresPartitionNumber() == 4)
@@ -257,7 +265,7 @@ void MultiImageWriteThread::run()
     emit completed();
 }
 
-bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *> &partitionMap)
+bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *> &pmap)
 {
     /* Write partition table using sfdisk */
 
@@ -265,48 +273,41 @@ bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *>
     int startP1 = getFileContents("/sys/class/block/mmcblk0p1/start").trimmed().toInt();
     int sizeP1  = getFileContents("/sys/class/block/mmcblk0p1/size").trimmed().toInt();
     /* Fixed start of extended partition. End is not fixed, as it depends on primary partition 3 & 4 */
-    int startP2 = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toInt();
+    int startExtended = startP1+sizeP1;
     /* Fixed settings partition */
     int startP5 = getFileContents("/sys/class/block/mmcblk0p5/start").trimmed().toInt();
     int sizeP5  = getFileContents("/sys/class/block/mmcblk0p5/size").trimmed().toInt();
 
-    if (!startP1 || !sizeP1 || !startP2 || !startP5 || !sizeP5)
+    if (!startP1 || !sizeP1 || !startP5 || !sizeP5)
     {
         emit error(tr("Error reading existing partition table"));
         return false;
     }
 
-    QByteArray partitionTable;
-    partitionTable  = QByteArray::number(startP1)+","+QByteArray::number(sizeP1)+",0E\n"; /* FAT partition */
+    /* Clone partition map, and add our system partitions to it */
+    QMap<int, PartitionInfo *> partitionMap(pmap);
 
-    /* Extended partition may not overlap P3 or P4 */
-    int startP3P4 = 0;
-    if (partitionMap.contains(3))
-        startP3P4 = partitionMap.value(3)->offset();
-    else if (partitionMap.contains(4))
-        startP3P4 = partitionMap.value(4)->offset();
+    partitionMap.insert(1, new PartitionInfo(1, startP1, sizeP1, "0E", this)); /* FAT boot partition */
+    partitionMap.insert(5, new PartitionInfo(5, startP5, sizeP5, "L", this)); /* Ext4 settings partition */
 
-    if (startP3P4)
+    int sizeExtended = partitionMap.values().last()->endSector() - startExtended;
+    if (!partitionMap.contains(2))
     {
-        int sizeP2 = startP3P4 - startP2;
-        partitionTable += QByteArray::number(startP2)+","+QByteArray::number(sizeP2)+",X\n";
+        partitionMap.insert(2, new PartitionInfo(2, startExtended, sizeExtended, "E", this));
     }
     else
     {
-        /* No P3 nor P4. Extended can have all remaining space */
-        partitionTable += QByteArray::number(startP2)+",,X\n";
+        /* If an OS already claimed primary partition 2, use out-of-order partitions, and store extended at partition 4 */
+        partitionMap.insert(4, new PartitionInfo(4, startExtended, sizeExtended, "E", this));
     }
 
     /* Add partitions */
     qDebug() << "partition map:" << partitionMap;
-    for (int i=3; i <= qMax(5, partitionMap.keys().last()); i++)
+
+    QByteArray partitionTable;
+    for (int i=1; i <= partitionMap.keys().last(); i++)
     {
-        if (i == 5)
-        {
-            /* Settings partition */
-            partitionTable += QByteArray::number(startP5)+","+QByteArray::number(sizeP5)+",L\n";
-        }
-        else if (partitionMap.contains(i))
+        if (partitionMap.contains(i))
         {
             PartitionInfo *p = partitionMap.value(i);
 
@@ -546,13 +547,6 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
         }
     }
 
-    PartitionInfo *p = partitions->first();
-    if (!p->bcdFile().isEmpty())
-    {
-        emit statusUpdate(tr("%1: Patching BCD file").arg(os_name));
-        patchBcdFile("/mnt2/"+p->bcdFile(), p->bcdDiskId(), p->bcdEfiSector(), p->bcdMainSector() );
-    }
-
     emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
     if (QProcess::execute("umount /mnt2") != 0)
     {
@@ -639,7 +633,7 @@ bool MultiImageWriteThread::untar(const QString &tarball)
 {
     QString cmd = "sh -o pipefail -c \"";
 
-    if (tarball.startsWith("http:"))
+    if (isURL(tarball))
         cmd += "wget --no-verbose --tries=inf -O- "+tarball+" | ";
 
     if (tarball.endsWith(".gz"))
@@ -668,7 +662,7 @@ bool MultiImageWriteThread::untar(const QString &tarball)
         emit error(tr("Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip"));
         return false;
     }
-    if (!tarball.startsWith("http:"))
+    if (!isURL(tarball))
     {
         cmd += " "+tarball;
     }
@@ -701,7 +695,7 @@ bool MultiImageWriteThread::dd(const QString &imagePath, const QString &device)
 {
     QString cmd = "sh -o pipefail -c \"";
 
-    if (imagePath.startsWith("http:"))
+    if (isURL(imagePath))
         cmd += "wget --no-verbose --tries=inf -O- "+imagePath+" | ";
 
     if (imagePath.endsWith(".gz"))
@@ -731,7 +725,7 @@ bool MultiImageWriteThread::dd(const QString &imagePath, const QString &device)
         return false;
     }
 
-    if (!imagePath.startsWith("http:"))
+    if (!isURL(imagePath))
         cmd += " "+imagePath;
 
     cmd += " | dd of="+device+" conv=fsync obs=4M\"";
@@ -760,7 +754,7 @@ bool MultiImageWriteThread::partclone_restore(const QString &imagePath, const QS
 {
     QString cmd = "sh -o pipefail -c \"";
 
-    if (imagePath.startsWith("http:"))
+    if (isURL(imagePath))
         cmd += "wget --no-verbose --tries=inf -O- "+imagePath+" | ";
 
     if (imagePath.endsWith(".gz"))
@@ -790,7 +784,7 @@ bool MultiImageWriteThread::partclone_restore(const QString &imagePath, const QS
         return false;
     }
 
-    if (!imagePath.startsWith("http:"))
+    if (!isURL(imagePath))
         cmd += " "+imagePath;
 
     cmd += " | partclone.restore -q -s - -o "+device+" \"";
@@ -898,49 +892,7 @@ QString MultiImageWriteThread::getDescription(const QString &folder, const QStri
     return "";
 }
 
-quint32 MultiImageWriteThread::getDiskId(const QString &device)
+bool MultiImageWriteThread::isURL(const QString &s)
 {
-    mbr_table mbr;
-
-    QFile f(device);
-    f.open(f.ReadOnly);
-    f.read((char *) &mbr, sizeof(mbr));
-    f.close();
-
-    return qFromLittleEndian<quint32>(mbr.diskid);
-}
-
-bool MultiImageWriteThread::patchBcdFile(const QByteArray bcdfile, unsigned int origDiskId, unsigned int origEfiSector, unsigned int origMainSector)
-{
-    QByteArray data;
-    QFile f(bcdfile);
-
-    quint64 origOffsetEfi  = origEfiSector * 512;
-    quint64 origOffsetMain = origMainSector * 512;
-    quint32 newDiskId = getDiskId();
-    quint64 newOffsetEfi  = getFileContents("/sys/class/block/mmcblk0p3/start").trimmed().toULongLong() * 512;
-    quint64 newOffsetMain = getFileContents("/sys/class/block/mmcblk0p4/start").trimmed().toULongLong() * 512;
-    QByteArray search32(4, '\0'), replace32(4, '\0'), search64(8, '\0'), replace64(8, '\0');
-
-    f.open(f.ReadWrite);
-    data = f.readAll();
-
-    /* Search and replace partition offsets and disk IDs in binary BCD file */
-    qToLittleEndian<quint32>(origDiskId, (uchar *) search32.data());
-    qToLittleEndian<quint32>(newDiskId, (uchar *) replace32.data());
-    data.replace(search32, replace32);
-
-    qToLittleEndian<quint64>(origOffsetEfi, (uchar *) search64.data());
-    qToLittleEndian<quint64>(newOffsetEfi, (uchar *) replace64.data());
-    data.replace(search64, replace64);
-
-    qToLittleEndian<quint64>(origOffsetMain, (uchar *) search64.data());
-    qToLittleEndian<quint64>(newOffsetMain, (uchar *) replace64.data());
-    data.replace(search64, replace64);
-
-    f.seek(0);
-    f.write(data);
-    f.close();
-
-    return true;
+    return s.startsWith("http:") || s.startsWith("https:");
 }

@@ -238,7 +238,7 @@ bool InitDriveThread::method_resizePartitions()
 
     // Primary partitions
     partitionTable  = QByteArray::number(startOfOurPartition)+","+QByteArray::number(sizeOfOurPartition)+",0E\n"; /* FAT partition */
-    partitionTable += QByteArray::number(startOfExtended)+",,X\n"; /* Extended partition with all remaining space */
+    partitionTable += QByteArray::number(startOfExtended)+",,E\n"; /* Extended partition with all remaining space */
     partitionTable += "0,0\n";
     partitionTable += "0,0\n";
     // Logical partitions

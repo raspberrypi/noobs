@@ -30,8 +30,7 @@ protected:
     void patchConfigTxt();
     QString getDescription(const QString &folder, const QString &flavour);
     bool writePartitionTable(const QMap<int, PartitionInfo *> &partitionMap);
-    quint32 getDiskId(const QString &device = "/dev/mmcblk0");
-    bool patchBcdFile(const QByteArray bcdfile, unsigned int origDiskId, unsigned int origEfiSector, unsigned int origMainSector);
+    bool isURL(const QString &s);
 
     /* key: folder, value: flavour */
     QList<OsInfo *> _images;

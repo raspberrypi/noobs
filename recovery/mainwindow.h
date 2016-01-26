@@ -71,6 +71,7 @@ protected:
     void downloadMetaFile(const QString &url, const QString &saveAs);
     void downloadIcon(const QString &urlstring, const QString &originalurl);
     void downloadList(const QString &urlstring);
+    void downloadLists();
     void startImageWrite();
 
 protected slots:

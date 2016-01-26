@@ -14,10 +14,6 @@ PartitionInfo::PartitionInfo(const QVariantMap &m, QObject *parent) :
     _requiresPartitionNumber = m.value("requires_partition_number").toInt();
     _uncompressedTarballSize = m.value("uncompressed_tarball_size").toInt();
     _active        = m.value("active", false).toBool();
-    _bcdFile       = m.value("bcd_file").toByteArray();
-    _bcdDiskId     = m.value("bcd_disk_id").toUInt();
-    _bcdEfiSector  = m.value("bcd_efi_sector").toUInt();
-    _bcdMainSector = m.value("bcd_main_sector").toUInt();
 
     QByteArray defaultPartType;
     if (_fstype.contains("fat"))
@@ -30,4 +26,9 @@ PartitionInfo::PartitionInfo(const QVariantMap &m, QObject *parent) :
         defaultPartType = "83"; /* Linux native */
 
     _partitionType = m.value("partition_type", defaultPartType).toByteArray();
+}
+
+PartitionInfo::PartitionInfo(int partitionNr, int offset, int sectors, const QByteArray &partType, QObject *parent) :
+    QObject(parent), _partitionType(partType), _requiresPartitionNumber(partitionNr), _offset(offset), _partitionSizeSectors(sectors), _active(false)
+{
 }

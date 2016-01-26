@@ -31,6 +31,7 @@
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkDiskCache>
 #include <QtNetwork/QNetworkInterface>
+#include <QtNetwork/QNetworkConfigurationManager>
 #include <QtDBus/QDBusConnection>
 #include <QHostInfo>
 
@@ -995,8 +996,10 @@ void MainWindow::onOnlineStateChanged(bool online)
             _cache->setCacheDirectory("/settings/cache");
             _cache->setMaximumCacheSize(8 * 1024 * 1024);
             _netaccess->setCache(_cache);
+            QNetworkConfigurationManager manager;
+            _netaccess->setConfiguration(manager.defaultConfiguration());
 
-            downloadList(DEFAULT_REPO_SERVER);
+            downloadLists();
         }
         ui->actionBrowser->setEnabled(true);
         emit networkUp();
@@ -1007,6 +1010,17 @@ void MainWindow::downloadList(const QString &urlstring)
 {
     QNetworkReply *reply = _netaccess->get(QNetworkRequest(QUrl(urlstring)));
     connect(reply, SIGNAL(finished()), this, SLOT(downloadListRedirectCheck()));
+}
+
+void MainWindow::downloadLists()
+{
+    _numIconsToDownload = 0;
+    QStringList urls = QString(DEFAULT_REPO_SERVER).split(' ', QString::SkipEmptyParts);
+
+    foreach (QString url, urls)
+    {
+        downloadList(url);
+    }
 }
 
 void MainWindow::rebuildInstalledList()
@@ -1137,10 +1151,9 @@ void MainWindow::processJson(QVariant json)
     }
 
     /* Download icons */
-    _numIconsToDownload = iconurls.count();
-
-    if (_numIconsToDownload)
+    if (!iconurls.isEmpty())
     {
+         _numIconsToDownload += iconurls.count();
         foreach (QString iconurl, iconurls)
         {
             downloadIcon(iconurl, iconurl);
@@ -1302,8 +1315,11 @@ void MainWindow::updateNeeded()
         if (nameMatchesRiscOS(entry.value("name").toString()))
         {
             /* RiscOS needs to start at a predetermined sector, calculate the extra space needed for that */
-            int startSector = getFileContents("/sys/class/block/mmcblk0p2/start").trimmed().toULongLong();
-            _neededMB += (RISCOS_SECTOR_OFFSET - startSector)/2048;
+            int startSector = getFileContents("/sys/class/block/mmcblk0p5/start").trimmed().toULongLong()+getFileContents("/sys/class/block/mmcblk0p5/size").trimmed().toULongLong();
+            if (RISCOS_SECTOR_OFFSET > startSector)
+            {
+                _neededMB += (RISCOS_SECTOR_OFFSET - startSector)/2048;
+            }
         }
     }
 
@@ -1362,7 +1378,6 @@ void MainWindow::downloadListRedirectCheck()
     if (httpstatuscode > 300 && httpstatuscode < 400)
     {
         qDebug() << "Redirection - Re-trying download from" << redirectionurl;
-        _numMetaFilesToDownload--;
         downloadList(redirectionurl);
     }
     else
@@ -1379,7 +1394,6 @@ void MainWindow::downloadIconRedirectCheck()
     if (httpstatuscode > 300 && httpstatuscode < 400)
     {
         qDebug() << "Redirection - Re-trying download from" << redirectionurl;
-        _numMetaFilesToDownload--;
         downloadIcon(redirectionurl, originalurl);
     }
     else
@@ -1568,7 +1582,7 @@ void MainWindow::on_actionWifi_triggered()
         if (wasAlreadyOnlineBefore)
         {
             /* Try to redownload list. Could have failed through previous access point */
-            downloadList(DEFAULT_REPO_SERVER);
+            downloadLists();
         }
     }
 }

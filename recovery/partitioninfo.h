@@ -17,6 +17,8 @@ public:
     /* Constructor. Gets called from OsInfo with info from json file */
     explicit PartitionInfo(const QVariantMap &m, QObject *parent = 0);
 
+    explicit PartitionInfo(int partitionNr, int offset, int sectors, const QByteArray &partType, QObject *parent = 0);
+
     inline void setPartitionDevice(const QByteArray &partdevice)
     {
         _partitionDevice = partdevice;
@@ -97,6 +99,11 @@ public:
         return _partitionSizeSectors;
     }
 
+    inline int endSector()
+    {
+        return _offset + _partitionSizeSectors;
+    }
+
     inline bool active()
     {
         return _active;
@@ -107,31 +114,10 @@ public:
         return _partitionType;
     }
 
-    inline QByteArray bcdFile()
-    {
-        return _bcdFile;
-    }
-
-    inline unsigned int bcdDiskId()
-    {
-        return _bcdDiskId;
-    }
-
-    inline unsigned int bcdEfiSector()
-    {
-        return _bcdEfiSector;
-    }
-
-    inline unsigned int bcdMainSector()
-    {
-        return _bcdMainSector;
-    }
-
 protected:
-    QByteArray _fstype, _mkfsOptions, _label, _partitionDevice, _partitionType, _bcdFile;
+    QByteArray _fstype, _mkfsOptions, _label, _partitionDevice, _partitionType;
     QString _tarball;
     int _partitionSizeNominal, _requiresPartitionNumber, _offset, _uncompressedTarballSize, _partitionSizeSectors;
-    unsigned int _bcdDiskId, _bcdEfiSector, _bcdMainSector;
     bool _emptyFS, _wantMaximised, _active;
 };
 
