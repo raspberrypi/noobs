@@ -820,10 +820,10 @@ void MultiImageWriteThread::patchConfigTxt()
         switch (videomode)
         {
         case 0: /* HDMI PREFERRED */
-            dispOptions = "hdmi_force_hotplug=1\r\nconfig_hdmi_boost=4\r\noverscan_left=24\r\noverscan_right=24\r\noverscan_top=16\r\noverscan_bottom=16\r\ndisable_overscan=0\r\n";
+            dispOptions = "hdmi_force_hotplug=1\r\n";
             break;
         case 1: /* HDMI VGA */
-            dispOptions = "hdmi_ignore_edid=0xa5000080\r\nhdmi_force_hotplug=1\r\nconfig_hdmi_boost=4\r\nhdmi_group=2\r\nhdmi_mode=4\r\n";
+            dispOptions = "hdmi_ignore_edid=0xa5000080\r\nhdmi_force_hotplug=1\r\nhdmi_group=2\r\nhdmi_mode=4\r\n";
             break;
         case 2: /* PAL */
             dispOptions = "hdmi_ignore_hotplug=1\r\nsdtv_mode=2\r\n";
