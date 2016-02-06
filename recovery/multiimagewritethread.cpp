@@ -484,91 +484,91 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
 
         emit statusUpdate(tr("%1: Creating os_config.json").arg(os_name));
 
-    QVariantMap qm;
-    qm.insert("flavour", image->flavour());
-    qm.insert("release_date", image->releaseDate());
-    qm.insert("imagefolder", image->folder());
-    qm.insert("description", description);
-    qm.insert("videomode", videomode);
-    qm.insert("partitions", vpartitions);
-    qm.insert("language", language);
-    qm.insert("keyboard", keyboard);
+        QVariantMap qm;
+        qm.insert("flavour", image->flavour());
+        qm.insert("release_date", image->releaseDate());
+        qm.insert("imagefolder", image->folder());
+        qm.insert("description", description);
+        qm.insert("videomode", videomode);
+        qm.insert("partitions", vpartitions);
+        qm.insert("language", language);
+        qm.insert("keyboard", keyboard);
 
-    Json::saveToFile("/mnt2/os_config.json", qm);
+        Json::saveToFile("/mnt2/os_config.json", qm);
 
-    emit statusUpdate(tr("%1: Saving display mode to config.txt").arg(os_name));
-    patchConfigTxt();
+        emit statusUpdate(tr("%1: Saving display mode to config.txt").arg(os_name));
+        patchConfigTxt();
 
-    /* Partition setup script can either reside in the image folder
-     * or inside the boot partition tarball */
-    QString postInstallScript = image->folder()+"/partition_setup.sh";
-    if (!QFile::exists(postInstallScript))
-        postInstallScript = "/mnt2/partition_setup.sh";
+        /* Partition setup script can either reside in the image folder
+         * or inside the boot partition tarball */
+        QString postInstallScript = image->folder()+"/partition_setup.sh";
+        if (!QFile::exists(postInstallScript))
+            postInstallScript = "/mnt2/partition_setup.sh";
 
-    if (QFile::exists(postInstallScript))
-    {
-        emit statusUpdate(tr("%1: Running partition setup script").arg(os_name));
-        QProcess proc;
-        QProcessEnvironment env;
-        QStringList args(postInstallScript);
-        env.insert("PATH", "/bin:/usr/bin:/sbin:/usr/sbin");
-
-        /* - Parameters to the partition-setup script are supplied both as
-         *   command line parameters and set as environement variables
-         * - Boot partition is mounted, working directory is set to its mnt folder
-         *
-         *  partition_setup.sh part1=/dev/mmcblk0p3 id1=LABEL=BOOT part2=/dev/mmcblk0p4
-         *  id2=UUID=550e8400-e29b-41d4-a716-446655440000
-         */
-        int pnr = 1;
-        foreach (PartitionInfo *p, *partitions)
+        if (QFile::exists(postInstallScript))
         {
-            QString part  = p->partitionDevice();
-            QString nr    = QString::number(pnr);
-            QString uuid  = getUUID(part);
-            QString label = getLabel(part);
-            QString id;
-            if (!label.isEmpty())
-                id = "LABEL="+label;
-            else
-                id = "UUID="+uuid;
+            emit statusUpdate(tr("%1: Running partition setup script").arg(os_name));
+            QProcess proc;
+            QProcessEnvironment env;
+            QStringList args(postInstallScript);
+            env.insert("PATH", "/bin:/usr/bin:/sbin:/usr/sbin");
 
-            qDebug() << "part" << part << uuid << label;
+            /* - Parameters to the partition-setup script are supplied both as
+             *   command line parameters and set as environement variables
+             * - Boot partition is mounted, working directory is set to its mnt folder
+             *
+             *  partition_setup.sh part1=/dev/mmcblk0p3 id1=LABEL=BOOT part2=/dev/mmcblk0p4
+             *  id2=UUID=550e8400-e29b-41d4-a716-446655440000
+             */
+            int pnr = 1;
+            foreach (PartitionInfo *p, *partitions)
+            {
+                QString part  = p->partitionDevice();
+                QString nr    = QString::number(pnr);
+                QString uuid  = getUUID(part);
+                QString label = getLabel(part);
+                QString id;
+                if (!label.isEmpty())
+                    id = "LABEL="+label;
+                else
+                    id = "UUID="+uuid;
 
-            args << "part"+nr+"="+part << "id"+nr+"="+id;
-            env.insert("part"+nr, part);
-            env.insert("id"+nr, id);
-            pnr++;
+                qDebug() << "part" << part << uuid << label;
+
+                args << "part"+nr+"="+part << "id"+nr+"="+id;
+                env.insert("part"+nr, part);
+                env.insert("id"+nr, id);
+                pnr++;
+            }
+
+            qDebug() << "Executing: sh" << args;
+            qDebug() << "Env:" << env.toStringList();
+            proc.setProcessChannelMode(proc.MergedChannels);
+            proc.setProcessEnvironment(env);
+            proc.setWorkingDirectory("/mnt2");
+            proc.start("/bin/sh", args);
+            proc.waitForFinished(-1);
+            qDebug() << proc.exitStatus();
+
+            if (proc.exitCode() != 0)
+            {
+                emit error(tr("%1: Error executing partition setup script").arg(os_name)+"\n"+proc.readAll());
+                return false;
+            }
         }
 
-        qDebug() << "Executing: sh" << args;
-        qDebug() << "Env:" << env.toStringList();
-        proc.setProcessChannelMode(proc.MergedChannels);
-        proc.setProcessEnvironment(env);
-        proc.setWorkingDirectory("/mnt2");
-        proc.start("/bin/sh", args);
-        proc.waitForFinished(-1);
-        qDebug() << proc.exitStatus();
-
-        if (proc.exitCode() != 0)
+        PartitionInfo *p = partitions->first();
+        if (!p->bcdFile().isEmpty())
         {
-            emit error(tr("%1: Error executing partition setup script").arg(os_name)+"\n"+proc.readAll());
-            return false;
+            emit statusUpdate(tr("%1: Patching BCD file").arg(os_name));
+            patchBcdFile("/mnt2/"+p->bcdFile(), p->bcdDiskId(), p->bcdEfiSector(), p->bcdMainSector() );
         }
-    }
 
-    PartitionInfo *p = partitions->first();
-    if (!p->bcdFile().isEmpty())
-    {
-        emit statusUpdate(tr("%1: Patching BCD file").arg(os_name));
-        patchBcdFile("/mnt2/"+p->bcdFile(), p->bcdDiskId(), p->bcdEfiSector(), p->bcdMainSector() );
-    }
-
-    emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
-    if (QProcess::execute("umount /mnt2") != 0)
-    {
-        emit error(tr("%1: Error unmounting").arg(os_name));
-    }
+        emit statusUpdate(tr("%1: Unmounting FAT partition").arg(os_name));
+        if (QProcess::execute("umount /mnt2") != 0)
+        {
+            emit error(tr("%1: Error unmounting").arg(os_name));
+        }
     }
 
     /* Save information about installed operating systems in installed_os.json */
