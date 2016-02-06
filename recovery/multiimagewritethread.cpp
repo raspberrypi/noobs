@@ -362,6 +362,11 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     qDebug() << "Processing OS:" << os_name;
 
     QList<PartitionInfo *> *partitions = image->partitions();
+    if (partitions->isEmpty())
+    {
+        emit error(tr("No partitions defined in partitions.json"));
+        return false;
+    }
 
     foreach (PartitionInfo *p, *partitions)
     {
@@ -453,15 +458,6 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
         _part++;
     }
 
-    emit statusUpdate(tr("%1: Mounting FAT partition").arg(os_name));
-    if (QProcess::execute("mount "+partitions->first()->partitionDevice()+" /mnt2") != 0)
-    {
-        emit error(tr("%1: Error mounting file system").arg(os_name));
-        return false;
-    }
-
-    emit statusUpdate(tr("%1: Creating os_config.json").arg(os_name));
-
     QString description = getDescription(image->folder(), image->flavour());
     QVariantList vpartitions;
     foreach (PartitionInfo *p, *partitions)
@@ -472,6 +468,21 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     int videomode = settings.value("display_mode", 0).toInt();
     QString language = settings.value("language", "en").toString();
     QString keyboard = settings.value("keyboard_layout", "gb").toString();
+
+    QByteArray fstypeFirstPartition = partitions->first()->fsType();
+    bool firstPartitionIsFat = (fstypeFirstPartition == "FAT" || fstypeFirstPartition == "fat");
+    bool firstPartitionIsBootable = image->bootable() && firstPartitionIsFat;
+
+    if (firstPartitionIsBootable)
+    {
+        emit statusUpdate(tr("%1: Mounting FAT partition").arg(os_name));
+        if (QProcess::execute("mount "+partitions->first()->partitionDevice()+" /mnt2") != 0)
+        {
+            emit error(tr("%1: Error mounting file system").arg(os_name));
+            return false;
+        }
+
+        emit statusUpdate(tr("%1: Creating os_config.json").arg(os_name));
 
     QVariantMap qm;
     qm.insert("flavour", image->flavour());
@@ -558,6 +569,7 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     {
         emit error(tr("%1: Error unmounting").arg(os_name));
     }
+    }
 
     /* Save information about installed operating systems in installed_os.json */
     QVariantMap ventry;
@@ -566,7 +578,7 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     ventry["folder"]      = image->folder();
     ventry["release_date"]= image->releaseDate();
     ventry["partitions"]  = vpartitions;
-    ventry["bootable"]    = image->bootable();
+    ventry["bootable"]    = firstPartitionIsBootable;
     QString iconfilename  = image->folder()+"/"+image->flavour()+".png";
     iconfilename.replace(" ", "_");
     if (QFile::exists(iconfilename))
