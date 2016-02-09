@@ -6,12 +6,12 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
         <source>Cannot display boot menu</source>
-        <translation>No se puede mostrar el menú de arranque</translation>
+        <translation>No se puede mostrar el men&uacute; de arranque</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="44"/>
         <source>Error mounting settings partition</source>
-        <translation>Error al montar la partición de opciones</translation>
+        <translation>Error al montar la partici&oacute;n de opciones</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="190"/>
@@ -31,7 +31,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="254"/>
         <source>Previously selected OS will boot in %1 seconds</source>
-        <translation>El OS previamente seleccionado arrancará en %1 segundos</translation>
+        <translation>El OS previamente seleccionado arrancar&aacute; en %1 segundos</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.ui" line="19"/>
@@ -45,7 +45,7 @@
     <message>
         <location filename="confeditdialog.ui" line="22"/>
         <source>Config editor</source>
-        <translation>Editor de configuración</translation>
+        <translation>Editor de configuraci&oacute;n</translation>
     </message>
     <message>
         <location filename="confeditdialog.cpp" line="82"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="confeditdialog.cpp" line="83"/>
         <source>Error mounting boot partition</source>
-        <translation>Error montando la partición de arranque</translation>
+        <translation>Error montando la partici&oacute;n de arranque</translation>
     </message>
 </context>
 <context>
@@ -64,22 +64,22 @@
         <location filename="initdrivethread.cpp" line="38"/>
         <location filename="initdrivethread.cpp" line="52"/>
         <source>Mounting FAT partition</source>
-        <translation>Montando partición FAT</translation>
+        <translation>Montando partici&oacute;n FAT</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="45"/>
         <source>Formatting settings partition</source>
-        <translation>Formateando la partición de opciones</translation>
+        <translation>Formateando la partici&oacute;n de opciones</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="48"/>
         <source>Error formatting settings partition</source>
-        <translation>Error al formatear la partición de opciones.</translation>
+        <translation>Error al formatear la partici&oacute;n de opciones.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="55"/>
         <source>Error mounting system partition.</source>
-        <translation>Error al montar la partición del sistema.</translation>
+        <translation>Error al montar la partici&oacute;n del sistema.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="60"/>
@@ -104,7 +104,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="93"/>
         <source>Unmounting boot partition</source>
-        <translation>Desmontando partición de arranque</translation>
+        <translation>Desmontando partici&oacute;n de arranque</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="156"/>
@@ -114,7 +114,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="197"/>
         <source>Resizing FAT partition</source>
-        <translation>Cambiando tamaño de la partición FAT</translation>
+        <translation>Cambiando tama&ntilde;o de la partici&oacute;n FAT</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="96"/>
@@ -124,7 +124,7 @@
     <message>
         <location filename="initdrivethread.cpp" line="106"/>
         <source>Mounting boot partition again</source>
-        <translation>Montando partición de arranque de nuevo</translation>
+        <translation>Montando partici&oacute;n de arranque de nuevo</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="117"/>
@@ -134,14 +134,14 @@
     <message>
         <location filename="initdrivethread.cpp" line="131"/>
         <source>Error unmounting system partition.</source>
-        <translation>Error al desmontar la partición del sistema.</translation>
+        <translation>Error al desmontar la partici&oacute;n del sistema.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="142"/>
         <source>Would you like NOOBS to create one for you?
 WARNING: This will erase all data on your SD card</source>
-        <translation>Te gustaría que NOOBS creara uno por ti?
-ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
+        <translation>Te gustar&iacute;a que NOOBS creara uno por ti?
+ADVERTENCIA: Esto borrar&aacute; todos los datos de tu tarjeta SD</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="143"/>
@@ -156,7 +156,7 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="151"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>Error al resetear MBR/GPT. La tarjeta SD podría estar rota o indicar una capacidad errónea.</translation>
+        <translation>Error al resetear MBR/GPT. La tarjeta SD podr&iacute;a estar rota o indicar una capacidad err&oacute;nea.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="164"/>
@@ -166,12 +166,12 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="172"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>La tarjeta SD ha sido formateadra y está lista para NOOBS. Por favor, copia de nuevo los archivos de NOOBS en la tarjeta y reinicia</translation>
+        <translation>La tarjeta SD ha sido formateadra y est&aacute; lista para NOOBS. Por favor, copia de nuevo los archivos de NOOBS en la tarjeta y reinicia</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="177"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>La tarjeta SD no ha sido formateada correctamente. Por favor, reformatéala usando la herramienta de formateo y prueba de nuevo.</translation>
+        <translation>La tarjeta SD no ha sido formateada correctamente. Por favor, reformat&eacute;ala usando la herramienta de formateo y prueba de nuevo.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="183"/>
@@ -181,17 +181,17 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="221"/>
         <source>Error resizing existing FAT partition</source>
-        <translation>Error al cambiar el tamaño de la partición FAT existente</translation>
+        <translation>Error al cambiar el tama&ntilde;o de la partici&oacute;n FAT existente</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="227"/>
         <source>Creating extended partition</source>
-        <translation>Creando partición extendida</translation>
+        <translation>Creando partici&oacute;n extendida</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="258"/>
         <source>Error creating extended partition</source>
-        <translation>Error al crear partición extendida</translation>
+        <translation>Error al crear partici&oacute;n extendida</translation>
     </message>
 </context>
 <context>
@@ -257,7 +257,7 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
     <message>
         <location filename="mainwindow.ui" line="168"/>
         <source>Edit config (e)</source>
-        <translation>Editar configuración (e)</translation>
+        <translation>Editar configuraci&oacute;n (e)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="171"/>
@@ -292,12 +292,12 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="141"/>
         <source>Error mounting settings partition</source>
-        <translation>Error al montar partición de configuración</translation>
+        <translation>Error al montar partici&oacute;n de configuraci&oacute;n</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="142"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
-        <translation>La partición de configuración parece estar corrupta. Formatear?</translation>
+        <translation>La partici&oacute;n de configuraci&oacute;n parece estar corrupta. Formatear?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
@@ -312,17 +312,17 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation>Esperando a la tarjeta SD (partición de configuración)</translation>
+        <translation>Esperando a la tarjeta SD (partici&oacute;n de configuraci&oacute;n)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="130"/>
         <source>Mounting settings partition</source>
-        <translation>Montando partición de configuración</translation>
+        <translation>Montando partici&oacute;n de configuraci&oacute;n</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
         <source>SD card might be damaged</source>
-        <translation>La tarjeta SD podría estar dañada</translation>
+        <translation>La tarjeta SD podr&iacute;a estar da&ntilde;ada</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="187"/>
@@ -349,17 +349,17 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="546"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
-        <translation>Advertencia: esto instalará los sistemas operativos seleccionados. Todos los datos existentes en la tarjeta SD serán sobreescritos, incluyendo cualquier sistema que estuviera previamente instalado.</translation>
+        <translation>Advertencia: esto instalar&aacute; los sistemas operativos seleccionados. Todos los datos existentes en la tarjeta SD ser&aacute;n sobreescritos, incluyendo cualquier sistema que estuviera previamente instalado.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="565"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation>Advertencia: sistemas operativos incompatibles detectados. Los siguientes sistemas no están soportados en esta versión de Raspberry Pi y podrían no arrancar o funcionar correctamente:</translation>
+        <translation>Advertencia: sistemas operativos incompatibles detectados. Los siguientes sistemas no est&aacute;n soportados en esta versi&oacute;n de Raspberry Pi y podr&iacute;an no arrancar o funcionar correctamente:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="605"/>
         <source>The install process will begin shortly.</source>
-        <translation>El proceso de instalación comenzará pronto.</translation>
+        <translation>El proceso de instalaci&oacute;n comenzar&aacute; pronto.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="627"/>
@@ -412,7 +412,7 @@ ADVERTENCIA: Esto borrará todos los datos de tu tarjeta SD</translation>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Modo de pantalla cambiado a %1
-Te gustaría que este cambio fuera permanente?</translation>
+Te gustar&iacute;a que este cambio fuera permanente?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="876"/>
@@ -424,7 +424,7 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="mainwindow.cpp" line="877"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
-        <translation>Una conexión por cable es necesaria para esta característica. Por favor conecta un cable de red al puerto de red</translation>
+        <translation>Una conexi&oacute;n por cable es necesaria para esta caracter&iacute;stica. Por favor conecta un cable de red al puerto de red</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1080"/>
@@ -436,7 +436,7 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1080"/>
         <source>Error downloading distribution list from Internet</source>
-        <translation>Error al descargar la lista de distribución de Internet</translation>
+        <translation>Error al descargar la lista de distribuci&oacute;n de Internet</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1094"/>
@@ -461,17 +461,17 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1429"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation>Error al escribir archivo descargado a la tarjeta SD. La tarjeta SD o el sistema de archivos podrían estar dañados.</translation>
+        <translation>Error al escribir archivo descargado a la tarjeta SD. La tarjeta SD o el sistema de archivos podr&iacute;an estar da&ntilde;ados.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1545"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
-        <translation>Es necesario tener acceso a internet para usar NOOBS sin imágenes locales. Por favor, selecciona tu red wifi en la siguiente pantalla.</translation>
+        <translation>Es necesario tener acceso a internet para usar NOOBS sin im&aacute;genes locales. Por favor, selecciona tu red wifi en la siguiente pantalla.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1553"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
-        <translation>Es necesario tener acceso a internet para usar NOOBS sin imágenes locales. Por favor, inserta un cable de red en el puerto de red.</translation>
+        <translation>Es necesario tener acceso a internet para usar NOOBS sin im&aacute;genes locales. Por favor, inserta un cable de red en el puerto de red.</translation>
     </message>
 </context>
 <context>
@@ -479,7 +479,7 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="52"/>
         <source>partitions.json invalid</source>
-        <translation>partitions.json inválido</translation>
+        <translation>partitions.json inv&aacute;lido</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="65"/>
@@ -494,17 +494,17 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="76"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
-        <translation>RISCOS no puede ser instalado. Tamaño de la partición de recuperación demasiado grande.</translation>
+        <translation>RISCOS no puede ser instalado. Tama&ntilde;o de la partici&oacute;n de recuperaci&oacute;n demasiado grande.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="103"/>
         <source>More than one operating system requires partition number %1</source>
-        <translation>Más de un sistema operativo requiere la partición número %1</translation>
+        <translation>M&aacute;s de un sistema operativo requiere la partici&oacute;n n&uacute;mero %1</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="108"/>
         <source>Operating system cannot require a system partition (1,2,5)</source>
-        <translation>El sistema operativo no puede requerir una partición de sistema (1,2,5)</translation>
+        <translation>El sistema operativo no puede requerir una partici&oacute;n de sistema (1,2,5)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="135"/>
@@ -519,12 +519,12 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="175"/>
         <source>Fixed partition offset too low</source>
-        <translation>Corregido offset de partición demasiado bajo</translation>
+        <translation>Corregido offset de partici&oacute;n demasiado bajo</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="241"/>
         <source>Zero&apos;ing start of each partition</source>
-        <translation>Eliminando comienzo de cada partición</translation>
+        <translation>Eliminando comienzo de cada partici&oacute;n</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="255"/>
@@ -581,7 +581,7 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="456"/>
         <source>%1: Mounting FAT partition</source>
-        <translation>%1: Montando partición FAT</translation>
+        <translation>%1: Montando partici&oacute;n FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="463"/>
@@ -596,12 +596,12 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="499"/>
         <source>%1: Running partition setup script</source>
-        <translation>%1: Ejecutando programa de instalación de particiones</translation>
+        <translation>%1: Ejecutando programa de instalaci&oacute;n de particiones</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="544"/>
         <source>%1: Error executing partition setup script</source>
-        <translation>%1: Error al ejecutar el programa de instalación de particiones</translation>
+        <translation>%1: Error al ejecutar el programa de instalaci&oacute;n de particiones</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="552"/>
@@ -611,7 +611,7 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="556"/>
         <source>%1: Unmounting FAT partition</source>
-        <translation>%1: Desmontando partición FAT</translation>
+        <translation>%1: Desmontando partici&oacute;n FAT</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="559"/>
@@ -628,7 +628,7 @@ Te gustaría que este cambio fuera permanente?</translation>
         <location filename="multiimagewritethread.cpp" line="730"/>
         <location filename="multiimagewritethread.cpp" line="789"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation>Formato de archivo comprimido desconocido. Formatos válidos: .lzo, .gz, .xz, .bz2 o .zip</translation>
+        <translation>Formato de archivo comprimido desconocido. Formatos v&aacute;lidos: .lzo, .gz, .xz, .bz2 o .zip</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="692"/>
@@ -703,7 +703,7 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="wifisettingsdialog.ui" line="22"/>
         <source>Wifi network selection</source>
-        <translation>Selección de red wifi</translation>
+        <translation>Selecci&oacute;n de red wifi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="28"/>
@@ -713,17 +713,17 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="wifisettingsdialog.ui" line="55"/>
         <source>Authentication method</source>
-        <translation>Método de autenticación</translation>
+        <translation>M&eacute;todo de autenticaci&oacute;n</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="64"/>
         <source>Pressing the WPS button on my wifi router</source>
-        <translation>Pulsando el botón WPS en mi router wifi</translation>
+        <translation>Pulsando el bot&oacute;n WPS en mi router wifi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="71"/>
         <source>Password authentication</source>
-        <translation>Autenticación con contraseña</translation>
+        <translation>Autenticaci&oacute;n con contrase&ntilde;a</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="96"/>
@@ -733,7 +733,7 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="wifisettingsdialog.ui" line="110"/>
         <source>Password</source>
-        <translation>Contraseña</translation>
+        <translation>Contrase&ntilde;a</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
@@ -743,22 +743,22 @@ Te gustaría que este cambio fuera permanente?</translation>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
         <source>Authenticated but still waiting for DHCP lease</source>
-        <translation>Autenticado pero esperando por la concesión DHCP</translation>
+        <translation>Autenticado pero esperando por la concesi&oacute;n DHCP</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to wifi failed</source>
-        <translation>Conexión al wifi fallida</translation>
+        <translation>Conexi&oacute;n al wifi fallida</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to the wifi access point failed. Check your password</source>
-        <translation>Error al conectarse a la red wifi. Revisa tu contraseña</translation>
+        <translation>Error al conectarse a la red wifi. Revisa tu contrase&ntilde;a</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="275"/>
         <source>Releasing old DHCP lease</source>
-        <translation>Liberando concesión DHCP antigua</translation>
+        <translation>Liberando concesi&oacute;n DHCP antigua</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="269"/>
