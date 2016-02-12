@@ -73,7 +73,7 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
-    _silent(false), _allowSilent(false), _splash(splash), _settings(NULL),
+    _silent(false), _allowSilent(false), _showAll(false), _splash(splash), _settings(NULL),
     _hasWifi(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL)
 {
     ui->setupUi(this);
@@ -158,7 +158,12 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     _qpd = NULL;
     QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
 
-    if (getFileContents("/proc/cmdline").contains("silentinstall"))
+    QString cmdline = getFileContents("/proc/cmdline");
+    if (cmdline.contains("showall"))
+    {
+        _showAll = true;
+    }
+    if (cmdline.contains("silentinstall"))
     {
         /* If silentinstall is specified, auto-install single image in /os */
         _allowSilent = true;
@@ -353,7 +358,7 @@ void MainWindow::repopulate()
 }
 
 /* Whether this OS should be displayed in the list of installable OSes */
-bool canInstallOs(const QString& name, const QVariantMap& values)
+bool MainWindow::canInstallOs(const QString &name, const QVariantMap &values)
 {
     /* Can't simply pull "name" from "values" because in some JSON files it's "os_name" and in others it's "name" */
 
@@ -372,11 +377,19 @@ bool canInstallOs(const QString& name, const QVariantMap& values)
         }
     }
 
-    return true;
+    /* Display OS in list if it is supported or "showall" is specified in recovery.cmdline */
+    if (_showAll)
+    {
+        return true;
+    }
+    else
+    {
+        return isSupportedOs(name, values);
+    }
 }
 
 /* Whether this OS is supported */
-bool isSupportedOs(const QString& name, const QVariantMap& values)
+bool MainWindow::isSupportedOs(const QString &name, const QVariantMap &values)
 {
     /* Can't simply pull "name" from "values" because in some JSON files it's "os_name" and in others it's "name" */
 

@@ -41,7 +41,7 @@ protected:
     QList <int> _kc;
     int _kcpos;
     const QString _defaultDisplay;
-    bool _silent, _allowSilent;
+    bool _silent, _allowSilent, _showAll;
     static bool _partInited;
     static int _currentMode;
     QSplashScreen *_splash;
@@ -73,6 +73,8 @@ protected:
     void downloadList(const QString &urlstring);
     void downloadLists();
     void startImageWrite();
+    bool canInstallOs(const QString &name, const QVariantMap &values);
+    bool isSupportedOs(const QString &name, const QVariantMap &values);
 
 protected slots:
     void populate();
