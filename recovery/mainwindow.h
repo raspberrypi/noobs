@@ -53,6 +53,7 @@ protected:
     QMessageBox *_displayModeBox;
     QTimer _networkStatusPollTimer;
     QTime _time;
+    QString _model;
 
     QMap<QString,QVariantMap> listImages();
     virtual void changeEvent(QEvent * event);

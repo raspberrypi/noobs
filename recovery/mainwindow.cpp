@@ -158,6 +158,7 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
     _qpd = NULL;
     QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
 
+    _model = getFileContents("/proc/device-tree/model");
     QString cmdline = getFileContents("/proc/cmdline");
     if (cmdline.contains("showall"))
     {
@@ -399,59 +400,21 @@ bool MainWindow::isSupportedOs(const QString &name, const QVariantMap &values)
         return true;
     }
 
-    uint board_revision = readBoardRevision();
-    if (values.find("supported_revisions") != values.end())
+    if (values.contains("supported_models"))
     {
-        /* Check the supported revisions list */
-        QStringList revisions = values.value("supported_revisions").toString().remove(" ").split(",");
-        for (int i=0; i < revisions.size(); i++)
+        QStringList supportedModels = values.value("supported_models").toStringList();
+
+        foreach (QString m, supportedModels)
         {
-            bool ok;
-            uint rev = revisions.at(i).toUInt(&ok, 10);
-            if (ok)
+            /* Check if the full formal model name (e.g. "Raspberry Pi 2 Model B Rev 1.1")
+             * contains the string we are told to look for (e.g. "Pi 2") */
+            if (_model.contains(m, Qt::CaseInsensitive))
             {
-                if ((rev & 0xffff) == (board_revision & 0xffff))
-                {
-                    return true;
-                }
+                return true;
             }
         }
+
         return false;
-    }
-    else if (values.find("supported_hex_revisions") != values.end())
-    {
-        /* Check the supported revisions list */
-        QStringList revisions = values.value("supported_hex_revisions").toString().remove(" ").split(",");
-        for (int i=0; i < revisions.size(); i++)
-        {
-            bool ok;
-            uint rev = revisions.at(i).toUInt(&ok, 16);
-            if (ok)
-            {
-                if ((rev & 0xffff) == (board_revision & 0xffff))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    else
-    {
-        /* Check the feature_level flag */
-        if (board_revision < 64) /* overflow otherwise */
-        {
-            quint64 featurelevel = values.value("feature_level", 58364).toULongLong();
-            quint64 mask = (quint64)1 << board_revision;
-            if ((featurelevel & mask) != mask)
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
     }
 
     return true;
