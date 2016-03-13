@@ -22,7 +22,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="190"/>
         <source>HDMI safe mode</source>
-        <translation>HDMI-Modus (safe)</translation>
+        <translation>HDMI-Modus (sicher)</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="194"/>
@@ -95,13 +95,13 @@
         <location filename="initdrivethread.cpp" line="142"/>
         <source>Would you like NOOBS to create one for you?
 WARNING: This will erase all data on your SD card</source>
-        <translation>Soll NOOBS eine für Sie erstellung
+        <translation>Soll NOOBS eine für Sie erstellen?
 Achtung: Dies löscht alle Ihre Daten auf der SD-Karte</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="143"/>
         <source>Error: No MBR present on SD Card</source>
-        <translation>Fehler: Keine Partitionstabelle (MBR) auf der SD-Karte</translation>
+        <translation>Fehler: Keine Partitionstabelle (MBR) auf der SD-Karte vorhanden</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="156"/>
@@ -116,12 +116,12 @@ Achtung: Dies löscht alle Ihre Daten auf der SD-Karte</translation>
     <message>
         <location filename="initdrivethread.cpp" line="172"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>Die SD-Karte wurde für die Installation von NOOBS vorbereitet. Bitte kopieren Sie die NOOBS-Dateien erneut auf die SD-Karte und starten Sie neu</translation>
+        <translation>Die SD-Karte wurde für die Installation von NOOBS formatiert. Bitte kopieren Sie die NOOBS-Dateien erneut auf die SD-Karte und starten Sie neu</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="177"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>Die SD-Karte wurde nicht korrekt formatiert. Bitte formatieren Sie die Karte mit Hilfe des SD Association Formatting Tool neu und versuchen es erneut.</translation>
+        <translation>Die SD-Karte wurde nicht korrekt formatiert. Bitte formatieren Sie die Karte mit Hilfe des &apos;SD Association Formatting Tool&apos; neu und versuchen es erneut.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="183"/>
@@ -335,7 +335,7 @@ Achtung: Dies löscht alle Ihre Daten auf der SD-Karte</translation>
         <location filename="mainwindow.cpp" line="546"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
-        <translation>Achtung: dies installiert die ausgewählten Betriebssysteme. Alle bestehenden Daten einschließlich bereits installierter Betriebssysteme der SD-Karte werden dabei überschrieben.</translation>
+        <translation>Achtung: dies installiert die ausgewählten Betriebssysteme. Alle bestehenden Daten der SD-Karte einschließlich bereits installierter Betriebssysteme werden dabei überschrieben.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="639"/>
@@ -357,7 +357,7 @@ Achtung: Dies löscht alle Ihre Daten auf der SD-Karte</translation>
         <location filename="mainwindow.cpp" line="688"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI-Modus (normal)</translation>
-    </message>    
+    </message>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
         <source>Waiting for SD card (settings partition)</source>
@@ -398,7 +398,7 @@ Achtung: Dies löscht alle Ihre Daten auf der SD-Karte</translation>
     <message>
         <location filename="mainwindow.cpp" line="692"/>
         <source>HDMI safe mode</source>
-        <translation>HDMI-Modus (safe)</translation>
+        <translation>HDMI-Modus (sicher)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="696"/>
