@@ -26,7 +26,7 @@
 
 BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidget *parent) :
     QDialog(parent),
-    _countdown(11),
+    _countdown(OS_SELECTION_TIMEOUT+1),
     ui(new Ui::BootSelectionDialog)
 {
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
