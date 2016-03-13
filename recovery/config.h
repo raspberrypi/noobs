@@ -4,6 +4,9 @@
 /* Version number displayed in the title bar */
 #define VERSION_NUMBER "1.7"
 
+/* Countdown for OS selection dialog in seconds */
+#define OS_SELECTION_TIMEOUT 10
+
 /* Color of the background */
 // #define BACKGROUND_COLOR  Qt::white
 #define BACKGROUND_COLOR  QColor(0xde, 0xde, 0xde)
