@@ -5,11 +5,10 @@
 #define VERSION_NUMBER "1.7"
 
 /* Countdown for OS selection dialog in seconds */
-#define OS_SELECTION_TIMEOUT 10
+#define OS_SELECTION_TIMEOUT 5
 
 /* Color of the background */
-// #define BACKGROUND_COLOR  Qt::white
-#define BACKGROUND_COLOR  QColor(0xde, 0xde, 0xde)
+#define BACKGROUND_COLOR  QColor(0x00, 0x00, 0x00)
 
 /* Highlight color of installed OS */
 #define INSTALLED_OS_BACKGROUND_COLOR  QColor(0xef,0xff,0xef)
