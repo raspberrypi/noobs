@@ -39,7 +39,7 @@
 void reboot_to_extended(const QString &defaultPartition, bool setDisplayMode)
 {
 #ifdef Q_WS_QWS
-    QWSServer::setBackground(Qt::white);
+    QWSServer::setBackground(BACKGROUND_COLOR);
     QWSServer::setCursorVisible(true);
 #endif
     BootSelectionDialog bsd(defaultPartition);
