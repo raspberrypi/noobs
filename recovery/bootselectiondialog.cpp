@@ -94,6 +94,12 @@ BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidge
         QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
         int partition = settings.value("default_partition_to_boot", defaultPartition).toInt();
 
+        // Negative partition setting means don't auto-update the setting, but still boot abs(partition)
+        if (partition < 0)
+        {
+            partition = -partition;
+        }
+
         if (partition != 800)
         {
             // Start timer
@@ -138,9 +144,18 @@ BootSelectionDialog::~BootSelectionDialog()
 void BootSelectionDialog::bootPartition()
 {
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
-    QByteArray partition = settings.value("default_partition_to_boot", 800).toByteArray();
-    qDebug() << "Booting partition" << partition;
-    setRebootPartition(partition);
+    QVariant partition = settings.value("default_partition_to_boot", 800);
+    int partitionNr = partition.toInt()
+
+    // Negative partition number means don't auto-update the setting, but still boot abs(partition)
+    if (partitionNr < 0)
+    {
+        partition.setValue(-partitionNr);
+    }
+
+    QByteArray partitionBytes = partition.toByteArray();
+    qDebug() << "Booting partition" << partitionBytes;
+    setRebootPartition(partitionBytes);
     QDialog::accept();
 }
 
@@ -151,19 +166,24 @@ void BootSelectionDialog::accept()
         return;
 
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
-    QVariantMap m = item->data(Qt::UserRole).toMap();
-    QByteArray partition = m.value("partitions").toList().first().toByteArray();
-    partition.replace("/dev/mmcblk0p", "");
-    int partitionNr    = partition.toInt();
     int oldpartitionNr = settings.value("default_partition_to_boot", 0).toInt();
 
-    if (partitionNr != oldpartitionNr)
+    // If negative, don't update the default boot setting
+    if (oldpartitionNr >= 0)
     {
-        // Save OS boot choice as the new default
-        QProcess::execute("mount -o remount,rw /settings");
-        settings.setValue("default_partition_to_boot", partitionNr);
-        settings.sync();
-        QProcess::execute("mount -o remount,ro /settings");
+        QVariantMap m = item->data(Qt::UserRole).toMap();
+        QByteArray partition = m.value("partitions").toList().first().toByteArray();
+        partition.replace("/dev/mmcblk0p", "");
+        int partitionNr = partition.toInt();
+
+        if (partitionNr != oldpartitionNr)
+        {
+            // Save OS boot choice as the new default
+            QProcess::execute("mount -o remount,rw /settings");
+            settings.setValue("default_partition_to_boot", partitionNr);
+            settings.sync();
+            QProcess::execute("mount -o remount,ro /settings");
+        }
     }
 
     bootPartition();
