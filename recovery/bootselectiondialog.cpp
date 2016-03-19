@@ -103,7 +103,8 @@ BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidge
         if (partition != 800)
         {
             // Start timer
-            qDebug() << "Starting 10 second timer before booting into partition" << partition;
+            _countdown = settings.value("default_boot_timeout", 10).toInt() + 1;
+            qDebug() << "Starting" << _countdown << "second timer before booting into partition" << partition;
             _timer.setInterval(1000);
             connect(&_timer, SIGNAL(timeout()), this, SLOT(countdown()));
             _timer.start();
