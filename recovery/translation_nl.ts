@@ -277,12 +277,12 @@ WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translatio
     <message>
         <location filename="mainwindow.ui" line="198"/>
         <source>Wifi networks (w)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wifi netwerken</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="201"/>
         <source>Select a wifi network to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer een wifi netwerk om connectie mee te maken</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
@@ -362,22 +362,22 @@ Hierbij worden alle bestaande bestanden verwijderd.</translation>
     <message>
         <location filename="mainwindow.cpp" line="117"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation type="unfinished"></translation>
+        <translation type=Wachten op SD kaart (settings partitie)></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="130"/>
         <source>Mounting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation type=Mounten van de settings partitie></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="187"/>
         <source>Please wait while NOOBS initialises</source>
-        <translation>Even geduld</translation>
+        <translation>Even geduld terwijl NOOBS opstart</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="565"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation type="unfinished"></translation>
+        <translation>incompatibele OS gedetecteerd, the volgende OS&apos;s zijn niet ondersteund in deze versie van Raspberry Pi en kunnen mogelijk niet opstarten of correct functioneren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="605"/>
@@ -458,7 +458,7 @@ De instelling opslaan?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1545"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Netwerk toegang is nodig om NOOBS te gebruiken zonder locale images, Kies uw WiFi netwerk op het volgende scherm</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1553"/>
@@ -510,7 +510,7 @@ De instelling opslaan?</translation>
         <location filename="multiimagewritethread.cpp" line="413"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
-        <translation type="unfinished">Wegschrijven image</translation>
+        <translation>Wegschrijven image</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="427"/>
