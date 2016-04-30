@@ -36,9 +36,11 @@ endef
 
 define DHCPCD_INSTALL_TARGET_CMDS
 	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) install DESTDIR=$(TARGET_DIR)
+	$(INSTALL) -D -m 0664 package/dhcpcd/dhcpcd.conf $(TARGET_DIR)/etc/dhcpcd.conf
 endef
 
 # NOTE: Even though this package has a configure script, it is not generated
 # using the autotools, so we have to use the generic package infrastructure.
 
 $(eval $(generic-package))
+
