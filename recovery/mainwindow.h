@@ -47,6 +47,7 @@ protected:
     QSplashScreen *_splash;
     QSettings *_settings;
     bool _hasWifi;
+    bool _networkOK;
     int _numInstalledOS;
     QNetworkAccessManager *_netaccess;
     int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
