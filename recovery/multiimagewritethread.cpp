@@ -19,8 +19,8 @@
 #include <sys/ioctl.h>
 #include <QtEndian>
 
-MultiImageWriteThread::MultiImageWriteThread(QObject *parent) :
-    QThread(parent), _extraSpacePerPartition(0), _part(5)
+MultiImageWriteThread::MultiImageWriteThread(const QString &drive, QObject *parent) :
+    QThread(parent), _drive(drive), _extraSpacePerPartition(0), _part(5)
 {
     QDir dir;
 
@@ -38,9 +38,9 @@ void MultiImageWriteThread::run()
 {
     /* Calculate space requirements, and check special requirements */
     int totalnominalsize = 0, totaluncompressedsize = 0, numparts = 0, numexpandparts = 0;
-    int startSector = getFileContents("/sys/class/block/mmcblk0p5/start").trimmed().toULongLong()
-                    + getFileContents("/sys/class/block/mmcblk0p5/size").trimmed().toULongLong();
-    int totalSectors = getFileContents("/sys/class/block/mmcblk0/size").trimmed().toULongLong();
+    int startSector = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()
+                    + getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong();
+    int totalSectors = getFileContents(sysclassblock(_drive)+"/size").trimmed().toULongLong();
     int availableMB = (totalSectors-startSector)/2048;
 
     /* key: partition number, value: partition information */
@@ -116,7 +116,7 @@ void MultiImageWriteThread::run()
                     return;
                 }
 
-                partition->setPartitionDevice("/dev/mmcblk0p"+QByteArray::number(reqPart));
+                partition->setPartitionDevice(partdev(_drive, reqPart));
                 partitionMap.insert(reqPart, partition);
             }
 
@@ -158,7 +158,7 @@ void MultiImageWriteThread::run()
             if (!partition->requiresPartitionNumber())
             {
                 partitionMap.insert(pnr, partition);
-                partition->setPartitionDevice("/dev/mmcblk0p"+QByteArray::number(pnr));
+                partition->setPartitionDevice(partdev(_drive, pnr));
                 pnr++;
             }
         }
@@ -272,13 +272,13 @@ bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *>
     /* Write partition table using sfdisk */
 
     /* Fixed NOOBS partition */
-    int startP1 = getFileContents("/sys/class/block/mmcblk0p1/start").trimmed().toInt();
-    int sizeP1  = getFileContents("/sys/class/block/mmcblk0p1/size").trimmed().toInt();
+    int startP1 = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toInt();
+    int sizeP1  = getFileContents(sysclassblock(_drive, 1)+"/size").trimmed().toInt();
     /* Fixed start of extended partition. End is not fixed, as it depends on primary partition 3 & 4 */
     int startExtended = startP1+sizeP1;
     /* Fixed settings partition */
-    int startP5 = getFileContents("/sys/class/block/mmcblk0p5/start").trimmed().toInt();
-    int sizeP5  = getFileContents("/sys/class/block/mmcblk0p5/size").trimmed().toInt();
+    int startP5 = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toInt();
+    int sizeP5  = getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toInt();
 
     if (!startP1 || !sizeP1 || !startP5 || !sizeP5)
     {
@@ -334,7 +334,7 @@ bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *>
     /* Let sfdisk write a proper partition table */
     QProcess proc;
     proc.setProcessChannelMode(proc.MergedChannels);
-    proc.start("/sbin/sfdisk -uS /dev/mmcblk0");
+    proc.start("/sbin/sfdisk -uS --force "+_drive);
     proc.write(partitionTable);
     proc.closeWriteChannel();
     proc.waitForFinished(-1);
@@ -347,8 +347,8 @@ bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *>
     QThread::msleep(500);
 
     /* Remount */
-    QProcess::execute("mount -o ro -t vfat /dev/mmcblk0p1 /mnt");
-    QProcess::execute("mount -t ext4 /dev/mmcblk0p5 /settings");
+    QProcess::execute("mount -o ro -t vfat "+partdev(_drive, 1)+" /mnt");
+    QProcess::execute("mount -t ext4 "+partdev(_drive, 5)+" /settings");
 
     if (proc.exitCode() != 0)
     {
@@ -463,6 +463,11 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
         return false;
     }
 
+    if (QFile::exists("/mnt/firmware.override"))
+    {
+        if (::system("cp /mnt/firmware.override/* /mnt2") != 0) { }
+    }
+
     emit statusUpdate(tr("%1: Creating os_config.json").arg(os_name));
 
     QString description = getDescription(image->folder(), image->flavour());
@@ -519,17 +524,21 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
             QString nr    = QString::number(pnr);
             QString uuid  = getUUID(part);
             QString label = getLabel(part);
+            QString partuuid = getPartUUID(part);
             QString id;
             if (!label.isEmpty())
                 id = "LABEL="+label;
             else
                 id = "UUID="+uuid;
+            //if (_drive != "/dev/mmcblk0")
+            //    part = partuuid;
 
             qDebug() << "part" << part << uuid << label;
 
             args << "part"+nr+"="+part << "id"+nr+"="+id;
             env.insert("part"+nr, part);
             env.insert("id"+nr, id);
+            env.insert("partuuid"+nr, partuuid);
             pnr++;
         }
 
@@ -906,4 +915,35 @@ QString MultiImageWriteThread::getDescription(const QString &folder, const QStri
 bool MultiImageWriteThread::isURL(const QString &s)
 {
     return s.startsWith("http:") || s.startsWith("https:");
+}
+
+QByteArray MultiImageWriteThread::getDiskId(const QString &device)
+{
+    mbr_table mbr;
+
+    QFile f(device);
+    f.open(f.ReadOnly);
+    f.read((char *) &mbr, sizeof(mbr));
+    f.close();
+
+    quint32 diskid = qFromLittleEndian<quint32>(mbr.diskid);
+    return QByteArray::number(diskid, 16).rightJustified(8, '0');;
+}
+
+QByteArray MultiImageWriteThread::getPartUUID(const QString &devpart)
+{
+    if (_diskId.isEmpty())
+        _diskId = getDiskId(_drive);
+
+    QByteArray r = "PARTUUID="+_diskId;
+
+    QRegExp partnrRx("([0-9]+)$");
+    if (partnrRx.indexIn(devpart) != -1)
+    {
+        int partnr = partnrRx.cap(1).toInt();
+        QByteArray partnrstr = QByteArray::number(partnr, 16).rightJustified(2, '0');
+        r += '-'+partnrstr;
+    }
+
+    return r;
 }

@@ -24,12 +24,10 @@
  * Multiple lists can be specified by space separating the URLs */
 #define DEFAULT_REPO_SERVER  "http://downloads.raspberrypi.org/os_list_v3.json"
 
-/* Size of recovery FAT partition in MB.
- * First partition starts at offset 1 MB (sector 2048)
- * If you want the second partition to start at offset 1024 MB, enter 1023 */
+/* Size of recovery FAT partition in MB when using reformat drive initialization method. */
 #define RESCUE_PARTITION_SIZE  63
 
-/* Files that are currently on the FAT partition are normaaly saved to memory during
+/* Files that are currently on the FAT partition are normally saved to memory during
  * repartitioning.
  * If files they are larger than number of MB, try resizing the FAT partition instead */
 #define MAXIMUM_BOOTFILES_SIZE  64
@@ -41,13 +39,11 @@
    if that prevents having a 4 MiB gap between the next one */
 #define SHRINK_PARTITIONS_TO_MINIMIZE_GAPS
 
-#define SETTINGS_PARTITION  "/dev/mmcblk0p5"
+#define SETTINGS_PARTNR   5
 #define SETTINGS_PARTITION_SIZE  (32 * 2048 - PARTITION_GAP)
 
 /* If the image name matches this exactly, mark it as recommended */
 #define RECOMMENDED_IMAGE "Raspbian"
-
-#define FAT_PARTITION_OF_IMAGE  "/dev/mmcblk0p6"
 
 /* RiscOS magic */
 #define RISCOS_OFFSET_KEY "riscos_offset"

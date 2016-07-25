@@ -32,7 +32,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWidget *parent = 0);
+    explicit MainWindow(const QString &drive, const QString &defaultDisplay, QSplashScreen *splash, QWidget *parent = 0);
     ~MainWindow();
 
 protected:
@@ -53,7 +53,7 @@ protected:
     QMessageBox *_displayModeBox;
     QTimer _networkStatusPollTimer;
     QTime _time;
-    QString _model, _repo;
+    QString _model, _repo, _drive;
 
     QMap<QString,QVariantMap> listImages();
     virtual void changeEvent(QEvent * event);

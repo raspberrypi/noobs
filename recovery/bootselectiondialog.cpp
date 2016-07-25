@@ -22,9 +22,10 @@
 #include <QDesktopWidget>
 #include <QScreen>
 #include <QWSServer>
+#include <QRegExp>
 #include <QDebug>
 
-BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidget *parent) :
+BootSelectionDialog::BootSelectionDialog(const QString &drive, const QString &defaultPartition, QWidget *parent) :
     QDialog(parent),
     _countdown(11),
     ui(new Ui::BootSelectionDialog)
@@ -39,14 +40,14 @@ BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidge
     dir.mkdir("/settings");
 
     if (QProcess::execute("mount -o remount,ro /settings") != 0
-        && QProcess::execute("mount -t ext4 -o ro " SETTINGS_PARTITION " /settings") != 0)
+        && QProcess::execute("mount -t ext4 -o ro "+partdev(drive, SETTINGS_PARTNR)+" /settings") != 0)
     {
         QMessageBox::critical(this, tr("Cannot display boot menu"), tr("Error mounting settings partition"));
         return;
     }
 
-    /* Also mount /dev/mmcblk0p1 as it may contain icons we need */
-    if (QProcess::execute("mount -t vfat -o ro /dev/mmcblk0p1 /mnt") != 0)
+    /* Also mount recovery partition as it may contain icons we need */
+    if (QProcess::execute("mount -t vfat -o ro "+partdev(drive, 1)+" /mnt") != 0)
     {
         /* Not fatal if this fails */
     }
@@ -105,12 +106,15 @@ BootSelectionDialog::BootSelectionDialog(const QString &defaultPartition, QWidge
             ui->list->installEventFilter(this);
 
             // Select OS booted previously
-            QByteArray partstr = "/dev/mmcblk0p"+QByteArray::number(partition);
+            QString partnrStr = QString::number(partition);
+            QRegExp partnrRx("([0-9]+)$");
             for (int i=0; i<ui->list->count(); i++)
             {
                 QVariantMap m = ui->list->item(i)->data(Qt::UserRole).toMap();
-                if (m.value("partitions").toList().first() == partstr)
+                QString bootpart = m.value("partitions").toList().first().toString();
+                if (partnrRx.indexIn(bootpart) != -1 && partnrRx.cap(1) == partnrStr)
                 {
+                    qDebug() << "Previous OS at" << bootpart;
                     ui->list->setCurrentRow(i);
                     break;
                 }
@@ -153,8 +157,13 @@ void BootSelectionDialog::accept()
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     QVariantMap m = item->data(Qt::UserRole).toMap();
     QByteArray partition = m.value("partitions").toList().first().toByteArray();
-    partition.replace("/dev/mmcblk0p", "");
-    int partitionNr    = partition.toInt();
+    QRegExp partnrRx("([0-9]+)$");
+    if (partnrRx.indexIn(partition) == -1)
+    {
+        QMessageBox::critical(this, "noobs.conf corrupt", "Not a valid partition: "+partition);
+        return;
+    }
+    int partitionNr    = partnrRx.cap(1).toInt();
     int oldpartitionNr = settings.value("default_partition_to_boot", 0).toInt();
 
     if (partitionNr != oldpartitionNr)

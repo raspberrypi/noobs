@@ -21,4 +21,6 @@ bool nameMatchesRiscOS(const QString &name);
 uint readBoardRevision();
 bool canBootOs(const QString& name, const QVariantMap& values);
 bool setRebootPartition(QByteArray partition);
+QByteArray partdev(const QString &drivedev, int nr);
+QByteArray sysclassblock(const QString &drivedev, int partnr = -1);
 #endif // UTIL_H

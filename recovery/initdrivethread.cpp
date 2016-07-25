@@ -19,9 +19,10 @@
 #include <unistd.h>
 #include <linux/fs.h>
 #include <sys/ioctl.h>
+#include <QtEndian>
 
-InitDriveThread::InitDriveThread(QObject *parent) :
-    QThread(parent)
+InitDriveThread::InitDriveThread(const QString &drive, QObject *parent) :
+    QThread(parent), _drive(drive)
 {
 }
 
@@ -30,7 +31,7 @@ void InitDriveThread::run()
     QDir dir;
 
     emit statusUpdate("Waiting for SD card to be ready");
-    while (!QFile::exists("/dev/mmcblk0"))
+    while (!QFile::exists(_drive))
     {
         QThread::usleep(100);
     }
@@ -38,9 +39,26 @@ void InitDriveThread::run()
     emit statusUpdate(tr("Mounting FAT partition"));
     mountSystemPartition();
 
-    // Try to resize existing partitions
-    if (!method_resizePartitions())
-        return;
+    if (sizeofBootFilesInKB() > (MAXIMUM_BOOTFILES_SIZE*1024))
+    {
+        // Try to resize existing partitions
+        if (!method_resizePartitions())
+        {
+            return;
+        }
+    }
+    else
+    {
+        // Reformat the drive
+        if (!method_reformatDrive())
+        {
+            return;
+        }
+    }
+
+    /* Make sure we have a disk volume ID,
+       or refering partition by PARTUUID later will not work */
+    setDiskId();
 
     emit statusUpdate(tr("Formatting settings partition"));
     if (!formatSettingsPartition())
@@ -123,7 +141,7 @@ void InitDriveThread::run()
 
 bool InitDriveThread::method_resizePartitions()
 {
-    int newStartOfRescuePartition = getFileContents("/sys/class/block/mmcblk0p1/start").trimmed().toInt();
+    int newStartOfRescuePartition = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toInt();
     int newSizeOfRescuePartition  = sizeofBootFilesInKB()*1.024/1000 + 100;
 
     if (!umountSystemPartition())
@@ -132,7 +150,7 @@ bool InitDriveThread::method_resizePartitions()
         return false;
     }
 
-    if (!QFile::exists("/dev/mmcblk0p1"))
+    if (!QFile::exists(partdev(_drive, 1)))
     {
         // SD card does not have a MBR.
 
@@ -156,7 +174,7 @@ bool InitDriveThread::method_resizePartitions()
             emit statusUpdate(tr("Writing new MBR"));
             QProcess proc;
             proc.setProcessChannelMode(proc.MergedChannels);
-            proc.start("/usr/sbin/parted /dev/mmcblk0 --script -- mktable msdos mkpartfs primary fat32 8192s -1");
+            proc.start("/usr/sbin/parted "+_drive+" --script -- mktable msdos mkpartfs primary fat32 8192s -1");
             proc.waitForFinished(-1);
             if (proc.exitCode() != 0)
             {
@@ -182,7 +200,7 @@ bool InitDriveThread::method_resizePartitions()
 
     emit statusUpdate(tr("Removing partitions 2,3,4"));
 
-    QFile f("/dev/mmcblk0");
+    QFile f(_drive);
     f.open(f.ReadWrite);
     // Seek to partition entry 2
     f.seek(462);
@@ -203,7 +221,7 @@ bool InitDriveThread::method_resizePartitions()
         newStartOfRescuePartition = PARTITION_ALIGNMENT; /* 4 MiB */
     }
 
-    QString cmd = "/usr/sbin/parted --script /dev/mmcblk0 resize 1 "+QString::number(newStartOfRescuePartition)+"s "+QString::number(newSizeOfRescuePartition)+"M";
+    QString cmd = "/usr/sbin/parted --script "+_drive+" resize 1 "+QString::number(newStartOfRescuePartition)+"s "+QString::number(newSizeOfRescuePartition)+"M";
     qDebug() << "Executing" << cmd;
     QProcess p;
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
@@ -227,8 +245,8 @@ bool InitDriveThread::method_resizePartitions()
     emit statusUpdate(tr("Creating extended partition"));
 
     QByteArray partitionTable;
-    int startOfOurPartition = getFileContents("/sys/class/block/mmcblk0p1/start").trimmed().toInt();
-    int sizeOfOurPartition  = getFileContents("/sys/class/block/mmcblk0p1/size").trimmed().toInt();
+    int startOfOurPartition = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toInt();
+    int sizeOfOurPartition  = getFileContents(sysclassblock(_drive, 1)+"/size").trimmed().toInt();
     int startOfExtended = startOfOurPartition+sizeOfOurPartition;
 
     // Align start of settings partition on 4 MiB boundary
@@ -246,7 +264,7 @@ bool InitDriveThread::method_resizePartitions()
     qDebug() << "Writing partition table" << partitionTable;
 
     /* Let sfdisk write a proper partition table */
-    cmd = QString("/sbin/sfdisk -uS /dev/mmcblk0");
+    cmd = QString("/sbin/sfdisk -uS --force "+_drive);
     QProcess proc;
     proc.setProcessChannelMode(proc.MergedChannels);
     proc.start(cmd);
@@ -261,16 +279,7 @@ bool InitDriveThread::method_resizePartitions()
     qDebug() << "sfdisk done, output:" << proc.readAll();
     QThread::msleep(500);
 
-    /* For reasons unknown Linux sometimes
-     * only finds /dev/mmcblk0p2 and /dev/mmcblk0p1 goes missing */
-    if (!QFile::exists("/dev/mmcblk0p1"))
-    {
-        /* Probe again */
-        QProcess::execute("/usr/sbin/partprobe");
-        QThread::msleep(1500);
-    }
-
-    QProcess::execute("/sbin/mlabel p:RECOVERY");
+    QProcess::execute("/sbin/mlabel -i "+partdev(_drive, 1)+" ::RECOVERY");
 
     return true;
 }
@@ -285,7 +294,7 @@ int InitDriveThread::sizeofBootFilesInKB()
 
 int InitDriveThread::sizeofSDCardInBlocks()
 {
-    QFile f("/sys/class/block/mmcblk0/size");
+    QFile f(sysclassblock(_drive)+"/size");
     f.open(f.ReadOnly);
     int blocks = f.readAll().trimmed().toULongLong();
     f.close();
@@ -295,7 +304,7 @@ int InitDriveThread::sizeofSDCardInBlocks()
 
 bool InitDriveThread::mountSystemPartition()
 {
-    return QProcess::execute("mount /dev/mmcblk0p1 /mnt") == 0 || QProcess::execute("mount /dev/mmcblk0 /mnt") == 0;
+    return QProcess::execute("mount "+partdev(_drive, 1)+" /mnt") == 0 || QProcess::execute("mount "+_drive+" /mnt") == 0;
 }
 
 bool InitDriveThread::umountSystemPartition()
@@ -303,14 +312,9 @@ bool InitDriveThread::umountSystemPartition()
     return QProcess::execute("umount /mnt") == 0;
 }
 
-bool InitDriveThread::formatBootPartition()
-{
-    return QProcess::execute("/sbin/mkfs.fat -n RECOVERY /dev/mmcblk0p1") == 0;
-}
-
 bool InitDriveThread::formatSettingsPartition()
 {
-    return QProcess::execute("/usr/sbin/mkfs.ext4 -L SETTINGS " SETTINGS_PARTITION) == 0;
+    return QProcess::execute("/usr/sbin/mkfs.ext4 -L SETTINGS "+partdev(_drive, SETTINGS_PARTNR)) == 0;
 }
 
 bool InitDriveThread::zeroMbr()
@@ -321,14 +325,147 @@ bool InitDriveThread::zeroMbr()
      *
      * Using conv=fsync to make sure we get notified of write errors
      */
-    return QProcess::execute("/bin/dd conv=fsync count=1 bs=8192 if=/dev/zero of=/dev/mmcblk0") == 0
-        && QProcess::execute("/bin/dd conv=fsync count=8 bs=512 if=/dev/zero seek="+QString::number(sizeofSDCardInBlocks()-8)+" of=/dev/mmcblk0") == 0;
+    return QProcess::execute("/bin/dd conv=fsync count=1 bs=8192 if=/dev/zero of="+_drive) == 0
+        && QProcess::execute("/bin/dd conv=fsync count=8 bs=512 if=/dev/zero seek="+QString::number(sizeofSDCardInBlocks()-8)+" of="+_drive) == 0;
 }
 
 #ifdef RISCOS_BLOB_FILENAME
 bool InitDriveThread::writeRiscOSblob()
 {
     qDebug() << "writing RiscOS blob";
-    return QProcess::execute("/bin/dd conv=fsync bs=512 if=" RISCOS_BLOB_FILENAME " of=/dev/mmcblk0 seek="+QString::number(RISCOS_BLOB_SECTOR_OFFSET)) == 0;
+    return QProcess::execute("/bin/dd conv=fsync bs=512 if=" RISCOS_BLOB_FILENAME " of="+_drive+" seek="+QString::number(RISCOS_BLOB_SECTOR_OFFSET)) == 0;
 }
 #endif
+
+bool InitDriveThread::method_reformatDrive()
+{
+    emit statusUpdate(tr("Saving boot files to memory"));
+    if (!saveBootFiles() )
+    {
+        emit error(tr("Error saving boot files to memory. SD card may be damaged."));
+        return false;
+    }
+    if (!umountSystemPartition())
+    {
+        emit error(tr("Error unmounting system partition."));
+        return false;
+    }
+
+    emit statusUpdate(tr("Zeroing partition table"));
+    if (!zeroMbr())
+    {
+        emit error(tr("Error zero'ing MBR/GPT. SD card may be broken or advertising wrong capacity."));
+        return false;
+    }
+
+    emit statusUpdate(tr("Creating partitions"));
+
+    if (!partitionDrive())
+    {
+        emit error(tr("Error partitioning"));
+        return false;
+    }
+
+    emit statusUpdate(tr("Formatting boot partition (fat)"));
+    if (!formatBootPartition())
+    {
+       emit error(tr("Error formatting boot partition (fat)"));
+       return false;
+    }
+
+    emit statusUpdate(tr("Copying boot files to storage"));
+    mountSystemPartition();
+    restoreBootFiles();
+    umountSystemPartition();
+
+    return true;
+}
+
+bool InitDriveThread::saveBootFiles()
+{
+    return QProcess::execute("cp -a /mnt /tmp") == 0;
+}
+
+bool InitDriveThread::restoreBootFiles()
+{
+    bool status = QProcess::execute("cp -a /tmp/mnt /") == 0;
+    QProcess::execute("rm -rf /tmp/mnt");
+    return status;
+}
+
+bool InitDriveThread::formatBootPartition()
+{
+    return QProcess::execute("/sbin/mkfs.fat -n RECOVERY "+partdev(_drive, 1)) == 0;
+}
+
+bool InitDriveThread::partitionDrive()
+{
+    /* Partition layout:
+     *
+     * First 4 MB kept empty for alignment
+     * Followed by FAT partition of RESCUE_PARTITION_SIZE
+     * Followed by extended partition spanning remainder of space
+     * First logical partition has NOOBS persistent settings partition
+     */
+    QByteArray partitionTable;
+    int sizeOfOurPartition = RESCUE_PARTITION_SIZE*1024*2;
+    int startOfOurPartition = PARTITION_ALIGNMENT;
+    int startOfExtended = startOfOurPartition+sizeOfOurPartition;
+
+    // Align start of settings partition on 4 MiB boundary
+    int startOfSettings = startOfExtended + PARTITION_GAP;
+    if (startOfSettings % PARTITION_ALIGNMENT != 0)
+         startOfSettings += PARTITION_ALIGNMENT-(startOfSettings % PARTITION_ALIGNMENT);
+
+    // Primary partitions
+    partitionTable  = QByteArray::number(startOfOurPartition)+","+QByteArray::number(sizeOfOurPartition)+",0E\n"; /* FAT partition */
+    partitionTable += QByteArray::number(startOfExtended)+",,E\n"; /* Extended partition with all remaining space */
+    partitionTable += "0,0\n";
+    partitionTable += "0,0\n";
+    // Logical partitions
+    partitionTable += QByteArray::number(startOfSettings)+","+QByteArray::number(SETTINGS_PARTITION_SIZE)+",L\n"; /* Settings partition */
+
+    /* Write main partition table */
+    QString cmd = QString("/sbin/sfdisk -uS --force "+_drive);
+    QProcess proc;
+    proc.setProcessChannelMode(proc.MergedChannels);
+    proc.start(cmd);
+    proc.write(partitionTable);
+    proc.closeWriteChannel();
+    proc.waitForFinished(-1);
+    QThread::msleep(500);
+
+    return proc.exitCode() == 0;
+}
+
+bool InitDriveThread::setDiskId()
+{
+    mbr_table mbr;
+
+    QFile f(_drive);
+    f.open(f.ReadOnly);
+    f.read((char *) &mbr, sizeof(mbr));
+    f.close();
+
+    if ( qFromLittleEndian<quint32>(mbr.diskid) == 0 )
+    {
+        emit statusUpdate(tr("Setting disk volume ID"));
+
+        /* Set disk volume ID to random number from urandom */
+        QFile fRand("/dev/urandom");
+        fRand.open(f.ReadOnly);
+        fRand.read((char *) mbr.diskid, sizeof(mbr.diskid));
+        fRand.close();
+
+        /* Make sure it isn't zero */
+        if (qFromLittleEndian<quint32>(mbr.diskid) == 0)
+            mbr.diskid[0] = 1;
+
+        f.open(f.ReadWrite);
+        f.write((char *) &mbr, sizeof(mbr));
+        qDebug() << "Set disk volume ID to:" << QByteArray::number(qFromLittleEndian<quint32>(mbr.diskid), 16);
+        f.close();
+    }
+
+    return true;
+}

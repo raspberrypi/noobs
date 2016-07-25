@@ -24,7 +24,7 @@ class BootSelectionDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BootSelectionDialog(const QString &defaultPartition, QWidget *parent = 0);
+    explicit BootSelectionDialog(const QString &drive, const QString &defaultPartition, QWidget *parent = 0);
     ~BootSelectionDialog();
     virtual void accept();
     void setDisplayMode();

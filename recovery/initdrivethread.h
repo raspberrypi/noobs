@@ -1,7 +1,7 @@
 #ifndef INITDRIVETHREAD_H
 #define INITDRIVETHREAD_H
 
-/* Prepare SD card for first use thread
+/* Prepare storage for first use thread
  *
  * Initial author: Floris Bos
  * Maintained by Raspberry Pi
@@ -18,7 +18,7 @@ class InitDriveThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit InitDriveThread(QObject *parent = 0);
+    explicit InitDriveThread(const QString &drive, QObject *parent = 0);
 
 protected:
     virtual void run();
@@ -29,11 +29,18 @@ protected:
     bool mountSystemPartition();
     bool umountSystemPartition();
     bool zeroMbr();
-    bool formatBootPartition();
     bool formatSettingsPartition();
 #ifdef RISCOS_BLOB_FILENAME
     bool writeRiscOSblob();
 #endif
+    bool method_reformatDrive();
+    bool saveBootFiles();
+    bool restoreBootFiles();
+    bool formatBootPartition();
+    bool partitionDrive();
+    bool setDiskId();
+
+    QString _drive;
 
 signals:
     void error(const QString &msg);
