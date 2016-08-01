@@ -19,6 +19,7 @@ class InitDriveThread : public QThread
     Q_OBJECT
 public:
     explicit InitDriveThread(const QString &drive, QObject *parent = 0);
+    bool formatUsbDrive();
 
 protected:
     virtual void run();

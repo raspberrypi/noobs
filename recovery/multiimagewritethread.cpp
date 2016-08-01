@@ -19,10 +19,11 @@
 #include <sys/ioctl.h>
 #include <QtEndian>
 
-MultiImageWriteThread::MultiImageWriteThread(const QString &drive, QObject *parent) :
-    QThread(parent), _drive(drive), _extraSpacePerPartition(0), _part(5)
+MultiImageWriteThread::MultiImageWriteThread(const QString &bootdrive, const QString &rootdrive, QObject *parent) :
+    QThread(parent), _drive(rootdrive), _bootdrive(bootdrive), _extraSpacePerPartition(0), _part(5)
 {
     QDir dir;
+    _multiDrives = (bootdrive != rootdrive);
 
     if (!dir.exists("/mnt2"))
         dir.mkdir("/mnt2");
@@ -44,7 +45,7 @@ void MultiImageWriteThread::run()
     int availableMB = (totalSectors-startSector)/2048;
 
     /* key: partition number, value: partition information */
-    QMap<int, PartitionInfo *> partitionMap;
+    QMap<int, PartitionInfo *> partitionMap, bootPartitionMap;
 
     foreach (OsInfo *image, _images)
     {
@@ -145,11 +146,18 @@ void MultiImageWriteThread::run()
     }
 
     /* Assign logical partition numbers to partitions that did not reserve a special number */
-    int pnr;
+    int pnr, bootpnr, offset = 0;
     if (partitionMap.isEmpty())
         pnr = 6;
     else
         pnr = qMax(partitionMap.keys().last(), 5)+1;
+
+    if (_multiDrives)
+    {
+        bootpnr = 6;
+        offset = getFileContents(sysclassblock(_bootdrive, 5)+"/start").trimmed().toULongLong()
+               + getFileContents(sysclassblock(_bootdrive, 5)+"/size").trimmed().toULongLong();
+    }
 
     foreach (OsInfo *image, _images)
     {
@@ -157,9 +165,29 @@ void MultiImageWriteThread::run()
         {
             if (!partition->requiresPartitionNumber())
             {
-                partitionMap.insert(pnr, partition);
-                partition->setPartitionDevice(partdev(_drive, pnr));
-                pnr++;
+                if (_multiDrives && partition->bootable() && !partition->wantMaximised() )
+                {
+                    bootPartitionMap.insert(bootpnr, partition);
+                    partition->setPartitionDevice(partdev(_bootdrive, bootpnr));
+                    bootpnr++;
+                    offset += PARTITION_GAP;
+
+                    /* Align at 4 MiB offset */
+                    if (offset % PARTITION_ALIGNMENT != 0)
+                    {
+                            offset += PARTITION_ALIGNMENT-(offset % PARTITION_ALIGNMENT);
+                    }
+                    partition->setOffset(offset);
+                    int partsizeSectors = partition->partitionSizeNominal() * 2048;
+                    partition->setPartitionSizeSectors(partsizeSectors);
+                    offset += partsizeSectors;
+                }
+                else
+                {
+                    partitionMap.insert(pnr, partition);
+                    partition->setPartitionDevice(partdev(_drive, pnr));
+                    pnr++;
+                }
             }
         }
     }
@@ -174,7 +202,7 @@ void MultiImageWriteThread::run()
     if (!log_before_prim.isEmpty() && log_before_prim.first()->requiresPartitionNumber() == 4)
         log_before_prim.push_back(log_before_prim.takeFirst());
 
-    int offset = startSector;
+    offset = startSector;
 
     foreach (PartitionInfo *p, log_before_prim)
     {
@@ -244,8 +272,26 @@ void MultiImageWriteThread::run()
         f.remove();
 
     emit statusUpdate(tr("Writing partition table"));
-    if (!writePartitionTable(partitionMap))
+    if (!writePartitionTable(_drive, partitionMap))
         return;
+
+    /* Write partition table to boot drive (if using multiple drives) */
+    if (_multiDrives)
+    {
+        emit statusUpdate(tr("Writing boot partition table"));
+
+        if (!writePartitionTable(_bootdrive, bootPartitionMap))
+            return;
+
+        if (QProcess::execute("mount -t ext4 "+partdev(_bootdrive, SETTINGS_PARTNR)+" /mnt2") == 0)
+        {
+            QFile f("/mnt2/installed_os.json");
+            if (f.exists())
+                f.remove();
+
+            QProcess::execute("umount /mnt2");
+        }
+    }
 
     /* Zero out first sector of partitions, to make sure to get rid of previous file system (label) */
     emit statusUpdate(tr("Zero'ing start of each partition"));
@@ -267,18 +313,18 @@ void MultiImageWriteThread::run()
     emit completed();
 }
 
-bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *> &pmap)
+bool MultiImageWriteThread::writePartitionTable(const QString &drive, const QMap<int, PartitionInfo *> &pmap)
 {
     /* Write partition table using sfdisk */
 
     /* Fixed NOOBS partition */
-    int startP1 = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toInt();
-    int sizeP1  = getFileContents(sysclassblock(_drive, 1)+"/size").trimmed().toInt();
+    int startP1 = getFileContents(sysclassblock(drive, 1)+"/start").trimmed().toInt();
+    int sizeP1  = getFileContents(sysclassblock(drive, 1)+"/size").trimmed().toInt();
     /* Fixed start of extended partition. End is not fixed, as it depends on primary partition 3 & 4 */
     int startExtended = startP1+sizeP1;
     /* Fixed settings partition */
-    int startP5 = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toInt();
-    int sizeP5  = getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toInt();
+    int startP5 = getFileContents(sysclassblock(drive, SETTINGS_PARTNR)+"/start").trimmed().toInt();
+    int sizeP5  = getFileContents(sysclassblock(drive, SETTINGS_PARTNR)+"/size").trimmed().toInt();
 
     if (!startP1 || !sizeP1 || !startP5 || !sizeP5)
     {
@@ -328,13 +374,21 @@ bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *>
     qDebug() << partitionTable;
 
     /* Unmount everything before modifying partition table */
-    QProcess::execute("umount /mnt");
-    QProcess::execute("umount /settings");
+    QString driveP1 = partdev(drive, 1).replace("/dev/", "");
+    if (drive == _bootdrive)
+    {
+        QProcess::execute("umount /mnt");
+        QProcess::execute("umount /settings");
+    }
+    if (QFile::exists("/tmp/media/"+driveP1))
+    {
+        QProcess::execute("umount /tmp/media/"+driveP1);
+    }
 
     /* Let sfdisk write a proper partition table */
     QProcess proc;
     proc.setProcessChannelMode(proc.MergedChannels);
-    proc.start("/sbin/sfdisk -uS --force "+_drive);
+    proc.start("/sbin/sfdisk -uS --force "+drive);
     proc.write(partitionTable);
     proc.closeWriteChannel();
     proc.waitForFinished(-1);
@@ -347,8 +401,15 @@ bool MultiImageWriteThread::writePartitionTable(const QMap<int, PartitionInfo *>
     QThread::msleep(500);
 
     /* Remount */
-    QProcess::execute("mount -o ro -t vfat "+partdev(_drive, 1)+" /mnt");
-    QProcess::execute("mount -t ext4 "+partdev(_drive, 5)+" /settings");
+    if (drive == _bootdrive)
+    {
+        QProcess::execute("mount -o ro -t vfat "+partdev(drive, 1)+" /mnt");
+        QProcess::execute("mount -t ext4 "+partdev(drive, SETTINGS_PARTNR)+" /settings");
+    }
+    if (QFile::exists("/tmp/media/"+driveP1))
+    {
+        QProcess::execute("mount -o ro -t vfat /dev/"+driveP1+" /tmp/media/"+driveP1);
+    }
 
     if (proc.exitCode() != 0)
     {
@@ -572,10 +633,24 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     ventry["release_date"]= image->releaseDate();
     ventry["partitions"]  = vpartitions;
     ventry["bootable"]    = image->bootable();
+    if (!image->supportedModels().isEmpty())
+        ventry["supported_models"] = image->supportedModels();
     QString iconfilename  = image->folder()+"/"+image->flavour()+".png";
     iconfilename.replace(" ", "_");
     if (QFile::exists(iconfilename))
+    {
+        if (iconfilename.startsWith("/tmp/media/"))
+        {
+            /* Copy icon to settings folder, as USB storage may take longer to get ready on boot */
+            QDir dir;
+            QString dirname = "/settings/os/"+image->flavour().replace(" ", "_");
+            dir.mkpath(dirname);
+            QFile::copy(iconfilename, dirname+"/icon.png");
+            iconfilename = dirname+"/icon.png";
+        }
+
         ventry["icon"] = iconfilename;
+    }
     else if (QFile::exists(image->folder()+"/icon.png"))
         ventry["icon"] = image->folder()+"/icon.png";
     installed_os.append(ventry);

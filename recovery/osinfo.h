@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QList>
+#include <QStringList>
 
 class PartitionInfo;
 
@@ -63,10 +64,16 @@ public:
         return _riscosOffset;
     }
 
+    inline QStringList supportedModels()
+    {
+        return _supportedModels;
+    }
+
 protected:
     QString _folder, _flavour, _name, _description, _version, _releaseDate;
     bool _bootable;
     QList<PartitionInfo *> _partitions;
+    QStringList _supportedModels;
     int _riscosOffset;
 
 };

@@ -12,6 +12,7 @@ OsInfo::OsInfo(const QString &folder, const QString &flavour, QObject *parent) :
     _releaseDate = m.value("release_date").toString();
     _bootable = m.value("bootable", true).toBool();
     _riscosOffset = m.value("riscos_offset").toInt();
+    _supportedModels = m.value("supported_models").toStringList();
 
     QVariantList parts = Json::loadFromFile(folder+"/partitions.json").toMap().value("partitions").toList();
     foreach (QVariant pv, parts)

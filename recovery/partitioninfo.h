@@ -114,6 +114,11 @@ public:
         return _partitionType;
     }
 
+    inline bool bootable()
+    {
+        return (_fstype == "fat" || _fstype == "FAT");
+    }
+
 protected:
     QByteArray _fstype, _mkfsOptions, _label, _partitionDevice, _partitionType;
     QString _tarball;

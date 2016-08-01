@@ -469,3 +469,16 @@ bool InitDriveThread::setDiskId()
 
     return true;
 }
+
+/* On USB root drives we create a dummy recovery and settings partition.
+ * Just in case the user wants to start booting from HDD later */
+bool InitDriveThread::formatUsbDrive()
+{
+    zeroMbr();
+    partitionDrive();
+    setDiskId();
+    formatBootPartition();
+    formatSettingsPartition();
+
+    return true;
+}

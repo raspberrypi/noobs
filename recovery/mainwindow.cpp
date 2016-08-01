@@ -73,8 +73,8 @@ MainWindow::MainWindow(const QString &drive, const QString &defaultDisplay, QSpl
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     _qpd(NULL), _kcpos(0), _defaultDisplay(defaultDisplay),
-    _silent(false), _allowSilent(false), _showAll(false), _splash(splash), _settings(NULL),
-    _hasWifi(false), _numInstalledOS(0), _netaccess(NULL), _displayModeBox(NULL), _drive(drive)
+    _silent(false), _allowSilent(false), _showAll(false), _fixate(false), _splash(splash), _settings(NULL),
+    _hasWifi(false), _numInstalledOS(0), _devlistcount(0), _netaccess(NULL), _displayModeBox(NULL), _drive(drive), _bootdrive(drive)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
@@ -99,7 +99,7 @@ MainWindow::MainWindow(const QString &drive, const QString &defaultDisplay, QSpl
         _qpd->setWindowModality(Qt::WindowModal);
         _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 
-        InitDriveThread *idt = new InitDriveThread(_drive, this);
+        InitDriveThread *idt = new InitDriveThread(_bootdrive, this);
         connect(idt, SIGNAL(statusUpdate(QString)), _qpd, SLOT(setLabelText(QString)));
         connect(idt, SIGNAL(completed()), _qpd, SLOT(deleteLater()));
         connect(idt, SIGNAL(error(QString)), this, SLOT(onError(QString)));
@@ -113,7 +113,7 @@ MainWindow::MainWindow(const QString &drive, const QString &defaultDisplay, QSpl
     }
 
     /* Make sure the SD card is ready, and partition table is read by Linux */
-    QByteArray settingsPartition = partdev(_drive, SETTINGS_PARTNR);
+    QByteArray settingsPartition = partdev(_bootdrive, SETTINGS_PARTNR);
     if (!QFile::exists(settingsPartition))
     {
         _qpd = new QProgressDialog( tr("Waiting for SD card (settings partition)"), QString(), 0, 0, this);
@@ -157,7 +157,7 @@ MainWindow::MainWindow(const QString &drive, const QString &defaultDisplay, QSpl
     _qpd->hide();
     _qpd->deleteLater();
     _qpd = NULL;
-    QProcess::execute("mount -o ro -t vfat "+partdev(_drive, 1)+" /mnt");
+    QProcess::execute("mount -o ro -t vfat "+partdev(_bootdrive, 1)+" /mnt");
 
     _model = getFileContents("/proc/device-tree/model");
     QString cmdline = getFileContents("/proc/cmdline");
@@ -205,9 +205,15 @@ MainWindow::MainWindow(const QString &drive, const QString &defaultDisplay, QSpl
         _repo = DEFAULT_REPO_SERVER;
     }
 
+    _usbimages = !cmdline.contains("disableusbimages");
+
     if (cmdline.contains("showall"))
     {
         _showAll = true;
+    }
+    if (cmdline.contains("fixate"))
+    {
+        _fixate = true;
     }
     if (cmdline.contains("silentinstall"))
     {
@@ -222,6 +228,11 @@ MainWindow::MainWindow(const QString &drive, const QString &defaultDisplay, QSpl
     /* Disable online help buttons until network is functional */
     ui->actionBrowser->setEnabled(false);
     QTimer::singleShot(1, this, SLOT(populate()));
+
+    ui->targetLabel->setHidden(true);
+    ui->targetCombo->setHidden(true);
+    connect(&_piDrivePollTimer, SIGNAL(timeout()), SLOT(pollForNewDisks()));
+    _piDrivePollTimer.start(100);
 }
 
 MainWindow::~MainWindow()
@@ -400,7 +411,15 @@ void MainWindow::repopulate()
     }
 
     if (_numInstalledOS)
+    {
         ui->actionCancel->setEnabled(true);
+        if (_fixate)
+        {
+            ui->list->setEnabled(false);
+        }
+    }
+
+    filterList();
 }
 
 /* Whether this OS should be displayed in the list of installable OSes */
@@ -465,17 +484,17 @@ bool MainWindow::isSupportedOs(const QString &name, const QVariantMap &values)
     return true;
 }
 
-QMap<QString, QVariantMap> MainWindow::listImages()
+QMap<QString, QVariantMap> MainWindow::listImages(const QString &folder, bool includeInstalled)
 {
     QMap<QString,QVariantMap> images;
 
     /* Local image folders */
-    QDir dir("/mnt/os", "", QDir::Name, QDir::Dirs | QDir::NoDotAndDotDot);
+    QDir dir(folder, "", QDir::Name, QDir::Dirs | QDir::NoDotAndDotDot);
     QStringList list = dir.entryList();
 
     foreach (QString image,list)
     {
-        QString imagefolder = "/mnt/os/"+image;
+        QString imagefolder = folder+"/"+image;
         if (!QFile::exists(imagefolder+"/os.json"))
             continue;
         QVariantMap osv = Json::loadFromFile(imagefolder+"/os.json").toMap();
@@ -516,7 +535,7 @@ QMap<QString, QVariantMap> MainWindow::listImages()
     }
 
     /* Also add information about files already installed */
-    if (_settings)
+    if (_settings && includeInstalled)
     {
         QVariantList i = Json::loadFromFile("/settings/installed_os.json").toList();
         foreach (QVariant v, i)
@@ -563,9 +582,13 @@ QMap<QString, QVariantMap> MainWindow::listImages()
 
 void MainWindow::on_actionWrite_image_to_disk_triggered()
 {
+    QString warning = tr("Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.");
+    if (_drive != "mmcblk0")
+        warning.replace(tr("SD card"), tr("drive"));
+
     if (_silent || QMessageBox::warning(this,
                                         tr("Confirm"),
-                                        tr("Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed."),
+                                        warning,
                                         QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
     {
         /* See if any of the OSes are unsupported */
@@ -1192,6 +1215,8 @@ void MainWindow::processJson(QVariant json)
             _qpd = NULL;
         }
     }
+
+    filterList();
 }
 
 void MainWindow::processJsonOs(const QString &name, QVariantMap &new_details, QSet<QString> &iconurls)
@@ -1217,7 +1242,7 @@ void MainWindow::processJsonOs(const QString &name, QVariantMap &new_details, QS
         }
 
     }
-    else
+    else if (!_fixate || _numInstalledOS == 0)
     {
         /* It's a new OS, so add it to the list */
         QString iconurl = new_details.value("icon").toString();
@@ -1490,7 +1515,7 @@ void MainWindow::downloadMetaComplete()
 void MainWindow::startImageWrite()
 {
     /* All meta files downloaded, extract slides tarball, and launch image writer thread */
-    MultiImageWriteThread *imageWriteThread = new MultiImageWriteThread(_drive);
+    MultiImageWriteThread *imageWriteThread = new MultiImageWriteThread(_bootdrive, _drive);
     QString folder, slidesFolder;
     QStringList slidesFolders;
 
@@ -1608,6 +1633,253 @@ void MainWindow::on_actionWifi_triggered()
         {
             /* Try to redownload list. Could have failed through previous access point */
             downloadLists();
+        }
+    }
+}
+
+void MainWindow::pollForNewDisks()
+{
+    QString dirname = "/sys/class/block";
+    QDir dir(dirname);
+    QStringList list = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+
+    if (list.count() != _devlistcount)
+    {
+        foreach (QString devname, list)
+        {
+            QString blocklink = QFile::symLinkTarget(dirname+"/"+devname);
+            /* skip virtual things and partitions */
+            if (blocklink.contains("/devices/virtual/") || QFile::exists(blocklink+"/partition") )
+                continue;
+
+            QByteArray inflight = getFileContents(sysclassblock(devname)+"/inflight").trimmed();
+            if (inflight.count() && inflight.left(1) != "0")
+            {
+                /* There are currently outstanding IO request, which could mean it hasn't finished
+                 * reading the partition table. Check again on next round */
+                return;
+            }
+
+            /* does the drive perhaps have a FAT partition with extra images? */
+            if ("/dev/"+devname != _bootdrive && QFile::exists(sysclassblock(devname, 1)))
+            {
+                QString p1 = partdev(devname, 1);
+
+                if (!QFile::exists("/dev/"+p1))
+                {
+                    /* /dev node not created yet. Check again on next round */
+                    return;
+                }
+
+                if (_usbimages && !QFile::exists("/tmp/media/"+p1))
+                    addImagesFromUSB(p1);
+            }
+
+            /* is the drive writable? */
+            if (getFileContents(blocklink+"/ro").trimmed() == "1")
+                continue;
+
+            QString model = getFileContents(dirname+"/"+devname+"/device/model").trimmed();
+            if (model.isEmpty())
+                model = getFileContents(dirname+"/"+devname+"/device/name").trimmed();
+            QIcon icon;
+
+            if (devname.startsWith("mmc"))
+            {
+                icon = QIcon(":/icons/hdd.png");
+            }
+            else
+            {
+                icon = QIcon(":/icons/hdd_usb_unmount.png");
+            }
+
+            if (ui->targetCombo->findData(devname) == -1)
+            {
+                ui->targetCombo->addItem(icon, devname+": "+model, devname);
+
+                /* does the partition structure look like a preloaded Pi drive, then select it by default? */
+                if (devname == "sda"
+                        && QFile::exists(sysclassblock(devname, 1))
+                        && QFile::exists(sysclassblock(devname, 5))
+                        && getFileContents(sysclassblock(devname, 5)+"/size").trimmed().toInt() == SETTINGS_PARTITION_SIZE)
+                    ui->targetCombo->setCurrentIndex(ui->targetCombo->count()-1);
+            }
+        }
+
+        if (ui->targetCombo->count() > 1)
+        {
+            ui->targetLabel->setHidden(false);
+            ui->targetCombo->setHidden(false);
+        }
+
+        _devlistcount = list.count();
+    }
+}
+
+void MainWindow::on_targetCombo_currentIndexChanged(int index)
+{
+    if (index != -1)
+    {
+        QString devname = ui->targetCombo->itemData(index).toString();
+
+        if (devname != "mmcblk0" && (
+                   !QFile::exists(sysclassblock(devname, 1))
+                || !QFile::exists(sysclassblock(devname, 5))
+                || getFileContents(sysclassblock(devname, 5)+"/size").trimmed().toInt() != SETTINGS_PARTITION_SIZE))
+        {
+            if (QMessageBox::question(this,
+                                      tr("Reformat drive?"),
+                                      tr("Are you sure you want to reformat the drive '%1' for use with NOOBS? All existing data on the drive will be deleted!").arg(devname),
+                                      QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+            {
+                InitDriveThread idt("/dev/"+devname);
+                idt.formatUsbDrive();
+            }
+            else
+            {
+                int idx = ui->targetCombo->findData("mmcblk0");
+                if (idx != -1 && idx != index)
+                    ui->targetCombo->setCurrentIndex(idx);
+                return;
+            }
+        }
+
+        qDebug() << "New drive selected:" << devname;
+        _drive = "/dev/"+devname;
+        _availableMB = (getFileContents(sysclassblock(_drive)+"/size").trimmed().toULongLong()-getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()-getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong())/2048;
+        filterList();
+        updateNeeded();
+    }
+}
+
+void MainWindow::addImagesFromUSB(const QString &device)
+{
+    QDir dir;
+    QString mntpath = "/tmp/media/"+device;
+
+    dir.mkpath(mntpath);
+    if (QProcess::execute("mount -o ro -t vfat /dev/"+device+" "+mntpath) != 0)
+    {
+        dir.rmdir(mntpath);
+        return;
+    }
+
+    if (!QFile::exists(mntpath+"/os"))
+    {
+        QProcess::execute("umount "+mntpath);
+        dir.rmdir(mntpath);
+        return;
+    }
+
+    QIcon usbIcon(":/icons/hdd_usb_unmount.png");
+    QMap<QString,QVariantMap> images = listImages(mntpath+"/os", false);
+
+    foreach (QVariant v, images.values())
+    {
+        QVariantMap m = v.toMap();
+        QString name = m.value("name").toString();
+        QString folder  = m.value("folder").toString();
+
+        QListWidgetItem *witem = findItem(name);
+        if (witem)
+        {
+            QVariantMap existing_details = witem->data(Qt::UserRole).toMap();
+
+            if ((existing_details["release_date"].toString() <= m["release_date"].toString()))
+            {
+                /* Existing item in list is same version or older. Prefer image on USB storage. */
+                m.insert("installed", existing_details.value("installed", false));
+                if (existing_details.contains("partitions"))
+                {
+                    m["partitions"] = existing_details["partitions"];
+                }
+                witem->setData(Qt::UserRole, m);
+                witem->setData(SecondIconRole, usbIcon);
+                ui->list->update();
+            }
+        }
+        else
+        {
+            /* It's a new OS, so add it to the list */
+            QString description = m.value("description").toString();
+            QString iconFilename = m.value("icon").toString();
+            bool recommended = m.value("recommended").toBool();
+
+            if (!iconFilename.isEmpty() && !iconFilename.contains('/'))
+                iconFilename = folder+"/"+iconFilename;
+            if (!QFile::exists(iconFilename))
+            {
+                iconFilename = folder+"/"+name+".png";
+                iconFilename.replace(' ', '_');
+            }
+
+            QString friendlyname = name;
+            if (recommended)
+                friendlyname += " ["+tr("RECOMMENDED")+"]";
+            if (!description.isEmpty())
+                friendlyname += "\n"+description;
+
+            witem = new QListWidgetItem(friendlyname);
+            witem->setCheckState(Qt::Unchecked);
+            witem->setData(Qt::UserRole, m);
+            witem->setData(SecondIconRole, usbIcon);
+            if (QFile::exists(iconFilename))
+                witem->setIcon(QIcon(iconFilename));
+
+            if (recommended)
+                ui->list->insertItem(0, witem);
+            else
+                ui->list->addItem(witem);
+        }
+    }
+
+    filterList();
+}
+
+/* Dynamically hide items from list depending on target drive */
+void MainWindow::filterList()
+{
+    for (int i=0; i < ui->list->count(); i++)
+    {
+        QListWidgetItem *witem = ui->list->item(i);
+
+        if (_drive == "/dev/mmcblk0")
+        {
+            witem->setHidden(false);
+        }
+        else
+        {
+            QVariantMap m = witem->data(Qt::UserRole).toMap();
+            bool supportsUsb;
+            QString param;
+
+            if (_bootdrive == "/dev/mmcblk0")
+                param = "supports_usb_root";
+            else
+                param = "supports_usb_boot";
+
+
+            /* If the repo explicity states wheter or not usb is supported use that info */
+            if (m.contains(param))
+            {
+                supportsUsb = m.value(param).toBool();
+            }
+            else
+            {
+                /* Otherwise just assume Linux does, and RiscOS and Windows do not */
+                QString name = m.value("name").toString();
+                supportsUsb = (!nameMatchesRiscOS(name) && !name.contains("Windows", Qt::CaseInsensitive));
+            }
+
+            if (supportsUsb)
+            {
+                witem->setHidden(false);
+            }
+            else
+            {
+                witem->setCheckState(Qt::Unchecked);
+                witem->setHidden(true);
+            }
         }
     }
 }
