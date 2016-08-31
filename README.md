@@ -30,7 +30,7 @@ The NOOBS interface provides the following functionality:
 Note that all user settings (language, keyboard layout, display mode) will persist between reboots and will also be automatically passed to the installed OSes. This means that if you can see the NOOBS interface on your display device then you should be able to see the OS CLI/GUI when it boots too!
 ### Setup
 
-To setup a blank SD card with NOOBS:
+To set up a blank SD card with NOOBS:
 - Format an SD card that is 4GB or greater in size as FAT (see instructions on how to do this below)
 - Download and extract the files from the NOOBS zip file. (Windows built-in zip features may have trouble with this file. If so, use another program such as 7zip.)
 - Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card.
