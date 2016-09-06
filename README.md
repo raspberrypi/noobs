@@ -56,7 +56,7 @@ If a wired ethernet cable is plugged into the Pi before NOOBS starts, NOOBS will
 
 #### Wifi Networks
 
-If you have the official [Rapberry Pi USB wifi Dongle](https://www.raspberrypi.org/products/usb-wifi-dongle/), or are using the Raspberry Pi 3 Model B with built-in wifi, the wifi icon on the NOOBS toolbar will be available. Click on this to select your Wifi SSID network and enter the wifi password. 
+If you have the official [Raspberry Pi USB wifi Dongle](https://www.raspberrypi.org/products/usb-wifi-dongle/), or are using the Raspberry Pi 3 Model B with built-in wifi, the wifi icon on the NOOBS toolbar will be available. Click on this to select your Wifi SSID network and enter the wifi password. 
 
 ![alt text](screenshots/wifi_selector.png "Select your wifi network and enter the password")
 
