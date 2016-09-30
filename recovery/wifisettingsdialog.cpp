@@ -159,7 +159,7 @@ void WifiSettingsDialog::on_passwordRadio_toggled(bool checked)
 
 void WifiSettingsDialog::on_list_currentItemChanged(QListWidgetItem *current)
 {
-    /* Enable authentication options appropiate for the SSID selected */
+    /* Enable authentication options appropriate for the SSID selected */
     QVariantMap properties = current->data(Qt::UserRole).toMap();
     QStringList keymgmt = properties.value("WPA").toMap().value("KeyMgmt").toStringList();
     QStringList keymgmt_wpa2 = properties.value("RSN").toMap().value("KeyMgmt").toStringList();

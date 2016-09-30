@@ -721,7 +721,7 @@ void MainWindow::displayMode(int modenr, bool silent)
     QWSServer::instance()->refresh();
 
     // In case they can't see the message box, inform that mode change
-    // is occuring by turning on the LED during the change
+    // is occurring by turning on the LED during the change
     QProcess *led_blink = new QProcess(this);
     connect(led_blink, SIGNAL(finished(int)), led_blink, SLOT(deleteLater()));
     led_blink->start("sh -c \"echo 1 > /sys/class/leds/led0/brightness; sleep 3; echo 0 > /sys/class/leds/led0/brightness\"");

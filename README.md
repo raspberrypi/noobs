@@ -185,7 +185,7 @@ This will also prevent the splashscreen from being displayed at boot. The partit
 ### How to use with the Raspberry Pi Touch Display
 
 If NOOBS detects you are using the [Raspberry Pi Touch Display](https://www.raspberrypi.org/products/raspberry-pi-touch-display/), it will enable the following functionality:
-- A tap on the touchscreen can activate NOOBS aswell as holding the shift key down.
+- A tap on the touchscreen can activate NOOBS as well as holding the shift key down.
 - A tap on the touchscreen will simulate a mouse click
 - A longpress on the touchscreen will simulate a mouse double-click.
 
