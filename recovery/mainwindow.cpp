@@ -160,6 +160,50 @@ MainWindow::MainWindow(const QString &defaultDisplay, QSplashScreen *splash, QWi
 
     _model = getFileContents("/proc/device-tree/model");
     QString cmdline = getFileContents("/proc/cmdline");
+
+    if (QFile::exists("/mnt/os_list_v3.json"))
+    {
+        /* We have a local os_list_v3.json for testing purposes */
+        _repo = "/mnt/os_list_v3.json";
+
+        /* We need a somewhat accurate date for https to work. Normally we retrieve that from the repo server,
+           but since we are in testing mode, just set date to last modification time of our local file */
+        if (QDate::currentDate().year() < 2016)
+        {
+            QFileInfo fi(_repo);
+
+            struct timeval tv;
+            tv.tv_sec = fi.lastModified().toTime_t();
+            tv.tv_usec = 0;
+            settimeofday(&tv, NULL);
+        }
+    }
+    else if (cmdline.contains("repo="))
+    {
+        QByteArray searchFor = "repo=";
+        int searchForLen = searchFor.length();
+        int pos = cmdline.indexOf(searchFor);
+        int end;
+
+        if (cmdline.length() > pos+searchForLen && cmdline.at(pos+searchForLen) == '"')
+        {
+            /* Value between quotes */
+            searchForLen++;
+            end = cmdline.indexOf('"', pos+searchForLen);
+        }
+        else
+        {
+            end = cmdline.indexOf(' ', pos+searchForLen);
+        }
+        if (end != -1)
+            end = end-pos-searchForLen;
+        _repo = cmdline.mid(pos+searchForLen, end);
+    }
+    else
+    {
+        _repo = DEFAULT_REPO_SERVER;
+    }
+
     if (cmdline.contains("showall"))
     {
         _showAll = true;
@@ -991,11 +1035,14 @@ void MainWindow::downloadList(const QString &urlstring)
 void MainWindow::downloadLists()
 {
     _numIconsToDownload = 0;
-    QStringList urls = QString(DEFAULT_REPO_SERVER).split(' ', QString::SkipEmptyParts);
+    QStringList urls = _repo.split(' ', QString::SkipEmptyParts);
 
     foreach (QString url, urls)
     {
-        downloadList(url);
+        if (url.startsWith("/"))
+            processJson( Json::parse(getFileContents(url)) );
+        else
+            downloadList(url);
     }
 }
 
