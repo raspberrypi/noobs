@@ -14,6 +14,8 @@
 #include <QTime>
 #include <unistd.h>
 #include <linux/fs.h>
+#include <linux/magic.h>
+#include <sys/statfs.h>
 #include <sys/ioctl.h>
 #include <QtEndian>
 
@@ -666,7 +668,16 @@ bool MultiImageWriteThread::untar(const QString &tarball)
     {
         cmd += " "+tarball;
     }
-    cmd += " | tar x -C /mnt2 ";
+
+    cmd += " | bsdtar -xf - -C /mnt2 ";
+
+    struct statfs st;
+    if (statfs("/mnt2", &st) == 0 && st.f_type == MSDOS_SUPER_MAGIC)
+    {
+        /* File system does not support uid/gid, tell bsdtar not to set those or it will error out */
+        cmd += " --no-same-owner ";
+    }
+
     cmd += "\"";
 
     QTime t1;

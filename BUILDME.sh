@@ -122,7 +122,7 @@ for i in $*; do
 
     # Update raspberrypi/linux rpi-4.1.y HEAD version in buildroot/.config to latest
     if [ $i = "update-kernel" ]; then
-        update_github_kernel_version raspberrypi/linux rpi-4.1.y
+        update_github_kernel_version raspberrypi/linux rpi-4.4.y
     fi
 
     # Option to build just recovery without completely rebuilding both kernels
