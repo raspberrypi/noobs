@@ -52,9 +52,5 @@ endef
 HOST_RPI_FIRMWARE_SOURCE =
 HOST_RPI_FIRMWARE_DEPENDENCIES =
 
-define HOST_RPI_FIRMWARE_INSTALL_CMDS
-	$(INSTALL) -D -m 0755 package/rpi-firmware/mkknlimg $(HOST_DIR)/usr/bin/mkknlimg
-endef
-
 $(eval $(generic-package))
 $(eval $(host-generic-package))

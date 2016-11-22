@@ -113,15 +113,9 @@ For example:
 
  $ cp output/images/rpi-firmware/* /mnt/mountpointboot
 
-If your kernel does *not* have support for the Device Tree, then install
-it with:
+Install your kernel with:
 
  $ cp output/images/zImage /mnt/mountpointboot
-
-If your kernel *does* have support for the Device Tree, then install it
-with:
-
-  $ ./output/host/usr/bin/mkknlimg output/images/zImage /mnt/mountpointboot/zImage
 
 Note: The kernel image file name is defined in config.txt like this:
 kernel=zImage

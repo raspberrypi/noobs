@@ -150,13 +150,13 @@ if [ $SKIP_KERNEL_REBUILD -ne 1 ]; then
     select_kernelconfig armv7
     make linux-reconfigure
     # copy ARMv7 kernel
-    package/rpi-firmware/mkknlimg "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7.img"
+    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7.img"
 
     # Rebuild kernel for ARMv6
     select_kernelconfig armv6
     make linux-reconfigure
     # copy ARMv6 kernel
-    package/rpi-firmware/mkknlimg "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery.img"
+    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery.img"
 else
     echo "Warning: kernels in '$NOOBS_OUTPUT_DIR' directory haven't been updated"
 fi
