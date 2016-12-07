@@ -588,6 +588,8 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
         {
             setEnabled(false);
             _numMetaFilesToDownload = 0;
+            if (_networkStatusPollTimer.isActive())
+                _networkStatusPollTimer.stop();
 
             QList<QListWidgetItem *> selected = selectedItems();
             foreach (QListWidgetItem *item, selected)
