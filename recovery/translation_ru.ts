@@ -676,7 +676,7 @@ Would you like to make this setting permanent?</source>
         <translation>&amp;Да</translation>
     </message>
     <message>
-        <location filename="lang1uagedialog.cpp" line="34"/>
+        <location filename="languagedialog.cpp" line="34"/>
         <source>&amp;No</source>
         <translation>&amp;Нет</translation>
     </message>
