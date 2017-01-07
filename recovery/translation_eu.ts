@@ -396,12 +396,12 @@ KONTUZ: Honek zure SD txarteleko datu guztiak ezabatuko ditu</translation>
     <message>
         <location filename="mainwindow.cpp" line="650"/>
         <source>OS(es) installed</source>
-        <translation>Instalatutako SEa(k)</translation>
+        <translation>SEa(k) instalatu dira</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="651"/>
         <source>OS(es) Installed Successfully</source>
-        <translation>Behar bezala instalatutako SEa(k)</translation>
+        <translation>SEa(k) behar bezala instalatu dira</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="662"/>
@@ -478,12 +478,12 @@ Ezarpen hau iraunkortu nahi duzu?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1351"/>
         <source>Needed</source>
-        <translation>Beharrezkoa</translation>
+        <translation>Behar dena</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1352"/>
         <source>Available</source>
-        <translation>Erabilgarria</translation>
+        <translation>Erabilgarri dagoena</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1458"/>
@@ -682,7 +682,7 @@ Ezarpen hau iraunkortu nahi duzu?</translation>
         <location filename="multiimagewritethread.cpp" line="735"/>
         <location filename="multiimagewritethread.cpp" line="794"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation>Konpresio-formatu fitxategi-luzapen ezezaguna. .lzo, .gz, .xz, .bz2 edo .zip espero zen</translation>
+        <translation>Konpresio-formatuaren fitxategi-luzapen ezezaguna. .lzo, .gz, .xz, .bz2 edo .zip espero zen</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="697"/>
@@ -701,7 +701,7 @@ Ezarpen hau iraunkortu nahi duzu?</translation>
     <message>
         <location filename="progressslideshowdialog.cpp" line="138"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
-        <translation>%1 MB / %2 MB(e)tik idatzita (%3 MB/s)</translation>
+        <translation>%1 MB / %2 MBetik idatzita (%3 MB/s)</translation>
     </message>
     <message>
         <location filename="progressslideshowdialog.cpp" line="143"/>
