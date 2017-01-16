@@ -911,7 +911,7 @@ void MainWindow::startBrowser()
         return;
     QProcess *proc = new QProcess(this);
     QString lang = LanguageDialog::instance("en", "gb")->currentLanguage();
-    if (lang == "gb" || lang == "us" || lang == "")
+    if (lang == "gb" || lang == "us" || lang == "ko" || lang == "")
         lang = "en";
     proc->start("arora -lang "+lang+" "+HOMEPAGE);
 }
