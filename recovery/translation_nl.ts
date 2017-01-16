@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl" sourcelanguage="en">
+<TS version="2.0" language="nl" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -275,205 +275,205 @@ WAARSCHUWING: Dit verwijdert alle bestaande bestanden op de SD kaart</translatio
         <translation>Start een webbrowser en bezoeker het Raspberry Pi forum.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="198"/>
-        <source>Wifi networks (w)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="201"/>
-        <source>Select a wifi network to connect to</source>
-        <translation type="unfinished"></translation>
+        <source>Wifi networks (w)</source>
+        <translation>Wifi netwerken</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
-        <source>W</source>
-        <translation type="unfinished"></translation>
+        <source>Select a wifi network to connect to</source>
+        <translation>Selecteer een wifi netwerk om connectie mee te maken</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="275"/>
-        <location filename="mainwindow.cpp" line="1195"/>
+        <location filename="mainwindow.ui" line="207"/>
+        <source>W</source>
+        <translation>W</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="326"/>
+        <location filename="mainwindow.cpp" line="1233"/>
         <source>RECOMMENDED</source>
         <translation>AANBEVOLEN</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="545"/>
-        <location filename="mainwindow.cpp" line="564"/>
+        <location filename="mainwindow.cpp" line="566"/>
+        <location filename="mainwindow.cpp" line="585"/>
         <source>Confirm</source>
         <translation>Bevestigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="656"/>
+        <location filename="mainwindow.cpp" line="679"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Built: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="97"/>
+        <location filename="mainwindow.cpp" line="98"/>
         <source>Setting up SD card</source>
         <translation>SD card voorbereiden</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="141"/>
+        <location filename="mainwindow.cpp" line="142"/>
         <source>Error mounting settings partition</source>
         <translation>Fout bij mounten instellingen partitie</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="142"/>
+        <location filename="mainwindow.cpp" line="143"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation>Instellingen partitie corrupt. Opnieuw formatteren?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="149"/>
+        <location filename="mainwindow.cpp" line="150"/>
         <source>Reformat failed</source>
         <translation>Formatteren mislukt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="149"/>
+        <location filename="mainwindow.cpp" line="150"/>
         <source>SD card might be damaged</source>
         <translation>SD kaart kan beschadigd zijn</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="546"/>
+        <location filename="mainwindow.cpp" line="567"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation>Weet u zeker dat u het besturingssysteem wilt installeren?
 Hierbij worden alle bestaande bestanden verwijderd.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="639"/>
-        <location filename="mainwindow.cpp" line="1094"/>
+        <location filename="mainwindow.cpp" line="662"/>
+        <location filename="mainwindow.cpp" line="1133"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="278"/>
+        <location filename="mainwindow.cpp" line="329"/>
         <source>INSTALLED</source>
         <translation>GEINSTALLEERD</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="756"/>
+        <location filename="mainwindow.cpp" line="779"/>
         <source>Display Mode Changed</source>
         <translation>Resolutie aangepast</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="688"/>
+        <location filename="mainwindow.cpp" line="711"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI preferred mode</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="117"/>
+        <location filename="mainwindow.cpp" line="118"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachten op SD kaart (settings partitie)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="130"/>
+        <location filename="mainwindow.cpp" line="131"/>
         <source>Mounting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Mounten van de settings partitie</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="187"/>
+        <location filename="mainwindow.cpp" line="238"/>
         <source>Please wait while NOOBS initialises</source>
-        <translation>Even geduld</translation>
+        <translation>Even geduld terwijl NOOBS opstart</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="565"/>
+        <location filename="mainwindow.cpp" line="586"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation type="unfinished"></translation>
+        <translation>incompatibele OS gedetecteerd, the volgende OS&apos;s zijn niet ondersteund in deze versie van Raspberry Pi en kunnen mogelijk niet opstarten of correct functioneren</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="605"/>
+        <location filename="mainwindow.cpp" line="628"/>
         <source>The install process will begin shortly.</source>
         <translation>Even geduld.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="627"/>
+        <location filename="mainwindow.cpp" line="650"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation>Besturingssysteem geinstalleerd</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="628"/>
+        <location filename="mainwindow.cpp" line="651"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation>Besturingssysteem successvol geinstalleerd</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="692"/>
+        <location filename="mainwindow.cpp" line="715"/>
         <source>HDMI safe mode</source>
         <translation>HDMI safe mode</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="696"/>
+        <location filename="mainwindow.cpp" line="719"/>
         <source>composite PAL mode</source>
         <translation>composite PAL mode</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="700"/>
+        <location filename="mainwindow.cpp" line="723"/>
         <source>composite NTSC mode</source>
         <translation>composite NTSC mode</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="757"/>
+        <location filename="mainwindow.cpp" line="780"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Resolutie aangepast naar %1
 De instelling opslaan?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1080"/>
-        <location filename="mainwindow.cpp" line="1419"/>
-        <location filename="mainwindow.cpp" line="1429"/>
+        <location filename="mainwindow.cpp" line="1119"/>
+        <location filename="mainwindow.cpp" line="1458"/>
+        <location filename="mainwindow.cpp" line="1468"/>
         <source>Download error</source>
         <translation>Fout bij downloaden</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1080"/>
+        <location filename="mainwindow.cpp" line="1119"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Fout downloaden van lijst met besturingssystemen van Internet</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1094"/>
+        <location filename="mainwindow.cpp" line="1133"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Fout bij parsen list.json</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1310"/>
+        <location filename="mainwindow.cpp" line="1351"/>
         <source>Needed</source>
         <translation>Nodig</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1311"/>
+        <location filename="mainwindow.cpp" line="1352"/>
         <source>Available</source>
         <translation>Beschikbaar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1419"/>
+        <location filename="mainwindow.cpp" line="1458"/>
         <source>Error downloading meta file</source>
         <translation>Fout bij downloaden meta bestand</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1429"/>
+        <location filename="mainwindow.cpp" line="1468"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Fout bij wegschrijven gedownload bestand naar SD kaart. SD kaart of bestandssysteem kan beschadigd zijn.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1584"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Netwerk toegang is nodig om NOOBS te gebruiken zonder locale images, Kies uw WiFi netwerk op het volgende scherm</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1553"/>
+        <location filename="mainwindow.cpp" line="1592"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Een bekabelde netwerk verbinding is vereist indien er geen lokale images zijn. Controleer of de netwerk kabel aangesloten zit.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="876"/>
-        <location filename="mainwindow.cpp" line="1544"/>
-        <location filename="mainwindow.cpp" line="1552"/>
+        <location filename="mainwindow.cpp" line="899"/>
+        <location filename="mainwindow.cpp" line="1583"/>
+        <location filename="mainwindow.cpp" line="1591"/>
         <source>No network access</source>
         <translation>Geen netwerk verbinding</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="877"/>
+        <location filename="mainwindow.cpp" line="900"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Een bekabelde netwerk verbinding is vereist voor deze functionaliteit. Controleer of de netwerk kabel aangesloten zit.</translation>
     </message>
@@ -481,180 +481,180 @@ De instelling opslaan?</translation>
 <context>
     <name>MultiImageWriteThread</name>
     <message>
-        <location filename="multiimagewritethread.cpp" line="52"/>
+        <location filename="multiimagewritethread.cpp" line="54"/>
         <source>partitions.json invalid</source>
         <translation>partitions.json corrupt</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="76"/>
+        <location filename="multiimagewritethread.cpp" line="78"/>
         <source>RISCOS cannot be installed. Size of recovery partition too large.</source>
         <translation>RISCOS kan niet geinstalleerd worden. Recovery partitie te groot.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="135"/>
+        <location filename="multiimagewritethread.cpp" line="110"/>
+        <source>Operating system cannot require a system partition (1,5)</source>
+        <translation>OS kan geen systeem partitite nodig hebben (1,5)</translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="115"/>
+        <source>Operating system cannot claim both primary partitions 2 and 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="multiimagewritethread.cpp" line="143"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
         <translation>Niet genoeg schijfruimte. %1 MB nodig, %2 MB beschikbaar</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="255"/>
+        <location filename="multiimagewritethread.cpp" line="265"/>
         <source>Finish writing (sync)</source>
         <translation>Bezig met wegschrijven (sync)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="384"/>
+        <location filename="multiimagewritethread.cpp" line="387"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>Bestand &apos;%1&apos; bestaat niet</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="407"/>
-        <location filename="multiimagewritethread.cpp" line="413"/>
+        <location filename="multiimagewritethread.cpp" line="410"/>
+        <location filename="multiimagewritethread.cpp" line="416"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
-        <translation type="unfinished">Wegschrijven image</translation>
+        <translation>%1: Wegschrijven image</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="427"/>
+        <location filename="multiimagewritethread.cpp" line="430"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
-        <translation type="unfinished">Mounten bestandssysteem</translation>
+        <translation>%1: Koppelen van bestandssysteem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="435"/>
-        <location filename="multiimagewritethread.cpp" line="459"/>
+        <location filename="multiimagewritethread.cpp" line="438"/>
+        <location filename="multiimagewritethread.cpp" line="462"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
-        <translation type="unfinished">Fout bij mounten bestandssysteem</translation>
+        <translation>%1: Fout bij mounten bestandssysteem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="420"/>
+        <location filename="multiimagewritethread.cpp" line="423"/>
         <source>%1: Creating filesystem (%2)</source>
-        <translation type="unfinished">Aanmaken bestandssysteem (%1) {1:?} {2)?}</translation>
+        <translation>%1: Aanmaken bestandssysteem (%2)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="65"/>
+        <location filename="multiimagewritethread.cpp" line="67"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS Kan niet installeren, RISCOS correctiewaarde klopt niet</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="71"/>
+        <location filename="multiimagewritethread.cpp" line="73"/>
         <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS Kan niet installeren, RISCOS correctiewaarde missend</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="103"/>
+        <location filename="multiimagewritethread.cpp" line="105"/>
         <source>More than one operating system requires partition number %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Meer dan een OS hebben partitie nummers %1</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="108"/>
-        <source>Operating system cannot require a system partition (1,2,5)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="multiimagewritethread.cpp" line="175"/>
+        <location filename="multiimagewritethread.cpp" line="185"/>
         <source>Fixed partition offset too low</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixed partitie correctiewaarde te laag</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="236"/>
+        <location filename="multiimagewritethread.cpp" line="246"/>
         <source>Writing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Schijven van Partitie tabel</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="241"/>
+        <location filename="multiimagewritethread.cpp" line="251"/>
         <source>Zero&apos;ing start of each partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle begin delen van elke partitie op nul zetten</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="275"/>
+        <location filename="multiimagewritethread.cpp" line="285"/>
         <source>Error reading existing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Lezen van bestaande partitie</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="352"/>
+        <location filename="multiimagewritethread.cpp" line="355"/>
         <source>Error creating partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Maken partitie tabel</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="440"/>
+        <location filename="multiimagewritethread.cpp" line="443"/>
         <source>%1: Downloading and extracting filesystem</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Downloaden en uitpakken van bestands systeem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="442"/>
+        <location filename="multiimagewritethread.cpp" line="445"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>%1: Bestands systeem uitpakken</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="456"/>
+        <location filename="multiimagewritethread.cpp" line="459"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
-        <translation type="unfinished">Mounten FAT partitie</translation>
+        <translation>%1: Mounten FAT partitie</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="463"/>
+        <location filename="multiimagewritethread.cpp" line="466"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
-        <translation type="unfinished">Aanmaken os_config.json</translation>
+        <translation>%1: Aanmaken os_config.json</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="488"/>
+        <location filename="multiimagewritethread.cpp" line="491"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
-        <translation type="unfinished">Opslaan resolutie naar config.txt</translation>
+        <translation>%1: Scherm resolutie opslaan in config.txt</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="499"/>
+        <location filename="multiimagewritethread.cpp" line="502"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
-        <translation type="unfinished">Uitvoeren partition setup script</translation>
+        <translation>%1: Uitvoeren partitie setup script</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="544"/>
+        <location filename="multiimagewritethread.cpp" line="547"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
-        <translation type="unfinished">Fout bij uitvoeren partition setup script</translation>
+        <translation>%1: Fout bij uitvoeren partitie setup script</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="552"/>
-        <source>%1: Patching BCD file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="multiimagewritethread.cpp" line="556"/>
         <source>%1: Unmounting FAT partition</source>
-        <oldsource>Unmounting FAT partition</oldsource>
-        <translation type="unfinished">Unmounten FAt partitie</translation>
+        <oldsource>%1: Patching BCD file</oldsource>
+        <translation>%1: Patchen van het BCD bestand</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="559"/>
+        <location filename="multiimagewritethread.cpp" line="555"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
-        <translation type="unfinished">Fout bij unmounten</translation>
+        <translation>%1: Fout bij uitwerpen</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="626"/>
+        <location filename="multiimagewritethread.cpp" line="622"/>
         <source>Error creating file system</source>
         <translation>Fout bij aanmaken bestandssysteem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="668"/>
-        <location filename="multiimagewritethread.cpp" line="730"/>
-        <location filename="multiimagewritethread.cpp" line="789"/>
+        <location filename="multiimagewritethread.cpp" line="664"/>
+        <location filename="multiimagewritethread.cpp" line="735"/>
+        <location filename="multiimagewritethread.cpp" line="794"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend compressie formaat bestands extensie. Verwacht .lzo .gz .xz .bz2 of .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="692"/>
+        <location filename="multiimagewritethread.cpp" line="697"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Fout bij downloaden of uitpakken tarball</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="751"/>
-        <location filename="multiimagewritethread.cpp" line="810"/>
+        <location filename="multiimagewritethread.cpp" line="756"/>
+        <location filename="multiimagewritethread.cpp" line="815"/>
         <source>Error downloading or writing OS to SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Error tijdens het downloaden of schijven van de OS naar de SD kaart</translation>
     </message>
 </context>
 <context>
@@ -718,77 +718,82 @@ De instelling opslaan?</translation>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
         <source>No wifi interfaces available</source>
+        <translation>Geen wifi interfaces beschikbaar</translation>
+    </message>
+    <message>
+        <location filename="wifisettingsdialog.cpp" line="44"/>
+        <source>No wifi interfaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
         <source>Authenticated but still waiting for DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>Geauthenticeerd maar nogsteeds wachten op de DHCP lease</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to wifi failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Connectie maken met wifi is mislukt</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to the wifi access point failed. Check your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen connectie maken met het WiFI access point. Check uw wachtwoord</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="269"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleren</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="275"/>
         <source>Releasing old DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgeven van ouwe DHCP lease</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="290"/>
         <source>Disconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitschakkelen van verbinding</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="295"/>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinden</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="22"/>
         <source>Wifi network selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wifi netwerk Selectie</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="28"/>
         <source>Wifi network</source>
-        <translation type="unfinished"></translation>
+        <translation>WiFi netwerk</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="55"/>
         <source>Authentication method</source>
-        <translation type="unfinished"></translation>
+        <translation>Authenticatie methode</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="64"/>
         <source>Pressing the WPS button on my wifi router</source>
-        <translation type="unfinished"></translation>
+        <translation>Op de WPS knop van mijn wifi router drukken</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="71"/>
         <source>Password authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord authenticatie</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="96"/>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers naam</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="110"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord</translation>
     </message>
 </context>
 </TS>
