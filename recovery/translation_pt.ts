@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt" sourcelanguage="en">
+<TS version="2.0" language="pt" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -274,7 +274,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+15"/>
         <source>Wifi networks (w)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -289,24 +289,24 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="+275"/>
-        <location line="+920"/>
+        <location filename="mainwindow.cpp" line="+326"/>
+        <location line="+907"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-650"/>
+        <location line="-667"/>
         <location line="+19"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+94"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-559"/>
+        <location line="-581"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -331,24 +331,24 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+397"/>
+        <location line="+417"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
-        <translation type="unfinished">Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
+        <translation>Você tem certeza que deseja gravar a imagem? ISSO EXCLUIRÁ TODOS OS DADOS EXISTENTES!</translation>
     </message>
     <message>
-        <location line="+93"/>
-        <location line="+455"/>
+        <location line="+95"/>
+        <location line="+471"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-816"/>
+        <location line="-804"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+478"/>
+        <location line="+450"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -358,7 +358,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-571"/>
+        <location line="-593"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -368,17 +368,17 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+57"/>
+        <location line="+107"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+378"/>
+        <location line="+348"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+42"/>
         <source>The install process will begin shortly.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -416,7 +416,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+323"/>
+        <location line="+339"/>
         <location line="+339"/>
         <location line="+10"/>
         <source>Download error</source>
@@ -433,7 +433,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+216"/>
+        <location line="+218"/>
         <source>Needed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -443,7 +443,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+106"/>
         <source>Error downloading meta file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -463,14 +463,14 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-677"/>
-        <location line="+668"/>
+        <location line="-693"/>
+        <location line="+684"/>
         <location line="+8"/>
         <source>No network access</source>
         <translation>Sem acesso de rede</translation>
     </message>
     <message>
-        <location line="-675"/>
+        <location line="-691"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>
@@ -478,7 +478,7 @@ Would you like to make this setting permanent?</source>
 <context>
     <name>MultiImageWriteThread</name>
     <message>
-        <location filename="multiimagewritethread.cpp" line="+52"/>
+        <location filename="multiimagewritethread.cpp" line="+54"/>
         <source>partitions.json invalid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -488,17 +488,27 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+59"/>
+        <location line="+32"/>
+        <source>Operating system cannot require a system partition (1,5)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Operating system cannot claim both primary partitions 2 and 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
         <source>Not enough disk space. Need %1 MB, got %2 MB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+120"/>
+        <location line="+122"/>
         <source>Finish writing (sync)</source>
-        <translation type="unfinished">Finalizando a gravação</translation>
+        <translation>Finalizando a gravação</translation>
     </message>
     <message>
-        <location line="+129"/>
+        <location line="+122"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -528,7 +538,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-355"/>
+        <location line="-356"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -543,12 +553,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Operating system cannot require a system partition (1,2,5)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+67"/>
+        <location line="+80"/>
         <source>Fixed partition offset too low</source>
         <translation type="unfinished"></translation>
     </message>
@@ -568,7 +573,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+70"/>
         <source>Error creating partition table</source>
         <translation type="unfinished"></translation>
     </message>
@@ -614,14 +619,9 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
-        <source>%1: Patching BCD file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>%1: Unmounting FAT partition</source>
-        <oldsource>Unmounting FAT partition</oldsource>
+        <oldsource>%1: Patching BCD file</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -637,7 +637,7 @@ Would you like to make this setting permanent?</source>
     </message>
     <message>
         <location line="+42"/>
-        <location line="+62"/>
+        <location line="+71"/>
         <location line="+59"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation type="unfinished"></translation>
@@ -718,6 +718,11 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+0"/>
+        <source>No wifi interfaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+183"/>
         <source>Authenticated but still waiting for DHCP lease</source>
         <translation type="unfinished"></translation>
@@ -735,7 +740,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location line="+35"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location line="+6"/>
