@@ -6,26 +6,48 @@
         <file>icons/page_white_edit.png</file>
         <file>icons/setting_tools.png</file>
         <file>wallpaper.png</file>
+        <file>icons/download.png</file>
+        <file>icons/hdd.png</file>
+        <file>icons/keyboard.png</file>
         <file>icons/world.png</file>
         <file>icons/gb.png</file>
-        <file>translation_nl.qm</file>
-        <file>icons/nl.png</file>
+        <file>icons/us.png</file>
+        <file>translation_ca.qm</file>
+        <file>icons/ca.png</file>
         <file>translation_de.qm</file>
         <file>icons/de.png</file>
-        <file>translation_pt.qm</file>
-        <file>icons/pt.png</file>
-        <file>translation_ja.qm</file>
-        <file>icons/ja.png</file>
+        <file>translation_es.qm</file>
+        <file>translation_es_XA.qm</file>
+        <file>icons/es_XA.png</file>
+        <file>icons/es.png</file>
+        <file>translation_eu.qm</file>
+        <file>icons/eu.png</file>
+        <file>translation_fi.qm</file>
+        <file>icons/fi.png</file>
         <file>translation_fr.qm</file>
         <file>icons/fr.png</file>
         <file>translation_hu.qm</file>
         <file>icons/hu.png</file>
-        <file>translation_fi.qm</file>
-        <file>icons/fi.png</file>
-        <file>icons/us.png</file>
-        <file>icons/download.png</file>
-        <file>icons/hdd.png</file>
-        <file>icons/keyboard.png</file>
+        <file>translation_it.qm</file>
+        <file>icons/it.png</file>
+        <file>translation_ja.qm</file>
+        <file>icons/ja.png</file>
+        <file>translation_ko.qm</file>
+        <file>icons/ko.png</file>
+        <file>translation_nl.qm</file>
+        <file>icons/nl.png</file>
+        <file>translation_pl.qm</file>
+        <file>icons/pl.png</file>
+        <file>translation_pt.qm</file>
+        <file>icons/pt.png</file>
+        <file>translation_ru.qm</file>
+        <file>icons/ru.png</file>
+        <file>translation_sv.qm</file>
+        <file>icons/sv.png</file>
+        <file>translation_tr.qm</file>
+        <file>icons/tr.png</file>
+        <file>translation_zh_TW.qm</file>
+        <file>icons/zh_TW.png</file>
         <file>icons/network-wireless.png</file>
         <file>icons/network-wireless-connected-00.png</file>
         <file>icons/network-wireless-connected-25.png</file>
