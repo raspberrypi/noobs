@@ -16,6 +16,8 @@
         <file>icons/pt.png</file>
         <file>translation_ja.qm</file>
         <file>icons/ja.png</file>
+        <file>translation_ko.qm</file>
+        <file>icons/ko.png</file>
         <file>translation_fr.qm</file>
         <file>icons/fr.png</file>
         <file>translation_hu.qm</file>

@@ -79,6 +79,7 @@ TRANSLATIONS += translation_nl.ts \
     translation_de.ts \
     translation_pt.ts \
     translation_ja.ts \
+    translation_ko.ts \
     translation_fr.ts \
     translation_hu.ts \
     translation_fi.ts
