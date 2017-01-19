@@ -491,6 +491,17 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     emit statusUpdate(tr("%1: Saving display mode to config.txt").arg(os_name));
     patchConfigTxt();
 
+    /* enable SSH
+     * If user supplied a ssh on the FAT partition copy that to partition1 (boot)
+     */
+    if (os_name == RECOMMENDED_IMAGE)
+    {
+        if (QFile::exists("/mnt/ssh"))
+        {
+            QFile::copy("/mnt/ssh", "/mnt2/ssh");
+        }
+    }
+
     /* Partition setup script can either reside in the image folder
      * or inside the boot partition tarball */
     QString postInstallScript = image->folder()+"/partition_setup.sh";
