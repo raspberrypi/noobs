@@ -31,7 +31,7 @@ Note that all user settings (language, keyboard layout, display mode) will persi
 ### Setup
 
 To set up a blank SD card with NOOBS:
-- Format an SD card that is 4GB or greater in size as FAT (see instructions on how to do this below)
+- Format an SD card as FAT32 (see instructions on how to do this below). A full install of Raspbian will require a card that is 8GB or greater in size. Other operating systems may fit on a 4GB card.
 - Download and extract the files from the NOOBS zip file. (Windows built-in zip features may have trouble with this file. If so, use another program such as 7zip.)
 - Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card.
 <b> Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.</b>
