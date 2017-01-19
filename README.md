@@ -31,7 +31,7 @@ Note that all user settings (language, keyboard layout, display mode) will persi
 ### Setup
 
 To set up a blank SD card with NOOBS:
-- Format an SD card as FAT32 (see instructions on how to do this below). A full install of Raspbian will require a card that is 8GB or greater in size. Other operating systems may fit on a 4GB card.
+- Format an SD card that is 8GB or greater in size as FAT32 (see instructions on how to do this below)
 - Download and extract the files from the NOOBS zip file. (Windows built-in zip features may have trouble with this file. If so, use another program such as 7zip.)
 - Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card.
 <b> Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.</b>
@@ -269,7 +269,7 @@ If your build machine also has some QT5 components, it is useful to `export QT_S
 ## How to run your Build
 
 In order to setup an SD card with a newly built version of NOOBS, you will need to:
-- Format an SD card that is 4GB or greater in size as FAT
+- Format an SD card that is 8GB or greater in size as FAT32
 - Replace the `/os` directory in `/output` with the copy contained in the release version of NOOBS (see above for download links)
 - Copy the files in the `/output` directory onto the SD card
 
