@@ -112,7 +112,7 @@ SKIP_KERNEL_REBUILD=0
 for i in $*; do
     # Update raspberrypi/firmware master HEAD version in package/rpi-firmware/rpi-firmware.mk to latest
     if [ $i = "update-firmware" ]; then
-        update_github_package_version rpi-firmware raspberrypi/firmware master
+        update_github_package_version rpi-firmware raspberrypi/firmware stable
     fi
 
     # Update raspberrypi/userland master HEAD version in package/rpi-userland/rpi-userland.mk to latest

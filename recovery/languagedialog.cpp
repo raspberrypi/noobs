@@ -80,6 +80,11 @@ LanguageDialog::LanguageDialog(const QString &defaultLang, const QString &defaul
         /* QString languagename = QLocale::languageToString(loc.language()); */
         /* should Display languagename in native language, e.g. Deutsch, Français  */
         QString languagename = loc.nativeLanguageName();
+
+        /* Exception for Asturian (not in ISO639-1) */
+        if (langcode.compare("ast", Qt::CaseInsensitive) == 0)
+            languagename = "Asturian";
+
         QString iconfilename = ":/icons/"+langcode+".png";
 
         if (QFile::exists(iconfilename))
