@@ -53,6 +53,11 @@ public:
         return _bootable;
     }
 
+    inline bool managevideo()
+    {
+        return _managevideo;
+    }
+
     inline QList<PartitionInfo *> *partitions()
     {
         return &_partitions;
@@ -66,6 +71,7 @@ public:
 protected:
     QString _folder, _flavour, _name, _description, _version, _releaseDate;
     bool _bootable;
+    bool _managevideo;
     QList<PartitionInfo *> _partitions;
     int _riscosOffset;
 
