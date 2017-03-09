@@ -41,7 +41,6 @@ protected:
     QString _drive, _bootdrive;
     int _extraSpacePerPartition, _sectorOffset, _part;
     QVariantList installed_os;
-    QByteArray _diskId;
     bool _multiDrives;
     
 signals:

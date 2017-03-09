@@ -1007,14 +1007,16 @@ QByteArray MultiImageWriteThread::getDiskId(const QString &device)
 
 QByteArray MultiImageWriteThread::getPartUUID(const QString &devpart)
 {
-    if (_diskId.isEmpty())
-        _diskId = getDiskId(_drive);
-
-    QByteArray r = "PARTUUID="+_diskId;
+    QByteArray r;
 
     QRegExp partnrRx("([0-9]+)$");
     if (partnrRx.indexIn(devpart) != -1)
     {
+        QString drive = devpart.left(partnrRx.pos());
+        if (drive.endsWith("p"))
+            drive.chop(1);
+
+        r = "PARTUUID="+getDiskId(drive);
         int partnr = partnrRx.cap(1).toInt();
         QByteArray partnrstr = QByteArray::number(partnr, 16).rightJustified(2, '0');
         r += '-'+partnrstr;
