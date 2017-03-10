@@ -591,8 +591,8 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
                 id = "LABEL="+label;
             else
                 id = "UUID="+uuid;
-            //if (_drive != "/dev/mmcblk0")
-            //    part = partuuid;
+            if (_drive != "/dev/mmcblk0")
+                part = partuuid;
 
             qDebug() << "part" << part << uuid << label;
 
