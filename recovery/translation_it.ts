@@ -381,7 +381,7 @@ ATTENZIONE: questo eliminerà tutti i dati nella scheda SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="628"/>
         <source>The install process will begin shortly.</source>
-        <translation>Il processo di installazionione inizierà a breve.</translation>
+        <translation>Il processo di installazione inizierà a breve.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="650"/>
