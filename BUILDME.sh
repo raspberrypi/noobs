@@ -175,7 +175,7 @@ touch "$FINAL_OUTPUT_DIR/RECOVERY_FILES_DO_NOT_EDIT"
 # Create build-date timestamp file containing Git HEAD info for build
 BUILD_INFO="$FINAL_OUTPUT_DIR/BUILD-DATA"
 echo "Build-date: $(date +"%Y-%m-%d")" > "$BUILD_INFO"
-echo "NOOBS Version: $(git describe)" >> "$BUILD_INFO"
+echo "NOOBS Version: $(sed -n 's|.*VERSION_NUMBER.*\"\(.*\)\"|v\1|p' ../recovery/config.h)" >> "$BUILD_INFO"
 echo "NOOBS Git HEAD @ $(git rev-parse --verify HEAD)" >> "$BUILD_INFO"
 echo "rpi-userland Git master @ $(get_package_version rpi-userland)" >> "$BUILD_INFO"
 echo "rpi-firmware Git master @ $(get_package_version rpi-firmware)" >> "$BUILD_INFO"
