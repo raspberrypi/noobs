@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -199,42 +199,42 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="342"/>
         <source>Saving boot files to memory</source>
-        <translation type="unfinished"></translation>
+        <translation>正在儲存開機檔案到記憶體</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="345"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存開機檔案到記憶體時發生錯誤。SD 記憶卡可能已損壞。</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="361"/>
         <source>Creating partitions</source>
-        <translation type="unfinished"></translation>
+        <translation>正在建立分割區</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="365"/>
         <source>Error partitioning</source>
-        <translation type="unfinished"></translation>
+        <translation>分割錯誤</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="369"/>
         <source>Formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>正在格式化開機分割區 (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="372"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>格式化開機分割區 (fat) 時發生錯誤</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="376"/>
         <source>Copying boot files to storage</source>
-        <translation type="unfinished"></translation>
+        <translation>複製開機檔案到儲存空間</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="452"/>
         <source>Setting disk volume ID</source>
-        <translation type="unfinished"></translation>
+        <translation>設定磁碟卷冊 ID</translation>
     </message>
 </context>
 <context>
@@ -260,7 +260,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="65"/>
         <source>Destination drive:</source>
-        <translation type="unfinished"></translation>
+        <translation>目標磁碟：</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="88"/>
@@ -325,7 +325,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="236"/>
         <source>Wifi networks (w)</source>
-        <translation>Wifi 網錄 (w)</translation>
+        <translation>Wifi 網路 (w)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="239"/>
@@ -403,12 +403,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="587"/>
         <source>SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>SD 記憶卡</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="587"/>
         <source>drive</source>
-        <translation type="unfinished"></translation>
+        <translation>磁碟</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="610"/>
@@ -535,12 +535,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1731"/>
         <source>Reformat drive?</source>
-        <translation type="unfinished"></translation>
+        <translation>重新格式化磁碟？</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1732"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>您確定您要重新格式化磁碟 &apos;%1&apos; 供 NOOBS 使用嗎？所有在該磁碟上的資料都會被刪除！</translation>
     </message>
 </context>
 <context>
@@ -598,7 +598,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="281"/>
         <source>Writing boot partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>正在寫入開機分割表</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="297"/>
