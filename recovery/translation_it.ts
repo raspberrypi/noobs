@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it" sourcelanguage="en">
+<TS version="2.1" language="it" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -154,42 +154,42 @@ ATTENZIONE: questo eliminerà tutti i dati nella scheda SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="342"/>
         <source>Saving boot files to memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvataggio file boot nella memoria</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="345"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nel salvataggio dei file di boot nella memoria. La scheda SD potrebbe essere danneggiata.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="361"/>
         <source>Creating partitions</source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione partizione</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="365"/>
         <source>Error partitioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nel partizionamento</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="369"/>
         <source>Formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Formattazione partizione boot (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="372"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nella formattazione della partizione boot (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="376"/>
         <source>Copying boot files to storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia file boot nello storage</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="452"/>
         <source>Setting disk volume ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazione ID volume disco</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="73"/>
@@ -260,7 +260,7 @@ ATTENZIONE: questo eliminerà tutti i dati nella scheda SD</translation>
     <message>
         <location filename="mainwindow.ui" line="65"/>
         <source>Destination drive:</source>
-        <translation type="unfinished"></translation>
+        <translation>Unità destinazione:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="88"/>
@@ -425,12 +425,12 @@ ATTENZIONE: questo eliminerà tutti i dati nella scheda SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="587"/>
         <source>SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Scheda SD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="587"/>
         <source>drive</source>
-        <translation type="unfinished"></translation>
+        <translation>unità</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="610"/>
@@ -526,12 +526,12 @@ Vuoi rendere questa impostazione permanente?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1731"/>
         <source>Reformat drive?</source>
-        <translation type="unfinished"></translation>
+        <translation>Riformattare l&apos;unità?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1732"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sei sicuro di voler riformattare l&apos;unità &apos;%1&apos; per l&apos;uso con NOOBS? Tutti dati esistenti nell&apos;unità verranno cancellati.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="922"/>
@@ -636,7 +636,7 @@ Vuoi rendere questa impostazione permanente?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="281"/>
         <source>Writing boot partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrittura tabella partizione boot</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="297"/>
