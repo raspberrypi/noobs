@@ -234,7 +234,7 @@ To prevent a `SHIFT` keypress from entering Recovery Mode on boot (maybe you hav
 
 #### How to change display output modes
 
-By default, NOOBS will output over HDMI at your display’s preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively.
+By default, NOOBS will output over HDMI at your display’s preferred resolution, even if no HDMI display is connected. If you do not see any output on your HDMI display or are using the composite output, on first boot press 1, 2, 3 or 4 on your keyboard to select HDMI preferred mode, HDMI safe mode, composite PAL mode or composite NTSC mode respectively. Note that on subsequent boots after installation you will need to keep alternately pressing SHIFT and the desired number to change display: SHIFT takes you to the installation screen, where the number key changes display. You can then choose whether to make the display change permanent, and press Esc to leave the installation screen and choose an OS to boot.
 
 If you don't have a keyboard, you can still change the display mode used by NOOBS through editing the `recovery.cmdline` file in the root NOOBS directory prior to first boot and appending the following argument:
 - `display=<display mode number>` (e.g. `display=1` or `display=3`)
