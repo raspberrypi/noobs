@@ -82,6 +82,7 @@ TRANSLATIONS += \
     translation_ast.ts \
     translation_ca.ts \
     translation_de.ts \
+    translation_en.ts \
     translation_es.ts \
     translation_eu.ts \
     translation_fi.ts \
