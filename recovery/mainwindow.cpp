@@ -1382,12 +1382,12 @@ void MainWindow::updateNeeded()
     foreach (QListWidgetItem *item, selected)
     {
         QVariantMap entry = item->data(Qt::UserRole).toMap();
-        _neededMB += entry.value("nominal_size").toInt();
+        _neededMB += entry.value("nominal_size").toULongLong();
 
         if (nameMatchesRiscOS(entry.value("name").toString()))
         {
             /* RiscOS needs to start at a predetermined sector, calculate the extra space needed for that */
-            int startSector = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()+getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong();
+            qint64 startSector = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()+getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong();
             if (RISCOS_SECTOR_OFFSET > startSector)
             {
                 _neededMB += (RISCOS_SECTOR_OFFSET - startSector)/2048;

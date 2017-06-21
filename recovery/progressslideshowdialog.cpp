@@ -138,7 +138,8 @@ void ProgressSlideshowDialog::setMaximum(qint64 bytes)
 
 void ProgressSlideshowDialog::updateIOstats()
 {
-    int sectors = sectorsWritten()-_sectorsStart;
+    qint64 sectors = sectorsWritten()-_sectorsStart;
+
     double sectorsPerSec = sectors * 1000.0 / _t1.elapsed();
     if (_maxSectors)
     {
@@ -154,7 +155,7 @@ void ProgressSlideshowDialog::updateIOstats()
     }
 }
 
-int ProgressSlideshowDialog::sectorsWritten()
+qint64 ProgressSlideshowDialog::sectorsWritten()
 {
     /* Poll kernel counters to get number of bytes written
      *
@@ -184,7 +185,7 @@ int ProgressSlideshowDialog::sectorsWritten()
     QList<QByteArray> stats = ioline.split(' ');
 
     if (stats.count() >= 6)
-        return stats.at(6).toInt(); /* write sectors */
+        return stats.at(6).toULongLong(); /* write sectors */
     else
         return 0;
 }
