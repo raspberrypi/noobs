@@ -273,74 +273,85 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
         <translation>Mevcut:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="158"/>
+        <location filename="mainwindow.ui" line="159"/>
         <source>Install (i)</source>
         <translation>Yükle (i)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="161"/>
+        <location filename="mainwindow.ui" line="162"/>
         <source>Installs the selected operating system image onto this SD card.</source>
         <translation>Seçili işletim sistemi imajını bu SD karta yükler.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="164"/>
+        <location filename="mainwindow.ui" line="165"/>
+        <location filename="mainwindow.ui" line="261"/>
         <source>I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="173"/>
+        <location filename="mainwindow.ui" line="174"/>
         <source>Exit (Esc)</source>
         <translation>Çık (Esc)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="176"/>
+        <location filename="mainwindow.ui" line="177"/>
         <source>Exits and boots the installed operating system.</source>
         <translation>Çıkış yapar ve seçili işletim sistemini açar.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="191"/>
+        <location filename="mainwindow.ui" line="192"/>
         <source>Advanced</source>
         <translation>Gelişmiş</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="203"/>
+        <location filename="mainwindow.ui" line="204"/>
         <source>Edit config (e)</source>
         <translation>Ayarları düzenle (e)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="206"/>
+        <location filename="mainwindow.ui" line="207"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
         <translation>Kurulu OS için config.txt ve cmdline.txt dosyasını metin editöründe açar.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="218"/>
+        <location filename="mainwindow.ui" line="219"/>
         <source>Online help (h)</source>
         <translation>Çevrimiçi yardım (h)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="221"/>
+        <location filename="mainwindow.ui" line="222"/>
         <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
         <translation>Raspberry Pi Forumlarını bir web tarayıcıda görüntüler.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="236"/>
+        <location filename="mainwindow.ui" line="237"/>
         <source>Wifi networks (w)</source>
         <translation>Wifi ağları (w)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="239"/>
+        <location filename="mainwindow.ui" line="240"/>
         <source>Select a wifi network to connect to</source>
         <translation>Bağlanmak için wifi ağı seçin</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="242"/>
+        <location filename="mainwindow.ui" line="243"/>
         <source>W</source>
         <translation>W</translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="255"/>
+        <source>Info (i)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="258"/>
+        <source>Show Information on selected OS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1818"/>
+        <location filename="mainwindow.cpp" line="1259"/>
+        <location filename="mainwindow.cpp" line="1819"/>
         <source>RECOMMENDED</source>
         <translation>TAVSİYEDİR</translation>
     </message>
@@ -351,7 +362,7 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
         <translation>Onayla</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="704"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Yapı: %2</translation>
     </message>
@@ -387,7 +398,7 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1157"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
@@ -397,12 +408,12 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
         <translation>KURULDU</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="804"/>
         <source>Display Mode Changed</source>
         <translation>Ekran Modu Değiştirildi</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="736"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI tercihli mod</translation>
     </message>
@@ -454,92 +465,92 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
         <translation>OS(ler) Başarıyla Kuruldu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="740"/>
         <source>HDMI safe mode</source>
         <translation>HDMI güvenli mod</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="744"/>
         <source>composite PAL mode</source>
         <translation>Kompozit PAL modu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="748"/>
         <source>composite NTSC mode</source>
         <translation>Kompozit NTSC modu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1143"/>
+        <location filename="mainwindow.cpp" line="1484"/>
+        <location filename="mainwindow.cpp" line="1494"/>
         <source>Download error</source>
         <translation>İndirme hatası</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1143"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Dağıtım listesi İnternetten indirilirken hata</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1157"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Sunucudan indirilen list.json çözümlenirken hata</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>Needed</source>
         <translation>Gerekli</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1378"/>
         <source>Available</source>
         <translation>Mevcut</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1484"/>
         <source>Error downloading meta file</source>
         <translation>Meta dosyası indirilirken hata</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1494"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>İndirilen dosya SD karta yazılırken hata. SD kart ya da dosya sistemi hasarlı olabilir.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1610"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>NOOBS&apos;u yerel imajlar haricinde kullanabilmek için ağa erişimi olması gereklidir. Lütfen sonraki ekranda wifi ağınızı seçin.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>NOOBS&apos;u yerel imajlar haricinde kullanabilmek için yerel ağa erişimi olması gereklidir. Lütfen ağ kablosunu ağ portuna takın.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1731"/>
+        <location filename="mainwindow.cpp" line="1732"/>
         <source>Reformat drive?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1733"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1608"/>
-        <location filename="mainwindow.cpp" line="1616"/>
+        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1617"/>
         <source>No network access</source>
         <translation>Ağ erişimi yok</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="805"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="924"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Bu özellik için yerel ağa erişimi olması gereklidir. Lütfen ağ kablosunu ağ portuna takın.</translation>
     </message>
@@ -705,25 +716,25 @@ Would you like to make this setting permanent?</source>
         <translation>%1: Çıkartılırken hata</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="706"/>
+        <location filename="multiimagewritethread.cpp" line="708"/>
         <source>Error creating file system</source>
         <translation>Dosya sistemi oluşturulurken hata</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="748"/>
-        <location filename="multiimagewritethread.cpp" line="819"/>
-        <location filename="multiimagewritethread.cpp" line="878"/>
+        <location filename="multiimagewritethread.cpp" line="750"/>
+        <location filename="multiimagewritethread.cpp" line="821"/>
+        <location filename="multiimagewritethread.cpp" line="880"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Geçersiz sıkıştırma formatı dosya uzantısı. Beklenen .lzo, .gz, .xz, .bz2 or .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="781"/>
+        <location filename="multiimagewritethread.cpp" line="783"/>
         <source>Error downloading or extracting tarball</source>
         <translation>tarball indirilir ya da çıkartılırken hata oluştu</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="840"/>
-        <location filename="multiimagewritethread.cpp" line="899"/>
+        <location filename="multiimagewritethread.cpp" line="842"/>
+        <location filename="multiimagewritethread.cpp" line="901"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>OS&apos;u SD karta indirirken ya da yazarken hata</translation>
     </message>

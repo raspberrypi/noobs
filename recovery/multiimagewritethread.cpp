@@ -635,6 +635,8 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     ventry["bootable"]    = image->bootable();
     if (!image->supportedModels().isEmpty())
         ventry["supported_models"] = image->supportedModels();
+    ventry["url"]         = image->url();
+
     QString iconfilename  = image->folder()+"/"+image->flavour()+".png";
     iconfilename.replace(" ", "_");
     if (QFile::exists(iconfilename))

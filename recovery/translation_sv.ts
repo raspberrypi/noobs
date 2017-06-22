@@ -273,69 +273,80 @@ VARNING: Detta kommer radera all data på ditt SD-kort</translation>
         <translation>Tillgängligt:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="158"/>
+        <location filename="mainwindow.ui" line="159"/>
         <source>Install (i)</source>
         <translation>Installera (i)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="161"/>
+        <location filename="mainwindow.ui" line="162"/>
         <source>Installs the selected operating system image onto this SD card.</source>
         <translation>Installerar avbilder för valda operativsystem till SD-kortet.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="164"/>
+        <location filename="mainwindow.ui" line="165"/>
+        <location filename="mainwindow.ui" line="261"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="173"/>
+        <location filename="mainwindow.ui" line="174"/>
         <source>Exit (Esc)</source>
         <translation>Avsluta (Esc)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="176"/>
+        <location filename="mainwindow.ui" line="177"/>
         <source>Exits and boots the installed operating system.</source>
         <translation>Avslutar och fortsätter till bootdialogen.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="191"/>
+        <location filename="mainwindow.ui" line="192"/>
         <source>Advanced</source>
         <translation>Avancerat</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="203"/>
+        <location filename="mainwindow.ui" line="204"/>
         <source>Edit config (e)</source>
         <translation>Redigera konfiguration (e)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="206"/>
+        <location filename="mainwindow.ui" line="207"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
         <translation>Öppnar config.txt och cmdline.txt för det valda operativsystemet i en textredigerare.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="218"/>
+        <location filename="mainwindow.ui" line="219"/>
         <source>Online help (h)</source>
         <translation>Onlinehjälp (h)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="221"/>
+        <location filename="mainwindow.ui" line="222"/>
         <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
         <translation>Öppnar en webbläsare med forumet för Raspberry Pi.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="236"/>
+        <location filename="mainwindow.ui" line="237"/>
         <source>Wifi networks (w)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="239"/>
+        <location filename="mainwindow.ui" line="240"/>
         <source>Select a wifi network to connect to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="242"/>
+        <location filename="mainwindow.ui" line="243"/>
         <source>W</source>
         <translation>W</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="255"/>
+        <source>Info (i)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="258"/>
+        <source>Show Information on selected OS</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="98"/>
@@ -379,8 +390,8 @@ VARNING: Detta kommer radera all data på ditt SD-kort</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1818"/>
+        <location filename="mainwindow.cpp" line="1259"/>
+        <location filename="mainwindow.cpp" line="1819"/>
         <source>RECOMMENDED</source>
         <translation>REKOMMENDERAD</translation>
     </message>
@@ -432,113 +443,113 @@ VARNING: Detta kommer radera all data på ditt SD-kort</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1157"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="704"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Byggd: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="736"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI föredraget läge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="740"/>
         <source>HDMI safe mode</source>
         <translation>HDMI säkert läge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="744"/>
         <source>composite PAL mode</source>
         <translation>Kompositvideo PAL-läge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="748"/>
         <source>composite NTSC mode</source>
         <translation>Kompositvideo NTSC-läge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="804"/>
         <source>Display Mode Changed</source>
         <translation>Bildskärmsläge ändrat</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="805"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Bildskärmsläge ändrades till %1
 Vill du spara detta som standardinställning?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1608"/>
-        <location filename="mainwindow.cpp" line="1616"/>
+        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1617"/>
         <source>No network access</source>
         <translation>Ingen nätverksåtkomst</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="924"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Nätverksåtkomst krävs för att använda denna funktion. Vänligen koppla in en nätverkskabel till din Raspberry Pi.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1143"/>
+        <location filename="mainwindow.cpp" line="1484"/>
+        <location filename="mainwindow.cpp" line="1494"/>
         <source>Download error</source>
         <translation>Nedladdningsfel</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1143"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Fel vid nedladdning av distributionslista från Internet</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1157"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Fel vid tolkning av list.json nedladdad från server</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>Needed</source>
         <translation>Krävs</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1378"/>
         <source>Available</source>
         <translation>Tillgängligt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1484"/>
         <source>Error downloading meta file</source>
         <translation>Fel vid nedladdning av meta-fil</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1494"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Fel vid skrivning av nedladdad fil till SD-kort. SD-kort eller filsystem kan vara skadade.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1610"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Nätverksåtkomst krävs för att använda NOOBS utan lokala avbilder. Vänligen koppla in en nätverkskabel till din Raspberry Pi.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1731"/>
+        <location filename="mainwindow.cpp" line="1732"/>
         <source>Reformat drive?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1733"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -704,25 +715,25 @@ Vill du spara detta som standardinställning?</translation>
         <translation>%1: Fel vid avmontering</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="706"/>
+        <location filename="multiimagewritethread.cpp" line="708"/>
         <source>Error creating file system</source>
         <translation>Fel vid skapande av filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="748"/>
-        <location filename="multiimagewritethread.cpp" line="819"/>
-        <location filename="multiimagewritethread.cpp" line="878"/>
+        <location filename="multiimagewritethread.cpp" line="750"/>
+        <location filename="multiimagewritethread.cpp" line="821"/>
+        <location filename="multiimagewritethread.cpp" line="880"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Okänd filändelse för kompressionsformat. Förväntar .lzo, .gz, .xz, .bz2 eller .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="781"/>
+        <location filename="multiimagewritethread.cpp" line="783"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Fel vid nedladdning eller extrahering av arkiv</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="840"/>
-        <location filename="multiimagewritethread.cpp" line="899"/>
+        <location filename="multiimagewritethread.cpp" line="842"/>
+        <location filename="multiimagewritethread.cpp" line="901"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>Fel vid nedladdning eller skrivning av OS till SD-kort</translation>
     </message>

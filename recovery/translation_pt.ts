@@ -272,7 +272,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+64"/>
         <source>Install (i)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -283,11 +283,12 @@ WARNING: This will erase all data on your SD card</source>
     </message>
     <message>
         <location line="+3"/>
+        <location line="+96"/>
         <source>I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="-87"/>
         <source>Exit (Esc)</source>
         <translation>Sair (Esc)</translation>
     </message>
@@ -337,25 +338,35 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+12"/>
+        <source>Info (i)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Show Information on selected OS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="+338"/>
-        <location line="+920"/>
+        <location line="+921"/>
         <location line="+560"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location line="-1228"/>
+        <location line="-1229"/>
         <location line="+19"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+95"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-605"/>
+        <location line="-606"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
@@ -387,17 +398,17 @@ WARNING: This will erase all data on your SD card</source>
     </message>
     <message>
         <location line="+101"/>
-        <location line="+470"/>
+        <location line="+471"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-815"/>
+        <location line="-816"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+462"/>
+        <location line="+463"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -407,7 +418,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-616"/>
+        <location line="-617"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -454,7 +465,7 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+64"/>
+        <location line="+65"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -705,7 +716,7 @@ Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+81"/>
+        <location line="+83"/>
         <source>Error creating file system</source>
         <translation type="unfinished"></translation>
     </message>
