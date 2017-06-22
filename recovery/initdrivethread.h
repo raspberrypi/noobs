@@ -26,7 +26,7 @@ protected:
 
     bool method_resizePartitions();
     int sizeofBootFilesInKB();
-    int sizeofSDCardInBlocks();
+    qint64 sizeofSDCardInBlocks();
     bool mountSystemPartition();
     bool umountSystemPartition();
     bool zeroMbr();
