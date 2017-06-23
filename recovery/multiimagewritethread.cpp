@@ -137,7 +137,7 @@ void MultiImageWriteThread::run()
         _extraSpacePerPartition = (availableMB-totalnominalsize)/numexpandparts;
     }
 
-    emit parsedImagesize(uint(totaluncompressedsize)*1024*1024);
+    emit parsedImagesize(qint64(totaluncompressedsize)*1024*1024);
 
     if (totalnominalsize > availableMB)
     {
