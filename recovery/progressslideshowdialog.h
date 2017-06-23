@@ -41,11 +41,11 @@ protected:
     QString _drive;
     QStringList _slides;
     int _pos, _changeInterval;
-    qint64 _sectorsStart, _maxSectors, _pausedAt;
+    uint _sectorsStart, _maxSectors, _pausedAt;
     QTimer _timer, _iotimer;
     QTime _t1;
 
-    qint64 sectorsWritten();
+    uint sectorsWritten();
 
 
 private:

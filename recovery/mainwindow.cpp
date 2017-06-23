@@ -278,7 +278,7 @@ void MainWindow::populate()
 
     // Fill in list of images
     repopulate();
-    _availableMB = (getFileContents(sysclassblock(_drive)+"/size").trimmed().toULongLong()-getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()-getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong())/2048;
+    _availableMB = (getFileContents(sysclassblock(_drive)+"/size").trimmed().toUInt()-getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toUInt()-getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toUInt())/2048;
     updateNeeded();
 
     if (ui->list->count() != 0)
@@ -1382,12 +1382,12 @@ void MainWindow::updateNeeded()
     foreach (QListWidgetItem *item, selected)
     {
         QVariantMap entry = item->data(Qt::UserRole).toMap();
-        _neededMB += entry.value("nominal_size").toULongLong();
+        _neededMB += entry.value("nominal_size").toUInt();
 
         if (nameMatchesRiscOS(entry.value("name").toString()))
         {
             /* RiscOS needs to start at a predetermined sector, calculate the extra space needed for that */
-            qint64 startSector = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()+getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong();
+            uint startSector = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toUInt()+getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toUInt();
             if (RISCOS_SECTOR_OFFSET > startSector)
             {
                 _neededMB += (RISCOS_SECTOR_OFFSET - startSector)/2048;
@@ -1769,7 +1769,7 @@ void MainWindow::on_targetCombo_currentIndexChanged(int index)
 
         qDebug() << "New drive selected:" << devname;
         _drive = "/dev/"+devname;
-        _availableMB = (getFileContents(sysclassblock(_drive)+"/size").trimmed().toULongLong()-getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()-getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong())/2048;
+        _availableMB = (getFileContents(sysclassblock(_drive)+"/size").trimmed().toUInt()-getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toUInt()-getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toUInt())/2048;
         filterList();
         updateNeeded();
     }

@@ -132,13 +132,17 @@ void ProgressSlideshowDialog::changeDrive(const QString &drive)
 
 void ProgressSlideshowDialog::setMaximum(qint64 bytes)
 {
+    /* restrict to size of 1TB since the progressbar expects an int32 */
+    /* to prevent overflow */
+    if (bytes > 1099511627775LL) /* == 2147483648 * 512 -1*/
+        bytes = 1099511627775LL;
     _maxSectors = bytes/512;
     ui->progressBar->setMaximum(_maxSectors);
 }
 
 void ProgressSlideshowDialog::updateIOstats()
 {
-    qint64 sectors = sectorsWritten()-_sectorsStart;
+    uint sectors = sectorsWritten()-_sectorsStart;
 
     double sectorsPerSec = sectors * 1000.0 / _t1.elapsed();
     if (_maxSectors)
@@ -155,7 +159,7 @@ void ProgressSlideshowDialog::updateIOstats()
     }
 }
 
-qint64 ProgressSlideshowDialog::sectorsWritten()
+uint ProgressSlideshowDialog::sectorsWritten()
 {
     /* Poll kernel counters to get number of bytes written
      *
@@ -177,6 +181,8 @@ qint64 ProgressSlideshowDialog::sectorsWritten()
      * time_in_queue   milliseconds  total wait time for all requests
      */
 
+    uint numsectors=0;
+
     QFile f(sysclassblock(_drive)+"/stat");
     f.open(f.ReadOnly);
     QByteArray ioline = f.readAll().simplified();
@@ -185,7 +191,9 @@ qint64 ProgressSlideshowDialog::sectorsWritten()
     QList<QByteArray> stats = ioline.split(' ');
 
     if (stats.count() >= 6)
-        return stats.at(6).toULongLong(); /* write sectors */
-    else
-        return 0;
+        numsectors = stats.at(6).toUInt(); /* write sectors */
+
+    if (numsectors > 2147483647)        //Maybe use MAX_INT from limits.h?
+       numsectors = 2147483647;
+    return numsectors;
 }

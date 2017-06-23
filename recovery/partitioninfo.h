@@ -17,7 +17,7 @@ public:
     /* Constructor. Gets called from OsInfo with info from json file */
     explicit PartitionInfo(const QVariantMap &m, QObject *parent = 0);
 
-    explicit PartitionInfo(int partitionNr, qint64 offset, qint64 sectors, const QByteArray &partType, QObject *parent = 0);
+    explicit PartitionInfo(int partitionNr, uint offset, uint sectors, const QByteArray &partType, QObject *parent = 0);
 
     inline void setPartitionDevice(const QByteArray &partdevice)
     {
@@ -59,7 +59,7 @@ public:
         return _tarball;
     }
 
-    inline qint64 partitionSizeNominal()
+    inline uint partitionSizeNominal()
     {
         return _partitionSizeNominal;
     }
@@ -74,32 +74,32 @@ public:
         return _wantMaximised;
     }
 
-    inline qint64 uncompressedTarballSize()
+    inline uint uncompressedTarballSize()
     {
         return _uncompressedTarballSize;
     }
 
-    inline void setOffset(qint64 offset)
+    inline void setOffset(uint offset)
     {
         _offset = offset;
     }
 
-    inline qint64 offset()
+    inline uint offset()
     {
         return _offset;
     }
 
-    inline void setPartitionSizeSectors(qint64 size)
+    inline void setPartitionSizeSectors(uint size)
     {
         _partitionSizeSectors = size;
     }
 
-    inline qint64 partitionSizeSectors()
+    inline uint partitionSizeSectors()
     {
         return _partitionSizeSectors;
     }
 
-    inline qint64 endSector()
+    inline uint endSector()
     {
         return _offset + _partitionSizeSectors;
     }
@@ -123,7 +123,7 @@ protected:
     QByteArray _fstype, _mkfsOptions, _label, _partitionDevice, _partitionType;
     QString _tarball;
     int _requiresPartitionNumber;
-    qint64 _partitionSizeNominal, _offset, _uncompressedTarballSize, _partitionSizeSectors;
+    uint _partitionSizeNominal, _offset, _uncompressedTarballSize, _partitionSizeSectors;
     bool _emptyFS, _wantMaximised, _active;
 };
 

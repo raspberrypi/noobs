@@ -49,7 +49,7 @@ protected:
     bool _hasWifi;
     int _numInstalledOS, _devlistcount;
     QNetworkAccessManager *_netaccess;
-    qint64 _neededMB, _availableMB;
+    uint _neededMB, _availableMB;
     int _numMetaFilesToDownload, _numIconsToDownload;
     QMessageBox *_displayModeBox;
     QTimer _networkStatusPollTimer, _piDrivePollTimer;
