@@ -143,7 +143,7 @@ The following steps allow you to create a modified copy of one of the standard O
 
 3. Navigate to the `os` directory
 
-4. Create a copy of the folder containing the OS release that you want to modify and rename it with a custom name.
+4. Create a copy of the existing Raspbian folder, modifying the folder name to a custom OS name, based on your OS version.
 
 5. Edit the following fields in the `os.json` file contained in the folder that you just created
   1. "name" - replace the name of the base OS with the name of your custom OS version
@@ -154,12 +154,19 @@ The following steps allow you to create a modified copy of one of the standard O
 7. [Optional] Replace the PNG image files in the `slides` and `slides_vga` directory with your own custom installer slides
 
 8. Edit the following fields in the `partitions.json` file contained in the folder that you just created
-  1. "partition_size_nominal" - replace the numerical value with the size of the paritions in your custom OS version
-  2. "uncompressed_tarball_size" - replace the numerical value with the size of your filesystem tarballs when uncompressed
+  1. "partition_size_nominal" - replace the numerical value with the size of the paritions (round up) you want in your custom OS version. (Also note the size is in MB).
+  2. "uncompressed_tarball_size" - replace the numerical value with the size of your filesystem tarballs (round up) when uncompressed (this can be obtained by running the command ll within the directory where the tarball is located). Also note the size is in MB.
 
-9. Replace the `.tar.xz` root and boot filesystem tarballs with copies created from your custom OS version (these instructions assume you're only using a single OS at a time with NOOBS - they won't work if you're running multiple OSes from a single SD card). The name of these tarballs needs to match the labels given in `partitions.json`.
-  1. To create the root tarball you will need to run `tar -cvpf <label>.tar /* --exclude=proc/* --exclude=sys/* --exclude=dev/pts/*` from within the root filesystem of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
-  2. To create the boot tarball you will need to run `tar -cvpf <label>.tar .` at the root directory of the boot partition of your custom OS version. You should then compress the resulting tarball with `xz -9 -e <label>.tar`.
+9. Replace the `.tar.xz` root and boot filesystem tarballs with copies created from your custom OS version .img (these instructions assume you're only using a single OS at a time with NOOBS - they won't work if you're running multiple OSes from a single SD card). The name of these tarballs needs to match the labels given in `partitions.json`.
+  1. Download the .img file for your custom OS.
+  2. Determine the boot and root partition mount points and their sizes within the .img file by running `parted <Image_Filename>.img` (Commands inside parted: print quit).
+  3. Mount the partitions within the .img by running `sudo kpartx -av <Image_Filename>.img` (if kpartx doesn't exist run: `sudo apt-get install kpartx` to install kpartx)
+  4. Change directory to the newly mounted boot partition `cd /media/$USER/PI_BOOT`
+  5. Create the boot tarball by running `tar -cvpf /tmp/<label>.tar *` at the root directory of the boot partition of your custom OS version img. Get the size of the extracted tar archive using `ll /tmp/`. Note the value in the partitions.json in the boot section for the uncompressed_tarball_size. (Also note the size in MB). You should then compress the resulting tarball with `xz -9 -e /tmp/<label>.tar`.
+  6. Change directory to the newly mounted root partition `cd /media/$USER/PI_ROOT`
+  7. To create the root tarball you will need to run `sudo tar -cvpf /tmp/<label>.tar /* --exclude=proc/* --exclude=sys/* --exclude=dev/pts/*` from within the root filesystem of your custom OS version img. Get the size of the extracted tar archive using `ll /tmp/`. Note the value in the partitions.json in the root section for the uncompressed_tarball_size. (Also note the size in MB). You should then compress the resulting tarball with `xz -9 -e /tmp/<label>.tar`. (Since this is a larger file it may fail, if so use `xz -4 -e /tmp/<label>.tar`).
+  8. Umount the .img partitions by running `sudo kpartx -dv <Image_Filename>.img `
+  
 
 ### How to change the default Language, Keyboard layout, Display mode or Boot Partition etc.
 
