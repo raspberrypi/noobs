@@ -154,42 +154,42 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="342"/>
         <source>Saving boot files to memory</source>
-        <translation type="unfinished"></translation>
+        <translation>부팅 파일을 메모리에 저장하고 있습니다</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="345"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation type="unfinished"></translation>
+        <translation>부팅 파일을 메모리에 기록하는 과정에 오류가 발생하였습니다. SD 카드가 손상되었는지 확인해 주십시오.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="361"/>
         <source>Creating partitions</source>
-        <translation type="unfinished"></translation>
+        <translation>파티션을 생성하고 있습니다</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="365"/>
         <source>Error partitioning</source>
-        <translation type="unfinished"></translation>
+        <translation>파티션하는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="369"/>
         <source>Formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>부팅 파티션을 포맷하고 있습니다 (FAT)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="372"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>부팅 파티션을 포맷하는 과정에서 오류가 발생하였습니다 (FAT)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="376"/>
         <source>Copying boot files to storage</source>
-        <translation type="unfinished"></translation>
+        <translation>부팅 파일을 저장소에 복사하고 있습니다</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="452"/>
         <source>Setting disk volume ID</source>
-        <translation type="unfinished"></translation>
+        <translation>디스크 볼륨 ID를 설정하고 있습니다</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="73"/>
@@ -204,7 +204,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="88"/>
         <source>Error opening %1</source>
-        <translation>%1 을 여는 중에 오류가 발생하였습니다.</translation>
+        <translation>%1 을 여는 과정에 오류가 발생하였습니다.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="101"/>
@@ -260,7 +260,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="65"/>
         <source>Destination drive:</source>
-        <translation type="unfinished"></translation>
+        <translation>대상 드라이브:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="88"/>
@@ -325,17 +325,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="236"/>
         <source>Wifi networks (w)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wi-Fi 네트워크 (W)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="239"/>
         <source>Select a wifi network to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>연결할 Wi-Fi 네트워크를 선택합니다</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="242"/>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="338"/>
@@ -410,12 +410,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="119"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation type="unfinished"></translation>
+        <translation>SD 카드를 준비하고 있습니다 (파티션 설정 중)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="132"/>
         <source>Mounting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>설정된 파티션을 마운트하고 있습니다</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="250"/>
@@ -425,17 +425,17 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="587"/>
         <source>SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>SD 카드</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="587"/>
         <source>drive</source>
-        <translation type="unfinished"></translation>
+        <translation>드라이브</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="610"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation type="unfinished"></translation>
+        <translation>경고: 호환되지 않는 운영체제를 발견하였습니다. 이 운영체제는 Raspberry Pi 의 현재 리비전을 지원하지 않으므로 부팅에 실패하거나 기능이 제대로 동작하지 않을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="652"/>
@@ -516,7 +516,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1609"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>로컬 이미지가 없는 NOOBS는 네트워크 접속이 필요합니다. 다음 화면에서 Wi-Fi 네트워크를 선택해 주십시오.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1617"/>
@@ -526,12 +526,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1731"/>
         <source>Reformat drive?</source>
-        <translation type="unfinished"></translation>
+        <translation>드라이브 포맷 확인</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1732"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 드라이브를 정말 다시 포맷하시겠습니까? 포맷을 완료하면 NOOBS가 이 드라이브를 이용합니다. 이 드라이브 안에 있는 모든 데이터는 완전히 삭제됩니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="922"/>
@@ -601,57 +601,57 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="68"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS를 설치할 수 없습니다. RISCOS의 오프셋 값이 맞지 않습니다.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="74"/>
         <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS를 설치할 수 없습니다. RISCOS의 오프셋 값이 없습니다.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="106"/>
         <source>More than one operating system requires partition number %1</source>
-        <translation type="unfinished"></translation>
+        <translation>하나 이상의 운영체제에 파티션 %1번이 필요합니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="111"/>
         <source>Operating system cannot require a system partition (1,5)</source>
-        <translation type="unfinished"></translation>
+        <translation>운영체제가 시스템 파티션 (1,5) 을 요청할 수 없습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="116"/>
         <source>Operating system cannot claim both primary partitions 2 and 4</source>
-        <translation type="unfinished"></translation>
+        <translation>운영체제가 주 파티션 2와 4를 모두 요구할 수는 없습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="213"/>
         <source>Fixed partition offset too low</source>
-        <translation type="unfinished"></translation>
+        <translation>고정 파티션 오프셋 값이 너무 낮습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="274"/>
         <source>Writing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>파티션 테이블을 기록하고 있습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="281"/>
         <source>Writing boot partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>부팅 파티션을 기록하고 있습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="297"/>
         <source>Zero&apos;ing start of each partition</source>
-        <translation type="unfinished"></translation>
+        <translation>파티션을 초기화 하고 있습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="331"/>
         <source>Error reading existing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>이미 있는 파티션 테이블을 읽는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="416"/>
         <source>Error creating partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>파티션 테이블을 생성하는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="504"/>
@@ -721,13 +721,13 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="781"/>
         <source>Error downloading or extracting tarball</source>
-        <translation>tarball을 다운로드/추출하는 과정에서 오류가 발생하였습니다.</translation>
+        <translation>tarball을 다운로드 및 압축 해제하는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="840"/>
         <location filename="multiimagewritethread.cpp" line="899"/>
         <source>Error downloading or writing OS to SD card</source>
-        <translation>운영체제를 SD 카드에 다운로드/기록하는 과정에서 오류가 발생하였습니다.</translation>
+        <translation>운영체제를 SD 카드에 다운로드 및 기록하는 과정에서 오류가 발생하였습니다</translation>
     </message>
 </context>
 <context>
@@ -791,62 +791,62 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.ui" line="22"/>
         <source>Wifi network selection</source>
-        <translation type="unfinished"></translation>
+        <translation>WI-FI 네트워크 선택</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="28"/>
         <source>Wifi network</source>
-        <translation type="unfinished"></translation>
+        <translation>Wi-Fi 네트워크</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="55"/>
         <source>Authentication method</source>
-        <translation type="unfinished"></translation>
+        <translation>인증 방식</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="64"/>
         <source>Pressing the WPS button on my wifi router</source>
-        <translation type="unfinished"></translation>
+        <translation>Wi-Fi 공유기에 있는 WPS 버튼을 눌러 설정</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="71"/>
         <source>Password authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>비밀번호 인증</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="96"/>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>계정명</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="110"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>암호</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
         <source>No wifi interfaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Wi-Fi 수신기 없음</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
         <source>No wifi interfaces available</source>
-        <translation type="unfinished"></translation>
+        <translation>사용 가능한 Wi-Fi 수신기가 없습니다</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
         <source>Authenticated but still waiting for DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>인증 완료 - DHCP에서 임대할 IP를 기다리고 있습니다</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to wifi failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Wi-Fi 연결 실패</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to the wifi access point failed. Check your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wi-Fi 액세스 지점에 연결하지 못하였습니다. 입력한 암호를 확인하여 주십시오</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="269"/>
@@ -856,17 +856,17 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="275"/>
         <source>Releasing old DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP 에서 임대한 IP를 갱신하고 있습니다</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="290"/>
         <source>Disconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>연결을 해제하고 있습니다</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="295"/>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>연결하고 있습니다</translation>
     </message>
 </context>
 </TS>
