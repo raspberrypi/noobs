@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.4" language="ko" sourcelanguage="en">
+<TS version="2.0" language="ko" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -285,7 +285,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="164"/>
         <source>I</source>
-        <translation>l</translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="173"/>
