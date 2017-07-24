@@ -12,7 +12,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="45"/>
         <source>Cannot display boot menu</source>
-        <translation>부팅 메뉴를 표시할 수 없습니다</translation>
+        <translation>부팅 메뉴를 표시할 수 없음</translation>
     </message>
     <message>
         <location filename="bootselectiondialog.cpp" line="45"/>
@@ -37,6 +37,7 @@
     <message>
         <location filename="bootselectiondialog.cpp" line="263"/>
         <source>Previously selected OS will boot in %1 seconds</source>
+        <translatorcomment>시간이 중요 정보로 판단됨. 따라서 시간 설정을 앞에 두는 구조는 유지합니다.</translatorcomment>
         <translation>%1 초 뒤에 이전에 선택한 OS로 부팅합니다</translation>
     </message>
 </context>
@@ -55,7 +56,7 @@
     <message>
         <location filename="confeditdialog.cpp" line="83"/>
         <source>Error mounting boot partition</source>
-        <translation>부팅 파티선을 마운트하는 과정에서 오류가 발생하였습니다</translation>
+        <translation>부팅 파티션을 마운트하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
 </context>
 <context>
@@ -92,7 +93,7 @@
         <location filename="initdrivethread.cpp" line="169"/>
         <location filename="initdrivethread.cpp" line="357"/>
         <source>Error zero&apos;ing MBR/GPT. SD card may be broken or advertising wrong capacity.</source>
-        <translation>MBR/GPT를 초기화하는 과잠에 오류가 발생하였습니다. SD 카드가 손상되었거나 용량을 잘못 표시하고 있는지 확인하여 주십시요.</translation>
+        <translation>MBR/GPT를 초기화하는 과정에 오류가 발생하였습니다. SD 카드가 손상되었거나 용량을 잘못 표시하고 있는지 확인하여 주십시요.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="160"/>
@@ -119,12 +120,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="190"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>SD 카드가 NOOBS 설치를 준비할 수 있도록 초기화 하였습니다.SD 카드에 NOOBS를 다시 복사한 다음 재부팅하여 주십시요.</translation>
+        <translation>NOOBS 설치를 준비할 수 있도록 SD 카드를 초기화하였습니다.SD 카드에 NOOBS를 다시 복사한 다음 재부팅하여 주십시요.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="195"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>SD 카드가 정상적으로 초기화되지 않았습니다. SD 카드 초기화 툴을 이용하여 카드를 초기화한 뒤 다시 시도하여 주십시요.</translation>
+        <translation>SD 카드를 올바르게 초기화할 수 없었습니다. SD Association Formatting Tool을 이용하여 카드를 초기화한 뒤 다시 시도하여 주십시요.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="201"/>
@@ -174,12 +175,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="369"/>
         <source>Formatting boot partition (fat)</source>
-        <translation>부팅 파티션을 포맷하고 있습니다 (FAT)</translation>
+        <translation>부팅 파티션 (FAT) 을 초기화하고 있습니다</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="372"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation>부팅 파티션을 포맷하는 과정에서 오류가 발생하였습니다 (FAT)</translation>
+        <translation>부팅 파티션 (FAT) 을 초기화하는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="376"/>
@@ -234,7 +235,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="135"/>
         <source>SD card broken (writes do not persist)</source>
-        <translation>SD 카드가 손상되었습니다. (기록 내용은 유지되지 않음)</translation>
+        <translation>SD 카드가 손상되었습니다. (기록된 내용은 유지되지 않음)</translation>
     </message>
 </context>
 <context>
@@ -242,7 +243,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="languagedialog.ui" line="135"/>
         <source>Language (l): </source>
-        <translation>언어 (l): </translation>
+        <translation>언어 (L): </translation>
     </message>
     <message>
         <location filename="languagedialog.ui" line="156"/>
@@ -373,7 +374,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="151"/>
         <source>Reformat failed</source>
-        <translation>다시 초기화를 할 수 없었습니다.</translation>
+        <translation>다시 초기화할 수 없음</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="151"/>
@@ -410,12 +411,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="119"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation>SD 카드를 준비하고 있습니다 (파티션 설정 중)</translation>
+        <translation>SD 카드를 준비하고 있습니다 (설정 파티션)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="132"/>
         <source>Mounting settings partition</source>
-        <translation>설정된 파티션을 마운트하고 있습니다</translation>
+        <translation>설정 파티션을 마운트하고 있습니다</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="250"/>
@@ -511,7 +512,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1493"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation>SD 카드에 가져온 파일을 기록하는 과정에서 오류가 발생하였습니다. SD 카드 또는 파일 시스템이 손상된 것으로 보입니다.</translation>
+        <translation>SD 카드에 가져온 파일을 기록하는 과정에서 오류가 발생하였습니다. SD 카드 또는 파일 시스템이 손상되었는지 확인하여 주십시오.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1609"/>
@@ -526,12 +527,12 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1731"/>
         <source>Reformat drive?</source>
-        <translation>드라이브 포맷 확인</translation>
+        <translation>드라이브 초기화 확인</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1732"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
-        <translation>&apos;%1&apos; 드라이브를 정말 다시 포맷하시겠습니까? 포맷을 완료하면 NOOBS가 이 드라이브를 이용합니다. 이 드라이브 안에 있는 모든 데이터는 완전히 삭제됩니다.</translation>
+        <translation>&apos;%1&apos; 드라이브를 정말 다시 초기화하시겠습니까? 초기화를 완료하면 이 드라이브 안에 있는 모든 데이터는 완전히 삭제됩니다. 초기화 후 NOOBS가 이 드라이브를 이용합니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="922"/>
