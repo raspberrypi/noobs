@@ -50,7 +50,7 @@ Both versions of NOOBS allow additional Operating Systems to be downloaded from 
 
 Once connected, the Pi will only show a list of Operating Systems that are appropriate to your Pi Model. If you want to see ALL available OSes, edit the `recovery.cmdline` file in the root NOOBS directory and append `showall` to the arguments list.
 
-####Wired Networks
+#### Wired Networks
 
 If a wired ethernet cable is plugged into the Pi before NOOBS starts, NOOBS will connect via DHCP to our remote download repository and present a list of available Operating Systems that are available for installation.
 
