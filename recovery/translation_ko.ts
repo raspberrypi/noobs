@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ko" sourcelanguage="en">
+<TS version="2.1" language="ko" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -110,22 +110,22 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="174"/>
         <source>Writing new MBR</source>
-        <translation>MBR을 새로 기록하고 있습니다.</translation>
+        <translation>새 MBR을 기록하고 있습니다.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="182"/>
         <source>Error creating MBR</source>
-        <translation>MBR을 만드는 과정에서 오류가 발생하였습니다.</translation>
+        <translation>MBR을 기록하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="190"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>NOOBS 설치를 준비할 수 있도록 SD 카드를 초기화하였습니다.SD 카드에 NOOBS를 다시 복사한 다음 재부팅하여 주십시요.</translation>
+        <translation>NOOBS를 설치할 수 있도록 SD 카드를 초기화하였습니다.SD 카드에 NOOBS 파일을 다시 복사한 다음 재부팅하여 주십시요.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="195"/>
         <source>SD card has not been formatted correctly. Please reformat using the SD Association Formatting Tool and try again.</source>
-        <translation>SD 카드를 올바르게 초기화할 수 없었습니다. SD Association Formatting Tool을 이용하여 카드를 초기화한 뒤 다시 시도하여 주십시요.</translation>
+        <translation>SD 카드를 올바르게 초기화할 수 없었습니다. SD Association Formatting Tool을 이용하여 SD 카드를 초기화한 뒤 다시 시도하여 주십시요.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="201"/>
@@ -160,7 +160,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="345"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation>부팅 파일을 메모리에 기록하는 과정에 오류가 발생하였습니다. SD 카드가 손상되었는지 확인해 주십시오.</translation>
+        <translation>부팅 파일을 메모리에 저장하는 과정에 오류가 발생하였습니다. SD 카드가 손상되었는지 확인해 주십시오.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="361"/>
@@ -210,12 +210,12 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="initdrivethread.cpp" line="101"/>
         <source>Writing RiscOS blob</source>
-        <translation>RiscOS 바이너리 데이터를 저장하고 있습니다.</translation>
+        <translation>RiscOS 바이너리 데이터를 기록하고 있습니다.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="104"/>
         <source>Error writing RiscOS blob</source>
-        <translation>RiscOS 바이너리 데이터를 저장하는 과정에서 오류가 발생하였습니다.</translation>
+        <translation>RiscOS 바이너리 데이터를 기록하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="111"/>
@@ -281,7 +281,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="161"/>
         <source>Installs the selected operating system image onto this SD card.</source>
-        <translation>이 SD 카드에 선택한 운영체제를 설치합니다.</translation>
+        <translation>선택한 운영체제를 이 SD 카드에 설치합니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="164"/>
@@ -311,7 +311,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="206"/>
         <source>Opens the config.txt and cmdline.txt for the installed OS in a text editor.</source>
-        <translation>설치한 운영체제에 사용하는 config.txt 와 cmdline.txt 를 문서 편집기로 엽니다.</translation>
+        <translation>설치한 운영체제에서 사용하는 config.txt 와 cmdline.txt 를 문서 편집기로 엽니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="218"/>
@@ -321,7 +321,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.ui" line="221"/>
         <source>Opens a web browser displaying the Raspberry Pi Forum.</source>
-        <translation>Raspberry Pi 포럼을 웹 브라우저로 열어 보여줍니다.</translation>
+        <translation>Raspberry Pi 포럼을 웹 브라우저를 열어 보여줍니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="236"/>
@@ -385,7 +385,7 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="585"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
-        <translation>경고: 선택한 운영체제를 설치하겠습니다. SD 카드에 이미 설치된 모든 운영체제와 개인 데이터를 전부 덮어씁니다.</translation>
+        <translation>경고: 선택한 운영체제를 설치하겠습니다. SD 카드에 이미 설치된 모든 운영체제 및 데이터를 전부 덮어씁니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="686"/>
@@ -453,7 +453,7 @@ WARNING: This will erase all data on your SD card</source>
         <location filename="mainwindow.cpp" line="675"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
-        <translation>운영체제 설치에 성공하였습니다.</translation>
+        <translation>운영체제를 설치하였습니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="739"/>
@@ -512,7 +512,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1493"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
-        <translation>SD 카드에 가져온 파일을 기록하는 과정에서 오류가 발생하였습니다. SD 카드 또는 파일 시스템이 손상되었는지 확인하여 주십시오.</translation>
+        <translation>다운로드한 파일을 SD 카드에 기록하는 과정에서 오류가 발생하였습니다. SD 카드 또는 파일 시스템이 손상되었는지 확인하여 주십시오.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1609"/>
@@ -522,7 +522,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="mainwindow.cpp" line="1617"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
-        <translation>NOOBS를 설치를 위한 로컬 이미지 파일 없이 사용하려면 유선 네트워크 연결이 필요합니다. 네트워크 포트에 네트워크 케이블을 삽입하여 주십시요.</translation>
+        <translation>로컬에 운영체제 이미지가 없는 NOOBS를 사용하려면 유선 네트워크 연결이 필요합니다. 네트워크 포트에 네트워크 케이블을 삽입하여 주십시요.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1731"/>
@@ -642,7 +642,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="297"/>
         <source>Zero&apos;ing start of each partition</source>
-        <translation>파티션을 초기화 하고 있습니다</translation>
+        <translation>각 파티션을 초기화 하고 있습니다</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="331"/>
@@ -657,7 +657,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="504"/>
         <source>%1: Downloading and extracting filesystem</source>
-        <translation>%1: 파일 시스템을 다운로드 및 추출하고 있습니다.</translation>
+        <translation>%1: 파일 시스템을 다운로드 및 압축 해제하고 있습니다.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="506"/>
@@ -705,7 +705,7 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="625"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
-        <translation>%1: 파일 시스템을 마운트 해제하는 과정에서 오류가 발생하였습니다.</translation>
+        <translation>%1: 마운트 해제하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="706"/>
