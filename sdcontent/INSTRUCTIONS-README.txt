@@ -5,9 +5,8 @@ NOOBS INSTALLATION INSTRUCTIONS
    a. Windows (32GB cards and under)
       i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_windows/
       ii. Install and run the Formatting Tool on your machine
-      iii. Set "FORMAT SIZE ADJUSTMENT" option to "ON" in the "Options" menu
-      iv. Check that the SD card you inserted matches the one selected by the Tool
-      v. Click the "Format" button
+      iii. Check that the SD card you inserted matches the one selected by the Tool
+      iv. Click the "Format" button
    b. Mac (32GB cards and under)
       i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_mac/
       ii. Install and run the Formatting Tool on your machine
