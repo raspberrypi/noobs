@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt" sourcelanguage="en">
-    <extra-po-header-language>pt</extra-po-header-language>
-    <extra-po-header-language_team></extra-po-header-language_team>
-    <extra-po-header-last_translator></extra-po-header-last_translator>
-    <extra-po-header-po_revision_date></extra-po-header-po_revision_date>
-    <extra-po-header-pot_creation_date></extra-po-header-pot_creation_date>
-    <extra-po-header-project_id_version></extra-po-header-project_id_version>
-    <extra-po-header-x_generator>Poedit 2.0.2</extra-po-header-x_generator>
-    <extra-po-headers>MIME-Version,Content-Type,Content-Transfer-Encoding,Plural-Forms,X-Language,X-Source-Language,X-Qt-Contexts,Project-Id-Version,POT-Creation-Date,PO-Revision-Date,Last-Translator,Language-Team,Language,X-Generator</extra-po-headers>
+<TS version="2.0" language="pt" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
