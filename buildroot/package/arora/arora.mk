@@ -4,7 +4,7 @@
 #
 #############################################################
 
-ARORA_VERSION = c5421dcf7d68ba61c3a5bed580e8fd65395643e1
+ARORA_VERSION = a2d19752759bfb183d983ee3a9d726a4b09375a9
 ARORA_SITE = $(call github,Arora,arora,$(ARORA_VERSION))
 ARORA_LICENSE = GPLv2
 ARORA_LICENSE_FILES = LICENSE.GPL2
