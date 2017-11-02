@@ -94,6 +94,7 @@ TRANSLATIONS += \
     translation_pl.ts \
     translation_pt.ts \
     translation_ru.ts \
+    translation_sk.ts \
     translation_sv.ts \
     translation_tr.ts \
     translation_zh_TW.ts
