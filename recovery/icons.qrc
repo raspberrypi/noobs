@@ -56,5 +56,6 @@
         <file>icons/network-wireless-connected-100.png</file>
         <file>icons/tick.png</file>
         <file>icons/hdd_usb_unmount.png</file>
+        <file>icons/information.png</file>
     </qresource>
 </RCC>

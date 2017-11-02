@@ -696,6 +696,7 @@ void MainWindow::on_list_currentRowChanged()
 {
     QListWidgetItem *item = ui->list->currentItem();
     ui->actionEdit_config->setEnabled(item && item->data(Qt::UserRole).toMap().contains("partitions"));
+    ui->actionInfo->setEnabled(item && item->data(Qt::UserRole).toMap().contains("url"));
 }
 
 void MainWindow::update_window_title()
@@ -1881,5 +1882,26 @@ void MainWindow::filterList()
                 witem->setHidden(true);
             }
         }
+    }
+}
+
+void MainWindow::on_actionInfo_triggered()
+{
+    if (!requireNetwork())
+        return;
+
+    QListWidgetItem * item = ui->list->currentItem();
+    if (!item)
+    {
+        return;
+    }
+    QVariantMap m = item->data(Qt::UserRole).toMap();
+    if (m.contains("url"))
+    {
+        QProcess *proc = new QProcess(this);
+        QString lang = LanguageDialog::instance("en", "gb")->currentLanguage();
+        if (lang == "gb" || lang == "us" || lang == "ko" || lang == "")
+            lang = "en";
+        proc->start("arora -lang "+lang+" "+m.value("url").toString());
     }
 }

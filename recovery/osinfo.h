@@ -69,8 +69,13 @@ public:
         return _supportedModels;
     }
 
+    inline QString url()
+    {
+        return _url;
+    }
+
 protected:
-    QString _folder, _flavour, _name, _description, _version, _releaseDate;
+    QString _folder, _flavour, _name, _description, _version, _releaseDate, _url;
     bool _bootable;
     QList<PartitionInfo *> _partitions;
     QStringList _supportedModels;

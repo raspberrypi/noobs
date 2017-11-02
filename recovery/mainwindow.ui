@@ -126,6 +126,7 @@
    <addaction name="actionWrite_image_to_disk"/>
    <addaction name="actionEdit_config"/>
    <addaction name="actionWifi"/>
+   <addaction name="actionInfo"/>
    <addaction name="actionBrowser"/>
    <addaction name="actionCancel"/>
   </widget>
@@ -240,6 +241,24 @@
    </property>
    <property name="shortcut">
     <string>W</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/information.png</normaloff>:/icons/information.png</iconset>
+   </property>
+   <property name="text">
+    <string>Info (f)</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Information on selected OS</string>
+   </property>
+   <property name="shortcut">
+    <string>F</string>
    </property>
   </action>
  </widget>

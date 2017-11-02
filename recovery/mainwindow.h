@@ -114,6 +114,8 @@ private slots:
 
     void on_targetCombo_currentIndexChanged(int index);
 
+    void on_actionInfo_triggered();
+
 signals:
     void networkUp();
 };
