@@ -531,7 +531,7 @@ Vuoi rendere questa impostazione permanente?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1732"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
-        <translation>Sei sicuro di voler riformattare l&apos;unità &apos;%1&apos; per l&apos;uso con NOOBS? Tutti dati esistenti nell&apos;unità verranno cancellati.</translation>
+        <translation>Sei sicuro di voler riformattare l&apos;unità &apos;%1&apos; per l&apos;uso con NOOBS? Tutti dati esistenti nell&apos;unità verranno cancellati!</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="922"/>
