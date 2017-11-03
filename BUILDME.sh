@@ -96,6 +96,8 @@ function select_kernelconfig {
 }
 
 
+export QT_SELECT=4
+
 cd buildroot
 
 # WARNING: don't try changing these - you'll break buildroot
