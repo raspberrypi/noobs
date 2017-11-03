@@ -97,8 +97,8 @@ TRANSLATIONS += \
     translation_sk.ts \
     translation_sv.ts \
     translation_tr.ts \
-    translation_zh_TW.ts \
-    translation_zh_CN.ts
+    translation_zh_CN.ts \
+    translation_zh_TW.ts
 
 OTHER_FILES += \
     README.txt \

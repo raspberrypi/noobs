@@ -48,10 +48,10 @@
         <file>icons/sv.png</file>
         <file>translation_tr.qm</file>
         <file>icons/tr.png</file>
-        <file>translation_zh_TW.qm</file>
-        <file>icons/zh_TW.png</file>
         <file>translation_zh_CN.qm</file>
         <file>icons/zh_CN.png</file>
+        <file>translation_zh_TW.qm</file>
+        <file>icons/zh_TW.png</file>
         <file>icons/network-wireless.png</file>
         <file>icons/network-wireless-connected-00.png</file>
         <file>icons/network-wireless-connected-25.png</file>
