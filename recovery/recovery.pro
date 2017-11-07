@@ -79,6 +79,7 @@ RESOURCES += \
     icons.qrc
 
 TRANSLATIONS += \
+    translation_ar.ts \
     translation_ast.ts \
     translation_ca.ts \
     translation_de.ts \
@@ -91,6 +92,7 @@ TRANSLATIONS += \
     translation_ja.ts \
     translation_ko.ts \
     translation_nl.ts \
+    translation_no.ts \
     translation_pl.ts \
     translation_pt.ts \
     translation_ru.ts \
