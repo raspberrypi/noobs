@@ -12,6 +12,8 @@
         <file>icons/world.png</file>
         <file>icons/gb.png</file>
         <file>icons/us.png</file>
+        <file>translation_ar.qm</file>
+        <file>icons/ar.png</file>
         <file>translation_ca.qm</file>
         <file>icons/ca.png</file>
         <file>translation_de.qm</file>
@@ -36,6 +38,8 @@
         <file>icons/ko.png</file>
         <file>translation_nl.qm</file>
         <file>icons/nl.png</file>
+        <file>translation_no.qm</file>
+        <file>icons/no.png</file>
         <file>translation_pl.qm</file>
         <file>icons/pl.png</file>
         <file>translation_pt.qm</file>
