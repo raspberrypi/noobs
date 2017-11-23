@@ -35,6 +35,7 @@ public slots:
     void updateIOstats();
     void pauseIOaccounting();
     void resumeIOaccounting();
+    void changeDrive(const QString &drive);
 
 protected:
     QString _drive;

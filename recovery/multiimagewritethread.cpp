@@ -465,6 +465,7 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
             }
         }
         QByteArray partdevice = p->partitionDevice();
+        emit newDrive(partdevice);
 
         if (fstype == "raw")
         {

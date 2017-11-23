@@ -123,6 +123,13 @@ void ProgressSlideshowDialog::resumeIOaccounting()
     _iotimer.start(1000);
 }
 
+void ProgressSlideshowDialog::changeDrive(const QString &drive)
+{
+    pauseIOaccounting();
+    _drive = drive;
+    resumeIOaccounting();
+}
+
 void ProgressSlideshowDialog::setMaximum(qint64 bytes)
 {
     _maxSectors = bytes/512;
