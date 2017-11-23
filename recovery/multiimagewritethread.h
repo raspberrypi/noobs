@@ -20,6 +20,8 @@ public:
 protected:
     virtual void run();
     bool processImage(OsInfo *image);
+    QString shorten(QString example, int maxLabelLen);
+    QByteArray makeLabelUnique(QByteArray label, int maxLabelLen);
     bool mkfs(const QByteArray &device, const QByteArray &fstype = "ext4", const QByteArray &label = "", const QByteArray &mkfsopt = "");
     bool dd(const QString &imagePath, const QString &device);
     bool partclone_restore(const QString &imagePath, const QString &device);
