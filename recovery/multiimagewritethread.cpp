@@ -275,6 +275,14 @@ void MultiImageWriteThread::run()
     if (!writePartitionTable(_drive, partitionMap))
         return;
 
+    /* Zero out first sector of partitions, to make sure to get rid of previous file system (label) */
+    emit statusUpdate(tr("Zero'ing start of each partition"));
+    foreach (PartitionInfo *p, partitionMap.values())
+    {
+        if (p->partitionSizeSectors())
+            QProcess::execute("/bin/dd count=3 bs=512 if=/dev/zero of="+p->partitionDevice());
+    }
+
     /* Write partition table to boot drive (if using multiple drives) */
     if (_multiDrives)
     {
@@ -282,6 +290,14 @@ void MultiImageWriteThread::run()
 
         if (!writePartitionTable(_bootdrive, bootPartitionMap))
             return;
+
+        /* Zero out first sector of partitions, to make sure to get rid of previous file system (label) */
+        emit statusUpdate(tr("Zero'ing start of each partition"));
+        foreach (PartitionInfo *p, bootPartitionMap.values())
+        {
+            if (p->partitionSizeSectors())
+                QProcess::execute("/bin/dd count=3 bs=512 if=/dev/zero of="+p->partitionDevice());
+        }
 
         if (QProcess::execute("mount -t ext4 "+partdev(_bootdrive, SETTINGS_PARTNR)+" /mnt2") == 0)
         {
@@ -291,14 +307,6 @@ void MultiImageWriteThread::run()
 
             QProcess::execute("umount /mnt2");
         }
-    }
-
-    /* Zero out first sector of partitions, to make sure to get rid of previous file system (label) */
-    emit statusUpdate(tr("Zero'ing start of each partition"));
-    foreach (PartitionInfo *p, partitionMap.values())
-    {
-        if (p->partitionSizeSectors())
-            QProcess::execute("/bin/dd count=1 bs=512 if=/dev/zero of="+p->partitionDevice());
     }
 
     /* Install each operating system */
