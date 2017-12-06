@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it" sourcelanguage="en">
+<TS version="2.1" language="it" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -716,7 +716,7 @@ Vuoi rendere questa impostazione permanente?</translation>
         <location filename="multiimagewritethread.cpp" line="819"/>
         <location filename="multiimagewritethread.cpp" line="878"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
-        <translation>Estensione file tipo compressione sconosciuta. Attesa: .lzo, .gz, .xz, .bz2,o .zip </translation>
+        <translation>Estensione file tipo compressione sconosciuta. Attesa: .lzo, .gz, .xz, .bz2,o .zip</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="781"/>
@@ -740,7 +740,7 @@ Vuoi rendere questa impostazione permanente?</translation>
     <message>
         <location filename="progressslideshowdialog.cpp" line="145"/>
         <source>%1 MB written (%2 MB/sec)</source>
-        <translation>Scritti %1 MB (%2 MB/sec) </translation>
+        <translation>Scritti %1 MB (%2 MB/sec)</translation>
     </message>
 </context>
 <context>
