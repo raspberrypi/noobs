@@ -350,7 +350,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="338"/>
         <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1818"/>
+        <location filename="mainwindow.cpp" line="1819"/>
         <source>RECOMMENDED</source>
         <translation>RECOMMANDé</translation>
     </message>
@@ -514,29 +514,29 @@ Would you like to make this setting permanent?</source>
         <translation>Erreur lors de l&apos;écriture des fichiers téléchargés. La carte SD ou le système de fichiers sont peut-être endommagés.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1610"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>Connexion réseau requise pour utiliser NOOBS sans images locales. Merci de sélectionner votre réseau wifi dans le prochain écran.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Connexion filaire requise pour utiliser NOOBS sans images locales. Merci d&apos;insérer un cable réseau dans le port réseau.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1731"/>
+        <location filename="mainwindow.cpp" line="1732"/>
         <source>Reformat drive?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1733"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1608"/>
-        <location filename="mainwindow.cpp" line="1616"/>
+        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1617"/>
         <source>No network access</source>
         <translation>Pas d&apos;accés réseau</translation>
     </message>
@@ -574,37 +574,37 @@ Would you like to make this setting permanent?</source>
         <translation>Pas assez d&apos;espace disque. %1 MB requis, %2 MB disponibles</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="311"/>
+        <location filename="multiimagewritethread.cpp" line="320"/>
         <source>Finish writing (sync)</source>
         <translation>écriture terminée (sync)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="448"/>
+        <location filename="multiimagewritethread.cpp" line="457"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>Le fichier &apos;%1&apos; n&apos;existe pas</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="471"/>
-        <location filename="multiimagewritethread.cpp" line="477"/>
+        <location filename="multiimagewritethread.cpp" line="491"/>
+        <location filename="multiimagewritethread.cpp" line="497"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
         <translation>%1: Ecriture de l&apos;image de l&apos;OS</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="491"/>
+        <location filename="multiimagewritethread.cpp" line="511"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
         <translation>%1: Montage du système de fichiers</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="499"/>
-        <location filename="multiimagewritethread.cpp" line="523"/>
+        <location filename="multiimagewritethread.cpp" line="519"/>
+        <location filename="multiimagewritethread.cpp" line="543"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
         <translation>%1: Erreur pendant le montage du système de fichiers</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="484"/>
+        <location filename="multiimagewritethread.cpp" line="504"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation>%1: Création du système de fichiers (%2)</translation>
     </message>
@@ -624,108 +624,109 @@ Would you like to make this setting permanent?</source>
         <translation>Plus d&apos;un OS demandent la partition %1</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="213"/>
+        <location filename="multiimagewritethread.cpp" line="214"/>
         <source>Fixed partition offset too low</source>
         <translation>Offset de la partition corrigé. (Trop faible)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="274"/>
+        <location filename="multiimagewritethread.cpp" line="275"/>
         <source>Writing partition table</source>
         <translation>Ecriture de la table de partition</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="281"/>
+        <location filename="multiimagewritethread.cpp" line="290"/>
         <source>Writing boot partition table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="297"/>
+        <location filename="multiimagewritethread.cpp" line="280"/>
+        <location filename="multiimagewritethread.cpp" line="296"/>
         <source>Zero&apos;ing start of each partition</source>
         <translation>Réinitialisation du début de chaque partition</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="331"/>
+        <location filename="multiimagewritethread.cpp" line="340"/>
         <source>Error reading existing partition table</source>
         <translation>Erreur pendant la lécture de la table de partition existante</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="416"/>
+        <location filename="multiimagewritethread.cpp" line="425"/>
         <source>Error creating partition table</source>
         <translation>Erreur pendant la création de la table de partition</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="504"/>
+        <location filename="multiimagewritethread.cpp" line="524"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation>%1: Téléchargement et extraction du système de fichier</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="506"/>
+        <location filename="multiimagewritethread.cpp" line="526"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
         <translation>%1: Extraction du système de fichiers</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="520"/>
+        <location filename="multiimagewritethread.cpp" line="540"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
         <translation>%1: Montage de la partition FAT</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="532"/>
+        <location filename="multiimagewritethread.cpp" line="552"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
         <translation>%1: Création de os_config.json</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="557"/>
+        <location filename="multiimagewritethread.cpp" line="577"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
         <translation>%1: Sauvegarde du mode d&apos;affichage dans config.txt</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="568"/>
+        <location filename="multiimagewritethread.cpp" line="588"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
         <translation>%1: Lancement du script d&apos;installation de partition</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="617"/>
+        <location filename="multiimagewritethread.cpp" line="637"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
         <translation>%1: Erreur d&apos;exécution du script d&apos;installation de partition</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="622"/>
+        <location filename="multiimagewritethread.cpp" line="642"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
         <translation>%1: Démontage de la partition FAT</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="625"/>
+        <location filename="multiimagewritethread.cpp" line="645"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
         <translation>%1: Erreur pendant le démontage</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="706"/>
+        <location filename="multiimagewritethread.cpp" line="804"/>
         <source>Error creating file system</source>
         <translation>Erreur pendant la création du système de fichiers</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="748"/>
-        <location filename="multiimagewritethread.cpp" line="819"/>
-        <location filename="multiimagewritethread.cpp" line="878"/>
+        <location filename="multiimagewritethread.cpp" line="846"/>
+        <location filename="multiimagewritethread.cpp" line="917"/>
+        <location filename="multiimagewritethread.cpp" line="976"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Format de compression inconnue. Extension .lzo, .gz, .xz, .bz2 or .zip attendu</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="781"/>
+        <location filename="multiimagewritethread.cpp" line="879"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Erreur durant le téléchargement ou l&apos;extraction du tarball</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="840"/>
-        <location filename="multiimagewritethread.cpp" line="899"/>
+        <location filename="multiimagewritethread.cpp" line="938"/>
+        <location filename="multiimagewritethread.cpp" line="997"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>Erreur durant le téléchargement ou l&apos;écriture de l&apos;OS sur la carte SD</translation>
     </message>
@@ -733,12 +734,12 @@ Would you like to make this setting permanent?</source>
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="140"/>
+        <location filename="progressslideshowdialog.cpp" line="152"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%1 MB sur %2 MB écrit (%3 MB/sec)</translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="145"/>
+        <location filename="progressslideshowdialog.cpp" line="157"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation>%1 MB écrit (%2 MB/sec)</translation>
     </message>

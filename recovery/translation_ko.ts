@@ -341,7 +341,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="338"/>
         <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1818"/>
+        <location filename="mainwindow.cpp" line="1819"/>
         <source>RECOMMENDED</source>
         <translation>추천 설치</translation>
     </message>
@@ -515,29 +515,29 @@ Would you like to make this setting permanent?</source>
         <translation>다운로드한 파일을 SD 카드에 기록하는 과정에서 오류가 발생하였습니다. SD 카드 또는 파일 시스템이 손상되었는지 확인하여 주십시오.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1610"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>로컬 이미지가 없는 NOOBS는 네트워크 접속이 필요합니다. 다음 화면에서 Wi-Fi 네트워크를 선택해 주십시오.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>로컬에 운영체제 이미지가 없는 NOOBS를 사용하려면 유선 네트워크 연결이 필요합니다. 네트워크 포트에 네트워크 케이블을 삽입하여 주십시요.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1731"/>
+        <location filename="mainwindow.cpp" line="1732"/>
         <source>Reformat drive?</source>
         <translation>드라이브 초기화 확인</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1733"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation>&apos;%1&apos; 드라이브를 정말 다시 초기화하시겠습니까? 초기화를 완료하면 이 드라이브 안에 있는 모든 데이터는 완전히 삭제됩니다. 초기화 후 NOOBS가 이 드라이브를 이용합니다.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1608"/>
-        <location filename="mainwindow.cpp" line="1616"/>
+        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1617"/>
         <source>No network access</source>
         <translation>네트워크에 접속할 수 없음</translation>
     </message>
@@ -565,37 +565,37 @@ Would you like to make this setting permanent?</source>
         <translation>디스크 공간이 부족합니다. 필요한 공간은 %1 MB이며, 남은 공간은 %2 MB입니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="311"/>
+        <location filename="multiimagewritethread.cpp" line="320"/>
         <source>Finish writing (sync)</source>
         <translation>기록을 완료하고 있습니다. (동기화 중)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="448"/>
+        <location filename="multiimagewritethread.cpp" line="457"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>파일 &apos;%1&apos; 이 없습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="471"/>
-        <location filename="multiimagewritethread.cpp" line="477"/>
+        <location filename="multiimagewritethread.cpp" line="491"/>
+        <location filename="multiimagewritethread.cpp" line="497"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
         <translation>%1: 운영체제 이미지 파일을 기록하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="491"/>
+        <location filename="multiimagewritethread.cpp" line="511"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
         <translation>%1: 파일 시스템을 마운트하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="499"/>
-        <location filename="multiimagewritethread.cpp" line="523"/>
+        <location filename="multiimagewritethread.cpp" line="519"/>
+        <location filename="multiimagewritethread.cpp" line="543"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
         <translation>%1: 파일 시스템을 마운트하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="484"/>
+        <location filename="multiimagewritethread.cpp" line="504"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation>%1: 파일시스템을 만들고 있습니다. (%2)</translation>
     </message>
@@ -625,108 +625,109 @@ Would you like to make this setting permanent?</source>
         <translation>운영체제가 주 파티션 2와 4를 모두 요구할 수는 없습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="213"/>
+        <location filename="multiimagewritethread.cpp" line="214"/>
         <source>Fixed partition offset too low</source>
         <translation>고정 파티션 오프셋 값이 너무 낮습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="274"/>
+        <location filename="multiimagewritethread.cpp" line="275"/>
         <source>Writing partition table</source>
         <translation>파티션 테이블을 기록하고 있습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="281"/>
+        <location filename="multiimagewritethread.cpp" line="290"/>
         <source>Writing boot partition table</source>
         <translation>부팅 파티션을 기록하고 있습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="297"/>
+        <location filename="multiimagewritethread.cpp" line="280"/>
+        <location filename="multiimagewritethread.cpp" line="296"/>
         <source>Zero&apos;ing start of each partition</source>
         <translation>각 파티션을 초기화 하고 있습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="331"/>
+        <location filename="multiimagewritethread.cpp" line="340"/>
         <source>Error reading existing partition table</source>
         <translation>이미 있는 파티션 테이블을 읽는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="416"/>
+        <location filename="multiimagewritethread.cpp" line="425"/>
         <source>Error creating partition table</source>
         <translation>파티션 테이블을 생성하는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="504"/>
+        <location filename="multiimagewritethread.cpp" line="524"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation>%1: 파일 시스템을 다운로드 및 압축 해제하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="506"/>
+        <location filename="multiimagewritethread.cpp" line="526"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
         <translation>%1: 파일 시스템을 추출하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="520"/>
+        <location filename="multiimagewritethread.cpp" line="540"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
         <translation>%1: FAT 파티션을 마운트하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="532"/>
+        <location filename="multiimagewritethread.cpp" line="552"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
         <translation>%1: os_config.json을 만들고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="557"/>
+        <location filename="multiimagewritethread.cpp" line="577"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
         <translation>%1: 디스플레이 모드를 config.txt에 저장하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="568"/>
+        <location filename="multiimagewritethread.cpp" line="588"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
         <translation>%1: 파티션 설치 스크립트를 실행하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="617"/>
+        <location filename="multiimagewritethread.cpp" line="637"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
         <translation>%1: 파티션 설치 스크립트를 실행하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="622"/>
+        <location filename="multiimagewritethread.cpp" line="642"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
         <translation>%1: FAT 파티션을 마운트 해제하고 있습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="625"/>
+        <location filename="multiimagewritethread.cpp" line="645"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
         <translation>%1: 마운트 해제하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="706"/>
+        <location filename="multiimagewritethread.cpp" line="804"/>
         <source>Error creating file system</source>
         <translation>파일 시스템을 만드는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="748"/>
-        <location filename="multiimagewritethread.cpp" line="819"/>
-        <location filename="multiimagewritethread.cpp" line="878"/>
+        <location filename="multiimagewritethread.cpp" line="846"/>
+        <location filename="multiimagewritethread.cpp" line="917"/>
+        <location filename="multiimagewritethread.cpp" line="976"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>압축 파일의 형식을 알아낼 수 없었습니다. .lzo 또는 .gz, .xz, .bz2, .zip 형식을 지원합니다.</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="781"/>
+        <location filename="multiimagewritethread.cpp" line="879"/>
         <source>Error downloading or extracting tarball</source>
         <translation>tarball을 다운로드 및 압축 해제하는 과정에서 오류가 발생하였습니다</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="840"/>
-        <location filename="multiimagewritethread.cpp" line="899"/>
+        <location filename="multiimagewritethread.cpp" line="938"/>
+        <location filename="multiimagewritethread.cpp" line="997"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>운영체제를 SD 카드에 다운로드 및 기록하는 과정에서 오류가 발생하였습니다</translation>
     </message>
@@ -734,12 +735,12 @@ Would you like to make this setting permanent?</source>
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="140"/>
+        <location filename="progressslideshowdialog.cpp" line="152"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%2 MB 중 %1 MB 기록 완료 (%3 MB/초)</translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="145"/>
+        <location filename="progressslideshowdialog.cpp" line="157"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation>%1 MB 기록 완료 (%2 MB/초)</translation>
     </message>
