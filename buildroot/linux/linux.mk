@@ -59,21 +59,19 @@ LINUX_MAKE_FLAGS = \
 # going to be installed in the target filesystem.
 LINUX_VERSION_PROBED = $(shell $(MAKE) $(LINUX_MAKE_FLAGS) -C $(LINUX_DIR) --no-print-directory -s kernelrelease)
 
-ifeq ($(BR2_LINUX_KERNEL_USE_INTREE_DTS),y)
-KERNEL_DTS_NAME = $(call qstrip,$(BR2_LINUX_KERNEL_INTREE_DTS_NAME))
-else ifeq ($(BR2_LINUX_KERNEL_USE_CUSTOM_DTS),y)
+ifeq ($(BR2_LINUX_KERNEL_USE_CUSTOM_DTS),y)
 KERNEL_DTS_NAME = $(basename $(notdir $(call qstrip,$(BR2_LINUX_KERNEL_CUSTOM_DTS_PATH))))
 endif
 
-ifeq ($(BR2_LINUX_KERNEL_DTS_SUPPORT)$(KERNEL_DTS_NAME),y)
+ifeq ($(BR2_LINUX_KERNEL_USE_CUSTOM_DTS)$(KERNEL_DTS_NAME),y)
 $(error No kernel device tree source specified, check your \
-BR2_LINUX_KERNEL_USE_INTREE_DTS / BR2_LINUX_KERNEL_USE_CUSTOM_DTS settings)
+BR2_LINUX_KERNEL_USE_CUSTOM_DTS settings)
 endif
 
 ifeq ($(BR2_LINUX_KERNEL_APPENDED_DTB),y)
 ifneq ($(words $(KERNEL_DTS_NAME)),1)
 $(error Kernel with appended device tree needs exactly one DTS source. \
-	Check BR2_LINUX_KERNEL_INTREE_DTS_NAME or BR2_LINUX_KERNEL_CUSTOM_DTS_PATH.)
+	Check BR2_LINUX_KERNEL_CUSTOM_DTS_PATH.)
 endif
 endif
 
@@ -228,21 +226,26 @@ endef
 ifeq ($(BR2_LINUX_KERNEL_DTS_SUPPORT),y)
 ifeq ($(BR2_LINUX_KERNEL_DTB_IS_SELF_BUILT),)
 define LINUX_BUILD_DTB
-	$(TARGET_MAKE_ENV) $(MAKE) $(LINUX_MAKE_FLAGS) -C $(@D) $(KERNEL_DTBS)
+	$(TARGET_MAKE_ENV) $(MAKE) $(LINUX_MAKE_FLAGS) -C $(@D) dtbs
 endef
 define LINUX_INSTALL_DTB
 	# dtbs moved from arch/<ARCH>/boot to arch/<ARCH>/boot/dts since 3.8-rc1
-	cp $(addprefix \
-		$(KERNEL_ARCH_PATH)/boot/$(if $(wildcard \
-		$(addprefix $(KERNEL_ARCH_PATH)/boot/dts/,$(KERNEL_DTBS))),dts/),$(KERNEL_DTBS)) \
+	cp $(KERNEL_ARCH_PATH)/boot/dts/bcm27*.dtb \
 		$(BINARIES_DIR)/
+	mkdir -p $(BINARIES_DIR)/overlays/
+	cp $(KERNEL_ARCH_PATH)/boot/dts/overlays/*.dtbo \
+		$(KERNEL_ARCH_PATH)/boot/dts/overlays/README \
+		$(BINARIES_DIR)/overlays/
+
 endef
 define LINUX_INSTALL_DTB_TARGET
 	# dtbs moved from arch/<ARCH>/boot to arch/<ARCH>/boot/dts since 3.8-rc1
-	cp $(addprefix \
-		$(KERNEL_ARCH_PATH)/boot/$(if $(wildcard \
-		$(addprefix $(KERNEL_ARCH_PATH)/boot/dts/,$(KERNEL_DTBS))),dts/),$(KERNEL_DTBS)) \
+	cp $(KERNEL_ARCH_PATH)/boot/dts/bcm27*.dtb \
 		$(TARGET_DIR)/boot/
+	mkdir -p $(TARGET_DIR)/boot/overlays/
+	cp $(KERNEL_ARCH_PATH)/boot/dts/overlays/*.dtbo \
+		$(KERNEL_ARCH_PATH)/boot/dts/overlays/README \
+		$(TARGET_DIR)/boot/overlays/
 endef
 endif
 endif
