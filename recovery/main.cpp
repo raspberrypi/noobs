@@ -10,7 +10,7 @@
 #include "bootselectiondialog.h"
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/reboot.h>
+#include <sys/syscall.h>
 #include <linux/reboot.h>
 #include <QApplication>
 #include <QStyle>
@@ -38,6 +38,7 @@
 
 void showBootMenu(const QString &drive, const QString &defaultPartition, bool setDisplayMode)
 {
+    QByteArray reboot_part;
 #ifdef Q_WS_QWS
     QWSServer::setBackground(Qt::white);
     QWSServer::setCursorVisible(true);
@@ -53,7 +54,8 @@ void showBootMenu(const QString &drive, const QString &defaultPartition, bool se
     QProcess::execute("umount -ar");
     ::sync();
     // Reboot
-    ::reboot(RB_AUTOBOOT);
+    reboot_part = getFileContents("/run/reboot_part").trimmed();
+    ::syscall(SYS_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_RESTART2, reboot_part.constData());
 }
 
 bool hasInstalledOS(const QString &drive)
