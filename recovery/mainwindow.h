@@ -78,6 +78,7 @@ protected:
     bool isSupportedOs(const QString &name, const QVariantMap &values);
     void addImagesFromUSB(const QString &device);
     void filterList();
+    void copyWpa();
 
 protected slots:
     void populate();
