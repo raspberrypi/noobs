@@ -185,5 +185,9 @@ echo "rpi-linux Git rpi-4.1.y @ $(get_kernel_version)" >> "$BUILD_INFO"
 
 cd ..
 
+#REMOVE THIS: Temporary firmware
+cp temp_firmware/bootcode.bin output/
+cp temp_firmware/start.elf output/recovery.elf
+
 clear
 echo "Build complete. Copy files in '$NOOBS_OUTPUT_DIR' directory onto a clean FAT formatted SD card to use."
