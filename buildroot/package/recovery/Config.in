@@ -2,6 +2,7 @@ config BR2_PACKAGE_RECOVERY
         bool "recovery"
     ### build dependencies
     select BR2_PACKAGE_QT
+    select BR2_PACKAGE_QT_HOST_TOOLS
     select BR2_PACKAGE_QT_QTPNG
     select BR2_PACKAGE_QT_GFX_LINUXFB
     select BR2_PACKAGE_QT_GFX_VNC
