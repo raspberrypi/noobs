@@ -216,7 +216,7 @@ MainWindow::MainWindow(const QString &drive, const QString &defaultDisplay, QSpl
         _fixate = true;
     }
 
-    copywpa();
+    copyWpa();
 
     if (cmdline.contains("silentinstall"))
     {
@@ -954,6 +954,7 @@ void MainWindow::on_list_doubleClicked(const QModelIndex &index)
     }
 }
 
+
 void MainWindow::copyWpa()
 {
     //This file is the one used by dhcpcd
@@ -967,19 +968,18 @@ void MainWindow::copyWpa()
     /* If user supplied a wpa_supplicant.conf on the FAT partition copy that one to settings regardless */
     if (QFile::exists("/mnt/wpa_supplicant.conf"))
     {
-        qDebug() << "Copying  user wpa_supplicant.conf to /settings/wpa_supplicant.conf";
+        qDebug() << "Copying user wpa_supplicant.conf to /settings/wpa_supplicant.conf";
 
         QProcess::execute("mount -o remount,rw /settings");
         QProcess::execute("mount -o remount,rw /mnt");
 
-        QFile::remove("/settings/wpa_supplicant.conf.bak");
-        QFile::rename("/settings/wpa_supplicant.conf","/settings/wpa_supplicant.conf.bak");
+        backup("/settings/wpa_supplicant.conf");
         QFile::copy("/mnt/wpa_supplicant.conf", "/settings/wpa_supplicant.conf");
         f.setPermissions( QFile::WriteUser | QFile::ReadGroup | QFile::ReadOther | QFile::ReadUser );
 
-        /* rename the user file to avoid overwriting any manually set SSIDs */
-        QFile::remove("/mnt/wpa_supplicant.conf.bak");
-        QFile::rename("/mnt/wpa_supplicant.conf","/mnt/wpa_supplicant.conf.bak");
+	/* rename the user file to indicate that it has been copied (and prevent it being re-copied next time, 
+           which could potentially overwrite any SSIDs created in the NOOBS GUI) */
+	backup("/mnt/wpa_supplicant.conf");
 
         QProcess::execute("sync");
         QProcess::execute("mount -o remount,ro /settings");
