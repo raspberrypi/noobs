@@ -39,15 +39,15 @@ void putFileContents(const QString &filename, const QByteArray &data)
     f.close();
 }
 
-bool backup(QString filename, QString ext)
+bool backup(const QString &filename, const QString &ext)
 {
-
     QString backupName = filename + "." + ext;
-    const char * backupFile = backupName.toUtf8().constData();
-    if( access( backupFile, F_OK ) != -1 ) {
-        remove(backupFile);
+
+    if (QFile::exists(backupName))
+    {
+        QFile::remove(backupName);
     }
-    return rename(filename.toUtf8().constData(), backupFile);
+    return  QFile::rename(filename,backupName);
 }
 
 /* Utility function to query current overscan setting */
