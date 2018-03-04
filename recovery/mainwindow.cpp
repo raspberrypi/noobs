@@ -973,13 +973,13 @@ void MainWindow::copyWpa()
         QProcess::execute("mount -o remount,rw /settings");
         QProcess::execute("mount -o remount,rw /mnt");
 
-        backup("/settings/wpa_supplicant.conf");
+        backupFile("/settings/wpa_supplicant.conf");
         QFile::copy("/mnt/wpa_supplicant.conf", "/settings/wpa_supplicant.conf");
         f.setPermissions( QFile::WriteUser | QFile::ReadGroup | QFile::ReadOther | QFile::ReadUser );
 
 	/* rename the user file to indicate that it has been copied (and prevent it being re-copied next time, 
            which could potentially overwrite any SSIDs created in the NOOBS GUI) */
-	backup("/mnt/wpa_supplicant.conf");
+	backupFile("/mnt/wpa_supplicant.conf");
 
         QProcess::execute("sync");
         QProcess::execute("mount -o remount,ro /settings");
