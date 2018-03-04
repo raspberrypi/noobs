@@ -39,7 +39,7 @@ void putFileContents(const QString &filename, const QByteArray &data)
     f.close();
 }
 
-bool backup(const QString &filename, const QString &ext)
+bool backupFile(const QString &filename, const QString &ext)
 {
     QString backupName = filename + "." + ext;
 
