@@ -40,7 +40,7 @@ void showBootMenu(const QString &drive, const QString &defaultPartition, bool se
 {
     QByteArray reboot_part;
 #ifdef Q_WS_QWS
-    QWSServer::setBackground(Qt::white);
+    QWSServer::setBackground(BACKGROUND_COLOR);
     QWSServer::setCursorVisible(true);
 #endif
     BootSelectionDialog bsd(drive, defaultPartition);
