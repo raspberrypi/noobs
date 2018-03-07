@@ -447,6 +447,12 @@ else
 QT_CONFIGURE_OPTS += -no-declarative
 endif
 
+ifeq ($(BR2_PACKAGE_QT_HOST_TOOLS),y)
+QT_CONFIGURE_OPTS += -make tools
+else
+QT_CONFIGURE_OPTS += -nomake tools
+endif
+
 # -no-pch is needed to workaround the issue described at
 # http://comments.gmane.org/gmane.comp.lib.qt.devel/5933.
 # In addition, ccache and precompiled headers don't play well together
@@ -546,7 +552,7 @@ endef
 # Build the list of libraries and plugins to install to the target
 
 QT_INSTALL_LIBS += QtCore
-QT_HOST_PROGRAMS += moc rcc qmake lrelease
+QT_HOST_PROGRAMS += moc rcc qmake lrelease lupdate
 
 ifeq ($(BR2_PACKAGE_QT_GUI_MODULE),y)
 QT_INSTALL_LIBS += QtGui
