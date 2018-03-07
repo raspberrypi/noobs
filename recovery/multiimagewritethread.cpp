@@ -449,21 +449,7 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
                 return false;
             }
         }
-        if (label.size() > 15)
-        {
-            label.clear();
-        }
-        else if (!isLabelAvailable(label))
-        {
-            for (int i=0; i<10; i++)
-            {
-                if (isLabelAvailable(label+QByteArray::number(i)))
-                {
-                    label = label+QByteArray::number(i);
-                    break;
-                }
-            }
-        }
+
         QByteArray partdevice = p->partitionDevice();
 
         if (fstype == "raw")
@@ -660,6 +646,84 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
     return true;
 }
 
+QString MultiImageWriteThread::shorten(QString example, int maxLabelLen)
+{
+    QString test;
+    if (example.size()<=maxLabelLen)
+    {
+        return(example);
+    }
+    example.replace("_","#");
+    example.replace("-","#");
+    example.replace(" ","#");
+
+    QStringList parts = example.split("#", QString::SkipEmptyParts);
+    int numParts = qMin(3, parts.count());
+    int r;
+    int len;
+    int l1,l2;
+    int rem;
+    switch (numParts)
+    {
+        case 3:
+            len=parts.last().size();
+            r=qMin((maxLabelLen-4),len);
+            rem = maxLabelLen -r-2;
+            l2 = rem/2;
+            l1 = rem-l2;
+            test= parts.first().left(l1)+"_"+parts.at(1).right(l2)+"_"+parts.last().left(r);
+            break;
+
+        case 2:
+            len=parts.last().size();
+            r=qMin(maxLabelLen-2, len);
+            test = parts.first().left(maxLabelLen-r-1) + "_" + parts.last().left(r);
+            break;
+
+        default:
+            test = parts.first();
+            test=test.left(maxLabelLen);
+            break;
+    }
+    return(test);
+}
+
+QByteArray MultiImageWriteThread::makeLabelUnique(QByteArray label, int maxLabelLen)
+{
+    if (label.size() > maxLabelLen)
+    {   //restrict to maximum size
+        label = shorten(label, maxLabelLen).toAscii();
+    }
+
+    if (!isLabelAvailable(label))
+    {
+        if (label.size() == maxLabelLen)
+        {   //Make room for extra digit
+            label = label.left(maxLabelLen-1);
+        }
+        for (int i=0; i<10; i++)
+        {
+            if (isLabelAvailable(label+QByteArray::number(i)))
+            {
+                label = label+QByteArray::number(i);
+                return(label);
+            }
+        }
+        //Let's add some more now that we can have 56 OSes on a USB installed!
+        for (char c='A'; c<='Z'; c++)
+        {
+            if (isLabelAvailable(label+c))
+            {
+                label = label+c;
+                return(label);
+            }
+        }
+        //No hope if we get to here
+        label="";
+    }
+    return (label);
+}
+
 bool MultiImageWriteThread::mkfs(const QByteArray &device, const QByteArray &fstype, const QByteArray &label, const QByteArray &mkfsopt)
 {
     QString cmd;
@@ -669,7 +733,7 @@ bool MultiImageWriteThread::mkfs(const QByteArray &device, const QByteArray &fst
         cmd = "/sbin/mkfs.fat ";
         if (!label.isEmpty())
         {
-            cmd += "-n "+label+" ";
+            cmd += "-n "+makeLabelUnique(label, 11)+" ";
         }
     }
     else if (fstype == "ext4")
@@ -677,7 +741,7 @@ bool MultiImageWriteThread::mkfs(const QByteArray &device, const QByteArray &fst
         cmd = "/usr/sbin/mkfs.ext4 ";
         if (!label.isEmpty())
         {
-            cmd += "-L "+label+" ";
+            cmd += "-L "+makeLabelUnique(label, 16)+" ";
         }
     }
     else if (fstype == "ntfs")
@@ -685,7 +749,7 @@ bool MultiImageWriteThread::mkfs(const QByteArray &device, const QByteArray &fst
         cmd = "/sbin/mkfs.ntfs --fast ";
         if (!label.isEmpty())
         {
-            cmd += "-L "+label+" ";
+            cmd += "-L "+makeLabelUnique(label, 32)+" ";
         }
     }
 
