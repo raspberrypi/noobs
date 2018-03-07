@@ -6,7 +6,7 @@
 
 PARTCLONE_VERSION = 0.2.84
 PARTCLONE_SOURCE = partclone-$(PARTCLONE_VERSION).tar.gz
-PARTCLONE_SITE = http://sourceforge.net/projects/partclone/files/source
+PARTCLONE_SITE = http://downloads.sourceforge.net/project/partclone/source
 PARTCLONE_LICENSE = GPLv2
 PARTCLONE_LICENSE_FILES = COPYING
 
