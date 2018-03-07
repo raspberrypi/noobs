@@ -449,6 +449,16 @@ bool MultiImageWriteThread::processImage(OsInfo *image)
                 return false;
             }
         }
+        else if (!emptyfs && !isURL(tarball))
+        {
+            /* non-URL tarball is specified */
+            if (!tarball.contains("/"))
+            {
+                /* Assume just the filename was specified, so add the path */
+                tarball = image->folder()+"/"+tarball;
+            }
+        }
+
         if (label.size() > 15)
         {
             label.clear();
