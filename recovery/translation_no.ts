@@ -569,34 +569,34 @@ Would you like to make this setting permanent?</source>
         <translation>Ikke nok diskplass. Trenger %1 MB, har %2 MB</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="320"/>
+        <location filename="multiimagewritethread.cpp" line="319"/>
         <source>Finish writing (sync)</source>
         <translation>Avslutter skriving (sync)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="457"/>
+        <location filename="multiimagewritethread.cpp" line="456"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>Fil &apos;%1&apos; eksisterer ikke</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="491"/>
-        <location filename="multiimagewritethread.cpp" line="497"/>
+        <location filename="multiimagewritethread.cpp" line="466"/>
+        <location filename="multiimagewritethread.cpp" line="472"/>
         <source>%1: Writing OS image</source>
         <translation>%1: Skriver OS-avbildning</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="511"/>
+        <location filename="multiimagewritethread.cpp" line="486"/>
         <source>%1: Mounting file system</source>
         <translation>%1: Monterer filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="519"/>
-        <location filename="multiimagewritethread.cpp" line="543"/>
+        <location filename="multiimagewritethread.cpp" line="494"/>
+        <location filename="multiimagewritethread.cpp" line="518"/>
         <source>%1: Error mounting file system</source>
         <translation>%1: Feil ved montering av filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="504"/>
+        <location filename="multiimagewritethread.cpp" line="479"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation>%1: Oppretter filsystem (%2)</translation>
     </message>
@@ -616,101 +616,101 @@ Would you like to make this setting permanent?</source>
         <translation>Mer enn et OS trenger partisjon nummer %1</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="214"/>
+        <location filename="multiimagewritethread.cpp" line="213"/>
         <source>Fixed partition offset too low</source>
         <translation>Fast partisjonsoffset for lav</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="275"/>
+        <location filename="multiimagewritethread.cpp" line="274"/>
         <source>Writing partition table</source>
         <translation>Skriver partisjonstabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="290"/>
+        <location filename="multiimagewritethread.cpp" line="289"/>
         <source>Writing boot partition table</source>
         <translation>Skriver partisjonstabell for boot</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="280"/>
-        <location filename="multiimagewritethread.cpp" line="296"/>
+        <location filename="multiimagewritethread.cpp" line="279"/>
+        <location filename="multiimagewritethread.cpp" line="295"/>
         <source>Zero&apos;ing start of each partition</source>
         <translation>Nullstiller start for hver partisjon</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="340"/>
+        <location filename="multiimagewritethread.cpp" line="339"/>
         <source>Error reading existing partition table</source>
         <translation>Feil ved lesing av eksisterende partisjonstabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="425"/>
+        <location filename="multiimagewritethread.cpp" line="424"/>
         <source>Error creating partition table</source>
         <translation>Feil ved opprettelse av partisjonstabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="524"/>
+        <location filename="multiimagewritethread.cpp" line="499"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation>%1: Laster ned og pakker ut filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="526"/>
+        <location filename="multiimagewritethread.cpp" line="501"/>
         <source>%1: Extracting filesystem</source>
         <translation>%1: Pakker ut filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="540"/>
+        <location filename="multiimagewritethread.cpp" line="515"/>
         <source>%1: Mounting FAT partition</source>
         <translation>%1: Monterer FAT-partisjon</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="552"/>
+        <location filename="multiimagewritethread.cpp" line="527"/>
         <source>%1: Creating os_config.json</source>
         <translation>%1: Oppretter os_config.json</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="577"/>
+        <location filename="multiimagewritethread.cpp" line="552"/>
         <source>%1: Saving display mode to config.txt</source>
         <translation>%1: Lagrer visningsmodus til config.txt</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="588"/>
+        <location filename="multiimagewritethread.cpp" line="563"/>
         <source>%1: Running partition setup script</source>
         <translation>%1: Kjører script for partisjonsoppsett</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="637"/>
+        <location filename="multiimagewritethread.cpp" line="612"/>
         <source>%1: Error executing partition setup script</source>
         <translation>%1: Feil ved utførelse av script for oppsett</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="642"/>
+        <location filename="multiimagewritethread.cpp" line="617"/>
         <source>%1: Unmounting FAT partition</source>
         <translation>%1: Avmonterer FAT-partisjon</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="645"/>
+        <location filename="multiimagewritethread.cpp" line="620"/>
         <source>%1: Error unmounting</source>
         <translation>%1: Feil ved avkobling</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="804"/>
+        <location filename="multiimagewritethread.cpp" line="779"/>
         <source>Error creating file system</source>
         <translation>Feil ved opprettelse av filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="846"/>
-        <location filename="multiimagewritethread.cpp" line="917"/>
-        <location filename="multiimagewritethread.cpp" line="976"/>
+        <location filename="multiimagewritethread.cpp" line="821"/>
+        <location filename="multiimagewritethread.cpp" line="892"/>
+        <location filename="multiimagewritethread.cpp" line="951"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Ukjent filetternavn for komprimert fil.  Forventer .lzo, .gz, .xz, .bz2 eller .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="879"/>
+        <location filename="multiimagewritethread.cpp" line="854"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Feil ved nedlasting eller utpakking av tabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="938"/>
-        <location filename="multiimagewritethread.cpp" line="997"/>
+        <location filename="multiimagewritethread.cpp" line="913"/>
+        <location filename="multiimagewritethread.cpp" line="972"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>Feil ved nedlasting eller skriving av OS til SD-kort</translation>
     </message>
@@ -718,12 +718,12 @@ Would you like to make this setting permanent?</source>
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="152"/>
+        <location filename="progressslideshowdialog.cpp" line="147"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="157"/>
+        <location filename="progressslideshowdialog.cpp" line="152"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation>%1 MB skrevet (%2 MB/sek)</translation>
     </message>

@@ -587,133 +587,133 @@ Chcete aby bolo toto nastavenie trvalé?</translation>
         <translation>Nedostatok miesta na disku. Potrebných %1 MB, dostupných %2 MB</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="214"/>
+        <location filename="multiimagewritethread.cpp" line="213"/>
         <source>Fixed partition offset too low</source>
         <translation>Posun pevného oddielu je príliš malý</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="275"/>
+        <location filename="multiimagewritethread.cpp" line="274"/>
         <source>Writing partition table</source>
         <translation>Zapisuje sa tabuľka oddielov</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="290"/>
+        <location filename="multiimagewritethread.cpp" line="289"/>
         <source>Writing boot partition table</source>
         <translation>Zapisuje sa tabuľka zavádzacieho oddielu</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="280"/>
-        <location filename="multiimagewritethread.cpp" line="296"/>
+        <location filename="multiimagewritethread.cpp" line="279"/>
+        <location filename="multiimagewritethread.cpp" line="295"/>
         <source>Zero&apos;ing start of each partition</source>
         <translation>Vyprázdňuje sa začiatok každého oddielu</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="320"/>
+        <location filename="multiimagewritethread.cpp" line="319"/>
         <source>Finish writing (sync)</source>
         <translation>Dokončenie zápisu (sync)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="340"/>
+        <location filename="multiimagewritethread.cpp" line="339"/>
         <source>Error reading existing partition table</source>
         <translation>Chyba pri čítaní existujúcej tabuľky oddielov</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="425"/>
+        <location filename="multiimagewritethread.cpp" line="424"/>
         <source>Error creating partition table</source>
         <translation>Chyba pri vytváraní tabuľky oddielov</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="457"/>
+        <location filename="multiimagewritethread.cpp" line="456"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>Súbor „%1“ neexistuje</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="491"/>
-        <location filename="multiimagewritethread.cpp" line="497"/>
+        <location filename="multiimagewritethread.cpp" line="466"/>
+        <location filename="multiimagewritethread.cpp" line="472"/>
         <source>%1: Writing OS image</source>
         <translation>%1: Zapisuje sa obraz OS</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="504"/>
+        <location filename="multiimagewritethread.cpp" line="479"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation>%1: Vytvára sa súborový systém (%2)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="511"/>
+        <location filename="multiimagewritethread.cpp" line="486"/>
         <source>%1: Mounting file system</source>
         <translation>%1: Pripája sa súborový systém</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="519"/>
-        <location filename="multiimagewritethread.cpp" line="543"/>
+        <location filename="multiimagewritethread.cpp" line="494"/>
+        <location filename="multiimagewritethread.cpp" line="518"/>
         <source>%1: Error mounting file system</source>
         <translation>%1: Chyba pri pripájaní súborového systému</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="524"/>
+        <location filename="multiimagewritethread.cpp" line="499"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation>%1: Preberá a rozbaľuje sa súborový systém</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="526"/>
+        <location filename="multiimagewritethread.cpp" line="501"/>
         <source>%1: Extracting filesystem</source>
         <translation>%1: Rozbaľuje sa súborový systém</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="540"/>
+        <location filename="multiimagewritethread.cpp" line="515"/>
         <source>%1: Mounting FAT partition</source>
         <translation>%1: Pripája sa oddiel FAT</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="552"/>
+        <location filename="multiimagewritethread.cpp" line="527"/>
         <source>%1: Creating os_config.json</source>
         <translation>%1: Vytvára sa súbor os_config.json</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="577"/>
+        <location filename="multiimagewritethread.cpp" line="552"/>
         <source>%1: Saving display mode to config.txt</source>
         <translation>%1: Ukladá sa zobrazovací režim do súboru config.txt</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="588"/>
+        <location filename="multiimagewritethread.cpp" line="563"/>
         <source>%1: Running partition setup script</source>
         <translation>%1: Spúšťa sa skript inštalácie oddielov</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="637"/>
+        <location filename="multiimagewritethread.cpp" line="612"/>
         <source>%1: Error executing partition setup script</source>
         <translation>%1: Chyba pri spúšťaní skriptu inštalácie oddielov</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="642"/>
+        <location filename="multiimagewritethread.cpp" line="617"/>
         <source>%1: Unmounting FAT partition</source>
         <translation>%1: Odpája sa oddiel FAT</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="645"/>
+        <location filename="multiimagewritethread.cpp" line="620"/>
         <source>%1: Error unmounting</source>
         <translation>%1: Chyba pri odpájaní</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="804"/>
+        <location filename="multiimagewritethread.cpp" line="779"/>
         <source>Error creating file system</source>
         <translation>Chyba pri vytváraní súborového systému</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="846"/>
-        <location filename="multiimagewritethread.cpp" line="917"/>
-        <location filename="multiimagewritethread.cpp" line="976"/>
+        <location filename="multiimagewritethread.cpp" line="821"/>
+        <location filename="multiimagewritethread.cpp" line="892"/>
+        <location filename="multiimagewritethread.cpp" line="951"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Neznámá prípona súboru kompresného formátu. Očakával sa .lzo, .gz, .xz, .bz2 or .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="879"/>
+        <location filename="multiimagewritethread.cpp" line="854"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Chyba pri preberaní alebo rozbaľovaní archívu tarball</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="938"/>
-        <location filename="multiimagewritethread.cpp" line="997"/>
+        <location filename="multiimagewritethread.cpp" line="913"/>
+        <location filename="multiimagewritethread.cpp" line="972"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>Chyba pri preberaní alebo zapisovaní OS na SD kartu</translation>
     </message>
@@ -721,12 +721,12 @@ Chcete aby bolo toto nastavenie trvalé?</translation>
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="152"/>
+        <location filename="progressslideshowdialog.cpp" line="147"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%1 MB z %2 MB zapísaných (%3 MB/s)</translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="157"/>
+        <location filename="progressslideshowdialog.cpp" line="152"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation>%1 MB zapísaných (%2 MB/s)</translation>
     </message>

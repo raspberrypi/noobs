@@ -1,0 +1,40 @@
+From fb2dc407776ae7f00dd33715e3487b5a6e55a79f Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Thu, 8 Feb 2018 15:08:57 +0000
+Subject: [PATCH 1/4] config: Set CONFIG_USB_LAN78XX=y
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/configs/bcm2709_defconfig | 2 +-
+ arch/arm/configs/bcmrpi_defconfig  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 96fbcc6..7120ea4 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -481,7 +481,7 @@ CONFIG_USB_KAWETH=m
+ CONFIG_USB_PEGASUS=m
+ CONFIG_USB_RTL8150=m
+ CONFIG_USB_RTL8152=m
+-CONFIG_USB_LAN78XX=m
++CONFIG_USB_LAN78XX=y
+ CONFIG_USB_USBNET=y
+ CONFIG_USB_NET_AX8817X=m
+ CONFIG_USB_NET_AX88179_178A=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 7e25253..af40b88 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -477,7 +477,7 @@ CONFIG_USB_KAWETH=m
+ CONFIG_USB_PEGASUS=m
+ CONFIG_USB_RTL8150=m
+ CONFIG_USB_RTL8152=m
+-CONFIG_USB_LAN78XX=m
++CONFIG_USB_LAN78XX=y
+ CONFIG_USB_USBNET=y
+ CONFIG_USB_NET_AX8817X=m
+ CONFIG_USB_NET_AX88179_178A=m
+-- 
+2.7.4
+
