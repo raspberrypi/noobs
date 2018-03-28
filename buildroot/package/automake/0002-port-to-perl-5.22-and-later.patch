@@ -1,0 +1,23 @@
+Without this change, Perl 5.22 complains "Unescaped left brace in
+regex is deprecated" and this is planned to become a hard error in
+Perl 5.26.  See:
+http://search.cpan.org/dist/perl-5.22.0/pod/perldelta.pod#A_literal_%22{%22_should_now_be_escaped_in_a_pattern
+* bin/automake.in (substitute_ac_subst_variables): Escape left brace.
+
+Backported from:
+http://git.savannah.gnu.org/cgit/automake.git/commit/?id=13f00eb4493c217269b76614759e452d8302955e
+Original author: Paul Eggert <eggert@cs.ucla.edu>
+Signed-off-by: Adam Duskett <aduskett@gmail.com>
+
+diff --git a/bin/automake.in b/bin/automake.in
+index a3a0aa3..2c8f31e 100644
+--- a/bin/automake.in
++++ b/bin/automake.in
+@@ -3878,7 +3878,7 @@ sub substitute_ac_subst_variables_worker
+ sub substitute_ac_subst_variables
+ {
+   my ($text) = @_;
+-  $text =~ s/\${([^ \t=:+{}]+)}/substitute_ac_subst_variables_worker ($1)/ge;
++  $text =~ s/\$[{]([^ \t=:+{}]+)}/substitute_ac_subst_variables_worker ($1)/ge;
+   return $text;
+ }
