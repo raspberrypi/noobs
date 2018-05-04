@@ -338,210 +338,253 @@ AVISO: Isto irá apagar todos os dados do seu cartão SD</translation>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1819"/>
+        <location filename="mainwindow.cpp" line="340"/>
+        <location filename="mainwindow.cpp" line="1266"/>
+        <location filename="mainwindow.cpp" line="1827"/>
         <source>RECOMMENDED</source>
         <translation>RECOMENDADO</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="592"/>
+        <location filename="mainwindow.cpp" line="611"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="705"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Built: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="100"/>
         <source>Setting up SD card</source>
         <translation>Configurando cartão SD</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="143"/>
+        <location filename="mainwindow.cpp" line="145"/>
         <source>Error mounting settings partition</source>
         <translation>Erro ao montar partição de configurações</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="144"/>
+        <location filename="mainwindow.cpp" line="146"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation>A partição de configurações persistente parece estar corrompida. Reformatar?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>Reformat failed</source>
         <translation>Falha ao reformatar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>SD card might be damaged</source>
         <translation>O cartão SD pode estar corrompido</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="587"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation>Aviso: isto irá instalar o(s) Sistema(s) Operacional(is) selecionado(s). Todos os dados existentes no cartão SD serão apagados, incluindo sistemas já instalados.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="688"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="343"/>
         <source>INSTALLED</source>
         <translation>INSTALADO</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="805"/>
         <source>Display Mode Changed</source>
         <translation>Modo de Exibição Alterado</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="737"/>
         <source>HDMI preferred mode</source>
         <translation>Modo preferido HDMI</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="119"/>
+        <location filename="mainwindow.cpp" line="121"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation>Aguardando pelo cartão SD (partição de configurações)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="132"/>
+        <location filename="mainwindow.cpp" line="134"/>
         <source>Mounting settings partition</source>
         <translation>Montando partição de configurações</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="252"/>
         <source>Please wait while NOOBS initialises</source>
         <translation>Por favor, aguarde a inicialização do NOOBS</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>SD card</source>
         <translation>Cartão SD</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>drive</source>
         <translation>unidade</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation>Aviso: Sistema Operacional incompatível detectado. Os seguintes sistemas não são suportados nesta revisão do Raspberry Pi e a inicialização pode falhar ou funcionar corretamente:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="652"/>
+        <location filename="mainwindow.cpp" line="654"/>
         <source>The install process will begin shortly.</source>
         <translation>O processo de instalação iniciará em breve.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="676"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation>Sistema(s) instalado(s)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="675"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation>Sistema(s) Instalado(s) com Sucesso</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="741"/>
         <source>HDMI safe mode</source>
         <translation>Modo seguro HDMI</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="745"/>
         <source>composite PAL mode</source>
         <translation>Modo PAL composto</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="749"/>
         <source>composite NTSC mode</source>
         <translation>Modo NTSC composto</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Modo de exibição alterado para %1
 Deseja tornar esta configuração permanente?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1150"/>
+        <location filename="mainwindow.cpp" line="1491"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Download error</source>
         <translation>Erro no download</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1150"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Erro ao baixar lista de distribuições da Internet</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Erro ao analisar list.json baixado do servidor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1384"/>
         <source>Needed</source>
         <translation>Necessário</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1385"/>
         <source>Available</source>
         <translation>Disponível</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1491"/>
         <source>Error downloading meta file</source>
         <translation>Erro ao baixar arquivo meta</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Erro ao salvar arquivo baixado para o cartão SD. O cartão ou sistema de arquivos pode estar danificado.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>O acesso à rede é necessário para usar o NOOBS sem imagens locais. Por favor, selecione sua rede wi-fi na próxima tela.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1626"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>O acesso à rede é necessário para usar o NOOBS sem imagens locais. Por favor, conecte o cabo de rede na porta de rede.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1740"/>
         <source>Reformat drive?</source>
         <translation>Reformatar unidade?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1741"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation>Tem certeza de que deseja reformatar a unidade &apos;%1&apos; para uso com o NOOBS? Todos os dados existentes na unidade serão excluídos!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <source>Error downloading update file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>NOOBS Update Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>Error contacting update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2050"/>
+        <source>NOOBS UPDATE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2051"/>
+        <source>A new version of NOOBS is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2052"/>
+        <source>Do you want to download this version?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Downloading Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="924"/>
         <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1625"/>
         <source>No network access</source>
         <translation>Sem acesso de rede</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="925"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Acesso de rede cabeado é necessário para este recurso. Por favor, insira um cabo de rede.</translation>
     </message>

@@ -337,209 +337,252 @@ WARNING: This will erase all data on your SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="705"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="100"/>
         <source>Setting up SD card</source>
         <translation>Valmistellaan SD muistikorttia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1819"/>
+        <location filename="mainwindow.cpp" line="340"/>
+        <location filename="mainwindow.cpp" line="1266"/>
+        <location filename="mainwindow.cpp" line="1827"/>
         <source>RECOMMENDED</source>
         <translation>SUOSITELTU</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="592"/>
+        <location filename="mainwindow.cpp" line="611"/>
         <source>Confirm</source>
         <translation>Vahvista</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="143"/>
+        <location filename="mainwindow.cpp" line="145"/>
         <source>Error mounting settings partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="144"/>
+        <location filename="mainwindow.cpp" line="146"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>Reformat failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>SD card might be damaged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="587"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation>Varoitus: tämä asentaa valityn käyttöjärjestelmän. Koko SD muistikortti tyhjennetään enne tätä.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="688"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="343"/>
         <source>INSTALLED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="805"/>
         <source>Display Mode Changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="737"/>
         <source>HDMI preferred mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="119"/>
+        <location filename="mainwindow.cpp" line="121"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="132"/>
+        <location filename="mainwindow.cpp" line="134"/>
         <source>Mounting settings partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="252"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>drive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="652"/>
+        <location filename="mainwindow.cpp" line="654"/>
         <source>The install process will begin shortly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="676"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="675"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="741"/>
         <source>HDMI safe mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="745"/>
         <source>composite PAL mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="749"/>
         <source>composite NTSC mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1150"/>
+        <location filename="mainwindow.cpp" line="1491"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Download error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1150"/>
         <source>Error downloading distribution list from Internet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1384"/>
         <source>Needed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1385"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1491"/>
         <source>Error downloading meta file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1626"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1740"/>
         <source>Reformat drive?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1741"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <source>Error downloading update file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>NOOBS Update Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>Error contacting update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2050"/>
+        <source>NOOBS UPDATE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2051"/>
+        <source>A new version of NOOBS is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2052"/>
+        <source>Do you want to download this version?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Downloading Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="924"/>
         <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1625"/>
         <source>No network access</source>
         <translation>Ei verkkoyhteyttä</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="925"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Tämä ominausuus tarvitsee langallisen verkkoyhteyden toimiakseen. Liitä verkkokaapeli verkko porttiin.</translation>
     </message>

@@ -5,6 +5,7 @@
 #include "confeditdialog.h"
 #include "progressslideshowdialog.h"
 #include "config.h"
+#include "builddata.h"
 #include "languagedialog.h"
 #include "json.h"
 #include "util.h"
@@ -42,6 +43,7 @@
 #include <sys/ioctl.h>
 #include <inttypes.h>
 #include <sys/reboot.h>
+#include <sys/syscall.h>
 #include <linux/reboot.h>
 #include <sys/time.h>
 
@@ -1044,6 +1046,12 @@ void MainWindow::onOnlineStateChanged(bool online)
             QNetworkConfigurationManager manager;
             _netaccess->setConfiguration(manager.defaultConfiguration());
 
+            QString cmdline = getFileContents("/proc/cmdline");
+            if (!cmdline.contains("no_update"))
+                checkForUpdates();
+            else
+                qDebug()<<"Skipping self update check";
+
             downloadLists();
         }
         ui->actionBrowser->setEnabled(true);
@@ -1882,5 +1890,205 @@ void MainWindow::filterList()
                 witem->setHidden(true);
             }
         }
+    }
+}
+
+void MainWindow::checkForUpdates()
+{
+    _numBuildsToDownload=0;
+    downloadUpdate(BUILD_URL,  "BUILD|" BUILD_NEW);
+    downloadUpdate(README_URL, "README|" README_NEW);
+}
+
+void MainWindow::downloadUpdate(const QString &urlstring, const QString &saveAs)
+{
+    //NOTE: saveAs=type|filename
+    _numBuildsToDownload++;
+    qDebug() << "Downloading" << urlstring << "to" << saveAs;
+    QUrl url(urlstring);
+    QNetworkRequest request(url);
+    //request.setRawHeader("User-Agent", AGENT);
+    request.setAttribute(QNetworkRequest::User, saveAs);
+    QNetworkReply *reply = _netaccess->get(request);
+    connect(reply, SIGNAL(finished()), this, SLOT(downloadUpdateRedirectCheck()));
+}
+
+void MainWindow::downloadUpdateRedirectCheck()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+    int httpstatuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    QString redirectionurl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
+    QString saveAs = reply->request().attribute(QNetworkRequest::User).toString();
+    //NOTE: saveAs=type|filename
+
+    if (httpstatuscode > 300 && httpstatuscode < 400)
+    {
+        _numBuildsToDownload--;
+        downloadUpdate(redirectionurl, saveAs);
+    }
+    else
+    {
+        downloadUpdateComplete();
+    }
+}
+
+void MainWindow::downloadUpdateComplete()
+{
+    QByteArray reboot_part;
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+    int httpstatuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    QString userInfo = reply->request().attribute(QNetworkRequest::User).toString();
+    //NOTE: userInfo=type|filename
+    QStringList userInfoList = userInfo.split("|");
+
+    QString saveAs = userInfoList.at(0);
+    QString type="";
+    if (userInfoList.count()>1)
+    {
+        type = saveAs;
+        saveAs = userInfoList.at(1);
+    }
+
+    qDebug() << type;
+
+    if (reply->error() != reply->NoError || httpstatuscode < 200 || httpstatuscode > 399)
+    {
+        if (type == "UPDATE")
+        {   // We only care if the user initiated upgrade fails. Others are non-fatal.
+            QMessageBox::critical(this, tr("Download error"), tr("Error downloading update file")+"\n"+reply->url().toString(), QMessageBox::Close);
+        }
+        else
+        {
+            _numBuildsToDownload--;
+            if (type =="BUILD")
+            {
+                QMessageBox::information(this, tr("NOOBS Update Check"), tr("Error contacting update server"), QMessageBox::Close);
+            }
+        }
+        setEnabled(true);
+        return;
+    }
+
+    //Successful download
+
+    QFile f(saveAs);
+    f.open(f.WriteOnly);
+    if (f.write(reply->readAll()) == -1)
+    {
+        if (type == "UPDATE")
+        {   // We only care if the user initiated upgrade fails. Others are non-fatal.
+            QMessageBox::critical(this, tr("Download error"), tr("Error writing downloaded file to SD card. SD card or file system may be damaged."), QMessageBox::Close);
+        }
+        else
+        {
+            _numBuildsToDownload--;
+        }
+    }
+    else
+    {
+        qDebug() << "Downloaded " << type << ":" << saveAs;
+        _numBuildsToDownload--;
+        //?
+    }
+    f.close();
+
+    setEnabled(true);
+
+    if (type=="UPDATE") //upgrade
+    {
+        qDebug() << "Time to update NOOBS!";
+        QProcess::execute("mount -o remount,rw /mnt");
+        QProcess::execute(QString("unzip ")+UPDATE_NEW+" -o -x recovery.cmdline -d /mnt");
+        QProcess::execute("mount -o remount,ro /mnt");
+        QProcess::execute(QString("rm ")+BUILD_IGNORE);
+        QProcess::execute("sync");
+
+        if (_qpd)
+        {
+            _qpd->hide();
+            _qpd->deleteLater();
+            _qpd = NULL;
+        }
+
+        QByteArray partition("1");
+        setRebootPartition(partition);
+        ::sync();
+        // Reboot
+        reboot_part = getFileContents("/run/reboot_part").trimmed();
+        ::syscall(SYS_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_RESTART2, reboot_part.constData());
+
+    }
+
+    if (_numBuildsToDownload==0)
+    {
+        BuildData currentver, newver, ignorever;
+
+        qDebug()<<"BUILD_IGNORE...";
+        ignorever.read(BUILD_IGNORE);
+        qDebug()<<"BUILD_CURRENT...";
+        currentver.read(BUILD_CURRENT);
+        if (!ignorever.isEmpty())
+        {
+            if (currentver > ignorever)
+                QProcess::execute(QString("rm ")+BUILD_IGNORE);
+            if (currentver < ignorever)
+                currentver = ignorever;
+        }
+        qDebug()<<"BUILD_NEW...";
+        newver.read(BUILD_NEW);
+
+        if (newver > currentver)
+        {
+            on_newVersion();
+        }
+    }
+}
+
+void MainWindow::on_newVersion()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("NOOBS UPDATE"));
+    msgBox.setText(tr("A new version of NOOBS is available"));
+    msgBox.setInformativeText(tr("Do you want to download this version?"));
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Ignore);
+    msgBox.setDefaultButton(QMessageBox::No);
+
+    QFile f(README_NEW);
+    QString history;
+
+    if (f.exists())
+    {
+        if (f.open(QFile::ReadOnly | QFile::Text))
+        {
+            QTextStream in(&f);
+            history = in.readAll();
+            msgBox.setDetailedText(history);
+            f.close();
+        }
+    }
+
+    int ret = msgBox.exec();
+    switch (ret)
+    {
+        case QMessageBox::Yes:
+            // Yes was clicked
+            setEnabled(false);
+            _qpd = new QProgressDialog( QString(tr("Downloading Update")), QString(tr("Press ESC to cancel")), 0, 0, this);
+            _qpd->setWindowModality(Qt::WindowModal);
+            _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+            _qpd->show();
+            downloadUpdate(UPDATE_URL,  "UPDATE|" UPDATE_NEW);
+            break;
+        case QMessageBox::No:
+            // No was clicked
+            break;
+        case QMessageBox::Ignore:
+            // Ignore was clicked
+            QString cmd = "cp ";
+            cmd.append(BUILD_NEW);
+            cmd.append(" ");
+            cmd.append(BUILD_IGNORE);
+            QProcess::execute(cmd);
+            break;
     }
 }

@@ -342,208 +342,251 @@ KONTUZ: Honek zure SD txarteleko datu guztiak ezabatuko ditu</translation>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="100"/>
         <source>Setting up SD card</source>
         <translation>SD txartela prestatzen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="252"/>
         <source>Please wait while NOOBS initialises</source>
         <translation>Mesedez itxaron NOOBS hasieratu bitartean</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="143"/>
+        <location filename="mainwindow.cpp" line="145"/>
         <source>Error mounting settings partition</source>
         <translation>Errorea ezarpenen partizioa muntatzean</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="119"/>
+        <location filename="mainwindow.cpp" line="121"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation>SD txartelaren zain (ezarpenak partizioa)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="132"/>
+        <location filename="mainwindow.cpp" line="134"/>
         <source>Mounting settings partition</source>
         <translation>Ezarpenak partizioa muntatzen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="144"/>
+        <location filename="mainwindow.cpp" line="146"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation>Ezarpen iraunkorren partizioa hondatuta dagoela dirudi. Berriz formateatu?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>Reformat failed</source>
         <translation>Berriz formateatzeak huts egin du</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>SD card might be damaged</source>
         <translation>SD txartela hondatuta egon daiteke</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1819"/>
+        <location filename="mainwindow.cpp" line="340"/>
+        <location filename="mainwindow.cpp" line="1266"/>
+        <location filename="mainwindow.cpp" line="1827"/>
         <source>RECOMMENDED</source>
         <translation>GOMENDATUA</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="343"/>
         <source>INSTALLED</source>
         <translation>INSTALATUA</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="592"/>
+        <location filename="mainwindow.cpp" line="611"/>
         <source>Confirm</source>
         <translation>Berretsi</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="587"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <translation>Kontuz: honek hautatutako sistema eragilea(k) instalatuko d(it)u. SD txartelean lehendik dauden datu guztiak gainidatziko dira, aurretik instalatutako SEak barne.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>drive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation>Kontuz: sistema eragile bateraezina(k) detektatu d(ir)a. Ondorengo SEek ez dute euskarririk Raspberry Piren bertsio honetan eta baliteke ez abiaraztea edo gaizki funtzionatzea:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="652"/>
+        <location filename="mainwindow.cpp" line="654"/>
         <source>The install process will begin shortly.</source>
         <translation>Instalazio prozesua laster hasiko da.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="676"/>
         <source>OS(es) installed</source>
         <translation>SEa(k) instalatu dira</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="675"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) Installed Successfully</source>
         <translation>SEa(k) behar bezala instalatu dira</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="688"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error</source>
         <translation>Errorea</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="705"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Eraikitzea: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="737"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI modu hobetsia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="741"/>
         <source>HDMI safe mode</source>
         <translation>HDMI modu segurua</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="745"/>
         <source>composite PAL mode</source>
         <translation>PAL konposatu modua</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="749"/>
         <source>composite NTSC mode</source>
         <translation>NTSC konposatu modua</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="805"/>
         <source>Display Mode Changed</source>
         <translation>Bistaratze-modua aldatuta</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Bistaratze modua %1(e)ra aldatu da
 Ezarpen hau iraunkortu nahi duzu?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="924"/>
         <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1625"/>
         <source>No network access</source>
         <translation>Sareko sarbiderik ez</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="925"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Haridun sareko sarbidea behar da ezaugarri honentzat. Mesedez sartu sareko kable bat sareko atakan.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1150"/>
+        <location filename="mainwindow.cpp" line="1491"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Download error</source>
         <translation>Errorea deskargatzean</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1150"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Errorea banaketa-zerrenda Internetetik deskargatzean</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Errorea zerbitzaritik deskargatutako list.json fitxategia analizatzean</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1384"/>
         <source>Needed</source>
         <translation>Behar dena</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1385"/>
         <source>Available</source>
         <translation>Erabilgarri dagoena</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1491"/>
         <source>Error downloading meta file</source>
         <translation>Errorea meta fitxategia deskargatzean</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Errorea deskargatutako fitxategia SD txartelean idaztean. SD txartela edo fitxategi-sistema hondatuta egon daitezke.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>Sareko sarbidea behar da NOOBS irudi lokalik gabe erabiltzeko. Mesedez, egiaztatu zure wifi sarea hurrengo pantailan.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1626"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Haridun sareko sarbidea beharrezkoa da NOOBS irudi lokalik gabe erabiltzeko. Mesedez sartu sareko kable bat sareko atakan.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1740"/>
         <source>Reformat drive?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1741"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <source>Error downloading update file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>NOOBS Update Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>Error contacting update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2050"/>
+        <source>NOOBS UPDATE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2051"/>
+        <source>A new version of NOOBS is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2052"/>
+        <source>Do you want to download this version?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Downloading Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Press ESC to cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
