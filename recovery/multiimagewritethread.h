@@ -27,14 +27,10 @@ protected:
     bool partclone_restore(const QString &imagePath, const QString &device);
     bool untar(const QString &tarball);
     bool isLabelAvailable(const QByteArray &label);
-    QByteArray getLabel(const QString part);
-    QByteArray getUUID(const QString part);
     void patchConfigTxt();
     QString getDescription(const QString &folder, const QString &flavour);
     bool writePartitionTable(const QString &drive, const QMap<int, PartitionInfo *> &partitionMap);
     bool isURL(const QString &s);
-    QByteArray getDiskId(const QString &device);
-    QByteArray getPartUUID(const QString &devpart);
 
 
     /* key: folder, value: flavour */

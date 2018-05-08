@@ -157,13 +157,33 @@ void BootSelectionDialog::accept()
     QSettings settings("/settings/noobs.conf", QSettings::IniFormat, this);
     QVariantMap m = item->data(Qt::UserRole).toMap();
     QByteArray partition = m.value("partitions").toList().first().toByteArray();
-    QRegExp partnrRx("([0-9]+)$");
-    if (partnrRx.indexIn(partition) == -1)
+
+    int partitionNr;
+    QRegExp parttype("^PARTUUID");
+    if (parttype.indexIn(partition) == -1)
     {
-        QMessageBox::critical(this, "noobs.conf corrupt", "Not a valid partition: "+partition);
-        return;
+        // SD card style /dev/mmcblk0pDD
+        QRegExp partnrRx("([0-9]+)$");
+        if (partnrRx.indexIn(partition) == -1)
+        {
+            QMessageBox::critical(this, "installed_os.json corrupt", "Not a valid partition: "+partition);
+            return;
+        }
+        partitionNr    = partnrRx.cap(1).toInt();
     }
-    int partitionNr    = partnrRx.cap(1).toInt();
+    else
+    {
+        // USB style PARTUUID=000dbedf-XX
+        QRegExp partnrRx("([0-9a-f][0-9a-f])$");
+        if (partnrRx.indexIn(partition) == -1)
+        {
+            QMessageBox::critical(this, "installed_os.json corrupt", "Not a valid partition: "+partition);
+            return;
+        }
+        bool ok;
+        partitionNr    = partnrRx.cap(1).toInt(&ok, 16);
+    }
+
     int oldpartitionNr = settings.value("default_partition_to_boot", 0).toInt();
 
     if (partitionNr != oldpartitionNr)
