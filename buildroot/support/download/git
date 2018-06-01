@@ -1,5 +1,5 @@
 #/home/noobs/buildroot/support/download/dl-wrapper -b git -o ./linux-f70eae405b5d75f7c41ea300b9f790656f99a203.tar.gz -H linux//linux.hash -- git://github.com/raspberrypi/linux.git f70eae405b5d75f7c41ea300b9f790656f99a203 linux-f70eae405b5d75f7c41ea300b9f790656f99a203
-#git clone -v --bare git://github.com/raspberrypi/linux.git --branch  linux-f70eae405b5d75f7c41ea300b9f790656f99a203
+#git clone -v --bare git://github.com/raspberrypi/linux.git  linux-f70eae405b5d75f7c41ea300b9f790656f99a203
 #在41行 clone linux内核时 不仅把某一提交版本拉下来并且还把整个仓库都拉了下来，速度太慢
 
 #!/usr/bin/env bash
