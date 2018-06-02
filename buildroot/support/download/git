@@ -30,21 +30,15 @@ repo="${2}"
 cset="${3}"
 basename="${4}"
 
-echo "-----------"
-echo ${repo}
-echo "-----------"
-echo ${cset}
-echo "-----------"
-echo ${verbose}
-echo "-----------"
-echo ${basename}
-echo "-----------"
 # Try to see if we can do a shallow clone, since it is faster
 # than a full clone.
 git_done=0
-if [ -n "$(${GIT} ls-remote "${repo}" "${cset}" 2>&1)" ]; then
+branch="${${GIT} ls-remote "${repo}" | grep -i "${cset}" | awk -F '/' '{print $3}'}"
+echo "-----------"
+echo ${branch}
+if [ -n "${branch}" ]; then
     printf "Doing shallow clone\n"
-    if ${GIT} clone ${verbose} --depth 1 -b "${cset}" --bare "${repo}" "${basename}"; then
+    if ${GIT} clone ${verbose} --depth 1 -b "${branch}" --bare "${repo}" "${basename}"; then
         git_done=1
     else
         printf "Shallow clone failed, falling back to doing a full clone\n"
