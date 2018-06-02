@@ -1,6 +1,7 @@
 #/home/noobs/buildroot/support/download/dl-wrapper -b git -o ./linux-f70eae405b5d75f7c41ea300b9f790656f99a203.tar.gz -H linux//linux.hash -- git://github.com/raspberrypi/linux.git f70eae405b5d75f7c41ea300b9f790656f99a203 linux-f70eae405b5d75f7c41ea300b9f790656f99a203
 #git clone -v --bare git://github.com/raspberrypi/linux.git  linux-f70eae405b5d75f7c41ea300b9f790656f99a203
 #在41行 clone linux内核时 不仅把某一提交版本拉下来并且还把整个仓库都拉了下来，速度太慢
+#在脚本中尝试了浅层克隆，但是由于某种原因失败了，改成了全仓库克隆，克隆了将近3g的仓库
 
 #!/usr/bin/env bash
 
@@ -29,6 +30,11 @@ repo="${2}"
 cset="${3}"
 basename="${4}"
 
+echo "-----------"
+echo ${repo}
+echo "-----------"
+echo ${cset}
+echo "-----------"
 # Try to see if we can do a shallow clone, since it is faster
 # than a full clone.
 git_done=0
