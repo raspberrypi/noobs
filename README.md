@@ -351,5 +351,5 @@ Currently used icon sets:
 - http://www.famfamfam.com/lab/icons/flags - "These flag icons are available for free use for any purpose with no requirement for attribution."
 - http://www.oxygen-icons.org/ - Available under Creative Common Attribution-ShareAlike 3.0 and LGPL license
 
-Licenses of utility software build by buildroot:
+Licenses of utility software built by buildroot:
 Type `cd buildroot ; make legal-info` to generate a list, which will be available under `output/legal-info`.
