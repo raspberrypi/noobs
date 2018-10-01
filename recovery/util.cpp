@@ -1,4 +1,5 @@
 #include "util.h"
+#include "mbr.h"
 #include <sys/ioctl.h>
 #include <stdint.h>
 #include <unistd.h>
@@ -10,6 +11,7 @@
 #include <QProcess>
 #include <QDebug>
 #include <QList>
+#include <QtEndian>
 
 /*
  * Convenience functions
@@ -172,4 +174,63 @@ QByteArray sysclassblock(const QString &drivedev, int partnr)
         b = b.mid(5);
 
     return "/sys/class/block/"+ b;
+}
+
+QByteArray getLabel(const QString part)
+{
+    QByteArray result;
+    QProcess p;
+    p.start("/sbin/blkid -s LABEL -o value "+part);
+    p.waitForFinished();
+
+    if (p.exitCode() == 0)
+        result = p.readAll().trimmed();
+
+    return result;
+}
+
+QByteArray getUUID(const QString part)
+{
+    QByteArray result;
+    QProcess p;
+    p.start("/sbin/blkid -s UUID -o value "+part);
+    p.waitForFinished();
+
+    if (p.exitCode() == 0)
+        result = p.readAll().trimmed();
+
+    return result;
+}
+
+QByteArray getDiskId(const QString &device)
+{
+    mbr_table mbr;
+
+    QFile f(device);
+    f.open(f.ReadOnly);
+    f.read((char *) &mbr, sizeof(mbr));
+    f.close();
+
+    quint32 diskid = qFromLittleEndian<quint32>(mbr.diskid);
+    return QByteArray::number(diskid, 16).rightJustified(8, '0');;
+}
+
+QByteArray getPartUUID(const QString &devpart)
+{
+    QByteArray r;
+
+    QRegExp partnrRx("([0-9]+)$");
+    if (partnrRx.indexIn(devpart) != -1)
+    {
+        QString drive = devpart.left(partnrRx.pos());
+        if (drive.endsWith("p"))
+            drive.chop(1);
+
+        r = "PARTUUID="+getDiskId(drive);
+        int partnr = partnrRx.cap(1).toInt();
+        QByteArray partnrstr = QByteArray::number(partnr, 16).rightJustified(2, '0');
+        r += '-'+partnrstr;
+    }
+
+    return r;
 }

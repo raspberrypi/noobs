@@ -23,4 +23,10 @@ bool canBootOs(const QString& name, const QVariantMap& values);
 void setRebootPartition(QByteArray partition);
 QByteArray partdev(const QString &drivedev, int nr);
 QByteArray sysclassblock(const QString &drivedev, int partnr = -1);
+
+QByteArray getLabel(const QString part);
+QByteArray getUUID(const QString part);
+QByteArray getDiskId(const QString &device);
+QByteArray getPartUUID(const QString &devpart);
+
 #endif // UTIL_H
