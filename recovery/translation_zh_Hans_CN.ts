@@ -338,209 +338,252 @@ WARNING: This will erase all data on your SD card</source>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="100"/>
         <source>Setting up SD card</source>
         <translation>正在设置 SD 卡</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="119"/>
+        <location filename="mainwindow.cpp" line="121"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation>正在等待 SD 卡 (settings 分区)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="132"/>
+        <location filename="mainwindow.cpp" line="134"/>
         <source>Mounting settings partition</source>
         <translation>正在挂载 settings 分区</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="143"/>
+        <location filename="mainwindow.cpp" line="145"/>
         <source>Error mounting settings partition</source>
         <translation>挂载 settings 分区时发生错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="144"/>
+        <location filename="mainwindow.cpp" line="146"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation>持久的 settings 分区似乎已损坏。重新格式化？</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>Reformat failed</source>
         <translation>重新格式化失败</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>SD card might be damaged</source>
         <translation>SD 卡也许可能已被损坏</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="252"/>
         <source>Please wait while NOOBS initialises</source>
         <translation>NOOBS 初始化中，请等待</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1819"/>
+        <location filename="mainwindow.cpp" line="340"/>
+        <location filename="mainwindow.cpp" line="1266"/>
+        <location filename="mainwindow.cpp" line="1827"/>
         <source>RECOMMENDED</source>
         <translation>建议</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="343"/>
         <source>INSTALLED</source>
         <translation>已安装</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="587"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <translation>警告：这将会安装选定的操作系统。SD 卡上已有数据将被覆盖，包括任何已安装的操作系统。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>SD card</source>
         <translation>SD 卡</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>drive</source>
         <translation>磁盘</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="592"/>
+        <location filename="mainwindow.cpp" line="611"/>
         <source>Confirm</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation>警告：检测到不兼容的操作系统。此版本 Raspberry Pi 不支持以下操作系统，可能会启动失败或有功能不正常：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="652"/>
+        <location filename="mainwindow.cpp" line="654"/>
         <source>The install process will begin shortly.</source>
         <translation>安装过程将很快开始。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="676"/>
         <source>OS(es) installed</source>
         <translation>操作系统已安装</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="675"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) Installed Successfully</source>
         <translation>操作系统已成功安装</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="688"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="705"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - 构建时间: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="737"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI 首选模式</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="741"/>
         <source>HDMI safe mode</source>
         <translation>HDMI 安全模式</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="745"/>
         <source>composite PAL mode</source>
         <translation>复合 PAL 模式</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="749"/>
         <source>composite NTSC mode</source>
         <translation>复合 NTSC 模式</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="805"/>
         <source>Display Mode Changed</source>
         <translation>显示模式已改动</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>显示模式已改为 %1
 您想要让这个改动永久生效吗？</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="924"/>
         <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1625"/>
         <source>No network access</source>
         <translation>无法访问网络</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="925"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>这个功能需要联网。请插入网线到有线网口。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1150"/>
+        <location filename="mainwindow.cpp" line="1491"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Download error</source>
         <translation>下载错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1150"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>从互联网下载分发清单时发生错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>解析从服务器上下载的 list.jsong上发生错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1384"/>
         <source>Needed</source>
         <translation>需要</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1385"/>
         <source>Available</source>
         <translation>可用</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1491"/>
         <source>Error downloading meta file</source>
         <translation>下载 meta 文件时发生错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>将已下载的文件写入 SD 卡时发生错误。SD 卡 或文件系统可能已损坏。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>NOOBS 不使用本地映像文件时需要联网。请在下一步选择您的 wifi 网络。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1626"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>NOOBS 不使用本地映像文件时需要联网。请在插入网线到有线接口。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1740"/>
         <source>Reformat drive?</source>
         <translation>重新格式化磁盘？</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1741"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation>您确定要重新格式化磁盘 &apos;%1&apos;供 NOOBS 使用吗？所有在该磁盘上的数据都会被删除！</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <source>Error downloading update file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>NOOBS Update Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>Error contacting update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2050"/>
+        <source>NOOBS UPDATE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2051"/>
+        <source>A new version of NOOBS is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2052"/>
+        <source>Do you want to download this version?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Downloading Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

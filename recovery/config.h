@@ -24,6 +24,20 @@
  * Multiple lists can be specified by space separating the URLs */
 #define DEFAULT_REPO_SERVER  "http://downloads.raspberrypi.org/os_list_v3.json"
 
+/* Location of data for self-updating */
+
+//Change these
+#define BUILD_URL       "http://raw.githubusercontent.com/procount/pinn-os/master/BUILD-DATA"
+#define README_URL      "http://raw.githubusercontent.com/procount/pinn-os/master/README.md"
+
+#define UPDATE_URL      "https://downloads.raspberrypi.org/NOOBS_lite_latest"
+#define BUILD_CURRENT   "/mnt/BUILD-DATA"
+#define BUILD_NEW       "/tmp/BUILD-DATA"
+#define BUILD_IGNORE    "/settings/BUILD-DATA"
+#define UPDATE_NEW      "/tmp/noobs-lite.zip"
+#define README_NEW      "/tmp/README.md"
+
+
 /* Size of recovery FAT partition in MB when using reformat drive initialization method. */
 #define RESCUE_PARTITION_SIZE  63
 

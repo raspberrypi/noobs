@@ -339,210 +339,253 @@ WARNING: This will erase all data on your SD card</source>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1819"/>
+        <location filename="mainwindow.cpp" line="340"/>
+        <location filename="mainwindow.cpp" line="1266"/>
+        <location filename="mainwindow.cpp" line="1827"/>
         <source>RECOMMENDED</source>
         <translation>추천 설치</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="592"/>
+        <location filename="mainwindow.cpp" line="611"/>
         <source>Confirm</source>
         <translation>확인</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="705"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - 빌드일: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="100"/>
         <source>Setting up SD card</source>
         <translation>SD 카드 설정</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="143"/>
+        <location filename="mainwindow.cpp" line="145"/>
         <source>Error mounting settings partition</source>
         <translation>설정 파티션을 마운트하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="144"/>
+        <location filename="mainwindow.cpp" line="146"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation>고정된 설정 파티션이 손상된 것으로 보입니다. 다시 초기화하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>Reformat failed</source>
         <translation>다시 초기화할 수 없음</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="153"/>
         <source>SD card might be damaged</source>
         <translation>SD 카드가 손상된 것으로 보입니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="587"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation>경고: 선택한 운영체제를 설치하겠습니다. SD 카드에 이미 설치된 모든 운영체제 및 데이터를 전부 덮어씁니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="688"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="343"/>
         <source>INSTALLED</source>
         <translation>설치됨</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="805"/>
         <source>Display Mode Changed</source>
         <translation>디스플레이 모드가 변경되었습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="737"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI 선호 모드</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="119"/>
+        <location filename="mainwindow.cpp" line="121"/>
         <source>Waiting for SD card (settings partition)</source>
         <translation>SD 카드를 준비하고 있습니다 (설정 파티션)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="132"/>
+        <location filename="mainwindow.cpp" line="134"/>
         <source>Mounting settings partition</source>
         <translation>설정 파티션을 마운트하고 있습니다</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="252"/>
         <source>Please wait while NOOBS initialises</source>
         <translation>NOOBS를 초기화하고 있습니다. 잠시만 기다려 주십시요.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>SD card</source>
         <translation>SD 카드</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>drive</source>
         <translation>드라이브</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation>경고: 호환되지 않는 운영체제를 발견하였습니다. 이 운영체제는 Raspberry Pi 의 현재 리비전을 지원하지 않으므로 부팅에 실패하거나 기능이 제대로 동작하지 않을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="652"/>
+        <location filename="mainwindow.cpp" line="654"/>
         <source>The install process will begin shortly.</source>
         <translation>곧 설치 과정을 시작합니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="676"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation>운영체제 설치 완료</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="675"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation>운영체제를 설치하였습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="741"/>
         <source>HDMI safe mode</source>
         <translation>HDMI 안전 모드</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="745"/>
         <source>composite PAL mode</source>
         <translation>PAL 영상 출력 모드</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="749"/>
         <source>composite NTSC mode</source>
         <translation>NTSC 영상 출력 모드</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>디스플레이 모드가 %1 로 변경되었습니다.
 이 설정을 계속 유지하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1150"/>
+        <location filename="mainwindow.cpp" line="1491"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Download error</source>
         <translation>다운로드 오류</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1150"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>인터넷에서 배포판 목록을 가져오는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>서버에서 가져온 list.json의 내용을 분석하는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1384"/>
         <source>Needed</source>
         <translation>필요함</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1385"/>
         <source>Available</source>
         <translation>가능함</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1491"/>
         <source>Error downloading meta file</source>
         <translation>메타파일을 가져오는 과정에서 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1980"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>다운로드한 파일을 SD 카드에 기록하는 과정에서 오류가 발생하였습니다. SD 카드 또는 파일 시스템이 손상되었는지 확인하여 주십시오.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>로컬 이미지가 없는 NOOBS는 네트워크 접속이 필요합니다. 다음 화면에서 Wi-Fi 네트워크를 선택해 주십시오.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1626"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>로컬에 운영체제 이미지가 없는 NOOBS를 사용하려면 유선 네트워크 연결이 필요합니다. 네트워크 포트에 네트워크 케이블을 삽입하여 주십시요.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1740"/>
         <source>Reformat drive?</source>
         <translation>드라이브 초기화 확인</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1741"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation>&apos;%1&apos; 드라이브를 정말 다시 초기화하시겠습니까? 초기화를 완료하면 이 드라이브 안에 있는 모든 데이터는 완전히 삭제됩니다. 초기화 후 NOOBS가 이 드라이브를 이용합니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1609"/>
+        <location filename="mainwindow.cpp" line="1958"/>
+        <source>Error downloading update file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>NOOBS Update Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1965"/>
+        <source>Error contacting update server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2050"/>
+        <source>NOOBS UPDATE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2051"/>
+        <source>A new version of NOOBS is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2052"/>
+        <source>Do you want to download this version?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Downloading Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2076"/>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="924"/>
         <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1625"/>
         <source>No network access</source>
         <translation>네트워크에 접속할 수 없음</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="925"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>이 기능은 유선 네트워크 연결이 필요합니다. 네트워크 포트에 네트워크 케이블을 삽입하여 주십시요.</translation>
     </message>

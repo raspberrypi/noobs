@@ -49,7 +49,7 @@ protected:
     bool _hasWifi;
     int _numInstalledOS, _devlistcount;
     QNetworkAccessManager *_netaccess;
-    int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload;
+    int _neededMB, _availableMB, _numMetaFilesToDownload, _numIconsToDownload, _numBuildsToDownload;
     QMessageBox *_displayModeBox;
     QTimer _networkStatusPollTimer, _piDrivePollTimer;
     QTime _time;
@@ -73,11 +73,14 @@ protected:
     void downloadIcon(const QString &urlstring, const QString &originalurl);
     void downloadList(const QString &urlstring);
     void downloadLists();
+    void checkForUpdates();
+    void downloadUpdate(const QString &urlstring, const QString &saveAs);
     void startImageWrite();
     bool canInstallOs(const QString &name, const QVariantMap &values);
     bool isSupportedOs(const QString &name, const QVariantMap &values);
     void addImagesFromUSB(const QString &device);
     void filterList();
+    void on_newVersion();
 
 protected slots:
     void populate();
@@ -94,6 +97,8 @@ protected slots:
     void downloadIconComplete();
     void downloadMetaRedirectCheck();
     void downloadIconRedirectCheck();
+    void downloadUpdateRedirectCheck();
+    void downloadUpdateComplete();
     void downloadListRedirectCheck();
     void downloadMetaComplete();
     void onQuery(const QString &msg, const QString &title, QMessageBox::StandardButton* answer);
