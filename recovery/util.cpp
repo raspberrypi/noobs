@@ -41,6 +41,17 @@ void putFileContents(const QString &filename, const QByteArray &data)
     f.close();
 }
 
+bool backupFile(const QString &filename, const QString &ext)
+{
+    QString backupName = filename + "." + ext;
+
+    if (QFile::exists(backupName))
+    {
+        QFile::remove(backupName);
+    }
+    return  QFile::rename(filename,backupName);
+}
+
 /* Utility function to query current overscan setting */
 #define VCMSG_GET_OVERSCAN 0x0004000a
 #define VCMSG_SET_OVERSCAN 0x0004800a
