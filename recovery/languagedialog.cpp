@@ -182,6 +182,10 @@ void LanguageDialog::changeLanguage(const QString &langcode)
     {
         defaultKeyboardLayout = "jp";
     }
+    else if (langcode == "sv")
+    {
+        defaultKeyboardLayout = "se";
+    }
     else
     {
         defaultKeyboardLayout = langcode;
