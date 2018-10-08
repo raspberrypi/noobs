@@ -5,7 +5,7 @@
     <name>BootSelectionDialog</name>
     <message>
         <location filename="bootselectiondialog.ui" line="19"/>
-        <location filename="bootselectiondialog.cpp" line="258"/>
+        <location filename="bootselectiondialog.cpp" line="278"/>
         <source>Select OS to boot</source>
         <translation>Wybierz system operacyjny do uruchomienia</translation>
     </message>
@@ -20,22 +20,22 @@
         <translation>Błąd montowania partycji z ustawieniami</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="199"/>
+        <location filename="bootselectiondialog.cpp" line="219"/>
         <source>HDMI safe mode</source>
         <translation>tryb bezpieczny HDMI</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="203"/>
+        <location filename="bootselectiondialog.cpp" line="223"/>
         <source>composite PAL mode</source>
         <translation>tryb composite PAL</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="207"/>
+        <location filename="bootselectiondialog.cpp" line="227"/>
         <source>composite NTSC mode</source>
         <translation>tryb composite NTSC</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="263"/>
+        <location filename="bootselectiondialog.cpp" line="283"/>
         <source>Previously selected OS will boot in %1 seconds</source>
         <translation>Poprzednio wybrany system operacyjny zostanie uruchomiony za %1 sekund</translation>
     </message>
@@ -338,20 +338,20 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1819"/>
+        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="1280"/>
+        <location filename="mainwindow.cpp" line="1841"/>
         <source>RECOMMENDED</source>
         <translation>ZALECANE</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Confirm</source>
         <translation>Potwierdź</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="706"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Zbudowany: %2</translation>
     </message>
@@ -381,29 +381,29 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
         <translation>Karta SD może być uszkodzona</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="588"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation>Ostrzeżenie: zostanie zainstalowany wybrany system(y). Wszystkie dotychczasowe dane na tej karcie SD zostaną nadpisane, włączając w to wcześniej zainstalowane systemy operacyjne.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="689"/>
+        <location filename="mainwindow.cpp" line="1178"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="344"/>
         <source>INSTALLED</source>
         <translation>ZAINSTALOWANE</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display Mode Changed</source>
         <translation>Tryb wyświetlania zmieniony</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="738"/>
         <source>HDMI preferred mode</source>
         <translation>tryb preferowany HDMI</translation>
     </message>
@@ -418,130 +418,130 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="253"/>
         <source>Please wait while NOOBS initialises</source>
         <translation>Proszę czekać na uruchomienie NOOBS</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>SD card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>drive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="613"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="652"/>
+        <location filename="mainwindow.cpp" line="655"/>
         <source>The install process will begin shortly.</source>
         <translation>Proces instalacji zostanie wkrótce rozpoczęty.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation>System(y) operacyjny zainstalowany</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="675"/>
+        <location filename="mainwindow.cpp" line="678"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation>System(y) operacyjny zainstalowany pomyślnie</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="742"/>
         <source>HDMI safe mode</source>
         <translation>tryb bezpieczny HDMI</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="746"/>
         <source>composite PAL mode</source>
         <translation>tryb composite PAL</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="750"/>
         <source>composite NTSC mode</source>
         <translation>tryb composite NTSC</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="807"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Tryb wyświetlania zmieniony na: %1
 Czy chcesz zachować te ustawienia?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1164"/>
+        <location filename="mainwindow.cpp" line="1505"/>
+        <location filename="mainwindow.cpp" line="1515"/>
         <source>Download error</source>
         <translation>Błąd pobierania</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Błąd pobierania listy dystrybucji z internetu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1178"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Błąd analizowania list.json pobranej z serwera</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1398"/>
         <source>Needed</source>
         <translation>Wymagane</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1399"/>
         <source>Available</source>
         <translation>Dostępne</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1505"/>
         <source>Error downloading meta file</source>
         <translation>Błąd pobierania metapliku</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1515"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Błąd zapisywania pobranego pliku na kartę SD. Karta lub system plików mogą być uszkodzone.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1632"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1640"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Kablowe połączenie z siecią jest wymagane do używania NOOBS bez lokalnego obrazu. Proszę włożyć kabel sieciowy do odpowiedniego portu.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1754"/>
         <source>Reformat drive?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1755"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1609"/>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="925"/>
+        <location filename="mainwindow.cpp" line="1631"/>
+        <location filename="mainwindow.cpp" line="1639"/>
         <source>No network access</source>
         <translation>Brak połączenia z siecią</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="926"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Kablowe połączenie sieciowe jest wymagane do tej funkcji. Prosze włożyć kabel sieciowy do odpowiedniego portu.</translation>
     </message>
@@ -564,37 +564,37 @@ Czy chcesz zachować te ustawienia?</translation>
         <translation>Za malo miejsca na dysku. Wymagane %1 MB, dostępne %2 MB</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="319"/>
+        <location filename="multiimagewritethread.cpp" line="320"/>
         <source>Finish writing (sync)</source>
         <translation>Kończenie zapisywania (zrzucanie buforów)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="456"/>
+        <location filename="multiimagewritethread.cpp" line="457"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>Plik &apos;%1&apos; nie istnieje</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="466"/>
-        <location filename="multiimagewritethread.cpp" line="472"/>
+        <location filename="multiimagewritethread.cpp" line="467"/>
+        <location filename="multiimagewritethread.cpp" line="473"/>
         <source>%1: Writing OS image</source>
         <oldsource>Writing image</oldsource>
         <translation>%1: Zapisywanie obrazu systemu operacyjnego</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="486"/>
+        <location filename="multiimagewritethread.cpp" line="487"/>
         <source>%1: Mounting file system</source>
         <oldsource>Mounting file system</oldsource>
         <translation>%1: Montowanie systemu plików</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="494"/>
-        <location filename="multiimagewritethread.cpp" line="518"/>
+        <location filename="multiimagewritethread.cpp" line="495"/>
+        <location filename="multiimagewritethread.cpp" line="519"/>
         <source>%1: Error mounting file system</source>
         <oldsource>Error mounting file system</oldsource>
         <translation>%1: Błąd montowania systemu plików</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="479"/>
+        <location filename="multiimagewritethread.cpp" line="480"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation>%1: Tworzenie systemu plików (%2)</translation>
     </message>
@@ -624,109 +624,109 @@ Czy chcesz zachować te ustawienia?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="213"/>
+        <location filename="multiimagewritethread.cpp" line="214"/>
         <source>Fixed partition offset too low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="274"/>
+        <location filename="multiimagewritethread.cpp" line="275"/>
         <source>Writing partition table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="289"/>
+        <location filename="multiimagewritethread.cpp" line="290"/>
         <source>Writing boot partition table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="279"/>
-        <location filename="multiimagewritethread.cpp" line="295"/>
+        <location filename="multiimagewritethread.cpp" line="280"/>
+        <location filename="multiimagewritethread.cpp" line="296"/>
         <source>Zero&apos;ing start of each partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="339"/>
+        <location filename="multiimagewritethread.cpp" line="340"/>
         <source>Error reading existing partition table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="424"/>
+        <location filename="multiimagewritethread.cpp" line="425"/>
         <source>Error creating partition table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="499"/>
+        <location filename="multiimagewritethread.cpp" line="500"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation>%1: Pobieranie i rozpakowywanie systemu plików</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="501"/>
+        <location filename="multiimagewritethread.cpp" line="502"/>
         <source>%1: Extracting filesystem</source>
         <oldsource>%1 Extracting filesystem</oldsource>
         <translation>%1: Rozpakowywanie systemu plików</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="515"/>
+        <location filename="multiimagewritethread.cpp" line="516"/>
         <source>%1: Mounting FAT partition</source>
         <oldsource>Mouning FAT partition</oldsource>
         <translation>%1: Montowanie partycji FAT</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="527"/>
+        <location filename="multiimagewritethread.cpp" line="528"/>
         <source>%1: Creating os_config.json</source>
         <oldsource>Creating os_config.json</oldsource>
         <translation>%1: Tworzenie os_config.json</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="552"/>
+        <location filename="multiimagewritethread.cpp" line="559"/>
         <source>%1: Saving display mode to config.txt</source>
         <oldsource>Saving display mode to config.txt</oldsource>
         <translation>%1: Zapisywanie trybu wyświetlania do config.txt</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="563"/>
+        <location filename="multiimagewritethread.cpp" line="570"/>
         <source>%1: Running partition setup script</source>
         <oldsource>Running partition setup script</oldsource>
         <translation>%1: Uruchamianie skryptu konfiguracji partycji</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="612"/>
+        <location filename="multiimagewritethread.cpp" line="619"/>
         <source>%1: Error executing partition setup script</source>
         <oldsource>Error executing partition setup script</oldsource>
         <translation>%1: Błąd wykonywania skryptu konfiguracji partycji</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="617"/>
+        <location filename="multiimagewritethread.cpp" line="624"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>Unmounting FAT partition</oldsource>
         <translation>%1: Odmontowywanie partycji FAT</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="620"/>
+        <location filename="multiimagewritethread.cpp" line="627"/>
         <source>%1: Error unmounting</source>
         <oldsource>Error unmounting</oldsource>
         <translation>%1: Błąd odmontowywania</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="779"/>
+        <location filename="multiimagewritethread.cpp" line="786"/>
         <source>Error creating file system</source>
         <translation>Błąd tworzenia systemu plików</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="821"/>
-        <location filename="multiimagewritethread.cpp" line="892"/>
-        <location filename="multiimagewritethread.cpp" line="951"/>
+        <location filename="multiimagewritethread.cpp" line="828"/>
+        <location filename="multiimagewritethread.cpp" line="899"/>
+        <location filename="multiimagewritethread.cpp" line="958"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Nieznane rozszerzenie skompresowanego pliku. Oczekiwane: .lzo, .gz, .xz, .bz2 lub .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="854"/>
+        <location filename="multiimagewritethread.cpp" line="861"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Błąd pobierania lub rozpakowywania pliku tar</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="913"/>
-        <location filename="multiimagewritethread.cpp" line="972"/>
+        <location filename="multiimagewritethread.cpp" line="920"/>
+        <location filename="multiimagewritethread.cpp" line="979"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>Błąd pobierania lub zapisywania systemu operacyjnego na kartę SD</translation>
     </message>
@@ -734,12 +734,12 @@ Czy chcesz zachować te ustawienia?</translation>
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="147"/>
+        <location filename="progressslideshowdialog.cpp" line="153"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation>%1 MB z %2 MB zapisane (%3 MB/sek)</translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="152"/>
+        <location filename="progressslideshowdialog.cpp" line="158"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation>%1 MB zapisane (%2 MB/sek)</translation>
     </message>

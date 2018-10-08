@@ -1,6 +1,7 @@
 #include "progressslideshowdialog.h"
 #include "ui_progressslideshowdialog.h"
 #include "util.h"
+#include <limits.h>
 #include <QDir>
 #include <QFile>
 #include <QPixmap>
@@ -193,7 +194,7 @@ uint ProgressSlideshowDialog::sectorsWritten()
     if (stats.count() >= 6)
         numsectors = stats.at(6).toUInt(); /* write sectors */
 
-    if (numsectors > 2147483647)        //Maybe use MAX_INT from limits.h?
-       numsectors = 2147483647;
+    if (numsectors > INT_MAX)
+       numsectors = INT_MAX;
     return numsectors;
 }

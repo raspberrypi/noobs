@@ -14,28 +14,28 @@
         <translation>Feil ved oppsett av innstillingspartisjon</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="199"/>
+        <location filename="bootselectiondialog.cpp" line="219"/>
         <source>HDMI safe mode</source>
         <translation>HDMI sikker-modus</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="203"/>
+        <location filename="bootselectiondialog.cpp" line="223"/>
         <source>composite PAL mode</source>
         <translation>komposit PAL-modus</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="207"/>
+        <location filename="bootselectiondialog.cpp" line="227"/>
         <source>composite NTSC mode</source>
         <translation>komposit NTSC-modus</translation>
     </message>
     <message>
-        <location filename="bootselectiondialog.cpp" line="263"/>
+        <location filename="bootselectiondialog.cpp" line="283"/>
         <source>Previously selected OS will boot in %1 seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="bootselectiondialog.ui" line="19"/>
-        <location filename="bootselectiondialog.cpp" line="258"/>
+        <location filename="bootselectiondialog.cpp" line="278"/>
         <source>Select OS to boot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -342,40 +342,40 @@ WARNING: This will erase all data on your SD card</source>
         <translation>Klargjør SD-kort</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="253"/>
         <source>Please wait while NOOBS initialises</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <location filename="mainwindow.cpp" line="1258"/>
-        <location filename="mainwindow.cpp" line="1819"/>
+        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="1280"/>
+        <location filename="mainwindow.cpp" line="1841"/>
         <source>RECOMMENDED</source>
         <translation>ANBEFALES</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Confirm</source>
         <translation>Bekreft</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
+        <location filename="mainwindow.cpp" line="1164"/>
         <source>Error downloading distribution list from Internet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1632"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1640"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1755"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -400,33 +400,33 @@ WARNING: This will erase all data on your SD card</source>
         <translation>SD-kort kan være ødelagt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="588"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <translation>Advarsel: dette vil installere valgte OS(er). Alle eksisterende data på SD-kortet vil bli overskrevet, også ethvert OS som allerede er installert.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="689"/>
+        <location filename="mainwindow.cpp" line="1178"/>
         <source>Error</source>
         <translation>Feil</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="344"/>
         <source>INSTALLED</source>
         <translation>INSTALLERT</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="706"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display Mode Changed</source>
         <translation>Visningsmodus endret</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="735"/>
+        <location filename="mainwindow.cpp" line="738"/>
         <source>HDMI preferred mode</source>
         <translation>HDMI foretrukket modus</translation>
     </message>
@@ -441,102 +441,102 @@ WARNING: This will erase all data on your SD card</source>
         <translation>Monterer instillingspartisjon</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>SD card</source>
         <translation>SD-kort</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>drive</source>
         <translation>drive</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="613"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation>Advarsel: inkompatible OS8er) oppdaget. Følgende OS(er) er ikke støttet av denne versjon av Raspberry Pi og kan feile ved boot eller ikke funksjonerer riktig:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="652"/>
+        <location filename="mainwindow.cpp" line="655"/>
         <source>The install process will begin shortly.</source>
         <translation>Installasjonsprosessen starter straks.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) installed</source>
         <translation>OS8er) installert</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="675"/>
+        <location filename="mainwindow.cpp" line="678"/>
         <source>OS(es) Installed Successfully</source>
         <translation>OS(er) installert med hell</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="742"/>
         <source>HDMI safe mode</source>
         <translation>HDMI sikkermodus</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="746"/>
         <source>composite PAL mode</source>
         <translation>komposit PAL-modus</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="750"/>
         <source>composite NTSC mode</source>
         <translation>komposit NTSC-modus</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="804"/>
+        <location filename="mainwindow.cpp" line="807"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Visningsmodus endret til %1 Vil du gjøre denne innstillingen permanent?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1142"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1164"/>
+        <location filename="mainwindow.cpp" line="1505"/>
+        <location filename="mainwindow.cpp" line="1515"/>
         <source>Download error</source>
         <translation>Nedlastingsfeil</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1156"/>
+        <location filename="mainwindow.cpp" line="1178"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>VEd ved analysering av list.json nedlastet fra server</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1398"/>
         <source>Needed</source>
         <translation>Nødvendig</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1399"/>
         <source>Available</source>
         <translation>Tilgjengelig</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1505"/>
         <source>Error downloading meta file</source>
         <translation>Feil ved nedlasting av meta-fil</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1515"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Feil ved skriving av nedlastet fil til SD-kort. SD-kort eller filsystem kan være ødelagt.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1754"/>
         <source>Reformat drive?</source>
         <translation>Reformatter drive?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="922"/>
-        <location filename="mainwindow.cpp" line="1609"/>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="925"/>
+        <location filename="mainwindow.cpp" line="1631"/>
+        <location filename="mainwindow.cpp" line="1639"/>
         <source>No network access</source>
         <translation>Ingen nettverkstilgang</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="923"/>
+        <location filename="mainwindow.cpp" line="926"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Kablet nettverkstilgang er nødvendig for denne funksjonen. Monter en nettverkskabel til nettverksporten.</translation>
     </message>
@@ -569,34 +569,34 @@ Would you like to make this setting permanent?</source>
         <translation>Ikke nok diskplass. Trenger %1 MB, har %2 MB</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="319"/>
+        <location filename="multiimagewritethread.cpp" line="320"/>
         <source>Finish writing (sync)</source>
         <translation>Avslutter skriving (sync)</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="456"/>
+        <location filename="multiimagewritethread.cpp" line="457"/>
         <source>File &apos;%1&apos; does not exist</source>
         <translation>Fil &apos;%1&apos; eksisterer ikke</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="466"/>
-        <location filename="multiimagewritethread.cpp" line="472"/>
+        <location filename="multiimagewritethread.cpp" line="467"/>
+        <location filename="multiimagewritethread.cpp" line="473"/>
         <source>%1: Writing OS image</source>
         <translation>%1: Skriver OS-avbildning</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="486"/>
+        <location filename="multiimagewritethread.cpp" line="487"/>
         <source>%1: Mounting file system</source>
         <translation>%1: Monterer filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="494"/>
-        <location filename="multiimagewritethread.cpp" line="518"/>
+        <location filename="multiimagewritethread.cpp" line="495"/>
+        <location filename="multiimagewritethread.cpp" line="519"/>
         <source>%1: Error mounting file system</source>
         <translation>%1: Feil ved montering av filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="479"/>
+        <location filename="multiimagewritethread.cpp" line="480"/>
         <source>%1: Creating filesystem (%2)</source>
         <translation>%1: Oppretter filsystem (%2)</translation>
     </message>
@@ -616,101 +616,101 @@ Would you like to make this setting permanent?</source>
         <translation>Mer enn et OS trenger partisjon nummer %1</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="213"/>
+        <location filename="multiimagewritethread.cpp" line="214"/>
         <source>Fixed partition offset too low</source>
         <translation>Fast partisjonsoffset for lav</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="274"/>
+        <location filename="multiimagewritethread.cpp" line="275"/>
         <source>Writing partition table</source>
         <translation>Skriver partisjonstabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="289"/>
+        <location filename="multiimagewritethread.cpp" line="290"/>
         <source>Writing boot partition table</source>
         <translation>Skriver partisjonstabell for boot</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="279"/>
-        <location filename="multiimagewritethread.cpp" line="295"/>
+        <location filename="multiimagewritethread.cpp" line="280"/>
+        <location filename="multiimagewritethread.cpp" line="296"/>
         <source>Zero&apos;ing start of each partition</source>
         <translation>Nullstiller start for hver partisjon</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="339"/>
+        <location filename="multiimagewritethread.cpp" line="340"/>
         <source>Error reading existing partition table</source>
         <translation>Feil ved lesing av eksisterende partisjonstabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="424"/>
+        <location filename="multiimagewritethread.cpp" line="425"/>
         <source>Error creating partition table</source>
         <translation>Feil ved opprettelse av partisjonstabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="499"/>
+        <location filename="multiimagewritethread.cpp" line="500"/>
         <source>%1: Downloading and extracting filesystem</source>
         <translation>%1: Laster ned og pakker ut filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="501"/>
+        <location filename="multiimagewritethread.cpp" line="502"/>
         <source>%1: Extracting filesystem</source>
         <translation>%1: Pakker ut filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="515"/>
+        <location filename="multiimagewritethread.cpp" line="516"/>
         <source>%1: Mounting FAT partition</source>
         <translation>%1: Monterer FAT-partisjon</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="527"/>
+        <location filename="multiimagewritethread.cpp" line="528"/>
         <source>%1: Creating os_config.json</source>
         <translation>%1: Oppretter os_config.json</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="552"/>
+        <location filename="multiimagewritethread.cpp" line="559"/>
         <source>%1: Saving display mode to config.txt</source>
         <translation>%1: Lagrer visningsmodus til config.txt</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="563"/>
+        <location filename="multiimagewritethread.cpp" line="570"/>
         <source>%1: Running partition setup script</source>
         <translation>%1: Kjører script for partisjonsoppsett</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="612"/>
+        <location filename="multiimagewritethread.cpp" line="619"/>
         <source>%1: Error executing partition setup script</source>
         <translation>%1: Feil ved utførelse av script for oppsett</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="617"/>
+        <location filename="multiimagewritethread.cpp" line="624"/>
         <source>%1: Unmounting FAT partition</source>
         <translation>%1: Avmonterer FAT-partisjon</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="620"/>
+        <location filename="multiimagewritethread.cpp" line="627"/>
         <source>%1: Error unmounting</source>
         <translation>%1: Feil ved avkobling</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="779"/>
+        <location filename="multiimagewritethread.cpp" line="786"/>
         <source>Error creating file system</source>
         <translation>Feil ved opprettelse av filsystem</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="821"/>
-        <location filename="multiimagewritethread.cpp" line="892"/>
-        <location filename="multiimagewritethread.cpp" line="951"/>
+        <location filename="multiimagewritethread.cpp" line="828"/>
+        <location filename="multiimagewritethread.cpp" line="899"/>
+        <location filename="multiimagewritethread.cpp" line="958"/>
         <source>Unknown compression format file extension. Expecting .lzo, .gz, .xz, .bz2 or .zip</source>
         <translation>Ukjent filetternavn for komprimert fil.  Forventer .lzo, .gz, .xz, .bz2 eller .zip</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="854"/>
+        <location filename="multiimagewritethread.cpp" line="861"/>
         <source>Error downloading or extracting tarball</source>
         <translation>Feil ved nedlasting eller utpakking av tabell</translation>
     </message>
     <message>
-        <location filename="multiimagewritethread.cpp" line="913"/>
-        <location filename="multiimagewritethread.cpp" line="972"/>
+        <location filename="multiimagewritethread.cpp" line="920"/>
+        <location filename="multiimagewritethread.cpp" line="979"/>
         <source>Error downloading or writing OS to SD card</source>
         <translation>Feil ved nedlasting eller skriving av OS til SD-kort</translation>
     </message>
@@ -718,12 +718,12 @@ Would you like to make this setting permanent?</source>
 <context>
     <name>ProgressSlideshowDialog</name>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="147"/>
+        <location filename="progressslideshowdialog.cpp" line="153"/>
         <source>%1 MB of %2 MB written (%3 MB/sec)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="progressslideshowdialog.cpp" line="152"/>
+        <location filename="progressslideshowdialog.cpp" line="158"/>
         <source>%1 MB written (%2 MB/sec)</source>
         <translation>%1 MB skrevet (%2 MB/sek)</translation>
     </message>
