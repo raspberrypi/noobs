@@ -141,8 +141,8 @@ void InitDriveThread::run()
 
 bool InitDriveThread::method_resizePartitions()
 {
-    int newStartOfRescuePartition = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toInt();
-    int newSizeOfRescuePartition  = sizeofBootFilesInKB()*1.024/1000 + 100;
+    uint newStartOfRescuePartition = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toUInt();
+    uint newSizeOfRescuePartition  = sizeofBootFilesInKB()*1.024/1000 + 100;
 
     if (!umountSystemPartition())
     {
@@ -245,12 +245,12 @@ bool InitDriveThread::method_resizePartitions()
     emit statusUpdate(tr("Creating extended partition"));
 
     QByteArray partitionTable;
-    int startOfOurPartition = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toInt();
-    int sizeOfOurPartition  = getFileContents(sysclassblock(_drive, 1)+"/size").trimmed().toInt();
-    int startOfExtended = startOfOurPartition+sizeOfOurPartition;
+    uint startOfOurPartition = getFileContents(sysclassblock(_drive, 1)+"/start").trimmed().toUInt();
+    uint sizeOfOurPartition  = getFileContents(sysclassblock(_drive, 1)+"/size").trimmed().toUInt();
+    uint startOfExtended = startOfOurPartition+sizeOfOurPartition;
 
     // Align start of settings partition on 4 MiB boundary
-    int startOfSettings = startOfExtended + PARTITION_GAP;
+    uint startOfSettings = startOfExtended + PARTITION_GAP;
     if (startOfSettings % PARTITION_ALIGNMENT != 0)
          startOfSettings += PARTITION_ALIGNMENT-(startOfSettings % PARTITION_ALIGNMENT);
 
@@ -292,11 +292,11 @@ int InitDriveThread::sizeofBootFilesInKB()
     return proc.readAll().split('\t').first().toInt();
 }
 
-int InitDriveThread::sizeofSDCardInBlocks()
+uint InitDriveThread::sizeofSDCardInBlocks()
 {
     QFile f(sysclassblock(_drive)+"/size");
     f.open(f.ReadOnly);
-    int blocks = f.readAll().trimmed().toULongLong();
+    uint blocks = f.readAll().trimmed().toUInt();
     f.close();
 
     return blocks;
@@ -408,12 +408,12 @@ bool InitDriveThread::partitionDrive()
      * First logical partition has NOOBS persistent settings partition
      */
     QByteArray partitionTable;
-    int sizeOfOurPartition = RESCUE_PARTITION_SIZE*1024*2;
-    int startOfOurPartition = PARTITION_ALIGNMENT;
-    int startOfExtended = startOfOurPartition+sizeOfOurPartition;
+    uint sizeOfOurPartition = RESCUE_PARTITION_SIZE*1024*2;
+    uint startOfOurPartition = PARTITION_ALIGNMENT;
+    uint startOfExtended = startOfOurPartition+sizeOfOurPartition;
 
     // Align start of settings partition on 4 MiB boundary
-    int startOfSettings = startOfExtended + PARTITION_GAP;
+    uint startOfSettings = startOfExtended + PARTITION_GAP;
     if (startOfSettings % PARTITION_ALIGNMENT != 0)
          startOfSettings += PARTITION_ALIGNMENT-(startOfSettings % PARTITION_ALIGNMENT);
 

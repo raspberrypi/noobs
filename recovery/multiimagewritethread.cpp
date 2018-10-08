@@ -38,11 +38,11 @@ void MultiImageWriteThread::addImage(const QString &folder, const QString &flavo
 void MultiImageWriteThread::run()
 {
     /* Calculate space requirements, and check special requirements */
-    int totalnominalsize = 0, totaluncompressedsize = 0, numparts = 0, numexpandparts = 0;
-    int startSector = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toULongLong()
-                    + getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toULongLong();
-    int totalSectors = getFileContents(sysclassblock(_drive)+"/size").trimmed().toULongLong();
-    int availableMB = (totalSectors-startSector)/2048;
+    uint totalnominalsize = 0, totaluncompressedsize = 0, numparts = 0, numexpandparts = 0;
+    uint startSector = getFileContents(sysclassblock(_drive, 5)+"/start").trimmed().toUInt()
+                    + getFileContents(sysclassblock(_drive, 5)+"/size").trimmed().toUInt();
+    uint totalSectors = getFileContents(sysclassblock(_drive)+"/size").trimmed().toUInt();
+    uint availableMB = (totalSectors-startSector)/2048;
 
     /* key: partition number, value: partition information */
     QMap<int, PartitionInfo *> partitionMap, bootPartitionMap;
@@ -146,7 +146,8 @@ void MultiImageWriteThread::run()
     }
 
     /* Assign logical partition numbers to partitions that did not reserve a special number */
-    int pnr, bootpnr, offset = 0;
+    int pnr, bootpnr;
+    uint offset = 0;
     if (partitionMap.isEmpty())
         pnr = 6;
     else
@@ -155,8 +156,8 @@ void MultiImageWriteThread::run()
     if (_multiDrives)
     {
         bootpnr = 6;
-        offset = getFileContents(sysclassblock(_bootdrive, 5)+"/start").trimmed().toULongLong()
-               + getFileContents(sysclassblock(_bootdrive, 5)+"/size").trimmed().toULongLong();
+        offset = getFileContents(sysclassblock(_bootdrive, 5)+"/start").trimmed().toUInt()
+               + getFileContents(sysclassblock(_bootdrive, 5)+"/size").trimmed().toUInt();
     }
 
     foreach (OsInfo *image, _images)
@@ -178,7 +179,7 @@ void MultiImageWriteThread::run()
                             offset += PARTITION_ALIGNMENT-(offset % PARTITION_ALIGNMENT);
                     }
                     partition->setOffset(offset);
-                    int partsizeSectors = partition->partitionSizeNominal() * 2048;
+                    uint partsizeSectors = partition->partitionSizeNominal() * 2048;
                     partition->setPartitionSizeSectors(partsizeSectors);
                     offset += partsizeSectors;
                 }
@@ -228,15 +229,15 @@ void MultiImageWriteThread::run()
             p->setOffset(offset);
         }
 
-        int partsizeMB = p->partitionSizeNominal();
+        uint partsizeMB = p->partitionSizeNominal();
         if ( p->wantMaximised() )
             partsizeMB += _extraSpacePerPartition;
-        int partsizeSectors = partsizeMB * 2048;
+        uint partsizeSectors = partsizeMB * 2048;
 
         if (p == log_before_prim.last())
         {
             /* Let last partition have any remaining space that we couldn't divide evenly */
-            int spaceleft = totalSectors - offset - partsizeSectors;
+            uint spaceleft = totalSectors - offset - partsizeSectors;
 
             if (spaceleft > 0 && p->wantMaximised())
             {
@@ -326,13 +327,13 @@ bool MultiImageWriteThread::writePartitionTable(const QString &drive, const QMap
     /* Write partition table using sfdisk */
 
     /* Fixed NOOBS partition */
-    int startP1 = getFileContents(sysclassblock(drive, 1)+"/start").trimmed().toInt();
-    int sizeP1  = getFileContents(sysclassblock(drive, 1)+"/size").trimmed().toInt();
+    uint startP1 = getFileContents(sysclassblock(drive, 1)+"/start").trimmed().toUInt();
+    uint sizeP1  = getFileContents(sysclassblock(drive, 1)+"/size").trimmed().toUInt();
     /* Fixed start of extended partition. End is not fixed, as it depends on primary partition 3 & 4 */
     int startExtended = startP1+sizeP1;
     /* Fixed settings partition */
-    int startP5 = getFileContents(sysclassblock(drive, SETTINGS_PARTNR)+"/start").trimmed().toInt();
-    int sizeP5  = getFileContents(sysclassblock(drive, SETTINGS_PARTNR)+"/size").trimmed().toInt();
+    uint startP5 = getFileContents(sysclassblock(drive, SETTINGS_PARTNR)+"/start").trimmed().toUInt();
+    uint sizeP5  = getFileContents(sysclassblock(drive, SETTINGS_PARTNR)+"/size").trimmed().toUInt();
 
     if (!startP1 || !sizeP1 || !startP5 || !sizeP5)
     {
@@ -346,7 +347,7 @@ bool MultiImageWriteThread::writePartitionTable(const QString &drive, const QMap
     partitionMap.insert(1, new PartitionInfo(1, startP1, sizeP1, "0E", this)); /* FAT boot partition */
     partitionMap.insert(5, new PartitionInfo(5, startP5, sizeP5, "L", this)); /* Ext4 settings partition */
 
-    int sizeExtended = partitionMap.values().last()->endSector() - startExtended;
+    uint sizeExtended = partitionMap.values().last()->endSector() - startExtended;
     if (!partitionMap.contains(2))
     {
         partitionMap.insert(2, new PartitionInfo(2, startExtended, sizeExtended, "E", this));
