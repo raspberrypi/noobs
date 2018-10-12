@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -418,7 +418,7 @@ WARNING: This will erase all data on your SD card</source>
     <message>
         <location filename="mainwindow.cpp" line="655"/>
         <source>The install process will begin shortly.</source>
-        <translation>安裝過程將很快開始</translation>
+        <translation>安裝過程將很快開始。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="677"/>
