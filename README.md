@@ -249,7 +249,7 @@ Note that this will require a minimum of 6GB free disk space.
 
 On Ubuntu:
 
-`sudo apt-get install build-essential rsync texinfo libncurses-dev whois unzip bc qt4-linguist-tools`
+`sudo apt install build-essential rsync texinfo libncurses-dev whois unzip bc qt4-linguist-tools`
 
 #### Run Build Script
 
