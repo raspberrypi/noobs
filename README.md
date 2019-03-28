@@ -41,8 +41,12 @@ On first boot the "RECOVERY" FAT partition will be automatically resized to a mi
 ### Operating System Choice
 
 NOOBS is available in 2 formats:
-- `NOOBS Full` includes the installation files for Raspbian only.
+- `NOOBS Full` includes the installation files for Raspbian Full and LibreELEC only.
 - `NOOBS-Lite` does not include any Operating Systems at all.
+
+Please note that RISC OS cannot be installed by the NOOBS FULL version due to the amount of space taken up by the included Operating Systems.
+
+If you want to install RISC OS, use NOOBS-Lite instead, or change the included operating systems.
 
 #### OS Network Download
 
