@@ -4,8 +4,9 @@
 #
 ################################################################################
 
-RPI_FIRMWARE_VERSION = fbad6408c4596d3d671736ee0571aae444f24e68
-RPI_FIRMWARE_SITE = $(call github,raspberrypi,firmware,$(RPI_FIRMWARE_VERSION))
+RPI_FIRMWARE_VERSION = e5b11a9d32cf4388b09097c33ab7bffbe1ca721c
+RPI_FIRMWARE_SITE = git@git.pitowers.org:serge/firmware.git
+RPI_FIRMWARE_SITE_METHOD = git
 RPI_FIRMWARE_LICENSE = BSD-3c
 RPI_FIRMWARE_LICENSE_FILES = boot/LICENCE.broadcom
 RPI_FIRMWARE_INSTALL_TARGET = NO
