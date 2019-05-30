@@ -21,7 +21,8 @@ for F in *; do
         cat "/lib/firmware/${F/!//}" > "$F/data"
         echo 0 > "$F/loading"
     fi
-done)
+done
+echo 1 > timeout)
 
 # Set up ACT LED to be triggered by mmc0
 echo mmc0 > /sys/class/leds/led0/trigger
