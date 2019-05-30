@@ -39,11 +39,47 @@ config BR2_PACKAGE_RPI_FIRMWARE_CD
 
 endchoice
 
+choice
+	bool "Pi 4 firmware to boot"
+	default BR2_PACKAGE_RPI_FIRMWARE_4DEFAULT
+	help
+	  There are three different firmware files:
+	    - the default firmware, that enables standard GPU features;
+	    - the extended firmware, that enables additional GPU features
+	      (eg. more audio/video codecs);
+	    - the cut-down firmware, for emergency situations, with only
+	      features required to boot a Linux kernel.
+
+config BR2_PACKAGE_RPI_FIRMWARE_4DEFAULT
+	bool "default"
+	help
+	  The default pi 4 firmware, that enables standard GPU features.
+
+config BR2_PACKAGE_RPI_FIRMWARE_4X
+	bool "extended pi4 ('4x', more codecs)"
+	help
+	  The extended pi 4 firmware, that enables additional GPU features
+	  (eg. more audio/video codecs).
+
+config BR2_PACKAGE_RPI_FIRMWARE_4CD
+	bool "cut-down pi4 ('4cd', emergency)"
+	help
+	  The cut-down pi 4 firmware, for emergency situations, with only
+	  features required to boot a Linux kernel.
+
+endchoice
+
 config BR2_PACKAGE_RPI_FIRMWARE_BOOT
 	string
 	default ""      if BR2_PACKAGE_RPI_FIRMWARE_DEFAULT
 	default "_x"    if BR2_PACKAGE_RPI_FIRMWARE_X
 	default "_cd"   if BR2_PACKAGE_RPI_FIRMWARE_CD
+
+config BR2_PACKAGE_RPI_FIRMWARE_BOOT_PI4
+	string
+	default "4"     if BR2_PACKAGE_RPI_FIRMWARE_4DEFAULT
+	default "4x"    if BR2_PACKAGE_RPI_FIRMWARE_4X
+	default "4cd"   if BR2_PACKAGE_RPI_FIRMWARE_4CD
 
 config BR2_PACKAGE_RPI_FIRMWARE_INSTALL_DTBS
 	bool "Install Device Tree Blobs (DTBs)"

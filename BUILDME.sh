@@ -148,6 +148,12 @@ mkdir -p "$FINAL_OUTPUT_DIR/os"
 cp -r ../sdcontent/* "$FINAL_OUTPUT_DIR"
 
 if [ $SKIP_KERNEL_REBUILD -ne 1 ]; then
+    # Rebuild kernel for ARMv7l
+    select_kernelconfig armv7l
+    make linux-reconfigure
+    # copy ARMv7l kernel
+    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7l.img"
+
     # Rebuild kernel for ARMv7
     select_kernelconfig armv7
     make linux-reconfigure
@@ -169,6 +175,7 @@ cp "$IMAGES_DIR/rootfs.squashfs" "$FINAL_OUTPUT_DIR/recovery.rfs"
 
 # Ensure that final output dir contains files necessary to boot
 cp "$IMAGES_DIR/rpi-firmware/start.elf" "$FINAL_OUTPUT_DIR/recovery.elf"
+cp "$IMAGES_DIR/rpi-firmware/start4.elf" "$FINAL_OUTPUT_DIR/recover4.elf"
 cp "$IMAGES_DIR/rpi-firmware/bootcode.bin" "$FINAL_OUTPUT_DIR"
 cp -a $IMAGES_DIR/*.dtb "$IMAGES_DIR/overlays" "$FINAL_OUTPUT_DIR"
 cp "$IMAGES_DIR/cmdline.txt" "$FINAL_OUTPUT_DIR/recovery.cmdline"
