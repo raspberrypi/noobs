@@ -190,13 +190,13 @@ int main(int argc, char *argv[])
         else if (strcmp(argv[i], "-gpiochannel") == 0)
         {
             if (argc > i+1)
-                gpioChannel = std::stoi(argv[i+1]);
+                gpioChannel = atoi(argv[i+1]);
         }
-        // Allow gpio channel value i.e pull up or pull low to be specified in commandline
+        // Allow gpio channel value i.e pull up or pull down to be specified in commandline
         else if (strcmp(argv[i], "-gpiochannelvalue") == 0)
         {
             if (argc > i+1)
-                gpioChannelValue = std::stoi(argv[i+1]);
+                gpioChannelValue = atoi(argv[i+1]);
         }
     }
 
