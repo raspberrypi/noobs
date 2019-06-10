@@ -148,11 +148,24 @@ mkdir -p "$FINAL_OUTPUT_DIR/os"
 cp -r ../sdcontent/* "$FINAL_OUTPUT_DIR"
 
 if [ $SKIP_KERNEL_REBUILD -ne 1 ]; then
-    # Rebuild kernel for ARMv7l
-    select_kernelconfig armv7l
-    make linux-reconfigure
-    # copy ARMv7l kernel
-    cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7l.img"
+    # Temporary recovery7l.img build
+    if false; then
+        # Rebuild kernel for ARMv7l
+        select_kernelconfig armv7l
+        make linux-reconfigure
+        # copy ARMv7l kernel
+        cp "$IMAGES_DIR/zImage" "$FINAL_OUTPUT_DIR/recovery7l.img"
+    else
+        mkdir -p linux7l
+        tar xzf ../linux-vc5-db83d4b7c10d0a4251780d2c7a033c2a1216d47c.tar.gz -C linux7l --strip-components=1
+	cp kernelconfig-recovery.armv7l linux7l/.config
+        (
+          cd linux7l
+          ARCH=arm CROSS_COMPILE="../output/host/usr/bin/arm-linux-" make -j$(nproc) olddefconfig zImage dtbs
+        )
+        cp "linux7l/arch/arm/boot/zImage" "$FINAL_OUTPUT_DIR/recovery7l.img"
+        cp "linux7l/arch/arm/boot/dts/bcm2711-rpi-4-b.dtb" "$FINAL_OUTPUT_DIR/"
+    fi
 
     # Rebuild kernel for ARMv7
     select_kernelconfig armv7
