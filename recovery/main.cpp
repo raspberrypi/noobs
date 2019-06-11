@@ -135,7 +135,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     RightButtonFilter rbf;
     LongPressHandler lph;
-    GpioInput gpio(gpioChannel);
 
     bool runinstaller = false;
     bool gpio_trigger = false;
@@ -199,6 +198,8 @@ int main(int argc, char *argv[])
                 gpioChannelValue = atoi(argv[i+1]);
         }
     }
+
+    GpioInput gpio(gpioChannel);
 
     // Intercept right mouse clicks sent to the title bar
     a.installEventFilter(&rbf);
