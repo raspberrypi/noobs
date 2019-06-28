@@ -2,14 +2,14 @@
 #define CONFIG_H
 
 /* Version number displayed in the title bar */
-#define VERSION_NUMBER "3.0"
+#define VERSION_NUMBER "4.0"
 
 /* Color of the background */
 // #define BACKGROUND_COLOR  Qt::white
-#define BACKGROUND_COLOR  QColor(0xde, 0xde, 0xde)
+#define BACKGROUND_COLOR  QColor(0xff, 0x9e, 0x17)
 
 /* Highlight color of installed OS */
-#define INSTALLED_OS_BACKGROUND_COLOR  QColor(0xef,0xff,0xef)
+#define INSTALLED_OS_BACKGROUND_COLOR  QColor(0xff,0x9e,0x17)
 
 /* Places background.png resource file in center of screen */
 #define CENTER_BACKGROUND_IMAGE
@@ -18,7 +18,7 @@
 #define ENABLE_LANGUAGE_CHOOSER
 
 /* Website launched when launching Arora */
-#define HOMEPAGE  "http://www.raspberrypi.org/help/"
+#define HOMEPAGE  "http://www.hrsid.com"
 
 /* Location to download the list of available distributions from
  * Multiple lists can be specified by space separating the URLs */
