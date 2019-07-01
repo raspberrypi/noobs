@@ -18,11 +18,11 @@
 #define ENABLE_LANGUAGE_CHOOSER
 
 /* Website launched when launching Arora */
-#define HOMEPAGE  "http://www.hrsid.com"
+#define HOMEPAGE  "https://www.hrsid.com"
 
 /* Location to download the list of available distributions from
  * Multiple lists can be specified by space separating the URLs */
-#define DEFAULT_REPO_SERVER  "http://downloads.raspberrypi.org/os_list_v3.json"
+#define DEFAULT_REPO_SERVER  "https://repository.hrs.cloud/os_list_v3.json"
 
 /* Size of recovery FAT partition in MB when using reformat drive initialization method. */
 #define RESCUE_PARTITION_SIZE  63
@@ -43,7 +43,7 @@
 #define SETTINGS_PARTITION_SIZE  (32 * 2048 - PARTITION_GAP)
 
 /* If the image name matches this exactly, mark it as recommended */
-#define RECOMMENDED_IMAGE "Raspbian Full"
+#define RECOMMENDED_IMAGE "HRS MSite"
 
 /* RiscOS magic */
 #define RISCOS_OFFSET_KEY "riscos_offset"

@@ -216,8 +216,8 @@ int main(int argc, char *argv[])
     settingsdir.mkdir("/settings");
 
     // Set wallpaper and icon, if we have resource files for that
-    if (QFile::exists(":/icons/raspberry_icon.png"))
-        a.setWindowIcon(QIcon(":/icons/raspberry_icon.png"));
+    if (QFile::exists(":/icons/icon.png"))
+        a.setWindowIcon(QIcon(":/icons/icon.png"));
 
 #ifdef Q_WS_QWS
     QWSServer::setBackground(BACKGROUND_COLOR);
