@@ -133,6 +133,10 @@ When you now boot your Pi using an SD card containing the modified version of NO
 
 If you already know your WiFi details, you can preconfigure NOOBS to use it straight away. Put a copy of your `wpa_supplicant.conf` file on the NOOBS root partition and NOOBS will read it and store it in its settings for all future uses.
 
+### Enabling SSH for Raspbian
+
+SSH is disabled by default in Raspbian. If you have elected to automatically install Raspbian and wish to SSH into it you'll need to add a line to the file `/os/Raspbian/partition_setup.sh` after the `wpa_supplicant.conf` block: `touch /tmp/1/ssh`. Be patient while the OS installs; the SSH server will not be immediately available.
+
 ### How to create a custom OS version
 
 There are two main use cases for which you may want to create a custom version of one of the standard OS releases that is suitable for installation via NOOBS:
