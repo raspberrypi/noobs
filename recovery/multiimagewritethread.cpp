@@ -994,9 +994,6 @@ void MultiImageWriteThread::patchConfigTxt()
 
         switch (videomode)
         {
-        case 0: /* HDMI PREFERRED */
-            dispOptions = "hdmi_force_hotplug=1\r\n";
-            break;
         case 1: /* HDMI VGA */
             dispOptions = "hdmi_ignore_edid=0xa5000080\r\nhdmi_force_hotplug=1\r\nhdmi_group=2\r\nhdmi_mode=4\r\n";
             break;
