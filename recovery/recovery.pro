@@ -62,7 +62,8 @@ TRANSLATIONS += translation_nl.ts \
     translation_hu.ts \
     translation_fi.ts \
     translation_ru.ts \
-    translation_zh_CN.ts
+    translation_zh_CN.ts \
+	translation_pt_BR.ts
 
 OTHER_FILES += \
     README.txt

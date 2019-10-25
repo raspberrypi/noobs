@@ -26,6 +26,8 @@
         <file>icons/ru.png</file>
         <file>translation_zh_CN.qm</file>
         <file>icons/zh_CN.png</file>
+		<file>translation_pt_BR.qm</file>
+        <file>icons/pt_BR.png</file>
         <file>icons/us.png</file>
         <file>icons/download.png</file>
         <file>icons/hdd.png</file>
