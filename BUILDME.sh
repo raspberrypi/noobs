@@ -127,6 +127,11 @@ for i in $*; do
         update_github_kernel_version raspberrypi/linux rpi-4.14.y
     fi
 
+    # Update LibreELEC/brcmfmac_sdio-firmware-rpi master HEAD version in package/rpi-wifi-firmware/rpi-wifi-firmware.mk to latest
+    if [ $i = "update-wifi-firmware" ]; then
+        update_github_package_version rpi-wifi-firmware LibreELEC/brcmfmac_sdio-firmware-rpi master
+    fi
+
     # Option to build just recovery without completely rebuilding both kernels
     if [ $i = "skip-kernel-rebuild" ]; then
         SKIP_KERNEL_REBUILD=1
@@ -181,6 +186,7 @@ echo "NOOBS Version: $(sed -n 's|.*VERSION_NUMBER.*\"\(.*\)\"|v\1|p' ../recovery
 echo "NOOBS Git HEAD @ $(git rev-parse --verify HEAD)" >> "$BUILD_INFO"
 echo "rpi-userland Git master @ $(get_package_version rpi-userland)" >> "$BUILD_INFO"
 echo "rpi-firmware Git master @ $(get_package_version rpi-firmware)" >> "$BUILD_INFO"
+echo "rpi-wifi-firmware Git master @ $(get_package_version rpi-wifi-firmware)" >> "$BUILD_INFO"
 echo "rpi-linux Git rpi-4.14.y @ $(get_kernel_version)" >> "$BUILD_INFO"
 
 cd ..
