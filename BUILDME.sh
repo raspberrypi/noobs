@@ -127,9 +127,9 @@ for i in $*; do
         update_github_kernel_version raspberrypi/linux rpi-4.14.y
     fi
 
-    # Update LibreELEC/brcmfmac_sdio-firmware-rpi master HEAD version in package/rpi-wifi-firmware/rpi-wifi-firmware.mk to latest
+    # Update RPi-Distro/firmware-nonfree master HEAD version in package/rpi-wifi-firmware/rpi-wifi-firmware.mk to latest
     if [ $i = "update-wifi-firmware" ]; then
-        update_github_package_version rpi-wifi-firmware LibreELEC/brcmfmac_sdio-firmware-rpi master
+        update_github_package_version rpi-wifi-firmware RPi-Distro/firmware-nonfree master
     fi
 
     # Option to build just recovery without completely rebuilding both kernels
