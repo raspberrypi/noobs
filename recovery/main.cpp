@@ -81,9 +81,8 @@ QString findRecoveryDrive()
 
     foreach (QString devname, list)
     {
-        /* Only search first partition and partitionless devices. Skip virtual devices (such as ramdisk) */
-        if ((devname.right(1).at(0).isDigit() && !devname.endsWith("1"))
-                || QFile::symLinkTarget("/sys/class/block/"+devname).contains("/devices/virtual/"))
+        /* Skip virtual devices (such as ramdisk) */
+        if (QFile::symLinkTarget("/sys/class/block/"+devname).contains("/devices/virtual/"))
             continue;
 
         if (QProcess::execute("mount -t vfat -o ro /dev/"+devname+" /mnt") == 0)
