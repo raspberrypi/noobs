@@ -81,9 +81,31 @@ QString findRecoveryDrive()
 
     foreach (QString devname, list)
     {
-        /* Skip virtual devices (such as ramdisk) */
-        if (QFile::symLinkTarget("/sys/class/block/"+devname).contains("/devices/virtual/"))
+        if (QFile::symLinkTarget("/sys/class/block/"+devname).contains("/devices/virtual/") )
+        {   //Skip if partition is virtual.
             continue;
+        }
+
+        int partitionNr = 0;
+        QRegExp partnrRx("([0-9]+)$");
+        if (partnrRx.indexIn(devname) != -1)
+        {   //Does devname end in 1 or more digits? Yes->Read it
+            partitionNr = partnrRx.cap(1).toInt();
+
+            if (partitionNr>1)
+            {   //Skip if partition Number >1
+                continue;
+            }
+        }
+
+        if (partitionNr == 0)
+        {   //Check for a possible non-MBR drive
+            if ( list.contains(devname+"1") || list.contains(devname+"p1") )
+            {
+                //skip if partition 1 exists (must have MBR)
+                continue;
+            }
+        }
 
         if (QProcess::execute("mount -t vfat -o ro /dev/"+devname+" /mnt") == 0)
         {
@@ -106,10 +128,8 @@ QString findRecoveryDrive()
         if (!drive.isEmpty())
             break;
     }
-
-    return drive;
+    return(drive);
 }
-
 
 int main(int argc, char *argv[])
 {
