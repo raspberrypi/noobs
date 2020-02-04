@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-RPI_USERLAND_VERSION = de4a7f2e3c391e2d3bc76af31864270e7802d9ac
+RPI_USERLAND_VERSION = 06bc6daa02137ca72b7a2104afad81e82a44de17
 RPI_USERLAND_SITE = $(call github,raspberrypi,userland,$(RPI_USERLAND_VERSION))
 RPI_USERLAND_LICENSE = BSD-3c
 RPI_USERLAND_LICENSE_FILES = LICENCE
@@ -25,7 +25,6 @@ define RPI_USERLAND_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libvchiq_arm.so $(TARGET_DIR)/usr/lib
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libvcos.so $(TARGET_DIR)/usr/lib
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libvchostif.so $(TARGET_DIR)/usr/lib
-	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libvcfiled_check.so $(TARGET_DIR)/usr/lib
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/bin/tvservice $(TARGET_DIR)/usr/bin
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/bin/vcgencmd $(TARGET_DIR)/usr/bin
 endef
