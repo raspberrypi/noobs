@@ -87,6 +87,7 @@ TRANSLATIONS += \
     translation_eu.ts \
     translation_fi.ts \
     translation_fr.ts \
+    translation_gl.ts \
     translation_hu.ts \
     translation_it.ts \
     translation_ja.ts \
