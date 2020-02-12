@@ -565,7 +565,7 @@ Bu ayarı kalıcı yapmak ister misiniz?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="116"/>
         <source>Operating system cannot claim both primary partitions 2 and 4</source>
-        <translation></translation>
+        <translation>İşletim sistemi hem birincil bölüm 2 hem de 4 için hak talebinde bulunamaz.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="144"/>
