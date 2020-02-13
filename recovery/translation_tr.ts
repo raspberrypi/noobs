@@ -154,42 +154,42 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
     <message>
         <location filename="initdrivethread.cpp" line="342"/>
         <source>Saving boot files to memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Önyükleme dosyaları belleğe kaydediliyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="345"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation type="unfinished"></translation>
+        <translation>Önyükleme dosyalarını belleğe kaydetmede hata yaşandı. SD kart zarar görmüş olabilir.<</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="361"/>
         <source>Creating partitions</source>
-        <translation type="unfinished"></translation>
+        <translation>Bölümler oluşturuluyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="365"/>
         <source>Error partitioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Bölümlendirme işleminde hata</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="369"/>
         <source>Formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Önyükleme bölümü (fat) biçimlendiriliyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="372"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Önyükleme bölümü (fat) biçimlendirilme işleminde hata</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="376"/>
         <source>Copying boot files to storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Önyükleme dosyaları bölüme kopyalanıyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="452"/>
         <source>Setting disk volume ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Disk yığını kimliği (ID) ayarlanıyor</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="73"/>
@@ -260,7 +260,7 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
     <message>
         <location filename="mainwindow.ui" line="65"/>
         <source>Destination drive:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hedef sürücü:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="88"/>
@@ -424,12 +424,12 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
     <message>
         <location filename="mainwindow.cpp" line="590"/>
         <source>SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>SD kart</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="590"/>
         <source>drive</source>
-        <translation type="unfinished"></translation>
+        <translation>sürücü</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="613"/>
@@ -518,12 +518,12 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
     <message>
         <location filename="mainwindow.cpp" line="1754"/>
         <source>Reformat drive?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürücüyü biçimlendir?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1755"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>NOOBS ile kullanmak için &apos;%1&apos; sürücüsünü yeniden biçimlendirmek ister misiniz? Sürücünüzdeki mevcut veriler silinecektir!</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="925"/>
@@ -536,7 +536,8 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
         <location filename="mainwindow.cpp" line="807"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü modu %1 olarak değiştirildi
+Bu ayarı kalıcı yapmak ister misiniz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="926"/>
@@ -564,7 +565,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="116"/>
         <source>Operating system cannot claim both primary partitions 2 and 4</source>
-        <translation type="unfinished"></translation>
+        <translation>İşletim sistemi hem birincil bölüm 2 hem de 4 için hak talebinde bulunamaz.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="144"/>
@@ -634,7 +635,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="multiimagewritethread.cpp" line="290"/>
         <source>Writing boot partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Önyükleme bölüm tablosu yazılıyor</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="280"/>
@@ -697,7 +698,7 @@ Would you like to make this setting permanent?</source>
         <location filename="multiimagewritethread.cpp" line="624"/>
         <source>%1: Unmounting FAT partition</source>
         <oldsource>%1: Patching BCD file</oldsource>
-        <translation type="unfinished">%1: BCD dosyası patchleniyor</translation>
+        <translation>%1: BCD dosyası patchleniyor</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="627"/>
@@ -795,7 +796,7 @@ Would you like to make this setting permanent?</source>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
         <source>No wifi interfaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi bir wifi arayüzü yok</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
