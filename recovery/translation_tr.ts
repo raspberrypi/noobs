@@ -159,7 +159,7 @@ UYARI: Bu işlem SD kartınızdaki tüm verileri silecektir</translation>
     <message>
         <location filename="initdrivethread.cpp" line="345"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation>Önyükleme dosyalarını belleğe kaydetmede hata yaşandı. SD kart zarar görmüş olabilir.<</translation>
+        <translation>Önyükleme dosyalarını belleğe kaydetmede hata yaşandı. SD kart zarar görmüş olabilir.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="361"/>
