@@ -28,7 +28,7 @@ Your Pi will now boot into NOOBS and should display a list of operating systems 
 If your display remains blank, you should select the correct output mode for your display by pressing one of the following number keys on your keyboard:
 1. HDMI mode - this is the default display mode.
 2. HDMI safe mode - select this mode if you are using the HDMI connector and cannot see anything on screen when the Pi has booted.
-3. Composite PAL mode - select either this mode or composite NTSC mode if you are using a screen connected to the composite video port (either RCA or 'headphone' connector).
+3. Composite PAL mode - select either this mode or composite NTSC mode if you are using a screen connected to the composite video port. (Either RCA or 'headphone' connector, depending on model of Raspberry Pi).
 4. Composite NTSC mode
 
 If you are still having difficulties after following these instructions, you can ask for help on the Raspberry Pi forums at https://raspberrypi.org/forums.
