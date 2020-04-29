@@ -22,7 +22,7 @@ NOOBS INSTALLATION INSTRUCTIONS
 4. Copy the extracted files onto the SD card that you just formatted. The files must be in the root directory of the SD card, not in a subdirectory within this.
 5. Insert the SD card into the Raspberry Pi and connect the power supply.
 
-**Note:** on the Raspberry Pi 4B you must connect the display to the micro HDMI port closest to the power jack, labelled HDMI 0.
+**Note:** On the Raspberry Pi 4B you must connect the display to the micro HDMI port closest to the power jack, labelled HDMI 0.
 
 Your Pi will now boot into NOOBS and should display a list of operating systems that you can choose to install.
 If your display remains blank, you should select the correct output mode for your display by pressing one of the following number keys on your keyboard:
@@ -31,4 +31,4 @@ If your display remains blank, you should select the correct output mode for you
 3. Composite PAL mode - select either this mode or composite NTSC mode if you are using a screen connected to the composite video port. (Either RCA or 'headphone' connector, depending on model of Raspberry Pi).
 4. Composite NTSC mode
 
-If you are still having difficulties after following these instructions, you can ask for help on the Raspberry Pi forums at https://raspberrypi.org/forums.
+If you are still having difficulties after following these instructions, you can ask for help on the Raspberry Pi forums at https://www.raspberrypi.org/forums .
