@@ -17,7 +17,7 @@ NOOBS INSTALLATION INSTRUCTIONS
       i. We recommend using gparted (or the command line version, parted)
       ii. Format the entire card as FAT32
    d. Cards over 32GB
-      i. Follow the instructions on https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md
+      i. Follow the instructions at https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md
 3. Extract the files contained in this NOOBS zip file.
 4. Copy the extracted files onto the SD card that you just formatted. The files must be in the root directory of the SD card, not in a subdirectory within this. If the files are in a subdirectory on the SD card, then you will not be able to start a Raspberry Pi from the SD card.
 5. Insert the SD card into the Raspberry Pi and connect the power supply.
