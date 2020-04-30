@@ -11,7 +11,7 @@ NOOBS INSTALLATION INSTRUCTIONS
       i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_mac/
       ii. Install and run the Formatting Tool on your machine
       iii. Select "Overwrite Format"
-      iv. Check that the SD card you inserted matches the one selected by the tool
+      iv. Check that the SD card you inserted matches the one selected by the Formatting Tool
       v. Click the "Format" button
    c. Linux
       i. We recommend using gparted (or the command line version, parted)
