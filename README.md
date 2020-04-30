@@ -33,11 +33,11 @@ Note that all user settings (language, keyboard layout, display mode) will persi
 **Raspberry Pi 4 Model B:** display must be connected to HDMI port closest to power jack.
 
 To set up a blank SD card with NOOBS:
-- Format an SD card as FAT32 (see instructions on how to do this below). The size of the SD card depends on which operating system(s) you want to install. 
-For a full Raspbian installation, a 16GB card is considered the minimum at the time of writing. To maximise the amount of space available on your SD card, consider using NOOBS-Lite with an internet connecton.
+- Format an SD card as FAT. See the instructions given below.
+  - Your SD card will need to be at least 16GB for Full Raspbian, or at least 8GB for all other installs.
+  - Consider using NOOBS-Lite with an internet connection if you want to leave more space for operating systems.
 - Download and extract the files from the NOOBS zip file. (Windows built-in zip features may have trouble with this file. If so, use another program such as [7zip](http://www.7-zip.org/).)
-- Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card.
-<b> Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.</b>
+- Copy the extracted files onto the SD card that you just formatted so that these files are at the root directory of the SD card. Please note that in some cases it may extract the files into a folder; if this is the case, then please copy across the files from inside the folder rather than the folder itself.  
 
 On first boot the "RECOVERY" FAT partition will be automatically resized to a minimum and a list of OSes that are available to install will be displayed.
 
