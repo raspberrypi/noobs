@@ -1,6 +1,6 @@
 NOOBS INSTALLATION INSTRUCTIONS
 
-1. Insert an SD card that is 8GB or greater in size into your computer.
+1. Insert an SD card that is 16GB or greater in size into your computer.
 2. Format the SD card using the platform-specific instructions below:
    a. Windows (32GB cards and under)
       i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_windows/
