@@ -34,7 +34,7 @@ Note that all user settings (language, keyboard layout, display mode) will persi
 
 To set up a blank SD card with NOOBS:
 - Format an SD card as FAT. See the instructions given below.
-  - Your SD card will need to be at least 16GB for Full Raspbian, or at least 8GB for all other installs.
+  - Your SD card will need to be at least 16GB for Raspberry Pi OS Full, or at least 8GB for all other installs.
   - Consider using NOOBS-Lite with an internet connection if you want to leave more space for operating systems.
 - Download and extract the files from the NOOBS zip file. (Windows built-in zip features may have trouble with this file. If so, use another program such as [7zip](http://www.7-zip.org/).)
 - Copy the extracted files onto the SD card that you just formatted so that these files are at the root directory of the SD card. Please note that in some cases it may extract the files into a folder; if this is the case, then please copy across the files from inside the folder rather than the folder itself.  
@@ -44,10 +44,10 @@ On first boot the "RECOVERY" FAT partition will be automatically resized to a mi
 ### Operating System Choice
 
 NOOBS is available in 2 formats:
-- `NOOBS Full` includes the installation files for Raspbian Full and LibreELEC only.
+- `NOOBS Full` includes the installation files for Raspberry Pi OS Full and LibreELEC only.
 - `NOOBS-Lite` does not include any Operating Systems at all.
 
-Please note that RISC OS cannot be installed by the NOOBS FULL version due to the amount of space taken up by the included Operating Systems.
+Please note that RISC OS cannot be installed by the NOOBS Full version due to the amount of space taken up by the included Operating Systems.
 
 If you want to install RISC OS, use NOOBS-Lite instead, or change the included operating systems.
 
