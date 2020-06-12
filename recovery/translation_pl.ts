@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl" sourcelanguage="en">
+<TS version="2.1" language="pl" sourcelanguage="en">
 <context>
     <name>BootSelectionDialog</name>
     <message>
@@ -119,7 +119,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="190"/>
         <source>SD card has now been formatted ready for NOOBS installation. Please re-copy the NOOBS files onto the card and reboot</source>
-        <translation>Karta SD została sformatowana i jest gotowa na instalacje NOOBS. Proszę ponownie skopiować pliki NOOBS na kartę i zresetować komputer.</translation>
+        <translation>Karta SD została sformatowana i jest gotowa na instalacje NOOBS. Proszę ponownie skopiować pliki NOOBS na kartę i zresetować komputer</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="195"/>
@@ -154,42 +154,42 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="initdrivethread.cpp" line="342"/>
         <source>Saving boot files to memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisywanie plików rozruchowych do pamięci</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="345"/>
         <source>Error saving boot files to memory. SD card may be damaged.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wystąpił błąd podczas zapisywania plików rozruchowych do pamięci. Twoja karta SD może być uszkodzona.</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="361"/>
         <source>Creating partitions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie partycji</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="365"/>
         <source>Error partitioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Wystąpił błąd podczas tworzenia partycji</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="369"/>
         <source>Formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatowanie partycji rozruchowej (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="372"/>
         <source>Error formatting boot partition (fat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wystąpił błąd podczas formatowania partycji rozruchowej (fat)</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="376"/>
         <source>Copying boot files to storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiowanie plików rozruchowych do pamięci</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="452"/>
         <source>Setting disk volume ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawianie identyfikatora dysku</translation>
     </message>
     <message>
         <location filename="initdrivethread.cpp" line="73"/>
@@ -260,7 +260,7 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.ui" line="65"/>
         <source>Destination drive:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dysk docelowy:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="88"/>
@@ -325,17 +325,17 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.ui" line="236"/>
         <source>Wifi networks (w)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sieci WiFi (w)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="239"/>
         <source>Select a wifi network to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz sieć z którą chcesz się połączyć</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="242"/>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="341"/>
@@ -410,12 +410,12 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="119"/>
         <source>Waiting for SD card (settings partition)</source>
-        <translation type="unfinished"></translation>
+        <translation>Oczekiwanie na kartę SD (partycja ustawień)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="132"/>
         <source>Mounting settings partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Montowanie partycji ustawień</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="253"/>
@@ -425,17 +425,17 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
     <message>
         <location filename="mainwindow.cpp" line="590"/>
         <source>SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Karta SD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="590"/>
         <source>drive</source>
-        <translation type="unfinished"></translation>
+        <translation>dysk</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="613"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrzeżenie: wykryto niekompatybilny system operacyjny. Poniższe systemy nie są wspierane na tej wersji Raspberry Pi, mogą one nie funkcjonować:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="655"/>
@@ -516,7 +516,7 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1632"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostęp do internetu jest wymagany podczas używania NOOBS bez obrazów lokalnych. Proszę wybrać swoją sieć WiFi na następnym ekranie.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1640"/>
@@ -526,12 +526,12 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1754"/>
         <source>Reformat drive?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz sformatować dysk?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1755"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy jesteś pewien, że chcesz sformatować dysk &apos;%1&apos; aby móc go używać z NOOBS? Wszystkie dane na dysku zostaną skasowane!</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="925"/>
@@ -601,58 +601,58 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="multiimagewritethread.cpp" line="68"/>
         <source>RISCOS cannot be installed. RISCOS offset value mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS nie może zostać zainstalowany.  Zła wartość przesunięcia.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="74"/>
         <source>RISCOS cannot be installed. RISCOS offset value missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>RISCOS nie może zostać zainstalowany. Brakująca wartość przesunięcia.</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="106"/>
         <source>More than one operating system requires partition number %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Więcej niż jeden system operacyjny wymaga partycji numer %1</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="111"/>
         <source>Operating system cannot require a system partition (1,5)</source>
-        <translation type="unfinished"></translation>
+        <translation>System operacyjny nie może wymagać partycji systemowej (1,5)</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="116"/>
         <source>Operating system cannot claim both primary partitions 2 and 4</source>
-        <translation type="unfinished"></translation>
+        <translation>System operacyjny nie może żądać obu partycji podstawowych 2 i 4</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="214"/>
         <source>Fixed partition offset too low</source>
-        <translation type="unfinished"></translation>
+        <translation>Przesunięcie partycji za małe</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="275"/>
         <source>Writing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisywanie tablicy partycji</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="290"/>
         <source>Writing boot partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisywanie tablicy partycji rozruchowej</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="280"/>
         <location filename="multiimagewritethread.cpp" line="296"/>
         <source>Zero&apos;ing start of each partition</source>
-        <translation type="unfinished"></translation>
+        <translation>Zerowanie początku każdej partycji</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="340"/>
         <source>Error reading existing partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd podczas odczytu istniejącej tablicy partycji</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="425"/>
         <source>Error creating partition table</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd podczas tworzenia tablicy partycji</translation>
     </message>
     <message>
         <location filename="multiimagewritethread.cpp" line="500"/>
@@ -792,62 +792,62 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="wifisettingsdialog.ui" line="22"/>
         <source>Wifi network selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybór sieci WiFi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="28"/>
         <source>Wifi network</source>
-        <translation type="unfinished"></translation>
+        <translation>Sieć WiFi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="55"/>
         <source>Authentication method</source>
-        <translation type="unfinished"></translation>
+        <translation>Metoda uwierzytelnienia</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="64"/>
         <source>Pressing the WPS button on my wifi router</source>
-        <translation type="unfinished"></translation>
+        <translation>Wciśnięcie przycisku WPS na routerze</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="71"/>
         <source>Password authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Uwierzytelenienie hasłem</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="96"/>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa użytkownika</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.ui" line="110"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
         <source>No wifi interfaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak interfejsów WiFi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="44"/>
         <source>No wifi interfaces available</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak dostępnych interfejsów WiFi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="227"/>
         <source>Authenticated but still waiting for DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>Uwierzytelniono, oczekiwanie na dzierżawę dhcp</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to wifi failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Wystąpił błąd podczas podłączania do sieci WiFi</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="234"/>
         <source>Connecting to the wifi access point failed. Check your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wystąpił błąd podczas łączenia. Sprawdź hasło</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="269"/>
@@ -857,17 +857,17 @@ Czy chcesz zachować te ustawienia?</translation>
     <message>
         <location filename="wifisettingsdialog.cpp" line="275"/>
         <source>Releasing old DHCP lease</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwalnianie dzierżawy DHCP</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="290"/>
         <source>Disconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozłączanie</translation>
     </message>
     <message>
         <location filename="wifisettingsdialog.cpp" line="295"/>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Łączenie</translation>
     </message>
 </context>
 </TS>
