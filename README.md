@@ -53,7 +53,7 @@ If you want to install RISC OS, use NOOBS-Lite instead, or change the included o
 
 #### OS Network Download
 
-Both versions of NOOBS allow additional Operating Systems to be downloaded from our remote repository. To do this, the Raspberry Pi must be connected to a wired network, or it can connect over Wifi using the [Raspberry Pi USB wifi dongle](https://www.raspberrypi.org/products/usb-wifi-dongle/) or the Raspberry Pi 3 Model B built-in wifi. 
+Both versions of NOOBS allow additional Operating Systems to be downloaded from our remote repository. To do this, the Raspberry Pi must be connected to a wired network, or it can connect over Wifi using the [Raspberry Pi USB wifi dongle](https://www.raspberrypi.org/products/raspberry-pi-usb-wifi-dongle/) or the Raspberry Pi 3 Model B built-in wifi. 
 
 Once connected, the Pi will only show a list of Operating Systems that are appropriate to your Pi Model. If you want to see ALL available OSes, edit the `recovery.cmdline` file in the root NOOBS directory and append `showall` to the arguments list.
 
@@ -63,7 +63,7 @@ If a wired ethernet cable is plugged into the Pi before NOOBS starts, NOOBS will
 
 #### Wifi Networks
 
-If you have the official [Raspberry Pi USB wifi Dongle](https://www.raspberrypi.org/products/usb-wifi-dongle/), or are using the Raspberry Pi 3 Model B with built-in wifi, the wifi icon on the NOOBS toolbar will be available. Click on this to select your Wifi SSID network and enter the wifi password. 
+If you have the official [Raspberry Pi USB wifi Dongle](https://www.raspberrypi.org/products/raspberry-pi-usb-wifi-dongle/), or are using the Raspberry Pi 3 Model B with built-in wifi, the wifi icon on the NOOBS toolbar will be available. Click on this to select your Wifi SSID network and enter the wifi password. 
 
 ![alt text](screenshots/wifi_selector.png "Select your wifi network and enter the password")
 
