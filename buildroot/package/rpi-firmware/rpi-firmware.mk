@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-RPI_FIRMWARE_VERSION = 149cd7f0487e08e148efe604f8d4d359541cecf4
+RPI_FIRMWARE_VERSION = 2b41f509710d99758a5b8efa88d95dd0e9169c0a
 RPI_FIRMWARE_SITE = $(call github,raspberrypi,firmware,$(RPI_FIRMWARE_VERSION))
 RPI_FIRMWARE_LICENSE = BSD-3c
 RPI_FIRMWARE_LICENSE_FILES = boot/LICENCE.broadcom
@@ -24,6 +24,7 @@ define RPI_FIRMWARE_INSTALL_DTB
 	$(INSTALL) -D -m 0644 $(@D)/boot/bcm2710-rpi-3-b-plus.dtb $(BINARIES_DIR)/rpi-firmware/bcm2710-rpi-3-b-plus.dtb
 	$(INSTALL) -D -m 0644 $(@D)/boot/bcm2710-rpi-cm3.dtb $(BINARIES_DIR)/rpi-firmware/bcm2710-rpi-cm3.dtb
 	$(INSTALL) -D -m 0644 $(@D)/boot/bcm2711-rpi-4-b.dtb $(BINARIES_DIR)/rpi-firmware/bcm2711-rpi-4-b.dtb
+	$(INSTALL) -D -m 0644 $(@D)/boot/bcm2711-rpi-cm4.dtb $(BINARIES_DIR)/rpi-firmware/bcm2711-rpi-cm4.dtb
 endef
 endif
 

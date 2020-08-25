@@ -24,9 +24,6 @@ for F in *; do
 done
 echo 1 > timeout)
 
-# Set up ACT LED to be triggered by mmc0
-echo mmc0 > /sys/class/leds/led0/trigger
-
 # Rescue shell available on tty2 and tty3
 echo 2 >/sys/module/vt/parameters/cur_default
 /sbin/getty -L tty2 0 vt100 &
@@ -46,7 +43,7 @@ fi
 #export QWS_MOUSE_PROTO=:accel=1
 
 # Pi touch screen
-if [ -e /sys/devices/platform/rpi_ft5406 ]; then
+if [ -d /proc/device-tree/soc/firmware/touchscreen ]; then
     export QWS_MOUSE_PROTO="linuxinput:/dev/input/event0:grab=1 intellimouse:/dev/input/mice"
 fi
 

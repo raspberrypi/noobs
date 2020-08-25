@@ -1,14 +1,7 @@
-# Please note that this is only a sample, we recommend you to change it to fit
-# your needs.
-# You should override this file using a post-build script.
-# See http://buildroot.org/downloads/manual/manual.html#rootfs-custom
-# and http://elinux.org/RPiconfig for a description of config.txt syntax
+gpu_mem=16
+start_file=recovery.elf
+fixup_file=fixup_rc.dat
 
-arm_freq=700
-core_freq=250
-kernel=zImage
-disable_overscan=1
-gpu_mem_256=100
-gpu_mem_512=100
-sdram_freq=400
-over_voltage=0
+[pi4]
+start_file=recover4.elf
+fixup_file=fixup4rc.dat

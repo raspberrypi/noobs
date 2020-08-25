@@ -133,7 +133,7 @@ QString findRecoveryDrive()
 
 int main(int argc, char *argv[])
 {
-    bool hasTouchScreen = QFile::exists("/sys/devices/platform/rpi_ft5406");
+    bool hasTouchScreen = QFile::exists("/proc/device-tree/soc/firmware/touchscreen");
 
     // Unless we have a touch screen, wait for keyboard to appear before displaying anything
     if (!hasTouchScreen)

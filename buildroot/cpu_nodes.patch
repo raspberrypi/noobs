@@ -1,0 +1,28 @@
+From a5c01bebc340e223c0ce5328242c867fdbffd08a Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 24 Aug 2020 18:28:52 +0100
+Subject: [PATCH] ARM: dts: bcm2708.dtsi: Don't delete the cpus node
+
+The cpus node was originally deleted to match the then downstream
+version of the BCM2835 DTS files, but doing so doesn't seem to make
+any material difference. Its presence is necessary for the CPUFREQ_DT
+support that is planned in the near future, so remove the deletion.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2708.dtsi | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2708.dtsi b/arch/arm/boot/dts/bcm2708.dtsi
+index a32ff21613eda..36ec4989403f5 100644
+--- a/arch/arm/boot/dts/bcm2708.dtsi
++++ b/arch/arm/boot/dts/bcm2708.dtsi
+@@ -2,8 +2,6 @@
+ #include "bcm270x.dtsi"
+ 
+ / {
+-	/delete-node/ cpus;
+-
+ 	__overrides__ {
+ 		arm_freq;
+ 	};
