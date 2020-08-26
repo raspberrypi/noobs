@@ -1,0 +1,124 @@
+--- /dev/null
++++ b/src/network/certfix.cpp
+@@ -0,0 +1,102 @@
++/****************************************************************************
++**
++** Copyright (C) 2017 The Qt Company Ltd.
++** Copyright (C) 2014 Governikus GmbH & Co. KG
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the QtNetwork module of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:LGPL$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU Lesser General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU Lesser
++** General Public License version 3 as published by the Free Software
++** Foundation and appearing in the file LICENSE.LGPL3 included in the
++** packaging of this file. Please review the following information to
++** ensure the GNU Lesser General Public License version 3 requirements
++** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 2.0 or (at your option) the GNU General
++** Public license version 3 or any later version approved by the KDE Free
++** Qt Foundation. The licenses are as published by the Free Software
++** Foundation and appearing in the file LICENSE.GPL2 and LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-2.0.html and
++** https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++/****************************************************************************
++**
++** In addition, as a special exception, the copyright holders listed above give
++** permission to link the code of its release of Qt with the OpenSSL project's
++** "OpenSSL" library (or modified versions of the "OpenSSL" library that use the
++** same license as the original version), and distribute the linked executables.
++**
++** You must comply with the GNU General Public License version 2 in all
++** respects for all of the code used other than the "OpenSSL" code.  If you
++** modify this file, you may extend this exception to your version of the file,
++** but you are not obligated to do so.  If you do not wish to do so, delete
++** this exception statement from your version of this file.
++**
++****************************************************************************/
++
++#include <QDirIterator>
++#include <QDir>
++#include <qsslconfiguration.h>
++#include <qsslerror.h>
++
++QList<QByteArray> unixRootCertDirectories_backport()
++{
++    return QList<QByteArray>() <<  "/etc/ssl/certs/" // (K)ubuntu, OpenSUSE, Mandriva ...
++                               << "/usr/lib/ssl/certs/" // Gentoo, Mandrake
++                               << "/usr/share/ssl/" // Centos, Redhat, SuSE
++                               << "/usr/local/ssl/" // Normal OpenSSL Tarball
++                               << "/var/ssl/certs/" // AIX
++                               << "/usr/local/ssl/certs/" // Solaris
++                               << "/etc/openssl/certs/" // BlackBerry
++                               << "/opt/openssl/certs/" // HP-UX
++                               << "/etc/ssl/"; // OpenBSD
++}
++
++QList<QSslCertificate> systemCaCertificates_backport()
++{
++    QList<QSslCertificate> systemCerts;
++    QList<QString> certFiles;
++    QDir currentDir;
++    QStringList nameFilters;
++    QList<QByteArray> directories;
++    QSsl::EncodingFormat platformEncodingFormat;
++    directories = unixRootCertDirectories_backport();
++    nameFilters << QLatin1String("*.pem") << QLatin1String("*.crt");
++    platformEncodingFormat = QSsl::Pem;
++    {
++        currentDir.setNameFilters(nameFilters);
++        for (int a = 0; a < directories.count(); a++) {
++            currentDir.setPath(QLatin1String(directories.at(a)));
++            QDirIterator it(currentDir);
++            while (it.hasNext()) {
++                it.next();
++                certFiles.insert(certFiles.size(), it.fileInfo().canonicalFilePath());
++            }
++        }
++        for (int a = 0; a < certFiles.count(); a++)
++            systemCerts.append(QSslCertificate::fromPath(certFiles.at(a), platformEncodingFormat));
++        systemCerts.append(QSslCertificate::fromPath(QLatin1String("/etc/pki/tls/certs/ca-bundle.crt"), QSsl::Pem));
++        systemCerts.append(QSslCertificate::fromPath(QLatin1String("/usr/local/share/certs/ca-root-nss.crt"), QSsl::Pem));
++    }
++
++    return systemCerts;
++}
+--- a/src/network/networkaccessmanager.cpp
++++ b/src/network/networkaccessmanager.cpp
+@@ -88,6 +88,8 @@
+ #include <qsslerror.h>
+ #include <qdatetime.h>
+ 
++#include "certfix.cpp"
++
+ // #define NETWORKACCESSMANAGER_DEBUG
+ 
+ NetworkAccessManager::NetworkAccessManager(QObject *parent)
+@@ -164,6 +166,7 @@ void NetworkAccessManager::loadSettings()
+ 
+ #ifndef QT_NO_OPENSSL
+     QSslConfiguration sslCfg = QSslConfiguration::defaultConfiguration();
++    sslCfg.setCaCertificates(systemCaCertificates_backport());
+     QList<QSslCertificate> ca_list = sslCfg.caCertificates();
+     QList<QSslCertificate> ca_new = QSslCertificate::fromData(settings.value(QLatin1String("CaCertificates")).toByteArray());
+     ca_list += ca_new;
