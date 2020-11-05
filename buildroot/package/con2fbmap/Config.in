@@ -1,0 +1,7 @@
+config BR2_PACKAGE_CON2FBMAP
+        bool "con2fbmap"
+    ### build dependencies
+    ### runtime dependencies
+        help
+          Change tty console to a different framebuffer device /dev/fbX
+
