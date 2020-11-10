@@ -1,0 +1,44 @@
+The upstream source was downloaded from:
+
+    <http://users.telenet.be/geertu/Linux/fbdev/> as a patch <03_con2fbmap.patch> to fbset.
+
+Copyright Holder of fbset:
+
+    Copyright © 1995-1998 Geert Uytterhoeven <geert@linux-m68k.org>
+
+License:
+
+    This file is subject to the terms and conditions of the GNU General Public
+    License. See the file COPYING in the main directory of the Linux
+    distribution for more details.
+
+--------------- Clarification ----------------------------------------
+
+From Geert.Uytterhoeven@sonycom.com Tue Jan 21 19:59:02 2003
+Date: Tue, 21 Jan 2003 17:06:11 +0100 (MET)
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Sender: geert@sonycom.com
+To: Guillem Jover <guillem.jover@menta.net>
+Subject: Re: fbset: GPL version
+In-Reply-To: <20030120063657.GA6650@zulo.hadrons.org>
+Message-ID: <Pine.GSO.4.21.0301211703450.24563-100000@vervain.sonytel.be>
+
+	Hi Guillem,
+
+> I'm the new Debian maintainer for fbset. A Debian user has filed a bug
+> reporting that the sources doesn't specify the GPL version. So could
+> you be so kind to tell me what version they obey?
+
+The source files refer to `the file COPYING in the main directory of the Linux
+distribution', so that must be the GNU General Public License Version 2.
+
+--------------- Clarification ----------------------------------------
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License can be found in '/usr/share/common-licenses/GPL-2'.
+
+--------------- Con2fbmap --------------------------------------------
+
+Con2fbmap had no specific copyright, therefore I assume it falls under 
+fbset's GPLv2 copyright and is attributed as such to Sven Luther.
+ 
