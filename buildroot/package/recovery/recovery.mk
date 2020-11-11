@@ -33,7 +33,6 @@ define RECOVERY_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 package/recovery/unicode-fonts/NanumBarunGothicBold.ttf $(TARGET_DIR)/usr/lib/fonts/NanumBarunGothicBold.ttf
 	$(INSTALL) -m 0755 package/recovery/data/data $(TARGET_DIR)/usr/data
 	$(INSTALL) -m 0644 $(@D)/cmdline.txt $(BINARIES_DIR)/cmdline.txt
-
 	mkdir -p $(TARGET_DIR)/keymaps/
 	$(INSTALL) -m 0755 package/recovery/keymaps/* $(TARGET_DIR)/keymaps/
 	$(INSTALL) -m 0644 package/recovery/wpa_supplicant.conf $(TARGET_DIR)/etc/wpa_supplicant.conf
