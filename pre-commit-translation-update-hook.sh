@@ -5,7 +5,7 @@
 # chmod +x pre-commit-translation-update-hook.sh
 # cp pre-commit-translation-update-hook.sh .git/hooks/pre-commit
 
-export QT_SELECT=4
+export QT_SELECT=5
 
 cd "$(git rev-parse --show-toplevel)"
 lupdate -no-obsolete recovery/recovery.pro
