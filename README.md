@@ -1,5 +1,6 @@
 # NOOBS+ (New Out of Box Software Plus)
 #### An easy Operating System installer for the Raspberry Pi
+## Warning! NOOBS+ is still in beta!
 
 NOOBS+ is designed to make it easy to select and install operating systems for the Raspberry Pi without having to worry about manually imaging your SD card.
 
