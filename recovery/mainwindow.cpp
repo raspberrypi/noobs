@@ -250,7 +250,7 @@ void MainWindow::populate()
     /* Ask user to wait while list is populated */
     if (!_allowSilent)
     {
-        _qpd = new QProgressDialog(tr("Please wait while NOOBS initialises"), QString(), 0, 0, this);
+        _qpd = new QProgressDialog(tr("Please wait while NOOBS+ initialises"), QString(), 0, 0, this);
         _qpd->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
         _qpd->show();
 
@@ -610,7 +610,7 @@ void MainWindow::on_actionWrite_image_to_disk_triggered()
         }
         if (_silent || allSupported || QMessageBox::warning(this,
                                         tr("Confirm"),
-                                        tr("Warning: incompatible Operating System(s) detected. The following OSes aren't supported on this revision of Raspberry Pi and may fail to boot or function correctly:") + unsupportedOses,
+                                        tr("Warning: incompatible Operating System(s) detected. These OSes aren't supported on this model of Raspberry Pi and may fail to boot or function correctly:") + unsupportedOses,
                                         QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             setEnabled(false);
@@ -674,8 +674,8 @@ void MainWindow::onCompleted()
 
     if (!_silent)
         QMessageBox::information(this,
-                                 tr("OS(es) installed"),
-                                 tr("OS(es) Installed Successfully"), QMessageBox::Ok);
+                                 tr("Installation Complete!"),
+                                 tr("The OS(es) were Installed Successfully!"), QMessageBox::Ok);
     _qpd->deleteLater();
     _qpd = NULL;
     close();
@@ -703,7 +703,7 @@ void MainWindow::on_list_currentRowChanged()
 
 void MainWindow::update_window_title()
 {
-    setWindowTitle(QString(tr("NOOBS v%1 - Built: %2")).arg(VERSION_NUMBER, QString::fromLocal8Bit(__DATE__)));
+    setWindowTitle(QString(tr("NOOBS+ v1.0 Beta"))
 }
 
 void MainWindow::changeEvent(QEvent* event)
@@ -922,8 +922,8 @@ bool MainWindow::requireNetwork()
     if (!isOnline())
     {
         QMessageBox::critical(this,
-                              tr("No network access"),
-                              tr("Wired network access is required for this feature. Please insert a network cable into the network port."),
+                              tr("No internet access"),
+                              tr("Wired network access is required for this feature. Please insert a network cable into the Ethernet port."),
                               QMessageBox::Close);
         return false;
     }
@@ -1512,7 +1512,7 @@ void MainWindow::downloadMetaComplete()
         f.open(f.WriteOnly);
         if (f.write(reply->readAll()) == -1)
         {
-            QMessageBox::critical(this, tr("Download error"), tr("Error writing downloaded file to SD card. SD card or file system may be damaged."), QMessageBox::Close);
+            QMessageBox::critical(this, tr("Error"), tr("There was an Error writing the file to the SD Card! The SD Card or filesystem my be damaged."), QMessageBox::Close);
             setEnabled(true);
         }
         else
