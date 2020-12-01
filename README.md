@@ -97,6 +97,7 @@ Recovery software directly links to:
 
 Currently used icon sets:
 - http://www.fatcow.com/free-icons - Creative commons Attribution license
+- https://www.flaticon.com
 - http://www.famfamfam.com/lab/icons/flags - "These flag icons are available for free use for any purpose with no requirement for attribution."
 - http://www.oxygen-icons.org/ - Available under Creative Common Attribution-ShareAlike 3.0 and LGPL license
 
