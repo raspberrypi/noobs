@@ -1,4 +1,4 @@
-NOOBS INSTALLATION INSTRUCTIONS
+NOOBS+ INSTALLATION INSTRUCTIONS
 
 1. Insert an SD card that is 16GB or greater in size into your computer.
 2. Format the SD card using the platform-specific instructions below:
@@ -18,13 +18,13 @@ NOOBS INSTALLATION INSTRUCTIONS
       ii. Format the entire disk as FAT32
    d. Cards over 32GB
       i. Follow the instructions on https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md
-3. Extract the files contained in this NOOBS zip file.
+3. Extract the files contained in this NOOBS+ zip file.
 4. Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card. Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.
 5. Insert the SD card into your Pi and connect the power supply.
 
 **Raspberry Pi 4 Model B:** display must be connected to HDMI port closest to power jack.
 
-Your Pi will now boot into NOOBS and should display a list of operating systems that you can choose to install.
+Your Pi will now boot into NOOBS+ and should display a list of operating systems that you can choose to install.
 If your display remains blank, you should select the correct output mode for your display by pressing one of the following number keys on your keyboard:
 1. HDMI mode - this is the default display mode.
 2. HDMI safe mode - select this mode if you are using the HDMI connector and cannot see anything on screen when the Pi has booted.
