@@ -79,6 +79,11 @@ ProgressSlideshowDialog::~ProgressSlideshowDialog()
     delete ui;
 }
 
+void ProgressSlideshowDialog::reject()
+{
+    /* prevent closing. */
+}
+
 void ProgressSlideshowDialog::setLabelText(const QString &text)
 {
     QString txt = text;
