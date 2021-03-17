@@ -53,7 +53,7 @@ If you want to install RISC OS, use NOOBS-Lite instead, or change the included o
 
 #### OS Network Download
 
-Both versions of NOOBS allow additional Operating Systems to be downloaded from our remote repository. To do this, the Raspberry Pi must be connected to a wired network, or it can connect over Wifi using the [Raspberry Pi USB wifi dongle](https://www.raspberrypi.org/products/raspberry-pi-usb-wifi-dongle/) or the Raspberry Pi 3 Model B built-in wifi. 
+Both versions of NOOBS allow additional Operating Systems to be downloaded from our remote repository. To do this, the Raspberry Pi must be connected to a wired network, or it can connect over Wifi using the [Raspberry Pi USB wifi dongle](https://www.raspberrypi.org/products/raspberry-pi-usb-wifi-dongle/) or a Raspberry Pi Model with built-in wifi. 
 
 Once connected, the Pi will only show a list of Operating Systems that are appropriate to your Pi Model. If you want to see ALL available OSes, edit the `recovery.cmdline` file in the root NOOBS directory and append `showall` to the arguments list.
 
