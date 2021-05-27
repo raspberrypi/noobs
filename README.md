@@ -3,7 +3,7 @@
 
 NOOBS is designed to make it easy to select and install operating systems for the Raspberry Pi without having to worry about manually imaging your SD card.
 
-The latest official release of NOOBS can be downloaded from http://downloads.raspberrypi.org/NOOBS_latest
+The latest official release of NOOBS can be downloaded from https://downloads.raspberrypi.org/NOOBS_latest
 
 For information on previous releases and version changelists, visit https://github.com/raspberrypi/noobs/releases
 
@@ -21,7 +21,7 @@ On any subsequent boot you can then press the SHIFT key to enter the NOOBS inter
 The NOOBS interface provides the following functionality:
 - <b>Install</b>: Installs the selected OSes onto your SD card. Changing this selection erases all OSes currently installed.
 - <b>Edit Config</b>: Opens a text editor allowing the cmdline and config for the selected installed OS to be edited.
-- <b>Online Help</b>: [Networking Required] Open a browser that displays the Raspberry Pi Help page ( http://www.raspberrypi.org/help/ ), allowing people to quickly access help and troubleshooting.
+- <b>Online Help</b>: [Networking Required] Open a browser that displays the Raspberry Pi Help page ( https://www.raspberrypi.org/help/ ), allowing people to quickly access help and troubleshooting.
 - <b>Exit</b>: Quits NOOBS and reboots the Pi into the OS boot menu.
 - <b>Language Selection</b>: Allows you to select the language to be displayed.
 - <b>Keyboard Layout Selection</b>: Allows you to select the keyboard layout to be used.
@@ -36,7 +36,7 @@ To set up a blank SD card with NOOBS:
 - Format an SD card as FAT. See the instructions given below.
   - Your SD card will need to be at least 16GB for Raspberry Pi OS Full, or at least 8GB for all other installs.
   - Consider using NOOBS-Lite with an internet connection if you want to leave more space for operating systems.
-- Download and extract the files from the NOOBS zip file. (Windows built-in zip features may have trouble with this file. If so, use another program such as [7zip](http://www.7-zip.org/).)
+- Download and extract the files from the NOOBS zip file. (Windows built-in zip features may have trouble with this file. If so, use another program such as [7zip](https://www.7-zip.org/).)
 - Copy the extracted files onto the SD card that you just formatted so that these files are at the root directory of the SD card. Please note that in some cases it may extract the files into a folder; if this is the case, then please copy across the files from inside the folder rather than the folder itself.  
 
 On first boot the "RECOVERY" FAT partition will be automatically resized to a minimum and a list of OSes that are available to install will be displayed.
@@ -69,7 +69,7 @@ If you have the official [Raspberry Pi USB wifi Dongle](https://www.raspberrypi.
 
 ### How to Format an SD card as FAT
 
-For <b>Windows</b> users, we recommend formatting your SD card using the SD Association's Formatting Tool, which can be downloaded from https://www.sdcard.org/downloads/formatter_4/ You will need to set "FORMAT SIZE ADJUSTMENT" option to "ON" in the "Options" menu to ensure that the entire SD card volume is formatted - not just a single partition. With the latest SD Association Formatting Tool (V5.0) that option has been removed and is now the default. For more detailed and beginner-friendly formatting instructions, please refer to http://www.raspberrypi.org/quick-start-guide
+For <b>Windows</b> users, we recommend formatting your SD card using the SD Association's Formatting Tool, which can be downloaded from https://www.sdcard.org/downloads/formatter_4/ You will need to set "FORMAT SIZE ADJUSTMENT" option to "ON" in the "Options" menu to ensure that the entire SD card volume is formatted - not just a single partition. With the latest SD Association Formatting Tool (V5.0) that option has been removed and is now the default. For more detailed and beginner-friendly formatting instructions, please refer to https://www.raspberrypi.org/quick-start-guide
 
 The SD Association's Formatting Tool is also available for <b>Mac</b> users although the default OSX Disk Utility is also capable of formatting the entire disk (select the SD card volume and choose "Erase" with "MS-DOS" format).
 
@@ -144,7 +144,7 @@ There are two main use cases for which you may want to create a custom version o
 
 The following steps allow you to create a modified copy of one of the standard OS releases that contains your custom files, packages and settings.
 
-1. Download a base version of NOOBS from http://downloads.raspberrypi.org/NOOBS_latest
+1. Download a base version of NOOBS from https://downloads.raspberrypi.org/NOOBS_latest
 
 2. Extract the NOOBS zipfile
 
@@ -317,9 +317,9 @@ so that the project also compiles and can be tested under standard Qt.
 
 References:
 
-http://qt-project.org/doc/qt-4.8/i18n-source-translation.html
+https://qt-project.org/doc/qt-4.8/i18n-source-translation.html
 
-http://qt-project.org/doc/qt-4.8/linguist-manual.html
+https://qt-project.org/doc/qt-4.8/linguist-manual.html
 
 To set up a git pre-commit hook to automatically update the translation files, run the following commands in the project root:
 - `chmod +x pre-commit-translation-update-hook.sh`
@@ -331,7 +331,7 @@ To add a new translation:
 - The *.ts* can then be sent to the translator, opened in Qt Linguist and filled in.
 - Add a line for the *.ts* file in to `recovery/icons.qrc`, but substitute *.ts* extension with *.qm* . This file contains a list
   of resource files that will be embedded into the application's executable during build.
-- Add a flag icon for your language from http://www.famfamfam.com/lab/icons/flags/ flag icon collection or if it
+- Add a flag icon for your language from https://www.famfamfam.com/lab/icons/flags/ flag icon collection or if it
   doesn't have the one you need, you may use some other small png icon for it. Copy the icon file to the `recovery/icons`
   folder and add a line for it into `recovery/icons.qrc` as well.
 
@@ -354,7 +354,7 @@ Recovery software directly links to:
 - Qt libraries, available under LGPL and commercial license.
 
 Currently used icon sets:
-- http://www.fatcow.com/free-icons - Creative commons Attribution license
+- https://www.fatcow.com/free-icons - Creative commons Attribution license
 - http://www.famfamfam.com/lab/icons/flags - "These flag icons are available for free use for any purpose with no requirement for attribution."
 - http://www.oxygen-icons.org/ - Available under Creative Common Attribution-ShareAlike 3.0 and LGPL license
 
