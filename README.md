@@ -331,7 +331,7 @@ To add a new translation:
 - The *.ts* can then be sent to the translator, opened in Qt Linguist and filled in.
 - Add a line for the *.ts* file in to `recovery/icons.qrc`, but substitute *.ts* extension with *.qm* . This file contains a list
   of resource files that will be embedded into the application's executable during build.
-- Add a flag icon for your language from https://www.famfamfam.com/lab/icons/flags/ flag icon collection or if it
+- Add a flag icon for your language from http://www.famfamfam.com/lab/icons/flags/ flag icon collection or if it
   doesn't have the one you need, you may use some other small png icon for it. Copy the icon file to the `recovery/icons`
   folder and add a line for it into `recovery/icons.qrc` as well.
 
