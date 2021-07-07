@@ -36,6 +36,7 @@ public slots:
     void pauseIOaccounting();
     void resumeIOaccounting();
     void changeDrive(const QString &drive);
+    void reject();
 
 protected:
     QString _drive;
