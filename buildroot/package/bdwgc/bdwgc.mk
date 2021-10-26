@@ -6,9 +6,9 @@
 
 # When bumping the version number, check if the list of supported architectures
 # is still valid; see Config.log.
-BDWGC_VERSION = 7.2f
+BDWGC_VERSION = 8.0.6
 BDWGC_SOURCE = gc-$(BDWGC_VERSION).tar.gz
-BDWGC_SITE = http://www.hboehm.info/gc/gc_source
+BDWGC_SITE = https://www.hboehm.info/gc/gc_source
 BDWGC_INSTALL_STAGING = YES
 BDWGC_LICENSE = bdwgc license
 BDWGC_LICENSE_FILES = README.QUICK
@@ -19,10 +19,6 @@ BDWGC_DEPENDENCIES = libatomic_ops host-pkgconf
 # libtool patches, so autoreconfiguring the packages is the easiest
 # solution.
 BDWGC_AUTORECONF = YES
-
-# Ensure we use the system libatomic_ops, and not the internal one.
-BDWGC_CONF_OPTS = --with-libatomic-ops=yes
-HOST_BDWGC_CONF_OPTS = --with-libatomic-ops=yes
 
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))
