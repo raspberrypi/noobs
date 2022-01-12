@@ -33,6 +33,29 @@ echo 2 >/sys/module/vt/parameters/cur_default
 # Enable syslog
 /etc/init.d/S01logging start > /dev/null
 
+present=$(tvservice -l | sed -n -e 's|^Display Number \(.*\),.*$|\1| p')
+for dev in $present; do
+    fitted=$(tvservice -n -v "$dev" 2>/dev/null)
+    if [[ "$fitted" != "" ]]; then
+        case "$dev" in
+            0)  #7in Touchscreen
+                export QWS_DISPLAY="LinuxFb:/dev/fb0"
+                break;
+                ;;
+            2)  #normal HDMI0
+                export QWS_DISPLAY="LinuxFb:/dev/fb0"
+                break;
+                ;;
+            7)  #Secondary HDMI1
+                export QWS_DISPLAY="LinuxFb:/dev/fb1"
+                /bin/con2fbmap 2 1
+                /bin/con2fbmap 3 1
+                break;
+                ;;
+        esac
+    fi
+done
+
 if grep -q vncinstall /proc/cmdline; then
     # VNC server mode. Mainly useful for making screenshots
     export QWS_DISPLAY="VNC:size=800x600:depth=32:0"
