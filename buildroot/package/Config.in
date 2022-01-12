@@ -6,7 +6,6 @@ menu "Target packages"
 	source "package/partclone/Config.in"
 	source "package/recovery/Config.in"
 	source "package/rpi-wifi-firmware/Config.in"
-	source "package/con2fbmap/Config.in"
 
 menu "Audio and video applications"
 	source "package/alsa-utils/Config.in"

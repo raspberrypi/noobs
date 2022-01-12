@@ -20,6 +20,7 @@ endef
 
 define FBSET_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 755 $(@D)/fbset $(TARGET_DIR)/usr/sbin/fbset
+	$(INSTALL) -D -m 755 $(@D)/con2fbmap $(TARGET_DIR)/bin/con2fbmap
 endef
 
 $(eval $(generic-package))

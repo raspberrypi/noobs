@@ -3,6 +3,6 @@ start_file=recovery.elf
 fixup_file=fixup_rc.dat
 
 [pi4]
+max_framebuffers=2
 start_file=recover4.elf
 fixup_file=fixup4rc.dat
-max_framebuffers=2

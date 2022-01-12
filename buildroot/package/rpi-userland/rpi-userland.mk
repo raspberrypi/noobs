@@ -22,6 +22,7 @@ endef
 endif
 
 define RPI_USERLAND_INSTALL_TARGET_CMDS
+	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libbcm_host.so $(TARGET_DIR)/usr/lib
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libvchiq_arm.so $(TARGET_DIR)/usr/lib
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libvcos.so $(TARGET_DIR)/usr/lib
 	$(INSTALL) -m 0755 $(STAGING_DIR)/usr/lib/libvchostif.so $(TARGET_DIR)/usr/lib
