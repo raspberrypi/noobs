@@ -15,12 +15,22 @@
 # However that can fail during boot due to our initrd ramdisk not being mounted in time
 # Retry any pending requests
 (cd /sys/class/firmware
-for F in *; do
-    if [ -d "$F" ]; then
-        echo 1 > "$F/loading"
-        cat "/lib/firmware/${F/!//}" > "$F/data"
-        echo 0 > "$F/loading"
-    fi
+while [ "$(ls | wc -l)" != "1" ]; do
+    for F in *; do
+        if [ -d "$F" ]; then
+            fw1="/lib/firmware/${F/!//}"
+            fw2="$(echo "$fw1" | sed 's/\..*\././')"
+            echo 1 > "$F/loading"
+            for fw in "$fw1" "$fw2"; do
+                if [ -e "$fw" ]; then
+                    cat "$fw" > "$F/data"
+                    break
+                fi
+            done
+            echo 0 > "$F/loading"
+        fi
+    done
+    sleep 1
 done
 echo 1 > timeout)
 

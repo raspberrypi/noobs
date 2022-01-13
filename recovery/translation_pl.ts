@@ -338,20 +338,20 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="341"/>
-        <location filename="mainwindow.cpp" line="1280"/>
-        <location filename="mainwindow.cpp" line="1841"/>
+        <location filename="mainwindow.cpp" line="344"/>
+        <location filename="mainwindow.cpp" line="1287"/>
+        <location filename="mainwindow.cpp" line="1855"/>
         <source>RECOMMENDED</source>
         <translation>ZALECANE</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="593"/>
-        <location filename="mainwindow.cpp" line="612"/>
+        <location filename="mainwindow.cpp" line="596"/>
+        <location filename="mainwindow.cpp" line="615"/>
         <source>Confirm</source>
         <translation>Potwierdź</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="706"/>
+        <location filename="mainwindow.cpp" line="709"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Zbudowany: %2</translation>
     </message>
@@ -361,49 +361,49 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
         <translation>Przygotwywanie karty SD</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="143"/>
+        <location filename="mainwindow.cpp" line="146"/>
         <source>Error mounting settings partition</source>
         <translation>Błąd montowania partycji z ustawieniami</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="144"/>
+        <location filename="mainwindow.cpp" line="147"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation>Partycja ze stałymi ustawieniami zdaje się być uszkodzona. Sformatować ponownie?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="154"/>
         <source>Reformat failed</source>
         <translation>Ponowne formatowanie nieudane</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="154"/>
         <source>SD card might be damaged</source>
         <translation>Karta SD może być uszkodzona</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="588"/>
+        <location filename="mainwindow.cpp" line="591"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <oldsource>Warning: this will install the selected Operating System. All existing data on the SD card will be overwritten.</oldsource>
         <translation>Ostrzeżenie: zostanie zainstalowany wybrany system(y). Wszystkie dotychczasowe dane na tej karcie SD zostaną nadpisane, włączając w to wcześniej zainstalowane systemy operacyjne.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="689"/>
-        <location filename="mainwindow.cpp" line="1178"/>
+        <location filename="mainwindow.cpp" line="692"/>
+        <location filename="mainwindow.cpp" line="1185"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="344"/>
+        <location filename="mainwindow.cpp" line="347"/>
         <source>INSTALLED</source>
         <translation>ZAINSTALOWANE</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="806"/>
+        <location filename="mainwindow.cpp" line="809"/>
         <source>Display Mode Changed</source>
         <translation>Tryb wyświetlania zmieniony</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="738"/>
+        <location filename="mainwindow.cpp" line="741"/>
         <source>HDMI preferred mode</source>
         <translation>tryb preferowany HDMI</translation>
     </message>
@@ -418,130 +418,130 @@ UWAGA: To usunie wszystkie dane zapisane na karcie SD</translation>
         <translation>Montowanie partycji ustawień</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="253"/>
+        <location filename="mainwindow.cpp" line="256"/>
         <source>Please wait while NOOBS initialises</source>
         <translation>Proszę czekać na uruchomienie NOOBS</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
+        <location filename="mainwindow.cpp" line="593"/>
         <source>SD card</source>
         <translation>Karta SD</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="590"/>
+        <location filename="mainwindow.cpp" line="593"/>
         <source>drive</source>
         <translation>dysk</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="613"/>
+        <location filename="mainwindow.cpp" line="616"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation>Ostrzeżenie: wykryto niekompatybilny system operacyjny. Poniższe systemy nie są wspierane na tej wersji Raspberry Pi, mogą one nie funkcjonować:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="655"/>
+        <location filename="mainwindow.cpp" line="658"/>
         <source>The install process will begin shortly.</source>
         <translation>Proces instalacji zostanie wkrótce rozpoczęty.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="677"/>
+        <location filename="mainwindow.cpp" line="680"/>
         <source>OS(es) installed</source>
         <oldsource>OS installed</oldsource>
         <translation>System(y) operacyjny zainstalowany</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="678"/>
+        <location filename="mainwindow.cpp" line="681"/>
         <source>OS(es) Installed Successfully</source>
         <oldsource>OS Installed Successfully</oldsource>
         <translation>System(y) operacyjny zainstalowany pomyślnie</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="742"/>
+        <location filename="mainwindow.cpp" line="745"/>
         <source>HDMI safe mode</source>
         <translation>tryb bezpieczny HDMI</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="746"/>
+        <location filename="mainwindow.cpp" line="749"/>
         <source>composite PAL mode</source>
         <translation>tryb composite PAL</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="750"/>
+        <location filename="mainwindow.cpp" line="753"/>
         <source>composite NTSC mode</source>
         <translation>tryb composite NTSC</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="807"/>
+        <location filename="mainwindow.cpp" line="810"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Tryb wyświetlania zmieniony na: %1
 Czy chcesz zachować te ustawienia?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1164"/>
-        <location filename="mainwindow.cpp" line="1505"/>
-        <location filename="mainwindow.cpp" line="1515"/>
+        <location filename="mainwindow.cpp" line="1171"/>
+        <location filename="mainwindow.cpp" line="1516"/>
+        <location filename="mainwindow.cpp" line="1526"/>
         <source>Download error</source>
         <translation>Błąd pobierania</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1164"/>
+        <location filename="mainwindow.cpp" line="1171"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Błąd pobierania listy dystrybucji z internetu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1178"/>
+        <location filename="mainwindow.cpp" line="1185"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Błąd analizowania list.json pobranej z serwera</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1398"/>
+        <location filename="mainwindow.cpp" line="1405"/>
         <source>Needed</source>
         <translation>Wymagane</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1399"/>
+        <location filename="mainwindow.cpp" line="1406"/>
         <source>Available</source>
         <translation>Dostępne</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1505"/>
+        <location filename="mainwindow.cpp" line="1516"/>
         <source>Error downloading meta file</source>
         <translation>Błąd pobierania metapliku</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1515"/>
+        <location filename="mainwindow.cpp" line="1526"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Błąd zapisywania pobranego pliku na kartę SD. Karta lub system plików mogą być uszkodzone.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1632"/>
+        <location filename="mainwindow.cpp" line="1646"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>Dostęp do internetu jest wymagany podczas używania NOOBS bez obrazów lokalnych. Proszę wybrać swoją sieć WiFi na następnym ekranie.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1640"/>
+        <location filename="mainwindow.cpp" line="1654"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Kablowe połączenie z siecią jest wymagane do używania NOOBS bez lokalnego obrazu. Proszę włożyć kabel sieciowy do odpowiedniego portu.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1754"/>
+        <location filename="mainwindow.cpp" line="1768"/>
         <source>Reformat drive?</source>
         <translation>Czy chcesz sformatować dysk?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1755"/>
+        <location filename="mainwindow.cpp" line="1769"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation>Czy jesteś pewien, że chcesz sformatować dysk &apos;%1&apos; aby móc go używać z NOOBS? Wszystkie dane na dysku zostaną skasowane!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="925"/>
-        <location filename="mainwindow.cpp" line="1631"/>
-        <location filename="mainwindow.cpp" line="1639"/>
+        <location filename="mainwindow.cpp" line="928"/>
+        <location filename="mainwindow.cpp" line="1645"/>
+        <location filename="mainwindow.cpp" line="1653"/>
         <source>No network access</source>
         <translation>Brak połączenia z siecią</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="926"/>
+        <location filename="mainwindow.cpp" line="929"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Kablowe połączenie sieciowe jest wymagane do tej funkcji. Prosze włożyć kabel sieciowy do odpowiedniego portu.</translation>
     </message>
