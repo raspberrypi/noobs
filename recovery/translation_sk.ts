@@ -353,192 +353,192 @@ UPOZORNENIE: Týmto sa vymažú všetky údaje na vašej SD karte</translation>
         <translation>Pripája sa oddiel nastavení</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="146"/>
+        <location filename="mainwindow.cpp" line="143"/>
         <source>Error mounting settings partition</source>
         <translation>Chyba pri pripájaní oddielu nastavení</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="147"/>
+        <location filename="mainwindow.cpp" line="144"/>
         <source>Persistent settings partition seems corrupt. Reformat?</source>
         <translation>Zdá sa, že oddiel trvalých nastavení je poškodený. Má sa znovu naformátovať?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="154"/>
+        <location filename="mainwindow.cpp" line="151"/>
         <source>Reformat failed</source>
         <translation>Opätovné formátovanie zlyhalo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="154"/>
+        <location filename="mainwindow.cpp" line="151"/>
         <source>SD card might be damaged</source>
         <translation>SD karta môže byť poškodená</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="256"/>
+        <location filename="mainwindow.cpp" line="253"/>
         <source>Please wait while NOOBS initialises</source>
         <translation>Prosím, čakajte, kým sa inštalátor NOOBS incializuje</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="344"/>
-        <location filename="mainwindow.cpp" line="1287"/>
-        <location filename="mainwindow.cpp" line="1855"/>
+        <location filename="mainwindow.cpp" line="341"/>
+        <location filename="mainwindow.cpp" line="1278"/>
+        <location filename="mainwindow.cpp" line="1839"/>
         <source>RECOMMENDED</source>
         <translation>ODPORÚČANÉ</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="347"/>
+        <location filename="mainwindow.cpp" line="344"/>
         <source>INSTALLED</source>
         <translation>NAINŠTALOVANÉ</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="591"/>
+        <location filename="mainwindow.cpp" line="588"/>
         <source>Warning: this will install the selected Operating System(s). All existing data on the SD card will be overwritten, including any OSes that are already installed.</source>
         <translation>Upozornenie: týmto sa nainštalujú vybrané operačné systémy. Všetky existujúce údaje na SD karte budú prepísané, vrátane všetkých už nainštalovaných operačných systémov.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>SD card</source>
         <translation>SD karta</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>drive</source>
         <translation>jednotka</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="596"/>
-        <location filename="mainwindow.cpp" line="615"/>
+        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>Confirm</source>
         <translation>Potvrdenie</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="616"/>
+        <location filename="mainwindow.cpp" line="613"/>
         <source>Warning: incompatible Operating System(s) detected. The following OSes aren&apos;t supported on this revision of Raspberry Pi and may fail to boot or function correctly:</source>
         <translation>Upozornenie: boli zistené nekompatibilné operačné systémy. Nasledovné operačné systémy nie sú podporované touto verziou Raspberry Pi a nemusia byť spustené alebo pracovať správne:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="658"/>
+        <location filename="mainwindow.cpp" line="655"/>
         <source>The install process will begin shortly.</source>
         <translation>Inštalácia bude čoskoro spustená.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="680"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>OS(es) installed</source>
         <translation>OS nainštalované</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="681"/>
+        <location filename="mainwindow.cpp" line="678"/>
         <source>OS(es) Installed Successfully</source>
         <translation>OS boli úspešne nainštalované</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="692"/>
-        <location filename="mainwindow.cpp" line="1185"/>
+        <location filename="mainwindow.cpp" line="689"/>
+        <location filename="mainwindow.cpp" line="1176"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="709"/>
+        <location filename="mainwindow.cpp" line="706"/>
         <source>NOOBS v%1 - Built: %2</source>
         <translation>NOOBS v%1 - Zostavený: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="741"/>
+        <location filename="mainwindow.cpp" line="738"/>
         <source>HDMI preferred mode</source>
         <translation>preferovaný režim HDMI</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="745"/>
+        <location filename="mainwindow.cpp" line="742"/>
         <source>HDMI safe mode</source>
         <translation>záchranný režim HDMI</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="749"/>
+        <location filename="mainwindow.cpp" line="746"/>
         <source>composite PAL mode</source>
         <translation>kompozitný režim PAL</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="753"/>
+        <location filename="mainwindow.cpp" line="750"/>
         <source>composite NTSC mode</source>
         <translation>kompozitný režim NTSC</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="809"/>
+        <location filename="mainwindow.cpp" line="806"/>
         <source>Display Mode Changed</source>
         <translation>Zmena zobrazovacieho režimu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="810"/>
+        <location filename="mainwindow.cpp" line="807"/>
         <source>Display mode changed to %1
 Would you like to make this setting permanent?</source>
         <translation>Zobrazovací režim bol zmenený na %1
 Chcete aby bolo toto nastavenie trvalé?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="928"/>
-        <location filename="mainwindow.cpp" line="1645"/>
-        <location filename="mainwindow.cpp" line="1653"/>
+        <location filename="mainwindow.cpp" line="925"/>
+        <location filename="mainwindow.cpp" line="1629"/>
+        <location filename="mainwindow.cpp" line="1637"/>
         <source>No network access</source>
         <translation>Bez prístupu k sieti</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="929"/>
+        <location filename="mainwindow.cpp" line="926"/>
         <source>Wired network access is required for this feature. Please insert a network cable into the network port.</source>
         <translation>Táto funkcia vyžaduje prístup k drôtovej sieti. Prosím, pripojte sieťový kábel do sieťového portu.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1171"/>
-        <location filename="mainwindow.cpp" line="1516"/>
-        <location filename="mainwindow.cpp" line="1526"/>
+        <location filename="mainwindow.cpp" line="1162"/>
+        <location filename="mainwindow.cpp" line="1503"/>
+        <location filename="mainwindow.cpp" line="1513"/>
         <source>Download error</source>
         <translation>Chyba preberania</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1171"/>
+        <location filename="mainwindow.cpp" line="1162"/>
         <source>Error downloading distribution list from Internet</source>
         <translation>Chyba pri preberaní zoznamu distribúcií z internetu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1185"/>
+        <location filename="mainwindow.cpp" line="1176"/>
         <source>Error parsing list.json downloaded from server</source>
         <translation>Chyba pri analyzovaní súboru list.json prevzatého zo servera</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1405"/>
+        <location filename="mainwindow.cpp" line="1396"/>
         <source>Needed</source>
         <translation>Potrebné</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1406"/>
+        <location filename="mainwindow.cpp" line="1397"/>
         <source>Available</source>
         <translation>Dostupné</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1516"/>
+        <location filename="mainwindow.cpp" line="1503"/>
         <source>Error downloading meta file</source>
         <translation>Chyba preberania meta súboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1526"/>
+        <location filename="mainwindow.cpp" line="1513"/>
         <source>Error writing downloaded file to SD card. SD card or file system may be damaged.</source>
         <translation>Chyba pri zapisovaní prevzatého súboru na SD kartu. SD karta alebo súborový systém môžu byť poškodené.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1646"/>
+        <location filename="mainwindow.cpp" line="1630"/>
         <source>Network access is required to use NOOBS without local images. Please select your wifi network in the next screen.</source>
         <translation>Na použitie inštalátora NOOBS bez miestnych obrazov sa vyžaduje prístup k sieti. Prosím, vyberte vašu sieť wifi v ďalšej obrazovke.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1654"/>
+        <location filename="mainwindow.cpp" line="1638"/>
         <source>Wired network access is required to use NOOBS without local images. Please insert a network cable into the network port.</source>
         <translation>Na použitie inštalátora NOOBS bez miestnych obrazov sa vyžaduje prístup k sieti. Prosím, pripojte sieťový kábel do sieťového portu.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1768"/>
+        <location filename="mainwindow.cpp" line="1752"/>
         <source>Reformat drive?</source>
         <translation>Preformátovať jednotku?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1769"/>
+        <location filename="mainwindow.cpp" line="1753"/>
         <source>Are you sure you want to reformat the drive &apos;%1&apos; for use with NOOBS? All existing data on the drive will be deleted!</source>
         <translation>Naozaj chcete preformátovať jednotku „%1“ pre pužitie s inštalátorom NOOBS? Všetky existujúce údaje na jednotke budú odstránené!</translation>
     </message>

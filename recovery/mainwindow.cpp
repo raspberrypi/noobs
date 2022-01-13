@@ -970,7 +970,6 @@ void MainWindow::copyWpa()
     {
         qDebug() << "Copying user wpa_supplicant.conf to /settings/wpa_supplicant.conf";
 
-        QProcess::execute("mount -o remount,rw /settings");
         QProcess::execute("mount -o remount,rw /mnt");
 
         backupFile("/settings/wpa_supplicant.conf");
@@ -982,7 +981,6 @@ void MainWindow::copyWpa()
 	backupFile("/mnt/wpa_supplicant.conf");
 
         QProcess::execute("sync");
-        QProcess::execute("mount -o remount,ro /settings");
         QProcess::execute("mount -o remount,ro /mnt");
     }
     else if ( !f.exists() )
