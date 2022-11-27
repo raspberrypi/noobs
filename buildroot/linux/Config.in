@@ -11,11 +11,11 @@ if BR2_LINUX_KERNEL
 #
 # Version selection. We provide the choice between:
 #
-#  1. A single fairly recent stable kernel version
+#  1. A single fairly recent stable kernel version.
 #  2. In case an internal toolchain has been built, the same kernel
-#     version as the kernel headers
-#  3. A custom stable version
-#  4. A custom tarball
+#     version as the kernel headers.
+#  3. A custom stable version.
+#  4. A custom tarball.
 #
 choice
 	prompt "Kernel version"
