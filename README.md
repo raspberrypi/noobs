@@ -5,6 +5,8 @@ NOOBS is designed to make it easy to select and install operating systems for th
 
 The latest official release of NOOBS can be downloaded from https://downloads.raspberrypi.org/NOOBS_latest
 
+The latest official release of NOOBS-Lite can be downloaded from https://downloads.raspberrypi.org/NOOBS_lite_latest
+
 For information on previous releases and version changelists, visit https://github.com/raspberrypi/noobs/releases
 
 ![alt text](screenshots/os_installed.png "NOOBS Interface")
