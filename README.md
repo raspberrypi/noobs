@@ -1,4 +1,7 @@
 # NOOBS (New Out of Box Software)
+
+## Please note that NOOBS is no longer supported or recommended. Please switch to [Raspberry Pi Imager](https://www.raspberrypi.com/software/). If you still require multi-boot functionality, consider switching to [PINN](https://github.com/procount/pinn), which is an unofficial fork with additional features.
+
 #### An easy Operating System installer for the Raspberry Pi
 
 NOOBS is designed to make it easy to select and install operating systems for the Raspberry Pi without having to worry about manually imaging your SD card.
