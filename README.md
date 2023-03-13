@@ -224,6 +224,15 @@ To force Recovery Mode to be entered on boot and to show the NOOBS interface, yo
 
 To force Recovery Mode being entered on boot, connect GPIO pin 3 on header P1 to GND (pin 25). If GPIO pin 3 remains unconnected then it will boot through to the installed OS as normal.
 
+##### Modifying the GPIO Trigger
+If you would like to use a different GPIO pin, for example if you have a push button or similar mechanism, to trigger the Recovery Mode append the `gpiotriggerenable` as described above and then perform the following steps:
+1. Append `gpiochannel=[gpiopin]` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory. `[gpiopin]` should be the GPIO pin number you wish to use, for example to use GPIO 15 you would append: `gpiochannel=15`
+2. Reboot
+
+If you would like the GPIO pin to only trigger the Recovery Mode when the GPIO value becomes high instead of low (default) perform the following steps:
+1. Append `gpiochannelvalue=[value]` to the argument list in the `recovery.cmdline` file which is found in the root NOOBS directory. `[value]` should be `1` if you want the trigger when the GPIO pin is high and `0` when the pin is low (default). For example to continue our example from above using GPIO 15, if we want to have it trigger when the pin is high you would append: `gpiochannelvalue=1` in addition to the `gpiochannel` argument already added.
+2. Reboot
+
 #### How to force Recovery Mode being entered on boot (overrides GPIO or keyboard input)
 
 Alternatively, if you are unable to use either the GPIO or keyboard to trigger entering Recovery Mode, you can:

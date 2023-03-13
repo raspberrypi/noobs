@@ -144,6 +144,7 @@ int main(int argc, char *argv[])
     qDebug() << "Board revision is " << rev;
 
     int gpioChannel;
+    int gpioChannelValue = 0;
 
     if (rev == 2 || rev == 3)
         gpioChannel = 0;
@@ -153,7 +154,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     RightButtonFilter rbf;
     LongPressHandler lph;
-    GpioInput gpio(gpioChannel);
 
     bool runinstaller = false;
     bool gpio_trigger = false;
@@ -204,7 +204,21 @@ int main(int argc, char *argv[])
             if (argc > i+1)
                 defaultPartition = argv[i+1];
         }
+          // Allow gpio channel to be specified in commandline
+        else if (strcmp(argv[i], "-gpiochannel") == 0)
+        {
+            if (argc > i+1)
+                gpioChannel = atoi(argv[i+1]);
+        }
+        // Allow gpio channel value i.e pull up or pull down to be specified in commandline
+        else if (strcmp(argv[i], "-gpiochannelvalue") == 0)
+        {
+            if (argc > i+1)
+                gpioChannelValue = atoi(argv[i+1]);
+        }
     }
+
+    GpioInput gpio(gpioChannel);
 
     // Intercept right mouse clicks sent to the title bar
     a.installEventFilter(&rbf);
@@ -271,7 +285,7 @@ int main(int argc, char *argv[])
     // or no OS is installed (/settings/installed_os.json does not exist)
     bool bailout = !runinstaller
         && !force_trigger
-        && !(gpio_trigger && (gpio.value() == 0 ))
+        && !(gpio_trigger && (gpio.value() == gpioChannelValue))
         && hasInstalledOS(drive);
 
     if (bailout && keyboard_trigger)
