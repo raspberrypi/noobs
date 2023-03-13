@@ -12,6 +12,7 @@
 #include <QProcessEnvironment>
 #include <QSettings>
 #include <QTime>
+#include <QUrl>
 #include <unistd.h>
 #include <linux/fs.h>
 #include <linux/magic.h>
@@ -799,26 +800,29 @@ bool MultiImageWriteThread::untar(const QString &tarball)
 {
     QString cmd = "sh -o pipefail -c \"";
 
-    if (isURL(tarball))
+    QString tarballPath = QString(tarball);
+    if (isURL(tarball)){
+        tarballPath = QUrl::fromUserInput(tarball).toString(QUrl::RemoveQuery);
         cmd += "wget --no-verbose --tries=inf -O- "+tarball+" | ";
+    }
 
-    if (tarball.endsWith(".gz"))
+    if (tarballPath.endsWith(".gz"))
     {
         cmd += "gzip -dc";
     }
-    else if (tarball.endsWith(".xz"))
+    else if (tarballPath.endsWith(".xz"))
     {
         cmd += "xz -dc";
     }
-    else if (tarball.endsWith(".bz2"))
+    else if (tarballPath.endsWith(".bz2"))
     {
         cmd += "bzip2 -dc";
     }
-    else if (tarball.endsWith(".lzo"))
+    else if (tarballPath.endsWith(".lzo"))
     {
         cmd += "lzop -dc";
     }
-    else if (tarball.endsWith(".zip"))
+    else if (tarballPath.endsWith(".zip"))
     {
         /* Note: the image must be the only file inside the .zip */
         cmd += "unzip -p";
